@@ -16,4 +16,5 @@ Módulo de Desarrollo Web en Entorno Servidor del ciclo de Desarrollo de Aplicac
 ## Referencias
 
 - [Características básicas de Nextjs 13 -en inglés-](https://makerkit.dev/blog/tutorials/nextjs13)
-- [Normativa](https://aapri.es/wp/?page_id=535)
+- [Normativa DWES](https://aapri.es/wp/?page_id=535)
+- [Normativa DIW](https://aapri.es/wp/?page_id=537)
