@@ -3,14 +3,14 @@
 # Tema 1: Selección de arquitecturas y herramientas de programación
 
 
-## Índice
+## Contenido
 
-- ### Introducción
-- ### Tecnologías para el backend
-- ### Tecnologías para el frontend
-- ### Tecnologías javascript Fullstack
-- ### MVC o SPA 
-- ### Persistencia de los datos
+- Introducción
+- Tecnologías para el backend
+- Tecnologías para el frontend
+- Tecnologías javascript Fullstack
+- MVC o SPA 
+- Persistencia de los datos
 
 --- 
 
