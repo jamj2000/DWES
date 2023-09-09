@@ -172,6 +172,11 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
 ![MVC vs SPA](assets/mvc-spa.png)
 
 
+### Arquitectura de 3 capas
+
+![Arquitectura de 3 capas](assets/arquitectura-3-capas.png)
+
+
 
 ## Persistencia de los datos
 
