@@ -15,8 +15,8 @@ export async function GET() {
     cookies().set("token", JSON.stringify({ id: 1, user: "Pepe", fecha: new Date() }))
 
     // Leemos cookie
-    const data = cookies().get('token')
-    const cookie = JSON.parse(data.value)
+    const data = cookies().get('token').value
+    const cookie = JSON.parse(data)
     cookie.fecha = new Date(cookie.fecha)
 
     // Mostramos información de la cookie
