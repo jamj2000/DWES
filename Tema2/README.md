@@ -158,3 +158,24 @@ app.listen(port, () => {
 ```
 
 
+**NEXTJS**
+```javascript
+import React from 'react';
+
+const Home = () => {
+  const color = "red";
+
+  return (
+    <html>
+      <body>
+        <p>My car is {color}</p>
+        <p>My house is {color}</p>
+        <p>My boat is {color}</p>
+      </body>
+    </html>
+  );
+};
+
+export default Home;
+```
+
