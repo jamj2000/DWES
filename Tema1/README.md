@@ -1,33 +1,41 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
-# Tema 1: Selección de arquitecturas y herramientas de programación
+# Tema 1: Selección de arquitecturas y herramientas de programación <!-- omit in toc -->
+
+- [1. Introducción](#1-introducción)
+  - [1.1. La base de la web](#11-la-base-de-la-web)
+  - [1.2. Partes de una aplicación web](#12-partes-de-una-aplicación-web)
+- [2. Tecnologías para el backend](#2-tecnologías-para-el-backend)
+  - [2.1. Lenguajes del lado del servidor](#21-lenguajes-del-lado-del-servidor)
+  - [2.2. Frameworks del lado servidor](#22-frameworks-del-lado-servidor)
+  - [2.3. Resumen](#23-resumen)
+- [3. Tecnologías para el frontend](#3-tecnologías-para-el-frontend)
+  - [3.1. Lenguajes del lado del cliente](#31-lenguajes-del-lado-del-cliente)
+  - [3.2. Frameworks del lado cliente](#32-frameworks-del-lado-cliente)
+  - [3.3. Resumen](#33-resumen)
+- [4. Tecnologías Javascript Fullstack](#4-tecnologías-javascript-fullstack)
+  - [4.1. Frameworks para servidor y cliente](#41-frameworks-para-servidor-y-cliente)
+- [5. MVC o SPA](#5-mvc-o-spa)
+  - [5.1. Modelo-Vista-Controlador](#51-modelo-vista-controlador)
+  - [5.2. Single Page Application](#52-single-page-application)
+  - [5.3. MVC vs SPA](#53-mvc-vs-spa)
+  - [5.4. Arquitectura de 3 capas](#54-arquitectura-de-3-capas)
+- [6. Persistencia de los datos](#6-persistencia-de-los-datos)
+  - [6.1. Bases de datos relacionales](#61-bases-de-datos-relacionales)
+  - [6.2. Bases de datos no relacionales (noSQL)](#62-bases-de-datos-no-relacionales-nosql)
+- [7. Viajando al futuro, que ya es presente](#7-viajando-al-futuro-que-ya-es-presente)
+  - [7.1. WebAssembly (Wasm)](#71-webassembly-wasm)
+  - [7.2. Apps en Wasm](#72-apps-en-wasm)
 
 
-## Contenido
-
-- Introducción
-- Tecnologías para el backend
-- Tecnologías para el frontend
-- Tecnologías javascript Fullstack
-- MVC o SPA 
-- Persistencia de los datos
-
---- 
-
-## Introducción
 
 
-### En esta Unidad aprenderemos a
+---
 
-- Identificar las tecnologías base de la web.
-- Identfificar los lenguajes y frameworks usados en el lado del servidor.
-- Identfificar los lenguajes y frameworks usados en el lado del cliente.
-- Reconocer el patrón MVC.
-- Distinguir entre MPA y SPA.
-- Valorar la importancia de la persistencia de los datos.
+# 1. Introducción
 
 
-### La base de la web
+## 1.1. La base de la web
 
 ![HTML CSS Javascript](assets/html-css-js.png)
 
@@ -35,15 +43,15 @@
 - **CSS**: Formato/apariencia del documento. `CSS3`. 
 - **Javascript**: Funcionalidad del documento. `ECMAScript6`. `2015`
 
-Note: Al final de línea se muestra la versión más relevante actualmente y el año de su aparición oficial.
+> **NOTA**  
+> 
+> Al final de línea se muestra la versión más relevante actualmente y el año de su aparición oficial.
 
 
-### Partes de una aplicación web
+## 1.2. Partes de una aplicación web
 
 ![Backend-Frontend](assets/frontend-backend.png)
 
-
-### Partes de una aplicación web
 
 - **Backend**: parte que se ejecuta en el servidor.
   - Se encarga de atender las peticiones de los clientes.
@@ -56,30 +64,27 @@ Note: Al final de línea se muestra la versión más relevante actualmente y el 
 
 
 
-## Tecnologías para el backend
+# 2. Tecnologías para el backend
 
 
-### Lenguajes del lado del servidor
+## 2.1. Lenguajes del lado del servidor
 
 ![Backend Languages](assets/backend-languages.png)
 
 
-### Lenguajes del lado del servidor
-
 - **PHP**: PHP Hypertext Preprocessor. Uno de los lenguajes más utilizados para la creación de todo tipo de CMS.
 - **JSP**: JavaServer Pages. Es la propuesta de Java, y uno de los más demandados.
 - **ASP**: Active Server Pages. Es el lenguaje de desarrollo web de Microsoft. 
+- **Java**: es un lenguaje multiplataforma propiedad de Oracle.
 - **Ruby**: es un lenguaje de programación interpretado, reflexivo y orientado a objetos.
 - **Python**: es un lenguaje de programación multiparadigma que hace hincapié en el código legible. 
 - **Javascript (Node.js)**: cada vez más popular puesto que se usa también en el lado cliente.
 
 
-### Frameworks del lado servidor 
+## 2.2. Frameworks del lado servidor 
 
 ![Backend Frameworks](assets/backend-frameworks.png)
 
-
-### Frameworks del lado servidor 
 
 - PHP: **Laravel**, **Symfony**.
 - JSP, Java: **Spring**.
@@ -89,21 +94,22 @@ Note: Al final de línea se muestra la versión más relevante actualmente y el 
 - Node.js: **Express**. 
 
 
-### Resumen
+## 2.3. Resumen
 
 ![Desarrollo Backend](assets/back-end-development.png)
 
 
 
-## Tecnologías para el frontend
+# 3. Tecnologías para el frontend
 
 
-### Lenguajes del lado del cliente
+## 3.1. Lenguajes del lado del cliente
 
 ![Desarrollo Frontend](assets/javascript.png)
 
+## 3.2. Frameworks del lado cliente
 
-### Frameworks del lado cliente 
+![Desarrollo Frontend](assets/frontend-frameworks.png)
 
 - **Angular**
 - **React**
@@ -111,19 +117,17 @@ Note: Al final de línea se muestra la versión más relevante actualmente y el 
 - **Svelte** (compilador)
 
 
-![Desarrollo Frontend](assets/frontend-frameworks.png)
 
-
-### Resumen
+## 3.3. Resumen
 
 ![Desarrollo Frontend](assets/front-end-development.png)
 
 
 
-## Tecnologías javascript Fullstack
+# 4. Tecnologías Javascript Fullstack
 
 
-### Frameworks para servidor y cliente 
+## 4.1. Frameworks para servidor y cliente 
 
 - **Universal**
 - **Next**
@@ -135,15 +139,13 @@ Note: Al final de línea se muestra la versión más relevante actualmente y el 
 
 
 
-## MVC o SPA
+# 5. MVC o SPA
 
 
-### Modelo-Vista-Controlador
+## 5.1. Modelo-Vista-Controlador
 
 ![Modelo Vista Controlador](assets/MVC.png)
 
-
-### Modelo-Vista-Controlador
 
 - patrón de diseño arquitectónico
 - se ejecuta casi toda la lógica de aplicación en el backend. 
@@ -153,12 +155,10 @@ Note: Al final de línea se muestra la versión más relevante actualmente y el 
 https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador 
 
 
-### Single Page Application
+## 5.2. Single Page Application
 
 ![Aplicación de Página Única](assets/SPA.png)
 
-
-### Single Page Application
 
 - se ejecuta gran parte de la lógica de la aplicación en el frontend. 
 - el servidor sirve datos mediante una API web. 
@@ -167,18 +167,18 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
   - **JSON** 
 
 
-### MVC vs SPA
+## 5.3. MVC vs SPA
 
 ![MVC vs SPA](assets/mvc-spa.png)
 
 
-### Arquitectura de 3 capas
+## 5.4. Arquitectura de 3 capas
 
 ![Arquitectura de 3 capas](assets/arquitectura-3-capas.png)
 
 
 
-## Persistencia de los datos
+# 6. Persistencia de los datos
 
 - Uso de archivos
 - Bases de datos relacionales
@@ -187,25 +187,25 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
   - Subtipo importante: **BBDD noSQL**.
 
 
-### Bases de datos relacionales
+## 6.1. Bases de datos relacionales
 
 ![BBDD relacionales](assets/SQL.png)
 
 
-### Bases de datos no relacionales (noSQL)
+## 6.2. Bases de datos no relacionales (noSQL)
 
 ![BBDD relacionales](assets/noSQL.png)
 
 
 
-## Viajando al futuro, que ya es presente
+# 7. Viajando al futuro, que ya es presente
 
 ![Wasm](assets/wasm.png)
 
 - [WebAssembly](https://es.wikipedia.org/wiki/WebAssembly)
 
 
-### WebAssembly (Wasm)
+## 7.1. WebAssembly (Wasm)
 
 - Formato binario pequeño y rápido que promete un rendimiento casi nativo para las aplicaciones web.
 - Los principales navegadores son compatibles con WebAssembly.
@@ -213,14 +213,12 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
 - Para casos de uso intensivo de rendimiento, como juegos, transmisión de música, edición de vídeo y aplicaciones CAD.
 
 
-### WebAssembly (Wasm)
-
 ![Wasm](assets/wasm-process.png)
 
 - [WebAssembly explicado](https://www.ciospain.es/liderazgo--gestion-ti/que-es-webassembly-la-plataforma-web-de-proxima-generacion-explicada)
 
 
-### Apps en Wasm
+## 7.2. Apps en Wasm
 
 ![Autocad web](assets/autocad-webassembly.jpg)
 
