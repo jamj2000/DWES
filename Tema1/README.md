@@ -129,13 +129,12 @@
 
 ## 4.1. Frameworks para servidor y cliente 
 
+![Desarrollo Frontend](assets/fullstack-frameworks.png)
+
 - **Universal**
 - **Next**
 - **Nuxt**
 - **SvelteKit**
-
-
-![Desarrollo Frontend](assets/fullstack-frameworks.png)
 
 
 
