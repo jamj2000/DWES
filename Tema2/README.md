@@ -345,7 +345,6 @@ fs.readFile('leeme.txt', 'utf8', (error, datos) => {
 })
 ```
 
-Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
 
 > **ACTIVIDAD**
 >
@@ -392,6 +391,8 @@ Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
 > 
 > `procces.uptime()`
 
+
+Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
 
 
 ## 2.3. Inicio de un proyecto
