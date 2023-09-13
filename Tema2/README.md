@@ -1,15 +1,65 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
-# Tema 2: Inserción de código en páginas Web
+# Tema 2: Inserción de código en páginas Web <!-- omit in toc -->
 
-## Contenido
+- [1. Introducción](#1-introducción)
+  - [1.1. Lenguajes de servidor](#11-lenguajes-de-servidor)
+- [2. NodeJS](#2-nodejs)
+  - [2.1. Instalación del entorno de ejecución NodeJS](#21-instalación-del-entorno-de-ejecución-nodejs)
+  - [2.2. Probando Node](#22-probando-node)
+  - [2.3. Inicio de un proyecto](#23-inicio-de-un-proyecto)
+  - [2.4. Archivo package.json](#24-archivo-packagejson)
+  - [2.5. Instalación de módulos](#25-instalación-de-módulos)
+  - [2.6. Opciones de NPM](#26-opciones-de-npm)
+  - [2.7. Desinstalación de módulos](#27-desinstalación-de-módulos)
+  - [2.8. Ejecución de paquetes sin necesidad de instalar](#28-ejecución-de-paquetes-sin-necesidad-de-instalar)
+  - [2.9. Módulos incorporados (built-in) en Node](#29-módulos-incorporados-built-in-en-node)
+  - [2.10. El servidor web](#210-el-servidor-web)
+- [3. NextJS](#3-nextjs)
+  - [3.1. Creación de un proyecto](#31-creación-de-un-proyecto)
+- [4. Referencias](#4-referencias)
+
 
 
 
 ---
+# 1. Introducción
+
+En el desarrollo de backend son muy numerosos los lenguajes de programación y frameworks que podemos usar. Actualmente las tecnologías web desarrolladas con Javascript está en plena efervescencia tanto en la parte *frontend* como *backend*. Es un ecosistema muy dinámico y con ideas novedosas e innovadoras.
+
+El gran interés despertado se debe, entre muchas otras cosas, a:
+
+1. Javascript puede usarse tanto en frontend, como backend. De esta forma no es necesario aprender 2 lenguajes.
+2. Javascript permite ejecución asíncrona de código desde hace tiempo, algo muy necesario en las aplicaciones web.
+3. Es un lenguaje muy eficiente y rápido. Más aún si se sabe utilizar adecuadamente.
+4. Está soportado por todos los navegadores en el frontend. Existen numerosos sitios donde desplegar aplicaciones basadas en NodeJS para el backend.
+5. Existe gran cantidad de software y paquetes escritos en Javascript.
+6. Existe gran cantidad de documentación y desarrolladores.
+
+Como desventajas, pueden señalarse las siguientes:
+
+1. Existen tantos frameworks basados en Javascript que resulta abrumador.
+2. Cada framework ofrece una forma de desarrollo y campo de aplicación diferentes, lo cual genera confusión entre los recién llegados.
+3. Es difícil seguir el ritmo de las tecnologías que van surgiendo. 
+   
+
+En el lado servidor usaremos **NodeJS como entorno de ejecución** y como framework del lado servidor usaremos **NextJS 13**.
+
+> **NOTA**
+>
+> Actualmente, no existe un único entorno de ejecución, sino 3:
+>
+> **Node**: https://nodejs.org/es
+>
+> **Deno**: https://deno.com/ 
+>
+> **Bun**: https://bun.sh/
 
 
-## Lenguajes de servidor
+
+## 1.1. Lenguajes de servidor
+
+A continuación se muestra un ejemplo de código de una pequeña aplicación desarrollada en distintos lenguajes de servidor.
 
 **PHP**
 
@@ -179,3 +229,383 @@ const Home = () => {
 export default Home;
 ```
 
+# 2. NodeJS
+
+Node.js es un **entorno en tiempo de ejecución** multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación **JavaScript**, asíncrono, con E/S de datos en una arquitectura orientada a eventos y **basado en el motor V8 de Google**.
+
+Este entorno nos permitirá desarrollar aplicaciones en el servidor usando Javascript. También es muy utilizado como plataforma de desarrollo para frameworks del lado cliente.
+
+Posee un extenso repositorio de paquetes para prácticamente cualquier funcionalidad que deseemos. 
+
+Trabajaremos con la version LTS, por ser más estable y tener soporte a largo plazo. 
+
+
+## 2.1. Instalación del entorno de ejecución NodeJS
+
+![Node download](assets/node-download.png)
+
+La instalación de NodeJS es bastante sencilla. Existen instaladores para Windows y Mac. En el caso de Linux no es tan sencilla, pero aún así no tiene excesiva dificultad.
+
+Se siguen los siguientes pasos:
+
+1. Se descarga archivo comprimido.
+2. Se descomprime el archivo anterior.
+3. Se copian a `/usr` las subcarpetas `bin`, `lib`, `include` y `share`.
+
+Aquí tienes los comandos. Es copiar y pegar.
+
+```bash
+wget https://nodejs.org/dist/v18.17.1/node-v18.17.1-linux-x64.tar.xz
+tar xvf node-v18.17.1-linux-x64.tar.xz
+cd node-v18.17.1-linux-x64
+sudo  cp  -r   bin  lib  include  share  /usr
+```
+
+Para comprobar que se ha instalado correctamente hacemos
+
+```bash
+ls /usr/bin/{node,npm,npx} -l
+```
+
+Deben aparecer 3 ejecutables:
+
+- **node**:  es el entorno de ejecución propiamente dicho.
+- **npm**:  es el gestor de paquetes.
+- **npx**:  es el lanzador de paquetes ejecutables.
+
+También podemos comprobar que se han instalado correctamente si ejecutamos
+
+```bash
+node --version
+npm  --version
+npx  --version
+```
+
+Si nos muestra la versión de cada uno, es que la instalación fue exitosa.
+
+
+## 2.2. Probando Node
+
+Podemos lanzar el intérprete de node, simplemente ejecutando en un terminal el comando `node`:
+
+```bash
+node 
+Welcome to Node.js v18.17.1.
+Type ".help" for more information.
+> 
+```
+
+Algunos comandos: 
+
+
+```javascript
+console.log("Hola mundo")
+```
+
+```javascript
+for (let i=0; i<10; i++) console.log (i)
+```
+
+```javascript
+let desarrolladores = [
+    { nombre: 'Juan', tipo: 'móvil', edad: 24 },
+    { nombre: 'Inma', tipo: 'móvil', edad: 31 },
+    { nombre: 'Ana',  tipo: 'web',   edad: 25 },
+    { nombre: 'Eva',  tipo: 'web',   edad: 30 },
+    { nombre: 'José', tipo: 'móvil', edad: 33 }
+];
+
+console.table(desarrolladores)
+```
+
+```javascript
+// Creación de archivo leeme.txt
+const datos = `
+Este contenido ha sido generado desde Javascript
+y escrito en un archivo desde NodeJS.
+
+Chao.
+`
+
+fs.writeFile ("leeme.txt", datos, (error) => {
+  if (error)
+    console.log(error);
+  else 
+    console.log("Archivo creado exitosamente");
+})
+```
+
+```javascript
+// Lectura de archivo leeme.txt
+fs.readFile('leeme.txt', 'utf8', (error, datos) => {
+  if (error) 
+    console.error(error);
+  else
+    console.log(datos);
+})
+```
+
+Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
+
+> **ACTIVIDAD**
+>
+> Escribe `os.` y pulsa tabulador 2 veces
+>
+> Te aparecerán todas las propiedades y métodos disponibles en este módulo.
+>
+> Ejecuta los siguientes y haz una captura de pantalla:
+> 
+> `os.type()`
+> 
+> `os.platform()`
+> 
+> `os.arch()`
+>
+> `os.release()`
+>
+> `os.cpus()`
+>
+> `os.totalmem()`
+>
+> `os.freemem()`
+>
+> `os.uptime()`
+>
+> `os.networkInterfaces()`
+>
+> `os.userInfo()`
+
+
+> **ACTIVIDAD**
+>
+> Escribe `process.` y pulsa tabulador 2 veces
+>
+> Te aparecerán todas las propiedades y métodos disponibles en este módulo.
+>
+> Ejecuta los siguientes y haz una captura de pantalla:
+>
+> `process.env`
+>
+> `procces.pid`
+>
+> `procces.ppid`
+> 
+> `procces.uptime()`
+
+
+
+## 2.3. Inicio de un proyecto
+
+Normalmente, node no se suele ejecutar de la forma que hemos realizado previamente, sino que se crean proyectos que se ejecutan en node.
+
+Para crear un proyecto, creamos una carpeta, entramos en ella y ejecutamos `npm init -y`
+```bash
+mkdir proyecto-node  &&  cd proyecto-node
+
+npm  init  -y 
+```
+
+> **NOTA**
+> 
+> La opción -y (--yes) de `npm init` crea un archivo **package.json** con opciones por defecto, sin hacer preguntas al usuario.
+
+> **NOTA**
+> 
+> El comando `npm` (Node Package Manager) es muy importante. Nos permitirá:
+> - Inicializar proyectos. 
+> - Instalar paquetes.
+> - Desinstalar paquetes.
+> - Ejecutar diversos scripts: lanzamiento de entorno de desarrollo, generación de la compilación, tests, ...
+
+
+## 2.4. Archivo package.json
+
+Una vez inicializado un proyecto, se nos generará un archivo parecido al siguiente:
+
+```json
+{
+  "name": "proyecto-node",
+  "version": "1.0.0",
+  "description": "nodejs backend app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "jamj2000",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
+```
+Este es el archivo que los tiene metadatos del proyecto, así como 3 cosas muy importantes:
+
+- **scripts**:  tareas que podremos invocar, por ejemplo `npm run test` 
+- **dependencies**: paquetes que nuestra aplicación necesita para ofrecer la funcionalidad deseada y serán incorporados a la aplicación final. 
+- **devDependencies**: paquetes que sólo usaremos durante el desarrollo, no se incorporan a la aplicación final.
+
+
+## 2.5. Instalación de módulos
+
+```bash
+     npm  install  express      -S  
+     npm  install  nodemon      -D  
+sudo npm  install  json-server  -g  
+```
+
+o de forma más corta
+
+```bash
+     npm  i  express     -S  
+     npm  i  nodemon     -D  
+sudo npm  i  json-server -g
+```
+
+## 2.6. Opciones de NPM
+
+**-S,  --save**
+- dependencia de aplicación. Añade entrada en archivo `package.json`. En las últimas versiones de `npm` no es necesaria esta opción.
+
+**-D,  --save-dev**
+- dependencia de desarrollo. Añade entrada en archivo `package.json`.
+
+**-g,  --global**
+- instala en el sistema de forma global. Se usa normalmente para paquetes ejecutables.
+
+
+## 2.7. Desinstalación de módulos
+
+```bash
+     npm  remove  express
+     npm  remove  nodemon     -D 
+sudo npm  remove  json-server -g 
+```   
+o de forma más corta
+
+```bash
+     npm  r  express 
+     npm  r  nodemon     -D  
+sudo npm  r  json-server -g
+```
+
+
+## 2.8. Ejecución de paquetes sin necesidad de instalar
+
+Si no tenemos permisos para instalar paquetes en el sistema, podemos usar la herramienta **npx**. Características:
+
+- Es una herramienta de ejecución de paquetes.
+- **Ejecuta** paquetes ejecutables de `node.js` sin necesidad de instalarlos.
+- Es más cómodo que usar `sudo npm install -g ...`
+- Ejemplo (lanzar servidor web):
+  
+**Usando `sudo npm install -g ...`**
+
+  ```bash
+  sudo npm  install  -g  http-server
+  http-server
+  ```
+**Usando `npx  ...`**
+ 
+  ```bash
+  npx  http-server
+  ```
+
+**Ejemplos**
+
+```
+npx  serve                     # Inicia un servidor web
+npx  http-server               # Inicia otro servidor web
+npx  live-server               # Inicia otro servidor web con recarga de archivos modificados
+npx  json-server               # Inicia un servidor JSON (API REST). Consultar https://www.npmjs.com/package/json-server
+
+npx  @angular/cli  new         nombre-proyecto  # Iniciar proyecto de Angular 
+npx  create-react-app          nombre-proyecto  # Iniciar proyecto de React 
+npx  @vue/cli  create          nombre-proyecto  # Iniciar proyecto de Vue
+npx  degit  sveltejs/template  nombre-proyecto  # Iniciar proyecto de Svelte   
+```
+
+
+## 2.9. Módulos incorporados (built-in) en Node
+
+- No es necesario instalarlos.
+- Ya vienen con node.js.
+- Ejemplos:
+  - **fs**:  Sistema de archivos
+  - **http**:  Servidor HTTP
+  - **https**:  Servidor HTTPS
+  - **os**:  Sistema operativo
+  - **path**:  Rutas de archivos
+  - **process**:  Información y control del proceso actual
+  - ...
+
+Mas info: https://www.w3schools.com/nodejs/ref_modules.asp
+
+
+## 2.10. El servidor web
+
+- Node.js nos permite desarrollar un servidor web desde cero.
+- Para ello puede usarse los módulos incorporados `http` y `https`.
+- Sin embargo es más recomendable, por su sencillez, usar el **framework `express`**.
+
+
+**Un servidor web sencillo**
+
+```javascript
+// server.js
+// --- IMPORTACIONES
+const path     = require('path');
+const express  = require('express');
+
+const app      = express();
+
+// Archivos estáticos. Deberás crear un archivo public/index.html para ver el resultado
+app.use(express.static(path.join(__dirname , 'public')));
+
+// Ruta /hola
+app.get ('/hola', (req, res) => { 
+    res.send ('Hola mundo') 
+});
+
+// Ruta /hola/loquesea, p. ej:  /hola/jose,  /hola/ana, ...
+app.get ('/hola/:usuario', (req, res) => { 
+    res.send (`<h1>Buenos días, ${req.params.usuario}</h1>`); 
+});
+
+app.listen (3000);
+```
+
+Ejecutaremos:
+
+```bash
+node  server
+```
+
+
+# 3. NextJS
+
+Next es un **framework fullstack JavaScript**, que emplea React para crear componentes. Y ya no solo componentes de frontend. Gracias a los "**React Server Components (RSC)**" podemos tener componentes que sólo se ejecuten en un entorno de servidor o backend.
+Con Next lo que hacemos son aplicaciones Server Side Rendering (SSR), y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
+
+
+> **IMPORTANTE**
+>
+> **Usaremos la versión NextJS 13 o superior.**
+>
+> En Internet hay mucha documentación de versiones anteriores, pero la forma de trabajar en ellas es ligeramente diferente.
+
+
+## 3.1. Creación de un proyecto
+
+```bash
+npx  create-next-app@latest  miapp
+```
+
+
+
+# 4. Referencias
+
+- [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
