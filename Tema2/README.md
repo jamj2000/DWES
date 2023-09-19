@@ -17,6 +17,8 @@
   - [2.10. El servidor web](#210-el-servidor-web)
 - [3. NextJS](#3-nextjs)
   - [3.1. Creación de un proyecto](#31-creación-de-un-proyecto)
+  - [Carpetas y archivos del proyecto](#carpetas-y-archivos-del-proyecto)
+  - [](#)
 - [4. Referencias](#4-referencias)
 
 
@@ -231,7 +233,13 @@ export default Home;
 
 # 2. NodeJS
 
+
+![node](assets/node.png)
+
 Node.js es un **entorno en tiempo de ejecución** multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación **JavaScript**, asíncrono, con E/S de datos en una arquitectura orientada a eventos y **basado en el motor V8 de Google**.
+
+
+![v8 engine](assets/v8-engine.png)
 
 Este entorno nos permitirá desarrollar aplicaciones en el servidor usando Javascript. También es muy utilizado como plataforma de desarrollo para frameworks del lado cliente.
 
@@ -601,10 +609,44 @@ Con Next lo que hacemos son aplicaciones Server Side Rendering (SSR), y con los 
 
 ## 3.1. Creación de un proyecto
 
+Para crear proyecto llamado `miapp`
+
 ```bash
-npx  create-next-app@latest  miapp
+npx  create-next-app  miapp
 ```
 
+Nos aparecerá un asistente solicitando las funcionalidades con las que vamos a trabajar. En principio, pulsaremos `Intro` para todo, instalando sólo 3 dependencias: `react`, `react-dom` y `next`.
+
+![create next app](assets/create-next-app.png)
+ 
+
+Para entrar dentro del proyecto
+
+```bash
+cd  miapp
+```
+
+Para editar el código con VSCode
+
+```bash
+code  .
+```
+
+## Carpetas y archivos del proyecto
+
+![lista archivos](assets/tree-app.png)
+
+Los archivos que aparecen dentro de la carpeta `src/app` son:
+
+- `favicon.ico`: icono de la aplicación
+- `globals.css`: estilos CSS globales
+- `layout.js`: plantilla o layout de la aplicación
+- `page.js`: página inicial
+- `page.module.css`: estilos CSS para la página principal
+
+
+
+## 
 
 
 # 4. Referencias
