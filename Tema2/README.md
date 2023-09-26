@@ -393,11 +393,11 @@ fs.readFile('leeme.txt', 'utf8', (error, datos) => {
 >
 > `process.env`
 >
-> `procces.pid`
+> `process.pid`
 >
-> `procces.ppid`
+> `process.ppid`
 > 
-> `procces.uptime()`
+> `process.uptime()`
 
 
 Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
