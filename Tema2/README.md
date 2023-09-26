@@ -402,6 +402,12 @@ fs.readFile('leeme.txt', 'utf8', (error, datos) => {
 
 Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
 
+## Probando VSCode
+
+La manera anterior de trabajar es muy incómoda. Nos sirve para tareas muy simples, pero si deseamos trabajar más cómoda podemos hacer uso de un editor o IDE. En la captura de más abajo se muestra un ejemplo de uso de VSCode. En el terminal lanzamos **`node  --watch  codigo.js`**, lo cual dejará a Node escuchando los cambios en el archivo `codigo.js`, y cada vez que guardemos los cambios a disco se ejecutará su código.
+
+![node --watch](assets/node--watch.png)
+
 
 ## 2.3. Inicio de un proyecto
 
