@@ -27,7 +27,7 @@
 ---
 # 1. Introducción
 
-Este tema hace uso de los siguientes recursos para el estudio de **Arrays**, **Objetos** y **Arrow functions**:
+Este tema hace uso de los siguientes recursos para el uso de **Arrays**, **Objetos** y **Arrow functions**:
 
 - [SINTAXIS DE JAVASCRIPT](https://github.com/jamj2000/Javascript/blob/master/02.SINTAXIS.md)
 - [FUNCIONES](https://github.com/jamj2000/Javascript/blob/master/03.FUNCIONES.md)
