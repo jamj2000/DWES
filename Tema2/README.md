@@ -27,6 +27,14 @@
 ---
 # 1. Introducción
 
+Este tema hace uso de los siguientes recursos para el estudio de **Arrays**, **Objetos** y **Arrow functions**:
+
+- [SINTAXIS DE JAVASCRIPT](https://github.com/jamj2000/Javascript/blob/master/02.SINTAXIS.md)
+- [FUNCIONES](https://github.com/jamj2000/Javascript/blob/master/03.FUNCIONES.md)
+- [ARRAYS](https://github.com/jamj2000/Javascript/blob/master/04.ARRAYS.md)
+- [OBJETOS](https://github.com/jamj2000/Javascript/blob/master/05.OBJETOS.md)
+
+
 En el desarrollo de backend son muy numerosos los lenguajes de programación y frameworks que podemos usar. Actualmente las tecnologías web desarrolladas con Javascript está en plena efervescencia tanto en la parte *frontend* como *backend*. Es un ecosistema muy dinámico y con ideas novedosas e innovadoras.
 
 El gran interés despertado se debe, entre muchas otras cosas, a:
