@@ -19,6 +19,7 @@
   - [3.1. Creación de un proyecto](#31-creación-de-un-proyecto)
   - [Carpetas y archivos del proyecto](#carpetas-y-archivos-del-proyecto)
   - [](#)
+- [Linter para Javascript](#linter-para-javascript)
 - [4. Referencias](#4-referencias)
 
 
@@ -335,6 +336,8 @@ console.table(desarrolladores)
 ```
 
 ```javascript
+const fs = require('fs')
+
 // Creación de archivo leeme.txt
 const datos = `
 Este contenido ha sido generado desde Javascript
@@ -352,6 +355,8 @@ fs.writeFile ("leeme.txt", datos, (error) => {
 ```
 
 ```javascript
+const fs = require('fs')
+
 // Lectura de archivo leeme.txt
 fs.readFile('leeme.txt', 'utf8', (error, datos) => {
   if (error) 
@@ -662,6 +667,9 @@ Los archivos que aparecen dentro de la carpeta `src/app` son:
 
 ## 
 
+# Linter para Javascript
+
+- https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
 
 # 4. Referencias
 
