@@ -1,6 +1,7 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 1: Selección de arquitecturas y herramientas de programación <!-- omit in toc -->
+> CONCEPTOS, BACKEND, FRONTEND, MVC, MPA, SPA, LENGUAJES, FRAMEWORKS
 
 - [1. Introducción](#1-introducción)
   - [1.1. La base de la web](#11-la-base-de-la-web)

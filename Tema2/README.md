@@ -1,25 +1,19 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 2: Inserción de código en páginas Web <!-- omit in toc -->
+> NODE, MÓDULOS INCORPORADOS, NPM, NPX, LINTER, ESLINT
 
 - [1. Introducción](#1-introducción)
   - [1.1. Lenguajes de servidor](#11-lenguajes-de-servidor)
 - [2. NodeJS](#2-nodejs)
   - [2.1. Instalación del entorno de ejecución NodeJS](#21-instalación-del-entorno-de-ejecución-nodejs)
   - [2.2. Probando Node](#22-probando-node)
-  - [2.3. Inicio de un proyecto](#23-inicio-de-un-proyecto)
-  - [2.4. Archivo package.json](#24-archivo-packagejson)
-  - [2.5. Instalación de módulos](#25-instalación-de-módulos)
-  - [2.6. Opciones de NPM](#26-opciones-de-npm)
-  - [2.7. Desinstalación de módulos](#27-desinstalación-de-módulos)
-  - [2.8. Ejecución de paquetes sin necesidad de instalar](#28-ejecución-de-paquetes-sin-necesidad-de-instalar)
-  - [2.9. Módulos incorporados (built-in) en Node](#29-módulos-incorporados-built-in-en-node)
-  - [2.10. El servidor web](#210-el-servidor-web)
-- [3. NextJS](#3-nextjs)
-  - [3.1. Creación de un proyecto](#31-creación-de-un-proyecto)
-  - [Carpetas y archivos del proyecto](#carpetas-y-archivos-del-proyecto)
-  - [](#)
-- [Linter para Javascript](#linter-para-javascript)
+  - [2.3. Probando VSCode](#23-probando-vscode)
+  - [2.4. Inicializar un proyecto](#24-inicializar-un-proyecto)
+  - [2.5. Archivo package.json](#25-archivo-packagejson)
+  - [2.6. Ejecución de paquetes sin necesidad de instalar](#26-ejecución-de-paquetes-sin-necesidad-de-instalar)
+  - [2.7. Módulos incorporados (built-in) en Node](#27-módulos-incorporados-built-in-en-node)
+- [3. Linter para Javascript](#3-linter-para-javascript)
 - [4. Referencias](#4-referencias)
 
 
@@ -71,6 +65,16 @@ En el lado servidor usaremos **NodeJS como entorno de ejecución** y como framew
 ## 1.1. Lenguajes de servidor
 
 A continuación se muestra un ejemplo de código de una pequeña aplicación desarrollada en distintos lenguajes de servidor.
+
+Los lenguajes son:
+
+- PHP
+- .NET
+- JSP
+- JAVA
+- PYTHON
+- NODEJS
+  
 
 **PHP**
 
@@ -415,14 +419,14 @@ fs.readFile('leeme.txt', 'utf8', (error, datos) => {
 
 Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
 
-## Probando VSCode
+## 2.3. Probando VSCode
 
 La manera anterior de trabajar es muy incómoda. Nos sirve para tareas muy simples, pero si deseamos trabajar más cómoda podemos hacer uso de un editor o IDE. En la captura de más abajo se muestra un ejemplo de uso de VSCode. En el terminal lanzamos **`node  --watch  codigo.js`**, lo cual dejará a Node escuchando los cambios en el archivo `codigo.js`, y cada vez que guardemos los cambios a disco se ejecutará su código.
 
 ![node --watch](assets/node--watch.png)
 
 
-## 2.3. Inicio de un proyecto
+## 2.4. Inicializar un proyecto
 
 Normalmente, node no se suele ejecutar de la forma que hemos realizado previamente, sino que se crean proyectos que se ejecutan en node.
 
@@ -439,14 +443,14 @@ npm  init  -y
 
 > **NOTA**
 > 
-> El comando `npm` (Node Package Manager) es muy importante. Nos permitirá:
+> El comando `npm` (**Node Package Manager**) es muy importante. Nos permitirá:
 > - Inicializar proyectos. 
 > - Instalar paquetes.
 > - Desinstalar paquetes.
 > - Ejecutar diversos scripts: lanzamiento de entorno de desarrollo, generación de la compilación, tests, ...
 
 
-## 2.4. Archivo package.json
+## 2.5. Archivo package.json
 
 Una vez inicializado un proyecto, se nos generará un archivo parecido al siguiente:
 
@@ -454,13 +458,13 @@ Una vez inicializado un proyecto, se nos generará un archivo parecido al siguie
 {
   "name": "proyecto-node",
   "version": "1.0.0",
-  "description": "nodejs backend app",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "jamj2000",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
@@ -470,6 +474,13 @@ Una vez inicializado un proyecto, se nos generará un archivo parecido al siguie
   }
 }
 ```
+Podemos instalar módulos externos con `npm`. Por ejemplo:
+
+```console
+npm install express     # Dependencia de aplicación
+npm install nodemon -D  # Dependencia de desarrollo (dev)
+```
+
 Este es el archivo que los tiene metadatos del proyecto, así como 3 cosas muy importantes:
 
 - **scripts**:  tareas que podremos invocar, por ejemplo `npm run test` 
@@ -477,51 +488,8 @@ Este es el archivo que los tiene metadatos del proyecto, así como 3 cosas muy i
 - **devDependencies**: paquetes que sólo usaremos durante el desarrollo, no se incorporan a la aplicación final.
 
 
-## 2.5. Instalación de módulos
 
-```bash
-     npm  install  express      -S  
-     npm  install  nodemon      -D  
-sudo npm  install  json-server  -g  
-```
-
-o de forma más corta
-
-```bash
-     npm  i  express     -S  
-     npm  i  nodemon     -D  
-sudo npm  i  json-server -g
-```
-
-## 2.6. Opciones de NPM
-
-**-S,  --save**
-- dependencia de aplicación. Añade entrada en archivo `package.json`. En las últimas versiones de `npm` no es necesaria esta opción.
-
-**-D,  --save-dev**
-- dependencia de desarrollo. Añade entrada en archivo `package.json`.
-
-**-g,  --global**
-- instala en el sistema de forma global. Se usa normalmente para paquetes ejecutables.
-
-
-## 2.7. Desinstalación de módulos
-
-```bash
-     npm  remove  express
-     npm  remove  nodemon     -D 
-sudo npm  remove  json-server -g 
-```   
-o de forma más corta
-
-```bash
-     npm  r  express 
-     npm  r  nodemon     -D  
-sudo npm  r  json-server -g
-```
-
-
-## 2.8. Ejecución de paquetes sin necesidad de instalar
+## 2.6. Ejecución de paquetes sin necesidad de instalar
 
 Si no tenemos permisos para instalar paquetes en el sistema, podemos usar la herramienta **npx**. Características:
 
@@ -548,7 +516,7 @@ Si no tenemos permisos para instalar paquetes en el sistema, podemos usar la her
 npx  serve                     # Inicia un servidor web
 npx  http-server               # Inicia otro servidor web
 npx  live-server               # Inicia otro servidor web con recarga de archivos modificados
-npx  json-server               # Inicia un servidor JSON (API REST). Consultar https://www.npmjs.com/package/json-server
+npx  servor                    # Inicia otro servidor web con recarga de archivos modificados
 
 npx  @angular/cli  new         nombre-proyecto  # Iniciar proyecto de Angular 
 npx  create-react-app          nombre-proyecto  # Iniciar proyecto de React 
@@ -557,7 +525,7 @@ npx  degit  sveltejs/template  nombre-proyecto  # Iniciar proyecto de Svelte
 ```
 
 
-## 2.9. Módulos incorporados (built-in) en Node
+## 2.7. Módulos incorporados (built-in) en Node
 
 - No es necesario instalarlos.
 - Ya vienen con node.js.
@@ -573,103 +541,16 @@ npx  degit  sveltejs/template  nombre-proyecto  # Iniciar proyecto de Svelte
 Mas info: https://www.w3schools.com/nodejs/ref_modules.asp
 
 
-## 2.10. El servidor web
-
-- Node.js nos permite desarrollar un servidor web desde cero.
-- Para ello puede usarse los módulos incorporados `http` y `https`.
-- Sin embargo es más recomendable, por su sencillez, usar el **framework `express`**.
-
-
-**Un servidor web sencillo**
-
-```javascript
-// server.js
-// --- IMPORTACIONES
-const path     = require('path');
-const express  = require('express');
-
-const app      = express();
-
-// Archivos estáticos. Deberás crear un archivo public/index.html para ver el resultado
-app.use(express.static(path.join(__dirname , 'public')));
-
-// Ruta /hola
-app.get ('/hola', (req, res) => { 
-    res.send ('Hola mundo') 
-});
-
-// Ruta /hola/loquesea, p. ej:  /hola/jose,  /hola/ana, ...
-app.get ('/hola/:usuario', (req, res) => { 
-    res.send (`<h1>Buenos días, ${req.params.usuario}</h1>`); 
-});
-
-app.listen (3000);
-```
-
-Ejecutaremos:
-
-```bash
-node  server
-```
-
-
-# 3. NextJS
-
-Next es un **framework fullstack JavaScript**, que emplea React para crear componentes. Y ya no solo componentes de frontend. Gracias a los "**React Server Components (RSC)**" podemos tener componentes que sólo se ejecuten en un entorno de servidor o backend.
-Con Next lo que hacemos son aplicaciones Server Side Rendering (SSR), y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
-
-
-> **IMPORTANTE**
->
-> **Usaremos la versión NextJS 13 o superior.**
->
-> En Internet hay mucha documentación de versiones anteriores, pero la forma de trabajar en ellas es ligeramente diferente.
-
-
-## 3.1. Creación de un proyecto
-
-Para crear proyecto llamado `miapp`
-
-```bash
-npx  create-next-app  miapp
-```
-
-Nos aparecerá un asistente solicitando las funcionalidades con las que vamos a trabajar. En principio, pulsaremos `Intro` para todo, instalando sólo 3 dependencias: `react`, `react-dom` y `next`.
-
-![create next app](assets/create-next-app.png)
- 
-
-Para entrar dentro del proyecto
-
-```bash
-cd  miapp
-```
-
-Para editar el código con VSCode
-
-```bash
-code  .
-```
-
-## Carpetas y archivos del proyecto
-
-![lista archivos](assets/tree-app.png)
-
-Los archivos que aparecen dentro de la carpeta `src/app` son:
-
-- `favicon.ico`: icono de la aplicación
-- `globals.css`: estilos CSS globales
-- `layout.js`: plantilla o layout de la aplicación
-- `page.js`: página inicial
-- `page.module.css`: estilos CSS para la página principal
-
-
-
-## 
-
-# Linter para Javascript
+# 3. Linter para Javascript
 
 - https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
+
+
+
+```javascript
+npm  init  -y               # Inicialización de proyecto
+npm  init  @eslint/config   # Configuración de ESLint
+```
 
 # 4. Referencias
 
