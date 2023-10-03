@@ -3,9 +3,17 @@
 # Tema 3: Programación basada en lenguajes de marcas con código embebido <!-- omit in toc -->
 > NODE, MÓDULOS EXTERNOS, EXPRESS, FETCH, APIs
 
+- [1. Introducción](#1-introducción)
+- [2. Módulos externos](#2-módulos-externos)
+  - [2.1. Instalación de módulos externos](#21-instalación-de-módulos-externos)
+  - [2.2. Opciones de NPM](#22-opciones-de-npm)
+  - [2.3. Desinstalación de módulos externos](#23-desinstalación-de-módulos-externos)
+- [3. EXPRESS](#3-express)
+
+
 ---
 
-# Introducción
+# 1. Introducción
 
 Este tema hace uso de los siguientes recursos para el uso de **Arrays**, **Objetos** y **Arrow functions**:
 
@@ -17,7 +25,7 @@ Este tema hace uso de los siguientes recursos para el uso de **Arrays**, **Objet
 
 
 
-# Módulos externos
+# 2. Módulos externos
 
 NodeJS viene con numerosos módulos internos incorporados (built-in): `fs`, `os`, `process`, `path`, `http`, `https`, ...
 
@@ -31,7 +39,7 @@ Para instalar estos módulos externos usamos la herramienta `npm`.
 >
 
 
-## 2.5. Instalación de módulos externos
+## 2.1. Instalación de módulos externos
 
 ```bash
      npm  install  express      -S  
@@ -47,7 +55,7 @@ o de forma más corta
 sudo npm  i  json-server -g
 ```
 
-## 2.6. Opciones de NPM
+## 2.2. Opciones de NPM
 
 **-S,  --save**
 - dependencia de aplicación. Añade entrada en archivo `package.json`. En las últimas versiones de `npm` no es necesaria esta opción.
@@ -59,7 +67,7 @@ sudo npm  i  json-server -g
 - instala en el sistema de forma global. Se usa normalmente para paquetes ejecutables.
 
 
-## 2.7. Desinstalación de módulos externos
+## 2.3. Desinstalación de módulos externos
 ```bash
      npm  remove  express
      npm  remove  nodemon     -D 
@@ -74,11 +82,12 @@ sudo npm  r  json-server -g
 ```
 
 
-# EXPRESS
+# 3. EXPRESS
 
 - Node.js nos permite desarrollar un servidor web desde cero.
 - Para ello puede usarse los módulos incorporados `http` y `https`.
 - Sin embargo es más recomendable, por su sencillez, usar el **framework `express`**.
+
 
 
 **Un servidor web sencillo**
@@ -221,4 +230,10 @@ app.get('/hola/:usuario', (req, res) => {
 })
 
 app.listen(3000)
+```
+
+Para lanzar el servidor, hacemos:
+
+```bash
+npm run dev
 ```
