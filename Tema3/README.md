@@ -83,6 +83,14 @@ sudo npm  r  json-server -g
 
 **Un servidor web sencillo**
 
+Este servidor trabaja con **módulos CommonJS**, por tanto para importarlos se hace con **`require`**. 
+
+```bash
+npm init -y
+npm install express
+```
+
+
 ```javascript
 // server.js
 // --- IMPORTACIONES
@@ -113,3 +121,104 @@ Ejecutaremos:
 node  server
 ```
 
+
+**Otro servidor web sencillo**
+
+Este otro servidor trabaja con **módulos ECMAScript**, por tanto para importarlos se hace con **`import`**. 
+
+```bash
+npm init -y
+```
+
+Insertamos línea `"type": "module"` en `package.json` para indicar que trabajaremos con módulos ECMAScript.
+
+```json
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+Instalamos las dependecias:
+
+```bash
+npm install express
+npm install -D standard  # Para trabajar con el linter eslint de Javascript
+```
+
+Insertamos en `package.json` las siguientes líneas:
+
+```json
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard"
+    ]
+  },
+```
+
+Con lo cual, el archivo `package.json` quedaría así:
+
+```json
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^17.1.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+```
+
+Y el archivo `server.js` quedaría así:
+
+```javascript
+// server.js
+// --- IMPORTACIONES
+import path from 'path'
+import express from 'express'
+
+const app = express()
+
+// Archivos estáticos. Deberás crear un archivo public/index.html para ver el resultado
+app.use(express.static(path.join(process.cwd(), 'public')))
+
+// Ruta /hola
+app.get('/hola', (req, res) => {
+  res.send('Hola mundo')
+})
+
+// Ruta /hola/loquesea, p. ej:  /hola/jose,  /hola/ana, ...
+app.get('/hola/:usuario', (req, res) => {
+  res.send(`<h1>Buenos días, ${req.params.usuario}</h1>`)
+})
+
+app.listen(3000)
+```
