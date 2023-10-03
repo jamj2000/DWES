@@ -543,14 +543,29 @@ Mas info: https://www.w3schools.com/nodejs/ref_modules.asp
 
 # 3. Linter para Javascript
 
-- https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
-
-
+Referencia: https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
 
 ```javascript
 npm  init  -y               # Inicialización de proyecto
 npm  init  @eslint/config   # Configuración de ESLint
 ```
+
+Otra forma de dar soporte es:
+
+```javascript
+npm  init  -y               # Inicialización de proyecto
+npm  install -D standard    # Instalamos el conjunto de reglas standard
+```
+
+E insertamos en `package.json`
+
+```json
+"eslintConfig": {
+  "extends": [ "standard" ]
+}
+``` 
+
+
 
 # 4. Referencias
 
