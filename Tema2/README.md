@@ -14,8 +14,10 @@
   - [2.6. Ejecución de paquetes sin necesidad de instalar](#26-ejecución-de-paquetes-sin-necesidad-de-instalar)
   - [2.7. Módulos incorporados (built-in) en Node](#27-módulos-incorporados-built-in-en-node)
 - [3. Linter para Javascript](#3-linter-para-javascript)
-- [4. Referencias](#4-referencias)
-
+- [4. Configuración de usuario en VSCode](#4-configuración-de-usuario-en-vscode)
+  - [4.1. Archivo settings.json](#41-archivo-settingsjson)
+  - [4.2. Plugins](#42-plugins)
+- [5. Referencias](#5-referencias)
 
 
 
@@ -465,13 +467,7 @@ Una vez inicializado un proyecto, se nos generará un archivo parecido al siguie
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.4"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.4"
-  }
+  "license": "ISC"
 }
 ```
 Podemos instalar módulos externos con `npm`. Por ejemplo:
@@ -481,7 +477,22 @@ npm install express     # Dependencia de aplicación
 npm install nodemon -D  # Dependencia de desarrollo (dev)
 ```
 
-Este es el archivo que los tiene metadatos del proyecto, así como 3 cosas muy importantes:
+Al realizar las instalaciones anteriores, se insertarán automáticamente las siguientes líneas en el archivo anterior:
+
+```json
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+```
+
+> **NOTA:** La versión de cada paquete puede diferir de la que tu tengas.
+
+
+
+El archivo `package.json` contiene los metadatos del proyecto, entre estos están 3 cosas muy importantes:
 
 - **scripts**:  tareas que podremos invocar, por ejemplo `npm run test` 
 - **dependencies**: paquetes que nuestra aplicación necesita para ofrecer la funcionalidad deseada y serán incorporados a la aplicación final. 
@@ -543,14 +554,18 @@ Mas info: https://www.w3schools.com/nodejs/ref_modules.asp
 
 # 3. Linter para Javascript
 
-Referencia: https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
+Un linter es un software que se encarga de examinar el código del programador y lo ayuda cuando detecta errores de sintaxis, código incorrecto, malas prácticas o incluso promueve a seguir unas normas de estilo. 
+
+Podemos configurar un linter básico haciendo:
 
 ```javascript
 npm  init  -y               # Inicialización de proyecto
-npm  init  @eslint/config   # Configuración de ESLint
+npm  init  @eslint/config   # Asistente de configuración de ESLint
 ```
 
-Otra forma de dar soporte es:
+Más información en https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
+
+Otra forma más directa, aunque menos configurable, es realizar:
 
 ```javascript
 npm  init  -y               # Inicialización de proyecto
@@ -565,8 +580,108 @@ E insertamos en `package.json`
 }
 ``` 
 
+# 4. Configuración de usuario en VSCode
 
 
-# 4. Referencias
+## 4.1. Archivo settings.json
+
+La configuración de usuario se guarda en un archivo **`settings.json`**, dentro de la carpeta del usuario, en la subcarpeta `.config/Code/User`.
+
+Para acceder al archivo anterior y realizar las configuraciones deseadas, pulsamos **`Ctrl+Shift+P`** para acceder a la paleta de comandos de VSCode, y luego escribimos `user settings json`. Abrimos el archivo, y editamos las opciones de configuración deseadas. 
+
+Por ejemplo, mi configuración es la siguiente:
+
+```json
+{
+    "workbench.colorTheme": "Default Light+",
+    "window.zoomLevel": 2,
+    // Fuente con ligaduras
+    "editor.fontLigatures": true,
+    "editor.fontVariations": false,
+    "editor.fontFamily": "'Fira Code', monospace",
+    "svg.preview.mode": "svg",
+    // Desactivamos validación CSS por defecto de VSCode
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    // Activamos stylelint para CSS
+    "stylelint.enable": true,
+    // linters: activamos eslint para Javascript
+    "javascript.validate.enable": true,
+    "eslint.validate": [
+        "javascript"
+    ],
+    "eslint.enable": true,
+    // linters: arreglamos código CSS + Javascript al guardar a disco
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true,
+    },
+    // Desactivamos la opción siguiente para no interferir con los linters
+    // "editor.formatOnSave": true,
+    "extensions.ignoreRecommendations": true,
+    // Permite la edición simultánea de inicio y cierre de etiquetas HTML y JSX
+    "editor.linkedEditing": true,
+}
+```
+
+Básicamente, la configuración hace lo siguiente:
+
+- Se usa fuente con ligaduras [`Fira Code`](https://github.com/tonsky/FiraCode). Dicha fuente tiene que estar instalada previamente en el sistema.
+- Se activa el [`lint`](https://es.wikipedia.org/wiki/Lint) para CSS y Javascript.
+- Al guardar los cambios a disco, se arregla ( *fix* ) el código. Algunos errores requerirán la intervención del usuario al no poder solucionarse automáticamente.
+- Se activa la edición enlazada, que permite modificar las 2 etiqueta HTML de una sola vez.   
+
+> **IMPORTANTE:**
+>
+> Para que la configuración anterior sea efectiva es necesario cumplir los 3 requisitos siguientes:
+> - Tener la fuente Fira Code instalada en el sistema.
+> - Tener el plugin ESLint instalado en VSCode
+> - Tener el plugin Stylelint instalado en VSCode
+
+
+
+## 4.2. Plugins
+
+Existen numerosos plugins para VSCode que nos permiten adaptar el entorno de desarrollo a nuestras necesidades. Para el desarrollo web suelen ser habituales, aunque pueden instalarse muchos otros, los siguientes:
+
+**Spanish Language Pack for Visual Studio Code**
+
+Para cambiar el idioma de VSCode a español. 
+
+
+**ESLint**
+
+Para hacer *lint* de Javascript.
+
+
+**Stylelint**
+
+Para hacer *lint* de CSS.
+
+
+**Error Lens** 
+
+Para mostrar los errores en la línea en la que ocurren.
+Este plugin puede considerarse opcional, según el caso. De cualquier modo, una vez instalado, puede deshabilitarse si lo consideramos intrusivo.
+
+
+**Svg Preview**
+
+Este plugin es opcional, pero recomendado si trabajamos con imagenes vectoriales `.svg`. Permite su visualización gráfica.
+
+
+**Markdown All in One**
+
+Este plugin es opcional, pero recomendado si trabajamos con Markdown. Permite numerar automáticamente los títulos y crear índice de contenido, entre otras funcionalidades.
+
+
+**ES7+ React/Redux/React-Native snippets**
+
+Este plugin es opcional, pero recomendado si trabajamos con React y/o NextJS.
+
+
+
+# 5. Referencias
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)

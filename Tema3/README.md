@@ -8,8 +8,10 @@
   - [2.1. Instalación de módulos externos](#21-instalación-de-módulos-externos)
   - [2.2. Opciones de NPM](#22-opciones-de-npm)
   - [2.3. Desinstalación de módulos externos](#23-desinstalación-de-módulos-externos)
-- [3. EXPRESS](#3-express)
-
+- [3. El framework EXPRESS](#3-el-framework-express)
+- [4. Módulos CommonJS](#4-módulos-commonjs)
+- [5. Módulos ECMAScript](#5-módulos-ecmascript)
+- [6. Referencias](#6-referencias)
 
 ---
 
@@ -82,17 +84,19 @@ sudo npm  r  json-server -g
 ```
 
 
-# 3. EXPRESS
+# 3. El framework EXPRESS
 
 - Node.js nos permite desarrollar un servidor web desde cero.
 - Para ello puede usarse los módulos incorporados `http` y `https`.
 - Sin embargo es más recomendable, por su sencillez, usar el **framework `express`**.
 
 
+# 4. Módulos CommonJS
 
-**Un servidor web sencillo**
+Tradicionalemente NodeJS trabajaba y aún trabaja con **módulos CommonJS**. En este caso, para importar los módulos se hace con **`require`**. 
 
-Este servidor trabaja con **módulos CommonJS**, por tanto para importarlos se hace con **`require`**. 
+**Ejemplo de servidor con express y módulos CommonJS**
+
 
 ```bash
 npm init -y
@@ -131,9 +135,11 @@ node  server
 ```
 
 
-**Otro servidor web sencillo**
+# 5. Módulos ECMAScript
 
-Este otro servidor trabaja con **módulos ECMAScript**, por tanto para importarlos se hace con **`import`**. 
+Una forma de importar módulos más moderna y, que además es usada también en el lado cliente, es trabajar con **módulos ECMAScript**. En este caso para importar los módulos se hace con **`import`**. 
+
+**Ejemplo de servidor con express y módulos ECMAScript**
 
 ```bash
 npm init -y
@@ -237,3 +243,8 @@ Para lanzar el servidor, hacemos:
 ```bash
 npm run dev
 ```
+
+# 6. Referencias
+
+- [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
+- [CommonJS vs ES Modules](https://lenguajejs.com/automatizadores/introduccion/commonjs-vs-es-modules/)
