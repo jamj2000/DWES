@@ -552,11 +552,16 @@ npx  degit  sveltejs/template  nombre-proyecto  # Iniciar proyecto de Svelte
 Mas info: https://www.w3schools.com/nodejs/ref_modules.asp
 
 
-# 3. Linter para Javascript
+# 3. Linter para Javascript (y también para CSS)
 
 Un linter es un software que se encarga de examinar el código del programador y lo ayuda cuando detecta errores de sintaxis, código incorrecto, malas prácticas o incluso promueve a seguir unas normas de estilo. 
 
-Podemos configurar un linter básico haciendo:
+Dos linter muy conocidos son:
+- **eslint** (para Javascript)
+- **stylelint** (para CSS)
+
+
+Podemos configurar un linter básico de Javascript haciendo:
 
 ```javascript
 npm  init  -y               # Inicialización de proyecto
@@ -568,8 +573,8 @@ Más información en https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
 Otra forma más directa, aunque menos configurable, es realizar:
 
 ```javascript
-npm  init  -y               # Inicialización de proyecto
-npm  install -D standard    # Instalamos el conjunto de reglas standard
+npm  init  -y                                        # Inicialización de proyecto
+npm  install -D standard  stylelint-config-standard  # Instalamos el conjunto de reglas standard
 ```
 
 E insertamos en `package.json`
@@ -577,7 +582,13 @@ E insertamos en `package.json`
 ```json
 "eslintConfig": {
   "extends": [ "standard" ]
-}
+},
+"stylelint": {
+  "extends": "stylelint-config-standard",
+  "rules": {
+     "indentation": 2
+  }
+},
 ``` 
 
 # 4. Configuración de usuario en VSCode
