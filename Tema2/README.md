@@ -24,7 +24,7 @@
 ---
 # 1. Introducción
 
-Este tema hace uso de los siguientes recursos para el uso de **Arrays**, **Objetos** y **Arrow functions**:
+En este tema necesitaras consultar los recursos que aparecen a continuación para entender los **Arrays**, **Objetos** y **Arrow functions**, requisito imprescindible para trabajar en NodeJS y Javascript:
 
 - [SINTAXIS DE JAVASCRIPT](https://github.com/jamj2000/Javascript/blob/master/02.SINTAXIS.md)
 - [FUNCIONES](https://github.com/jamj2000/Javascript/blob/master/03.FUNCIONES.md)
