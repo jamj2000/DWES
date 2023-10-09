@@ -11,7 +11,10 @@
 - [3. El framework EXPRESS](#3-el-framework-express)
 - [4. Módulos CommonJS](#4-módulos-commonjs)
 - [5. Módulos ECMAScript](#5-módulos-ecmascript)
-- [6. Referencias](#6-referencias)
+- [6. Parámetros de URL](#6-parámetros-de-url)
+- [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
+- [8. Referencias](#8-referencias)
+
 
 ---
 
@@ -244,7 +247,43 @@ Para lanzar el servidor, hacemos:
 npm run dev
 ```
 
-# 6. Referencias
+# 6. Parámetros de URL
+
+**Parámetros de ruta** (Path Parameters)
+
+
+**Parámetros de consulta** (Query Parameters o Query Strings)
+
+
+https://www.abstractapi.com/api-glossary/path-parameters
+https://www.botify.com/learn/basics/what-are-url-parameters
+https://ahrefs.com/blog/url-parameters/
+
+
+
+# 7. Fetch desde el servidor
+
+Se entiende `fetch` como la recuperación de datos solicitados a un servidor. Es habitual que el formato de los datos sea `JSON`.
+
+La [`API fetch`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API), que se introdujo en 2015 como un reemplazo más contemporáneo de XMLHttpRequest, desde entonces se ha convertido en el estándar de facto para la realización de llamadas asincrónicas en aplicaciones web.
+
+Aunque la `API Fetch` lleva tiempo disponible para su uso en navegadores web en el lado cliente, no estaba disponible para su uso desde el lado servidor debido a varias limitaciones.
+
+Desde NodeJS v17.5.0, `fetch` se hizo disponible como función experimental para su uso desde la lado servidor.
+
+https://reqres.in/
+https://jsonplaceholder.typicode.com/
+https://randomuser.me
+
+
+https://randomuser.me/documentation
+
+fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone').then(res => res.json(res)).then(data => console.log(...data.results))
+
+
+
+
+# 8. Referencias
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
 - [CommonJS vs ES Modules](https://lenguajejs.com/automatizadores/introduccion/commonjs-vs-es-modules/)

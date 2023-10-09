@@ -1,18 +1,27 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 4: Desarrollo de aplicaciones Web utilizando código embebido <!-- omit in toc -->
+> APP ROUTER, ROUTE HANDLERS, COOKIES
 
+- [1. Introducción](#1-introducción)
+- [2. NextJS](#2-nextjs)
+  - [2.1. Creación de un proyecto](#21-creación-de-un-proyecto)
+  - [2.2. Carpetas y archivos del proyecto](#22-carpetas-y-archivos-del-proyecto)
+  - [2.3.](#23)
+- [3. App Router](#3-app-router)
+- [4. Route Handlers](#4-route-handlers)
+- [5. Cookies](#5-cookies)
 
 
 
 
 --- 
 
-# Introducción
+# 1. Introducción
 
 
 
-# NextJS
+# 2. NextJS
 
 Next es un **framework fullstack JavaScript**, que emplea React para crear componentes. Y ya no solo componentes de frontend. Gracias a los "**React Server Components (RSC)**" podemos tener componentes que sólo se ejecuten en un entorno de servidor o backend.
 Con Next lo que hacemos son aplicaciones Server Side Rendering (SSR), y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
@@ -25,7 +34,7 @@ Con Next lo que hacemos son aplicaciones Server Side Rendering (SSR), y con los 
 > En Internet hay mucha documentación de versiones anteriores, pero la forma de trabajar en ellas es ligeramente diferente.
 
 
-## 3.1. Creación de un proyecto
+## 2.1. Creación de un proyecto
 
 Para crear proyecto llamado `miapp`
 
@@ -50,7 +59,7 @@ Para editar el código con VSCode
 code  .
 ```
 
-## Carpetas y archivos del proyecto
+## 2.2. Carpetas y archivos del proyecto
 
 ![lista archivos](assets/tree-app.png)
 
@@ -62,10 +71,25 @@ Los archivos que aparecen dentro de la carpeta `src/app` son:
 - `page.js`: página inicial
 - `page.module.css`: estilos CSS para la página principal
 
+Otros archivos opcionales que podemos añadir son:
+
+- `loading.js`: mensaje mientras se carga la página
+- `error.js`: mensaje de error, si se da el caso
+- `not-found.js`: mensaje de página no encontrada, si se da el caso
 
 
-## 
 
+## 2.3. 
+
+
+
+# 3. App Router
+
+
+# 4. Route Handlers
+
+
+# 5. Cookies
 
 ```javascript
 // damecookie/route.js  => http://localhost:3000/damecookie
