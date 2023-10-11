@@ -11,7 +11,13 @@
 - [3. El framework EXPRESS](#3-el-framework-express)
 - [4. Módulos CommonJS](#4-módulos-commonjs)
 - [5. Módulos ECMAScript](#5-módulos-ecmascript)
+- [Formularios](#formularios)
+  - [application/x-www-form-urlencoded](#applicationx-www-form-urlencoded)
+  - [multipart/form-data](#multipartform-data)
+  - [*JSON*](#json)
 - [6. Parámetros de URL](#6-parámetros-de-url)
+  - [Parámetros de ruta (Path Parameters)](#parámetros-de-ruta-path-parameters)
+  - [Parámetros de consulta (Query Parameters o Query Strings)](#parámetros-de-consulta-query-parameters-o-query-strings)
 - [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
 - [8. Referencias](#8-referencias)
 
@@ -247,17 +253,157 @@ Para lanzar el servidor, hacemos:
 npm run dev
 ```
 
+# Formularios
+
+Los formularios es el método principal para enviar información al servidor desde el lado cliente o navegador. Los formularios únicamente pueden enviar esta información mediante 2 métodos:
+
+- `GET`
+- `POST`
+
+El método `POST` es el recomendado, puesto que no tiene limitación en la longitud del contenido y los valores transferidos no se muestran en la `url`.
+
+Cuando se envía información desde un formulario, ésta puede codificarse de 3 maneras distintas:
+
+
+enctype        | Descripción
+---------------|------------------
+**application/x-www-form-urlencoded**	| **Codificación por defecto**. No es necesario hacerla explícita. Todos los caracteres se codifican antes del envío (los espacios se convierten en símbolos "+" y los caracteres especiales se convierten en valores ASCII HEX)
+**multipart/form-data**	| Esta codificación es necesaria si el usuario desea **subir un archivo** a través del formulario.
+**text/plain** | **Desaconsejada**. Envía datos sin ningún tipo de codificación. 
+*application/json* | *No disponible*.
+
+
+> **Referencias**: 
+> - https://codex.so/handling-any-post-data-in-express
+> - https://blog.jim-nielsen.com/2022/browsers-json-formdata/
+
+
+## application/x-www-form-urlencoded
+
+```javascript
+const express = require('express');
+const app = express();
+
+/** Decode Form URL Encoded data */
+app.use(express.urlencoded());
+
+/** Show page with a form */
+app.get('/', (req, res, next) => {
+  res.send(`<form method="POST" action="/" enctype="application/x-www-form-urlencoded">
+  <input type="text" name="username" placeholder="username">
+  <input type="submit">
+</form>`);
+});
+
+/** Process POST request */
+app.post('/', function (req, res, next) {
+  res.send(JSON.stringify(req.body));
+});
+
+/** Run the app */
+app.listen(3000);
+```
+
+## multipart/form-data
+
+```javascript
+const express = require('express');
+const app = express();
+
+/** Require multer */
+const multer = require('multer');
+
+/** Show page with a form with a specific enctype */
+app.get('/', (req, res, next) => {
+  res.send(`<form method="POST" action="/" enctype="multipart/form-data">
+  <input type="text" name="username" placeholder="username">
+  <input type="submit">
+</form>`);
+});
+
+/** Process POST request with a mutter's middleware */
+app.post('/', multer().none(), function (req, res, next) {
+  res.send(JSON.stringify(req.body));
+});
+
+/** Run the app */
+app.listen(3000);
+```
+
+## *JSON* 
+
+No existe la codificación `application: json` (~~enctype="application: json"~~). [Hubo una propuesta](https://www.w3.org/TR/html-json-forms/), pero quedó en nada.
+
+Por tanto, en este caso no hay otra solución que usar Javascript en el lado cliente para gestionar las peticiones al servidor. Lo más frecuente es hacer uso de `fetch`.
+
+
+```javascript
+const express = require('express');
+const app = express();
+
+/** Decode JSON data */
+app.use(express.json());
+
+/** Show page with a input field, button and javascript */
+app.get('/', (req, res, next) => {
+  res.send(`
+<script>
+var send = function() {
+  var username = document.getElementById('username').value;
+  
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+    body: { username: username }
+  })
+    .then(response => response.json())
+    .then(data => console.log(data) )
+    .catch(console.error);
+}   
+</script>
+
+<input type="text" name="username" placeholder="username" id="username">
+<button onclick="send()">Send</button>`);
+});
+
+/** Process POST request */
+app.post('/', function (req, res, next) {
+  res.send(JSON.stringify(req.body));
+});
+
+/** Run the app */
+app.listen(3000);
+```
+
+
+
 # 6. Parámetros de URL
 
-**Parámetros de ruta** (Path Parameters)
 
 
-**Parámetros de consulta** (Query Parameters o Query Strings)
+
+## Parámetros de ruta (Path Parameters)
+
+Son parámetros que están incorporados dentro de la ruta de la URL. Son parámetros de solicitud adjuntos a una URL que apuntan a un recurso de `API REST` específico.
+
+Los parámetros de ruta son parte del `endpoint` y son obligatorios. Por ejemplo, `/users/{id}`, `{id}` es el parámetro de ruta del `endpoint` `/users`; apunta a un registro de usuario específico. Un `endpoint` puede tener varios parámetros de ruta, como en el ejemplo `/organizations/{orgId}/members/{memberId}`. Esto apuntaría al registro de un miembro específico dentro de una organización específica, y tanto `{orgID}` como `{memberID}` requerirían variables.
 
 
-https://www.abstractapi.com/api-glossary/path-parameters
-https://www.botify.com/learn/basics/what-are-url-parameters
-https://ahrefs.com/blog/url-parameters/
+
+## Parámetros de consulta (Query Parameters o Query Strings)
+
+Son parámetros que están al final de la ruta de la URL, tras el signo `?` y están separados unos de otros mediante `&`
+
+Tienen la forma siguiente:
+
+![Query Parameters](assets/query-parameters.png)
+
+Los parámetros de consulta a menudo se utilizan para solicitar operaciones de clasificación, paginación o filtrado.
+
+
+- https://www.abstractapi.com/api-glossary/path-parameters
+- https://www.botify.com/learn/basics/what-are-url-parameters
+- https://ahrefs.com/blog/url-parameters/
 
 
 
@@ -269,17 +415,20 @@ La [`API fetch`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API), que s
 
 Aunque la `API Fetch` lleva tiempo disponible para su uso en navegadores web en el lado cliente, no estaba disponible para su uso desde el lado servidor debido a varias limitaciones.
 
-Desde NodeJS v17.5.0, `fetch` se hizo disponible como función experimental para su uso desde la lado servidor.
+Desde NodeJS v17.5.0, `fetch` se hizo disponible como función experimental para su uso desde el lado servidor.
 
-https://reqres.in/
-https://jsonplaceholder.typicode.com/
-https://randomuser.me
+- https://reqres.in/
+- https://jsonplaceholder.typicode.com/
+- https://randomuser.me
 
 
-https://randomuser.me/documentation
+- https://randomuser.me/documentation
 
-fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone').then(res => res.json(res)).then(data => console.log(...data.results))
-
+```javascript
+fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone')
+  .then(res => res.json(res))
+  .then(data => console.log(data.results))
+```
 
 
 
