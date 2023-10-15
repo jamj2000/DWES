@@ -27,7 +27,7 @@
 # 2. NextJS
 
 Next es un **framework fullstack JavaScript**, que emplea React para crear componentes. Y ya no solo componentes de frontend. Gracias a los "**React Server Components (RSC)**" podemos tener componentes que sólo se ejecuten en un entorno de servidor o backend.
-Con Next lo que hacemos son aplicaciones Server Side Rendering (SSR), y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
+Con Next hacemos aplicaciones **Server Side Rendering (SSR)**, y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
 
 
 > **IMPORTANTE**
@@ -101,7 +101,7 @@ JSX (JavaScript Syntax Extension y ocasionalmente denominada JavaScript XML) es 
 
 JSX te permite escribir marcado similar a HTML dentro de un archivo JavaScript, manteniendo la lógica de renderizado y el contenido en el mismo lugar. En ocasiones será deseable añadir un poco de lógica en JavaScript o referenciar una propiedad dinámica dentro del marcado. En esta situación, puedes utilizar llaves en tu JSX para «abrir una ventana» hacia JavaScript.
 
-El código escrito en JSX requiere conversión con una herramienta como Babel antes de que los navegadores web puedan entenderlo. Este procesamiento generalmente se realiza durante un proceso de construcción de software antes de deslplegar la aplicación .
+El código escrito en JSX requiere conversión con una herramienta como *Babel* antes de que los navegadores web puedan entenderlo. Este procesamiento generalmente se realiza durante un proceso de construcción de software antes de deslplegar la aplicación .
 
 **Ejemplo**:
 
@@ -116,8 +116,6 @@ const App = () => {
    ); 
 }
 ```
-
-
 
 
 ## 3.2. Aplicar estilos
@@ -170,6 +168,20 @@ function Test () {
 
 export default Test;
 ```
+
+Para aplicar múltiples clases:
+
+```javascript
+import styles from "./App.module.css"
+
+export const App = () => {
+  return(
+      <button className={`${styles.buttonClass} ${styles.buttonColor}`}>CSS Styles</button>
+  )
+}
+export default App
+```
+
 
 **Tailwind**
 
