@@ -1,7 +1,7 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 3: Programación basada en lenguajes de marcas con código embebido <!-- omit in toc -->
-> NODE, MÓDULOS EXTERNOS, EXPRESS, FETCH, APIs
+> NODE, MÓDULOS EXTERNOS, EXPRESS, APIs REST, FETCH, 
 
 - [1. Introducción](#1-introducción)
 - [2. Módulos externos](#2-módulos-externos)
@@ -11,15 +11,16 @@
 - [3. El framework EXPRESS](#3-el-framework-express)
 - [4. Módulos CommonJS](#4-módulos-commonjs)
 - [5. Módulos ECMAScript](#5-módulos-ecmascript)
-- [Formularios](#formularios)
-  - [application/x-www-form-urlencoded](#applicationx-www-form-urlencoded)
-  - [multipart/form-data](#multipartform-data)
-  - [*JSON*](#json)
-- [6. Parámetros de URL](#6-parámetros-de-url)
-  - [Parámetros de ruta (Path Parameters)](#parámetros-de-ruta-path-parameters)
-  - [Parámetros de consulta (Query Parameters o Query Strings)](#parámetros-de-consulta-query-parameters-o-query-strings)
-- [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
-- [8. Referencias](#8-referencias)
+- [6. Formularios](#6-formularios)
+  - [6.1. application/x-www-form-urlencoded](#61-applicationx-www-form-urlencoded)
+  - [6.2. multipart/form-data](#62-multipartform-data)
+  - [6.3. JSON](#63-json)
+- [7. Parámetros de URL](#7-parámetros-de-url)
+  - [7.1. Parámetros de ruta (Path Parameters)](#71-parámetros-de-ruta-path-parameters)
+  - [7.2. Parámetros de consulta (Query Parameters o Query Strings)](#72-parámetros-de-consulta-query-parameters-o-query-strings)
+- [8. Fetch desde el servidor](#8-fetch-desde-el-servidor)
+- [9. Referencias](#9-referencias)
+
 
 
 ---
@@ -125,13 +126,13 @@ const app      = express();
 app.use(express.static(path.join(__dirname , 'public')));
 
 // Ruta /hola
-app.get ('/hola', (req, res) => { 
-    res.send ('Hola mundo') 
+app.get ('/hola', (request, response) => { 
+    response.send ('Hola mundo') 
 });
 
 // Ruta /hola/loquesea, p. ej:  /hola/jose,  /hola/ana, ...
-app.get ('/hola/:usuario', (req, res) => { 
-    res.send (`<h1>Buenos días, ${req.params.usuario}</h1>`); 
+app.get ('/hola/:usuario', (request, response) => { 
+    response.send (`<h1>Buenos días, ${request.params.usuario}</h1>`); 
 });
 
 app.listen (3000);
@@ -142,11 +143,16 @@ Ejecutaremos:
 ```bash
 node  server
 ```
-
+> **NOTA:** 
+> 
+> Los objetos `request` y `response` son instancias de [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Request) respectivamente.
+>
+> Por tanto, poseen las propiedades y métodos correspondientes.
 
 # 5. Módulos ECMAScript
 
-Una forma de importar módulos más moderna y, que además es usada también en el lado cliente, es trabajar con **módulos ECMAScript**. En este caso para importar los módulos se hace con **`import`**. 
+Una forma de importar módulos más moderna y, que además es usada también en el lado cliente, es trabajar con **módulos ECMAScript**. En este caso para importar los módulos se hace con **`import`**. Es la forma recomendada de cara al futuro.
+
 
 **Ejemplo de servidor con express y módulos ECMAScript**
 
@@ -154,7 +160,7 @@ Una forma de importar módulos más moderna y, que además es usada también en 
 npm init -y
 ```
 
-Insertamos línea `"type": "module"` en `package.json` para indicar que trabajaremos con módulos ECMAScript.
+Para poder trabajar con **módulos ES (ECMAScript)** debemos insertar la línea **`"type": "module"`** en `package.json` para indicar que trabajaremos con este tipo de módulos.
 
 ```json
 {
@@ -235,13 +241,13 @@ const app = express()
 app.use(express.static(path.join(process.cwd(), 'public')))
 
 // Ruta /hola
-app.get('/hola', (req, res) => {
-  res.send('Hola mundo')
+app.get('/hola', (request, response) => {
+  response.send('Hola mundo')
 })
 
 // Ruta /hola/loquesea, p. ej:  /hola/jose,  /hola/ana, ...
-app.get('/hola/:usuario', (req, res) => {
-  res.send(`<h1>Buenos días, ${req.params.usuario}</h1>`)
+app.get('/hola/:usuario', (request, response) => {
+  response.send(`<h1>Buenos días, ${request.params.usuario}</h1>`)
 })
 
 app.listen(3000)
@@ -253,7 +259,7 @@ Para lanzar el servidor, hacemos:
 npm run dev
 ```
 
-# Formularios
+# 6. Formularios
 
 Los formularios es el método principal para enviar información al servidor desde el lado cliente o navegador. Los formularios únicamente pueden enviar esta información mediante 2 métodos:
 
@@ -278,7 +284,7 @@ enctype        | Descripción
 > - https://blog.jim-nielsen.com/2022/browsers-json-formdata/
 
 
-## application/x-www-form-urlencoded
+## 6.1. application/x-www-form-urlencoded
 
 ```javascript
 const express = require('express');
@@ -304,7 +310,7 @@ app.post('/', function (req, res, next) {
 app.listen(3000);
 ```
 
-## multipart/form-data
+## 6.2. multipart/form-data
 
 ```javascript
 const express = require('express');
@@ -330,7 +336,7 @@ app.post('/', multer().none(), function (req, res, next) {
 app.listen(3000);
 ```
 
-## *JSON* 
+## 6.3. JSON
 
 No existe la codificación `application/json` (~~enctype="application/json"~~). [Hubo una propuesta](https://www.w3.org/TR/html-json-forms/), pero quedó en nada.
 
@@ -376,21 +382,36 @@ app.listen(3000);
 ```
 
 
+# 7. Parámetros de URL
 
-# 6. Parámetros de URL
+Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
+
+Existen 2 tipos:
+
+- **Parámetros de ruta** `Path Parameters`
+- **Parámetros de consulta** `Query Parameters` o `Query Strings`
+
+> **NOTA**:
+> 
+> A menudo se usa el término `Query Strings` como sinónimo de `URL Parameters`, lo cual no es del todo cierto como se acaba de ver y provoca confusiones.
 
 
-
-
-## Parámetros de ruta (Path Parameters)
+## 7.1. Parámetros de ruta (Path Parameters)
 
 Son parámetros que están incorporados dentro de la ruta de la URL. Son parámetros de solicitud adjuntos a una URL que apuntan a un recurso de `API REST` específico.
 
-Los parámetros de ruta son parte del `endpoint` y son obligatorios. Por ejemplo, `/users/{id}`, `{id}` es el parámetro de ruta del `endpoint` `/users`; apunta a un registro de usuario específico. Un `endpoint` puede tener varios parámetros de ruta, como en el ejemplo `/organizations/{orgId}/members/{memberId}`. Esto apuntaría al registro de un miembro específico dentro de una organización específica, y tanto `{orgID}` como `{memberID}` requerirían variables.
+![Path Parameter](assets/path-parameter.png)
+
+Los parámetros de ruta son parte del *endpoint* y son obligatorios. Por ejemplo en `/users/{id}`, `{id}` es el parámetro de ruta del *endpoint* `/users`; apunta a un registro de usuario específico. 
+
+Un *endpoint* puede tener varios parámetros de ruta, como en el ejemplo `/organizations/{orgId}/members/{memberId}`. Esto apuntaría al registro de un miembro específico dentro de una organización específica, y tanto `{orgID}` como `{memberID}` requerirían variables.
+
+Los parámetros de ruta son muy usados en `API REST`.
+
+![API REST](assets/api-url.png)
 
 
-
-## Parámetros de consulta (Query Parameters o Query Strings)
+## 7.2. Parámetros de consulta (Query Parameters o Query Strings)
 
 Son parámetros que están al final de la ruta de la URL, tras el signo `?` y están separados unos de otros mediante `&`
 
@@ -398,41 +419,61 @@ Tienen la forma siguiente:
 
 ![Query Parameters](assets/query-parameters.png)
 
-Los parámetros de consulta a menudo se utilizan para solicitar operaciones de clasificación, paginación o filtrado.
+![Query Strings](assets/query-strings.png)
+
+Los parámetros de consulta a menudo se utilizan para solicitar operaciones de clasificación, paginación, ordenación o filtrado.
 
 
-- https://www.abstractapi.com/api-glossary/path-parameters
-- https://www.botify.com/learn/basics/what-are-url-parameters
-- https://ahrefs.com/blog/url-parameters/
+**En una misma URL pueden aparecer tanto parámetros de ruta como parámetros de consulta.**
+
+Ejemplos:
+
+- **`https://api.github.com/orgs/{organización}/repos?{parámetros de consulta}`**
+- `https://api.github.com/orgs/google/repos?per_page=10&page=1`
+- `https://api.github.com/orgs/microsoft/repos?per_page=1&page=2`
+- **`https://api.github.com/users/{usuario}/repos?{parámetros de consulta}`**
+- `https://api.github.com/users/jamj2000/repos?sort=updated`
+- `https://api.github.com/users/jamj2000/repos?sort=created&direction=asc`
 
 
+# 8. Fetch desde el servidor
 
-# 7. Fetch desde el servidor
 
-Se entiende `fetch` como la recuperación de datos solicitados a un servidor. Es habitual que el formato de los datos sea `JSON`.
+Se entiende **`fetch`** como la **recuperación de datos solicitados a un servidor**. Es habitual que el formato de los datos sea **`JSON`**.
 
-La [`API fetch`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API), que se introdujo en 2015 como un reemplazo más contemporáneo de XMLHttpRequest, desde entonces se ha convertido en el estándar de facto para la realización de llamadas asincrónicas en aplicaciones web.
+La [`API fetch`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API) se introdujo en 2015 como un reemplazo más contemporáneo de XMLHttpRequest. Desde entonces se ha convertido en el estándar de facto para la realización de llamadas asincrónicas en aplicaciones web.
 
 Aunque la `API Fetch` lleva tiempo disponible para su uso en navegadores web en el lado cliente, no estaba disponible para su uso desde el lado servidor debido a varias limitaciones.
 
 Desde NodeJS v17.5.0, `fetch` se hizo disponible como función experimental para su uso desde el lado servidor.
 
+Existen incontables APIs de tipo REST de innumerables tipos de las que podemos obtener información en formato JSON.
+
+Algunos ejemplos de APIs muy minimalistas para realizar pruebas son:
+
 - https://reqres.in/
 - https://jsonplaceholder.typicode.com/
 - https://randomuser.me
 
+Un listado más extenso de APIs profesionales puede encontrarse en:
 
-- https://randomuser.me/documentation
+- https://github.com/public-apis/public-apis
+- https://rapidapi.com/collection/list-of-free-apis
+
+
+**Ejemplo**
 
 ```javascript
-fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone')
-  .then(res => res.json(res))
-  .then(data => console.log(data.results))
+// Recuperación de datos de https://randomuser.me
+// Documentación: https://randomuser.me/documentation 
+fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone,picture').
+  then(res => res.json(res)).
+  then(data => console.log(data.results))
 ```
 
 
 
-# 8. Referencias
+# 9. Referencias
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
 - [CommonJS vs ES Modules](https://lenguajejs.com/automatizadores/introduccion/commonjs-vs-es-modules/)
