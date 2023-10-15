@@ -7,10 +7,13 @@
 - [2. NextJS](#2-nextjs)
   - [2.1. Creación de un proyecto](#21-creación-de-un-proyecto)
   - [2.2. Carpetas y archivos del proyecto](#22-carpetas-y-archivos-del-proyecto)
-  - [2.3.](#23)
-- [3. App Router](#3-app-router)
-- [4. Route Handlers](#4-route-handlers)
-- [5. Cookies](#5-cookies)
+- [3. Componentes](#3-componentes)
+  - [3.1. JSX](#31-jsx)
+  - [3.2. Aplicar estilos](#32-aplicar-estilos)
+- [4. App Router](#4-app-router)
+- [5. Route Handlers](#5-route-handlers)
+- [6. Cookies](#6-cookies)
+
 
 
 
@@ -79,17 +82,124 @@ Otros archivos opcionales que podemos añadir son:
 
 
 
-## 2.3. 
+# 3. Componentes
+
+Los componentes son uno de los conceptos esenciales de los modernos frameworks de Javascript. Constituyen los cimientos sobre los que construyes interfaces de usuario (UIs por sus siglas en inglés). 
+
+Un componente permite combinar tu marcado HTML, CSS y JavaScript en «componentes» personalizados, elementos reutilizables de UI para tu aplicación.
+
+- Referencia: https://es.react.dev/learn/your-first-component
+
+
+## 3.1. JSX
+
+**Referencias**: 
+- https://es.react.dev/learn/writing-markup-with-jsx
+- https://es.legacy.reactjs.org/docs/jsx-in-depth.html
+
+JSX (JavaScript Syntax Extension y ocasionalmente denominada JavaScript XML) es una extensión de JavaScript que permite la creación de árboles DOM utilizando una sintaxis similar a XML. Creado inicialmente por Facebook para su uso con React, JSX ha sido adoptado por múltiples frameworks.
+
+JSX te permite escribir marcado similar a HTML dentro de un archivo JavaScript, manteniendo la lógica de renderizado y el contenido en el mismo lugar. En ocasiones será deseable añadir un poco de lógica en JavaScript o referenciar una propiedad dinámica dentro del marcado. En esta situación, puedes utilizar llaves en tu JSX para «abrir una ventana» hacia JavaScript.
+
+El código escrito en JSX requiere conversión con una herramienta como Babel antes de que los navegadores web puedan entenderlo. Este procesamiento generalmente se realiza durante un proceso de construcción de software antes de deslplegar la aplicación .
+
+**Ejemplo**:
+
+```javascript
+const App = () => {
+   return (
+     <div>
+       <p>Header</p>
+       <p>Content</p>
+       <p>Footer</p>
+     </div>
+   ); 
+}
+```
 
 
 
-# 3. App Router
+
+## 3.2. Aplicar estilos
+
+**en línea**
+
+```javascript 
+function Test () {
+  return (
+    <div style={{ backgroundColor: "yellow", fontSize: "24px" }}> 
+      Hola 
+    </div>
+  )
+}
+
+export default Test;
+```
+
+**interno**
+
+```javascript
+const style = {
+  backgroundColor: "yellow",
+  fontSize: "24px"
+}
+
+function Test () {
+  return <div style={style}> Hola </div>
+}
+
+export default Test;
+```
+
+**externo**
+
+```css
+/* Test.module.css */
+.clase {
+  background-color: "yellow";
+  font-size: 24px;
+}
+```
+
+```javascript
+import style from 'Test.module.css'
+
+function Test () {
+  return <div className={style.clase}> Hola </div>
+}
+
+export default Test;
+```
+
+**Tailwind**
+
+```javascript
+import style from 'Test.module.css'
+
+function Test () {
+  return <div className="bg-yellow-100  text-2xl"> Hola </div>
+}
+
+export default Test;
+```
+
+Tailwind es un framework CSS bastante popular y muy peculiar. 
+
+Sitios que proporcionan componentes basados en Tailwind:
+
+- [Shadcn](https://ui.shadcn.com/)
+- [flowbite](https://flowbite.com/)
 
 
-# 4. Route Handlers
 
 
-# 5. Cookies
+# 4. App Router
+
+
+# 5. Route Handlers
+
+
+# 6. Cookies
 
 ```javascript
 // damecookie/route.js  => http://localhost:3000/damecookie
