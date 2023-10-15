@@ -242,9 +242,9 @@ Hay una serie de beneficios al realizar el trabajo de renderizado en el servidor
 Las funciones dinámicas se basan en información que sólo se puede conocer en el momento de la solicitud, como las cookies del usuario, los encabezados de las solicitudes actuales o los parámetros de ruta y consulta de la URL. En Next.js, estas funciones dinámicas son:
 
 - `cookies()` y `headers()`: al usarlos en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
-- `searchParams` (**parámetros de ruta**): El uso de las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud.
-- `useSearchParams()` (**parámetros de consulta**): En componentes del cliente, omitirá la renderización estática y en su lugar se realizará renderizado  en el cliente (`CSR: Client Side Rendering`) de todos los componentes del cliente hasta el Suspense padre más cercano.
+- `useSearchParams()` (**parámetros de consulta**): En componentes del cliente, el uso de esta función omitirá la renderización estática y en su lugar se realizará renderizado en el cliente (`CSR: Client Side Rendering`) de todos los componentes del cliente hasta el Suspense padre más cercano.
 Recomendamos envolver el componente del cliente que utilice useSearchParams() en un <Suspense/>. Esto permitirá que cualquier componente del cliente que se encuentre encima se renderice estáticamente. 
+- `searchParams` (**parámetros de consulta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud.
 
 **Ejemplo:**
 
