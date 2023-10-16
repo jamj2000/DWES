@@ -256,13 +256,14 @@ interface Props {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
+// params: Parámetros de ruta
+// searchParams: Párametros de consulta
 function Page({params, searchParams}: Props) {
   return <h1>My Page</h1>
 }
 
 export default Page
 ```
-
 
 El uso de cualquiera de estas funciones optará por toda la ruta hacia la representación dinámica en el momento de la solicitud.
 
