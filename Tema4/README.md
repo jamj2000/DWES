@@ -1,8 +1,8 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 4: Desarrollo de aplicaciones Web utilizando código embebido <!-- omit in toc -->
-> APP ROUTER, ROUTE HANDLERS, COOKIES
-> 
+> NEXTJS, APP ROUTER, ROUTE HANDLERS, COOKIES
+
 - [1. Introducción](#1-introducción)
 - [2. NextJS](#2-nextjs)
   - [2.1. Creación de un proyecto](#21-creación-de-un-proyecto)
@@ -13,17 +13,18 @@
 - [4. Componentes del Servidor](#4-componentes-del-servidor)
   - [4.1. Beneficios del renderizado en el servidor](#41-beneficios-del-renderizado-en-el-servidor)
   - [4.2. Funciones dinámicas](#42-funciones-dinámicas)
-- [4.3. Componentes del Cliente](#43-componentes-del-cliente)
-  - [4.4. Beneficios del renderizado en el cliente](#44-beneficios-del-renderizado-en-el-cliente)
-- [5. Componentes del Servidor VS Componentes del Cliente](#5-componentes-del-servidor-vs-componentes-del-cliente)
-  - [5.1. ¿Cuándo utilizar componentes de servidor y cliente?](#51-cuándo-utilizar-componentes-de-servidor-y-cliente)
-- [6. App Router](#6-app-router)
-- [7. Route Handlers](#7-route-handlers)
-- [8. Cookies](#8-cookies)
-  - [8.1. Generar Cookies](#81-generar-cookies)
-  - [8.2. Leer Cookies](#82-leer-cookies)
-  - [8.3. Eliminar Cookies](#83-eliminar-cookies)
-
+- [5. Componentes del Cliente](#5-componentes-del-cliente)
+  - [5.1. Beneficios del renderizado en el cliente](#51-beneficios-del-renderizado-en-el-cliente)
+- [6. Componentes del Servidor VS Componentes del Cliente](#6-componentes-del-servidor-vs-componentes-del-cliente)
+  - [6.1. ¿Cuándo utilizar componentes de servidor y cliente?](#61-cuándo-utilizar-componentes-de-servidor-y-cliente)
+- [7. App Router](#7-app-router)
+- [8. Route Handlers](#8-route-handlers)
+- [9. Cookies](#9-cookies)
+  - [9.1. Tipos de cookies](#91-tipos-de-cookies)
+  - [9.2. Generar Cookies](#92-generar-cookies)
+  - [9.3. Leer Cookies](#93-leer-cookies)
+  - [9.4. Eliminar Cookies](#94-eliminar-cookies)
+- [10. Referencias](#10-referencias)
 
 
 
@@ -273,11 +274,11 @@ El uso de cualquiera de estas funciones optará por toda la ruta hacia la repres
 - https://nextjs.org/docs/app/api-reference/functions/use-search-params
 
 
-# 4.3. Componentes del Cliente
+# 5. Componentes del Cliente
 
 Los componentes del cliente permiten escribir una interfaz de usuario interactiva que se puede renderizar en el cliente (`CSR: Client Side Rendering`) en el momento de la solicitud. En Next.js, la renderización en el cliente es opcional, lo que significa que debe decidir explícitamente qué componentes React serán renderizados en el cliente.
 
-## 4.4. Beneficios del renderizado en el cliente
+## 5.1. Beneficios del renderizado en el cliente
 
 Hay un par de beneficios al realizar el trabajo de renderizado en el cliente, que incluyen:
 
@@ -304,9 +305,9 @@ export default function Counter() {
 Referencia: https://nextjs.org/docs/app/building-your-application/rendering/client-components
 
 
-# 5. Componentes del Servidor VS Componentes del Cliente
+# 6. Componentes del Servidor VS Componentes del Cliente
 
-## 5.1. ¿Cuándo utilizar componentes de servidor y cliente?
+## 6.1. ¿Cuándo utilizar componentes de servidor y cliente?
 
 A continuación se ofrece un resumen rápido de los diferentes casos de uso de los componentes de servidor y cliente:
 
@@ -323,10 +324,10 @@ Utilizar enlaces personalizados que dependan del estado, los efectos o las API e
 
 
 
-# 6. App Router
+# 7. App Router
 
 
-# 7. Route Handlers
+# 8. Route Handlers
 
 **Referencias:**
 
@@ -334,10 +335,24 @@ Utilizar enlaces personalizados que dependan del estado, los efectos o las API e
 - https://nextjs.org/docs/app/api-reference/functions/next-response
 
 
-# 8. Cookies
+# 9. Cookies
 
+Una cookie es un fichero de datos que una página web le envía a tu ordenador o móvil cuando la visitas. 
 
-## 8.1. Generar Cookies 
+Las cookies suelen utilizarse principalmente para dos finalidades principales: **recordar accesos** y **conocer hábitos de navegación**. Las cookies hacen que las páginas web puedan identificar tu ordenador, y por lo tanto, si vuelves a entrar a ellas podrán recordar quién eres y qué has hecho antes dentro de ellas.
+
+Gracias a las cookies la página web podrá recordar que eres tú, y por lo tanto podrá permitirte seguir en el perfil con el que iniciases sesión sin tener que volver a escribir tus credenciales.
+
+Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas muchos archivos en tu cesta de la compra sin tener una cuenta, pero luego te vas. Entonces, cuando vuelvas a entrar, gracias a tu IP y los otros identificadores que miran las cookies, Amazon sabrá quién eres y qué hiciste antes, y muy posiblemente todavía podrá recordar lo que tenías en la cesta de la compra para que no tengas que volver a meterlo.
+
+## 9.1. Tipos de cookies
+
+- **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
+- **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. 
+
+A continuación se muestra como trabjar con cookies desde NextJS.
+
+## 9.2. Generar Cookies 
 
 **`cookies().set(name, value, options)`**
 
@@ -350,7 +365,9 @@ Utilizar enlaces personalizados que dependan del estado, los efectos o las API e
 'use server'
  
 import { cookies } from 'next/headers'
- 
+
+const oneDay = 1000 * 60 * 60 * 24
+
 async function create(data) {
   cookies().set('usuario', 'jose')
   // or
@@ -365,7 +382,8 @@ async function create(data) {
   })
 }
 ```
-
+> **NOTA:** Para crear una cookie de sesión debes omitir la opción `expires`. 
+> 
 
 ```javascript
 // damecookie/route.js  => http://localhost:3000/damecookie
@@ -399,7 +417,7 @@ export async function GET() {
 }
 ```
 
-## 8.2. Leer Cookies 
+## 9.3. Leer Cookies 
 
 **cookies().get(name)**
 
@@ -407,14 +425,14 @@ export async function GET() {
 import { cookies } from 'next/headers'
  
 export default function Page() {
-  const cookieStore = cookies().get('usuario')
+  const usuario = cookies().get('usuario')
 
-  return '...'
+  return '<h1>Bienvendio {usuario}</h1>'
 }
 ```
 
 
-## 8.3. Eliminar Cookies
+## 9.4. Eliminar Cookies
 
 **cookies().delete(name)**
 
@@ -433,3 +451,8 @@ async function create(data) {
 ```
 
 Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
+
+
+# 10. Referencias
+
+- [Documentación de NextJS](https://nextjs.org/docs)
