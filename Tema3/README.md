@@ -466,7 +466,7 @@ Un listado más extenso de APIs profesionales puede encontrarse en:
 ```javascript
 // Recuperación de datos de https://randomuser.me
 // Documentación: https://randomuser.me/documentation 
-fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone,picture').
+fetch('https://randomuser.me/api/?results=4&nat=es&inc=name,location,phone,picture').
   then(res => res.json()).
   then(data => console.log(data.results))
 ```
