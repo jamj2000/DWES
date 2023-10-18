@@ -467,7 +467,7 @@ Un listado más extenso de APIs profesionales puede encontrarse en:
 // Recuperación de datos de https://randomuser.me
 // Documentación: https://randomuser.me/documentation 
 fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone,picture').
-  then(res => res.json(res)).
+  then(res => res.json()).
   then(data => console.log(data.results))
 ```
 
