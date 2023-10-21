@@ -492,8 +492,8 @@ fetch('https://randomuser.me/api/?results=4&nat=es&inc=name,location,phone,pictu
 **Ejemplo completo**
 
 > **Aplicación para realizar consultas a la API de Github**
->
-> Documentación: https://docs.github.com/en/rest/repos/repos
+> - Documentación: https://docs.github.com/en/rest/repos/repos
+> - Código: https://github.com/jamj2000/query-github
 
 ```javascript
 import express from 'express'
