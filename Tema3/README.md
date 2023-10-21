@@ -19,6 +19,10 @@
   - [8.1. application/x-www-form-urlencoded](#81-applicationx-www-form-urlencoded)
   - [8.2. multipart/form-data](#82-multipartform-data)
   - [8.3. JSON](#83-json)
+- [7. Parámetros de URL](#7-parámetros-de-url)
+  - [7.1. Parámetros de ruta (Path Parameters)](#71-parámetros-de-ruta-path-parameters)
+  - [7.2. Parámetros de consulta (Query Parameters o Query Strings)](#72-parámetros-de-consulta-query-parameters-o-query-strings)
+- [8. Fetch desde el servidor](#8-fetch-desde-el-servidor)
 - [9. Referencias](#9-referencias)
 
 
@@ -604,8 +608,8 @@ Un listado más extenso de APIs profesionales puede encontrarse en:
 ```javascript
 // Recuperación de datos de https://randomuser.me
 // Documentación: https://randomuser.me/documentation 
-fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone,picture').
-  then(res => res.json(res)).
+fetch('https://randomuser.me/api/?results=4&nat=es&inc=name,location,phone,picture').
+  then(res => res.json()).
   then(data => console.log(data.results))
 ```
 
