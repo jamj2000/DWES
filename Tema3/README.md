@@ -519,17 +519,16 @@ app.get('/github/:organizacion', async (req, res) => {
         <small>Máximo de resultados: 100</small><hr>              
         ${json.length
             &&
-            json
-                .map(repo => `
-               <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
-               <em>${repo.language}: </em>  <strong>${repo.description}</strong>
-               <br><small>Creado en ${repo.created_at}. Último push en ${repo.pushed_at} </small>
-            `)
+            json.map(repo => `
+                <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
+                <em>${repo.language}: </em>  <strong>${repo.description}</strong>
+                <br><small>Creado en ${repo.created_at}. Último push en ${repo.pushed_at} </small>
+                `)
                 .join('<br><hr>')
             ||
             'Nada por aquí'
             }
-    `)
+        `)
     }
 })
 
