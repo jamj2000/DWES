@@ -15,15 +15,16 @@
   - [6.1. Parámetros de ruta (Path Parameters)](#61-parámetros-de-ruta-path-parameters)
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
 - [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
-- [7. Parámetros de URL](#7-parámetros-de-url)
-  - [7.1. Parámetros de ruta (Path Parameters)](#71-parámetros-de-ruta-path-parameters)
-  - [7.2. Parámetros de consulta (Query Parameters o Query Strings)](#72-parámetros-de-consulta-query-parameters-o-query-strings)
-- [8. Fetch desde el servidor](#8-fetch-desde-el-servidor)
-- [8. Formularios](#8-formularios)
-  - [8.1. application/x-www-form-urlencoded](#81-applicationx-www-form-urlencoded)
-  - [8.2. multipart/form-data](#82-multipartform-data)
-  - [8.3. JSON](#83-json)
-- [9. Referencias](#9-referencias)
+- [8. Parámetros de URL](#8-parámetros-de-url)
+  - [8.1. Parámetros de ruta (Path Parameters)](#81-parámetros-de-ruta-path-parameters)
+  - [8.2. Parámetros de consulta (Query Parameters o Query Strings)](#82-parámetros-de-consulta-query-parameters-o-query-strings)
+- [9. Fetch desde el servidor](#9-fetch-desde-el-servidor)
+- [10. Formularios](#10-formularios)
+  - [10.1. application/x-www-form-urlencoded](#101-applicationx-www-form-urlencoded)
+  - [10.2. multipart/form-data](#102-multipartform-data)
+  - [10.3. JSON](#103-json)
+- [11. Referencias](#11-referencias)
+
 
 
 
@@ -400,7 +401,7 @@ app.get('/github/:organizacion', async (req, res) => {
 app.listen(3000)
 ```
 
-# 7. Parámetros de URL
+# 8. Parámetros de URL
 
 Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
 
@@ -414,7 +415,7 @@ Existen 2 tipos:
 > A menudo se usa el término `Query Strings` como sinónimo de `URL Parameters`, lo cual no es del todo cierto como se acaba de ver y provoca confusiones.
 
 
-## 7.1. Parámetros de ruta (Path Parameters)
+## 8.1. Parámetros de ruta (Path Parameters)
 
 Son parámetros que están incorporados dentro de la ruta de la URL. Son parámetros de solicitud adjuntos a una URL que apuntan a un recurso de `API REST` específico.
 
@@ -429,7 +430,7 @@ Los parámetros de ruta son muy usados en `API REST`.
 ![API REST](assets/api-url.png)
 
 
-## 7.2. Parámetros de consulta (Query Parameters o Query Strings)
+## 8.2. Parámetros de consulta (Query Parameters o Query Strings)
 
 Son parámetros que están al final de la ruta de la URL, tras el signo `?` y están separados unos de otros mediante `&`
 
@@ -454,7 +455,7 @@ Ejemplos:
 - `https://api.github.com/users/jamj2000/repos?sort=created&direction=asc`
 
 
-# 8. Fetch desde el servidor
+# 9. Fetch desde el servidor
 
 
 Se entiende **`fetch`** como la **recuperación de datos solicitados a un servidor**. Es habitual que el formato de los datos sea **`JSON`**.
@@ -536,7 +537,7 @@ app.get('/github/:organizacion', async (req, res) => {
 app.listen(3000)
 ```
 
-# 8. Formularios
+# 10. Formularios
 
 Los formularios es el método principal para enviar información al servidor desde el lado cliente o navegador. Los formularios únicamente pueden enviar esta información mediante 2 métodos:
 
@@ -561,7 +562,7 @@ enctype        | Descripción
 > - https://blog.jim-nielsen.com/2022/browsers-json-formdata/
 
 
-## 8.1. application/x-www-form-urlencoded
+## 10.1. application/x-www-form-urlencoded
 
 ```javascript
 const express = require('express');
@@ -587,7 +588,7 @@ app.post('/', function (req, res, next) {
 app.listen(3000);
 ```
 
-## 8.2. multipart/form-data
+## 10.2. multipart/form-data
 
 ```javascript
 const express = require('express');
@@ -613,7 +614,7 @@ app.post('/', multer().none(), function (req, res, next) {
 app.listen(3000);
 ```
 
-## 8.3. JSON
+## 10.3. JSON
 
 No existe la codificación `application/json` (~~enctype="application/json"~~). [Hubo una propuesta](https://www.w3.org/TR/html-json-forms/), pero quedó en nada.
 
@@ -660,7 +661,7 @@ app.listen(3000);
 
 
 
-# 9. Referencias
+# 11. Referencias
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
 - [CommonJS vs ES Modules](https://lenguajejs.com/automatizadores/introduccion/commonjs-vs-es-modules/)
