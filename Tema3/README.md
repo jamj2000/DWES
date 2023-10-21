@@ -15,14 +15,14 @@
   - [6.1. Parámetros de ruta (Path Parameters)](#61-parámetros-de-ruta-path-parameters)
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
 - [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
-- [8. Formularios](#8-formularios)
-  - [8.1. application/x-www-form-urlencoded](#81-applicationx-www-form-urlencoded)
-  - [8.2. multipart/form-data](#82-multipartform-data)
-  - [8.3. JSON](#83-json)
 - [7. Parámetros de URL](#7-parámetros-de-url)
   - [7.1. Parámetros de ruta (Path Parameters)](#71-parámetros-de-ruta-path-parameters)
   - [7.2. Parámetros de consulta (Query Parameters o Query Strings)](#72-parámetros-de-consulta-query-parameters-o-query-strings)
 - [8. Fetch desde el servidor](#8-fetch-desde-el-servidor)
+- [8. Formularios](#8-formularios)
+  - [8.1. application/x-www-form-urlencoded](#81-applicationx-www-form-urlencoded)
+  - [8.2. multipart/form-data](#82-multipartform-data)
+  - [8.3. JSON](#83-json)
 - [9. Referencias](#9-referencias)
 
 
@@ -400,6 +400,141 @@ app.get('/github/:organizacion', async (req, res) => {
 app.listen(3000)
 ```
 
+# 7. Parámetros de URL
+
+Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
+
+Existen 2 tipos:
+
+- **Parámetros de ruta** `Path Parameters`
+- **Parámetros de consulta** `Query Parameters` o `Query Strings`
+
+> **NOTA**:
+> 
+> A menudo se usa el término `Query Strings` como sinónimo de `URL Parameters`, lo cual no es del todo cierto como se acaba de ver y provoca confusiones.
+
+
+## 7.1. Parámetros de ruta (Path Parameters)
+
+Son parámetros que están incorporados dentro de la ruta de la URL. Son parámetros de solicitud adjuntos a una URL que apuntan a un recurso de `API REST` específico.
+
+![Path Parameter](assets/path-parameter.png)
+
+Los parámetros de ruta son parte del *endpoint* y son obligatorios. Por ejemplo en `/users/{id}`, `{id}` es el parámetro de ruta del *endpoint* `/users`; apunta a un registro de usuario específico. 
+
+Un *endpoint* puede tener varios parámetros de ruta, como en el ejemplo `/organizations/{orgId}/members/{memberId}`. Esto apuntaría al registro de un miembro específico dentro de una organización específica, y tanto `{orgID}` como `{memberID}` requerirían variables.
+
+Los parámetros de ruta son muy usados en `API REST`.
+
+![API REST](assets/api-url.png)
+
+
+## 7.2. Parámetros de consulta (Query Parameters o Query Strings)
+
+Son parámetros que están al final de la ruta de la URL, tras el signo `?` y están separados unos de otros mediante `&`
+
+Tienen la forma siguiente:
+
+![Query Parameters](assets/query-parameters.png)
+
+![Query Strings](assets/query-strings.png)
+
+Los parámetros de consulta a menudo se utilizan para solicitar operaciones de clasificación, paginación, ordenación o filtrado.
+
+
+**En una misma URL pueden aparecer tanto parámetros de ruta como parámetros de consulta.**
+
+Ejemplos:
+
+- **`https://api.github.com/orgs/{organización}/repos?{parámetros de consulta}`**
+- `https://api.github.com/orgs/google/repos?per_page=10&page=1`
+- `https://api.github.com/orgs/microsoft/repos?per_page=1&page=2`
+- **`https://api.github.com/users/{usuario}/repos?{parámetros de consulta}`**
+- `https://api.github.com/users/jamj2000/repos?sort=updated`
+- `https://api.github.com/users/jamj2000/repos?sort=created&direction=asc`
+
+
+# 8. Fetch desde el servidor
+
+
+Se entiende **`fetch`** como la **recuperación de datos solicitados a un servidor**. Es habitual que el formato de los datos sea **`JSON`**.
+
+La [`API fetch`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API) se introdujo en 2015 como un reemplazo más contemporáneo de XMLHttpRequest. Desde entonces se ha convertido en el estándar de facto para la realización de llamadas asincrónicas en aplicaciones web.
+
+Aunque la `API Fetch` lleva tiempo disponible para su uso en navegadores web en el lado cliente, no estaba disponible para su uso desde el lado servidor debido a varias limitaciones.
+
+Desde NodeJS v17.5.0, `fetch` se hizo disponible como función experimental para su uso desde el lado servidor.
+
+Existen incontables APIs de tipo REST de innumerables tipos de las que podemos obtener información en formato JSON.
+
+Algunos ejemplos de APIs muy minimalistas para realizar pruebas son:
+
+- https://reqres.in/
+- https://jsonplaceholder.typicode.com/
+- https://randomuser.me
+
+Un listado más extenso de APIs profesionales puede encontrarse en:
+
+- https://github.com/public-apis/public-apis
+- https://rapidapi.com/collection/list-of-free-apis
+
+
+**Ejemplo**
+
+```javascript
+// Recuperación de datos de https://randomuser.me
+// Documentación: https://randomuser.me/documentation 
+fetch('https://randomuser.me/api/?results=4&nat=es&inc=name,location,phone,picture').
+  then(res => res.json()).
+  then(data => console.log(data.results))
+```
+
+**Ejemplo completo**
+
+> **Aplicación para realizar consultas a la API de Github**
+>
+> Documentación: https://docs.github.com/en/rest/repos/repos
+
+```javascript
+import express from 'express'
+
+const app = express()
+
+/* Ejemplos
+- http://localhost:3000/github/microsoft?pag=1
+- http://localhost:3000/github/oracle?pag=2
+- http://localhost:3000/github/google?pag=20
+*/
+app.get('/github/:organizacion', async (req, res) => {
+    const org = req.params.organizacion  // Path parameter
+    const pag = req.query.pag            // Query parameter (Query string)
+    const data = await fetch(`https://api.github.com/orgs/${org}/repos?per_page=100&page=${pag}`)
+    const json = await data.json()
+    if (json.message) {
+        // Ocurrió algún evento, como límite de peticiones excedido
+        res.send(`<h1>${json.message}</h1> <h2>${json.documentation_url}</h2>`)
+    } else {
+        res.send(`
+        <h1>Página ${pag}, ${json.length ?? 0} repositorios.</h1>
+        <small>Máximo de resultados: 100</small><hr>              
+        ${json.length
+            &&
+            json
+                .map(repo => `
+               <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
+               <em>${repo.language}: </em>  <strong>${repo.description}</strong>
+               <br><small>Creado en ${repo.created_at}. Último push en ${repo.pushed_at} </small>
+            `)
+                .join('<br><hr>')
+            ||
+            'Nada por aquí'
+            }
+    `)
+    }
+})
+
+app.listen(3000)
+```
 
 # 8. Formularios
 
@@ -521,96 +656,6 @@ app.post('/', function (req, res, next) {
 
 /** Run the app */
 app.listen(3000);
-```
-
-
-# 7. Parámetros de URL
-
-Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
-
-Existen 2 tipos:
-
-- **Parámetros de ruta** `Path Parameters`
-- **Parámetros de consulta** `Query Parameters` o `Query Strings`
-
-> **NOTA**:
-> 
-> A menudo se usa el término `Query Strings` como sinónimo de `URL Parameters`, lo cual no es del todo cierto como se acaba de ver y provoca confusiones.
-
-
-## 7.1. Parámetros de ruta (Path Parameters)
-
-Son parámetros que están incorporados dentro de la ruta de la URL. Son parámetros de solicitud adjuntos a una URL que apuntan a un recurso de `API REST` específico.
-
-![Path Parameter](assets/path-parameter.png)
-
-Los parámetros de ruta son parte del *endpoint* y son obligatorios. Por ejemplo en `/users/{id}`, `{id}` es el parámetro de ruta del *endpoint* `/users`; apunta a un registro de usuario específico. 
-
-Un *endpoint* puede tener varios parámetros de ruta, como en el ejemplo `/organizations/{orgId}/members/{memberId}`. Esto apuntaría al registro de un miembro específico dentro de una organización específica, y tanto `{orgID}` como `{memberID}` requerirían variables.
-
-Los parámetros de ruta son muy usados en `API REST`.
-
-![API REST](assets/api-url.png)
-
-
-## 7.2. Parámetros de consulta (Query Parameters o Query Strings)
-
-Son parámetros que están al final de la ruta de la URL, tras el signo `?` y están separados unos de otros mediante `&`
-
-Tienen la forma siguiente:
-
-![Query Parameters](assets/query-parameters.png)
-
-![Query Strings](assets/query-strings.png)
-
-Los parámetros de consulta a menudo se utilizan para solicitar operaciones de clasificación, paginación, ordenación o filtrado.
-
-
-**En una misma URL pueden aparecer tanto parámetros de ruta como parámetros de consulta.**
-
-Ejemplos:
-
-- **`https://api.github.com/orgs/{organización}/repos?{parámetros de consulta}`**
-- `https://api.github.com/orgs/google/repos?per_page=10&page=1`
-- `https://api.github.com/orgs/microsoft/repos?per_page=1&page=2`
-- **`https://api.github.com/users/{usuario}/repos?{parámetros de consulta}`**
-- `https://api.github.com/users/jamj2000/repos?sort=updated`
-- `https://api.github.com/users/jamj2000/repos?sort=created&direction=asc`
-
-
-# 8. Fetch desde el servidor
-
-
-Se entiende **`fetch`** como la **recuperación de datos solicitados a un servidor**. Es habitual que el formato de los datos sea **`JSON`**.
-
-La [`API fetch`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API) se introdujo en 2015 como un reemplazo más contemporáneo de XMLHttpRequest. Desde entonces se ha convertido en el estándar de facto para la realización de llamadas asincrónicas en aplicaciones web.
-
-Aunque la `API Fetch` lleva tiempo disponible para su uso en navegadores web en el lado cliente, no estaba disponible para su uso desde el lado servidor debido a varias limitaciones.
-
-Desde NodeJS v17.5.0, `fetch` se hizo disponible como función experimental para su uso desde el lado servidor.
-
-Existen incontables APIs de tipo REST de innumerables tipos de las que podemos obtener información en formato JSON.
-
-Algunos ejemplos de APIs muy minimalistas para realizar pruebas son:
-
-- https://reqres.in/
-- https://jsonplaceholder.typicode.com/
-- https://randomuser.me
-
-Un listado más extenso de APIs profesionales puede encontrarse en:
-
-- https://github.com/public-apis/public-apis
-- https://rapidapi.com/collection/list-of-free-apis
-
-
-**Ejemplo**
-
-```javascript
-// Recuperación de datos de https://randomuser.me
-// Documentación: https://randomuser.me/documentation 
-fetch('https://randomuser.me/api/?results=4&nat=es&inc=name,location,phone,picture').
-  then(res => res.json()).
-  then(data => console.log(data.results))
 ```
 
 
