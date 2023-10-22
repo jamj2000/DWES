@@ -402,7 +402,7 @@ app.listen(3000)
 
 Con NodeJS+Express es realmente sencillo crear una `API REST`. 
 
-A continuación se muestra un ejemplo de una `API REST` que proporciona respuestas en formato `JSON` y ofrece funcionalidad básica `CRUD`. Lo normal es que la información se registre en una base de datos. Pero, por simplificar, en este ejemplo se trabaja con memoria primaria.
+A continuación se muestra un ejemplo de una `API REST` que proporciona respuestas en formato `JSON` y ofrece funcionalidad básica **`CRUD`**. Lo normal es que la información se registre en una base de datos. Pero, por simplificar, en este ejemplo se trabaja con memoria primaria.
 
 Operación  | Método HTTP | Descripción
 -----------|-------------|---------------------------------------------------------
