@@ -1,7 +1,7 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 3: Programación basada en lenguajes de marcas con código embebido <!-- omit in toc -->
-> NODE, MÓDULOS EXTERNOS, EXPRESS, APIs REST, FETCH, 
+> NODE, MÓDULOS EXTERNOS, EXPRESS, APIs REST, FETCH 
 
 - [1. Introducción](#1-introducción)
 - [2. Módulos externos](#2-módulos-externos)
@@ -15,15 +15,13 @@
   - [6.1. Parámetros de ruta (Path Parameters)](#61-parámetros-de-ruta-path-parameters)
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
 - [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
-- [8. Parámetros de URL](#8-parámetros-de-url)
-  - [8.1. Parámetros de ruta (Path Parameters)](#81-parámetros-de-ruta-path-parameters)
-  - [8.2. Parámetros de consulta (Query Parameters o Query Strings)](#82-parámetros-de-consulta-query-parameters-o-query-strings)
-- [9. Fetch desde el servidor](#9-fetch-desde-el-servidor)
-- [10. Formularios](#10-formularios)
-  - [10.1. application/x-www-form-urlencoded](#101-applicationx-www-form-urlencoded)
-  - [10.2. multipart/form-data](#102-multipartform-data)
-  - [10.3. JSON](#103-json)
-- [11. Referencias](#11-referencias)
+- [8. Creando nuestra propia API REST](#8-creando-nuestra-propia-api-rest)
+- [9. Formularios](#9-formularios)
+  - [9.1. application/x-www-form-urlencoded](#91-applicationx-www-form-urlencoded)
+  - [9.2. multipart/form-data](#92-multipartform-data)
+  - [9.3. JSON](#93-json)
+- [10. Referencias](#10-referencias)
+
 
 
 
@@ -349,141 +347,6 @@ Un listado más extenso de APIs profesionales puede encontrarse en:
 ```javascript
 // Recuperación de datos de https://randomuser.me
 // Documentación: https://randomuser.me/documentation 
-fetch('https://randomuser.me/api/?results=10&nat=es&inc=name,location,phone,picture').
-  then(res => res.json(res)).
-  then(data => console.log(data.results))
-```
-
-**Ejemplo completo**
-
-> **Aplicación para realizar consultas a la API de Github**
->
-> Documentación en https://docs.github.com/en/rest/repos/repos
-
-```javascript
-import express from 'express'
-
-const app = express()
-
-/* Ejemplos
-- http://localhost:3000/github/microsoft?pag=1
-- http://localhost:3000/github/oracle?pag=2
-- http://localhost:3000/github/google?pag=20
-*/
-app.get('/github/:organizacion', async (req, res) => {
-    const org = req.params.organizacion  // Path parameter
-    const pag = req.query.pag            // Query parameter (Query string)
-    const data = await fetch(`https://api.github.com/orgs/${org}/repos?per_page=100&page=${pag}`)
-    const json = await data.json()
-    if (json.message) {
-        // Ocurrió algún evento, como límite de peticiones excedido
-        res.send(`<h1>${json.message}</h1> <h2>${json.documentation_url}</h2>`)
-    } else {
-        res.send(`
-        <h1>Página ${pag}, ${json.length ?? 0} repositorios.</h1>
-        <small>Máximo de resultados: 100</small><hr>              
-        ${json.length
-            &&
-            json.map(repo => `
-                <h4><a href="${repo.html_url}" target="_blank">${repo.name}</a></h4>
-                <em>${repo.language}: </em>  <strong>${repo.description}</strong>
-                <br><small>Creado en ${repo.created_at}. Último push en ${repo.pushed_at} </small>
-                `)
-                .join('<br><hr>')
-            ||
-            'Nada por aquí'
-         }
-        `)
-    }
-})
-
-app.listen(3000)
-```
-
-# 8. Parámetros de URL
-
-Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
-
-Existen 2 tipos:
-
-- **Parámetros de ruta** `Path Parameters`
-- **Parámetros de consulta** `Query Parameters` o `Query Strings`
-
-> **NOTA**:
-> 
-> A menudo se usa el término `Query Strings` como sinónimo de `URL Parameters`, lo cual no es del todo cierto como se acaba de ver y provoca confusiones.
-
-
-## 8.1. Parámetros de ruta (Path Parameters)
-
-Son parámetros que están incorporados dentro de la ruta de la URL. Son parámetros de solicitud adjuntos a una URL que apuntan a un recurso de `API REST` específico.
-
-![Path Parameter](assets/path-parameter.png)
-
-Los parámetros de ruta son parte del *endpoint* y son obligatorios. Por ejemplo en `/users/{id}`, `{id}` es el parámetro de ruta del *endpoint* `/users`; apunta a un registro de usuario específico. 
-
-Un *endpoint* puede tener varios parámetros de ruta, como en el ejemplo `/organizations/{orgId}/members/{memberId}`. Esto apuntaría al registro de un miembro específico dentro de una organización específica, y tanto `{orgID}` como `{memberID}` requerirían variables.
-
-Los parámetros de ruta son muy usados en `API REST`.
-
-![API REST](assets/api-url.png)
-
-
-## 8.2. Parámetros de consulta (Query Parameters o Query Strings)
-
-Son parámetros que están al final de la ruta de la URL, tras el signo `?` y están separados unos de otros mediante `&`
-
-Tienen la forma siguiente:
-
-![Query Parameters](assets/query-parameters.png)
-
-![Query Strings](assets/query-strings.png)
-
-Los parámetros de consulta a menudo se utilizan para solicitar operaciones de clasificación, paginación, ordenación o filtrado.
-
-
-**En una misma URL pueden aparecer tanto parámetros de ruta como parámetros de consulta.**
-
-Ejemplos:
-
-- **`https://api.github.com/orgs/{organización}/repos?{parámetros de consulta}`**
-- `https://api.github.com/orgs/google/repos?per_page=10&page=1`
-- `https://api.github.com/orgs/microsoft/repos?per_page=1&page=2`
-- **`https://api.github.com/users/{usuario}/repos?{parámetros de consulta}`**
-- `https://api.github.com/users/jamj2000/repos?sort=updated`
-- `https://api.github.com/users/jamj2000/repos?sort=created&direction=asc`
-
-
-# 9. Fetch desde el servidor
-
-
-Se entiende **`fetch`** como la **recuperación de datos solicitados a un servidor**. Es habitual que el formato de los datos sea **`JSON`**.
-
-La [`API fetch`](https://developer.mozilla.org/es/docs/Web/API/Fetch_API) se introdujo en 2015 como un reemplazo más contemporáneo de XMLHttpRequest. Desde entonces se ha convertido en el estándar de facto para la realización de llamadas asincrónicas en aplicaciones web.
-
-Aunque la `API Fetch` lleva tiempo disponible para su uso en navegadores web en el lado cliente, no estaba disponible para su uso desde el lado servidor debido a varias limitaciones.
-
-Desde NodeJS v17.5.0, `fetch` se hizo disponible como función experimental para su uso desde el lado servidor.
-
-Existen incontables APIs de tipo REST de innumerables tipos de las que podemos obtener información en formato JSON.
-
-Algunos ejemplos de APIs muy minimalistas para realizar pruebas son:
-
-- https://reqres.in/
-- https://jsonplaceholder.typicode.com/
-- https://randomuser.me
-
-Un listado más extenso de APIs profesionales puede encontrarse en:
-
-- https://github.com/public-apis/public-apis
-- https://rapidapi.com/collection/list-of-free-apis
-
-
-**Ejemplo**
-
-```javascript
-// Recuperación de datos de https://randomuser.me
-// Documentación: https://randomuser.me/documentation 
 fetch('https://randomuser.me/api/?results=4&nat=es&inc=name,location,phone,picture').
   then(res => res.json()).
   then(data => console.log(data.results))
@@ -535,7 +398,95 @@ app.get('/github/:organizacion', async (req, res) => {
 app.listen(3000)
 ```
 
-# 10. Formularios
+# 8. Creando nuestra propia API REST
+
+Con NodeJS+Express es realmente sencillo crear una `API REST`. 
+
+A continuación se muestra un ejemplo de una `API REST` que proporciona respuestas en formato `JSON` y ofrece funcionalidad básica `CRUD`. Lo normal es que la información se registre en una base de datos. Pero, por simplificar, en este ejemplo se trabaja con memoria primaria.
+
+Operación  | Método HTTP | Descripción
+-----------|-------------|---------------------------------------------------------
+**C**reate | **POST**    | Crear un recurso. Equivale a INSERT en una base de datos
+**R**ead   | **GET**     | Leer un recurso. Equivale a SELECT en una base de datos 
+**U**pdate | **PUT**     | Actualizar un recurso. Equivale a UPDATE en una base de datos
+**D**elete | **DELETE**  | Eliminar un recurso. Equivale a DELETE en una base de datos
+
+```javascript
+import express from "express";
+const app = express()
+
+let Users = [
+    { id: 0, nombre: "Jose", edad: 20 },
+    { id: 1, nombre: "Juan", edad: 21 },
+    { id: 2, nombre: "Eva", edad: 22 }
+]
+
+app.use(express.json())  // IMPORTANTE
+
+// GET
+app.get('/api/users', (request, response) => response.json(Users))
+
+// POST 
+app.post('/api/users', (request, response) => {
+    if ( !request.is('json') )
+        return response.json({ message: 'Debes proporcionar datos JSON' })
+
+    let sig = Math.max( ...Users.map( u => u.id ))+1
+
+    const { nombre, edad } = request.body
+    Users.push({ id: sig, nombre, edad })
+    return response.json(Users)
+})
+
+// GET 
+app.get('/api/users/:id', (request, response) => {
+    let usuario = Users.find(user => user.id == request.params.id)
+
+    if (usuario !== undefined) { // Si es encontrado    
+        return response.json(usuario)
+    } else {
+        response.json({ message: 'El elemento no ha sido encontrado' })
+    }
+})
+
+// PUT
+app.put('/api/users/:id', (request, response) => {
+    if ( !request.is('json') )
+        return response.json({ message: 'Debes proporcionar datos JSON' })
+
+    const { id } = request.params
+    const { nombre, edad } = request.body
+
+    // Obtenemos posición    
+    const pos = Users.findIndex(user => user.id == id)
+
+    if (pos != -1) { // Si es encontrado
+        Users.splice(pos, 1, { id, nombre, edad })
+        return response.json(Users)
+    } else { // Sino
+        response.json({ message: 'El elemento no ha sido encontrado' })
+    }
+})
+
+// DELETE
+app.delete('/api/users/:id', (request, response) => {
+    // Obtenemos posición    
+    const pos = Users.findIndex(user => user.id == request.params.id)
+
+    if (pos != -1) { // Si es encontrado
+        Users.splice(pos, 1)
+        return response.json(Users)
+    } else { // Sino
+        response.json({ message: 'El elemento no ha sido encontrado' })
+    }
+})
+
+
+app.listen(3000)
+```
+
+
+# 9. Formularios
 
 Los formularios es el método principal para enviar información al servidor desde el lado cliente o navegador. Los formularios únicamente pueden enviar esta información mediante 2 métodos:
 
@@ -560,7 +511,7 @@ enctype        | Descripción
 > - https://blog.jim-nielsen.com/2022/browsers-json-formdata/
 
 
-## 10.1. application/x-www-form-urlencoded
+## 9.1. application/x-www-form-urlencoded
 
 ```javascript
 const express = require('express');
@@ -586,7 +537,7 @@ app.post('/', function (req, res, next) {
 app.listen(3000);
 ```
 
-## 10.2. multipart/form-data
+## 9.2. multipart/form-data
 
 ```javascript
 const express = require('express');
@@ -612,7 +563,7 @@ app.post('/', multer().none(), function (req, res, next) {
 app.listen(3000);
 ```
 
-## 10.3. JSON
+## 9.3. JSON
 
 No existe la codificación `application/json` (~~enctype="application/json"~~). [Hubo una propuesta](https://www.w3.org/TR/html-json-forms/), pero quedó en nada.
 
@@ -659,7 +610,7 @@ app.listen(3000);
 
 
 
-# 11. Referencias
+# 10. Referencias
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
 - [CommonJS vs ES Modules](https://lenguajejs.com/automatizadores/introduccion/commonjs-vs-es-modules/)
