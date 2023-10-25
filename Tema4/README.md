@@ -17,14 +17,21 @@
   - [5.1. Beneficios del renderizado en el cliente](#51-beneficios-del-renderizado-en-el-cliente)
 - [6. Componentes del Servidor VS Componentes del Cliente](#6-componentes-del-servidor-vs-componentes-del-cliente)
   - [6.1. ¿Cuándo utilizar componentes de servidor y cliente?](#61-cuándo-utilizar-componentes-de-servidor-y-cliente)
+  - [6.2. Componentes de NextJS](#62-componentes-de-nextjs)
 - [7. App Router](#7-app-router)
+  - [7.1. Segmentos de ruta](#71-segmentos-de-ruta)
+  - [7.2. Creando rutas](#72-creando-rutas)
+  - [7.3. Organización del proyecto](#73-organización-del-proyecto)
 - [8. Route Handlers](#8-route-handlers)
+  - [8.1. Métodos HTTP admitidos](#81-métodos-http-admitidos)
 - [9. Cookies](#9-cookies)
   - [9.1. Tipos de cookies](#91-tipos-de-cookies)
   - [9.2. Generar Cookies](#92-generar-cookies)
   - [9.3. Leer Cookies](#93-leer-cookies)
   - [9.4. Eliminar Cookies](#94-eliminar-cookies)
-- [10. Referencias](#10-referencias)
+- [10. Proyecto personal](#10-proyecto-personal)
+- [11. Referencias](#11-referencias)
+
 
 
 
@@ -128,6 +135,16 @@ const App = () => {
 }
 ```
 
+**Características de JSX**
+
+- JSX simula ser HTML, pero en el fondo no lo es.
+- Obligatoriamente, todas las etiquetas tienen que tener cierre.
+- No se puede hacer `return` de varias etiquetas. 
+  - Debemos insertar varias etiquetas en una etiqueta padre. 
+  - O podemos usar un fragmento `<>` ... `</>`
+- No se permite el atributo HTML `class`. En su lugar hay que usar **`className`**
+- Necesidad de usar atributo **`key`** en lista de elementos similares.
+
 
 ## 3.2. Aplicar estilos
 
@@ -159,6 +176,19 @@ function Test () {
 
 export default Test;
 ```
+
+También es válido lo siguiente:
+
+```javascript
+function Test () {
+  return <div style={{ backgroundColor: "yellow", fontSize: "24px" }}> Hola </div>
+}
+
+export default Test;
+```
+
+> **NOTA:** Observa que las **propiedades** se escriben en **camelCase** y el separador es la coma.
+
 
 **externo**
 
@@ -312,28 +342,146 @@ Referencia: https://nextjs.org/docs/app/building-your-application/rendering/clie
 
 A continuación se ofrece un resumen rápido de los diferentes casos de uso de los componentes de servidor y cliente:
 
-¿Qué hay que hacer?	 | Componente del servidor | Componente del cliente
----------------------|:-----------------------:|:----------------------:
-Obtener datos		| ✅ | ❌
-Acceder a recursos backend (directamente)	| ✅ | ❌
-Mantener información confidencial en el servidor (tokens de acceso, claves API, etc.)	| ✅	| ❌
-Mantener grandes dependencias en el servidor/Reducir JavaScript del lado del cliente	| ✅	| ❌
-Añadir interactividad y detectores de eventos ( onClick(), onChange(), etc.)|	❌ | ✅
-Utilizar efectos de estado y ciclo de vida ( useState(), useEffect(), etc.)	|	❌ | ✅
-Utilizar API solo para navegador 	| ❌ | ✅
-Utilizar enlaces personalizados que dependan del estado, los efectos o las API exclusivas del navegador	| ❌ | ✅
+| ¿Qué hay que hacer?                                                                                     | Componente del servidor | Componente del cliente |
+| ------------------------------------------------------------------------------------------------------- | :---------------------: | :--------------------: |
+| Obtener datos                                                                                           |            ✅            |           ❌            |
+| Acceder a recursos backend (directamente)                                                               |            ✅            |           ❌            |
+| Mantener información confidencial en el servidor (tokens de acceso, claves API, etc.)                   |            ✅            |           ❌            |
+| Mantener grandes dependencias en el servidor/Reducir JavaScript del lado del cliente                    |            ✅            |           ❌            |
+| Añadir interactividad y detectores de eventos ( onClick(), onChange(), etc.)                            |            ❌            |           ✅            |
+| Utilizar efectos de estado y ciclo de vida ( useState(), useEffect(), etc.)                             |            ❌            |           ✅            |
+| Utilizar API solo para navegador                                                                        |            ❌            |           ✅            |
+| Utilizar enlaces personalizados que dependan del estado, los efectos o las API exclusivas del navegador |            ❌            |           ✅            |
 
+
+## 6.2. Componentes de NextJS
+
+**Link**
+
+`<Link>` es un componente de React que extiende el elemento HTML <a>para proporcionar *pre-fetching* y navegación del lado del cliente entre rutas. Es la forma principal de navegar entre rutas en Next.js.
+
+Ejemplo:
+
+```javascript
+import Link from 'next/link'
+ 
+export default function Page() {
+  return (
+    <>
+      <Link href="/">Home</Link><br/>
+      <Link href="/dashboard">Dashboard</Link>
+    </>
+  )
+}
+```
+
+- Referencia: https://nextjs.org/docs/app/api-reference/components/link
+
+**Image**
+
+El componente `<Image>` de Next.js amplía el elemento <img> de HTML con funciones para la optimización automática de imágenes. Funcionalidades:
+
+- **Optimización de tamaño**: proporciona automáticamente imágenes del tamaño correcto para cada dispositivo, utilizando formatos de imagen modernos como WebP y AVIF.
+- **Estabilidad visual**: evita el cambio de diseño automáticamente cuando se cargan las imágenes.
+- **Cargas de página más rápidas**: las imágenes solo se cargan cuando ingresan a la ventana gráfica mediante la carga diferida del navegador nativo, con marcadores de posición borrosos opcionales.
+- **Flexibilidad de recursos**: cambio de tamaño de imágenes bajo demanda, incluso para imágenes almacenadas en servidores remotos
+
+
+- Referencia: https://nextjs.org/docs/app/api-reference/components/image
 
 
 # 7. App Router
 
-El enrutador de la aplicación fue introducido en NextJS 13. En versiones anteriores se usaba el *page router*.
+En la versión 13, Next.js introdujo un nuevo `App Router` construido sobre `React Server Components` , que admite diseños compartidos, enrutamiento anidado, estados de carga, manejo de errores y más.
+
+App Router funciona en un nuevo directorio llamado `app` (en versiones anteriores se usaba `pages`). 
+
+![Terminología](assets/terminology-component-tree.avif)
+
+![Anatomía de URL](assets/terminology-url-anatomy.avif)
+
+**Conceptos**
+
+- **Segmento de URL**: Parte de la ruta de la URL delimitada por barras.
+- **Ruta URL**: Parte de la URL que viene después del dominio (compuesta por segmentos).
+
+## 7.1. Segmentos de ruta
+
+Cada carpeta en una ruta representa un segmento de ruta. Cada segmento de ruta se asigna a un segmento correspondiente en una ruta URL.
+
+![Segmentos de ruta](assets/route-segments-to-path-segments.avif)
+
+Dentro de `app`, las subcarpetas definen rutas, pero solo los contenidos devueltos por `page.js` o `route.js` son direccionables públicamente.
+
+Esto significa que los archivos de proyecto se pueden colocar de forma segura dentro de segmentos de ruta en el directorio `app` sin que se puedan enrutar accidentalmente.
+
+![colocación](assets/project-organization-colocation.avif)
+
+- Referencia: https://nextjs.org/docs/app/building-your-application/routing
+
+## 7.2. Creando rutas
+
+Next.js utiliza un enrutador basado en un sistema de archivos donde se utilizan carpetas para definir rutas.
+
+Cada carpeta representa un segmento de ruta que se asigna a un segmento de URL. Para crear una ruta anidada, puede anidar carpetas una dentro de otra.
+
+![Segmentos de ruta a segmentos de ruta](assets/route-segments-to-path-segments.avif)
+
+Se utiliza un archivo especial **`page.js`** para hacer que los segmentos de ruta sean accesibles públicamente.
+
+![Definición de rutas](assets/defining-routes.avif)
+
+En este ejemplo, la ruta URL `/dashboard/analytics` no es accesible públicamente porque no tiene un archivo `page.js` correspondiente. Esta carpeta podría usarse para almacenar componentes, hojas de estilo, imágenes u otros archivos colocados.
+
+
+## 7.3. Organización del proyecto
+
+Aparte de las convenciones de enrutamiento de carpetas y archivos, Next.js no tiene opiniones sobre cómo organizar y colocar los archivos de su proyecto.
+
+A continuación se muesran **3 estratégias válidas**:
+
+**Archivos de proyecto fuera de `app`**
+
+Esta estrategia almacena todo el código de la aplicación en carpetas compartidas en la raíz de su proyecto y mantiene el directorio `app` únicamente con fines de enrutamiento.
+
+![](assets/project-organization-project-root.avif)
+
+**Archivos del proyecto en carpetas de nivel superior dentro de `app`**
+
+Esta estrategia almacena todo el código de la aplicación en carpetas compartidas en la raíz del directorio `app`.
+
+![](assets/project-organization-app-root.avif)
+
+**Archivos de proyecto divididos por característica o ruta**
+
+Esta estrategia almacena el código de aplicación compartido globalmente en el directorio raíz `app` y divide el código de aplicación más específico en los segmentos de ruta que los utilizan.
+
+![](assets/project-organization-app-root-split.avif)
 
 
 # 8. Route Handlers
 
+Los `controladores de ruta` le permiten crear controladores de solicitudes personalizados para una ruta determinada mediante las APIs web [`Request`](https://developer.mozilla.org/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/docs/Web/API/Response).
+
+Los controladores de ruta solo están disponibles dentro del directorio `app`. A menudo se suelen utilizar para la creación de `APIs REST`.
+
+![route-special-file](assets/route-special-file.avif)
+
+Los controladores de ruta se definen en un archivo `route.js|ts` dentro del directorio `app`:
+
+```typescript
+// app/api/route.ts
+export async function GET(request: Request) {}
+```
+
+## 8.1. Métodos HTTP admitidos
+
+Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATCH**, **DELETE**, **HEAD**, y **OPTIONS**. Si se llama a un método no compatible, Next.js devolverá una respuesta *405 Method Not Allowed*.
+
+
 **Referencias:**
 
+- https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 - https://nextjs.org/docs/app/api-reference/functions/next-request
 - https://nextjs.org/docs/app/api-reference/functions/next-response
 
@@ -456,6 +604,12 @@ async function create(data) {
 Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
 
-# 10. Referencias
+# 10. Proyecto personal
+
+![SSG Blog build](ssg-blog-build.png)
+
+
+
+# 11. Referencias
 
 - [Documentación de NextJS](https://nextjs.org/docs)
