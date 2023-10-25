@@ -606,7 +606,10 @@ Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
 # 10. Proyecto personal
 
-![SSG Blog build](ssg-blog-build.png)
+
+[Código fuente](https://github.com/jamj2000/nxblog)
+
+![SSG Blog build](assets/ssg-blog-build.png)
 
 
 
