@@ -605,6 +605,12 @@ app.post('/', function (req, res, next) {
 app.listen(3000);
 ```
 
+**NOTA:**
+Esta última forma es usada frecuentemente en Aplicaciones de Página Única (SPA - Single Page Applications) para enviar datos al servidor. Ofrece mayor libertad y flexibilidad que las anteriores, puesto que:
+
+- No es necesario usar la etiqueta `form` de HTML. Basta con tener los `input` necesarios y recoger sus valores en variables.
+- No está restringido a los métodos `GET` y `POST`. Se pueden usar otros métodos como `PUT`, `PATCH`, `DELETE`, ...
+
 
 
 # 10. Referencias
