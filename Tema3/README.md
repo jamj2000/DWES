@@ -560,6 +560,9 @@ app.post('/', multer().none(), function (req, res, next) {
 app.listen(3000);
 ```
 
+**NOTA**: Para gestionar los archivos subidos al servidor usaremos el paquete [`multer`](https://github.com/expressjs/multer/blob/master/doc/README-es.md)
+
+
 ## 9.3. JSON
 
 No existe la codificación `application/json` (~~enctype="application/json"~~). [Hubo una propuesta](https://www.w3.org/TR/html-json-forms/), pero quedó en nada.
