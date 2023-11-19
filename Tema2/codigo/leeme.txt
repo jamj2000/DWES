@@ -1,0 +1,5 @@
+
+Este contenido ha sido generado desde Javascript
+y escrito en un archivo desde NodeJS.
+
+Chao.

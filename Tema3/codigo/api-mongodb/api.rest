@@ -1,0 +1,65 @@
+# Ejemplos
+
+POST http://localhost:3000/api/users HTTP/1.1
+content-type: application/json
+
+{ 
+    "nombre": "Eva", 
+    "edad": 20 
+}
+
+### 
+
+POST http://localhost:3000/api/users HTTP/1.1
+content-type: application/json
+
+{ 
+    "nombre": "Jose", 
+    "edad": 21 
+}
+
+
+### 
+
+GET http://localhost:3000/api/users HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:3000/api/users/6542da20c20d9ad95c739701 HTTP/1.1
+content-type: application/json
+
+###
+
+PUT http://localhost:3000/api/users/6548f6566802ae8e19bd782b HTTP/1.1
+content-type: application/json
+
+{ 
+    "nombre": "José Antonio", 
+    "edad": 32 
+}
+
+###
+
+DELETE http://localhost:3000/api/users/6544e7ced958fc237ad628ed HTTP/1.1
+content-type: application/json
+
+###
+
+DELETE https://api-mongodb-dev-nnas.3.us-1.fl0.io/api/users/6542da20c20d9ad95c739701 HTTP/1.1
+content-type: application/json
+
+### 
+
+POST https://api-mongodb-dev-nnas.3.us-1.fl0.io/api/users HTTP/1.1
+content-type: application/json
+
+{ 
+    "nombre": "Jose", 
+    "edad": 21 
+}
+
+### 
+
+DELETE https://api-mongodb-dev-nnas.3.us-1.fl0.io/api/users/6542da35c20d9ad95c739702
+content-type: application/json

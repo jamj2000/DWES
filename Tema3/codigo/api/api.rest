@@ -1,0 +1,16 @@
+DELETE http://localhost:3000/api/users/1 HTTP/1.1
+
+### 
+GET http://localhost:3000/api/users HTTP/1.1
+
+###
+
+PUT http://localhost:3000/api/users/2 HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "Elena",
+    "edad": 11
+}
+
+###

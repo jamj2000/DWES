@@ -1,0 +1,191 @@
+[
+  {
+    "nombre": "Ana Perez",
+    "telefono": 602112233,
+    "domicilio": {
+      "calle": "Nueva",
+      "numero": 1,
+      "localidad": "Montilla"
+    },
+    "aficiones": [
+      "cine",
+      "lectura"
+    ]
+  },
+  {
+    "nombre": "Eva Garcia",
+    "telefono": 602112244,
+    "domicilio": {
+      "calle": "Antigua",
+      "numero": 2,
+      "localidad": "Montilla"
+    },
+    "aficiones": [
+      "cine",
+      "senderismo"
+    ]
+  },
+  {
+    "nombre": "Isabel Rubio",
+    "telefono": 602112255,
+    "domicilio": {
+      "calle": "Ancha",
+      "numero": 3,
+      "localidad": "Moriles"
+    },
+    "aficiones": [
+      "lectura"
+    ]
+  },
+  {
+    "nombre": "Jose Redondo",
+    "telefono": 602112266,
+    "domicilio": {
+      "calle": "Estrecha",
+      "numero": 4,
+      "localidad": "Moriles"
+    },
+    "aficiones": [
+      "cine",
+      "teatro"
+    ]
+  },
+  {
+    "nombre": "Juan Garrido",
+    "telefono": 602112277,
+    "domicilio": {
+      "calle": "Nueva",
+      "numero": 1,
+      "localidad": "Cordoba"
+    },
+    "aficiones": [
+      "parapente",
+      "viajes"
+    ]
+  },
+  {
+    "nombre": "Elisa",
+    "telefono": 602222211,
+    "domicilio": {
+      "calle": "Alterna",
+      "numero": 11,
+      "localidad": "Montilla"
+    },
+    "aficiones": [
+      "senderismo",
+      "cine",
+      "lectura"
+    ]
+  },
+  {
+    "nombre": "Maria",
+    "telefono": 602222222,
+    "domicilio": {
+      "calle": "Conquista",
+      "numero": 22,
+      "localidad": "Espejo"
+    },
+    "aficiones": [
+      "teatro",
+      "lectura"
+    ]
+  },
+  {
+    "nombre": "Bernardo",
+    "telefono": 602222233,
+    "domicilio": {
+      "calle": "Conquista",
+      "numero": 33,
+      "localidad": "Espejo"
+    },
+    "aficiones": [
+      "cine",
+      "viajes"
+    ]
+  },
+  {
+    "nombre": "Alba",
+    "telefono": 602222244,
+    "domicilio": {
+      "calle": "Aguadores",
+      "numero": 44,
+      "localidad": "Cordoba"
+    },
+    "aficiones": [
+      "voluntariado"
+    ]
+  },
+  {
+    "nombre": "Sonia",
+    "telefono": 602222255,
+    "domicilio": {
+      "calle": "Pilates",
+      "numero": 55,
+      "localidad": "Malaga"
+    },
+    "aficiones": [
+      "lectura"
+    ]
+  },
+  {
+    "nombre": "Carlos",
+    "telefono": 602222266,
+    "domicilio": {
+      "calle": "Madrid",
+      "numero": 66,
+      "localidad": "Malaga"
+    },
+    "aficiones": []
+  },
+  {
+    "nombre": "Carla",
+    "telefono": 60222277,
+    "domicilio": {
+      "calle": "Toledo",
+      "numero": 77,
+      "localidad": "Cordoba"
+    },
+    "aficiones": [
+      "parapente",
+      "viajes"
+    ]
+  },
+  {
+    "nombre": "Elena",
+    "telefono": 602222288,
+    "domicilio": {
+      "calle": "Ancha",
+      "numero": 88,
+      "localidad": "Moriles"
+    },
+    "aficiones": [
+      "ajedrez",
+      "deporte"
+    ]
+  },
+  {
+    "nombre": "Cesar",
+    "telefono": 602222299,
+    "domicilio": {
+      "calle": "Ancha",
+      "numero": 99,
+      "localidad": "Cordoba"
+    },
+    "aficiones": [
+      "lectura"
+    ]
+  },
+  {
+    "nombre": "David",
+    "telefono": 602222200,
+    "domicilio": {
+      "calle": "Francia",
+      "numero": 100,
+      "localidad": "Moriles"
+    },
+    "aficiones": [
+      "teatro",
+      "viajar"
+    ]
+  }
+]
