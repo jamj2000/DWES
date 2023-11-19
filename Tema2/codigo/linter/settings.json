@@ -1,0 +1,31 @@
+{
+    "workbench.colorTheme": "Default Light+",
+    "window.zoomLevel": 2,
+    // Fuente con ligaduras
+    "editor.fontLigatures": true,
+    "editor.fontVariations": false,
+    "editor.fontFamily": "'Fira Code', monospace",
+    "svg.preview.mode": "svg",
+    // Desactivamos validación CSS por defecto de VSCode
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    // Activamos stylelint para CSS
+    "stylelint.enable": true,
+    // linters: activamos eslint para Javascript
+    "javascript.validate.enable": true,
+    "eslint.validate": [
+        "javascript"
+    ],
+    "eslint.enable": true,
+    // linters: arreglamos código CSS + Javascript al guardar a disco
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true,
+    },
+    // Desactivamos la opción siguiente para no interferir con los linters
+    // "editor.formatOnSave": true,
+    "extensions.ignoreRecommendations": true,
+    // Permite la edición simultánea de inicio y cierre de etiquetas HTML y JSX
+    "editor.linkedEditing": true,
+}
