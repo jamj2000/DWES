@@ -24,9 +24,9 @@
   - [7.3. Organización del proyecto](#73-organización-del-proyecto)
 - [8. Route Handlers](#8-route-handlers)
   - [8.1. Métodos HTTP admitidos](#81-métodos-http-admitidos)
-  - [Creación de API REST](#creación-de-api-rest)
-  - [API REST con datos en memoria RAM](#api-rest-con-datos-en-memoria-ram)
-  - [API REST con datos en BD MongoDB](#api-rest-con-datos-en-bd-mongodb)
+  - [8.2. Creación de API REST](#82-creación-de-api-rest)
+  - [8.3. API REST con datos en memoria RAM](#83-api-rest-con-datos-en-memoria-ram)
+  - [8.4. API REST con datos en BD MongoDB](#84-api-rest-con-datos-en-bd-mongodb)
 - [9. Cookies](#9-cookies)
   - [9.1. Tipos de cookies](#91-tipos-de-cookies)
   - [9.2. Generar Cookies](#92-generar-cookies)
@@ -34,8 +34,6 @@
   - [9.4. Eliminar Cookies](#94-eliminar-cookies)
 - [10. Proyecto personal](#10-proyecto-personal)
 - [11. Referencias](#11-referencias)
-
-
 
 
 
@@ -527,7 +525,7 @@ Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATC
 - https://nextjs.org/docs/app/api-reference/functions/next-response
 
 
-## Creación de API REST
+## 8.2. Creación de API REST
 
 Como se ha comentado anteriormente, la principal aplicación que tienen los route handlers (`controladores de ruta`) es la implentación de APIs. Suele ser habitual el intercambio de información mediante el formato JSON.
 
@@ -553,7 +551,7 @@ app
 ```
 
 
-## API REST con datos en memoria RAM
+## 8.3. API REST con datos en memoria RAM
 
 **Estructura de archivos en `src`**
 
@@ -578,7 +576,7 @@ Gestión de datos en archivo `lib/users.js`.
 - [Código fuente](https://github.com/jamj2000/nxapi-memory)
 
 
-## API REST con datos en BD MongoDB
+## 8.4. API REST con datos en BD MongoDB
 
 **Estructura de archivos en `src`**
 
