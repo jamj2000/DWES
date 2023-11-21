@@ -24,6 +24,9 @@
   - [7.3. Organización del proyecto](#73-organización-del-proyecto)
 - [8. Route Handlers](#8-route-handlers)
   - [8.1. Métodos HTTP admitidos](#81-métodos-http-admitidos)
+  - [Creación de API REST](#creación-de-api-rest)
+  - [API REST con datos en memoria RAM](#api-rest-con-datos-en-memoria-ram)
+  - [API REST con datos en BD MongoDB](#api-rest-con-datos-en-bd-mongodb)
 - [9. Cookies](#9-cookies)
   - [9.1. Tipos de cookies](#91-tipos-de-cookies)
   - [9.2. Generar Cookies](#92-generar-cookies)
@@ -190,7 +193,7 @@ export default Test;
 > **NOTA:** Observa que las **propiedades** se escriben en **camelCase** y el separador es la coma.
 
 
-**externo**
+**externo en módulo CSS**
 
 ```css
 /* Test.module.css */
@@ -223,17 +226,55 @@ export const App = () => {
 export default App
 ```
 
+**externo en CSS global**
+
+```css
+/* globals.css */
+
+.bg-lavanda {
+  background-color: Lavender;
+}
+
+.borde {
+  border: solid 1px LightSlateGray;
+}
+
+.relleno {
+  padding: 30px;
+}
+```
+
+```javascript
+import './globals.css'
+
+export default function Home() {
+  return (
+    <main className="borde relleno bg-lavanda">
+      <h1>Inicio</h1>
+    </main>
+  )
+}
+```
+
 
 **Tailwind**
 
-```javascript
-import style from 'Test.module.css'
+```css
+/* globals.css */ 
 
-function Test () {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+
+```javascript
+
+function Home () {
   return <div className="bg-yellow-100  text-2xl"> Hola </div>
 }
 
-export default Test;
+export default Home;
 ```
 
 Tailwind es un framework CSS bastante popular y muy peculiar. 
@@ -463,7 +504,7 @@ Esta estrategia almacena el código de aplicación compartido globalmente en el 
 
 Los `controladores de ruta` le permiten crear controladores de solicitudes personalizados para una ruta determinada mediante las APIs web [`Request`](https://developer.mozilla.org/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/docs/Web/API/Response).
 
-Los controladores de ruta solo están disponibles dentro del directorio `app`. A menudo se suelen utilizar para la creación de `APIs REST`.
+Los controladores de ruta sólo están disponibles dentro del directorio `app`. A menudo se suelen utilizar para la creación de `APIs REST`.
 
 ![route-special-file](assets/route-special-file.avif)
 
@@ -484,6 +525,82 @@ Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATC
 - https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 - https://nextjs.org/docs/app/api-reference/functions/next-request
 - https://nextjs.org/docs/app/api-reference/functions/next-response
+
+
+## Creación de API REST
+
+Como se ha comentado anteriormente, la principal aplicación que tienen los route handlers (`controladores de ruta`) es la implentación de APIs. Suele ser habitual el intercambio de información mediante el formato JSON.
+
+A continuación tienes 2 proyectos donde se implementa una API sencilla de este tipo. En ambos casos, los *endpoints* disponibles son:
+
+- `/api/users` Métodos **GET** y **POST**
+- `/api/users/[id]` Métodos **GET**, **PUT** y **DELETE**
+
+**Estructura de archivos en `app`**
+
+```
+app
+├── api
+│   └── users
+│       ├── [id]
+│       │   └── route.js
+│       └── route.js
+├── favicon.ico
+├── globals.css
+├── layout.js
+└── page.js
+
+```
+
+
+## API REST con datos en memoria RAM
+
+**Estructura de archivos en `src`**
+
+```
+.
+├── app
+│   ├── api
+│   │   └── users
+│   │       ├── [id]
+│   │       │   └── route.js
+│   │       └── route.js
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+└── lib
+    └── users.js
+```
+
+Gestión de datos en archivo `lib/users.js`.
+
+- [Código fuente](https://github.com/jamj2000/nxapi-memory)
+
+
+## API REST con datos en BD MongoDB
+
+**Estructura de archivos en `src`**
+
+```
+.
+├── app
+│   ├── api
+│   │   └── users
+│   │       ├── [id]
+│   │       │   └── route.js
+│   │       └── route.js
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+└── lib
+    └── mongodb.js
+```
+
+Gestión de datos en archivo `lib/mongodb.js`.
+
+- [Código fuente](https://github.com/jamj2000/nxapi-mongodb)
 
 
 # 9. Cookies
