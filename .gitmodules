@@ -1,3 +1,9 @@
 [submodule "proyectos/tema4/nxapp-router"]
 	path = proyectos/tema4/nxapp-router
 	url = https://github.com/jamj2000/nxapp-router.git
+[submodule "proyectos/tema4/nxapi-memory"]
+	path = proyectos/tema4/nxapi-memory
+	url = https://github.com/jamj2000/nxapi-memory.git
+[submodule "proyectos/tema4/nxapi-mongodb"]
+	path = proyectos/tema4/nxapi-mongodb
+	url = https://github.com/jamj2000/nxapi-mongodb.git

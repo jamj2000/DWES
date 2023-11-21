@@ -1,7 +1,16 @@
-# Añadir submódulos
+# Añadir submódulo
 
 ```terminal
 git submodule add https://github.com/jamj2000/nxapp-router.git proyectos/tema4/nxapp-router
+```
+
+# Actualizar submódulo
+
+```terminal
+# Dentro de carpeta del submódulo
+
+git fetch
+git merge origin/main
 ```
 
 # Documentación
