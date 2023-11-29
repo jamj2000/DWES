@@ -12,12 +12,12 @@
 
 El envío de información por parte del usuario al servidor se realiza a través de formularios. Por tanto su correcto manejo es de gran importancia.
 
-En este tema veremos como se trabaja con formularios en NextJS. 
+En este tema veremos principalmente como trabajar con formularios en NextJS. 
 
 
+# SSG
 
-# SSR, CSR, SSG
-
+Antes de 
 
 
 
@@ -27,17 +27,20 @@ En este tema veremos como se trabaja con formularios en NextJS.
 ![SSG Blog build](assets/ssg-blog-build.png)
 
 
+# Server Actions
+
+Las acciones de servidor fueron introducidas en NextJS 13. 
+
 
 
 # Formularios
 
 
+[Código fuente](https://github.com/jamj2000/nxform)
 
 
 
-# Server Actions
-
-Las acciones de servidor fueron introducidas en NextJS 13. 
+[Código fuente](https://github.com/jamj2000/nxfactions)
 
 
 
