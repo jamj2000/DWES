@@ -111,6 +111,7 @@ Por ejemplo, rutas que provocaran `Error` son:
 - ❌ /blog/este-post-no-existe
 - ❌ /blog/este-tampoco
   
+**Enlaces**
 
 - [Código fuente](https://github.com/jamj2000/nxblog)
 - [Demo](https://jamblog.vercel.app/)
@@ -146,6 +147,8 @@ La estructura de carpetas es la siguiente:
 │   └── mdx-components.tsx
 └── tsconfig.json
 ```
+
+**Enlaces**
 
 - [Código fuente](https://github.com/jamj2000/nxmdx)
 - [Demo](https://nxmdx.vercel.app/mdx)
