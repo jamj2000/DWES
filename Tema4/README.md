@@ -32,8 +32,7 @@
   - [9.2. Generar Cookies](#92-generar-cookies)
   - [9.3. Leer Cookies](#93-leer-cookies)
   - [9.4. Eliminar Cookies](#94-eliminar-cookies)
-- [10. Proyecto personal](#10-proyecto-personal)
-- [11. Referencias](#11-referencias)
+- [10. Referencias](#10-referencias)
 
 
 
@@ -267,6 +266,7 @@ export default function Home() {
 
 
 ```javascript
+import "./globals.css"
 
 function Home () {
   return <div className="bg-yellow-100  text-2xl"> Hola </div>
@@ -641,11 +641,11 @@ async function create(data) {
   // o
   cookies().set({
     name: 'usuario',
-    value: 'jose',
+    value: 'jose', 
     httpOnly: true,
     path: '/',
     expires: Date.now() + oneDay 
-  })
+    })
 }
 ```
 > **NOTA:** Para crear una cookie de sesión debes omitir la opción `expires`. 
@@ -719,15 +719,7 @@ async function create(data) {
 Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
 
-# 10. Proyecto personal
 
-
-[Código fuente](https://github.com/jamj2000/nxblog)
-
-![SSG Blog build](assets/ssg-blog-build.png)
-
-
-
-# 11. Referencias
+# 10. Referencias
 
 - [Documentación de NextJS](https://nextjs.org/docs)

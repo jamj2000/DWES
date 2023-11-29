@@ -7,3 +7,6 @@
 [submodule "proyectos/tema4/nxapi-mongodb"]
 	path = proyectos/tema4/nxapi-mongodb
 	url = https://github.com/jamj2000/nxapi-mongodb.git
+[submodule "proyectos/tema4/nxcookie"]
+	path = proyectos/tema4/nxcookie
+	url = https://github.com/jamj2000/nxcookie.git
