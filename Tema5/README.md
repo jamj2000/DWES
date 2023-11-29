@@ -1,21 +1,27 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 5: Generación dinámica de páginas Web  <!-- omit in toc -->
-> FORMULARIOS, SERVER ACTIONS
+> SSG, SERVER ACTIONS, FORMULARIOS 
 
-
+- [1. Introducción](#1-introducción)
+- [2. SSG](#2-ssg)
+- [3. Server Actions](#3-server-actions)
+- [4. Formularios](#4-formularios)
+- [5. Referencias](#5-referencias)
 
 
 --- 
 
-# Introducción
+# 1. Introducción
 
 El envío de información por parte del usuario al servidor se realiza a través de formularios. Por tanto su correcto manejo es de gran importancia.
 
 En este tema veremos, principalmente, como trabajar con formularios en NextJS. 
 
+También incluimos en este tema la técnica `SSG`, aunque no tiene relación con los formularios.
 
-# SSG
+
+# 2. SSG
 
 **Static Site Generat{ion,or,ed}**
 
@@ -106,12 +112,15 @@ Por ejemplo, rutas que provocaran `Error` son:
 - ❌ /blog/este-tampoco
   
 
-[Código fuente](https://github.com/jamj2000/nxblog)
+- [Código fuente](https://github.com/jamj2000/nxblog)
+- [Demo](https://jamblog.vercel.app/)
 
 
 **Ejemplo 2**
 
-En este ejemplo, nos ahorramos que utilizar `generateStaticParams()`. Para ello hacemos uso de [`MDX`](https://mdxjs.com/).
+En este ejemplo, nos ahorramos que utilizar `generateStaticParams()`. 
+
+Para ello hacemos uso de [`MDX`](https://mdxjs.com/). Existe un tutorial en [dev.to](https://dev.to/mikeesto/next-js-mdx-w-code-highlighting-16fi)
 
 La estructura de carpetas es la siguiente:
 
@@ -138,9 +147,10 @@ La estructura de carpetas es la siguiente:
 └── tsconfig.json
 ```
 
-[Código fuente](https://github.com/jamj2000/nxmdx)
+- [Código fuente](https://github.com/jamj2000/nxmdx)
+- [Demo](https://nxmdx.vercel.app/mdx)
 
-# Server Actions
+# 3. Server Actions
 
 Las acciones de servidor son funciones que serán ejecutadas en el servidor. Fueron introducidas en NextJS 13. 
 
@@ -148,7 +158,7 @@ Las acciones de servidor son funciones que serán ejecutadas en el servidor. Fue
 
 
 
-# Formularios
+# 4. Formularios
 
 
 [Código fuente](https://github.com/jamj2000/nxform)
@@ -159,5 +169,5 @@ Las acciones de servidor son funciones que serán ejecutadas en el servidor. Fue
 
 
 
-# Referencias
+# 5. Referencias
 
