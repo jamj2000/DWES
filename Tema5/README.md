@@ -258,6 +258,15 @@ export async function logout() {
 }
 ```
 
+> **NOTA**:
+>
+> El `server action` recibe un argumento, habitualmente llamado `formData` con la información que ha recogido el formulario en el cliente. 
+> Para acceder a la información de cada campo del formulario hacemos:
+>
+> `formData.get(nombre-del-campo)`
+>
+> Siendo *nombre-del-campo* el que aparece en el atributo `name` del input del formulario
+
 ## 3.2. Ejecutar acciones del servidor
 
 Para invocar a una acción del servidor desde un formulario bastará con indicarlo con el atributo `action` del elemento `form`.
@@ -439,6 +448,8 @@ export function Formulario() {
 ```
 Un inconveniente de esta técnica es que debemos modificar el `server action` para que reciba 2 argumentos. Quedaría así:
 
+**/app/actions.js**
+
 ```js                                                        
 'use server'
 
@@ -458,7 +469,7 @@ Una técnica que considero más elegante que la anterior es usar un *wrapper* pa
 Como ventaja tiene que es más legible y que no tenemos que modificar el `server action` para recibir 2 argumentos. Además no rompe nada en NextJS. Simplemente estamos haciendo uso de funcionalidades que proporciona Javascript.
 
 
-
+**/app/formulario.js**
 ```js
 'use client'
 import { SubmitButton } from '@/app/submitButton'
@@ -489,6 +500,7 @@ export function Formulario() {
 
 Si usamos esta técnica, no necesitamos modificar el `server action`, quedando éste de la siguiente manera:
 
+**/app/actions.js**
 ```js                                                        
 'use server'
 
