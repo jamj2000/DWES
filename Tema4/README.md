@@ -723,3 +723,4 @@ Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 # 10. Referencias
 
 - [Documentación de NextJS](https://nextjs.org/docs)
+- [Listado de APIs públicas](https://publicapis.dev)
