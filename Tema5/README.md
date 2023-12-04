@@ -370,6 +370,7 @@ NextJS tiene 2 funciones para mejorar la experiencia con formularios:
 
 Supongamos que disponemos del siguiente `server action`:
 
+**/app/actions.js**
 ```js                                                        
 'use server'
 
