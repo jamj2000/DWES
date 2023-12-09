@@ -417,7 +417,7 @@ export function SubmitButton() {
 
 Este *hook* permite al formulario recibir el mensaje generado por el `server action` tras su ejecución, y poder dar retroalimentación al usuario.
 
-Esta técnica es la que aparece en la mayoría de tutoriales y documentación. Voy a pasar a exponerla para que el lector entienda su funcionamiento y la forma de aplicarla. Aunque yo personalmente considero que es muy engorrosa y que es bastante mejorable. Ahí lo dejo.
+Esta técnica es la que aparece en la mayoría de tutoriales y documentación. Voy a pasar a exponerla para que el lector entienda su funcionamiento y la forma de aplicarla. Aunque yo personalmente considero que es muy engorrosa y que es bastante mejorable.
 
 La documentación puede consultarse en https://react.dev/reference/react-dom/hooks/useFormState
 
