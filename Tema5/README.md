@@ -445,7 +445,7 @@ export function Formulario() {
             </label>
             <input type="file" required name="avatar" accept="image/*" />
             <SubmitButton />
-            {respuesta.message}
+            {respuesta?.message}
         </form>
     )
 }
