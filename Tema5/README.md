@@ -18,7 +18,11 @@
 - [5. Validación de datos](#5-validación-de-datos)
   - [5.1. Validación en el cliente](#51-validación-en-el-cliente)
   - [5.2. Validación en el servidor](#52-validación-en-el-servidor)
+    - [5.2.1. Ataques frecuentes](#521-ataques-frecuentes)
+    - [5.2.2. Sea paranoico: nunca confíe en sus usuarios](#522-sea-paranoico-nunca-confíe-en-sus-usuarios)
+    - [5.2.3. Resumen](#523-resumen)
 - [6. Referencias](#6-referencias)
+
 
 
 
@@ -215,7 +219,7 @@ export function testData(formData) {
     const apellidos = formData.get('apellidos')
 
     // Este mensaje se mostrará en la consola del servidor.
-    console.log(nombre, apellidos, avatar)
+    console.log(nombre, apellidos)
 }
 
 export async function uploadAvatar(formData) {
@@ -368,6 +372,10 @@ NextJS tiene 2 funciones para mejorar la experiencia con formularios:
 - Mostrar estados de carga en el cliente con `useFormStatus()`
 - Capturar y mostrar errores del servidor con `useFormState()`
 
+> **IMPORTANTE**: **Componentes del lado cliente**
+>
+> En React, y en NextJS, todas las funciones que comienzan por `use` se consideran `hooks` y deben ser ejecutadas en el cliente. También es necesario usar componentes del cliente si queremos hacer uso de eventos como onclick, onchange, ...
+
 Supongamos que disponemos del siguiente `server action`:
 
 **/app/actions.js**
@@ -383,15 +391,10 @@ export async function handle(formData) {
 }
 ```
 
-> **IMPORTANTE**: **Componentes del lado cliente**
->
-> En React, y en NextJS, todas las funciones que comienzan por `use` se consideran `hooks` y deben ser ejecutadas en el cliente. También es necesario usar componentes del cliente si queremos hacer uso de eventos como onclick, onchange, ...
-
-
 
 ## 4.1. useFormStatus
 
-Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón y sobrecargar de peticiones al servidor.
+Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
 
 
 **/app/submitButton.js**
@@ -417,7 +420,7 @@ export function SubmitButton() {
 
 Este *hook* permite al formulario recibir el mensaje generado por el `server action` tras su ejecución, y poder dar retroalimentación al usuario.
 
-Esta técnica es la que aparece en la mayoría de tutoriales y documentación. Voy a pasar a exponerla para que el lector entienda su funcionamiento y la forma de aplicarla. Aunque yo personalmente considero que es muy engorrosa y que es bastante mejorable.
+Esta técnica es la que aparece en la mayoría de tutoriales y documentación. Voy a pasar a exponerla para que puedas entienda su funcionamiento y la forma de aplicarla. Aunque yo personalmente considero que es muy engorrosa y que es bastante mejorable.
 
 La documentación puede consultarse en https://react.dev/reference/react-dom/hooks/useFormState
 
@@ -520,7 +523,7 @@ export async function handle(formData) {
 
 ## 4.4. Varias acciones dentro de un formulario
 
-Quizás no mucha gente sepa que, en HTML, [los `input` y `button` pueden tener un atributo](https://www.w3schools.com/tags/att_formaction.asp) **`formAction`**. Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
+Quizás no mucha gente sepa que, en HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](https://www.w3schools.com/tags/att_formaction.asp) . Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
 
 NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
 
@@ -536,7 +539,7 @@ NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX
         </form>
 ```
 
-Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar con ellos distintas acciones: actualizar, eliminar, ...
+Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar distintas acciones: actualizar, eliminar, ...
 
 
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxfactions)
@@ -544,13 +547,107 @@ Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un us
 
 #  5. Validación de datos
 
+La validación de datos es el proceso de garantizar que la entrada del usuario sea limpia, correcta y útil.
+
+Las tareas de validación típicas son:
+
+- ¿El usuario ha completado todos los campos obligatorios?
+- ¿Ha introducido el usuario una fecha válida?
+- ¿El usuario ha ingresado texto en un campo numérico?
+
+En la mayoría de los casos, el propósito de la validación de datos es garantizar la entrada correcta del usuario.
+
+La validación puede definirse mediante muchos métodos diferentes e implementarse de muchas maneras diferentes.
+
+La **validación del lado del cliente** la realiza un navegador web, antes de enviar la entrada a un servidor web.
+
+La **validación del lado del servidor** la realiza un servidor web, después de que la entrada se haya enviado al servidor.
+
 
 ## 5.1. Validación en el cliente
 
+HTML5 introdujo un nuevo concepto de validación HTML llamado validación de restricciones .
+
+La validación de restricciones HTML se basa en:
+
+- Atributos de entrada HTML de validación de restricciones
+- Pseudo selectores CSS de validación de restricciones
+- Propiedades y métodos DOM de validación de restricciones
+
+
+**Atributos HTML**
+
+Atributo     | Descripción
+-------------|-------------------------
+`disabled`   | el elemento de entrada debe estar deshabilitado
+`max`        | el valor máximo de un elemento de entrada
+`min`        | el valor mínimo de un elemento de entrada
+`pattern`    | el patrón de valor de un elemento de entrada
+`required`   | el campo de entrada requiere un valor de entrada
+`type`       | el tipo de un elemento de entrada
+
+
+**Pseudoselectores CSS**
+
+Selector     | Descripción
+-------------|-------------------------
+`:disabled`  | Selecciona elementos de entrada con el atributo "disabled" 
+`:invalid`   | Selecciona elementos de entrada con valores no válido
+`:optional`  | Selecciona elementos de entrada sin ningún atributo "required" 
+`:required`  | Selecciona elementos de entrada con el atributo "required"
+`:valid`     | Selecciona elementos de entrada con valores válidos.
+
+
 ## 5.2. Validación en el servidor
+
+> **ADVERTENCIA**: nunca confíe en los datos pasados ​​a su servidor desde el cliente. Incluso si su formulario se valida correctamente y evita entradas con formato incorrecto en el lado del cliente, un usuario malintencionado aún puede alterar la solicitud de red.
+
+Cada vez que envía datos a un servidor, debe considerar la seguridad. Los formularios HTML son, con diferencia, los vectores de ataque a servidores más comunes (lugares donde pueden ocurrir ataques). Los problemas nunca provienen de los formularios HTML en sí, sino de cómo el servidor maneja los datos.
+
+### 5.2.1. Ataques frecuentes
+
+En [este artículo](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security) se analiza en detalle varios ataques comunes y posibles defensas contra ellos. Es muy recomendable su lectura. Los ataques más conocidos son los siguientes:
+
+**1. Cross-Site Scripting (XSS)**:
+
+XSS es un término utilizado para describir una clase de ataques que permiten a un atacante inyectar scripts del lado del cliente a través del sitio web en los navegadores de otros usuarios. 
+
+Históricamente, las vulnerabilidades XSS han sido más comunes que cualquier otro tipo de amenaza a la seguridad.
+
+La mejor defensa contra las vulnerabilidades XSS es eliminar o deshabilitar cualquier marcado que potencialmente pueda contener instrucciones para ejecutar el código. Para HTML, esto incluye elementos como `<script>`, `<object>`, `<embed>` y `<link>`.
+
+El proceso de modificar los datos del usuario para que no puedan usarse para ejecutar scripts o afectar la ejecución del código del servidor se conoce como **desinfección de entrada** (en inglés se conoce como **`sanitized`**). Muchos frameworks desinfectan automáticamente la entrada del usuario desde formularios HTML de forma predeterminada.
+
+**2. SQL injection**
+
+Las vulnerabilidades de inyección SQL permiten a usuarios malintencionados ejecutar código SQL arbitrario en una base de datos, lo que permite acceder, modificar o eliminar datos independientemente de los permisos del usuario.
+  
+**3. Cross-Site Request Forgery (CSRF)**
+
+Los ataques CSRF permiten a un usuario malintencionado ejecutar acciones utilizando las credenciales de otro usuario sin el conocimiento o consentimiento de ese usuario.
+
+
+### 5.2.2. Sea paranoico: nunca confíe en sus usuarios
+
+Entonces, ¿cómo se lucha contra estas amenazas? Este es un tema que va mucho más allá de esta guía, pero hay algunas reglas a tener en cuenta. La regla más importante es: nunca confíes en tus usuarios, incluido tú mismo; Incluso un usuario de confianza podría haber sido secuestrado.
+
+Todos los datos que llegan a su servidor deben ser verificados y desinfectados (en inglés se conoce como `sanitized`). Siempre. Sin excepción.
+
+- **Escapa de personajes potencialmente peligrosos**. Los caracteres específicos con los que debes tener cuidado varían según el contexto en el que se utilizan los datos y la plataforma del servidor que empleas, pero todos los lenguajes del lado del servidor tienen funciones para esto. Lo que hay que tener en cuenta son las secuencias de caracteres que parecen código ejecutable (como comandos JavaScript o SQL).
+- **Limite la cantidad de datos entrantes para permitir solo lo necesario**.
+- **Archivos subidos a la zona de pruebas**. Guárdelos en un servidor diferente y permita el acceso al archivo sólo a través de un subdominio diferente o, mejor aún, a través de un dominio completamente diferente.
+Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres reglas, pero siempre es una buena idea que un tercero competente realice una revisión de seguridad. No asuma que ha visto todos los problemas posibles.
+
+### 5.2.3. Resumen
+
+Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
+
 
 
 # 6. Referencias
 
 - [MDN: Envío y rececpción de datos de formulario (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 - [W3Schools: Atributo formaction (en inglés)](https://www.w3schools.com/tags/att_formaction.asp)
+- [W3Schools: Validación de formularios (en inglés)](https://www.w3schools.com/js/js_validation.asp)
+- [MDN: Validación de formularios (en inglés) ](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
+- [MDN: Seguridad en el lado servidor (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)
