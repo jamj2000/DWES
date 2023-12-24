@@ -10,3 +10,19 @@
 [submodule "proyectos/tema4/nxcookie"]
 	path = proyectos/tema4/nxcookie
 	url = https://github.com/jamj2000/nxcookie.git
+[submodule "proyectos/tema5/nxform"]
+	path = proyectos/tema5/nxform
+	url = https://github.com/jamj2000/nxform.git
+[submodule "proyectos/tema5/nxfactions"]
+	path = proyectos/tema5/nxfactions
+	url = https://github.com/jamj2000/nxfactions.git
+[submodule "proyectos/tema5/nxcloudinary-upload"]
+	path = proyectos/tema5/nxcloudinary-upload
+	url = https://github.com/jamj2000/nxcloudinary-upload.git
+[submodule "proyectos/tema5/nxcloudinary-gallery"]
+	path = proyectos/tema5/nxcloudinary-gallery
+	url = https://github.com/jamj2000/nxcloudinary-gallery.git
+[submodule "proyectos/tema5/cloudinary"]
+	path = proyectos/tema5/cloudinary
+	url = https://github.com/jamj2000/cloudinary.git
+
