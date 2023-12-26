@@ -3,11 +3,22 @@
 # Tema 6: Utilización de técnicas de acceso a datos <!-- omit in toc -->
 > BASES DE DATOS sin ORM.
 
+- [1. Introducción](#1-introducción)
+- [2. MySQL](#2-mysql)
+  - [2.1. Proyecto](#21-proyecto)
+  - [2.2. Otros aspectos](#22-otros-aspectos)
+- [3. SQLite](#3-sqlite)
+  - [3.1. Proyecto](#31-proyecto)
+  - [3.2. Otros aspectos](#32-otros-aspectos)
+- [4. Postgres (Vercel)](#4-postgres-vercel)
+  - [4.1. Proyecto](#41-proyecto)
+  - [4.2. Otros aspectos](#42-otros-aspectos)
+- [5. Referencias](#5-referencias)
 
 
 --- 
 
-# Introducción
+# 1. Introducción
 
 En temas anteriores hemos trabajado un poco con bases de datos no relacionales, también llamadas noSQL. En concreto, en el tema 4, creamos una aplicación que proporcionaba una API REST hacia una base de datos documental como MongoDB. En adelante nos centraremos en las bases de datos relacionales. 
 
@@ -15,12 +26,12 @@ En este tema trabajaremos con algunas de estas bases de datos relacionales de us
 
 En el tema siguiente trabajaremos con las mismas bases de datos, pero haciendo uso de ORM (Object-Relational Mapping), que es una técnica que nos permite realizar un mapeo objeto-relacional y evitar así tener que trabajar con el SQL específico de cada base de datos. 
 
-# MySQL
+# 2. MySQL
 
 MySQL/MariaDB es un sistema gestor de bases de datos ampliamente usado hoy en día. Para trabajar con él los haremos con el driver **`serverless-mysql`** y usando un entorno de desarrollo local, es decir un servidor de base de datos en `localhost:3306`.
 
 
-## Proyecto
+## 2.1. Proyecto
 
 La estructura del proyecto es la siguiente:
 
@@ -108,7 +119,7 @@ export async function deleteArticulo(formData) {
 }
 ```
 
-## Otros aspectos
+## 2.2. Otros aspectos
 
 El proyecto anterior, aunque simple, es muy adecuado desde un punto de vista didáctico, pues no sólo se muestra como trabajar con MySQL, sino que lo hace con un *driver* que permite acceso a base de datos *serverless*, lo cual es cada día más habitual. Por ejemplo, desde [PlanetScale](https://planetscale.com/features) podemos leer lo siguiente:
 
@@ -182,7 +193,7 @@ export default Form
 ```
 
 
-# SQLite
+# 3. SQLite
 
 **SQLite es una biblioteca** en proceso que implementa un motor de base de datos SQL transaccional , autónomo y sin configuración . El código de SQLite es de dominio público y, por lo tanto, se puede utilizar de forma gratuita para cualquier fin, comercial o privado.
 
@@ -190,11 +201,11 @@ export default Form
 
 Usaremos el driver **`sqlite3`**.
 
-## Proyecto
+## 3.1. Proyecto
 
-## Otros aspectos
+## 3.2. Otros aspectos
 
-# Postgres (Vercel)
+# 4. Postgres (Vercel)
 
 [Postgres](https://es.wikipedia.org/wiki/PostgreSQL) es un sistema gestor de bases de datos que está ganando bastante aceptación últimamente. Esto es debido principalmente a numerosos factores:
 
@@ -209,11 +220,11 @@ Aunque usaremos la base de datos Postgres proporcionada por [Vercel](https://ver
 
 Para trabajar con él los haremos con el driver **`@vercel/postgres`** y usando el [DBaaS proporcionado por Vercel](https://vercel.com/storage/postgres).
 
-## Proyecto
+## 4.1. Proyecto
 
-## Otros aspectos
+## 4.2. Otros aspectos
 
-# Referencias
+# 5. Referencias
 
 - [MySQL API con NextJS](https://github.com/jamj2000/nxapi-mysql)
 - [MySQL CRUD con NextJS](https://github.com/jamj2000/nxmysql-crud)
