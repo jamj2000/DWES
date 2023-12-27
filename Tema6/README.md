@@ -203,7 +203,125 @@ Usaremos el driver **`sqlite3`**.
 
 ## 3.1. Proyecto
 
+La estructura del proyecto es la siguiente:
+
+![Archivos de CRUD SQLite](assets/tree-sqlite-crud.png)
+
+El código fuente completo puede obtenerse desde el siguiente enlace:
+
+- [Código fuente](https://github.com/jamj2000/nxsqlite-crud)
+
+Los archivos directamente relacionados con la Base de Datos, son:
+
+- `src/database/db.js`
+- `src/lib/sqlite.js`
+- `src/lib/actions.js`
+
+
+```javascript
+// src/database/db.js
+const sqlite3 = require("sqlite3").verbose();
+
+const createTable = `CREATE TABLE IF NOT EXISTS articulos (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10,2),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`
+
+// Connecting to or creating a new SQLite database file
+const db = new sqlite3.Database(
+  "./db.sqlite",
+  sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
+  (err) => { if (err) return console.error(err.message); console.log("Connected to the SQlite database."); }
+);
+
+// Serialize method ensures that database queries are executed sequentially
+db.serialize(() => {
+  // Create the items of table if it doesn't exist
+  db.run(createTable,
+    (err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log("Created items table.");
+
+    // ...
+    }
+  );
+});
+```
+
+```javascript
+// src/lib/sqlite.js
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
+
+let db = null;
+
+if (!db) {
+    // If the database instance is not initialized, open the database connection
+    db = await open({
+        filename: "./src/database/db.sqlite", // Specify the database file path
+        driver: sqlite3.Database, // Specify the database driver (sqlite3 in this case)
+    });
+}
+
+export default db;
+```
+
+```javascript
+'use server'
+// src/lib/actions.js
+import db from '@/lib/sqlite'
+
+
+export async function getArticulos() {
+
+    // ...
+    const results = await db.all('select * from articulos');
+    // ...
+
+}
+
+export async function newArticulo(formData) {
+
+    // ...
+    const query = 'insert into articulos(nombre,descripcion,precio) values (?, ?, ?)';
+    const results = await db.run(query, [nombre, descripcion, precio]);
+    // ...
+
+}
+
+
+export async function editArticulo(formData) {
+
+    // ...
+    const query = 'update articulos nombre = ?, descripcion = ?, precio = ? where id = ? ';
+    const results = await db.run(query, [nombre, descripcion, precio, id]);
+    // ...
+
+}
+
+export async function deleteArticulo(formData) {
+
+    // ...
+    const query = 'delete from articulos where id = ?';
+    const results = await db.run(query, [id]);
+    // ...
+
+}
+```
+
+
+
 ## 3.2. Otros aspectos
+
+SQLite nos permite trabajar sin necesidad de instalar un SGBD, puesto que trabaja directamente con el archivo en disco. Por tanto, esta base de datos es muy adecuada cuando deseamos realizar pruebas sin la necesidad de instalar un sistema gestor de bases de datos.
+
+
+
 
 # 4. Postgres (Vercel)
 
