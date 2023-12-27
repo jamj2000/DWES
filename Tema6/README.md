@@ -338,9 +338,116 @@ Aunque usaremos la base de datos Postgres proporcionada por [Vercel](https://ver
 
 Para trabajar con él los haremos con el driver **`@vercel/postgres`** y usando el [DBaaS proporcionado por Vercel](https://vercel.com/storage/postgres).
 
+
 ## 4.1. Proyecto
 
+
+La estructura del proyecto es la siguiente:
+
+![Archivos de CRUD Postgres](assets/tree-postgres-crud.png)
+
+El código fuente completo puede obtenerse desde el siguiente enlace:
+
+- [Código fuente](https://github.com/jamj2000/nxpostgres-crud)
+
+Los archivos directamente relacionados con la Base de Datos, son:
+
+- `.env`
+- `src/database/.env`
+- `src/database/db.js`
+- `src/lib/actions.js`
+
+El driver `@vercel/postgres` trabaja con la variable de entorno `POSTGRES_URL`, por lo tanto es importante que la indiquemos en el archivo **`.env`**, en este caso lo haremos en 2 sitios con el mismo formato:
+
+```
+POSTGRES_URL="postgres://usuario:password@host:5432/basedatos"
+```
+
+```javascript
+// src/database/db.js
+import { sql } from '@vercel/postgres';
+
+async function crearTabla() {
+    try {
+        const result = await sql`
+        CREATE TABLE IF NOT EXISTS articulos (
+            id SERIAL PRIMARY KEY,
+            nombre TEXT NOT NULL,
+            descripcion TEXT,
+            precio DECIMAL(10,2),
+            createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        `;
+        console.log(result);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+crearTabla();
+```
+
+
+```javascript
+'use server'
+// src/lib/actions.js
+import { sql } from '@vercel/postgres';
+
+
+export async function getArticulos() {
+
+    // ...
+    const { rows } = await sql`select * from articulos;`
+    // ...
+
+}
+
+export async function newArticulo(formData) {
+
+    // ...
+    const results = await sql`
+    insert into articulos(nombre,descripcion,precio) values (${nombre}, ${descripcion}, ${precio});
+    `
+    // ...
+
+}
+
+
+export async function editArticulo(formData) {
+
+    // ...
+    const results = await sql` 
+    update articulos set nombre=${nombre}, descripcion=${descripcion}, precio=${precio} where id = ${id};
+    `
+    // ...
+
+}
+
+export async function deleteArticulo(formData) {
+
+    // ...
+    const results = await sql`delete from articulos where id = ${id};`
+    // ...
+
+}
+```
+
+
 ## 4.2. Otros aspectos
+
+Por supuesto, un prerrequisito para que todo ello funcione es tener creada una base de datos en Vercel. Puedes hacerlo desde tu `dashboard` en `Add New...`, `Storage`.
+
+![Vercel Create Storage](assets/vercel-create-storage.png)
+
+Luego pulsaremos en el botón `Create Database`.
+
+![Vercel Create Database](assets/create-database.png)
+
+
+A la hora de desplegar en Vercel la aplicación deberemos configurar las variables de entorno, en este caso `POSTGRES_URL`.
+
+![Vercel Create Env var](assets/env-var.png)
+
 
 # 5. Referencias
 
@@ -348,3 +455,4 @@ Para trabajar con él los haremos con el driver **`@vercel/postgres`** y usando 
 - [MySQL CRUD con NextJS](https://github.com/jamj2000/nxmysql-crud)
 - [BD Serverless en PlanetScale](https://planetscale.com/docs/tutorials/planetscale-serverless-driver)
 - [Usando SQLite con NextJS 13](https://plainenglish.io/blog/using-sqlite-with-next-js-13)
+- [Getting Started with Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres/quickstart)
