@@ -13,15 +13,14 @@
   - [3.2. Escribir el modelo de datos manualmente](#32-escribir-el-modelo-de-datos-manualmente)
     - [3.2.1. Modelos](#321-modelos)
     - [3.2.2. Relaciones](#322-relaciones)
-    - [Sincronizando el esquema con la base de datos](#sincronizando-el-esquema-con-la-base-de-datos)
-- [Consultas CRUD](#consultas-crud)
-  - [Create](#create)
-  - [Read](#read)
-  - [Update](#update)
-  - [Delete](#delete)
-- [4. Ver datos de las tablas](#4-ver-datos-de-las-tablas)
-- [5. Referencias](#5-referencias)
-
+    - [3.2.3. Sincronizando el esquema con la base de datos](#323-sincronizando-el-esquema-con-la-base-de-datos)
+- [4. Consultas CRUD](#4-consultas-crud)
+  - [4.1. Create](#41-create)
+  - [4.2. Read](#42-read)
+  - [4.3. Update](#43-update)
+  - [4.4. Delete](#44-delete)
+- [5. Ver datos de las tablas](#5-ver-datos-de-las-tablas)
+- [6. Referencias](#6-referencias)
 
 
 --- 
@@ -183,7 +182,7 @@ Reglas de nombrado:
 - [Relaciones en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations)
 
 
-### Sincronizando el esquema con la base de datos
+### 3.2.3. Sincronizando el esquema con la base de datos
 
 
 Siempre que actualices tu esquema Prisma, deberás actualizar el esquema de tu base de datos utilizando `npx prisma migrate dev` o `npx prisma db push`. Esto mantendrá el esquema de tu base de datos sincronizado con tu esquema Prisma. Los comandos también regenerarán Prisma Client.
@@ -205,11 +204,11 @@ npx prisma db push
 > **IMPORTANTE**: La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
 
 
-# Consultas CRUD
+# 4. Consultas CRUD
 
 - [Consutlas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
 
-## Create
+## 4.1. Create
 
 ```javascript
 const user = await prisma.user.create({
@@ -220,7 +219,7 @@ const user = await prisma.user.create({
 })
 ```
 
-## Read
+## 4.2. Read
 
 **Encontrar un registro por ID**
 
@@ -238,7 +237,7 @@ const user = await prisma.user.findUnique({
 const users = await prisma.user.findMany()
 ```
 
-## Update
+## 4.3. Update
 
 **Actualizar un registro por ID**
 
@@ -253,7 +252,7 @@ const updateUser = await prisma.user.update({
 })
 ```
 
-## Delete
+## 4.4. Delete
 
 **Elimnar un registro por ID**
 
@@ -266,7 +265,7 @@ const deleteUser = await prisma.user.delete({
 ```
 
 
-# 4. Ver datos de las tablas
+# 5. Ver datos de las tablas
 
 Ejecutamos
 
@@ -281,7 +280,7 @@ y abrimos en el navegador la URL http://localhost:5555
 ![prisma studio 2](assets/studio2.png)
 
 
-# 5. Referencias
+# 6. Referencias
 
 - [Video: Nextjs y Prisma ORM desde Cero usando Typescript](https://www.youtube.com/watch?v=5k7ZGhL3pI0&t=3938s)
 - [Get started with Prisma](https://www.prisma.io/docs/getting-started)
