@@ -19,6 +19,8 @@
   - [4.2. Read](#42-read)
   - [4.3. Update](#43-update)
   - [4.4. Delete](#44-delete)
+  - [Seleccionar campos](#seleccionar-campos)
+  - [Consultar varias tablas](#consultar-varias-tablas)
 - [5. Ver datos de las tablas](#5-ver-datos-de-las-tablas)
 - [6. Referencias](#6-referencias)
 
@@ -155,9 +157,8 @@ En este otro caso, tenemos una base de datos totalmente vacía, sin tablas cread
 
 - [Modelos en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/models)
 
-**Modelo**
 
-Reglas de nombrado:
+**Reglas de nombrado para Modelos:**
 
 - Los nombres de los modelos deben cumplir con la siguiente expresión regular: `[A-Za-z][A-Za-z0-9_]*`
 - Los nombres de los modelos deben comenzar con una letra y normalmente se escriben en **PascalCase**
@@ -166,7 +167,7 @@ Reglas de nombrado:
 > **NOTA**: Puede utilizar el atributo `@@map` para asignar un modelo (por ejemplo, `Usuario`) a una tabla con un nombre diferente que no coincide con las convenciones de nomenclatura del modelo (por ejemplo, usuarios).
 
 
-**Campos del modelo**
+**Reglas de nombrado para Campos**
 
 Reglas de nombrado:
 
@@ -176,11 +177,119 @@ Reglas de nombrado:
 > **NOTA**: Puede utilizar el atributo `@map` para asignar un nombre de campo a una columna con un nombre diferente que no coincida con las convenciones de nomenclatura de campos: p. ej. `miCampo @map("mi_campo")`.
 
 
+**Ejemplo**:
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Articulo {
+  id          Int       @id @default(autoincrement())
+  nombre      String
+  descripcion String?
+  precio      Decimal?  
+
+  @@map("articulos")
+}
+```
+
+> NOTA: El signo **`?`** significa que el valor no es requerido, es decir admite NULL.
+
+
+**Tipos de datos**
+
+Prisma define los siguientes tipos de datos:
+
+- [String](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string)
+- [Boolean](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#boolean)
+- [Int](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#int)
+- [BigInt](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#bigint)
+- [Float](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#float)
+- [Decimal](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#decimal)
+- [DateTime](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#datetime)
+- [Json](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#json)
+
+Estos tipos de datos son mapeados a los tipos nativos de cada base de datos según se muestra en la siguiente tabla:
+
+Prisma  	  | String        | Boolean    | Int      | BigInt    | Float             | Decimal        | DateTime     | Json
+------------|---------------|------------|----------|-----------|-------------------|----------------|--------------|----------------
+PostgreSQL	| text          | boolean    | integer  | bigint    | double precision  | decimal(65,30) | timestamp(3) | jsonb
+SQL Server	| nvarchar(1000)|tinyint     | int      | int       | float(53)         | decimal(32,16) | datetime2    | Not supported
+MySQL	      | varchar(191)  |TINYINT(1)  | INT      | BIGINT    | DOUBLE            | DECIMAL(65,30) | DATETIME(3)  | JSON
+MongoDB	    | String        |Bool        | Int      | Long      | Double            | Not supported  | Timestamp    | A valid BSON object (Relaxed mode) 
+SQLite	    | TEXT          |INTEGER     | INTEGER  | INTEGER   | REAL              | DECIMAL        | NUMERIC      | Not supported
+CockroachDB	| STRING        |BOOL        | INT      | INTEGER   | DOUBLE PRECISION  | DECIMAL        | TIMESTAMP    | JSONB
+
+
 
 ### 3.2.2. Relaciones 
 
 - [Relaciones en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations)
 
+![Esquema de ejemplo](assets/sample-database.png)
+
+**[Uno a Uno](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/one-to-one-relations)**
+
+```prisma
+model User {
+  id      Int      @id @default(autoincrement())
+  profile Profile?
+}
+
+model Profile {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique // relation scalar field (used in the `@relation` attribute above)
+}
+```
+
+**[Uno a Muchos](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/one-to-many-relations)**
+
+```prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  posts Post[]
+}
+
+model Post {
+  id       Int  @id @default(autoincrement())
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+}
+```
+
+**[Muchos a Muchos](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/many-to-many-relations)**
+
+```prisma
+model Post {
+  id         Int                 @id @default(autoincrement())
+  title      String
+  categories CategoriesOnPosts[]
+}
+
+model Category {
+  id    Int                 @id @default(autoincrement())
+  name  String
+  posts CategoriesOnPosts[]
+}
+
+model CategoriesOnPosts {
+  post       Post     @relation(fields: [postId], references: [id])
+  postId     Int // relation scalar field (used in the `@relation` attribute above)
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([postId, categoryId])
+}
+```
 
 ### 3.2.3. Sincronizando el esquema con la base de datos
 
@@ -207,6 +316,7 @@ npx prisma db push
 # 4. Consultas CRUD
 
 - [Consutlas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
+
 
 ## 4.1. Create
 
@@ -264,6 +374,105 @@ const deleteUser = await prisma.user.delete({
 })
 ```
 
+## Seleccionar campos
+
+```javascript
+const getUser = await prisma.user.findUnique({
+  where: {
+    id: 22,
+  },
+  select: {
+    email: true,
+    name: true,
+  },
+})
+```
+
+## Consultar varias tablas
+
+Algunos ejemplos.
+
+**Insertar user, algunos posts y categorias asociadas**
+
+```javascript 
+const user = await prisma.user.create({
+  data: {
+    email: 'ariadne@prisma.io',
+    name: 'Ariadne',
+    posts: {
+      create: [
+        {
+          title: 'My first day at Prisma',
+          categories: {
+            create: {
+              name: 'Office',
+            },
+          },
+        },
+        {
+          title: 'How to connect to a SQLite database',
+          categories: {
+            create: [{ name: 'Databases' }, { name: 'Tutorials' }],
+          },
+        },
+      ],
+    },
+  },
+})
+```
+
+**Obtener user y todos sus posts**
+
+```javascript
+const user = await prisma.user.findFirst({
+  include: {
+    posts: true,
+  },
+}
+```
+
+**Obtener user, sus posts y categories**
+
+```javascript
+const user = await prisma.user.findFirst({
+  include: {
+    posts: {
+      include: {
+        categories: true,
+      },
+    },
+  },
+})
+```
+
+**Obtener name de user y todos los title de sus posts**
+
+```javascript
+const user = await prisma.user.findFirst({
+  select: {
+    name: true,
+    posts: {
+      select: {
+        title: true,
+      },
+    },
+  },
+})
+```
+
+**Obtener todos los campos de user y todos los title de sus posts**
+
+```javascript
+const user = await prisma.user.findFirst({
+  include: {
+    posts: {
+      select: {
+        title: true,
+      },
+    },
+  },
+})
+```
 
 # 5. Ver datos de las tablas
 
