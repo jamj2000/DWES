@@ -15,12 +15,13 @@
     - [3.2.2. Relaciones](#322-relaciones)
     - [3.2.3. Sincronizando el esquema con la base de datos](#323-sincronizando-el-esquema-con-la-base-de-datos)
 - [4. Consultas CRUD](#4-consultas-crud)
-  - [4.1. Create](#41-create)
-  - [4.2. Read](#42-read)
-  - [4.3. Update](#43-update)
-  - [4.4. Delete](#44-delete)
-  - [Seleccionar campos](#seleccionar-campos)
-  - [Consultar varias tablas](#consultar-varias-tablas)
+  - [4.1. CRUD](#41-crud)
+    - [4.1.1. Create](#411-create)
+    - [4.1.2. Read](#412-read)
+    - [4.1.3. Update](#413-update)
+    - [4.1.4. Delete](#414-delete)
+  - [4.2. Seleccionar campos](#42-seleccionar-campos)
+  - [4.3. Consultar varias tablas](#43-consultar-varias-tablas)
 - [5. Ver datos de las tablas](#5-ver-datos-de-las-tablas)
 - [6. Referencias](#6-referencias)
 
@@ -317,8 +318,18 @@ npx prisma db push
 
 - [Consutlas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
 
+## 4.1. CRUD
 
-## 4.1. Create
+CRUD es el acrónimo para:
+
+- **Create**
+- **Read**
+- **Update**
+- **Delete**
+
+Estas son las 4 operaciones básicas necesarias para la gestión de información.
+
+### 4.1.1. Create
 
 ```javascript
 const user = await prisma.user.create({
@@ -329,7 +340,7 @@ const user = await prisma.user.create({
 })
 ```
 
-## 4.2. Read
+### 4.1.2. Read
 
 **Encontrar un registro por ID**
 
@@ -347,7 +358,7 @@ const user = await prisma.user.findUnique({
 const users = await prisma.user.findMany()
 ```
 
-## 4.3. Update
+### 4.1.3. Update
 
 **Actualizar un registro por ID**
 
@@ -362,7 +373,7 @@ const updateUser = await prisma.user.update({
 })
 ```
 
-## 4.4. Delete
+### 4.1.4. Delete
 
 **Elimnar un registro por ID**
 
@@ -374,7 +385,10 @@ const deleteUser = await prisma.user.delete({
 })
 ```
 
-## Seleccionar campos
+## 4.2. Seleccionar campos
+
+
+**Obtener email y name del user con id 22**
 
 ```javascript
 const getUser = await prisma.user.findUnique({
@@ -388,7 +402,7 @@ const getUser = await prisma.user.findUnique({
 })
 ```
 
-## Consultar varias tablas
+## 4.3. Consultar varias tablas
 
 Algunos ejemplos.
 
