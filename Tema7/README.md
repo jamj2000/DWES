@@ -153,7 +153,19 @@ npx prisma generate
 
 ## 3.2. Escribir el modelo de datos manualmente
 
-En este otro caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo `prisma/schema.prisma` para añadir los modelos deseados.
+En este otro caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
+
+```sh
+npx prisma migrate dev   
+```
+
+Si no ha habido cambios se mostrará un mensaje similar al siguiente:
+
+![prisma migrate sin cambios](assets/migrate-dev1.png)
+
+Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para la migración:
+
+![prisma migrate con cambios](assets/migrate-dev2.png)
 
 
 ### 3.2.1. Modelos
@@ -303,7 +315,7 @@ Siempre que actualices tu esquema Prisma, deberás actualizar el esquema de tu b
 Para ello ejecutaremos:
 
 ```sh
-npx prisma migrate dev --name init
+npx prisma migrate dev --name nombremigracion
 ```
 
 o, en su lugar, ejecutaremos:
