@@ -23,7 +23,9 @@
   - [4.2. Seleccionar campos](#42-seleccionar-campos)
   - [4.3. Consultar varias tablas](#43-consultar-varias-tablas)
 - [5. Ver datos de las tablas](#5-ver-datos-de-las-tablas)
-- [6. Referencias](#6-referencias)
+- [6. Despliegue en Vercel](#6-despliegue-en-vercel)
+- [7. Referencias](#7-referencias)
+
 
 
 --- 
@@ -502,7 +504,26 @@ y abrimos en el navegador la URL http://localhost:5555
 
 ![prisma studio 2](assets/studio2.png)
 
-# 6. Referencias
+
+# 6. Despliegue en Vercel
+
+
+Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
+
+Para evitar este problema, debemos añadir `prisma generate` al script `postinstall` en el archivo **`package.json`**:
+
+```json
+{
+  ...
+  "scripts" {
+    ...
+    "postinstall": "prisma generate"
+  }
+  ...
+}
+```
+
+# 7. Referencias
 
 - [Video: Nextjs y Prisma ORM desde Cero usando Typescript](https://www.youtube.com/watch?v=5k7ZGhL3pI0&t=3938s)
 - [Get started with Prisma](https://www.prisma.io/docs/getting-started)
