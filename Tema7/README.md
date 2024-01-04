@@ -406,7 +406,7 @@ const getUser = await prisma.user.findUnique({
 
 Algunos ejemplos.
 
-**Insertar user, algunos posts y categorias asociadas**
+**Insertar user, algunos posts y categories asociadas**
 
 ```javascript 
 const user = await prisma.user.create({
@@ -501,7 +501,6 @@ y abrimos en el navegador la URL http://localhost:5555
 ![prisma studio 1](assets/studio1.png)
 
 ![prisma studio 2](assets/studio2.png)
-
 
 # 6. Referencias
 
