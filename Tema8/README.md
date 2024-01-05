@@ -6,13 +6,13 @@
 - [1. Introducción](#1-introducción)
 - [2. Instalación de dependencias](#2-instalación-de-dependencias)
 - [3. Creación de archivos necesarios](#3-creación-de-archivos-necesarios)
-  - [Archivo .env](#archivo-env)
-  - [3.1. Archivo auth.js](#31-archivo-authjs)
-  - [3.2. Archivo auth.config.js](#32-archivo-authconfigjs)
-  - [3.3. Archivo middleware.js](#33-archivo-middlewarejs)
-  - [3.4. Archivo app/api/\[...nextauth\]/route.js](#34-archivo-appapinextauthroutejs)
-- [Adaptadores](#adaptadores)
-- [4. Referencias:](#4-referencias)
+  - [3.1. Archivo .env](#31-archivo-env)
+  - [3.2. Archivo auth.js](#32-archivo-authjs)
+  - [3.3. Archivo auth.config.js](#33-archivo-authconfigjs)
+  - [3.4. Archivo middleware.js](#34-archivo-middlewarejs)
+  - [3.5. Archivo app/api/\[...nextauth\]/route.js](#35-archivo-appapinextauthroutejs)
+- [4. Adaptadores](#4-adaptadores)
+- [5. Referencias:](#5-referencias)
 
 
 
@@ -64,7 +64,7 @@ También necesitaremos el siguiente *route handler*:
 - `app/api/[...nextauth]/route.js`
 
 
-## Archivo .env
+## 3.1. Archivo .env
 
 ```
 AUTH_SECRET= # Linux: `openssl rand -hex 32` or go to https://generate-secret.vercel.app/32
@@ -79,7 +79,7 @@ AUTH_FACEBOOK_ID=
 AUTH_FACEBOOK_SECRET=
 ```
 
-## 3.1. Archivo auth.js
+## 3.2. Archivo auth.js
 
 **Ejemplo con configuración dentro del archivo**
 
@@ -131,7 +131,7 @@ export const {
 
 ```
 
-## 3.2. Archivo auth.config.js
+## 3.3. Archivo auth.config.js
 
 ```js
 import GitHub from "next-auth/providers/github"
@@ -151,7 +151,7 @@ export default {
 }
 ```
 
-## 3.3. Archivo middleware.js
+## 3.4. Archivo middleware.js
 
 ```js
 import NextAuth from 'next-auth'
@@ -172,7 +172,7 @@ export const config = {
 }
 
 ```
-## 3.4. Archivo app/api/[...nextauth]/route.js
+## 3.5. Archivo app/api/[...nextauth]/route.js
 
 ```js
 export { GET, POST } from '@/auth' // ??
@@ -180,7 +180,7 @@ export { GET, POST } from '@/auth' // ??
 
 
 
-# Adaptadores
+# 4. Adaptadores
 
 - Referencia: https://authjs.dev/reference/adapter/prisma
 
@@ -229,7 +229,7 @@ Los Modelos que usa Auth.js son los siguientes:
 
 ![Modelos para Auth](assets/authjs-models.png)
 
-# 4. Referencias:
+# 5. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Guías de Vercel](https://vercel.com/guides)
