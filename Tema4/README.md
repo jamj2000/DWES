@@ -429,6 +429,32 @@ El componente `<Image>` de Next.js amplía el elemento <img> de HTML con funcion
 - Referencia: https://nextjs.org/docs/app/api-reference/components/image
 
 
+> **IMPORTANTE**: Tanto si usamos el componente `Image` proporcionado por NextJS, como si usamos la etiqueta `img` de HTML, deberemos indicar en el archivo **`next.config.js`** los dominios desde los cuales recuperamos imágenes. Por ejemplo, si usamos imágenes alojadas en cloudinary, escribiremos:
+>
+>
+> ```js
+> /** @type {import('next').NextConfig} */
+> const nextConfig = {
+>   images: {
+>     remotePatterns: [
+>       {
+>         protocol: 'https',
+>         hostname: '**.cloudinary.com',
+>       },
+>     ],
+>   }
+> }
+> module.exports = nextConfig 
+>```
+>
+> Así podremos usar 
+> ```html
+> <img src="https://res.cloudinary.com/dk30psegu/image/upload/v1694772098/sample.jpg" />
+> ```
+
+- Más información: https://nextjs.org/docs/app/api-reference/components/image#configuration-options
+
+
 # 7. App Router
 
 En la versión 13, Next.js introdujo un nuevo `App Router` construido sobre `React Server Components` , que admite diseños compartidos, enrutamiento anidado, estados de carga, manejo de errores y más.
