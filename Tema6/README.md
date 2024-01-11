@@ -448,6 +448,9 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 
 ![Vercel Create Env var](assets/env-var.png)
 
+> **NOTA**: Además de Vercel, otros proveedores de DBaaS Postgres son:
+> - [Neon.tech](https://neon.tech/)
+> - [Supabase](https://supabase.com/)
 
 # 5. Referencias
 
