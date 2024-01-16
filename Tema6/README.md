@@ -298,7 +298,7 @@ export async function newArticulo(formData) {
 export async function editArticulo(formData) {
 
     // ...
-    const query = 'update articulos nombre = ?, descripcion = ?, precio = ? where id = ? ';
+    const query = 'update articulos set nombre = ?, descripcion = ?, precio = ? where id = ? ';
     const results = await db.run(query, [nombre, descripcion, precio, id]);
     // ...
 
@@ -334,7 +334,7 @@ SQLite nos permite trabajar sin necesidad de instalar un SGBD, puesto que trabaj
 - Existe bastante documentación.
 - Cada vez existen más proveedores en la nube de este DBaaS.
 
-Aunque usaremos la base de datos Postgres proporcionada por [Vercel](https://vercel.com/docs/storage/vercel-postgres), también disponemos de otras como [Supabase](https://supabase.com/docs/guides/database/overviews)
+Aunque usaremos la base de datos Postgres proporcionada por [Vercel](https://vercel.com/docs/storage/vercel-postgres), también disponemos de otras como [Neon.tech](https://neon.tech/) o [Supabase](https://supabase.com/docs/guides/database/overviews)
 
 Para trabajar con él los haremos con el driver **`@vercel/postgres`** y usando el [DBaaS proporcionado por Vercel](https://vercel.com/storage/postgres).
 
