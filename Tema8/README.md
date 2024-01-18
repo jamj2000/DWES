@@ -8,12 +8,12 @@
 - [3. Creación de archivos necesarios](#3-creación-de-archivos-necesarios)
   - [3.1. Archivo .env](#31-archivo-env)
   - [3.2. Archivo auth.js](#32-archivo-authjs)
-  - [3.3. Archivo auth.config.js](#33-archivo-authconfigjs)
+  - [3.3. Archivo app/api/auth/\[...nextauth\]/route.js](#33-archivo-appapiauthnextauthroutejs)
   - [3.4. Archivo middleware.js](#34-archivo-middlewarejs)
-  - [3.5. Archivo app/api/\[...nextauth\]/route.js](#35-archivo-appapinextauthroutejs)
 - [4. Adaptadores](#4-adaptadores)
-- [5. Referencias:](#5-referencias)
-
+- [5. Tipos de autenticación](#5-tipos-de-autenticación)
+  - [5.1. Envío de correo](#51-envío-de-correo)
+- [6. Referencias:](#6-referencias)
 
 
 --- 
@@ -53,15 +53,14 @@ npm install prisma --save-dev
 En la ruta raíz, junto al archivo `package.json`
 
 - `.env`
-- `auth.js` 
-- `auth.config.js`
-- `middleware.js` 
+
+En la carpeta `src`
+
+- `src/auth.js` 
+- `src/app/api/auth/[...nextauth]/route.js`
+- `src/middleware.js` 
 
 > **NOTA**: Trabajaremos con archivos de Javascript, en lugar de Typescript, para evitar complejidad. 
-
-También necesitaremos el siguiente *route handler*:
-
-- `app/api/[...nextauth]/route.js`
 
 
 ## 3.1. Archivo .env
@@ -81,101 +80,46 @@ AUTH_FACEBOOK_SECRET=
 
 ## 3.2. Archivo auth.js
 
-**Ejemplo con configuración dentro del archivo**
+**Ejemplo**
 
 ```js
 import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github"
+import GitHub from "@auth/core/providers/github"
+import GitHub from "@auth/core/providers/google"
 
 export const {
   handlers: { GET, POST },
   auth,
+  signIn,
+  signOut
 } = NextAuth({
-  providers: [GitHub],
+  providers: [ GitHub,  Google ],
 })
 ```
 
-**Ejemplo con configuración en archivo auth.config.js**
+
+## 3.3. Archivo app/api/auth/[...nextauth]/route.js
 
 ```js
-import NextAuth from "next-auth"
-import authConfig from "./auth.config"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
-
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
-  ...authConfig,
-})
-```
-
-**Ejemplo con configuración en archivos separados** 
-
-```js
-import NextAuth from 'next-auth'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import { db } from '@/lib/db'
-import { authConfig } from '@/auth.config'
-
-export const { 
-    handlers: { GET, POST},
-    auth
-  } = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
-  ...authConfig,
-})
-
-```
-
-## 3.3. Archivo auth.config.js
-
-```js
-import GitHub from "next-auth/providers/github"
-import Google from "next-auth/providers/google"
-
-export default {
-  providers: [
-    GitHub({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
-    }),
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
-    })
- ],
-}
+export { GET, POST } from '@/auth' // Reexportamos GET  y POST
 ```
 
 ## 3.4. Archivo middleware.js
 
 ```js
-import NextAuth from 'next-auth'
-import { authConfig } from '@/auth.config'
+import { auth } from "@/auth";
 
-const { auth } = NextAuth(authConfig)
-
-export default auth((req) => {
-  const isAutenticated = !!req.auth
-  console.log('Ruta procesada por middleware', req.nextUrl.pathname, isAutenticated );
-  // ...
+export default auth((req, res) => {
+    if (!req.auth) {
+        return Response.redirect(req.nextUrl.origin + '/api/auth/signin')
+    }
 })
 
-// Rutas a las que se aplicará la función anterior
+// Rutas que seran revisadas por la función anterior
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
-  // matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-}
+    matcher: ['/(dashboard)(.*)']
+};
 
-```
-## 3.5. Archivo app/api/[...nextauth]/route.js
-
-```js
-export { GET, POST } from '@/auth' // ??
 ```
 
 
@@ -197,7 +141,7 @@ Los métodos del adaptador se utilizan para realizar las siguientes operaciones:
 
 Auth.js se puede integrar con cualquier capa de datos (base de datos, ORM o API backend, cliente HTTP) para crear usuarios automáticamente, manejar la vinculación de cuentas automáticamente, admitir el inicio de sesión sin contraseña y almacenar información de la sesión.
 
-[Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar un adaptador de base de datos para almacenar la sesión en una base de datos.
+[Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar un adaptador de base de datos para almacenar la sesión en una base de datos  (`strategy: "database"`).
 
 Auth.js tiene una lista bastante extensa de adaptadores para ORM/Bases de datos:
 
@@ -229,7 +173,22 @@ Los Modelos que usa Auth.js son los siguientes:
 
 ![Modelos para Auth](assets/authjs-models.png)
 
-# 5. Referencias:
+
+# 5. Tipos de autenticación
+
+
+
+
+## 5.1. Envío de correo
+
+**Servidores de correo transaccional**
+
+- [Brevo](https://brevo.com)
+- [Resend](https://resend.com)
+- [Sendgrid](https://sendgrid.com)
+
+
+# 6. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Guías de Vercel](https://vercel.com/guides)
