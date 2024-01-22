@@ -54,6 +54,14 @@ En este tema veremos el ORM **Prisma**, disponible para Javascript/Typescript y 
 - MongoDB
 - CockroachDB
 
+En general, las tareas básicas a la hora de gestionar la persistencia de datos son tres:
+
+1. **Crear la base de datos**: reserva de espacio en un DBaaS o similar.
+2. **Migrar** (`migrate`): creación de tablas.
+3. **Sembrar** (`seed`): inserción de datos iniciales.
+
+Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
+
 
 # 2. Primeros pasos con Prisma
 
