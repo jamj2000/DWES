@@ -18,7 +18,13 @@
 - [6. Adaptadores. Tipos de persistencia de datos](#6-adaptadores-tipos-de-persistencia-de-datos)
   - [6.1. Prisma](#61-prisma)
 - [7. Envío de correo](#7-envío-de-correo)
-- [8. Referencias:](#8-referencias)
+- [8. Despliegue](#8-despliegue)
+- [9. Aplicaciones de ejemplo](#9-aplicaciones-de-ejemplo)
+  - [9.1. Aplicación OAuth](#91-aplicación-oauth)
+  - [9.2. Aplicación Credentials](#92-aplicación-credentials)
+  - [9.3. Aplicación All](#93-aplicación-all)
+- [10. Referencias:](#10-referencias)
+
 
 
 
@@ -159,16 +165,15 @@ api/auth/verify-request
 
 **`middleware.js`**
 
-La configuración de este archivo nos permitirá indicar qué rutas de nuestra aplicación están disponibles y cuales no según las condiciones. 
+La configuración de este archivo nos permite indicar qué rutas de nuestra aplicación están disponibles y cuales no según las condiciones. 
 
 
 ```js
 import { auth } from "@/auth";
 
-export default auth((req, res) => {
-    if (!req.auth) {
-        return Response.redirect(req.nextUrl.origin + '/api/auth/signin')
-    }
+export default auth((req) => {
+    // ...
+
 })
 
 // Rutas que seran revisadas por la función anterior
@@ -177,6 +182,51 @@ export const config = {
 };
 
 ```
+
+En configuraciones más complejas, cuando nuestra aplicación se despliega en Internet en una red `edge`, necesitaremos configurar el middleware de una manera algo distinta a la anterior, tal como se muestra a continuación.
+
+En un archivo separado pondremos la configuración de los proveedores. Y en el middleware sólamente incluiremos esta configuración. El resto de opciones de autenticación no los incluiremos. Esto es necesario, porque actualmente Prisma no puede ejecutarse en el `edge`, que es donde se ejecutará el *middleware*.
+
+```js
+// auth.config.js
+import Credentials from "@auth/core/providers/credentials"
+import Google from "@auth/core/providers/google"
+import GitHub from '@auth/core/providers/github'
+
+export default {
+    providers: [
+        Google,
+        GitHub,
+        Credentials({  /* ... */ })
+    ]
+}
+```
+
+```js
+// middleware.js
+import NextAuth from "next-auth";
+import authConfing from "@/auth.config"
+
+const { auth } = NextAuth(authConfing)
+
+
+export default auth((req) => {
+    // ...
+
+})
+
+export const config = {
+    matcher: [
+        '/',
+        '/about',
+        '/(dashboard)(.*)' 
+    ]
+};
+```
+
+El acceso a las rutas se puede configurar también sin necesidad de *middleware*. En este tema realizaremos el proceso de autorización sin necesidad de hacer uso de éste.
+
+
 
 # 4. Conceptos teóricos
 
@@ -447,8 +497,12 @@ Los Modelos que usa Auth.js son los siguientes:
 
 ![Modelos para Auth](assets/authjs-models.png)
 
+**IMPORTANTE**: 
+Sólo necesitaremos los modelos User y Account. Al modelo User añadiremos los campos password y role. Ver más abajo.
 
 # 7. Envío de correo
+
+Si desaas realizar la verificación de email, por ejemplo al usar credenciales, necesitarás enviar un correo de confirmación al usuario. Y para ello puedes usar alguno de los correos transaccionales que aparecen a continuación.
 
 **Servidores de correo transaccional**
 
@@ -457,11 +511,246 @@ Los Modelos que usa Auth.js son los siguientes:
 - [Sendgrid](https://sendgrid.com)
 - [Mailtrap](https://mailtrap.io/)
 
-# 8. Referencias:
+El proceso de verificación de email es complejo y no se aboradará en este tema. Si te interesa, en [este vídeo](https://youtu.be/MNm1XhDjX1s?si=XtUeR4FxpEY5MYSy) puedes ver como se realiza.
+
+
+
+# 8. Despliegue
+
+**MUY IMPORTANTE:**
+
+Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en los proveedores OAuth, de forma similar a la mostrada a continuación:
+
+**Google**
+
+![oauth google despliegue](assets/oauth-google5.png)
+
+**Github**
+
+![oauth github despliegue](assets/oauth-github5.png)
+
+
+# 9. Aplicaciones de ejemplo
+
+En este tema trabajaremos con el código fuente de 3 aplicaciones:
+
+1. [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
+2. [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
+3. [nxauth-all](https://github.com/jamj2000/nxauth-all)
+
+Las directrices seguidas para su desarrollan han sido comunes, y se listan a continuación.
+
+Se ha realizado la **autenticación siempre desde el lado servidor**.
+
+Para **obtener los datos de sesión**, se ha usado `const sesion = await auth()`
+
+```js
+import { auth } from "@/auth"
+
+async function page() {
+    const sesion = await auth()
+    
+}
+```
+
+Se ha **ampliado del módelo `User` con campos `password` y `role`**.
+
+```prisma
+model User {
+  id            String  @id @default(cuid())
+  // ...
+  password      String?
+  role          String?   @default("USER")  // o  ADMIN
+  // ...
+}
+```
+
+Vamos a necesitar el campo `password` para el trabajo con credenciales. Y el campo `role` nos permitirá distinguir entre roles USER y ADMIN.
+
+
+## 9.1. Aplicación OAuth
+
+- [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
+
+En la primera aplicación, nos centramos en el código necesario para trabajar con OAuth.
+
+El archivo `auth.js` queda de una forma similar a la siguiente:
+
+```js
+// auth.js
+import NextAuth from "next-auth";
+import Google from "@auth/core/providers/github"
+import GitHub from "@auth/core/providers/google"
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/lib/prisma"
+
+const options = {
+    providers: [Google, GitHub],
+    adapter: PrismaAdapter(prisma),
+    session: { strategy: "jwt" },
+    callbacks: {
+        async session({ session, token }) {
+            session.user.role = token?.role
+            return session
+        },
+        async jwt({ token }) {  
+            const { role } = await prisma.user.findUnique({
+                where: {
+                    email: token.email
+                }
+            })
+            token.role = role
+
+            return token
+        }
+    }
+}
+
+export const {
+    handlers: { GET, POST },
+    auth,
+    signIn,
+    signOut
+} = NextAuth(options)
+```
+
+Los callbacks **`jwt`** y **`session`** son muy importantes. Se ejecutan en el orden indicado anteriormente y nos permiten:
+
+1. recoger la información de *role* del usuario desde la BD e introducirla en el JWT.
+2. recoger la información de *role* del usuario desde el JWT e introducirla en la sesión.
+
+Los datos de sesión tendrán por tanto un aspecto similar al siguiente:
+
+```json
+{
+  "user": {
+    "name": "José Antonio Muñoz Jiménez",
+    "email": "jamj2000@gmail.com",
+    "image": "https://avatars.githubusercontent.com/u/2934084?v=4",
+    "role": "USER",    
+  },
+  "expires": "2024-02-20T12:02:43.639Z"
+}
+```
+
+Las acciones de servidor quedan así:
+
+```js
+'use server'
+import { signIn, signOut} from "@/auth"
+
+
+// https://authjs.dev/reference/nextjs#signin
+export async function loginGoogle() {
+    try {
+        await signIn('google', { redirectTo: '/dashboard'})
+    } catch (error) {
+        throw error
+    }
+}
+
+export async function loginGithub() {
+    try {
+        await signIn('github', { redirectTo: '/dashboard'})
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+// https://authjs.dev/reference/nextjs#signout
+export async function logout() {
+    try {
+        await signOut({redirectTo: '/'})
+    } catch (error) {
+        throw error
+    }
+}
+```
+
+
+## 9.2. Aplicación Credentials
+
+- [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
+
+En la segunda aplicación, nos centramos en el código necesario para trabajar  con Credentials.
+
+Bastantes archivos se ven afectados.
+
+```js
+// auth.js
+import NextAuth from "next-auth"
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/lib/prisma"
+import Credentials from "@auth/core/providers/credentials"
+import bcrypt from 'bcryptjs'
+
+export const options = {
+    session: { strategy: 'jwt' },
+    adapter: PrismaAdapter(prisma),
+    pages: {
+        signIn: '/auth/signin',
+        signOut: '/auth/signout',
+        error: '/auth/error'
+    },
+    providers: [
+        Credentials({
+            async authorize(credentials) {
+                const user = await prisma.user.findUnique({
+                    where: {
+                        email: credentials.email
+                    },
+                })
+
+                if (user) {  // && user.emailVerified
+                    const matchPassword = bcrypt.compare(credentials.password, user?.password)
+                    if (matchPassword) return user
+                } else {
+                    return null
+                }
+
+            },
+        }),
+     ]
+}
+
+
+export const {
+    handlers: { GET, POST },
+    auth,
+    signIn,
+    signOut
+} = NextAuth({ ...options })
+
+```
+
+La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y de la ejecución de 
+
+```js
+// código ejecutado en un server action
+await signIn('credentials', { email, password, redirectTo: '/dashboard' })
+```
+
+Las variables `email` y `password` anteriores, son enviadas como `credentials` a la función `authorize`.
+
+
+## 9.3. Aplicación All
+
+- [nxauth-all](https://github.com/jamj2000/nxauth-all)
+  
+En la tercera aplicación, desarrollamos el código necesario para trabajar tanto con OAuth como Credentials y afinamos algunos detalles finales.
+
+En esta aplicación final, se revisa el correcto funcionamiento de ambos tipos de autenticación y se revisa la correcta autorización de acceso a las rutas.
+
+Hay una demo disponible en [vercel](https://auth5.vercel.app/).
+
+
+
+# 10. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Diferencias entre NextAuth4 y NextAuth5](https://authjs.dev/guides/upgrade-to-v5)
+- [⭐ Video: Next Auth V5 - Advanced Guide (2024)](https://youtu.be/MNm1XhDjX1s?si=XtUeR4FxpEY5MYSy): El vídeo es muy completo, pero dura 8 horas 😱. Nuestro interés empieza a partir de la segunda hora.
+- [⭐ Código fuente del vídeo anterior](https://github.com/AntonioErdeljac/next-auth-v5-advanced-guide)
 - [How to Build a Fullstack App with Next.js, Prisma, and Vercel Postgres](https://vercel.com/guides/nextjs-prisma-postgres): Esta guía está diseñada para ser usada con `pages router`. Pero con algunos pequeños cambios puede aplicarse a `app router`
 - [Video: How to Use NextAuth Beta v5 to Secure Your Web Applications](https://youtu.be/VrBLfXfXfoY?si=GE_ebqXwgUrSCRei)
-- [Video: Next Auth V5 - Advanced Guide (2024)](https://youtu.be/MNm1XhDjX1s?si=XtUeR4FxpEY5MYSy): El vídeo es muy completo, pero dura 8 horas 😱. Nuestro interés empieza a partir de la segunda hora.
-- [Código fuente del vídeo anterior](https://github.com/AntonioErdeljac/next-auth-v5-advanced-guide)
