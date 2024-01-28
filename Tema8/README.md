@@ -721,7 +721,6 @@ export const {
     signIn,
     signOut
 } = NextAuth({ ...options })
-
 ```
 
 La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y de la ejecución de 
