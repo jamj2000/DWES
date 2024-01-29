@@ -1,7 +1,7 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 8: Generación dinámica de páginas Web interactivas <!-- omit in toc -->
-> AUTENTICACIÓN DE USUARIOS, NEXT AUTH. TYPESCRIPT
+> AUTENTICACIÓN DE USUARIOS, NEXT AUTH. OAUTH, CREDENTIALS.
 
 - [1. Introducción](#1-introducción)
 - [2. Instalación de dependencias](#2-instalación-de-dependencias)
@@ -17,15 +17,15 @@
   - [5.3. Credentials](#53-credentials)
 - [6. Adaptadores. Tipos de persistencia de datos](#6-adaptadores-tipos-de-persistencia-de-datos)
   - [6.1. Prisma](#61-prisma)
-- [7. Envío de correo](#7-envío-de-correo)
-- [8. Despliegue](#8-despliegue)
-- [9. Aplicaciones de ejemplo](#9-aplicaciones-de-ejemplo)
-  - [9.1. Aplicación OAuth](#91-aplicación-oauth)
-  - [9.2. Aplicación Credentials](#92-aplicación-credentials)
-  - [9.3. Aplicación All](#93-aplicación-all)
-- [10. Referencias:](#10-referencias)
-
-
+  - [6.2. Neon.tech](#62-neontech)
+- [7. Estrategias de gestión de sesiones](#7-estrategias-de-gestión-de-sesiones)
+- [8. Envío de correo](#8-envío-de-correo)
+- [9. Despliegue](#9-despliegue)
+- [10. Aplicaciones de ejemplo](#10-aplicaciones-de-ejemplo)
+  - [10.1. Aplicación OAuth](#101-aplicación-oauth)
+  - [10.2. Aplicación Credentials](#102-aplicación-credentials)
+  - [10.3. Aplicación All](#103-aplicación-all)
+- [11. Referencias:](#11-referencias)
 
 
 --- 
@@ -185,7 +185,7 @@ export const config = {
 
 En configuraciones más complejas, cuando nuestra aplicación se despliega en Internet en una red `edge`, necesitaremos configurar el middleware de una manera algo distinta a la anterior, tal como se muestra a continuación.
 
-En un archivo separado pondremos la configuración de los proveedores. Y en el middleware sólamente incluiremos esta configuración. El resto de opciones de autenticación no los incluiremos. Esto es necesario, porque actualmente Prisma no puede ejecutarse en el `edge`, que es donde se ejecutará el *middleware*.
+En un archivo separado pondremos la configuración de los proveedores. Y en el middleware sólamente incluiremos la configuración de este archivo. El resto de opciones de autenticación no los incluiremos. Esto es necesario, porque actualmente Prisma no puede ejecutarse en el `edge`, que es donde se ejecutará el *middleware*.
 
 ```js
 // auth.config.js
@@ -465,8 +465,6 @@ Los métodos del adaptador se utilizan para realizar las siguientes operaciones:
 
 Auth.js se puede integrar con cualquier capa de datos (base de datos, ORM o API backend, cliente HTTP) para crear usuarios automáticamente, manejar la vinculación de cuentas automáticamente, admitir el inicio de sesión sin contraseña y almacenar información de la sesión.
 
-[Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar un adaptador de base de datos para almacenar la sesión en una base de datos  (`strategy: "database"`).
-
 Auth.js tiene una lista bastante extensa de adaptadores para ORM/Bases de datos:
 
 - @auth/azure-tables-adapter
@@ -500,7 +498,33 @@ Los Modelos que usa Auth.js son los siguientes:
 **IMPORTANTE**: 
 Sólo necesitaremos los modelos User y Account. Al modelo User añadiremos los campos password y role. Ver más abajo.
 
-# 7. Envío de correo
+## 6.2. Neon.tech
+
+[https://neon.tech] es un DBaaS muy sencillo de usar y con un plan gratis bastante generoso. Se recomienda su uso para las tareas de este Tema. 
+
+Una vez nos hayamos registrado y creado una base de datos, podemos acceder a los datos de conexión mediante `Dashboard` -> `Connection Details`-> `Database` -> `Prisma` y `.env`
+
+![neon prisma](assets/neon-prisma.png)
+
+![neon .env](assets/neon-env.png)
+
+
+# 7. Estrategias de gestión de sesiones
+
+[Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar el adaptador de base de datos para almacenar la sesión en una base de datos  (`strategy: "database"`).
+
+Para la gestión de información de la sesión, nosotros usaremos la estrategia `jwt`:
+
+```js
+const options = {
+    providers: [Google, GitHub],
+    adapter: PrismaAdapter(prisma),
+    session: { strategy: "jwt" },
+    /* ... */
+}
+```
+
+# 8. Envío de correo
 
 Si desaas realizar la verificación de email, por ejemplo al usar credenciales, necesitarás enviar un correo de confirmación al usuario. Y para ello puedes usar alguno de los correos transaccionales que aparecen a continuación.
 
@@ -515,7 +539,7 @@ El proceso de verificación de email es complejo y no se aboradará en este tema
 
 
 
-# 8. Despliegue
+# 9. Despliegue
 
 **MUY IMPORTANTE:**
 
@@ -530,7 +554,7 @@ Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en lo
 ![oauth github despliegue](assets/oauth-github5.png)
 
 
-# 9. Aplicaciones de ejemplo
+# 10. Aplicaciones de ejemplo
 
 En este tema trabajaremos con el código fuente de 3 aplicaciones:
 
@@ -568,7 +592,7 @@ model User {
 Vamos a necesitar el campo `password` para el trabajo con credenciales. Y el campo `role` nos permitirá distinguir entre roles USER y ADMIN.
 
 
-## 9.1. Aplicación OAuth
+## 10.1. Aplicación OAuth
 
 - [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
 
@@ -669,7 +693,7 @@ export async function logout() {
 ```
 
 
-## 9.2. Aplicación Credentials
+## 10.2. Aplicación Credentials
 
 - [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
 
@@ -733,7 +757,7 @@ await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 Las variables `email` y `password` anteriores, son enviadas como `credentials` a la función `authorize`.
 
 
-## 9.3. Aplicación All
+## 10.3. Aplicación All
 
 - [nxauth-all](https://github.com/jamj2000/nxauth-all)
   
@@ -745,7 +769,7 @@ Hay una demo disponible en [vercel](https://auth5.vercel.app/).
 
 
 
-# 10. Referencias:
+# 11. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Diferencias entre NextAuth4 y NextAuth5](https://authjs.dev/guides/upgrade-to-v5)
