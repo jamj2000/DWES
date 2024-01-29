@@ -747,14 +747,14 @@ export const {
 } = NextAuth({ ...options })
 ```
 
-La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y de la ejecución de 
+La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y después de la ejecución de 
 
 ```js
 // código ejecutado en un server action
 await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 ```
 
-Las variables `email` y `password` anteriores, son enviadas como `credentials` a la función `authorize`.
+> NOTA: Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
 
 
 ## 10.3. Aplicación All
