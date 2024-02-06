@@ -268,7 +268,7 @@ model User {
 model Profile {
   id     Int  @id @default(autoincrement())
   user   User @relation(fields: [userId], references: [id])
-  userId Int  @unique // relation scalar field (used in the `@relation` attribute above)
+  userId Int  @unique  // campo escalar (usado en atributo `@relation`)
 }
 ```
 
@@ -283,7 +283,25 @@ model User {
 model Post {
   id       Int  @id @default(autoincrement())
   author   User @relation(fields: [authorId], references: [id])
-  authorId Int
+  authorId Int  // campo escalar (usado en atributo `@relation`)
+}
+```
+
+Una relación uno-muchos puede ser opcional.
+
+En el siguiente ejemplo, se permite crear un Post sin asignar un User. Observar el signo **`?`** en los 2 últimos campos.
+
+
+```prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  posts Post[]
+}
+
+model Post {
+  id       Int   @id @default(autoincrement())
+  author   User? @relation(fields: [authorId], references: [id])
+  authorId Int?
 }
 ```
 
@@ -291,28 +309,47 @@ model Post {
 
 ```prisma
 model Post {
-  id         Int                 @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   title      String
   categories CategoriesOnPosts[]
 }
 
 model Category {
-  id    Int                 @id @default(autoincrement())
+  id    Int            @id @default(autoincrement())
   name  String
   posts CategoriesOnPosts[]
 }
 
 model CategoriesOnPosts {
   post       Post     @relation(fields: [postId], references: [id])
-  postId     Int // relation scalar field (used in the `@relation` attribute above)
+  postId     Int     // campo escalar (usado en atributo `@relation`)
   category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int // relation scalar field (used in the `@relation` attribute above)
+  categoryId Int     // campo escalar (usado en atributo `@relation`)
   assignedAt DateTime @default(now())
   assignedBy String
 
   @@id([postId, categoryId])
 }
 ```
+
+Si en la tabla intermedia no tenemos campos propios, Prisma nos permite simplificar el esquema, que quedaría así:
+
+```prisma
+model Post {
+  id         Int         @id @default(autoincrement())
+  title      String
+  categories Category[]
+}
+
+model Category {
+  id    Int              @id @default(autoincrement())
+  name  String
+  posts Post[]
+}
+```
+
+Esto se conoce como relación implícita de muchos a muchos. Esta relación todavía se manifiesta en una tabla de relaciones en la base de datos subyacente. Sin embargo, Prisma gestiona esta tabla de relaciones.
+
 
 ### 3.2.3. Sincronizando el esquema con la base de datos
 
