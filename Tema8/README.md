@@ -344,6 +344,10 @@ https://console.developers.google.com/apis/credentials
 
 ![google 4](assets/oauth-google4.png)
 
+Si no has usado nunca está consola, Google te pedirá que primero crees un Proyecto, y después que rellenes una Pantalla de Consentimiento. Y finalmente podrás dar de alta las credenciales de tu app tal como se muestra en las capturas anteriores.
+
+Si tienes algún problema puedes consultar la página https://support.google.com/cloud/answer/10311615 
+
 
 ### 5.1.2. GitHub
 
