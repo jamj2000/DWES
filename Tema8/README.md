@@ -561,12 +561,12 @@ Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en lo
 
 # 10. Aplicaciones de ejemplo
 
-En este tema trabajaremos con el código fuente de 3 aplicaciones:
+En este tema trabajaremos con el código fuente de 4 aplicaciones:
 
 1. [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
 2. [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
 3. [nxauth-all](https://github.com/jamj2000/nxauth-all)
-4. [nxauth-all](https://github.com/jamj2000/nxauth-middleware)
+4. [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
    
 Las directrices seguidas para su desarrollan han sido comunes, y se listan a continuación.
 
