@@ -25,6 +25,7 @@
   - [10.1. Aplicación OAuth](#101-aplicación-oauth)
   - [10.2. Aplicación Credentials](#102-aplicación-credentials)
   - [10.3. Aplicación All](#103-aplicación-all)
+  - [10.4. Aplicación Middleware](#104-aplicación-middleware)
 - [11. Referencias:](#11-referencias)
 
 
@@ -178,7 +179,7 @@ export default auth((req) => {
 
 // Rutas que seran revisadas por la función anterior
 export const config = {
-    matcher: ['/(dashboard)(.*)']
+    matcher: ['/dashboard(.*)']
 };
 
 ```
@@ -565,7 +566,8 @@ En este tema trabajaremos con el código fuente de 3 aplicaciones:
 1. [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
 2. [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
 3. [nxauth-all](https://github.com/jamj2000/nxauth-all)
-
+4. [nxauth-all](https://github.com/jamj2000/nxauth-middleware)
+   
 Las directrices seguidas para su desarrollan han sido comunes, y se listan a continuación.
 
 Se ha realizado la **autenticación siempre desde el lado servidor**.
@@ -751,7 +753,7 @@ export const {
 } = NextAuth({ ...options })
 ```
 
-La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y después de la ejecución de 
+La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y después de la ejecución del server action de login. 
 
 ```js
 // código ejecutado en un server action
@@ -771,6 +773,125 @@ En esta aplicación final, se revisa el correcto funcionamiento de ambos tipos d
 
 Hay una demo disponible en [vercel](https://auth5.vercel.app/).
 
+
+## 10.4. Aplicación Middleware
+
+- [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
+
+En la cuarta aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas.
+
+El contenido del archivo `src/middleware.js` es el siguiente:
+
+```js
+import NextAuth from "next-auth";
+import authConfig from "@/auth.config";
+
+const { auth } = NextAuth(authConfig);
+
+export default auth((req) => {
+    // console.log(req.auth);
+    // console.log(req.nextUrl);
+    if (!req.auth) {
+        console.log('no autenticado');
+
+        let callbackUrl = req.nextUrl.pathname;
+        if (req.nextUrl.search) {
+          callbackUrl += req.nextUrl.search;
+        }
+    
+        const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+        return Response.redirect(req.nextUrl.origin
+            + `/auth/login?callbackUrl=${encodedCallbackUrl}`)
+    }
+    
+})
+
+
+export const config = {
+    matcher: [
+        "/dashboard(.*)",
+        "/admin(.*)",
+        "/proveedores(.*)",
+        "/articulos",
+        "/articulos/new",
+        "/articulos/edit",
+        "/articulos/delete",
+    ],
+};
+```
+
+Hemos colocado la configuración de NextAuth en dos archivos separados:
+
+- **src/auth.js**
+- **src/auth.config.js**
+  
+El motivo es que, actualmente, dentro del *middleware* no podemos hacer uso de `PrismaAdapter`. Por tanto, colocamos en **`src/auth.config.js`**
+
+```js
+import Credentials from "@auth/core/providers/credentials"
+import Google from "@auth/core/providers/google"
+import GitHub from '@auth/core/providers/github'
+import { getUserByEmail } from "@/lib/data"
+
+export default {
+    providers: [
+        Google,
+        GitHub,
+        Credentials({
+            async authorize(credentials) {
+                console.log('AUTHORIZE');
+                return getUserByEmail(credentials.email)
+            },
+        }),
+    ]
+}
+```
+
+Y en **`src/auth.js`**
+
+```js
+import NextAuth from "next-auth"
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/lib/prisma"
+import { getUserById } from "@/lib/data"
+import authConfig from "@/auth.config"
+
+
+export const options = {
+    session: { strategy: 'jwt' },
+    adapter: PrismaAdapter(prisma),
+    pages: {
+        signIn: '/auth/login',
+        signOut: '/auth/logout',
+        error: '/auth/error'
+    },
+    callbacks: {
+        async session({ session, token }) {
+            // console.log(session, user);
+            session.user.role = token?.role
+            return session
+        },
+        async jwt({ token }) {
+            if (!token.sub) return token;
+
+            const user = await getUserById(token.sub)
+            if (!user) return token;
+
+            token.role = user?.role
+            return token
+        }
+    },
+}
+
+export const {
+    handlers: { GET, POST },
+    auth,
+    signIn,
+    signOut
+} = NextAuth({ ...options, ...authConfig })
+```
+
+Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
 
 # 11. Referencias:
