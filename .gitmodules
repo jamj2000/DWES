@@ -56,3 +56,18 @@
 [submodule "proyectos/tema8/nxauth-oauth"]
 	path = proyectos/tema8/nxauth-oauth
 	url = https://github.com/jamj2000/nxauth-oauth.git
+[submodule "proyectos/tema4/nxapi-mysql"]
+	path = proyectos/tema4/nxapi-mysql
+	url = https://github.com/jamj2000/nxapi-mysql.git
+[submodule "proyectos/tema7/nxprisma-crud-negocio"]
+	path = proyectos/tema7/nxprisma-crud-negocio
+	url = https://github.com/jamj2000/nxprisma-crud-negocio.git
+[submodule "examenes/examen-dwes-node-next"]
+	path = examenes/examen-dwes-node-next
+	url = https://github.com/jamj2000/examen-dwes-node-next.git
+[submodule "examenes/examen-dwes-bis-node-next"]
+	path = examenes/examen-dwes-bis-node-next
+	url = https://github.com/jamj2000/examen-dwes-bis-node-next.git
+[submodule "examenes/examen-dwes-nextjs-prisma"]
+	path = examenes/examen-dwes-nextjs-prisma
+	url = https://github.com/jamj2000/examen-dwes-nextjs-prisma.git
