@@ -60,3 +60,4 @@ La propiedad `manifest` forma parte del objeto `metadata`. Puedes encontrar otra
 - [MDN PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 - [Web Manifest](https://developer.mozilla.org/es/docs/Web/Manifest)
 - [Video - Crear PWA de forma muy sencilla](https://youtu.be/Sb0_k0gaWX0?si=178qFPPH5DzuVs2h)
+- [Aplicación Demo](https://nxprisma-crud-negocio.vercel.app/)
