@@ -71,3 +71,6 @@
 [submodule "examenes/examen-dwes-nextjs-prisma"]
 	path = examenes/examen-dwes-nextjs-prisma
 	url = https://github.com/jamj2000/examen-dwes-nextjs-prisma.git
+[submodule "examenes/examen-dwes-bis-nextjs-prisma"]
+	path = examenes/examen-dwes-bis-nextjs-prisma
+	url = https://github.com/jamj2000/examen-dwes-bis-nextjs-prisma.git
