@@ -116,6 +116,7 @@ La propiedad `manifest` forma parte del objeto `metadata`. Puedes encontrar otra
 
 - [Web App Manifest Generator: simicart](https://www.simicart.com/manifest-generator.html/)
 - [Web App Manifest Generator: netlify](https://manifest-gen.netlify.app/) 
+- [❤️ Convertidor PNG a ICO ❤️](https://convertico.com/)
 - [Web App Manifest Generator: progressier](https://progressier.com/pwa-manifest-generator) 
 - [MDN PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 - [Web Manifest](https://developer.mozilla.org/es/docs/Web/Manifest)
