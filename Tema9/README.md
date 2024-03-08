@@ -9,8 +9,11 @@
   - [3.1. Generar manifest.json e iconos](#31-generar-manifestjson-e-iconos)
   - [3.2. Añadir manifest.js al layout principal](#32-añadir-manifestjs-al-layout-principal)
 - [4. Instalar / desinstalar PWA](#4-instalar--desinstalar-pwa)
-- [5. Otras propiedades de metadata](#5-otras-propiedades-de-metadata)
-- [6. Referencias](#6-referencias)
+- [5. Profundizando en las PWA](#5-profundizando-en-las-pwa)
+- [6. Otras propiedades de metadata](#6-otras-propiedades-de-metadata)
+- [7. Favicon](#7-favicon)
+- [8. Referencias](#8-referencias)
+
 
 
 --- 
@@ -19,9 +22,11 @@
 
 En este tema veremos como convertir nuestra aplicación web en una PWA.
 
-Una aplicación web progresiva (PWA) es una aplicación creada utilizando tecnologías de plataforma web, pero que proporciona una experiencia de usuario similar a la de una aplicación específica de una plataforma.
+Una [aplicación web progresiva (PWA)](https://es.wikipedia.org/wiki/Aplicaci%C3%B3n_web_progresiva) es una aplicación creada utilizando tecnologías de plataforma web, pero que proporciona una experiencia de usuario similar a la de una aplicación específica de una plataforma.
 
 Al igual que un sitio web, una PWA puede ejecutarse en múltiples plataformas y dispositivos desde una única base de código. Al igual que una aplicación específica de una plataforma, se puede instalar en el dispositivo, puede funcionar sin conexión y en segundo plano, y puede integrarse con el dispositivo y con otras aplicaciones instaladas.
+
+![pwa](assets/pwa.png)
 
 
 # 2. Características de una PWA
@@ -93,26 +98,47 @@ export const metadata = {
 
 # 4. Instalar / desinstalar PWA
 
+Si abrimos la aplicación con Chrome, nos apareceráen la parte derecha de la barra de direcciones  un icono para instalar la app.
+
 ![install](assets/install.png)
 
+Una vez instalada, se nos creará un acceso directo en el escritorio. 
 
 ![installed](assets/installed.png)
 
+También es posible instalar la aplicación en un dispositivo móvil.
+
+![installed in mobile](assets/installed-mobile.png)
+
+En el escritorio de PC o portátil pulsamos en los 3 puntos de la barra de título para realizar la desinstalación.
 
 ![uninstall](assets/uninstall.png)
 
 
+# 5. Profundizando en las PWA
 
-# 5. Otras propiedades de metadata
+Una PWA puede proporcionar otras funcionalidades más allá de la simple instalación en un sistema anfitrión. 
+
+Más información en el siguiente enlace:
+
+- https://www.dosmedia.com/que-son-progressive-web-apps/
+
+
+# 6. Otras propiedades de metadata
 
 La propiedad `manifest` forma parte del objeto `metadata`. Puedes encontrar otras propiedades como [openGraph](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#opengraph), [robots](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#robots), ... en el siguiente enlace:
 
 - https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields
 
 
+# 7. Favicon
+
+Independientemente de la PWA, para generar los distintos tamaños del [**`favicon.ico`**](https://es.wikipedia.org/wiki/Favicon) podemos usar la herramienta web [convertico.com](https://convertico.com/es/)
+
+![png to ico](assets/png-ico.png)
 
 
-# 6. Referencias
+# 8. Referencias
 
 - [Web App Manifest Generator: simicart](https://www.simicart.com/manifest-generator.html/)
 - [Web App Manifest Generator: netlify](https://manifest-gen.netlify.app/) 
