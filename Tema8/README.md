@@ -13,6 +13,7 @@
   - [5.1. OAuth (Open Authentication)](#51-oauth-open-authentication)
     - [5.1.1. Google](#511-google)
     - [5.1.2. GitHub](#512-github)
+    - [5.1.3. Discord](#513-discord)
   - [5.2. Email](#52-email)
   - [5.3. Credentials](#53-credentials)
 - [6. Adaptadores. Tipos de persistencia de datos](#6-adaptadores-tipos-de-persistencia-de-datos)
@@ -365,6 +366,13 @@ https://github.com/settings/apps
 ![github 4](assets/oauth-github4.png)
 
 
+### 5.1.3. Discord
+
+https://discord.com/developers/applications
+
+![oauth discord despliegue](assets/oauth-discord.png)
+
+
 ## 5.2. Email
 
 - [Documentación de Email](https://authjs.dev/getting-started/providers/email-tutorial)
@@ -558,6 +566,10 @@ Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en lo
 
 ![oauth github despliegue](assets/oauth-github5.png)
 
+**Discord**
+
+![oauth discord despliegue](assets/oauth-discord.png)
+
 
 # 10. Aplicaciones de ejemplo
 
@@ -609,8 +621,9 @@ El archivo `auth.js` queda de una forma similar a la siguiente:
 ```js
 // auth.js
 import NextAuth from "next-auth";
-import Google from "@auth/core/providers/github"
-import GitHub from "@auth/core/providers/google"
+import Google from "@auth/core/providers/google"
+import GitHub from "@auth/core/providers/github"
+import Discord from "@auth/core/providers/discord"
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma"
 
@@ -688,6 +701,16 @@ export async function loginGithub() {
     }
 }
 
+
+export async function loginDiscord() {
+    try {
+        await signIn('discord', { redirectTo: '/dashboard'})
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
 // https://authjs.dev/reference/nextjs#signout
 export async function logout() {
     try {
@@ -709,10 +732,10 @@ Bastantes archivos se ven afectados.
 
 ```js
 // auth.js
-import NextAuth from "next-auth"
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/lib/prisma"
-import Credentials from "@auth/core/providers/credentials"
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { prisma } from '@/lib/prisma'
+import NextAuth from 'next-auth'
+import Credentials from '@auth/core/providers/credentials'
 import bcrypt from 'bcryptjs'
 
 export const options = {
@@ -778,7 +801,7 @@ Hay una demo disponible en [vercel](https://auth5.vercel.app/).
 
 - [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
 
-En la cuarta aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas.
+En la cuarta aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas. 
 
 El contenido del archivo `src/middleware.js` es el siguiente:
 
@@ -791,6 +814,8 @@ const { auth } = NextAuth(authConfig);
 export default auth((req) => {
     // console.log(req.auth);
     // console.log(req.nextUrl);
+
+
     if (!req.auth) {
         console.log('no autenticado');
 
@@ -820,6 +845,9 @@ export const config = {
 };
 ```
 
+Si el usuario no ha iniciado sesión, lo redirigimos a la página de login y guardamos en query string `?callbackUrl=` la url a la que quiere acceder.
+
+
 Hemos colocado la configuración de NextAuth en dos archivos separados:
 
 - **src/auth.js**
@@ -828,15 +856,17 @@ Hemos colocado la configuración de NextAuth en dos archivos separados:
 El motivo es que, actualmente, dentro del *middleware* no podemos hacer uso de `PrismaAdapter`. Por tanto, colocamos en **`src/auth.config.js`**
 
 ```js
-import Credentials from "@auth/core/providers/credentials"
-import Google from "@auth/core/providers/google"
+import Credentials from '@auth/core/providers/credentials'
+import Google from '@auth/core/providers/google'
 import GitHub from '@auth/core/providers/github'
-import { getUserByEmail } from "@/lib/data"
+import Discord from '@auth/core/providers/discord'
+import { getUserByEmail } from '@/lib/data'
 
 export default {
     providers: [
         Google,
         GitHub,
+        Discord,
         Credentials({
             async authorize(credentials) {
                 console.log('AUTHORIZE');
@@ -890,6 +920,49 @@ export const {
     signOut
 } = NextAuth({ ...options, ...authConfig })
 ```
+
+**`src/app/auth/login.js`**
+
+En la página de login, recogemos la variable `callbackUrl` con la información de la ruta a la que quería acceder el usuario. 
+
+Guardamos dicho valor dentro de [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) (más información [aquí](https://krative.digital/globalthis/)), que es un objeto global
+
+
+**`src/app/auth/login.js`**
+
+```js
+// ...
+
+function page({ searchParams }) {
+  const { error, callbackUrl } = searchParams
+  // Usamos globalThis para almacenar variable global
+  // La usaremos en los actions de login
+  globalThis.callbackUrl = decodeURIComponent(callbackUrl ?? '%2Fdashboard')
+
+  // ...
+
+```
+
+De esta forma podremos recoger el valor en los *server actions* y redirigir finalmente al usuario a la ruta a que quería acceder en un inicio.
+
+
+**`src/lib/actions.js`**
+
+```js
+// ...
+export async function loginGoogle() {
+    try {
+        await signIn('google', { redirectTo: globalThis.callbackUrl })
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+// ...
+```
+
+
 
 Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
