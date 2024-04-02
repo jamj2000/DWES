@@ -56,7 +56,7 @@ En el lado servidor usaremos **NodeJS como entorno de ejecución** y como framew
 >
 > Actualmente, no existe un único entorno de ejecución, sino 3:
 >
-> **Node**: https://nodejs.org/es
+> **Node**: https://nodejs.org
 >
 > **Deno**: https://deno.com/ 
 >
