@@ -281,6 +281,7 @@ Sitios que proporcionan componentes basados en Tailwind:
 
 - [Shadcn](https://ui.shadcn.com/)
 - [flowbite](https://flowbite.com/)
+- [DaisyUI](https://daisyui.com/)
 
 
 # 4. Componentes del Servidor
