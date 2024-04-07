@@ -203,8 +203,9 @@ Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (
 
 ## 3.3. Documentación
 
+- [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
 - [Componentes](https://react-chartjs-2.js.org/components/)
-- [Ejemplos](https://github.com/reactchartjs/react-chartjs-2/tree/master/sandboxes)
+- [Ejemplos de react-chartjs-2](https://github.com/reactchartjs/react-chartjs-2/tree/master/sandboxes)
 - [Otros recursos relacionados - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
 
 
