@@ -1,589 +1,177 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
 # Tema 7: Programación de servicios Web <!-- omit in toc -->
-> BASES DE DATOS con ORM, PRISMA
+> FUNCIONALIDADES EN LAS APP WEB.
+
 
 - [1. Introducción](#1-introducción)
-- [2. Primeros pasos con Prisma](#2-primeros-pasos-con-prisma)
-  - [2.1. Instalación del paquete prisma](#21-instalación-del-paquete-prisma)
-  - [2.2. Comandos disponibles](#22-comandos-disponibles)
-  - [2.3. Inicialización](#23-inicialización)
-- [3. Definiendo el Modelo de Datos](#3-definiendo-el-modelo-de-datos)
-  - [3.1. Generar el modelo de datos mediante introspección](#31-generar-el-modelo-de-datos-mediante-introspección)
-  - [3.2. Escribir el modelo de datos manualmente](#32-escribir-el-modelo-de-datos-manualmente)
-    - [3.2.1. Modelos](#321-modelos)
-    - [3.2.2. Relaciones](#322-relaciones)
-    - [3.2.3. Sincronizando el esquema con la base de datos](#323-sincronizando-el-esquema-con-la-base-de-datos)
-- [4. Consultas CRUD](#4-consultas-crud)
-  - [4.1. CRUD](#41-crud)
-    - [4.1.1. Create](#411-create)
-    - [4.1.2. Read](#412-read)
-    - [4.1.3. Update](#413-update)
-    - [4.1.4. Delete](#414-delete)
-  - [4.2. Seleccionar campos](#42-seleccionar-campos)
-  - [4.3. Consultar varias tablas](#43-consultar-varias-tablas)
-- [5. Ver datos de las tablas](#5-ver-datos-de-las-tablas)
-- [6. Despliegue en Vercel](#6-despliegue-en-vercel)
-- [7. Referencias](#7-referencias)
-
+- [2. Datos ficticios](#2-datos-ficticios)
+  - [2.1. Instalación de librería](#21-instalación-de-librería)
+  - [2.2. Uso](#22-uso)
+  - [2.3. Documentación](#23-documentación)
+- [3. Gráficos](#3-gráficos)
+  - [3.1. Instalación](#31-instalación)
+  - [3.2. Uso](#32-uso)
+  - [3.3. Documentación](#33-documentación)
+- [4. Creación de PDFs](#4-creación-de-pdfs)
+  - [4.1. Instalación](#41-instalación)
+  - [4.2. Uso](#42-uso)
+  - [4.3. Documentación](#43-documentación)
+- [5. Envío de correos](#5-envío-de-correos)
+  - [5.1. Instalación](#51-instalación)
+  - [5.2. Uso](#52-uso)
+  - [5.3. Documentación](#53-documentación)
+- [6. Pago por internet](#6-pago-por-internet)
+  - [6.1. Instalación](#61-instalación)
+  - [6.2. Uso](#62-uso)
+  - [6.3. Documentación](#63-documentación)
 
 
 --- 
 
+![NUEVO](assets/nuevo.png)
+
+> **IMPORTANTE: MATERIAL PARA EL PRÓXIMO CURSO 2024/25**
+>
+> El contenido previo de este tema ha sido movido al Tetma 6. Este contenido es nuevo, y está previsto su uso en el próximo curso.
+
+ 
+
 # 1. Introducción
 
-Un **ORM**, o **Object Relational Mapper**, es una pieza de software diseñada para traducir entre las representaciones de datos utilizadas por las bases de datos y las utilizadas en la programación orientada a objetos.
+En este tema añadiremos nuevas funcionalidades a nuestra aplicación web. En concreto, se estudiarán las siguientes funcionalidades:
 
-Desde la perspectiva de un desarrollador, un ORM le permite trabajar con datos respaldados por bases de datos utilizando las mismas estructuras y mecanismos orientados a objetos que usaría para cualquier tipo de datos internos. En general, los ORM sirven como una capa de abstracción entre la aplicación y la base de datos. 
-
-Cada lenguaje/framework tiene su propio ORM. A continuación se muestran los más conocidos:
-
-- Doctrine (PHP/Symfony)
-- Eloquent (PHP/Laravel)
-- JPA (Java)
-- Hibernate (Java/Spring)
-- Sequelize (Node.js)
-- Prisma (Node.js)
-
-En este tema veremos el ORM **Prisma**, disponible para Javascript/Typescript y que soporta las siguientes bases de datos:
-
-- PostgreSQL
-- MySQL
-- SQLite
-- SQL Server
-- MongoDB
-- CockroachDB
-
-En general, las tareas básicas a la hora de gestionar la persistencia de datos son tres:
-
-1. **Crear la base de datos**: reserva de espacio en un DBaaS o similar.
-2. **Migrar** (`migrate`): creación de tablas.
-3. **Sembrar** (`seed`): inserción de datos iniciales.
-
-Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
+- **Datos ficticios**
+- **Gráficos**
+- **Creación de PDFs**
+- **Envío de correos**
+- **Pago por internet**
 
 
-# 2. Primeros pasos con Prisma
+# 2. Datos ficticios
 
-## 2.1. Instalación del paquete prisma
+Durante el desarrollo de una aplicación a menudo necesitamos datos *fake* para probar su funcionalidad. Para ello disponemos de la librería **[faker.js](https://fakerjs.dev/)**, la cual nos provee de este tipo de datos. 
 
-```sh 
-npm install prisma -D
-npm install @prisma/client
-``` 
 
-## 2.2. Comandos disponibles
+## 2.1. Instalación de librería
+Instalamos como **dependencia de desarrollo**. Aparecerá en la sección `devDependencies` en el archivo `package.json`.
 
-`npx prisma`
 
-## 2.3. Inicialización
+```console
+npm install -D @faker-js/faker
+```
 
-`npx prisma init`
-
-> **NOTA**: Podemos indicar el proveedor de datos en la inicialización. Por ejemplo:
+> **IMPORTANTE:**
 >
-> ```sh
-> npx prisma init --datasource-provider postgresql
-> npx prisma init --datasource-provider mysql
-> npx prisma init --datasource-provider sqlite
-> ```   
+> Esta librería ocupa unos cuantos MB, por lo que no debería usarse en producción.
 
 
-Este comando hace dos cosas:
+## 2.2. Uso
 
-1. crea un nuevo directorio y archivo llamados **`prima/schema.prisma`**, que contiene el esquema de Prisma con la variable de conexión de su base de datos.
-2. añade al archivo **`.env`** en el directorio raíz del proyecto la variable de entorno `DATABASE_URL`, que debeás posteriormente editar manualmente para apuntar a tu base de datos.
+```js
+import { faker } from '@faker-js/faker';
 
-
-**`prisma/schema.prisma`**
-
-```prisma
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+// Algunos datos disponibles.
+// Para ver un listado exhaustivo, consulta la API
+faker.number.int()
+faker.number.int({ min: 10, max: 100 })
+faker.number.float() 
+faker.number.float({ min: 10, max: 100, multipleOf: 0.02 }) 
+faker.person.firstName() 
+faker.person.firstName('female') 
+faker.person.firstName('male') 
+faker.person.lastName()
+faker.person.fullName()
+faker.person.bio()
+faker.internet.email()
+faker.internet.email({ firstName: 'Jeanne', lastName: 'Doe' }) // 'Jeanne_Doe63@yahoo.com'
+faker.internet.email({ firstName: 'Jeanne', lastName: 'Doe', provider: 'example.fakerjs.dev' }) // 'Jeanne_Doe88@example.fakerjs.dev'
+faker.animal.dog()   // 'Irish Water Spaniel'
+faker.animal.cat()   // 'Singapura'
+faker.animal.horse() // 'Swedish Warmblood'
+faker.image.avatar()
+faker.image.city()
 ```
 
-Como `provider` del `datasource` tenemos los siguientes: 
 
-- sqlite
-- postgresql
-- mysql
-- sqlserver
-- mongodb
-- cockroachdb
+## 2.3. Documentación
 
+- [Guía](https://fakerjs.dev/guide/)
+- [API. Tipos de datos proporcionados](https://fakerjs.dev/api/)
 
-**`.env`**
 
-```
-DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
-```
 
-> **NOTA**: El formato de la variable de entorno `DATABASE_URL` es el siguiente:
->
-> `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>'`
+# 3. Gráficos
 
+Otra de las funcionalidades que a menudo es requerida es la de presentación de información en forma gráfica. Suele tratarse de diagramas para la exposición de datos o de monitorización de ellos (en algunos casos en tiempo real). En este último caso, los gráficos suelen estar incorporados en un Dashboard o Panel del usuario. 
 
-# 3. Definiendo el Modelo de Datos
+La web W3Schools tiene una [introdución a los gráficos](https://ww  w.w3schools.com/ai/ai_graphics.asp) explicando brevemente las librerías más habituales para el trabajo con gráficos.
 
-Hay dos formas alternativas de definir un modelo de datos:
+Nosotros usaremos la librería [chart.js](https://www.chartjs.org/) por ser una de las más populares. Además es sencilla de usar y tiene licencia MIT, la cual es muy permisiva.
 
-1. **Generar el modelo de datos mediante introspección**: cuando tienes una base de datos existente o prefieres migrar el esquema de tu base de datos con SQL, genera el modelo de datos mediante una introspección de tu base de datos. En este caso, el esquema de la base de datos es la única fuente de verdad para los modelos de tu aplicación.
+Hay una demo disponible en [Vercel](https://nxchart.vercel.app). El código fuente está disponible en:
 
+- [Código fuente](https://github.com/jamj2000/nxchart)
 
-2. **Escribir el modelo de datos manualmente y usar Prisma Migrate**: puedes escribir tu modelo de datos manualmente y asignarlo a tu base de datos usando Prisma Migrate. En este caso, el modelo de datos es la única fuente de verdad para los modelos de tu aplicación.
+![demo](assets/chart-dashboard.png)
 
 
+## 3.1. Instalación
 
-## 3.1. Generar el modelo de datos mediante introspección
 
-En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, generaremos el modelo a partir de dichas tablas. Para ello ejecutamos:
+## 3.2. Uso
 
-```sh
-npx prisma db pull    
-npx prisma generate
-```
 
-> **IMPORTANTE**: La operación `npx prisma db pull` borra el modelo previo de `prisma/schema.prisma`. 
 
-![prisma db pull](assets/introspect.png)
+## 3.3. Documentación
 
-![prisma generate](assets/generate.png)
+- [Componentes](https://react-chartjs-2.js.org/components/)
+- [Ejemplos](https://github.com/reactchartjs/react-chartjs-2/tree/master/sandboxes)
+- [Otros recursos relacionados - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
 
 
-## 3.2. Escribir el modelo de datos manualmente
+# 4. Creación de PDFs 
 
-En este otro caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
 
-```sh
-npx prisma migrate dev   
-```
+pdf-lib
 
-Si no ha habido cambios se mostrará un mensaje similar al siguiente:
+## 4.1. Instalación
 
-![prisma migrate sin cambios](assets/migrate-dev1.png)
 
-Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para la migración:
+## 4.2. Uso
 
-![prisma migrate con cambios](assets/migrate-dev2.png)
 
 
-### 3.2.1. Modelos
+## 4.3. Documentación
 
-- [Modelos en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/models)
 
 
-**Reglas de nombrado para Modelos:**
+# 5. Envío de correos
 
-- Los nombres de los modelos deben cumplir con la siguiente expresión regular: `[A-Za-z][A-Za-z0-9_]*`
-- Los nombres de los modelos deben comenzar con una letra y normalmente se escriben en **PascalCase**
-- Los nombres de los modelos deben usar la forma singular (por ejemplo, `Usuario` en lugar de usuario, usuarios o Usuarios)
 
-> **NOTA**: Puede utilizar el atributo `@@map` para asignar un modelo (por ejemplo, `Usuario`) a una tabla con un nombre diferente que no coincide con las convenciones de nomenclatura del modelo (por ejemplo, usuarios).
+react-email
+nodemailer
 
+## 5.1. Instalación
 
-**Reglas de nombrado para Campos**
 
-Reglas de nombrado:
+## 5.2. Uso
 
-- Debe cumplir con la siguiente expresión regular: [A-Za-z][A-Za-z0-9_]*
-- Debe comenzar con una letra y normalmente se escriben en **camelCase**
-  
-> **NOTA**: Puede utilizar el atributo `@map` para asignar un nombre de campo a una columna con un nombre diferente que no coincida con las convenciones de nomenclatura de campos: p. ej. `miCampo @map("mi_campo")`.
 
 
-**Ejemplo**:
+## 5.3. Documentación
 
-```prisma
-generator client {
-  provider = "prisma-client-js"
-}
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+# 6. Pago por internet
 
-model Articulo {
-  id          Int       @id @default(autoincrement())
-  nombre      String
-  descripcion String?
-  precio      Decimal?  
 
-  @@map("articulos")
-}
-```
+stripe
 
-> NOTA: El signo **`?`** significa que el valor no es requerido, es decir admite NULL.
+## 6.1. Instalación
 
 
-**Tipos de datos**
+## 6.2. Uso
 
-Prisma define los siguientes tipos de datos:
 
-- [String](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string)
-- [Boolean](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#boolean)
-- [Int](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#int)
-- [BigInt](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#bigint)
-- [Float](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#float)
-- [Decimal](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#decimal)
-- [DateTime](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#datetime)
-- [Json](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#json)
 
-Estos tipos de datos son mapeados a los tipos nativos de cada base de datos según se muestra en la siguiente tabla:
-
-Prisma  	  | String        | Boolean    | Int      | BigInt    | Float             | Decimal        | DateTime     | Json
-------------|---------------|------------|----------|-----------|-------------------|----------------|--------------|----------------
-PostgreSQL	| text          | boolean    | integer  | bigint    | double precision  | decimal(65,30) | timestamp(3) | jsonb
-SQL Server	| nvarchar(1000)|tinyint     | int      | int       | float(53)         | decimal(32,16) | datetime2    | Not supported
-MySQL	      | varchar(191)  |TINYINT(1)  | INT      | BIGINT    | DOUBLE            | DECIMAL(65,30) | DATETIME(3)  | JSON
-MongoDB	    | String        |Bool        | Int      | Long      | Double            | Not supported  | Timestamp    | A valid BSON object (Relaxed mode) 
-SQLite	    | TEXT          |INTEGER     | INTEGER  | INTEGER   | REAL              | DECIMAL        | NUMERIC      | Not supported
-CockroachDB	| STRING        |BOOL        | INT      | INTEGER   | DOUBLE PRECISION  | DECIMAL        | TIMESTAMP    | JSONB
-
-
-
-### 3.2.2. Relaciones 
-
-- [Relaciones en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations)
-
-![Esquema de ejemplo](assets/sample-database.png)
-
-**[Uno a Uno](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/one-to-one-relations)**
-
-```prisma
-model User {
-  id      Int      @id @default(autoincrement())
-  profile Profile?
-}
-
-model Profile {
-  id     Int  @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id])
-  userId Int  @unique  // campo escalar (usado en atributo `@relation`)
-}
-```
-
-**[Uno a Muchos](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/one-to-many-relations)**
-
-```prisma
-model User {
-  id    Int    @id @default(autoincrement())
-  posts Post[]
-}
-
-model Post {
-  id       Int  @id @default(autoincrement())
-  author   User @relation(fields: [authorId], references: [id])
-  authorId Int  // campo escalar (usado en atributo `@relation`)
-}
-```
-
-Una relación uno-muchos puede ser opcional.
-
-En el siguiente ejemplo, se permite crear un Post sin asignar un User. Observar el signo **`?`** en los 2 últimos campos.
-
-
-```prisma
-model User {
-  id    Int    @id @default(autoincrement())
-  posts Post[]
-}
-
-model Post {
-  id       Int   @id @default(autoincrement())
-  author   User? @relation(fields: [authorId], references: [id])
-  authorId Int?
-}
-```
-
-**[Muchos a Muchos](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/many-to-many-relations)**
-
-```prisma
-model Post {
-  id         Int       @id @default(autoincrement())
-  title      String
-  categories CategoriesOnPosts[]
-}
-
-model Category {
-  id    Int            @id @default(autoincrement())
-  name  String
-  posts CategoriesOnPosts[]
-}
-
-model CategoriesOnPosts {
-  post       Post     @relation(fields: [postId], references: [id])
-  postId     Int     // campo escalar (usado en atributo `@relation`)
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int     // campo escalar (usado en atributo `@relation`)
-  assignedAt DateTime @default(now())
-  assignedBy String
-
-  @@id([postId, categoryId])
-}
-```
-
-Si en la tabla intermedia no tenemos campos propios, Prisma nos permite simplificar el esquema, que quedaría así:
-
-```prisma
-model Post {
-  id         Int         @id @default(autoincrement())
-  title      String
-  categories Category[]
-}
-
-model Category {
-  id    Int              @id @default(autoincrement())
-  name  String
-  posts Post[]
-}
-```
-
-Esto se conoce como relación implícita de muchos a muchos. Esta relación todavía se manifiesta en una tabla de relaciones en la base de datos subyacente. Sin embargo, Prisma gestiona esta tabla de relaciones.
-
-
-### 3.2.3. Sincronizando el esquema con la base de datos
-
-
-Siempre que actualices tu esquema Prisma, deberás actualizar el esquema de tu base de datos utilizando `npx prisma migrate dev` o `npx prisma db push`. Esto mantendrá el esquema de tu base de datos sincronizado con tu esquema Prisma. Los comandos también regenerarán Prisma Client.
-
-
-Para ello ejecutaremos:
-
-```sh
-npx prisma migrate dev --name nombremigracion
-```
-
-o, en su lugar, ejecutaremos:
-
-
-```sh
-npx prisma db push
-```
-
-> **IMPORTANTE**: La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
-
-
-# 4. Consultas CRUD
-
-- [Consutlas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
-
-## 4.1. CRUD
-
-CRUD es el acrónimo para:
-
-- **Create**
-- **Read**
-- **Update**
-- **Delete**
-
-Estas son las 4 operaciones básicas necesarias para la gestión de información.
-
-### 4.1.1. Create
-
-```javascript
-const user = await prisma.user.create({
-  data: {
-    email: 'elsa@prisma.io',
-    name: 'Elsa Prisma',
-  },
-})
-```
-
-### 4.1.2. Read
-
-**Encontrar un registro por ID**
-
-```javascript
-const user = await prisma.user.findUnique({
-  where: {
-    id: 1,
-  },
-})
-```  
-
-**Encontrar todos los registros**
-
-```javascript
-const users = await prisma.user.findMany()
-```
-
-### 4.1.3. Update
-
-**Actualizar un registro por ID**
-
-```javascript
-const updateUser = await prisma.user.update({
-  where: {
-    id: 1,
-  },
-  data: {
-    name: 'Eva York',
-  },
-})
-```
-
-### 4.1.4. Delete
-
-**Elimnar un registro por ID**
-
-```javascript
-const deleteUser = await prisma.user.delete({
-  where: {
-    id: 1,
-  },
-})
-```
-
-## 4.2. Seleccionar campos
-
-
-**Obtener email y name del user con id 22**
-
-```javascript
-const getUser = await prisma.user.findUnique({
-  where: {
-    id: 22,
-  },
-  select: {
-    email: true,
-    name: true,
-  },
-})
-```
-
-## 4.3. Consultar varias tablas
-
-Algunos ejemplos.
-
-**Insertar user, algunos posts y categories asociadas**
-
-```javascript 
-const user = await prisma.user.create({
-  data: {
-    email: 'ariadne@prisma.io',
-    name: 'Ariadne',
-    posts: {
-      create: [
-        {
-          title: 'My first day at Prisma',
-          categories: {
-            create: {
-              name: 'Office',
-            },
-          },
-        },
-        {
-          title: 'How to connect to a SQLite database',
-          categories: {
-            create: [{ name: 'Databases' }, { name: 'Tutorials' }],
-          },
-        },
-      ],
-    },
-  },
-})
-```
-
-**Obtener user y todos sus posts**
-
-```javascript
-const user = await prisma.user.findFirst({
-  include: {
-    posts: true,
-  },
-}
-```
-
-**Obtener user, sus posts y categories**
-
-```javascript
-const user = await prisma.user.findFirst({
-  include: {
-    posts: {
-      include: {
-        categories: true,
-      },
-    },
-  },
-})
-```
-
-**Obtener name de user y todos los title de sus posts**
-
-```javascript
-const user = await prisma.user.findFirst({
-  select: {
-    name: true,
-    posts: {
-      select: {
-        title: true,
-      },
-    },
-  },
-})
-```
-
-**Obtener todos los campos de user y todos los title de sus posts**
-
-```javascript
-const user = await prisma.user.findFirst({
-  include: {
-    posts: {
-      select: {
-        title: true,
-      },
-    },
-  },
-})
-```
-
-# 5. Ver datos de las tablas
-
-Ejecutamos
-
-```sh
-npx prisma studio
-```
-
-y abrimos en el navegador la URL http://localhost:5555
-
-![prisma studio 1](assets/studio1.png)
-
-![prisma studio 2](assets/studio2.png)
-
-
-# 6. Despliegue en Vercel
-
-
-Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
-
-Para evitar este problema, debemos añadir `prisma generate` al script `postinstall` en el archivo **`package.json`**:
-
-```json
-{
-  ...
-  "scripts" {
-    ...
-    "postinstall": "prisma generate"
-  }
-  ...
-}
-```
-
-# 7. Referencias
-
-- [Video: Nextjs y Prisma ORM desde Cero usando Typescript](https://www.youtube.com/watch?v=5k7ZGhL3pI0&t=3938s)
-- [Get started with Prisma](https://www.prisma.io/docs/getting-started)
-- [Prisma schema](https://www.prisma.io/docs/orm/prisma-schema)
-- [Proyecto de ejemplo](https://github.com/jamj2000/nxprisma-crud)
-
+## 6.3. Documentación

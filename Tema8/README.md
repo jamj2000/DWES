@@ -32,6 +32,7 @@
 
 --- 
 
+
 # 1. Introducción
 
 En este Tema usaremos el sistema de autenticación proporcionado por **[Auth.js](https://authjs.dev/)**. 
