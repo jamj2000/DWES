@@ -118,9 +118,87 @@ Hay una demo disponible en [Vercel](https://nxchart.vercel.app). El código fuen
 
 ## 3.1. Instalación
 
+```console
+npm  install  chart.js  react-chartjs-2
+```
+
+El segundo paquete (`react-chartjs-2`) nos permitirá usar directamente componentes de React, en lugar de Vanilla JS.
+
 
 ## 3.2. Uso
 
+
+La forma más rápida y directa de empezar a usar esta librería es usando el siguiente código. 
+
+```js
+import { Chart } from 'chart.js/auto'
+```
+
+Sin embargo, para despliegue en producción es recomendable usar la forma que aparece a continuación, puesto que reducirá el peso del código resultante. En este segundo caso deberemos importar los componentes especificos que vayamos a necesitar y además realizar un registro de ellos.
+
+```js
+// Esto es un ejemplo para un gráfico tipo Scatter.
+// Para otro tipo de gráfico necesitarás importar otros componentes.
+import {
+  Chart,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+Chart.register(LinearScale, PointElement, Tooltip, Legend);
+```
+
+
+Haciendo uso del paquete `react-chartjs-2` importamos el tipo de gráfico deseado. En el ejemplo que viene a continuación importamos un gráfico de tipo `Scatter`.
+
+Luego seguimos el siguiente procedimiento:
+
+1. Definimos un constante `options` con la configuración general del gráfico.
+2. Definimos una constante `data` con la configuración específica del gráfico.
+3. Usamos el componente pasándole las propiedades anteriores.
+
+
+```js
+import { Scatter } from 'react-chartjs-2';
+
+const options = {
+    scales: {
+        y: {
+            beginAtZero: true,
+        },
+    },
+};
+
+const data = {
+    datasets: [
+        {
+            label: 'Puntos aleatorios',   
+            data: Array.from({ length: 100 }, () => ({  // 100 puntos 
+                x: Math.random(),
+                y: Math.random(),
+            })),
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+        },
+    ],
+};
+
+export default function grafico() {
+    return (
+        <div className='contenedor '>
+            <Scatter options={options} data={data} />
+        </div>
+    )
+}
+```
+
+El gráfico debe estar dentro de un **elemento contenedor**. El contenedor padre debe cumplir los siguientes requisitos para que el comportamiento sea [responsive](https://www.chartjs.org/docs/latest/configuration/responsive.html):
+
+- Tener `position: relative` en su estilo CSS. 
+- Dedicarse únicamente al lienzo del gráfico.
+
+Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (`canvas`) y los tamaños de visualización. Sin embargo, este método requiere que el contenedor esté relativamente posicionado y dedicado únicamente al lienzo del gráfico.
 
 
 ## 3.3. Documentación
