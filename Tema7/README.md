@@ -201,6 +201,12 @@ El gráfico debe estar dentro de un **elemento contenedor**. El contenedor padre
 Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (`canvas`) y los tamaños de visualización. Sin embargo, este método requiere que el contenedor esté relativamente posicionado y dedicado únicamente al lienzo del gráfico.
 
 
+> **IMPORTANTE:**
+>
+> La página donde vaya a incrustarse el gráfico debe contener la directiva **`'use client'`**
+
+
+
 ## 3.3. Documentación
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
