@@ -105,7 +105,7 @@ faker.image.city()
 
 Otra de las funcionalidades que a menudo es requerida es la de presentación de información en forma gráfica. Suele tratarse de diagramas para la exposición de datos o de monitorización de ellos (en algunos casos en tiempo real). En este último caso, los gráficos suelen estar incorporados en un Dashboard o Panel del usuario. 
 
-La web W3Schools tiene una [introdución a los gráficos](https://ww  w.w3schools.com/ai/ai_graphics.asp) explicando brevemente las librerías más habituales para el trabajo con gráficos.
+La web W3Schools tiene una [introdución a los gráficos](https://www.w3schools.com/ai/ai_graphics.asp) explicando brevemente las librerías más habituales para el trabajo con gráficos.
 
 Nosotros usaremos la librería [chart.js](https://www.chartjs.org/) por ser una de las más populares. Además es sencilla de usar y tiene licencia MIT, la cual es muy permisiva.
 
