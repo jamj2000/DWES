@@ -85,7 +85,7 @@ faker.person.fullName()
 faker.person.bio()
 faker.internet.email()
 faker.internet.email({ firstName: 'Jeanne', lastName: 'Doe' }) // 'Jeanne_Doe63@yahoo.com'
-faker.internet.email({ firstName: 'Jeanne', lastName: 'Doe', provider: 'example.fakerjs.dev' }) // 'Jeanne_Doe88@example.fakerjs.dev'
+faker.internet.email({ firstName: 'Jeanne', lastName: 'Doe', provider: 'example.dev' }) // 'Jeanne_Doe88@example.dev'
 faker.animal.dog()   // 'Irish Water Spaniel'
 faker.animal.cat()   // 'Singapura'
 faker.animal.horse() // 'Swedish Warmblood'
