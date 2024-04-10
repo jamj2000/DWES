@@ -12,6 +12,9 @@
 - [3. Gráficos](#3-gráficos)
   - [3.1. Instalación](#31-instalación)
   - [3.2. Uso](#32-uso)
+  - [Flujo de datos (streaming)](#flujo-de-datos-streaming)
+  - [Los modelos de provisión de datos](#los-modelos-de-provisión-de-datos)
+  - [Crear app para NextJS](#crear-app-para-nextjs)
   - [3.3. Documentación](#33-documentación)
 - [4. Creación de PDFs](#4-creación-de-pdfs)
   - [4.1. Instalación](#41-instalación)
@@ -206,13 +209,103 @@ Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (
 > La página donde vaya a incrustarse el gráfico debe contener la directiva **`'use client'`**
 
 
+## Flujo de datos (streaming)
+
+En algunos casos deseamos que la gráfica muestre un flujo de datos (streaming) obtenido de alguna fuente. Para ello podemos usar el plugin [chartjs-plugin-streaming](https://nagix.github.io/chartjs-plugin-streaming/latest/). Su página web dispone de varios [ejemplos](https://nagix.github.io/chartjs-plugin-streaming/latest/samples/charts/line-horizontal.html).
+
+El sitio oficial también dispone de una [guía](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/) bastante detallada.
+
+Entre toda la información podemos destacar:
+
+1. [Los modelos de provisión de datos](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html)
+2. [El tutorial para crear app en React, también aplicable a Next.js](https://nagix.github.io/chartjs-plugin-streaming/latest/tutorials/react/app.html)
+
+## Los modelos de provisión de datos
+
+
+
+## Crear app para NextJS
+
+```console
+npm install chart.js react-chartjs-2 luxon chartjs-adapter-luxon chartjs-plugin-streaming chartjs-plugin-annotation
+```
+
+> **IMPORTANTE:** 
+>
+> A fecha de Abril de 2024, este plugin de streaming no soporta chartjs v4, por tanto debemos instalar los paquetes más antiguos usando el siguiente comando:
+>
+> ```console
+> npm install chart.js@3 react-chartjs-2@4 luxon chartjs-adapter-luxon chartjs-plugin-streaming chartjs-plugin-annotation@1 --legacy-peer-deps
+> ```
+
+
+```js
+import { Line, Chart } from 'react-chartjs-2';
+import 'chartjs-adapter-luxon';
+import StreamingPlugin from 'chartjs-plugin-streaming';
+
+
+Chart.register(StreamingPlugin);
+
+const options = {
+          scales: {
+            x: {
+              type: 'realtime',
+              realtime: {
+                delay: 2000,
+                onRefresh: chart => {
+                  chart.data.datasets.forEach(dataset => {
+                    dataset.data.push({
+                      x: Date.now(),
+                      y: Math.random()
+                    });
+                  });
+                }
+              }
+            }
+          }
+
+
+const data = {
+          datasets: [{
+            label: 'Dataset 1',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgb(255, 99, 132)',
+            borderDash: [8, 4],
+            fill: true,
+            data: []
+          }, {
+            label: 'Dataset 2',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgb(54, 162, 235)',
+            cubicInterpolationMode: 'monotone',
+            fill: true,
+            data: []
+          }]
+        }
+
+
+function grafico () {
+      return (
+      <Line options={options} data={data}  />
+    );
+}
+
+export default grafico
+```
+
+
+
+
+
 
 ## 3.3. Documentación
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
 - [Componentes](https://react-chartjs-2.js.org/components/)
 - [Ejemplos de react-chartjs-2](https://github.com/reactchartjs/react-chartjs-2/tree/master/sandboxes)
-- [Otros recursos relacionados - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
+- [Más gráficos, plugins,... - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
+  
 
 
 # 4. Creación de PDFs 
