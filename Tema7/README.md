@@ -12,9 +12,9 @@
   - [3.1. Instalación](#31-instalación)
   - [3.2. Uso](#32-uso)
   - [3.3. Flujo de datos (streaming)](#33-flujo-de-datos-streaming)
-  - [3.4. Los modelos de provisión de datos](#34-los-modelos-de-provisión-de-datos)
-  - [3.5. Crear app para NextJS](#35-crear-app-para-nextjs)
-  - [3.6. Documentación](#36-documentación)
+    - [3.3.1. Los modelos de provisión de datos](#331-los-modelos-de-provisión-de-datos)
+    - [3.3.2. Ejemplo](#332-ejemplo)
+  - [3.4. Documentación](#34-documentación)
 - [4. Creación de PDFs](#4-creación-de-pdfs)
   - [4.1. Instalación](#41-instalación)
   - [4.2. Uso](#42-uso)
@@ -27,6 +27,7 @@
   - [6.1. Instalación](#61-instalación)
   - [6.2. Uso](#62-uso)
   - [6.3. Documentación](#63-documentación)
+
 
 
 
@@ -251,18 +252,37 @@ Entre toda la información podemos destacar:
 1. [Los modelos de provisión de datos](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html)
 2. [El tutorial para crear app en React, también aplicable a Next.js](https://nagix.github.io/chartjs-plugin-streaming/latest/tutorials/react/app.html)
 
-## 3.4. Los modelos de provisión de datos
+### 3.3.1. Los modelos de provisión de datos
 
 El paquete `chartjs-plugin-streaming` soporta obtención de datos mediante los modos **pull** y **push**. Para mayor información consulta la [documentación oficial](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html#push-model-listening-based)
 
 
 
-## 3.5. Crear app para NextJS
+### 3.3.2. Ejemplo
 
-**Instalación**
+Hay disponible una aplicación de ejemplo con [código fuente disponible en Github](https://github.com/jamj2000/nxchart-streaming).
+
+![demo streaming](assets/streaming.avif)
+
+
+**Ejecución en entorno de desarrollo**
 
 ```console
- npm  install  chart.js@3 react-chartjs-2@4 luxon chartjs-adapter-luxon chartjs-plugin-streaming chartjs-plugin-zoom chartjs-plugin-annotation@1 --legacy-peer-deps
+git clone  https://github.com/jamj2000/nxchart-streaming.git
+cd  nxchart-streaming
+npm install
+npm run dev
+```
+
+**Ejecución en entorno de producción**
+
+**IMPORTANTE**: El grafico6 hace uso del plugin `chartjs-plugin-zoom` para ofrecer funcionalidad de zoom y pan. Sin embargo este plugin provoca un error en el proceso de construcción. Por tanto el comando `npm run build` fallará. Si deseas llevar esta aplicación a producción, elimina este plugin del archivo `src/components/grafico6.js`.
+
+
+**Resumen del proceso de desarrollo**
+
+```console
+npm  install  chart.js@3 react-chartjs-2@4 luxon chartjs-adapter-luxon chartjs-plugin-streaming chartjs-plugin-zoom chartjs-plugin-annotation@1 --legacy-peer-deps
 ```
 
 > **IMPORTANTE:** 
@@ -290,29 +310,15 @@ import ChartStreaming from 'chartjs-plugin-streaming';
 
 
 const onRefresh = (chart) => {
-  const now = Date.now();
-  chart.data.datasets.forEach(dataset => {
-    dataset.data.push({
-      x: now,
-      y: Math.random() * 200 - 100   // Rango de 200 empezando en -100 -> desde -100 hasta 100
-    });
-  });
+ /* ... */
 };
 
 
 const options = {
   responsive: true,
   plugins: {
-    title: {
-      display: true,
-      text: 'TEMPERATURAS en ºC',
-    },
-    legend: {
-      display: true,
-      labels: {
-        color: '#000000'
-      },
-    },
+    title: /* ... */,
+    legend: /* ... */,
     annotation: { annotations: {} }  // necesario para ocultar gráfica al pulsar leyenda
   },
   scales: {
@@ -332,24 +338,11 @@ const options = {
       }
     }
   },
-  interaction: {
-    mode: 'index',
-    intersect: false
-  },
+  interaction: /* ... */,
 }
 
 
-const data = {
-  datasets: [
-    {
-      label: 'Datos',
-      data: [],
-      backgroundColor: '#55555588',
-      borderColor: '#55555588',
-      borderWidth: 4,
-    },
-  ]
-};
+const data = /* ... */;
 
 
 
@@ -357,7 +350,7 @@ function grafico() {
   Chart.register(annotationPlugin, ChartStreaming);
 
   return (
-    <div className='chart'>
+    <div className='contenedor'>
       <Line options={options} data={data} />
     </div>
   );
@@ -367,25 +360,7 @@ export default grafico
 ```
 
 
-Hay disponible una aplicación de ejemplo con [código fuente disponible en Github](https://github.com/jamj2000/nxchart-streaming).
-
-![demo streaming](assets/streaming.avif)
-
-**Ejecución en entorno de desarrollo**
-
-```console
-git clone  https://github.com/jamj2000/nxchart-streaming.git
-cd  nxchart-streaming
-npm install
-npm run dev
-```
-
-**Ejecución en entorno de producción**
-
-**IMPORTANTE**: El grafico6 hace uso del plugin `chartjs-plugin-zoom` para ofrecer funcionalidad de zoom y pan. Sin embargo este plugin provoca un error en el proceso de construcción. Por tanto el comando `npm run build` fallará. Si deseas llevar esta aplicación a producción, elimina este plugin del archivo `src/components/grafico6.js`.
-
-
-## 3.6. Documentación
+## 3.4. Documentación
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
 - [Código fuente de ejemplo con streaming](https://github.com/jamj2000/nxchart-streaming)
