@@ -37,7 +37,7 @@
 
 > **IMPORTANTE: MATERIAL PARA EL PRÓXIMO CURSO 2024/25**
 >
-> El contenido previo de este tema ha sido movido al Tetma 6. Este contenido es nuevo, y está previsto su uso en el próximo curso.
+> El contenido previo de este tema ha sido movido al [Tema 6](Tema6). Este contenido es nuevo, y está previsto su uso en el próximo curso.
 
  
 
