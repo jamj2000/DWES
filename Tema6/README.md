@@ -13,7 +13,7 @@
 - [4. Postgres (Vercel)](#4-postgres-vercel)
   - [4.1. Proyecto](#41-proyecto)
   - [4.2. Otros aspectos](#42-otros-aspectos)
-- [5. Primeros pasos con Prisma](#5-primeros-pasos-con-prisma)
+- [5. Primeros pasos con ORM Prisma](#5-primeros-pasos-con-orm-prisma)
   - [5.1. Instalación del paquete prisma](#51-instalación-del-paquete-prisma)
   - [5.2. Comandos disponibles](#52-comandos-disponibles)
   - [5.3. Inicialización](#53-inicialización)
@@ -476,7 +476,7 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 
 
 
-# 5. Primeros pasos con Prisma
+# 5. Primeros pasos con ORM Prisma
 
 Un **ORM**, o **Object Relational Mapper**, es una pieza de software diseñada para traducir entre las representaciones de datos utilizadas por las bases de datos y las utilizadas en la programación orientada a objetos.
 

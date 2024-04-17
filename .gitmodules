@@ -38,8 +38,8 @@
 [submodule "proyectos/tema6/nxpostgres-crud"]
 	path = proyectos/tema6/nxpostgres-crud
 	url = https://github.com/jamj2000/nxpostgres-crud.git
-[submodule "proyectos/tema7/nxprisma-crud"]
-	path = proyectos/tema7/nxprisma-crud
+[submodule "proyectos/tema6/nxprisma-crud"]
+	path = proyectos/tema6/nxprisma-crud
 	url = https://github.com/jamj2000/nxprisma-crud.git
 [submodule "proyectos/tema6/nxmysql-app"]
 	path = proyectos/tema6/nxmysql-app
@@ -59,8 +59,8 @@
 [submodule "proyectos/tema4/nxapi-mysql"]
 	path = proyectos/tema4/nxapi-mysql
 	url = https://github.com/jamj2000/nxapi-mysql.git
-[submodule "proyectos/tema7/nxprisma-crud-negocio"]
-	path = proyectos/tema7/nxprisma-crud-negocio
+[submodule "proyectos/tema6/nxprisma-crud-negocio"]
+	path = proyectos/tema6/nxprisma-crud-negocio
 	url = https://github.com/jamj2000/nxprisma-crud-negocio.git
 [submodule "examenes/examen-dwes-node-next"]
 	path = examenes/examen-dwes-node-next
