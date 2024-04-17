@@ -13,7 +13,7 @@
   - [2.5. Archivo package.json](#25-archivo-packagejson)
   - [2.6. Ejecución de paquetes sin necesidad de instalar](#26-ejecución-de-paquetes-sin-necesidad-de-instalar)
   - [2.7. Módulos incorporados (built-in) en Node](#27-módulos-incorporados-built-in-en-node)
-- [3. Linter para Javascript](#3-linter-para-javascript)
+- [3. Linter para Javascript (y también para CSS)](#3-linter-para-javascript-y-también-para-css)
 - [4. Configuración de usuario en VSCode](#4-configuración-de-usuario-en-vscode)
   - [4.1. Archivo settings.json](#41-archivo-settingsjson)
   - [4.2. Plugins](#42-plugins)
@@ -605,7 +605,11 @@ Por ejemplo, mi configuración es la siguiente:
 ```json
 {
     "workbench.colorTheme": "Default Light+",
-    "window.zoomLevel": 2,
+    "workbench.iconTheme": "material-icon-theme",
+    // Tailwind autofold 
+    "tailwind-fold.autoFold": true,
+    // Actualizar etiquetas de cierre de HTML y JSX
+    "editor.linkedEditing": true,
     // Fuente con ligaduras
     "editor.fontLigatures": true,
     "editor.fontVariations": false,
