@@ -17,6 +17,7 @@
   - [5.1. Beneficios del renderizado en el cliente](#51-beneficios-del-renderizado-en-el-cliente)
 - [6. Componentes del Servidor VS Componentes del Cliente](#6-componentes-del-servidor-vs-componentes-del-cliente)
   - [6.1. ¿Cuándo utilizar componentes de servidor y cliente?](#61-cuándo-utilizar-componentes-de-servidor-y-cliente)
+  - [Ejemplo: Paginación de datos](#ejemplo-paginación-de-datos)
   - [6.2. Componentes de NextJS](#62-componentes-de-nextjs)
 - [7. App Router](#7-app-router)
   - [7.1. Segmentos de ruta](#71-segmentos-de-ruta)
@@ -392,6 +393,23 @@ A continuación se ofrece un resumen rápido de los diferentes casos de uso de l
 | Utilizar efectos de estado y ciclo de vida ( useState(), useEffect(), etc.)                             |            ❌            |           ✅            |
 | Utilizar API solo para navegador                                                                        |            ❌            |           ✅            |
 | Utilizar enlaces personalizados que dependan del estado, los efectos o las API exclusivas del navegador |            ❌            |           ✅            |
+
+## Ejemplo: Paginación de datos
+
+La decisión de realizar la paginación en el lado del servidor o del cliente en Next.js depende de varios factores, como el tamaño de los datos, la frecuencia de actualización de los datos y las necesidades de rendimiento de tu aplicación.
+
+- **Paginación en el lado del servidor**: Si estás trabajando con grandes conjuntos de datos o necesitas una carga inicial rápida, puede ser más eficiente implementar la paginación en el lado del servidor. Esto significa que la lógica de paginación se ejecuta en el servidor y solo se envían al cliente los datos necesarios para la página actual. Esto puede ayudar a reducir el tiempo de carga inicial y mejorar la experiencia del usuario.
+- **Paginación en el lado del cliente**: Si estás trabajando con conjuntos de datos más pequeños o si los datos se actualizan frecuentemente, puede ser más práctico implementar la paginación en el lado del cliente. Esto significa que todos los datos se cargan inicialmente en el cliente y la paginación se gestiona mediante JavaScript en el navegador. Esto puede simplificar la lógica del servidor y permitir una interacción más fluida con la página sin necesidad de recargarla.
+
+En resumen, la mejor opción dependerá de las necesidades específicas de tu aplicación. En algunos casos, puede ser beneficioso combinar ambas estrategias, utilizando la paginación en el lado del servidor para la carga inicial y luego la paginación en el lado del cliente para una navegación más fluida.
+
+- [Código fuente de ejemplo](https://github.com/jamj2000/nxpagination.git) 
+
+> **ACTIVIDAD:**
+>
+> Descarga y ejectua el código fuente anterior.
+> 
+> ¿Qué tipo de paginación se realiza en la aplicacón del código fuente anterior?.
 
 
 ## 6.2. Componentes de NextJS
