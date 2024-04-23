@@ -17,8 +17,8 @@
   - [5.1. Beneficios del renderizado en el cliente](#51-beneficios-del-renderizado-en-el-cliente)
 - [6. Componentes del Servidor VS Componentes del Cliente](#6-componentes-del-servidor-vs-componentes-del-cliente)
   - [6.1. ¿Cuándo utilizar componentes de servidor y cliente?](#61-cuándo-utilizar-componentes-de-servidor-y-cliente)
-  - [Ejemplo: Paginación de datos](#ejemplo-paginación-de-datos)
-  - [6.2. Componentes de NextJS](#62-componentes-de-nextjs)
+  - [6.2. Ejemplo: Paginación de datos](#62-ejemplo-paginación-de-datos)
+  - [6.3. Componentes de NextJS](#63-componentes-de-nextjs)
 - [7. App Router](#7-app-router)
   - [7.1. Segmentos de ruta](#71-segmentos-de-ruta)
   - [7.2. Creando rutas](#72-creando-rutas)
@@ -34,6 +34,7 @@
   - [9.3. Leer Cookies](#93-leer-cookies)
   - [9.4. Eliminar Cookies](#94-eliminar-cookies)
 - [10. Referencias](#10-referencias)
+
 
 
 
@@ -394,7 +395,7 @@ A continuación se ofrece un resumen rápido de los diferentes casos de uso de l
 | Utilizar API solo para navegador                                                                        |            ❌            |           ✅            |
 | Utilizar enlaces personalizados que dependan del estado, los efectos o las API exclusivas del navegador |            ❌            |           ✅            |
 
-## Ejemplo: Paginación de datos
+## 6.2. Ejemplo: Paginación de datos
 
 La decisión de realizar la paginación en el lado del servidor o del cliente en Next.js depende de varios factores, como el tamaño de los datos, la frecuencia de actualización de los datos y las necesidades de rendimiento de tu aplicación.
 
@@ -412,7 +413,7 @@ En resumen, la mejor opción dependerá de las necesidades específicas de tu ap
 > ¿Qué tipo de paginación se realiza en la aplicacón del código fuente anterior?.
 
 
-## 6.2. Componentes de NextJS
+## 6.3. Componentes de NextJS
 
 **Link**
 
