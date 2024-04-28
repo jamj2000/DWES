@@ -287,7 +287,7 @@ Sitios que proporcionan componentes basados en Tailwind:
 
 Como hemos indicado antes, JSX se usa tanto en páginas como en componentes. En ambos es posible el paso de argumentos, llamados también propiedades. 
 
-Las propiedades más importantes que puede recibir una página son **`params`** y **`searchParams**`. A través de ellas podemos acceder a los **parámetros de ruta** y los **parámetros de consulta** correspondientes
+Las propiedades más importantes que puede recibir una página son **`params`** y **`searchParams`**. A través de ellas podemos acceder a los **parámetros de ruta** y los **parámetros de consulta** correspondientes
 
 La estructura básica de la página es la siguiente:
 
@@ -308,7 +308,7 @@ Para un descripción más detallada de estos parámetros consultar más adelante
 
 ## 2.3. Propiedades de un componente
 
-A los componentes también se le puede pasar información mediante las propiedades. A diferencia de las páginas, cuyas propiedades son recurrentes, en los componentes el nombre de las propiedades suele ser muy variado. La única propiedad que tiene un nombre reservado es `children` que representa los elementos hijos del componente, es decir los elementos que irán insertados entre la etiqueta de inicio y la etiqueta de cierre.
+A los componentes también se les puede pasar información mediante las propiedades. A diferencia de las páginas, cuyas propiedades son recurrentes, en los componentes el nombre de las propiedades suele ser muy variado. La única propiedad que tiene un nombre reservado es **`children`** que representa los elementos hijos del componente, es decir los elementos que irán insertados entre la etiqueta de inicio y la etiqueta de cierre.
 
 
 En los componentes debemos distinguir 2 aspectos:
@@ -401,7 +401,7 @@ Aunque hay 2 pequeñas diferencias:
 
 En la etiqueta de inicio `<Productos>` pasamos los valores de las propiedades que acepta el componente. En este caso son las propiedades *productos* y *categoria*.
 
-Los elementos que aparecen entre la etiqueta de inicio `<Productos>` y la etiqueta de cierre `</Productos>` corresponden a la propiedad `children` y se colocarán en la posición en la cual fueron definidos.
+Los elementos que aparecen entre la etiqueta de inicio `<Productos>` y la etiqueta de cierre `</Productos>` corresponden a la propiedad `children` y se colocarán en la posición en la cual fue definida dicha propiedad.
 
 
 También podemos encontrar componentes sin elementos insertados `children`, en cuyo caso deberíamos hacer uso de la siguiente manera:
