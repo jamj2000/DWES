@@ -27,7 +27,9 @@
   - [10.2. Aplicación Credentials](#102-aplicación-credentials)
   - [10.3. Aplicación All](#103-aplicación-all)
   - [10.4. Aplicación Middleware](#104-aplicación-middleware)
-- [11. Referencias:](#11-referencias)
+- [11. ANEXO: Datos de sesión en el lado cliente](#11-anexo-datos-de-sesión-en-el-lado-cliente)
+- [12. Referencias:](#12-referencias)
+
 
 
 --- 
@@ -963,12 +965,74 @@ export async function loginGoogle() {
 // ...
 ```
 
-
-
 Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
 
-# 11. Referencias:
+# 11. ANEXO: Datos de sesión en el lado cliente
+
+En los ejemplos anteriores nos hemos centrado en usar los datos de sesión desde el lado servidor. NextJS, como framework fullstack, también nos permite recuperar los datos de sesión desde el lado cliente.
+
+En el lado servidor, hemos usado la siguiente forma:
+
+```js
+import { auth } from "@/auth"
+
+async function page() {
+    const sesion = await auth()
+    // ...
+}
+```
+
+Sin embargo, en el lado cliente, deberemos hacer uso del *hook* `useSession` de la siguiente manera:
+
+```js
+"use client";
+import {useSession} from "next-auth/react";
+
+export default function page() {
+  const {data: session, status} = useSession();
+  console.log("status", status);
+  console.log("session", session);
+
+  return <div>Client Page</div>;
+}
+```
+
+Pero, además debemos realizar un cambio en `RootLayout`  para que todas las páginas cliente puedan hacer uso del método anterior. Debemos envolver la propiedad `children` dentro de un `SessionProvider`, el cual es un componente cliente, y por tanto deberemos declararlo en un archivo separado. 
+
+
+```js
+// src/app/layout.js
+import {Providers} from "./providers";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+          <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+```js
+// src/app/providers.js
+"use client"
+import {SessionProvider} from "next-auth/react";
+
+export function Providers({children}) {
+  return <SessionProvider>{children}</SessionProvider>;
+}
+```
+
+
+- Referencia: https://medium.com/@rezahedi/using-nextauth-authentication-provider-in-next-js-by-app-router-f50cb23282c9
+ 
+
+
+
+# 12. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Diferencias entre NextAuth4 y NextAuth5](https://authjs.dev/guides/upgrade-to-v5)
