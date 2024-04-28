@@ -3,48 +3,49 @@
 # Tema 4: Desarrollo de aplicaciones Web utilizando código embebido <!-- omit in toc -->
 > NEXTJS, APP ROUTER, ROUTE HANDLERS, COOKIES
 
-- [1. Introducción](#1-introducción)
-- [2. NextJS](#2-nextjs)
-  - [2.1. Creación de un proyecto](#21-creación-de-un-proyecto)
-  - [2.2. Carpetas y archivos del proyecto](#22-carpetas-y-archivos-del-proyecto)
+- [1. Introducción a NextJS](#1-introducción-a-nextjs)
+  - [1.1. Creación de un proyecto](#11-creación-de-un-proyecto)
+  - [1.2. Carpetas y archivos del proyecto](#12-carpetas-y-archivos-del-proyecto)
+- [2. JSX](#2-jsx)
+  - [2.1. Aplicar estilos](#21-aplicar-estilos)
+  - [2.2. Propiedades de una paǵina](#22-propiedades-de-una-paǵina)
+  - [2.3. Propiedades de un componente](#23-propiedades-de-un-componente)
 - [3. Componentes](#3-componentes)
-  - [3.1. JSX](#31-jsx)
-  - [3.2. Aplicar estilos](#32-aplicar-estilos)
-- [4. Componentes del Servidor](#4-componentes-del-servidor)
-  - [4.1. Beneficios del renderizado en el servidor](#41-beneficios-del-renderizado-en-el-servidor)
-  - [4.2. Funciones dinámicas](#42-funciones-dinámicas)
-- [5. Componentes del Cliente](#5-componentes-del-cliente)
-  - [5.1. Beneficios del renderizado en el cliente](#51-beneficios-del-renderizado-en-el-cliente)
-- [6. Componentes del Servidor VS Componentes del Cliente](#6-componentes-del-servidor-vs-componentes-del-cliente)
-  - [6.1. ¿Cuándo utilizar componentes de servidor y cliente?](#61-cuándo-utilizar-componentes-de-servidor-y-cliente)
-  - [6.2. Ejemplo: Paginación de datos](#62-ejemplo-paginación-de-datos)
-  - [6.3. Componentes de NextJS](#63-componentes-de-nextjs)
-- [7. App Router](#7-app-router)
-  - [7.1. Segmentos de ruta](#71-segmentos-de-ruta)
-  - [7.2. Creando rutas](#72-creando-rutas)
-  - [7.3. Organización del proyecto](#73-organización-del-proyecto)
-- [8. Route Handlers](#8-route-handlers)
-  - [8.1. Métodos HTTP admitidos](#81-métodos-http-admitidos)
-  - [8.2. Creación de API REST](#82-creación-de-api-rest)
-  - [8.3. API REST con datos en memoria RAM](#83-api-rest-con-datos-en-memoria-ram)
-  - [8.4. API REST con datos en BD MongoDB](#84-api-rest-con-datos-en-bd-mongodb)
-- [9. Cookies](#9-cookies)
-  - [9.1. Tipos de cookies](#91-tipos-de-cookies)
-  - [9.2. Generar Cookies](#92-generar-cookies)
-  - [9.3. Leer Cookies](#93-leer-cookies)
-  - [9.4. Eliminar Cookies](#94-eliminar-cookies)
-- [10. Referencias](#10-referencias)
+  - [3.1. Componentes del Servidor](#31-componentes-del-servidor)
+  - [3.2. Beneficios del renderizado en el servidor](#32-beneficios-del-renderizado-en-el-servidor)
+  - [3.3. Funciones dinámicas](#33-funciones-dinámicas)
+  - [3.4. Componentes del Cliente](#34-componentes-del-cliente)
+  - [3.5. Beneficios del renderizado en el cliente](#35-beneficios-del-renderizado-en-el-cliente)
+- [4. Componentes del Servidor VS Componentes del Cliente](#4-componentes-del-servidor-vs-componentes-del-cliente)
+  - [4.1. ¿Cuándo utilizar componentes de servidor y cliente?](#41-cuándo-utilizar-componentes-de-servidor-y-cliente)
+  - [4.2. Ejemplo: Paginación de datos](#42-ejemplo-paginación-de-datos)
+  - [4.3. Componentes de NextJS](#43-componentes-de-nextjs)
+- [5. App Router](#5-app-router)
+  - [5.1. Segmentos de ruta](#51-segmentos-de-ruta)
+  - [5.2. Creando rutas](#52-creando-rutas)
+  - [5.3. Parámetros de URL](#53-parámetros-de-url)
+  - [5.4. Organización del proyecto](#54-organización-del-proyecto)
+- [6. Route Handlers](#6-route-handlers)
+  - [6.1. Métodos HTTP admitidos](#61-métodos-http-admitidos)
+  - [6.2. Parámetros de URL](#62-parámetros-de-url)
+  - [6.3. Creación de API REST](#63-creación-de-api-rest)
+  - [6.4. API REST con datos en memoria RAM](#64-api-rest-con-datos-en-memoria-ram)
+  - [6.5. API REST con datos en BD MongoDB](#65-api-rest-con-datos-en-bd-mongodb)
+- [7. Cookies](#7-cookies)
+  - [7.1. Tipos de cookies](#71-tipos-de-cookies)
+  - [7.2. Generar Cookies](#72-generar-cookies)
+  - [7.3. Leer Cookies](#73-leer-cookies)
+  - [7.4. Eliminar Cookies](#74-eliminar-cookies)
+- [8. Referencias](#8-referencias)
+
+
 
 
 
 
 --- 
 
-# 1. Introducción
-
-
-
-# 2. NextJS
+# 1. Introducción a NextJS
 
 Next es un **framework fullstack JavaScript**, que emplea **React** para crear componentes. Y ya no solo componentes de frontend. Gracias a los "**React Server Components (RSC)**" podemos tener componentes que sólo se ejecuten en un entorno de servidor o backend.
 Con Next hacemos aplicaciones **Server Side Rendering (SSR)**, y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
@@ -57,7 +58,7 @@ Con Next hacemos aplicaciones **Server Side Rendering (SSR)**, y con los RSC lo 
 > En Internet hay mucha documentación de versiones anteriores, pero la forma de trabajar en ellas es ligeramente diferente.
 
 
-## 2.1. Creación de un proyecto
+## 1.1. Creación de un proyecto
 
 Para crear proyecto llamado `miapp`
 
@@ -82,7 +83,7 @@ Para editar el código con VSCode
 code  .
 ```
 
-## 2.2. Carpetas y archivos del proyecto
+## 1.2. Carpetas y archivos del proyecto
 
 ![lista archivos](assets/tree.png)
 
@@ -102,24 +103,19 @@ Otros archivos opcionales que podemos añadir son:
 
 
 
-# 3. Componentes
+# 2. JSX
 
-Los componentes son uno de los conceptos esenciales de los modernos frameworks de Javascript. Constituyen los cimientos sobre los que construyes interfaces de usuario (UIs por sus siglas en inglés). 
+En NextJS, tanto las páginas como los componentes hacen uso de JSX (JavaScript Syntax Extension).
 
-Un componente permite combinar tu marcado HTML, CSS y JavaScript en «componentes» personalizados, elementos reutilizables de UI para tu aplicación.
+JSX (JavaScript Syntax Extension y ocasionalmente denominada JavaScript XML) es una extensión de JavaScript que permite la creación de árboles DOM utilizando una sintaxis similar a XML. Creado inicialmente por Facebook para su uso con React, JSX ha sido adoptado por múltiples frameworks.
 
-- Referencia: https://es.react.dev/learn/your-first-component
-
-
-## 3.1. JSX
+JSX te permite escribir marcado similar a HTML dentro de un archivo JavaScript, manteniendo la lógica de renderizado y el contenido en el mismo lugar. En ocasiones será deseable añadir un poco de lógica en JavaScript o referenciar una propiedad dinámica dentro del marcado. En esta situación, puedes utilizar llaves en tu JSX para «abrir una ventana» hacia JavaScript.
 
 **Referencias**: 
 - https://es.react.dev/learn/writing-markup-with-jsx
 - https://es.legacy.reactjs.org/docs/jsx-in-depth.html
 
-JSX (JavaScript Syntax Extension y ocasionalmente denominada JavaScript XML) es una extensión de JavaScript que permite la creación de árboles DOM utilizando una sintaxis similar a XML. Creado inicialmente por Facebook para su uso con React, JSX ha sido adoptado por múltiples frameworks.
 
-JSX te permite escribir marcado similar a HTML dentro de un archivo JavaScript, manteniendo la lógica de renderizado y el contenido en el mismo lugar. En ocasiones será deseable añadir un poco de lógica en JavaScript o referenciar una propiedad dinámica dentro del marcado. En esta situación, puedes utilizar llaves en tu JSX para «abrir una ventana» hacia JavaScript.
 
 El código escrito en JSX requiere conversión con una herramienta como *Babel* antes de que los navegadores web puedan entenderlo. Este procesamiento generalmente se realiza durante un proceso de construcción de software antes de deslplegar la aplicación .
 
@@ -148,7 +144,8 @@ const App = () => {
 - Necesidad de usar atributo **`key`** en lista de elementos similares.
 
 
-## 3.2. Aplicar estilos
+
+## 2.1. Aplicar estilos
 
 **en línea**
 
@@ -286,7 +283,154 @@ Sitios que proporcionan componentes basados en Tailwind:
 - [DaisyUI](https://daisyui.com/)
 
 
-# 4. Componentes del Servidor
+## 2.2. Propiedades de una paǵina
+
+Como hemos indicado antes, JSX se usa tanto en páginas como en componentes. En ambos es posible el paso de argumentos, llamados también propiedades. 
+
+Las propiedades más importantes que puede recibir una página son **`params`** y **`searchParams**`. A través de ellas podemos acceder a los **parámetros de ruta** y los **parámetros de consulta** correspondientes
+
+La estructura básica de la página es la siguiente:
+
+```js
+function page({ params, searchParams}) {
+    // ...
+
+    return (
+      // JSX
+    )
+}
+
+export default page
+```
+
+Para un descripción más detallada de estos parámetros consultar más adelante.
+
+
+## 2.3. Propiedades de un componente
+
+A los componentes también se le puede pasar información mediante las propiedades. A diferencia de las páginas, cuyas propiedades son recurrentes, en los componentes el nombre de las propiedades suele ser muy variado. La única propiedad que tiene un nombre reservado es `children` que representa los elementos hijos del componente, es decir los elementos que irán insertados entre la etiqueta de inicio y la etiqueta de cierre.
+
+
+En los componentes debemos distinguir 2 aspectos:
+
+1. La **definición** del componente
+2. El **uso** del componente
+
+
+**1. DEFINICIÓN**
+
+En la definición del componente establecemos su funcionalidad y las propiedades que aceptará. En el siguiente ejemplo, el componente *Productos* aceptará 3 propiedades: *children*, *productos* y *categoria*. No aceptará ninguna otra propiedad.
+
+```js
+function Productos ({ children, productos, categoria }) {
+    // ...
+
+    return (
+      // JSX
+    )
+}
+
+export default Productos 
+```
+
+Si desarrollamos un poco más el componente anterior, podríamos encontrarnos con código semejante al siguiente:
+
+```js
+function Productos ({ children, productos, categoria }) {
+
+    return (
+      <div>
+          <h1>{categoria}</h1>
+          {children}  
+          {// recorrer lista de productos
+          productos.map ( producto =>
+              <p>{producto.name}</p>
+              // ...       
+          )
+          }
+      </div>
+    )
+}
+
+export default Productos 
+```
+
+
+
+**2. USO**
+
+Una vez definido el componente, podemos usarlo tantas veces como deseemos dentro de páginas o de otros componentes.
+
+Por ejemplo, para hacer uso del componente anterior en una página, podemos encontrar:
+
+
+```js
+import Productos from '@/components/Productos'
+import { getProductos } from '@/lib/actions'
+
+async function page() {
+    // hacer consulta a la base de datos y obtener productos de la categoría deseada
+    const productos = await getProductos()
+
+    return (
+      <Productos productos={productos} categoria='teclados'>
+        <h2>Productos de esta categoría</h2>
+        <p> /* ... */ </p>
+      </Productos>
+    )
+}
+
+export default page
+```
+
+
+Observa que hemos usado el componente como si de un elemento HTML se tratara:
+
+```js
+<Productos productos={productos} categoria='teclados'>
+  <h2>Productos de esta categoría</h2>
+  <p> /* ... */ </p>
+</Productos>
+```
+
+Aunque hay 2 pequeñas diferencias:
+
+- En HTML el nombre de las etiquetas suele ir en minúsculas. En los componentes la primera letra es mayúsculas.
+- En HTML las etiquetas tienen atributos. En los componentes se les llama propiedades.
+
+
+En la etiqueta de inicio `<Productos>` pasamos los valores de las propiedades que acepta el componente. En este caso son las propiedades *productos* y *categoria*.
+
+Los elementos que aparecen entre la etiqueta de inicio `<Productos>` y la etiqueta de cierre `</Productos>` corresponden a la propiedad `children` y se colocarán en la posición en la cual fueron definidos.
+
+
+También podemos encontrar componentes sin elementos insertados `children`, en cuyo caso deberíamos hacer uso de la siguiente manera:
+
+```js
+ // IMPORTANTE: Colocar / al final para indicar el cierre del elemento
+ <Productos productos={productos} categoria='teclados' />
+```
+
+Si un componente no tiene propiedades, hacemos uso de él de la siguiente forma:
+
+```js
+ // IMPORTANTE: Colocar / al final para indicar el cierre del elemento
+ <Productos />
+```
+
+
+
+# 3. Componentes
+
+
+Los componentes son uno de los conceptos esenciales de los modernos frameworks de Javascript. Constituyen los cimientos sobre los que construyes interfaces de usuario (UIs por sus siglas en inglés). 
+
+Un componente permite combinar tu marcado HTML, CSS y JavaScript en «componentes» personalizados, elementos reutilizables de UI para tu aplicación.
+
+- Referencia: https://es.react.dev/learn/your-first-component
+
+
+## 3.1. Componentes del Servidor
 
 NextJS es un framework destinado al desarrollo Fullstack centrado principalmente en el lado servidor. La mayoría de componentes que desarrollaremos serán `Server React Components`.
 
@@ -298,7 +442,7 @@ En Next.js, el trabajo de renderizado se divide por segmentos de ruta para permi
 - Renderizado dinámico
 - Streaming
 
-## 4.1. Beneficios del renderizado en el servidor
+## 3.2. Beneficios del renderizado en el servidor
 
 Hay una serie de beneficios al realizar el trabajo de renderizado en el servidor, que incluyen:
 
@@ -310,14 +454,14 @@ Hay una serie de beneficios al realizar el trabajo de renderizado en el servidor
 - **Optimización de motores de búsqueda y capacidad de compartir en redes sociales**: los robots de los motores de búsqueda pueden utilizar el HTML renderizado para indexar sus páginas y los robots de las redes sociales para generar vistas previas de tarjetas sociales para sus páginas.
 - **Streaming**: los componentes del servidor le permiten dividir el trabajo de renderizado en partes y transmitirlas al cliente a medida que estén listas. Esto permite al usuario ver partes de la página antes sin tener que esperar a que se represente toda la página en el servidor.
 
-## 4.2. Funciones dinámicas
+## 3.3. Funciones dinámicas
 
 Las funciones dinámicas se basan en información que sólo se puede conocer en el momento de la solicitud, como las cookies del usuario, los encabezados de las solicitudes actuales o los parámetros de ruta y consulta de la URL. En Next.js, estas funciones dinámicas son:
 
 - `cookies()` y `headers()`: al usarlos en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
-- `useSearchParams()` (**parámetros de consulta**): En componentes del cliente, el uso de esta función omitirá la renderización estática y en su lugar se realizará renderizado en el cliente (`CSR: Client Side Rendering`) de todos los componentes del cliente hasta el *Suspense* padre más cercano.
-Recomendamos envolver el componente del cliente que utilice useSearchParams() en un <Suspense/>. Esto permitirá que cualquier componente del cliente que se encuentre encima se renderice estáticamente. 
 - `searchParams` (**parámetros de consulta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud.
+- `useSearchParams()` (**parámetros de consulta**): En componentes del cliente, el uso de esta función omitirá la renderización estática y en su lugar se realizará renderizado en el cliente (`CSR: Client Side Rendering`) de todos los componentes del cliente hasta el *Suspense* padre más cercano. Recomendamos envolver el componente del cliente que utilice useSearchParams() en un <Suspense/>. Esto permitirá que cualquier componente del cliente que se encuentre encima se renderice estáticamente. 
+
 
 **Ejemplo:**
 
@@ -347,11 +491,11 @@ El uso de cualquiera de estas funciones optará por toda la ruta hacia la repres
 - https://nextjs.org/docs/app/api-reference/functions/use-search-params
 
 
-# 5. Componentes del Cliente
+## 3.4. Componentes del Cliente
 
 Los componentes del cliente permiten escribir una interfaz de usuario interactiva que se puede renderizar en el cliente (`CSR: Client Side Rendering`) en el momento de la solicitud. En Next.js, la renderización en el cliente es opcional, lo que significa que debe decidir explícitamente qué componentes React serán renderizados en el cliente.
 
-## 5.1. Beneficios del renderizado en el cliente
+## 3.5. Beneficios del renderizado en el cliente
 
 Hay un par de beneficios al realizar el trabajo de renderizado en el cliente, que incluyen:
 
@@ -378,9 +522,9 @@ export default function Counter() {
 Referencia: https://nextjs.org/docs/app/building-your-application/rendering/client-components
 
 
-# 6. Componentes del Servidor VS Componentes del Cliente
+# 4. Componentes del Servidor VS Componentes del Cliente
 
-## 6.1. ¿Cuándo utilizar componentes de servidor y cliente?
+## 4.1. ¿Cuándo utilizar componentes de servidor y cliente?
 
 A continuación se ofrece un resumen rápido de los diferentes casos de uso de los componentes de servidor y cliente:
 
@@ -395,7 +539,7 @@ A continuación se ofrece un resumen rápido de los diferentes casos de uso de l
 | Utilizar API solo para navegador                                                                        |            ❌            |           ✅            |
 | Utilizar enlaces personalizados que dependan del estado, los efectos o las API exclusivas del navegador |            ❌            |           ✅            |
 
-## 6.2. Ejemplo: Paginación de datos
+## 4.2. Ejemplo: Paginación de datos
 
 La decisión de realizar la paginación en el lado del servidor o del cliente en Next.js depende de varios factores, como el tamaño de los datos, la frecuencia de actualización de los datos y las necesidades de rendimiento de tu aplicación.
 
@@ -413,7 +557,7 @@ En resumen, la mejor opción dependerá de las necesidades específicas de tu ap
 > ¿Qué tipo de paginación se realiza en la aplicacón del código fuente anterior?.
 
 
-## 6.3. Componentes de NextJS
+## 4.3. Componentes de NextJS
 
 **Link**
 
@@ -475,7 +619,7 @@ El componente `<Image>` de Next.js amplía el elemento <img> de HTML con funcion
 - Más información: https://nextjs.org/docs/app/api-reference/components/image#configuration-options
 
 
-# 7. App Router
+# 5. App Router
 
 En la versión 13, Next.js introdujo un nuevo `App Router` construido sobre `React Server Components` , que admite diseños compartidos, enrutamiento anidado, estados de carga, manejo de errores y más.
 
@@ -490,7 +634,7 @@ App Router funciona en un nuevo directorio llamado `app` (en versiones anteriore
 - **Segmento de URL**: Parte de la ruta de la URL delimitada por barras.
 - **Ruta URL**: Parte de la URL que viene después del dominio (compuesta por segmentos).
 
-## 7.1. Segmentos de ruta
+## 5.1. Segmentos de ruta
 
 Cada carpeta en una ruta representa un segmento de ruta. Cada segmento de ruta se asigna a un segmento correspondiente en una ruta URL.
 
@@ -504,7 +648,7 @@ Esto significa que los archivos de proyecto se pueden colocar de forma segura de
 
 - Referencia: https://nextjs.org/docs/app/building-your-application/routing
 
-## 7.2. Creando rutas
+## 5.2. Creando rutas
 
 Next.js utiliza un enrutador basado en un sistema de archivos donde se utilizan carpetas para definir rutas.
 
@@ -519,7 +663,46 @@ Se utiliza un archivo especial **`page.js`** para hacer que los segmentos de rut
 En este ejemplo, la ruta URL `/dashboard/analytics` no es accesible públicamente porque no tiene un archivo `page.js` correspondiente. Esta carpeta podría usarse para almacenar componentes, hojas de estilo, imágenes u otros archivos colocados.
 
 
-## 7.3. Organización del proyecto
+## 5.3. Parámetros de URL
+
+Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
+
+En las páginas gestionadas por el `app router` también podemos acceder a los 2 tipos que existen:
+
+- **Parámetros de ruta** `Path Parameters`
+- **Parámetros de consulta** `Query Parameters` o `Query Strings` 
+
+
+Si tenemos la siguiente ruta:
+
+**`http://localhost:3000/products/bristol/books?sort=author&skip=1`**
+
+
+Y el siguiente código en `src/app/products/[store]/[category]/page.js`
+
+
+```js
+export default function page({ params, searchParams }) {
+
+    console.log( params.store )
+    console.log( params.category )
+    console.log( searchParams.sort )
+    console.log( searchParams.skip )
+
+    // ...
+}
+```
+
+Producirá la siguiente salida:
+
+```
+bristol
+books
+author
+1
+``` 
+
+## 5.4. Organización del proyecto
 
 Aparte de las convenciones de enrutamiento de carpetas y archivos, Next.js no tiene opiniones sobre cómo organizar y colocar los archivos de su proyecto.
 
@@ -544,7 +727,7 @@ Esta estrategia almacena el código de aplicación compartido globalmente en el 
 ![](assets/project-organization-app-root-split.avif)
 
 
-# 8. Route Handlers
+# 6. Route Handlers
 
 Los `controladores de ruta` le permiten crear controladores de solicitudes personalizados para una ruta determinada mediante las APIs web [`Request`](https://developer.mozilla.org/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/docs/Web/API/Response).
 
@@ -559,7 +742,7 @@ Los controladores de ruta se definen en un archivo `route.js|ts` dentro del dire
 export async function GET(request: Request) {}
 ```
 
-## 8.1. Métodos HTTP admitidos
+## 6.1. Métodos HTTP admitidos
 
 Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATCH**, **DELETE**, **HEAD**, y **OPTIONS**. Si se llama a un método no compatible, Next.js devolverá una respuesta *405 Method Not Allowed*.
 
@@ -571,7 +754,54 @@ Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATC
 - https://nextjs.org/docs/app/api-reference/functions/next-response
 
 
-## 8.2. Creación de API REST
+## 6.2. Parámetros de URL
+
+Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
+
+En los `route handlers` también podemos acceder a los 2 tipos que existen:
+
+- **Parámetros de ruta** `Path Parameters`
+- **Parámetros de consulta** `Query Parameters` o `Query Strings` 
+
+
+Si tenemos la siguiente ruta:
+
+**`http://localhost:3000/api/products/bristol/books?sort=author&skip=1`**
+
+
+Y el siguiente código en `src/app/api/products/[store]/[category]/route.js`
+
+
+```js
+export function GET(request, { params }) {
+    
+    const sort = request.nextUrl.searchParams.get("sort")
+    const skip = request.nextUrl.searchParams.get("skip")
+    console.log( request.nextUrl.origin )
+    console.log( request.nextUrl.pathname )
+    console.log( params.store )
+    console.log( params.category )
+    console.log( sort )
+    console.log( skip )
+
+    // ...
+}
+```
+
+Producirá la siguiente salida:
+
+```
+http://localhost:3000
+/api/products/bristol/garden
+bristol
+books
+author
+1
+``` 
+
+
+
+## 6.3. Creación de API REST
 
 Como se ha comentado anteriormente, la principal aplicación que tienen los route handlers (`controladores de ruta`) es la implentación de APIs. Suele ser habitual el intercambio de información mediante el formato JSON.
 
@@ -597,7 +827,7 @@ app
 ```
 
 
-## 8.3. API REST con datos en memoria RAM
+## 6.4. API REST con datos en memoria RAM
 
 **Estructura de archivos en `src`**
 
@@ -622,7 +852,7 @@ Gestión de datos en archivo `lib/users.js`.
 - [Código fuente](https://github.com/jamj2000/nxapi-memory)
 
 
-## 8.4. API REST con datos en BD MongoDB
+## 6.5. API REST con datos en BD MongoDB
 
 **Estructura de archivos en `src`**
 
@@ -647,7 +877,7 @@ Gestión de datos en archivo `lib/mongodb.js`.
 - [Código fuente](https://github.com/jamj2000/nxapi-mongodb)
 
 
-# 9. Cookies
+# 7. Cookies
 
 Una cookie es un fichero de datos que una página web le envía a tu ordenador o móvil cuando la visitas. 
 
@@ -657,14 +887,14 @@ Gracias a las cookies la página web podrá recordar que eres tú, y por lo tant
 
 Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas muchos archivos en tu cesta de la compra sin tener una cuenta, pero luego te vas. Entonces, cuando vuelvas a entrar, gracias a tu IP y los otros identificadores que miran las cookies, Amazon sabrá quién eres y qué hiciste antes, y muy posiblemente todavía podrá recordar lo que tenías en la cesta de la compra para que no tengas que volver a meterlo.
 
-## 9.1. Tipos de cookies
+## 7.1. Tipos de cookies
 
 - **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
 - **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. 
 
 A continuación se muestra como trabjar con cookies desde NextJS.
 
-## 9.2. Generar Cookies 
+## 7.2. Generar Cookies 
 
 **`cookies().set(name, value, options)`**
 
@@ -729,7 +959,7 @@ export async function GET() {
 }
 ```
 
-## 9.3. Leer Cookies 
+## 7.3. Leer Cookies 
 
 **cookies().get(name)**
 
@@ -744,7 +974,7 @@ export default function Page() {
 ```
 
 
-## 9.4. Eliminar Cookies
+## 7.4. Eliminar Cookies
 
 **cookies().delete(name)**
 
@@ -766,7 +996,7 @@ Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
 
 
-# 10. Referencias
+# 8. Referencias
 
 - [Documentación de NextJS](https://nextjs.org/docs)
 - [Listado de APIs públicas](https://publicapis.dev)
