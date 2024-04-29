@@ -792,7 +792,7 @@ Producirá la siguiente salida:
 
 ```
 http://localhost:3000
-/api/products/bristol/garden
+/api/products/bristol/books
 bristol
 books
 author
