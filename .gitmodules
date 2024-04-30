@@ -83,3 +83,9 @@
 [submodule "proyectos/tema6/nxprisma-crud-prisma2"]
 	path = proyectos/tema6/nxprisma-crud-prisma2
 	url = https://github.com/jamj2000/nxprisma-crud-simple2.git
+[submodule "proyectos/tema6/nxprisma-crud-simple2"]
+	path = proyectos/tema6/nxprisma-crud-simple2
+	url = https://github.com/jamj2000/nxprisma-crud-simple2.git
+[submodule "proyectos/tema6/nxprisma-crud-simple1"]
+	path = proyectos/tema6/nxprisma-crud-simple1
+	url = https://github.com/jamj2000/nxprisma-crud-simple1.git
