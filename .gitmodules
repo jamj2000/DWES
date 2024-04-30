@@ -77,3 +77,9 @@
 [submodule "proyectos/tema4/nxpagination"]
 	path = proyectos/tema4/nxpagination
 	url = https://github.com/jamj2000/nxpagination.git
+[submodule "proyectos/tema6/nxprisma-crud-prisma1"]
+	path = proyectos/tema6/nxprisma-crud-prisma1
+	url = https://github.com/jamj2000/nxprisma-crud-simple1.git
+[submodule "proyectos/tema6/nxprisma-crud-prisma2"]
+	path = proyectos/tema6/nxprisma-crud-prisma2
+	url = https://github.com/jamj2000/nxprisma-crud-simple2.git
