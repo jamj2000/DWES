@@ -36,6 +36,7 @@
   - [7.2. Generar Cookies](#72-generar-cookies)
   - [7.3. Leer Cookies](#73-leer-cookies)
   - [7.4. Eliminar Cookies](#74-eliminar-cookies)
+- [ANEXO: Parámetros de ruta y consulta en página de cliente](#anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [8. Referencias](#8-referencias)
 
 
@@ -419,9 +420,7 @@ Si un componente no tiene propiedades, hacemos uso de él de la siguiente forma:
 ```
 
 
-
 # 3. Componentes
-
 
 Los componentes son uno de los conceptos esenciales de los modernos frameworks de Javascript. Constituyen los cimientos sobre los que construyes interfaces de usuario (UIs por sus siglas en inglés). 
 
@@ -994,6 +993,32 @@ async function create(data) {
 
 Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
+
+# ANEXO: Parámetros de ruta y consulta en página de cliente
+
+```js
+'use client'
+import { useLocation, useParams, useSearchParams } from 'next/navigation';
+
+export default const page = () => {
+  const location = useLocation();
+  const { projectId } = useParams();
+  const searchParams = useSearchParams();
+  
+  const paramValue = searchParams.get('paramName');
+
+  return (
+    <>
+      <div>
+       Current Path: {location.pathname}
+      </div>
+      <div>
+        Project ID: {projectId}
+      </div>;
+    </>
+  )
+};
+```
 
 
 # 8. Referencias
