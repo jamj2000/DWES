@@ -33,7 +33,9 @@
   - [7.3. Consultar varias tablas](#73-consultar-varias-tablas)
 - [8. Ver datos de las tablas](#8-ver-datos-de-las-tablas)
 - [9. Despliegue en Vercel](#9-despliegue-en-vercel)
-- [10. Referencias](#10-referencias)
+- [10. ANEXO: CRUD en una única página](#10-anexo-crud-en-una-única-página)
+- [11. Referencias](#11-referencias)
+
 
 
 
@@ -1024,7 +1026,22 @@ Para evitar este problema, debemos añadir `prisma generate` al script `postinst
 }
 ```
 
-# 10. Referencias
+# 10. ANEXO: CRUD en una única página
+
+Es posible realizar las 4 operaciones de CRUD desde una única página. Este caso es habitual cuando se trabaja con SPA (Single Page Applications). 
+
+Desde NextJS también podemos ofrecer una funcionalidad prácticamente idéntica a la anterior. Para mostrar cómo se realiza, he desarrollado las 2 aplicaciones siguientes:
+
+1. [Simple1: con componente de servidor](https://github.com/jamj2000/nxprisma-crud-simple1)
+2. [Simple2: con componente de cliente](https://github.com/jamj2000/nxprisma-crud-simple2)
+
+El primer ejemplo es mucho más sencillo, pero también dispone de menos funcionalidades. 
+
+El segundo ejemplo es más complejo y dispone de mayor interactividad con el usuario. Después de obtener los datos desde el servidor, en el componente de cliente podemos realizar búsquedas por nombre y descripción y ordenar de forma ascendente y descendente por nombre y precio.
+
+
+
+# 11. Referencias
 
 - [MySQL API con NextJS](https://github.com/jamj2000/nxapi-mysql)
 - [MySQL CRUD con NextJS](https://github.com/jamj2000/nxmysql-crud)
