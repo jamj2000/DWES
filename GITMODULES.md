@@ -1,7 +1,7 @@
 # Añadir y descargar submódulo
 
 ```sh
-git submodule add https://github.com/jamj2000/nxapp-router.git proyectos/tema4/nxapp-router
+git submodule add https://github.com/jamj2000/nxapp-router.git Tema4/proyectos/nxapp-router
 ```
 
 # Actualizar todos los submódulos

@@ -7,9 +7,16 @@
 [submodule "Tema4/proyectos/nxapi-mongodb"]
 	path = Tema4/proyectos/nxapi-mongodb
 	url = https://github.com/jamj2000/nxapi-mongodb.git
+[submodule "Tema4/proyectos/nxapi-mysql"]
+	path = Tema4/proyectos/nxapi-mysql
+	url = https://github.com/jamj2000/nxapi-mysql.git
 [submodule "Tema4/proyectos/nxcookie"]
 	path = Tema4/proyectos/nxcookie
 	url = https://github.com/jamj2000/nxcookie.git
+[submodule "Tema4/proyectos/nxpagination"]
+	path = Tema4/proyectos/nxpagination
+	url = https://github.com/jamj2000/nxpagination.git
+
 [submodule "Tema5/proyectos/nxform"]
 	path = Tema5/proyectos/nxform
 	url = https://github.com/jamj2000/nxform.git
@@ -28,6 +35,7 @@
 [submodule "Tema5/proyectos/nxcloudinary-crud"]
 	path = Tema5/proyectos/nxcloudinary-crud
 	url = https://github.com/jamj2000/nxcloudinary-crud.git
+
 [submodule "Tema6/proyectos/nxmysql-crud"]
 	path = Tema6/proyectos/nxmysql-crud
 	url = https://github.com/jamj2000/nxmysql-crud.git
@@ -43,6 +51,18 @@
 [submodule "Tema6/proyectos/nxmysql-app"]
 	path = Tema6/proyectos/nxmysql-app
 	url = https://github.com/jamj2000/nxmysql-app.git
+[submodule "Tema6/proyectos/nxprisma-crud-negocio"]
+	path = Tema6/proyectos/nxprisma-crud-negocio
+	url = https://github.com/jamj2000/nxprisma-crud-negocio
+[submodule "Tema6/proyectos/nxprisma-crud-simple2"]
+	path = Tema6/proyectos/nxprisma-crud-simple2
+	url = https://github.com/jamj2000/nxprisma-crud-simple2.git
+[submodule "Tema6/proyectos/nxprisma-crud-simple1"]
+	path = Tema6/proyectos/nxprisma-crud-simple1
+	url = https://github.com/jamj2000/nxprisma-crud-simple1.git
+
+
+
 [submodule "Tema8/proyectos/nxauth-middleware"]
 	path = Tema8/proyectos/nxauth-middleware
 	url = https://github.com/jamj2000/nxauth-middleware.git
@@ -55,12 +75,8 @@
 [submodule "Tema8/proyectos/nxauth-oauth"]
 	path = Tema8/proyectos/nxauth-oauth
 	url = https://github.com/jamj2000/nxauth-oauth.git
-[submodule "Tema4/proyectos/nxapi-mysql"]
-	path = Tema4/proyectos/nxapi-mysql
-	url = https://github.com/jamj2000/nxapi-mysql.git
-[submodule "Tema6/proyectos/nxprisma-crud-negocio"]
-	path = Tema6/proyectos/nxprisma-crud-negocio
-	url = https://github.com/jamj2000/nxprisma-crud-negocio
+
+
 [submodule "examenes/examen-dwes-node-next"]
 	path = examenes/examen-dwes-node-next
 	url = https://github.com/jamj2000/examen-dwes-node-next.git
@@ -73,18 +89,4 @@
 [submodule "examenes/examen-dwes-bis-nextjs-prisma"]
 	path = examenes/examen-dwes-bis-nextjs-prisma
 	url = https://github.com/jamj2000/examen-dwes-bis-nextjs-prisma.git
-[submodule "Tema4/proyectos/nxpagination"]
-	path = Tema4/proyectos/nxpagination
-	url = https://github.com/jamj2000/nxpagination.git
-[submodule "Tema6/proyectos/nxprisma-crud-simple2"]
-	path = Tema6/proyectos/nxprisma-crud-simple2
-	url = https://github.com/jamj2000/nxprisma-crud-simple2.git
-[submodule "Tema6/proyectos/nxprisma-crud-simple1"]
-	path = Tema6/proyectos/nxprisma-crud-simple1
-	url = https://github.com/jamj2000/nxprisma-crud-simple1.git
-[submodule "Tema7/proyectos/nxchart"]
-	path = Tema7/proyectos/nxchart
-	url = https://github.com/jamj2000/nxchart.git
-[submodule "Tema7/proyectos/nxchart-streaming"]
-	path = Tema7/proyectos/nxchart-streaming
-	url = https://github.com/jamj2000/nxchart-streaming.git
+
