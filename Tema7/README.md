@@ -14,6 +14,7 @@
   - [3.3. Flujo de datos (streaming)](#33-flujo-de-datos-streaming)
     - [3.3.1. Los modelos de provisión de datos](#331-los-modelos-de-provisión-de-datos)
     - [3.3.2. Ejemplo](#332-ejemplo)
+    - [3.3.3. Colas de mensajes](#333-colas-de-mensajes)
   - [3.4. Documentación](#34-documentación)
 - [4. Creación de PDFs](#4-creación-de-pdfs)
   - [4.1. Instalación](#41-instalación)
@@ -27,6 +28,7 @@
   - [6.1. Instalación](#61-instalación)
   - [6.2. Uso](#62-uso)
   - [6.3. Documentación](#63-documentación)
+
 
 
 
@@ -358,6 +360,22 @@ function grafico() {
 
 export default grafico
 ```
+
+
+### 3.3.3. Colas de mensajes
+
+Una forma de recuperar los datos para realizar las gráficas es mediante el uso de una cola de mensajes.
+
+Una cola de mensajes es una forma de comunicación asíncrona entre múltiples procesos que necesitan transmitirse diferentes datos. De esta forma un sistema añade un mensaje a la cola que se persistirá hasta que otro sistema lo consuma y lo procese. 
+
+La principal ventaja de utilizar las colas de mensajes es desacoplar diferentes sistema. También pueden ser de utilidad cuando quieres procesar múltiples operaciones en lotes, de forma que evites que se produzcan picos en la utilización de tu plataforma y se pueda degradar el servicio.
+
+Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQS, algunas más complejas para flujos de eventos como Apache Kafka o Amazon Kinesis, pero realmente puedes utilizar incluso un buffer en memoria aprovechando herramientas como Redis, o incluso MySQL como se indica en la siguiente referencia (incluye vídeo).
+
+
+**Referencia**:
+
+- [Pirobits: Cola de mensajes usando MySQL: SELECT * FOR UPDATE](https://www.pirobits.com/es/post/cola-de-mensajes-usando-mysql-select-for-update)
 
 
 ## 3.4. Documentación
