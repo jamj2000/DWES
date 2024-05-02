@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a {
+  padding: 4px;
+}
+
+a:hover {
+  color: blue;
+  cursor: pointer;
+  outline: solid 1px lightblue;
+}
+
+.chart {
+  position: relative;  /* IMPORTANTE para hacer el chart responsive */
+  aspect-ratio: 2;     /* IMPORTANTE: debe coincidir con el usado en chart, por defecto 2 */
+  width: 100%;
+  max-width: 800px; 
+  border: solid 1px lightgray;
+  border-radius: 10px;
+  margin: 0 auto; 
+  padding: 1%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  /* margin: 40px; */
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+@media (width < 768px ) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+} 

@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a {
+  padding: 4px;
+}
+
+a:hover {
+  color: blue;
+  cursor: pointer;
+  outline: solid 1px lightblue;
+}
+
+.chart {
+  position: relative;  /* IMPORTANTE para hacer el chart responsive */
+  width: 100%;
+  border: solid 1px lightgray;
+  border-radius: 8px;
+  margin: 0 auto; 
+  padding: 1%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  /* margin: 40px; */
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+@media (width < 1500px ) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+} 
+
+
+@media (width < 1000px ) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+} 
