@@ -1,66 +1,65 @@
-[submodule "proyectos/tema4/nxapp-router"]
-	path = proyectos/tema4/nxapp-router
+[submodule "Tema4/proyectos/nxapp-router"]
+	path = Tema4/proyectos/nxapp-router
 	url = https://github.com/jamj2000/nxapp-router.git
-[submodule "proyectos/tema4/nxapi-memory"]
-	path = proyectos/tema4/nxapi-memory
+[submodule "Tema4/proyectos/nxapi-memory"]
+	path = Tema4/proyectos/nxapi-memory
 	url = https://github.com/jamj2000/nxapi-memory.git
-[submodule "proyectos/tema4/nxapi-mongodb"]
-	path = proyectos/tema4/nxapi-mongodb
+[submodule "Tema4/proyectos/nxapi-mongodb"]
+	path = Tema4/proyectos/nxapi-mongodb
 	url = https://github.com/jamj2000/nxapi-mongodb.git
-[submodule "proyectos/tema4/nxcookie"]
-	path = proyectos/tema4/nxcookie
+[submodule "Tema4/proyectos/nxcookie"]
+	path = Tema4/proyectos/nxcookie
 	url = https://github.com/jamj2000/nxcookie.git
-[submodule "proyectos/tema5/nxform"]
-	path = proyectos/tema5/nxform
+[submodule "Tema5/proyectos/nxform"]
+	path = Tema5/proyectos/nxform
 	url = https://github.com/jamj2000/nxform.git
-[submodule "proyectos/tema5/nxfactions"]
-	path = proyectos/tema5/nxfactions
+[submodule "Tema5/proyectos/nxfactions"]
+	path = Tema5/proyectos/nxfactions
 	url = https://github.com/jamj2000/nxfactions.git
-[submodule "proyectos/tema5/nxcloudinary-upload"]
-	path = proyectos/tema5/nxcloudinary-upload
+[submodule "Tema5/proyectos/nxcloudinary-upload"]
+	path = Tema5/proyectos/nxcloudinary-upload
 	url = https://github.com/jamj2000/nxcloudinary-upload.git
-[submodule "proyectos/tema5/nxcloudinary-gallery"]
-	path = proyectos/tema5/nxcloudinary-gallery
+[submodule "Tema5/proyectos/nxcloudinary-gallery"]
+	path = Tema5/proyectos/nxcloudinary-gallery
 	url = https://github.com/jamj2000/nxcloudinary-gallery.git
-[submodule "proyectos/tema5/cloudinary"]
-	path = proyectos/tema5/cloudinary
+[submodule "Tema5/proyectos/cloudinary"]
+	path = Tema5/proyectos/cloudinary
 	url = https://github.com/jamj2000/cloudinary.git
-
-[submodule "proyectos/tema5/nxcloudinary-crud"]
-	path = proyectos/tema5/nxcloudinary-crud
+[submodule "Tema5/proyectos/nxcloudinary-crud"]
+	path = Tema5/proyectos/nxcloudinary-crud
 	url = https://github.com/jamj2000/nxcloudinary-crud.git
-[submodule "proyectos/tema6/nxmysql-crud"]
-	path = proyectos/tema6/nxmysql-crud
+[submodule "Tema6/proyectos/nxmysql-crud"]
+	path = Tema6/proyectos/nxmysql-crud
 	url = https://github.com/jamj2000/nxmysql-crud.git
-[submodule "proyectos/tema6/nxsqlite-crud"]
-	path = proyectos/tema6/nxsqlite-crud
+[submodule "Tema6/proyectos/nxsqlite-crud"]
+	path = Tema6/proyectos/nxsqlite-crud
 	url = https://github.com/jamj2000/nxsqlite-crud.git
-[submodule "proyectos/tema6/nxpostgres-crud"]
-	path = proyectos/tema6/nxpostgres-crud
+[submodule "Tema6/proyectos/nxpostgres-crud"]
+	path = Tema6/proyectos/nxpostgres-crud
 	url = https://github.com/jamj2000/nxpostgres-crud.git
-[submodule "proyectos/tema6/nxprisma-crud"]
-	path = proyectos/tema6/nxprisma-crud
+[submodule "Tema6/proyectos/nxprisma-crud"]
+	path = Tema6/proyectos/nxprisma-crud
 	url = https://github.com/jamj2000/nxprisma-crud
-[submodule "proyectos/tema6/nxmysql-app"]
-	path = proyectos/tema6/nxmysql-app
+[submodule "Tema6/proyectos/nxmysql-app"]
+	path = Tema6/proyectos/nxmysql-app
 	url = https://github.com/jamj2000/nxmysql-app.git
-[submodule "proyectos/tema8/nxauth-middleware"]
-	path = proyectos/tema8/nxauth-middleware
+[submodule "Tema8/proyectos/nxauth-middleware"]
+	path = Tema8/proyectos/nxauth-middleware
 	url = https://github.com/jamj2000/nxauth-middleware.git
-[submodule "proyectos/tema8/nxauth-all"]
-	path = proyectos/tema8/nxauth-all
+[submodule "Tema8/proyectos/nxauth-all"]
+	path = Tema8/proyectos/nxauth-all
 	url = https://github.com/jamj2000/nxauth-all.git
-[submodule "proyectos/tema8/nxauth-credentials"]
-	path = proyectos/tema8/nxauth-credentials
+[submodule "Tema8/proyectos/nxauth-credentials"]
+	path = Tema8/proyectos/nxauth-credentials
 	url = https://github.com/jamj2000/nxauth-credentials.git
-[submodule "proyectos/tema8/nxauth-oauth"]
-	path = proyectos/tema8/nxauth-oauth
+[submodule "Tema8/proyectos/nxauth-oauth"]
+	path = Tema8/proyectos/nxauth-oauth
 	url = https://github.com/jamj2000/nxauth-oauth.git
-[submodule "proyectos/tema4/nxapi-mysql"]
-	path = proyectos/tema4/nxapi-mysql
+[submodule "Tema4/proyectos/nxapi-mysql"]
+	path = Tema4/proyectos/nxapi-mysql
 	url = https://github.com/jamj2000/nxapi-mysql.git
-[submodule "proyectos/tema6/nxprisma-crud-negocio"]
-	path = proyectos/tema6/nxprisma-crud-negocio
+[submodule "Tema6/proyectos/nxprisma-crud-negocio"]
+	path = Tema6/proyectos/nxprisma-crud-negocio
 	url = https://github.com/jamj2000/nxprisma-crud-negocio
 [submodule "examenes/examen-dwes-node-next"]
 	path = examenes/examen-dwes-node-next
@@ -74,12 +73,18 @@
 [submodule "examenes/examen-dwes-bis-nextjs-prisma"]
 	path = examenes/examen-dwes-bis-nextjs-prisma
 	url = https://github.com/jamj2000/examen-dwes-bis-nextjs-prisma.git
-[submodule "proyectos/tema4/nxpagination"]
-	path = proyectos/tema4/nxpagination
+[submodule "Tema4/proyectos/nxpagination"]
+	path = Tema4/proyectos/nxpagination
 	url = https://github.com/jamj2000/nxpagination.git
-[submodule "proyectos/tema6/nxprisma-crud-simple2"]
-	path = proyectos/tema6/nxprisma-crud-simple2
+[submodule "Tema6/proyectos/nxprisma-crud-simple2"]
+	path = Tema6/proyectos/nxprisma-crud-simple2
 	url = https://github.com/jamj2000/nxprisma-crud-simple2.git
-[submodule "proyectos/tema6/nxprisma-crud-simple1"]
-	path = proyectos/tema6/nxprisma-crud-simple1
+[submodule "Tema6/proyectos/nxprisma-crud-simple1"]
+	path = Tema6/proyectos/nxprisma-crud-simple1
 	url = https://github.com/jamj2000/nxprisma-crud-simple1.git
+[submodule "Tema7/proyectos/nxchart"]
+	path = Tema7/proyectos/nxchart
+	url = https://github.com/jamj2000/nxchart.git
+[submodule "Tema7/proyectos/nxchart-streaming"]
+	path = Tema7/proyectos/nxchart-streaming
+	url = https://github.com/jamj2000/nxchart-streaming.git
