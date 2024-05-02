@@ -15,9 +15,9 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 ---
 
-- [Proyectos](proyectos)
 - [Exámenes resueltos](examenes)
 
+---
 
 ## Referencias
 
