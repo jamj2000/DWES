@@ -277,7 +277,7 @@ A la hora de exportar, deberemos tener en cuenta que **un archivo**
 
 A continuación se muestra un ejemplo.
 
-**package.json**
+**`package.json`**
 
 ```json
 {
@@ -286,7 +286,7 @@ A continuación se muestra un ejemplo.
 ```
 
 
-**archivo1.js**
+**`archivo1.js`**
 
 ```js
 const NADA = 0
@@ -297,7 +297,7 @@ export const DOS = 2
 export const TRES = 3
 ```
 
-**archivo2.js**
+**`archivo2.js`**
 
 ```js
 import POR_DEFECTO, { UNO as uno, DOS, TRES } from './archivo1.js'
@@ -308,7 +308,7 @@ console.log (uno, DOS, TRES)
 
 **La exportación por defecto se puede importar con cualquier nombre**.
 
-La exportación normal se debe importar usando llaves `{` y `}`. Se puede importar con otro nombre si usamos la palabla clave `as`. 
+La exportación normal se debe importar usando llaves `{` y `}`. Se puede importar con otro nombre si usamos `as`. 
 
 
 # 6. Parámetros de URL
