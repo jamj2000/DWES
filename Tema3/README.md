@@ -303,9 +303,7 @@ export const TRES = 3
 import POR_DEFECTO, { UNO as uno, DOS, TRES } from './archivo1.js'
 
 console.log (POR_DEFECTO)
-console.log (uno)
-console.log (DOS)
-console.log (TRES)
+console.log (uno, DOS, TRES)
 ```
 
 **La exportación por defecto se puede importar con cualquier nombre**.
