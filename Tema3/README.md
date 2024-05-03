@@ -11,6 +11,7 @@
 - [3. El framework EXPRESS](#3-el-framework-express)
 - [4. Módulos CommonJS](#4-módulos-commonjs)
 - [5. Módulos ECMAScript](#5-módulos-ecmascript)
+  - [5.1. Exportación e Importación](#51-exportación-e-importación)
 - [6. Parámetros de URL](#6-parámetros-de-url)
   - [6.1. Parámetros de ruta (Path Parameters)](#61-parámetros-de-ruta-path-parameters)
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
@@ -21,6 +22,7 @@
   - [9.2. multipart/form-data](#92-multipartform-data)
   - [9.3. JSON](#93-json)
 - [10. Referencias](#10-referencias)
+
 
 
 ---
@@ -258,6 +260,57 @@ Para lanzar el servidor, hacemos:
 ```bash
 npm run dev
 ```
+
+## 5.1. Exportación e Importación
+
+Cuando usamos `ESM (ECMAScript Modules)`, un archivo puede exportar e importar:
+
+- Constantes
+- Variables (Objetos, Arrays, ...)
+- Funciones
+- ...
+  
+A la hora de exportar, deberemos tener en cuenta que **un archivo**
+
+- **sólo puede exportar por defecto un único elemento**
+- puede exportar varios elementos que no sean por defecto
+
+A continuación se muestra un ejemplo.
+
+**package.json**
+
+```json
+{
+  "type": "module"
+}
+```
+
+
+**archivo1.js**
+
+```js
+const NADA = 0
+export default NADA 
+
+export const UNO = 1
+export const DOS = 2
+export const TRES = 3
+```
+
+**archivo2.js**
+
+```js
+import POR_DEFECTO, { UNO as uno, DOS, TRES } from './archivo1.js'
+
+console.log (POR_DEFECTO)
+console.log (uno)
+console.log (DOS)
+console.log (TRES)
+```
+
+**La exportación por defecto se puede importar con cualquier nombre**.
+
+La exportación normal se debe importar usando llaves `{` y `}`. Se puede importar con otro nombre si usamos la palabla clave `as`. 
 
 
 # 6. Parámetros de URL
