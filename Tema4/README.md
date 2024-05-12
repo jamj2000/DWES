@@ -788,6 +788,39 @@ export default function ButtonRoundedFullBasePrimaryAnimated() {
 }
 ```
 
+**DaisyUI**  ( [sitio oficial](https://daisyui.com/) )
+
+Es la librería de componentes muy popular y con un gran número de componentes y posibilidades de personalización pero sin dejar de ser amigable para principiantes. Es similar a la anterior a la hora de su uso: basta con copiar y pegar desde el sitio oficial. Pero hay que realizar una instalación y configuración previa.
+
+```sh
+npm  install  daisyui@latest  -D
+```
+
+
+```js
+// tailwind.config.js
+module.exports = {
+  //...
+  plugins: [   
+    require('daisyui'),
+  ],
+}
+```
+
+```js
+export default function Skeleton() {
+  return (
+    <div className="flex flex-col gap-4 w-52">
+       <div className="skeleton h-32 w-full"></div>
+        <div className="skeleton h-4 w-28"></div>
+        <div className="skeleton h-4 w-full"></div>
+        <div className="skeleton h-4 w-full"></div>
+    </div>
+  )
+}
+```
+
+
 
 ## Otros
 
