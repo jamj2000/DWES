@@ -20,6 +20,10 @@
   - [4.1. ¿Cuándo utilizar componentes de servidor y cliente?](#41-cuándo-utilizar-componentes-de-servidor-y-cliente)
   - [4.2. Ejemplo: Paginación de datos](#42-ejemplo-paginación-de-datos)
   - [4.3. Componentes de NextJS](#43-componentes-de-nextjs)
+- [Componentes listos para usar](#componentes-listos-para-usar)
+  - [Iconos](#iconos)
+  - [UI](#ui)
+  - [Otros](#otros)
 - [5. App Router](#5-app-router)
   - [5.1. Segmentos de ruta](#51-segmentos-de-ruta)
   - [5.2. Creando rutas](#52-creando-rutas)
@@ -277,11 +281,16 @@ export default Home;
 
 Tailwind es un framework CSS bastante popular y muy peculiar. 
 
-Sitios que proporcionan componentes basados en Tailwind:
+Existen muchos sitios que proporcionan componentes basados en Tailwind. Algunos de ellos son:
 
 - [Shadcn](https://ui.shadcn.com/)
-- [flowbite](https://flowbite.com/)
+- [Flowbite](https://flowbite.com/)
 - [DaisyUI](https://daisyui.com/)
+- [WindUI](https://wind-ui.com/)
+
+Muchos más recursos relacionados con Tailwind en
+
+- [Awesome Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss)
 
 
 ## 2.2. Propiedades de una paǵina
@@ -501,6 +510,8 @@ Hay un par de beneficios al realizar el trabajo de renderizado en el cliente, qu
 - **Interactividad**: los componentes del cliente pueden hacer uso de `state`, `effects` , and `event listeners`, lo que significa que pueden proporcionar retroalimentación inmediata al usuario y actualizar la interfaz de usuario.
 - **API del navegador**: los componentes del cliente tienen acceso a las API del navegador, como la geolocalización o el almacenamiento local, lo que le permite crear una interfaz de usuario para casos de uso específicos.
 
+
+
 ```javascript
 'use client'
  
@@ -521,6 +532,14 @@ export default function Counter() {
 Referencia: https://nextjs.org/docs/app/building-your-application/rendering/client-components
 
 
+**RECORDATORIO IMPORTANTE:** 
+
+**Deberemos colocar al inicio del archivo la directiva `use cliente`, si un componente o una página contiene alguno de los siguientes elementos:** 
+
+- **eventos (click, change, ...)**
+- **funciones de React del lado cliente como `useState`, ...**
+
+
 # 4. Componentes del Servidor VS Componentes del Cliente
 
 ## 4.1. ¿Cuándo utilizar componentes de servidor y cliente?
@@ -537,6 +556,8 @@ A continuación se ofrece un resumen rápido de los diferentes casos de uso de l
 | Utilizar efectos de estado y ciclo de vida ( useState(), useEffect(), etc.)                             |            ❌            |           ✅            |
 | Utilizar API solo para navegador                                                                        |            ❌            |           ✅            |
 | Utilizar enlaces personalizados que dependan del estado, los efectos o las API exclusivas del navegador |            ❌            |           ✅            |
+
+
 
 ## 4.2. Ejemplo: Paginación de datos
 
@@ -616,6 +637,194 @@ El componente `<Image>` de Next.js amplía el elemento <img> de HTML con funcion
 > ```
 
 - Más información: https://nextjs.org/docs/app/api-reference/components/image#configuration-options
+
+
+# Componentes listos para usar
+
+## Iconos
+
+**Lucide** ( [sitio oficial](https://lucide.dev/) )
+
+```sh
+npm  install  lucide-react
+```
+
+```js
+import {
+  Smile,
+  ThumbsUp,
+  Bold,
+  Italic
+} from 'lucide-react'
+
+
+export default function page () {
+  return (
+    <div className="app">
+      <Smile size={64} color='#3e9392' strokeWidth={4} >
+    </div>
+  )
+}
+```
+
+**HeroIcons** ( [sitio oficial](https://heroicons.com/) )
+
+```sh
+npm  install  @heroicons/react
+```
+
+
+```js
+import { BeakerIcon } from '@heroicons/react/24/solid'
+
+export default function MyComponent() {
+  return (
+    <div>
+      <BeakerIcon className="size-6 text-blue-500" />
+    </div>
+  )
+}
+```
+
+
+## UI
+
+**Shadcn/UI** ( [sitio oficial](https://ui.shadcn.com/) )
+
+Es un *kit* de componentes que nos permite su descarga y personalización. Es uno de los más completos y potentes, pero con una curva de aprendizaje mayor que otras librerías de componentes.
+
+```sh
+# Inicialización
+npx  shadcn-ui@latest  init
+```
+
+```sh
+# Instalación de componente
+npx  shadcn-ui@latest  add  skeleton
+```
+
+```js
+// Uso del componente
+import { Skeleton } from "@/components/ui/skeleton"
+ 
+export function SkeletonCard() {
+  return (
+    <div className="flex flex-col space-y-3">
+      <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+      </div>
+    </div>
+  )
+}
+```
+
+
+**HeadlessUI** ( [sitio oficial](https://headlessui.com/) )
+
+Posee una dificultad de uso media, aunque no parece disponer de muchos componentes.
+
+```sh
+npm  install  @headlessui/react
+```
+
+```js
+import { Button } from '@headlessui/react'
+
+export default function Example() {
+  return (
+    <Button className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+      Save changes
+    </Button>
+  )
+}
+```
+
+**WindUI** ( [sitio oficial](https://wind-ui.com/) )
+
+Es la librería de componentes que puede resultar de más fácil uso para principiantes. No es necesario instalar nada. Basta con copiar y pegar desde el sitio oficial.
+
+```js
+// Copiado de https://wind-ui.com/components/buttons/
+import React from "react"
+
+export default function ButtonRoundedFullBasePrimaryAnimated() {
+  return (
+    <>
+      {/*<!-- Component: Base primary button with animation  --> */}
+      <button className="inline-flex items-center justify-center h-10 gap-2 px-5 text-sm font-medium tracking-wide text-white transition duration-300 rounded-full whitespace-nowrap bg-emerald-500 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
+        <span>Animated</span>
+        <span className="relative only:-mx-5">
+          <svg
+            className="w-5 h-5 text-white animate-spin"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            role="graphics-symbol"
+            aria-labelledby="title-41 desc-41"
+          >
+            <title id="title-41">Icon title</title>
+            <desc id="desc-41">A more detailed description of the icon</desc>
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        </span>
+      </button>
+      {/*<!-- End Base primary button with animation  --> */}
+    </>
+  )
+}
+```
+
+
+## Otros
+
+**Tiptap - Editor WYSIWYG** ( [sitio oficial](https://tiptap.dev/) )
+
+```sh
+npm  install  @tiptap/react  @tiptap/pm  @tiptap/starter-kit
+```
+
+```sh
+# Algunas extensiones interesantes
+npm  install  @tiptap/extension-color  @tiptap/extension-list-item  @tiptap/extension-text-style
+```
+
+```js
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+
+const Tiptap = () => {
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+    ],
+    content: '<p>Hello World! 🌎️</p>',
+  })
+
+  return (
+    <EditorContent editor={editor} />
+  )
+}
+
+export default Tiptap
+```
+
+Un ejemplo mucho más completo puede encontrarse [AQUÍ](https://tiptap.dev/docs/editor/examples/default)
+
+También hay una aplicación de ejemplo, que además hace uso de iconos Lucide, en https://github.com/jamj2000/nxeditor-icons
 
 
 # 5. App Router
