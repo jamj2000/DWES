@@ -1,6 +1,8 @@
 # DWES
 Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Aplicaciones Web
 
+Apuntes iniciados en el curso 2023/24.
+
 ## Temas del Módulos
 
 1. [Selección de arquitecturas y herramientas de programación](Tema1/README.md)
