@@ -8,6 +8,9 @@ git submodule add https://github.com/jamj2000/nxapp-router.git Tema4/proyectos/n
 
 ```sh
 git submodule update --remote
+git add .
+git commit -m "update submodules"
+git push
 ```
 
 
