@@ -3,6 +3,12 @@
 # Tema 4: Desarrollo de aplicaciones Web utilizando código embebido <!-- omit in toc -->
 > NEXTJS, APP ROUTER, ROUTE HANDLERS, COOKIES
 
+---
+
+**[`PROYECTOS DE EJEMPLO`](proyectos)**
+
+---
+
 - [1. Introducción a NextJS](#1-introducción-a-nextjs)
   - [1.1. Creación de un proyecto](#11-creación-de-un-proyecto)
   - [1.2. Carpetas y archivos del proyecto](#12-carpetas-y-archivos-del-proyecto)
@@ -20,28 +26,28 @@
   - [4.1. ¿Cuándo utilizar componentes de servidor y cliente?](#41-cuándo-utilizar-componentes-de-servidor-y-cliente)
   - [4.2. Ejemplo: Paginación de datos](#42-ejemplo-paginación-de-datos)
   - [4.3. Componentes de NextJS](#43-componentes-de-nextjs)
-- [Componentes listos para usar](#componentes-listos-para-usar)
-  - [Iconos](#iconos)
-  - [UI](#ui)
-  - [Otros](#otros)
-- [5. App Router](#5-app-router)
-  - [5.1. Segmentos de ruta](#51-segmentos-de-ruta)
-  - [5.2. Creando rutas](#52-creando-rutas)
-  - [5.3. Parámetros de URL](#53-parámetros-de-url)
-  - [5.4. Organización del proyecto](#54-organización-del-proyecto)
-- [6. Route Handlers](#6-route-handlers)
-  - [6.1. Métodos HTTP admitidos](#61-métodos-http-admitidos)
-  - [6.2. Parámetros de URL](#62-parámetros-de-url)
-  - [6.3. Creación de API REST](#63-creación-de-api-rest)
-  - [6.4. API REST con datos en memoria RAM](#64-api-rest-con-datos-en-memoria-ram)
-  - [6.5. API REST con datos en BD MongoDB](#65-api-rest-con-datos-en-bd-mongodb)
-- [7. Cookies](#7-cookies)
-  - [7.1. Tipos de cookies](#71-tipos-de-cookies)
-  - [7.2. Generar Cookies](#72-generar-cookies)
-  - [7.3. Leer Cookies](#73-leer-cookies)
-  - [7.4. Eliminar Cookies](#74-eliminar-cookies)
-- [ANEXO: Parámetros de ruta y consulta en página de cliente](#anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
-- [8. Referencias](#8-referencias)
+- [5. Componentes listos para usar](#5-componentes-listos-para-usar)
+  - [5.1. Iconos](#51-iconos)
+  - [5.2. UI](#52-ui)
+  - [5.3. Otros](#53-otros)
+- [6. App Router](#6-app-router)
+  - [6.1. Segmentos de ruta](#61-segmentos-de-ruta)
+  - [6.2. Creando rutas](#62-creando-rutas)
+  - [6.3. Parámetros de URL](#63-parámetros-de-url)
+  - [6.4. Organización del proyecto](#64-organización-del-proyecto)
+- [7. Route Handlers](#7-route-handlers)
+  - [7.1. Métodos HTTP admitidos](#71-métodos-http-admitidos)
+  - [7.2. Parámetros de URL](#72-parámetros-de-url)
+  - [7.3. Creación de API REST](#73-creación-de-api-rest)
+  - [7.4. API REST con datos en memoria RAM](#74-api-rest-con-datos-en-memoria-ram)
+  - [7.5. API REST con datos en BD MongoDB](#75-api-rest-con-datos-en-bd-mongodb)
+- [8. Cookies](#8-cookies)
+  - [8.1. Tipos de cookies](#81-tipos-de-cookies)
+  - [8.2. Generar Cookies](#82-generar-cookies)
+  - [8.3. Leer Cookies](#83-leer-cookies)
+  - [8.4. Eliminar Cookies](#84-eliminar-cookies)
+- [9. ANEXO: Parámetros de ruta y consulta en página de cliente](#9-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
+- [10. Referencias](#10-referencias)
 
 
 
@@ -639,9 +645,9 @@ El componente `<Image>` de Next.js amplía el elemento <img> de HTML con funcion
 - Más información: https://nextjs.org/docs/app/api-reference/components/image#configuration-options
 
 
-# Componentes listos para usar
+# 5. Componentes listos para usar
 
-## Iconos
+## 5.1. Iconos
 
 **Lucide** ( [sitio oficial](https://lucide.dev/) )
 
@@ -687,7 +693,7 @@ export default function MyComponent() {
 ```
 
 
-## UI
+## 5.2. UI
 
 **Shadcn/UI** ( [sitio oficial](https://ui.shadcn.com/) )
 
@@ -822,7 +828,7 @@ export default function Skeleton() {
 
 
 
-## Otros
+## 5.3. Otros
 
 **Tiptap - Editor WYSIWYG** ( [sitio oficial](https://tiptap.dev/) )
 
@@ -860,7 +866,7 @@ Un ejemplo mucho más completo puede encontrarse [AQUÍ](https://tiptap.dev/docs
 También hay una aplicación de ejemplo, que además hace uso de iconos Lucide, en https://github.com/jamj2000/nxeditor-icons
 
 
-# 5. App Router
+# 6. App Router
 
 En la versión 13, Next.js introdujo un nuevo `App Router` construido sobre `React Server Components` , que admite diseños compartidos, enrutamiento anidado, estados de carga, manejo de errores y más.
 
@@ -875,7 +881,7 @@ App Router funciona en un nuevo directorio llamado `app` (en versiones anteriore
 - **Segmento de URL**: Parte de la ruta de la URL delimitada por barras.
 - **Ruta URL**: Parte de la URL que viene después del dominio (compuesta por segmentos).
 
-## 5.1. Segmentos de ruta
+## 6.1. Segmentos de ruta
 
 Cada carpeta en una ruta representa un segmento de ruta. Cada segmento de ruta se asigna a un segmento correspondiente en una ruta URL.
 
@@ -889,7 +895,7 @@ Esto significa que los archivos de proyecto se pueden colocar de forma segura de
 
 - Referencia: https://nextjs.org/docs/app/building-your-application/routing
 
-## 5.2. Creando rutas
+## 6.2. Creando rutas
 
 Next.js utiliza un enrutador basado en un sistema de archivos donde se utilizan carpetas para definir rutas.
 
@@ -904,7 +910,7 @@ Se utiliza un archivo especial **`page.js`** para hacer que los segmentos de rut
 En este ejemplo, la ruta URL `/dashboard/analytics` no es accesible públicamente porque no tiene un archivo `page.js` correspondiente. Esta carpeta podría usarse para almacenar componentes, hojas de estilo, imágenes u otros archivos colocados.
 
 
-## 5.3. Parámetros de URL
+## 6.3. Parámetros de URL
 
 Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
 
@@ -943,7 +949,7 @@ author
 1
 ``` 
 
-## 5.4. Organización del proyecto
+## 6.4. Organización del proyecto
 
 Aparte de las convenciones de enrutamiento de carpetas y archivos, Next.js no tiene opiniones sobre cómo organizar y colocar los archivos de su proyecto.
 
@@ -968,7 +974,7 @@ Esta estrategia almacena el código de aplicación compartido globalmente en el 
 ![](assets/project-organization-app-root-split.avif)
 
 
-# 6. Route Handlers
+# 7. Route Handlers
 
 Los `controladores de ruta` le permiten crear controladores de solicitudes personalizados para una ruta determinada mediante las APIs web [`Request`](https://developer.mozilla.org/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/docs/Web/API/Response).
 
@@ -983,7 +989,7 @@ Los controladores de ruta se definen en un archivo `route.js|ts` dentro del dire
 export async function GET(request: Request) {}
 ```
 
-## 6.1. Métodos HTTP admitidos
+## 7.1. Métodos HTTP admitidos
 
 Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATCH**, **DELETE**, **HEAD**, y **OPTIONS**. Si se llama a un método no compatible, Next.js devolverá una respuesta *405 Method Not Allowed*.
 
@@ -995,7 +1001,7 @@ Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATC
 - https://nextjs.org/docs/app/api-reference/functions/next-response
 
 
-## 6.2. Parámetros de URL
+## 7.2. Parámetros de URL
 
 Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
 
@@ -1042,7 +1048,7 @@ author
 
 
 
-## 6.3. Creación de API REST
+## 7.3. Creación de API REST
 
 Como se ha comentado anteriormente, la principal aplicación que tienen los route handlers (`controladores de ruta`) es la implentación de APIs. Suele ser habitual el intercambio de información mediante el formato JSON.
 
@@ -1068,7 +1074,7 @@ app
 ```
 
 
-## 6.4. API REST con datos en memoria RAM
+## 7.4. API REST con datos en memoria RAM
 
 **Estructura de archivos en `src`**
 
@@ -1093,7 +1099,7 @@ Gestión de datos en archivo `lib/users.js`.
 - [Código fuente](https://github.com/jamj2000/nxapi-memory)
 
 
-## 6.5. API REST con datos en BD MongoDB
+## 7.5. API REST con datos en BD MongoDB
 
 **Estructura de archivos en `src`**
 
@@ -1118,7 +1124,7 @@ Gestión de datos en archivo `lib/mongodb.js`.
 - [Código fuente](https://github.com/jamj2000/nxapi-mongodb)
 
 
-# 7. Cookies
+# 8. Cookies
 
 Una cookie es un fichero de datos que una página web le envía a tu ordenador o móvil cuando la visitas. 
 
@@ -1128,14 +1134,14 @@ Gracias a las cookies la página web podrá recordar que eres tú, y por lo tant
 
 Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas muchos archivos en tu cesta de la compra sin tener una cuenta, pero luego te vas. Entonces, cuando vuelvas a entrar, gracias a tu IP y los otros identificadores que miran las cookies, Amazon sabrá quién eres y qué hiciste antes, y muy posiblemente todavía podrá recordar lo que tenías en la cesta de la compra para que no tengas que volver a meterlo.
 
-## 7.1. Tipos de cookies
+## 8.1. Tipos de cookies
 
 - **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
 - **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. 
 
 A continuación se muestra como trabjar con cookies desde NextJS.
 
-## 7.2. Generar Cookies 
+## 8.2. Generar Cookies 
 
 **`cookies().set(name, value, options)`**
 
@@ -1200,7 +1206,7 @@ export async function GET() {
 }
 ```
 
-## 7.3. Leer Cookies 
+## 8.3. Leer Cookies 
 
 **cookies().get(name)**
 
@@ -1215,7 +1221,7 @@ export default function Page() {
 ```
 
 
-## 7.4. Eliminar Cookies
+## 8.4. Eliminar Cookies
 
 **cookies().delete(name)**
 
@@ -1236,7 +1242,7 @@ async function create(data) {
 Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
 
-# ANEXO: Parámetros de ruta y consulta en página de cliente
+# 9. ANEXO: Parámetros de ruta y consulta en página de cliente
 
 ```js
 'use client'
@@ -1263,7 +1269,7 @@ export default const page = () => {
 ```
 
 
-# 8. Referencias
+# 10. Referencias
 
 - [Documentación de NextJS](https://nextjs.org/docs)
 - [Listado de APIs públicas](https://publicapis.dev)
