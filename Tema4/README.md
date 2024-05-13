@@ -3,8 +3,6 @@
 # Tema 4: Desarrollo de aplicaciones Web utilizando código embebido <!-- omit in toc -->
 > NEXTJS, APP ROUTER, ROUTE HANDLERS, COOKIES
 
----
-
 **[`PROYECTOS DE EJEMPLO`](proyectos)**
 
 ---
