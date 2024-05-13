@@ -3,6 +3,9 @@
 # Tema 8: Generación dinámica de páginas Web interactivas <!-- omit in toc -->
 > AUTENTICACIÓN DE USUARIOS, NEXT AUTH. OAUTH, CREDENTIALS.
 
+**[`PROYECTOS DE EJEMPLO`](proyectos)**
+
+---
 - [1. Introducción](#1-introducción)
 - [2. Instalación de dependencias](#2-instalación-de-dependencias)
 - [3. Creación de archivos necesarios](#3-creación-de-archivos-necesarios)

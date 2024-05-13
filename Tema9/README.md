@@ -3,6 +3,9 @@
 # Tema 9: Desarrollo de aplicaciones Web híbridas <!-- omit in toc -->
 > PWA: PROGRESSIVE WEB APP. WEB MANIFEST. SERVICE WORKER.
 
+**[`PROYECTOS DE EJEMPLO`](proyectos)**
+
+---
 - [1. Introducción](#1-introducción)
 - [2. Características de una PWA](#2-características-de-una-pwa)
 - [3. Pasos a seguir](#3-pasos-a-seguir)

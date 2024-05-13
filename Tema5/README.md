@@ -3,6 +3,9 @@
 # Tema 5: Generación dinámica de páginas Web  <!-- omit in toc -->
 > SSG, SERVER ACTIONS, FORMULARIOS 
 
+**[`PROYECTOS DE EJEMPLO`](proyectos)**
+
+---
 
 - [1. Introducción](#1-introducción)
 - [2. SSG](#2-ssg)

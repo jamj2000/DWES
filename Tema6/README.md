@@ -3,6 +3,9 @@
 # Tema 6: Utilización de técnicas de acceso a datos <!-- omit in toc -->
 > BASES DE DATOS sin ORM. BASES DE DATOS con ORM, PRISMA
 
+**[`PROYECTOS DE EJEMPLO`](proyectos)**
+
+---
 - [1. Introducción](#1-introducción)
 - [2. MySQL](#2-mysql)
   - [2.1. Proyecto](#21-proyecto)

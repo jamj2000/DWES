@@ -3,6 +3,9 @@
 # Tema 7: Programación de servicios Web <!-- omit in toc -->
 > FUNCIONALIDADES EN LAS APP WEB.
 
+**[`PROYECTOS DE EJEMPLO`](proyectos)**
+
+---
 - [1. Introducción](#1-introducción)
 - [2. Datos ficticios](#2-datos-ficticios)
   - [2.1. Instalación de librería](#21-instalación-de-librería)
