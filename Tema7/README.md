@@ -8,11 +8,11 @@
 ---
 - [1. Introducción](#1-introducción)
 - [2. Datos ficticios](#2-datos-ficticios)
-  - [2.1. Instalación de librería](#21-instalación-de-librería)
+  - [2.1. Instalación de biblioteca](#21-instalación-de-biblioteca)
   - [2.2. Uso](#22-uso)
   - [2.3. Documentación](#23-documentación)
 - [3. Datos de archivos CSV](#3-datos-de-archivos-csv)
-  - [3.1. Instalación de librería](#31-instalación-de-librería)
+  - [3.1. Instalación de biblioteca](#31-instalación-de-biblioteca)
   - [3.2. Uso](#32-uso)
   - [3.3. Documentación](#33-documentación)
 - [4. Gráficos](#4-gráficos)
@@ -66,11 +66,11 @@ En este tema añadiremos nuevas funcionalidades a nuestra aplicación web. En co
 
 # 2. Datos ficticios
 
-Durante el desarrollo de una aplicación a menudo necesitamos datos *fake* para probar su funcionalidad. Para ello disponemos de la librería **[faker.js](https://fakerjs.dev/)**, la cual nos provee de este tipo de datos. 
+Durante el desarrollo de una aplicación a menudo necesitamos datos *fake* para probar su funcionalidad. Para ello disponemos de la biblioteca **[faker.js](https://fakerjs.dev/)**, la cual nos provee de este tipo de datos. 
 
-Esta librería puede usarse desde el lado cliente y desde el lado servidor.
+Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
-## 2.1. Instalación de librería
+## 2.1. Instalación de biblioteca
 
 Instalamos como **dependencia de desarrollo**. Aparecerá en la sección `devDependencies` en el archivo `package.json`.
 
@@ -81,7 +81,7 @@ npm install -D @faker-js/faker
 
 > **IMPORTANTE:**
 >
-> Esta librería ocupa unos cuantos MB.
+> Esta biblioteca ocupa unos cuantos MB.
 
 
 ## 2.2. Uso
@@ -124,11 +124,11 @@ faker.image.city()
 
 Es posible que se te presente la posibilidad de realizar una aplicación que requiera el uso de datos de poca complejidad y de sólo lectura. En estos casos es problable que usar una BD sea algo parecido a *matar moscas a cañonazos*. 
 
-Disponemos de una librería  llamada **[Papa Parse](https://www.papaparse.com/)** que nos permite almacenar nuestros datos en uno o varios [archivos CSV](https://es.wikipedia.org/wiki/Valores_separados_por_comas), y realizar las consultas deseadas sobre ellos. 
+Disponemos de una biblioteca  llamada **[Papa Parse](https://www.papaparse.com/)** que nos permite almacenar nuestros datos en uno o varios [archivos CSV](https://es.wikipedia.org/wiki/Valores_separados_por_comas), y realizar las consultas deseadas sobre ellos. 
 
-Esta librería puede usarse desde el lado cliente y desde el lado servidor.
+Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
-## 3.1. Instalación de librería
+## 3.1. Instalación de biblioteca
 
  ```sh
 npm  install  papaparse
@@ -164,13 +164,13 @@ Para cargar grandes cantidades de datos desde CSV a una BD consulta el siguiente
 
 # 4. Gráficos
 
-Esta librería debe ser usada desde el lado cliente.
+Esta biblioteca debe ser usada desde el lado cliente.
 
 Otra de las funcionalidades que a menudo es requerida es la de presentación de información en forma gráfica. Suele tratarse de diagramas para la exposición de datos o de monitorización de ellos (en algunos casos en tiempo real). En este último caso, los gráficos suelen estar incorporados en un Dashboard o Panel del usuario. 
 
-La web W3Schools tiene una [introdución a los gráficos](https://www.w3schools.com/ai/ai_graphics.asp) explicando brevemente las librerías más habituales para el trabajo con gráficos.
+La web W3Schools tiene una [introdución a los gráficos](https://www.w3schools.com/ai/ai_graphics.asp) explicando brevemente las bibliotecas más habituales para el trabajo con gráficos.
 
-Nosotros usaremos la librería [chart.js](https://www.chartjs.org/) por ser una de las más populares. Además es sencilla de usar y tiene licencia MIT, la cual es muy permisiva.
+Nosotros usaremos la biblioteca [chart.js](https://www.chartjs.org/) por ser una de las más populares. Además es sencilla de usar y tiene licencia MIT, la cual es muy permisiva.
 
 Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuente está disponible en:
 
@@ -191,7 +191,7 @@ El segundo paquete (`react-chartjs-2`) nos permitirá usar directamente componen
 ## 4.2. Uso
 
 
-La forma más rápida y directa de empezar a usar esta librería es usando el siguiente esquema. 
+La forma más rápida y directa de empezar a usar esta biblioteca es usando el siguiente esquema. 
 
 ```js
 import { Chart } from 'chart.js/auto'   // versión 4 de chartjs
@@ -350,8 +350,8 @@ npm  install  chart.js@3 react-chartjs-2@4 luxon chartjs-adapter-luxon chartjs-p
 
 Los paquetes instalados son los siguientes:
 
-- `luxon`: librería para manejo de fechas y horas
-- `chartjs-adapter-luxon`: adaptador de la librería anterior
+- `luxon`: biblioteca para manejo de fechas y horas
+- `chartjs-adapter-luxon`: adaptador de la biblioteca anterior
 - `chartjs-plugin-annotation`: plugin para realizar anotaciones en el gráfico
 - `chartjs-plugin-streaming`: plugin para hacer streaming
 - `chartjs-plugin-zoom`: plugin opcional. Para hacer zoom y pan 
@@ -449,7 +449,7 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 
 ## 4.5. ANEXO: Curiosidad
 
-Existe un librería para *charting* llamada **`roughViz`**. Como su nombre indica realiza la visualización de forma algo bruta. Sirve para dar un toque de originalidad en detrimento de la exactitud en la representación gráfica.
+Existe un biblioteca para *charting* llamada **`roughViz`**. Como su nombre indica realiza la visualización de forma algo bruta. Sirve para dar un toque de originalidad en detrimento de la exactitud en la representación gráfica.
 
 ![roughViz 1](assets/roughViz1.png)
 
@@ -496,7 +496,7 @@ import {Bar, Pie } from 'react-roughviz'
 
 pdf-lib
 
-Esta librería puede usarse desde el lado cliente y desde el lado servidor.
+Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
 ## 5.1. Instalación
 
@@ -506,12 +506,36 @@ npm  install  pdf-lib
 
 ## 5.2. Uso
 
+```js
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
+
+async function createPdf() {
+  const pdfDoc = await PDFDocument.create()
+  const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
+
+  const page = pdfDoc.addPage()
+  const { width, height } = page.getSize()
+  const fontSize = 30
+  page.drawText('Creating PDFs in JavaScript is awesome!', {
+    x: 50,
+    y: height - 4 * fontSize,
+    size: fontSize,
+    font: timesRomanFont,
+    color: rgb(0, 0.53, 0.71),
+  })
+
+  const pdfBytes = await pdfDoc.save()
+}
+``` 
+
 A continuación tienes los enlaces a 2 proyectos que hacen uso de esta biblioteca.
 
 - [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
-
+- [Aplicación de tickets de supermercado -por realizar-](#)
 
 ## 5.3. Documentación
+
+- [Ejemplos](https://pdf-lib.js.org/#examples)
 
 
 
