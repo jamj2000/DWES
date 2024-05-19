@@ -3,6 +3,10 @@
 # Tema 3: Programación basada en lenguajes de marcas con código embebido <!-- omit in toc -->
 > NODE, MÓDULOS EXTERNOS, EXPRESS, APIs REST, FETCH 
 
+**[`CÓDIGO DE EJEMPLO`](codigo)**
+
+---
+
 - [1. Introducción](#1-introducción)
 - [2. Módulos externos](#2-módulos-externos)
   - [2.1. Instalación de módulos externos](#21-instalación-de-módulos-externos)

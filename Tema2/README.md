@@ -3,6 +3,10 @@
 # Tema 2: Inserción de código en páginas Web <!-- omit in toc -->
 > NODE, MÓDULOS INCORPORADOS, NPM, NPX, LINTER, ESLINT
 
+**[`CÓDIGO DE EJEMPLO`](codigo)**
+
+---
+
 - [1. Introducción](#1-introducción)
   - [1.1. Lenguajes de servidor](#11-lenguajes-de-servidor)
 - [2. NodeJS](#2-nodejs)
