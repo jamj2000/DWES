@@ -3,7 +3,7 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 Apuntes iniciados en el curso 2023/24.
 
-## Temas del Módulos
+## Temas del Módulo
 
 1. [Selección de arquitecturas y herramientas de programación](Tema1/README.md)
 2. [Inserción de código en páginas Web](Tema2/README.md)
