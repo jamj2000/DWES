@@ -499,8 +499,9 @@ import {Bar, Pie } from 'react-roughviz'
 
 # 5. Creación de PDFs 
 
+De las muchas bibliotecas disponibles para trabajar con archivos PDF, una de las más interesantes y potentes es [pdf-lib](https://www.npmjs.com/package/pdf-lib).
 
-pdf-lib
+Permite crear nuevos documenteos y modificar los existentes. Permite trabajar en todos los entornos de JavaScript, no solo en Node o el navegador.
 
 Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
@@ -541,7 +542,7 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 
 ## 5.3. Documentación
 
-- [Documentación oficial: Ejemplos](https://pdf-lib.js.org/#examples)
+- [Ejemplos de la Documentación oficial](https://pdf-lib.js.org/#examples)
 
 
 
