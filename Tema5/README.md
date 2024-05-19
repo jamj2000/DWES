@@ -24,9 +24,9 @@
     - [5.2.1. Ataques frecuentes](#521-ataques-frecuentes)
     - [5.2.2. Sea paranoico: nunca confíe en sus usuarios](#522-sea-paranoico-nunca-confíe-en-sus-usuarios)
     - [5.2.3. Resumen](#523-resumen)
-- [Ejemplo práctico avanzado](#ejemplo-práctico-avanzado)
-- [ANEXO: Componentes de servidor y de cliente](#anexo-componentes-de-servidor-y-de-cliente)
-- [6. Referencias](#6-referencias)
+- [6. Ejemplo práctico avanzado](#6-ejemplo-práctico-avanzado)
+- [7. ANEXO: Componentes de servidor y de cliente](#7-anexo-componentes-de-servidor-y-de-cliente)
+- [8. Referencias](#8-referencias)
 
 
 
@@ -648,11 +648,11 @@ Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
 
 
-# Ejemplo práctico avanzado
+# 6. Ejemplo práctico avanzado
 
-En este tema dispones de algunos proyectos de ejemplo que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
+En este tema dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
-Para que compruebes las posibilidades que tienes a tu disposición puedes consultar el siguiente proyecto, que está desarrollado y explicado (en inglés) con cierta profundidad. 
+Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar el siguiente proyecto, que está desarrollado y explicado (en inglés) con cierta profundidad. 
 
 ![photobox](assets/photobox.png)
  
@@ -665,7 +665,7 @@ Para que compruebes las posibilidades que tienes a tu disposición puedes consul
 
 
 
-# ANEXO: Componentes de servidor y de cliente
+# 7. ANEXO: Componentes de servidor y de cliente
 
 
 **BIEN**
@@ -683,7 +683,7 @@ Para que compruebes las posibilidades que tienes a tu disposición puedes consul
 
 
 
-# 6. Referencias
+# 8. Referencias
 
 - [MDN: Envío y rececpción de datos de formulario (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 - [W3Schools: Atributo formaction (en inglés)](https://www.w3schools.com/tags/att_formaction.asp)
