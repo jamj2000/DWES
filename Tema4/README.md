@@ -23,7 +23,8 @@
 - [4. Componentes del Servidor VS Componentes del Cliente](#4-componentes-del-servidor-vs-componentes-del-cliente)
   - [4.1. ¿Cuándo utilizar componentes de servidor y cliente?](#41-cuándo-utilizar-componentes-de-servidor-y-cliente)
   - [4.2. Ejemplo: Paginación de datos](#42-ejemplo-paginación-de-datos)
-  - [4.3. Componentes de NextJS](#43-componentes-de-nextjs)
+  - [4.3. Ejemplo avanzado: Paginación y búsqueda](#43-ejemplo-avanzado-paginación-y-búsqueda)
+  - [4.4. Componentes de NextJS](#44-componentes-de-nextjs)
 - [5. Componentes listos para usar](#5-componentes-listos-para-usar)
   - [5.1. Iconos](#51-iconos)
   - [5.2. UI](#52-ui)
@@ -46,6 +47,7 @@
   - [8.4. Eliminar Cookies](#84-eliminar-cookies)
 - [9. ANEXO: Parámetros de ruta y consulta en página de cliente](#9-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [10. Referencias](#10-referencias)
+
 
 
 
@@ -579,8 +581,12 @@ En resumen, la mejor opción dependerá de las necesidades específicas de tu ap
 > 
 > ¿Qué tipo de paginación se realiza en la aplicacón del código fuente anterior?.
 
+## 4.3. Ejemplo avanzado: Paginación y búsqueda
 
-## 4.3. Componentes de NextJS
+- [Aplicación de lado servidor para consultar biblioteca de libros](https://github.com/jamj2000/book-inventory)
+
+
+## 4.4. Componentes de NextJS
 
 **Link**
 
@@ -690,7 +696,7 @@ export default function MyComponent() {
 ```
 
 
-**ReactIcons**  ( [sitio oficial](https://react-icons.github.io/react-icons/) )
+**React Icons**  ( [sitio oficial](https://react-icons.github.io/react-icons/) )
 
 Se trata de un megaconjunto de iconos, el cual incluye muchos subconjuntos, entre los que están los que hemos visto anteriormente.
 
@@ -1050,7 +1056,7 @@ Y luego usar dicho componente:
 
 
 ```js
-import { BackgroundGradientAnimation } from "../ui/background-gradient-animation";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
  
 export function BackgroundGradientAnimationDemo() {
   return (
@@ -1065,7 +1071,7 @@ export function BackgroundGradientAnimationDemo() {
 }
 ```
 
-Puedes consultar los siguientes recursos para aprender como hacer uso de algunos de los numerosos componentes disponibles:
+Puedes consultar los siguientes recursos para aprender como hacer uso de algunos de los numerosos componentes disponibles. Se trata de un portfolio con una única página.
 
 - [Vídeo: creación de un Portfolio](https://youtu.be/FTH6Dn3AyIQ?si=PMpHbdk3lMRCFbQz)
 - [Código fuente del vídeo anterior](https://github.com/adrianhajdin/portfolio)

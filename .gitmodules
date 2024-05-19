@@ -94,3 +94,6 @@
 [submodule "Tema7/proyectos/nxchart-streaming"]
 	path = Tema7/proyectos/nxchart-streaming
 	url = https://github.com/jamj2000/nxchart-streaming.git
+[submodule "Tema7/proyectos/semana-fct"]
+	path = Tema7/proyectos/semana-fct
+	url = https://github.com/jamj2000/semana-fct

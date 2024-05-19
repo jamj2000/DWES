@@ -68,8 +68,10 @@ En este tema añadiremos nuevas funcionalidades a nuestra aplicación web. En co
 
 Durante el desarrollo de una aplicación a menudo necesitamos datos *fake* para probar su funcionalidad. Para ello disponemos de la librería **[faker.js](https://fakerjs.dev/)**, la cual nos provee de este tipo de datos. 
 
+Esta librería puede usarse desde el lado cliente y desde el lado servidor.
 
 ## 2.1. Instalación de librería
+
 Instalamos como **dependencia de desarrollo**. Aparecerá en la sección `devDependencies` en el archivo `package.json`.
 
 
@@ -79,10 +81,11 @@ npm install -D @faker-js/faker
 
 > **IMPORTANTE:**
 >
-> Esta librería ocupa unos cuantos MB, por lo que no debería usarse en producción.
+> Esta librería ocupa unos cuantos MB.
 
 
 ## 2.2. Uso
+
 
 ```js
 import { faker } from '@faker-js/faker';
@@ -119,17 +122,49 @@ faker.image.city()
 
 # 3. Datos de archivos CSV
 
+Es posible que se te presente la posibilidad de realizar una aplicación que requiera el uso de datos de poca complejidad y de sólo lectura. En estos casos es problable que usar una BD sea algo parecido a *matar moscas a cañonazos*. 
+
+Disponemos de una librería  llamada **[Papa Parse](https://www.papaparse.com/)** que nos permite almacenar nuestros datos en uno o varios [archivos CSV](https://es.wikipedia.org/wiki/Valores_separados_por_comas), y realizar las consultas deseadas sobre ellos. 
+
+Esta librería puede usarse desde el lado cliente y desde el lado servidor.
+
 ## 3.1. Instalación de librería
 
-papa
+ ```sh
+npm  install  papaparse
+ ```
 
 
 ## 3.2. Uso
 
+
+```js
+import Papa from 'papaparse';
+
+Papa.parse(file, config);
+```
+
+A continuación tienes los enlaces a 2 proyectos que hacen uso de esta biblioteca.
+
+- [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
+- [Aplicación de lado servidor para consultar biblioteca de libros](https://github.com/jamj2000/book-inventory)
+
+La segunda aplicación contiene los datos en el archivo [book.csv](https://github.com/jamj2000/book-inventory/blob/main/books.csv). CUIDADO: son unos 7OMB.
+
+Para cargar grandes cantidades de datos desde CSV a una BD consulta el siguiente vídeo:
+
+- [Loading Large CSVs into a Vercel Postgres Database](https://youtu.be/RbDcTraZwQA?si=PEv-tX-Q6L3QHtrS)
+
+
 ## 3.3. Documentación
+
+- [Sitio oficial](https://www.papaparse.com/)
+- [Repositorio en Github](https://github.com/mholt/PapaParse?tab=readme-ov-file)
 
 
 # 4. Gráficos
+
+Esta librería debe ser usada desde el lado cliente.
 
 Otra de las funcionalidades que a menudo es requerida es la de presentación de información en forma gráfica. Suele tratarse de diagramas para la exposición de datos o de monitorización de ellos (en algunos casos en tiempo real). En este último caso, los gráficos suelen estar incorporados en un Dashboard o Panel del usuario. 
 
@@ -461,11 +496,19 @@ import {Bar, Pie } from 'react-roughviz'
 
 pdf-lib
 
+Esta librería puede usarse desde el lado cliente y desde el lado servidor.
+
 ## 5.1. Instalación
 
+```sh
+npm  install  pdf-lib
+```
 
 ## 5.2. Uso
 
+A continuación tienes los enlaces a 2 proyectos que hacen uso de esta biblioteca.
+
+- [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
 
 
 ## 5.3. Documentación
@@ -477,6 +520,7 @@ pdf-lib
 
 react-email
 nodemailer
+
 
 ## 6.1. Instalación
 

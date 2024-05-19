@@ -16,6 +16,8 @@
 - [4. Módulos CommonJS](#4-módulos-commonjs)
 - [5. Módulos ECMAScript](#5-módulos-ecmascript)
   - [5.1. Exportación e Importación](#51-exportación-e-importación)
+    - [Ejemplo sin package.json](#ejemplo-sin-packagejson)
+    - [Ejemplo con package.json](#ejemplo-con-packagejson)
 - [6. Parámetros de URL](#6-parámetros-de-url)
   - [6.1. Parámetros de ruta (Path Parameters)](#61-parámetros-de-ruta-path-parameters)
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
@@ -279,7 +281,41 @@ A la hora de exportar, deberemos tener en cuenta que **un archivo**
 - **sólo puede exportar por defecto un único elemento**
 - puede exportar varios elementos que no sean por defecto
 
-A continuación se muestra un ejemplo.
+
+### Ejemplo sin package.json
+
+Si no usamos archivo `package.json`, deberemos colocar a nuestros archivos la extensión `.mjs` (Module JavaScript)
+
+**`archivo1.mjs`**
+
+```js
+const NADA = 0
+export default NADA 
+
+export const UNO = 1
+export const DOS = 2
+export const TRES = 3
+```
+
+**`archivo2.mjs`**
+
+```js
+import POR_DEFECTO, { UNO as uno, DOS, TRES } from './archivo1.js'
+
+console.log (POR_DEFECTO)
+console.log (uno, DOS, TRES)
+```
+
+Para ejecutar hacemos:
+
+```sh
+node archivo2.mjs
+```
+
+
+### Ejemplo con package.json
+
+En este caso indicamos que nuestro proyecto es de `"type": "module"`. En este caso, los archivos ya no llevarán las extensión `.mjs` sino **`.js`**.
 
 **`package.json`**
 
@@ -308,6 +344,12 @@ import POR_DEFECTO, { UNO as uno, DOS, TRES } from './archivo1.js'
 
 console.log (POR_DEFECTO)
 console.log (uno, DOS, TRES)
+```
+
+Para ejecutar hacemos:
+
+```sh
+node  archivo2.js
 ```
 
 **La exportación por defecto se puede importar con cualquier nombre**.
