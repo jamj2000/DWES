@@ -591,7 +591,7 @@ Esta biblioteca solo puede usarse desde el lado cliente.
 
 ```sh
 npm  install  @googlemaps/js-api-loader
-npm  install  @types/google.maps
+npm  install  @types/google.maps          # Sólo necesario si vamos a usar Typescript
 ``` 
 
 ## 8.2. Uso
@@ -673,3 +673,4 @@ export default function Home() {
 
 - [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
 - [Código fuente del video anterior](https://github.com/MG95Developer/google-maps-tutorial)
+- [Documentación oficial](https://googlemaps.github.io/js-api-loader/index.html)
