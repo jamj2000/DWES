@@ -5,7 +5,7 @@
 
 **[`PROYECTOS DE EJEMPLO`](proyectos)**
 
----
+---- [1. Introducción](#1-introducción)
 - [1. Introducción](#1-introducción)
 - [2. Instalación de dependencias](#2-instalación-de-dependencias)
 - [3. Creación de archivos necesarios](#3-creación-de-archivos-necesarios)
@@ -1042,8 +1042,8 @@ export function Providers({children}) {
 > import { signIn, signOut } from "next-auth/react"
 >  
 > // ...
->    <button onClick={() => signIn()}>Sign in</button>
->    <button onClick={() => signOut()}>Sign out</button>
+>    <button onClick={() => signIn()}> Sign in </button>
+>    <button onClick={() => signOut()}> Sign out </button>
 >```
 > La redirección se hace de forma distinta a la empleada en el lado servidor. Empleamos la propiedad **`callbackUrl`** en lugar de la propiedad `redirectTo`. En el lado cliente es así:
 >

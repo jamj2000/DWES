@@ -11,30 +11,32 @@
   - [2.1. Instalación de librería](#21-instalación-de-librería)
   - [2.2. Uso](#22-uso)
   - [2.3. Documentación](#23-documentación)
-- [Datos de archivos CSV](#datos-de-archivos-csv)
-  - [Instalación de librería](#instalación-de-librería)
-  - [Uso](#uso)
-  - [Documentación](#documentación)
-- [3. Gráficos](#3-gráficos)
-  - [3.1. Instalación](#31-instalación)
+- [3. Datos de archivos CSV](#3-datos-de-archivos-csv)
+  - [3.1. Instalación de librería](#31-instalación-de-librería)
   - [3.2. Uso](#32-uso)
-  - [3.3. Flujo de datos (streaming)](#33-flujo-de-datos-streaming)
-    - [3.3.1. Los modelos de provisión de datos](#331-los-modelos-de-provisión-de-datos)
-    - [3.3.2. Ejemplo](#332-ejemplo)
-    - [3.3.3. Colas de mensajes](#333-colas-de-mensajes)
-  - [3.4. Documentación](#34-documentación)
-- [4. Creación de PDFs](#4-creación-de-pdfs)
+  - [3.3. Documentación](#33-documentación)
+- [4. Gráficos](#4-gráficos)
   - [4.1. Instalación](#41-instalación)
   - [4.2. Uso](#42-uso)
-  - [4.3. Documentación](#43-documentación)
-- [5. Envío de correos](#5-envío-de-correos)
+  - [4.3. Flujo de datos (streaming)](#43-flujo-de-datos-streaming)
+    - [4.3.1. Los modelos de provisión de datos](#431-los-modelos-de-provisión-de-datos)
+    - [4.3.2. Ejemplo](#432-ejemplo)
+    - [4.3.3. Colas de mensajes](#433-colas-de-mensajes)
+  - [4.4. Documentación](#44-documentación)
+  - [4.5. ANEXO: Curiosidad](#45-anexo-curiosidad)
+- [5. Creación de PDFs](#5-creación-de-pdfs)
   - [5.1. Instalación](#51-instalación)
   - [5.2. Uso](#52-uso)
   - [5.3. Documentación](#53-documentación)
-- [6. Pago por internet](#6-pago-por-internet)
+- [6. Envío de correos](#6-envío-de-correos)
   - [6.1. Instalación](#61-instalación)
   - [6.2. Uso](#62-uso)
   - [6.3. Documentación](#63-documentación)
+- [7. Pago por internet](#7-pago-por-internet)
+  - [7.1. Instalación](#71-instalación)
+  - [7.2. Uso](#72-uso)
+  - [7.3. Documentación](#73-documentación)
+
 
 
 
@@ -115,19 +117,19 @@ faker.image.city()
 
 
 
-# Datos de archivos CSV
+# 3. Datos de archivos CSV
 
-## Instalación de librería
+## 3.1. Instalación de librería
 
 papa
 
 
-## Uso
+## 3.2. Uso
 
-## Documentación
+## 3.3. Documentación
 
 
-# 3. Gráficos
+# 4. Gráficos
 
 Otra de las funcionalidades que a menudo es requerida es la de presentación de información en forma gráfica. Suele tratarse de diagramas para la exposición de datos o de monitorización de ellos (en algunos casos en tiempo real). En este último caso, los gráficos suelen estar incorporados en un Dashboard o Panel del usuario. 
 
@@ -142,7 +144,7 @@ Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuen
 ![demo](assets/chart-dashboard.png)
 
 
-## 3.1. Instalación
+## 4.1. Instalación
 
 ```console
 npm  install  chart.js  react-chartjs-2
@@ -151,7 +153,7 @@ npm  install  chart.js  react-chartjs-2
 El segundo paquete (`react-chartjs-2`) nos permitirá usar directamente componentes de React, en lugar de Vanilla JS.
 
 
-## 3.2. Uso
+## 4.2. Uso
 
 
 La forma más rápida y directa de empezar a usar esta librería es usando el siguiente esquema. 
@@ -263,7 +265,7 @@ Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (
 > La página donde vaya a incrustarse el gráfico debe contener la directiva **`'use client'`**
 
 
-## 3.3. Flujo de datos (streaming)
+## 4.3. Flujo de datos (streaming)
 
 En algunos casos deseamos que la gráfica muestre un flujo de datos (**streaming**) obtenido de alguna fuente. Para ello podemos usar el plugin [chartjs-plugin-streaming](https://nagix.github.io/chartjs-plugin-streaming/latest/). Su página web dispone de varios [ejemplos](https://nagix.github.io/chartjs-plugin-streaming/latest/samples/charts/line-horizontal.html).
 
@@ -274,13 +276,13 @@ Entre toda la información podemos destacar:
 1. [Los modelos de provisión de datos](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html)
 2. [El tutorial para crear app en React, también aplicable a Next.js](https://nagix.github.io/chartjs-plugin-streaming/latest/tutorials/react/app.html)
 
-### 3.3.1. Los modelos de provisión de datos
+### 4.3.1. Los modelos de provisión de datos
 
 El paquete `chartjs-plugin-streaming` soporta obtención de datos mediante los modos **pull** y **push**. Para mayor información consulta la [documentación oficial](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html#push-model-listening-based)
 
 
 
-### 3.3.2. Ejemplo
+### 4.3.2. Ejemplo
 
 Hay disponible una aplicación de ejemplo con [código fuente disponible en Github](https://github.com/jamj2000/nxchart-streaming).
 
@@ -382,7 +384,7 @@ export default grafico
 ```
 
 
-### 3.3.3. Colas de mensajes
+### 4.3.3. Colas de mensajes
 
 Una forma de recuperar los datos para realizar las gráficas es mediante el uso de una cola de mensajes.
 
@@ -398,7 +400,7 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 - [Pirobits: Cola de mensajes usando MySQL: SELECT * FOR UPDATE](https://www.pirobits.com/es/post/cola-de-mensajes-usando-mysql-select-for-update)
 
 
-## 3.4. Documentación
+## 4.4. Documentación
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
 - [Código fuente de ejemplo con streaming](https://github.com/jamj2000/nxchart-streaming)
@@ -410,28 +412,54 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 - [Más gráficos, plugins,... - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
   
 
+## 4.5. ANEXO: Curiosidad
 
-# 4. Creación de PDFs 
+Existe un librería para *charting* llamada **`roughViz`**. Como su nombre indica realiza la visualización de forma algo bruta. Sirve para dar un toque de originalidad en detrimento de la exactitud en la representación gráfica.
+
+![roughViz 1](assets/roughViz1.png)
+
+La [documentación oficial](https://github.com/jwilber/roughViz) nos informa de los tipos de gráficos soportados y de las propiedades que podemos emplear en ellos. Algunas de estas propiedades son las que se muestran a continuación:
+
+![roughViz 2](assets/roughViz2.png)
+
+Existe [integración para React](https://github.com/Chris927/react-roughviz).
+
+
+```js
+npm  install  react-roughviz
+```
+
+```js
+'use client'
+import {Bar, Pie } from 'react-roughviz'
+// ...
+
+    <h3>Bar</h3>
+    <Bar
+      data='https://raw.githubusercontent.com/jwilber/random_data/master/flavors.csv'
+      labels='flavor'
+      values='price'
+    />
+    <h3>Pie</h3>
+    <Pie
+      data={{
+        labels: ['North', 'South', 'East', 'West'],
+        values: [10, 5, 8, 3]
+      }}
+      title='Regions'
+      colors={['red', 'orange', 'blue', 'skyblue']}
+      roughness={8}
+    />
+
+```
+
+
+
+
+# 5. Creación de PDFs 
 
 
 pdf-lib
-
-## 4.1. Instalación
-
-
-## 4.2. Uso
-
-
-
-## 4.3. Documentación
-
-
-
-# 5. Envío de correos
-
-
-react-email
-nodemailer
 
 ## 5.1. Instalación
 
@@ -443,10 +471,12 @@ nodemailer
 ## 5.3. Documentación
 
 
-# 6. Pago por internet
+
+# 6. Envío de correos
 
 
-stripe
+react-email
+nodemailer
 
 ## 6.1. Instalación
 
@@ -456,3 +486,18 @@ stripe
 
 
 ## 6.3. Documentación
+
+
+# 7. Pago por internet
+
+
+stripe
+
+## 7.1. Instalación
+
+
+## 7.2. Uso
+
+
+
+## 7.3. Documentación
