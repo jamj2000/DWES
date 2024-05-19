@@ -541,7 +541,7 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 
 ## 5.3. Documentación
 
-- [Ejemplos](https://pdf-lib.js.org/#examples)
+- [Documentación oficial: Ejemplos](https://pdf-lib.js.org/#examples)
 
 
 
@@ -580,7 +580,7 @@ stripe
 # 8. Mapas
 
 
-google-maps-react
+Si deseamos hacer uso de los Mapas de Google, podemos usar la biblioteca [@googlemaps/js-api-loader](https://www.npmjs.com/package/@googlemaps/js-api-loader).
 
 > **NOTA:** Deberás obtener una API KEY de Google.
 
