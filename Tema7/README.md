@@ -32,10 +32,15 @@
   - [6.1. Instalación](#61-instalación)
   - [6.2. Uso](#62-uso)
   - [6.3. Documentación](#63-documentación)
-- [7. Pago por internet](#7-pago-por-internet)
+- [7. Pagos por internet](#7-pagos-por-internet)
   - [7.1. Instalación](#71-instalación)
   - [7.2. Uso](#72-uso)
   - [7.3. Documentación](#73-documentación)
+- [8. Mapas](#8-mapas)
+  - [8.1. Instalación](#81-instalación)
+  - [8.2. Uso](#82-uso)
+  - [8.3. Documentación](#83-documentación)
+
 
 
 
@@ -61,7 +66,8 @@ En este tema añadiremos nuevas funcionalidades a nuestra aplicación web. En co
 - **Gráficos**
 - **Creación de PDFs**
 - **Envío de correos**
-- **Pago por internet**
+- **Pagos por internet**
+- **Mapas**
 
 
 # 2. Datos ficticios
@@ -556,7 +562,7 @@ nodemailer
 ## 6.3. Documentación
 
 
-# 7. Pago por internet
+# 7. Pagos por internet
 
 
 stripe
@@ -569,3 +575,101 @@ stripe
 
 
 ## 7.3. Documentación
+
+
+# 8. Mapas
+
+
+google-maps-react
+
+> **NOTA:** Deberás obtener una API KEY de Google.
+
+Esta biblioteca solo puede usarse desde el lado cliente.
+
+
+## 8.1. Instalación
+
+```sh
+npm  install  @googlemaps/js-api-loader
+npm  install  @types/google.maps
+``` 
+
+## 8.2. Uso
+
+**`.env`**
+
+```sh
+NEXT_PUBLIC_MAPS_API_KEY="YOUR API KEY"
+```
+
+
+**`src/components/GoogleMaps.js`**
+
+```js
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { Loader } from '@googlemaps/js-api-loader';
+
+
+export default function GoogleMaps() {
+	const mapRef = useRef(null);
+
+	useEffect(() => {
+		const initializeMap = async () => {
+			const loader = new Loader({
+				apiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY,
+				version: "quarterly",
+				libraries: ["places"]
+			});
+
+			const { Map } = await loader.importLibrary('maps');
+
+			const locationInMap = {
+				lat: 37.57869021751064,
+				lng: -4.6471375471961025
+			};
+
+			// MARKER
+			const { AdvancedMarkerElement: Marker } = await loader.importLibrary("marker")
+
+			const options = {
+				center: locationInMap,
+				zoom: 10,
+				mapId: 'DEMO_MAP_ID',
+			};
+
+			const map = new Map(mapRef.current, options);
+
+			// add the marker in the map
+			const marker = new Marker({
+				map: map,
+				position: locationInMap,
+			});
+		};
+
+		initializeMap();
+	}, []);
+
+	return <div className="h-[600px]" ref={mapRef} />;
+}
+``` 
+
+**`src/app/page.js`**
+
+```js
+import GoogleMaps from "@/components/GoogleMaps";
+
+export default function Home() {
+  return (
+    <div className="mx-auto container w-8/12">
+    <GoogleMaps />
+    </div>
+  );
+}
+```
+
+## 8.3. Documentación
+
+- [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
+- [Código fuente del video anterior](https://github.com/MG95Developer/google-maps-tutorial)

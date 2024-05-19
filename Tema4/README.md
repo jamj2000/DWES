@@ -135,6 +135,7 @@ El código escrito en JSX requiere conversión con una herramienta como *Babel* 
 const App = () => {
    return (
      <div>
+       {/* Esto es un comentario de JSX */}
        <p>Header</p>
        <p>Content</p>
        <p>Footer</p>

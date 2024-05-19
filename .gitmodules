@@ -97,3 +97,6 @@
 [submodule "Tema7/proyectos/semana-fct"]
 	path = Tema7/proyectos/semana-fct
 	url = https://github.com/jamj2000/semana-fct
+[submodule "Tema7/proyectos/nxgoogle-maps"]
+	path = Tema7/proyectos/nxgoogle-maps
+	url = https://github.com/jamj2000/nxgoogle-maps.git
