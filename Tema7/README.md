@@ -11,6 +11,10 @@
   - [2.1. Instalación de librería](#21-instalación-de-librería)
   - [2.2. Uso](#22-uso)
   - [2.3. Documentación](#23-documentación)
+- [Datos de archivos CSV](#datos-de-archivos-csv)
+  - [Instalación de librería](#instalación-de-librería)
+  - [Uso](#uso)
+  - [Documentación](#documentación)
 - [3. Gráficos](#3-gráficos)
   - [3.1. Instalación](#31-instalación)
   - [3.2. Uso](#32-uso)
@@ -51,6 +55,7 @@
 En este tema añadiremos nuevas funcionalidades a nuestra aplicación web. En concreto, se estudiarán las siguientes funcionalidades:
 
 - **Datos ficticios**
+- **Datos de archivos CSV**
 - **Gráficos**
 - **Creación de PDFs**
 - **Envío de correos**
@@ -108,6 +113,18 @@ faker.image.city()
 - [Guía](https://fakerjs.dev/guide/)
 - [API. Tipos de datos proporcionados](https://fakerjs.dev/api/)
 
+
+
+# Datos de archivos CSV
+
+## Instalación de librería
+
+papa
+
+
+## Uso
+
+## Documentación
 
 
 # 3. Gráficos
