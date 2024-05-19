@@ -668,6 +668,8 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 # 7. ANEXO: Componentes de servidor y de cliente
 
 
+Por desarrollar ... 
+
 **BIEN**
 ```js
 <ClientComponent>
@@ -681,6 +683,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 <ClientComponent />
 ```
 
+- Consultar https://react.dev/learn/passing-data-deeply-with-context
 
 
 # 8. Referencias
