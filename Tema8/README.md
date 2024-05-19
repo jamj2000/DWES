@@ -1033,6 +1033,26 @@ export function Providers({children}) {
 - Referencia: https://medium.com/@rezahedi/using-nextauth-authentication-provider-in-next-js-by-app-router-f50cb23282c9
  
 
+> **NOTA: signIn y signOut en el lado cliente**
+>
+> Al igual que podemos acceder a los datos de sesión desde el lado cliente, también podemos hacer `signin` y `signout` desde el lado cliente.
+>
+> ```js
+> 'use client'
+> import { signIn, signOut } from "next-auth/react"
+>  
+> // ...
+>    <button onClick={() => signIn()}>Sign in</button>
+>    <button onClick={() => signOut()}>Sign out</button>
+>```
+> La redirección se hace de forma distinta a la empleada en el lado servidor. Empleamos la propiedad **`callbackUrl`** en lugar de la propiedad `redirectTo`. En el lado cliente es así:
+>
+> ```js
+>  signIn('google', { callbackUrl: 'http://localhost:3000/dashboard' })
+>  signOut({ callbackUrl: 'http://localhost:3000/home' })
+> ```
+
+
 
 
 # 12. Referencias:
