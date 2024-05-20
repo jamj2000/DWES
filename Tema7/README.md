@@ -72,6 +72,8 @@ En este tema añadiremos nuevas funcionalidades a nuestra aplicación web. En co
 - **Envío de correos**
 - **Pagos por internet**
 - **Mapas**
+- **Coloreado de código**
+- **Información flotante**
 
 
 # 2. Datos ficticios
