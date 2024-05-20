@@ -44,9 +44,6 @@
   - [9.1. Instalación](#91-instalación)
   - [9.2. Uso](#92-uso)
   - [9.3. Documentación](#93-documentación)
-- [10. Información flotante](#10-información-flotante)
-  - [10.1. Instalación](#101-instalación)
-  - [10.2. Uso](#102-uso)
   - [10.3. Documentación](#103-documentación)
 
 
@@ -73,7 +70,7 @@ En este tema añadiremos nuevas funcionalidades a nuestra aplicación web. En co
 - **Pagos por internet**
 - **Mapas**
 - **Coloreado de código**
-- **Información flotante**
+
 
 
 # 2. Datos ficticios
@@ -726,71 +723,6 @@ export default function Page() {
 
 
 
-# 10. Información flotante
-
-[Floating UI](https://github.com/floating-ui/floating-ui) es una biblioteca de posicionamiento. Ayuda a posicionar información sobre herramientas, ventanas emergentes y otros elementos flotantes. Esta biblioteca se utiliza para gestionar la posición de un elemento en relación con otro elemento de referencia en la página.
-
-Esta biblioteca debe usarse en el lado cliente.
-
-
-## 10.1. Instalación
-
-```sh
-npm  install  @floating-ui/react
-``` 
-
-## 10.2. Uso
-
-
-```js
-'use client'
-
-import { useState } from 'react'
-import { useFloating, useHover, useInteractions } from '@floating-ui/react'
-
-
-export default () => {
-  const [isOpen, setIsOpen] = useState(false);
- 
-  const {refs, floatingStyles, context} = useFloating({
-    open: isOpen,
-    onOpenChange: setIsOpen,
-  });
- 
-  const hover = useHover(context);
- 
-  const {getReferenceProps, getFloatingProps} = useInteractions([
-    hover,
-  ]);
- 
-  return (
-    <>
-      <div ref={refs.setReference} {...getReferenceProps()}>
-        Elemento de referencia
-      </div>
-      {isOpen && (
-        <div
-          ref={refs.setFloating}
-          style={{
-                background: 'lightgray',
-                // position: 'absolute',
-                border: 'solid 1px darkgray',
-                borderRadius: '4px',
-                width: '150px',
-                height: '50px',
-                color: 'black',
-            }}
-          {...getFloatingProps()}
-        >
-          Elemento flotante
-        </div>
-      )}
-      <p> Otro texto   </p>
-      <p> Otro texto   </p>
-    </>
-  );
-}
-```
 
 ## 10.3. Documentación
 
