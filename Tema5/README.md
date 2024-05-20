@@ -683,7 +683,10 @@ Por desarrollar ...
 <ClientComponent />
 ```
 
-- Consultar https://react.dev/learn/passing-data-deeply-with-context
+Referencias:
+
+- [Delicious Donut Components](https://frontendatscale.com/blog/donut-components/)
+- [Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)
 
 
 # 8. Referencias
