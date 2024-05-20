@@ -23,7 +23,7 @@
     - [4.3.2. Ejemplo](#432-ejemplo)
     - [4.3.3. Colas de mensajes](#433-colas-de-mensajes)
   - [4.4. Documentación](#44-documentación)
-  - [4.5. ANEXO: Curiosidad](#45-anexo-curiosidad)
+  - [4.5. Curiosidad](#45-curiosidad)
 - [5. Creación de PDFs](#5-creación-de-pdfs)
   - [5.1. Instalación](#51-instalación)
   - [5.2. Uso](#52-uso)
@@ -40,10 +40,14 @@
   - [8.1. Instalación](#81-instalación)
   - [8.2. Uso](#82-uso)
   - [8.3. Documentación](#83-documentación)
-
-
-
-
+- [9. Coloreado de código](#9-coloreado-de-código)
+  - [9.1. Instalación](#91-instalación)
+  - [9.2. Uso](#92-uso)
+  - [9.3. Documentación](#93-documentación)
+- [10. Información flotante](#10-información-flotante)
+  - [10.1. Instalación](#101-instalación)
+  - [10.2. Uso](#102-uso)
+  - [10.3. Documentación](#103-documentación)
 
 
 
@@ -453,7 +457,7 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 - [Más gráficos, plugins,... - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
   
 
-## 4.5. ANEXO: Curiosidad
+## 4.5. Curiosidad
 
 Existe un biblioteca para *charting* llamada **`roughViz`**. Como su nombre indica realiza la visualización de forma algo bruta. Sirve para dar un toque de originalidad en detrimento de la exactitud en la representación gráfica.
 
@@ -675,3 +679,118 @@ export default function Home() {
 - [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
 - [Código fuente del video anterior](https://github.com/MG95Developer/google-maps-tutorial)
 - [Documentación oficial](https://googlemaps.github.io/js-api-loader/index.html)
+
+
+# 9. Coloreado de código
+
+
+En el muy poco probable caso de que tengamos que incorporar visualización de código fuente en nuestra aplicación, podemos usar la biblioteca [bright](https://bright.codehike.org/).
+
+Esta biblioteca debe usarse en el lado servidor, aunque es probable que también pueda emplearse en la lado cliente (no la he utilizado).
+
+
+## 9.1. Instalación
+
+```sh
+npm  install  bright
+``` 
+
+## 9.2. Uso
+
+```js
+import { Code } from "bright"
+
+const myCode = `
+let hello = "hello brightness"
+console.log(hello, "my old friend")
+`.trim()
+
+Code.theme = "github-dark"
+
+export default function Page() {
+  return (
+    <Code lang="js" title="example.js" lineNumbers>
+      {myCode}
+    </Code>
+  )
+}
+```
+
+
+## 9.3. Documentación
+
+- [Documentación oficial](https://bright.codehike.org/)
+- [Código en Github](https://github.com/code-hike/bright?tab=readme-ov-file)
+
+
+
+# 10. Información flotante
+
+[Floating UI](https://github.com/floating-ui/floating-ui) es una biblioteca de posicionamiento. Ayuda a posicionar información sobre herramientas, ventanas emergentes y otros elementos flotantes. Esta biblioteca se utiliza para gestionar la posición de un elemento en relación con otro elemento de referencia en la página.
+
+Esta biblioteca debe usarse en el lado cliente.
+
+
+## 10.1. Instalación
+
+```sh
+npm  install  @floating-ui/react
+``` 
+
+## 10.2. Uso
+
+
+```js
+'use client'
+
+import { useState } from 'react'
+import { useFloating, useHover, useInteractions } from '@floating-ui/react'
+
+
+export default () => {
+  const [isOpen, setIsOpen] = useState(false);
+ 
+  const {refs, floatingStyles, context} = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+  });
+ 
+  const hover = useHover(context);
+ 
+  const {getReferenceProps, getFloatingProps} = useInteractions([
+    hover,
+  ]);
+ 
+  return (
+    <>
+      <div ref={refs.setReference} {...getReferenceProps()}>
+        Elemento de referencia
+      </div>
+      {isOpen && (
+        <div
+          ref={refs.setFloating}
+          style={{
+                background: 'lightgray',
+                // position: 'absolute',
+                border: 'solid 1px darkgray',
+                borderRadius: '4px',
+                width: '150px',
+                height: '50px',
+                color: 'black',
+            }}
+          {...getFloatingProps()}
+        >
+          Elemento flotante
+        </div>
+      )}
+      <p> Otro texto   </p>
+      <p> Otro texto   </p>
+    </>
+  );
+}
+```
+
+## 10.3. Documentación
+
+- [Documentación oficial](https://floating-ui.com/)
+- [Código fuente en Github](https://github.com/floating-ui/floating-ui)

@@ -1029,9 +1029,11 @@ export function Providers({children}) {
 }
 ```
 
+Referencias: 
 
-- Referencia: https://medium.com/@rezahedi/using-nextauth-authentication-provider-in-next-js-by-app-router-f50cb23282c9
- 
+- [Using NextAuth authentication provider in Next.js 13 App Router](https://medium.com/@rezahedi/using-nextauth-authentication-provider-in-next-js-by-app-router-f50cb23282c9)
+- [Using Context Providers](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#using-context-providers) 
+
 
 > **NOTA: signIn y signOut en el lado cliente**
 >

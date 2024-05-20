@@ -670,6 +670,8 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 Por desarrollar ... 
 
+Al crear aplicaciones NextJS, deberás considerar qué partes de tu aplicación deben representarse en el servidor y cuales en el cliente. A continuación comentaremos algunos **patrones de composición recomendados** cuando se utilizan componentes de servidor y cliente.
+
 **BIEN**
 ```js
 <ClientComponent>
@@ -687,6 +689,7 @@ Referencias:
 
 - [Delicious Donut Components](https://frontendatscale.com/blog/donut-components/)
 - [Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)
+- [Server Component Patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)
 
 
 # 8. Referencias
