@@ -25,12 +25,12 @@ Aquí encontrarás una recopilación de recursos que pueden ser de utilidad de f
 
 <details>
   <summary><strong>Roadmap</strong></summary>  
-  <a href="https://roadmap.sh/">BundlePhobia</a>
+  <a href="https://roadmap.sh/">Roadmap</a>
   <p>
     Sitio que pretende ofrecer una <i>hoja de ruta</i> a la hora de abordar un perfil profesional dentro del sector de la informática. 
   </p>
   <p>
-    No debe interpretarse de forma rígida, puesto que a menudo los conocimientos necesarios pueden adquirirse en distinto orden al indicado. Además, en algunos casos, sólo es necesario adquirir el 10% de ellos para manejarnos en dicho sector. Las tecnologías mostradas deben nos servirán para tener una visión de conjunto de todas las opciones posibles, pero en ningún caso significa que debemos aprender todas ellas para considerarnos competentes en dicho sector. Algunas tecnologías estan próximas a su reemplazo por otras por lo que no merece la pena invertir tiempo en ellas.
+    No debe interpretarse de forma rígida, puesto que a menudo los conocimientos necesarios pueden adquirirse en distinto orden al indicado. Además, en algunos casos, sólo es necesario adquirir el 10% de ellos para manejarnos en dicho sector. Las tecnologías mostradas  nos servirán para tener una visión de conjunto de todas las opciones posibles, pero en ningún caso significa que debemos aprender todas ellas para considerarnos competentes en dicho sector. Algunas tecnologías estan próximas a su reemplazo por otras por lo que no merece la pena invertir tiempo en ellas.
   </p>
   <img src="assets/roadmap.png" alt="roadmap">
 </details>
