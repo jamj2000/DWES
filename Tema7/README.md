@@ -45,7 +45,6 @@
   - [9.1. Instalación](#91-instalación)
   - [9.2. Uso](#92-uso)
   - [9.3. Documentación](#93-documentación)
-  - [9.4. Documentación](#94-documentación)
 
 
 
@@ -747,9 +746,3 @@ export default function Page() {
 - [Código en Github](https://github.com/code-hike/bright?tab=readme-ov-file)
 
 
-
-
-## 9.4. Documentación
-
-- [Documentación oficial](https://floating-ui.com/)
-- [Código fuente en Github](https://github.com/floating-ui/floating-ui)
