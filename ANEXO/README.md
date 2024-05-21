@@ -5,11 +5,12 @@ Aquí encontrarás una recopilación de recursos que pueden ser de utilidad de f
 
 <details open>
   <summary>
-  <a href="https://stateofjs.com/en-US" target="_blank">State of Javascript</a>
+  <a href="https://stateofjs.com/en-US">State of Javascript</a>
   </summary>
   <p>
-    Requires a computer running an operating system. The computer must have some
-    memory and ideally some kind of long-term storage. An input device as well
-    as some form of output device is recommended.
+    Estadísticas anuales de las características, herramientas y frameworks relacionadas con el lenguaje, basadas en encuestas realizadas a la comunidad.
+  </p>
+  <p>
+    Puede resultar de utilidad para tener una orientación a la hora de considerar para su uso o dejar de considerar ciertas tecnologías.
   </p>
 </details>

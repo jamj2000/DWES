@@ -22,6 +22,7 @@
     - [4.3.1. Los modelos de provisión de datos](#431-los-modelos-de-provisión-de-datos)
     - [4.3.2. Ejemplo](#432-ejemplo)
     - [4.3.3. Colas de mensajes](#433-colas-de-mensajes)
+    - [InfluxDB](#influxdb)
   - [4.4. Documentación](#44-documentación)
   - [4.5. Curiosidad](#45-curiosidad)
 - [5. Creación de PDFs](#5-creación-de-pdfs)
@@ -442,6 +443,9 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 **Referencia**:
 
 - [Pirobits: Cola de mensajes usando MySQL: SELECT * FOR UPDATE](https://www.pirobits.com/es/post/cola-de-mensajes-usando-mysql-select-for-update)
+
+### InfluxDB
+
 
 
 ## 4.4. Documentación
