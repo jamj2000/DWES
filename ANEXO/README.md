@@ -4,10 +4,8 @@ Aquí encontrarás una recopilación de recursos que pueden ser de utilidad de f
 
 
 <details>
-  <summary>
-    <strong>State of Javascript</strong>
-  </summary>
-  <a href="https://stateofjs.com/en-US" target="_blank">State of Javascript</a>
+  <summary><strong>State of Javascript</strong></summary>
+  <a href="https://stateofjs.com/en-US">State of Javascript</a>
   <p>
     Estadísticas anuales de las características, herramientas y frameworks relacionadas con el lenguaje, basadas en encuestas realizadas a la comunidad.
   </p>
@@ -17,10 +15,8 @@ Aquí encontrarás una recopilación de recursos que pueden ser de utilidad de f
 </details>
 
 <details>
-  <summary>
-    <strong>BundlePhobia</strong>
-  </summary>
-    <a href="https://bundlephobia.com/">BundlePhobia</a>
+  <summary><strong>BundlePhobia</strong></summary>  
+  <a href="https://bundlephobia.com/">BundlePhobia</a>
   <p>
     ¿Cuánto ocupa cada paquete de npm?
   </p>
@@ -28,9 +24,19 @@ Aquí encontrarás una recopilación de recursos que pueden ser de utilidad de f
 </details>
 
 <details>
-  <summary>
-  <strong>Lighthouse</strong>
-  </summary>
+  <summary><strong>Roadmap</strong></summary>  
+  <a href="https://roadmap.sh/">BundlePhobia</a>
+  <p>
+    Sitio que pretende ofrecer una <i>hoja de ruta</i> a la hora de abordar un perfil profesional dentro del sector de la informática. 
+  </p>
+  <p>
+    No debe interpretarse de forma rígida, puesto que a menudo los conocimientos necesarios pueden adquirirse en distinto orden al indicado. Además, en algunos casos, sólo es necesario adquirir el 10% de ellos para manejarnos en dicho sector. Las tecnologías mostradas deben nos servirán para tener una visión de conjunto de todas las opciones posibles, pero en ningún caso significa que debemos aprender todas ellas para considerarnos competentes en dicho sector. Algunas tecnologías estan próximas a su reemplazo por otras por lo que no merece la pena invertir tiempo en ellas.
+  </p>
+  <img src="assets/roadmap.png" alt="roadmap">
+</details>
+
+<details>
+  <summary><strong>Lighthouse</strong></summary>
   <p>
     Herramienta para desarrolladores incorporada en el navegador Chrome que nos permite realizar auditoría de aplicaciones web.
   </p>

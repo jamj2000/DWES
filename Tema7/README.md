@@ -22,7 +22,7 @@
     - [4.3.1. Los modelos de provisión de datos](#431-los-modelos-de-provisión-de-datos)
     - [4.3.2. Ejemplo](#432-ejemplo)
     - [4.3.3. Colas de mensajes](#433-colas-de-mensajes)
-    - [InfluxDB](#influxdb)
+    - [4.3.4. InfluxDB](#434-influxdb)
   - [4.4. Documentación](#44-documentación)
   - [4.5. Curiosidad](#45-curiosidad)
 - [5. Creación de PDFs](#5-creación-de-pdfs)
@@ -45,7 +45,7 @@
   - [9.1. Instalación](#91-instalación)
   - [9.2. Uso](#92-uso)
   - [9.3. Documentación](#93-documentación)
-  - [10.3. Documentación](#103-documentación)
+  - [9.4. Documentación](#94-documentación)
 
 
 
@@ -444,9 +444,30 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 
 - [Pirobits: Cola de mensajes usando MySQL: SELECT * FOR UPDATE](https://www.pirobits.com/es/post/cola-de-mensajes-usando-mysql-select-for-update)
 
-### InfluxDB
+### 4.3.4. InfluxDB
+
+No podemos dejar de nombrar al SGBD InfluxDB que es un sistema especialmente diseñado desde cero para trabajar con **base de datos de series temporales**.
+
+InfluxDB ofrece muchas alternativas a la hora de recopilar datos, como puede apreciarse en la siguiente imagen:
+
+![influxDB recopilación de datos](assets/influxdb-collect-data.png)
+
+Puedes [instalar InfluxDB con Docker](https://github.com/jamj2000/Docker/tree/master/influxdb), y luego realizar la configuración accediendo a http://localhost:8086.
+
+![setup 1](assets/influxdb-setup1.png)
+
+![setup 2](assets/influxdb-setup2.png)
+
+![setup 3](assets/influxdb-setup3.png)
 
 
+Referencias:
+
+- [Sitio oficial](https://www.influxdata.com/)
+- [Qué es InfluxDB y primeros pasos](https://openwebinars.net/blog/que-es-influxdb-y-primeros-pasos/)
+- [Compare InfluxDB to SQL databases](https://docs.influxdata.com/influxdb/v1/concepts/crosswalk/#influxql)
+- [Paquete de npm para InfluxDB](https://www.npmjs.com/package/@influxdata/influxdb-client)
+- [Monitorizando datos con InfluxDB, Telegraf y Grafana](https://openwebinars.net/blog/monitorizando-datos-con-influxdb-telegraf-y-grafana/)  
 
 ## 4.4. Documentación
 
@@ -682,10 +703,10 @@ export default function Home() {
 - [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
 - [Código fuente del video anterior](https://github.com/MG95Developer/google-maps-tutorial)
 - [Documentación oficial](https://googlemaps.github.io/js-api-loader/index.html)
+- [Bibliotecas disponibles](https://developers.google.com/maps/documentation/javascript/libraries?hl=es-419)
 
 
 # 9. Coloreado de código
-
 
 En el muy poco probable caso de que tengamos que incorporar visualización de código fuente en nuestra aplicación, podemos usar la biblioteca [bright](https://bright.codehike.org/).
 
@@ -728,7 +749,7 @@ export default function Page() {
 
 
 
-## 10.3. Documentación
+## 9.4. Documentación
 
 - [Documentación oficial](https://floating-ui.com/)
 - [Código fuente en Github](https://github.com/floating-ui/floating-ui)

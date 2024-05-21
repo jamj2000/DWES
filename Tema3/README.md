@@ -16,8 +16,8 @@
 - [4. Módulos CommonJS](#4-módulos-commonjs)
 - [5. Módulos ECMAScript](#5-módulos-ecmascript)
   - [5.1. Exportación e Importación](#51-exportación-e-importación)
-    - [Ejemplo sin package.json](#ejemplo-sin-packagejson)
-    - [Ejemplo con package.json](#ejemplo-con-packagejson)
+    - [5.1.1. Ejemplo sin package.json](#511-ejemplo-sin-packagejson)
+    - [5.1.2. Ejemplo con package.json](#512-ejemplo-con-packagejson)
 - [6. Parámetros de URL](#6-parámetros-de-url)
   - [6.1. Parámetros de ruta (Path Parameters)](#61-parámetros-de-ruta-path-parameters)
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
@@ -28,7 +28,6 @@
   - [9.2. multipart/form-data](#92-multipartform-data)
   - [9.3. JSON](#93-json)
 - [10. Referencias](#10-referencias)
-
 
 
 ---
@@ -282,7 +281,7 @@ A la hora de exportar, deberemos tener en cuenta que **un archivo**
 - puede exportar varios elementos que no sean por defecto
 
 
-### Ejemplo sin package.json
+### 5.1.1. Ejemplo sin package.json
 
 Si no usamos archivo `package.json`, deberemos colocar a nuestros archivos la extensión `.mjs` (Module JavaScript)
 
@@ -313,7 +312,7 @@ node archivo2.mjs
 ```
 
 
-### Ejemplo con package.json
+### 5.1.2. Ejemplo con package.json
 
 En este caso indicamos que nuestro proyecto es de `"type": "module"`. En este caso, los archivos ya no llevarán las extensión `.mjs` sino **`.js`**.
 
