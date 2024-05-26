@@ -529,7 +529,7 @@ import {Bar, Pie } from 'react-roughviz'
 
 De las muchas bibliotecas disponibles para trabajar con archivos PDF, una de las más interesantes y potentes es [pdf-lib](https://www.npmjs.com/package/pdf-lib).
 
-Permite crear nuevos documenteos y modificar los existentes. Permite trabajar en todos los entornos de JavaScript, no solo en Node o el navegador.
+Permite crear nuevos documentos y modificar los existentes. Permite trabajar en todos los entornos de JavaScript, no solo en Node o el navegador.
 
 Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
@@ -541,7 +541,7 @@ npm  install  pdf-lib
 
 ## 5.2. Uso
 
-Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto entero en NextJS. Para ello crea el archivo **pdf.mjs** y ejecútalo directamente con Node. 
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **pdf.mjs** y ejecútalo directamente con Node. 
 
 ```js
 // pdf.mjs
@@ -618,7 +618,7 @@ Finalmente la opción más sencilla es la siguiente:
 
 ![gandi](assets/gandi-email.png)
 
-3. Si lo deseamos, podemos crear alias. Son cuentas de correo adicionales asociadas a la cuenta principal.
+3. Si lo deseas, puedes crear alias. Son cuentas de correo adicionales asociadas a la cuenta principal.
 
 ![gandi](assets/gandi-email-alias.png)
 
@@ -631,7 +631,7 @@ npm  install  nodemailer
 
 ## 6.2. Uso
 
-Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto entero en NextJS. Para ello crea el archivo **mail.mjs** y ejecútalo directamente con Node. 
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **mail.mjs** y ejecútalo directamente con Node. 
 
 ```js
 // mail.mjs
