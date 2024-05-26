@@ -541,10 +541,14 @@ npm  install  pdf-lib
 
 ## 5.2. Uso
 
-```js
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto entero en NextJS. Para ello crea el archivo **pdf.mjs** y ejecútalo directamente con Node. 
 
-async function createPdf() {
+```js
+// pdf.mjs
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
+import fs from 'node:fs/promises'
+
+async function createPDF() {
   const pdfDoc = await PDFDocument.create()
   const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
 
@@ -560,8 +564,21 @@ async function createPdf() {
   })
 
   const pdfBytes = await pdfDoc.save()
+
+  try {
+    await fs.writeFile('example.pdf', pdfBytes);
+  } catch (err) {
+    console.log(err);
+  } 
 }
-``` 
+
+createPDF()
+```
+
+![pdf-lib](assets/pdf-lib.png)
+
+> **NOTA**: Una vez hayas comprobado que funciona correctamente, puedes reutilizar la función anterior `createPDF` como *server action* dentro de un proyecto NextJS. 
+
 
 A continuación tienes los enlaces a 2 proyectos que hacen uso de esta biblioteca.
 
@@ -578,9 +595,9 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 
 El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. 
 
-Es posible usar nuestra cuenta de Gmail para ello, pero Google ha ido restringiendo este tipo de funcionalidad, y actualmente aunque es posible su configuración requiere bastantes pasos y no es tan sencilla como sería esperable.
-
 > **NOTA:** Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
+
+Es posible usar nuestra cuenta de Gmail para ello, pero Google ha ido restringiendo este tipo de funcionalidad, y actualmente aunque es posible su configuración requiere bastantes pasos y no es tan sencilla como sería esperable.
 
 Otra opción, es usar alguno de los servidores de correo transaccional, entre ellos:
 
