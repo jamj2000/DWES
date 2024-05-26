@@ -478,7 +478,8 @@ Referencias:
 - [Documentación Plugin Annotation](https://www.chartjs.org/chartjs-plugin-annotation/latest/)
 - [Documentación Plugin Zoom](https://www.chartjs.org/chartjs-plugin-zoom/latest/)
 - [Más gráficos, plugins,... - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
-  
+- [Otra biblioteca de Charts](https://recharts.org)
+
 
 ## 4.5. Curiosidad
 
@@ -575,19 +576,92 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 
 # 6. Envío de correos
 
+El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. 
 
-react-email
-nodemailer
+Es posible usar nuestra cuenta de Gmail para ello, pero Google ha ido restringiendo este tipo de funcionalidad, y actualmente aunque es posible su configuración requiere bastantes pasos y no es tan sencilla como sería esperable.
+
+> **NOTA:** Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
+
+Otra opción, es usar alguno de los servidores de correo transaccional, entre ellos:
+
+- [Brevo](https://brevo.com)
+- [Resend](https://resend.com)
+- [Sendgrid](https://sendgrid.com)
+- [Mailtrap](https://mailtrap.io/)
+
+Su configuración no suele ser demasiado complicada, pero la integración con el dominio puede dar algunos problemas. Por ejemplo, en mi caso, configurar [resend](https://resend.com) para que use mi dominio registrado con [gandi](https://gandi.net) me ha sido imposible.
+
+Finalmente la opción más sencilla es la siguiente:
+
+1. Registrar un dominio con algún proveedor que ofrezca además alguna cuenta de correo. Por ejemplo, [gandi](https://gandi.net) ofrece 2 cuentas de correo. Los dominios `.eu` suelen ser bastante baratos.
+
+![gandi](assets/gandi.png)
+
+2. Usar los parámetros de conexión para enviar correos con nuestra aplicación.  
+
+![gandi](assets/gandi-email.png)
+
+3. Si lo deseamos, podemos crear alias. Son cuentas de correo adicionales asociadas a la cuenta principal.
+
+![gandi](assets/gandi-email-alias.png)
 
 
 ## 6.1. Instalación
 
+```sh
+npm  install  nodemailer
+```
 
 ## 6.2. Uso
 
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto entero en NextJS. Para ello crea el archivo **mail.mjs** y ejecútalo directamente con Node. 
+
+```js
+// mail.mjs
+import nodemailer from 'nodemailer'
+
+var transporter = nodemailer.createTransport({
+  host: "mail.gandi.net",     // coloca aquí tu servidor de correo
+  port: 465,
+  auth: {
+    user: "info@jamj2000.eu", // coloca aquí tu usuario
+    pass: "tu_contraseña",    // coloca aquí tu contraseña
+  }
+});
+
+
+// async..await no está permitido en el global scope, debemos usar un wrapper
+async function sendMail() {
+  // send mail with defined transport object
+  const info = await transporter.sendMail({
+    from: '"José Antonio Muñoz Jiménez 👻" <soporte@jamj2000.eu>', 
+    to: "jamj2000@gmail.com, jamunoz@iesincagarcilaso.com, adfadcaxs@afdaadxcdf.com", 
+    subject: "Ejemplo con Nodemailer ✔", 
+    text: "Mensaje de prueba. Ignoralo.", 
+    html: "<h1>Mensaje de prueba</h1><p>Ignoralo</p>"
+  });
+
+console.log("Mensaje enviado: %s", info.messageId);
+  // Mensaje enviado: <d786aa62-4e0a-070a-47ed-0b0666549519@jamj2000.eu>
+console.log('MENSAJES ACEPTADOS: ', info.accepted);
+console.log('MENSAJES RECHAZADOS: ', info.rejected);
+}
+
+sendMail().catch(console.error);
+```
+
+![nodemailer](assets/node-mail.png)
+
+> **NOTA**: Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
 
 
 ## 6.3. Documentación
+
+- [Nodemailer](https://www.nodemailer.com/)
+- [react-email](https://react.email/)
+- [Resend: Video en español](https://www.youtube.com/watch?v=orYsGPYwkXQ)
+- [Resend: Video en inglés](https://www.youtube.com/watch?v=UqQxfpTQBaE)
+- [Resend: Video en inglés](https://www.youtube.com/watch?v=T2xaiw7VK4A)
 
 
 # 7. Pagos por internet
