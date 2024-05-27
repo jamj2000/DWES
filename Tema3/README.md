@@ -428,6 +428,7 @@ Algunos ejemplos de APIs muy minimalistas para realizar pruebas son:
 - https://reqres.in/
 - https://jsonplaceholder.typicode.com/
 - https://randomuser.me
+- https://dummyjson.com
 
 Un listado más extenso de APIs profesionales puede encontrarse en:
 
