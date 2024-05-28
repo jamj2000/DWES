@@ -118,7 +118,7 @@ AUTH_FACEBOOK_ID=
 AUTH_FACEBOOK_SECRET=
 ```
 
-> **NOTA**: También es posible generar AUTH_SECRET con el comando:
+> **NOTA**: También es posible generar **AUTH_SECRET** con el comando:
 > ```sh
 > npx  auth  secret
 > ```
