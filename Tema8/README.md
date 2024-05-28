@@ -116,6 +116,11 @@ AUTH_FACEBOOK_ID=
 AUTH_FACEBOOK_SECRET=
 ```
 
+> **NOTA**: También es posible generar AUTH_SECRET con el comando:
+> ```sh
+> npx  auth  secret
+> ```
+
 > **IMPORTANTE**: NextAuth 5 simplifica el proceso de gestión de variables de entorno con respecto a NextAuth4. La nueva forma de nombrado de variables es la mostrada arriba. Si seguimos esta convención, AuthJs las reconocerá automáticamente y nuestra configuración de archivos se verá simplificada de forma notable. 
 
 **`auth.js`**
