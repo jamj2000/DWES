@@ -13,7 +13,7 @@ La principal desventaja de que **DnD Kit** no use la API de arrastrar y soltar d
 Si el caso de uso de arrastrar y soltar que tiene en mente implica este tipo de funcionalidad, definitivamente querrá usar una biblioteca que esté construida sobre la API de arrastrar y soltar de HTML5. 
 Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd/about) para obtener una biblioteca de React que tenga un backend de arrastrar y soltar de HTML5 nativo.
 
-            | Soporta pantallas táctiles  | DnD desde escritorio y entre ventanas  
-------------|:---------------------------:|:-------------------------------------:
-DnD Kit     |       ✓                     |   𐄂
-React DnD   |       𐄂                     |   ✓
+|            | Soporta pantallas táctiles  | DnD desde escritorio y entre ventanas  
+|------------|:---------------------------:|:-------------------------------------:
+|DnD Kit     |       ✓                     |   𐄂
+|React DnD   |       𐄂                     |   ✓
