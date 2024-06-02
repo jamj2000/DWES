@@ -1,5 +1,5 @@
 
-A continuación encontrará una serie de características y funcionalidades, muchas no relacionadas directamente con NextJS, pero que lo complementan de tal forma que nos permitirán ir más allá del desarrollo backend y abarcar el desarrollo fullstack al completo. 
+A continuación encontrarás una serie de características y funcionalidades, muchas no relacionadas directamente con NextJS, pero que lo complementan de tal forma que nos permitirán ir más allá del desarrollo backend y abarcar el desarrollo fullstack al completo. 
 
 
 
