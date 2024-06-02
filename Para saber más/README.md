@@ -1,6 +1,11 @@
 
+A continuación encontrará una serie de características y funcionalidades, muchas no relacionadas directamente con NextJS, pero que lo complementan de tal forma que nos permitirán ir más allá del desarrollo backend y abarcar el desarrollo fullstack al completo. 
+
+
 
 # Arrastrar y Soltar (Drag & Drop)
+
+La funcionalidad de arrastrar y soltar es propia del lado cliente y por tanto deberá ser usada desde componentes cliente. Además de poder realizarla con Vanilla JS, también disponemos de 2 bibliotecas interesantes, que son:
 
 - [DnD Kit](https://docs.dndkit.com/)
 - [React DnD](https://react-dnd.github.io/react-dnd/docs/overview)
