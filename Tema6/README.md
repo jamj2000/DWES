@@ -5,8 +5,6 @@
 
 **[`PROYECTOS DE EJEMPLO`](proyectos)**
 
-![MySQL](assets/mysql.svg) ![SQLite](assets/sqlite.svg) ![Postgres](assets/postgresql.svg)
-
 ---
 - [1. Introducción](#1-introducción)
 - [2. MySQL](#2-mysql)
