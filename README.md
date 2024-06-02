@@ -28,7 +28,7 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 ## Referencias
 
-- [Learn NextJS 13](https://nextjs.org/learn)
+- [Learn NextJS](https://nextjs.org/learn)
 - [Características básicas de Nextjs 13 -en inglés-](https://makerkit.dev/blog/tutorials/nextjs13)
 - [Normativa DWES](https://aapri.es/wp/?page_id=535)
 
