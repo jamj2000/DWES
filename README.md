@@ -1,7 +1,11 @@
 # DWES
 Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Aplicaciones Web
 
-Apuntes iniciados en el curso 2023/24.
+<small>Apuntes iniciados en el curso 2023/24.</small>
+
+![Javascript](https://img.shields.io/badge/Javascript-6+-yellow?logo=javascript&style=for-the-badge)
+![NodeJS](https://img.shields.io/badge/NodeJS-18+-green?logo=nodedotjs&style=for-the-badge)
+![NextJS](https://img.shields.io/badge/NextJS-14+-black?logo=nextdotjs&style=for-the-badge)
 
 ## Temas del Módulo
 
