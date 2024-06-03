@@ -1224,6 +1224,13 @@ Esta estrategia almacena el código de aplicación compartido globalmente en el 
 
 ![](assets/project-organization-app-root-split.avif)
 
+**Referencias:**
+
+Un muy video donde se explica la estructura de un proyecto en NextJS y los archivos más habituales es el siguiente:
+
+- [Project Structure and File Conventions in NextJs 14](https://youtu.be/i6Fa5Oyr59k?si=Y3IVfA8ZuMV38ndo)
+
+
 
 # 7. Route Handlers
 
