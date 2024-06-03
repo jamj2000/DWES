@@ -27,6 +27,10 @@ Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd
 # Comunicación Cliente-Servidor en tiempo real
 
 
+- Long Polling
+- Server Sent Events
+- WebSockets
+
 
 
 
