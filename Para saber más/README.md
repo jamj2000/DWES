@@ -22,3 +22,7 @@ Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd
 |------------|:---------------------------:|:-------------------------------------:
 |DnD Kit     |       ✓                     |   𐄂
 |React DnD   |       𐄂                     |   ✓
+
+
+# Comiunicación Cliente Servidor en tiempo real
+
