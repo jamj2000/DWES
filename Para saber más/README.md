@@ -26,6 +26,11 @@ Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd
 
 # Comunicación Cliente-Servidor en tiempo real
 
+![arquitecturas](assets/arquitecturas.png)
+
+![comunicación bidireccional](assets/bidireccional.png)
+
+
 
 - Long Polling
 - Server Sent Events
@@ -40,3 +45,4 @@ Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd
 - [SSE: Server-Sent Events Crash Course](https://youtu.be/4HlNv1qpZFY?si=sQ6uuZAJ97Ty4q1l)
 - [Server-Sent Events (SSE) - Implement Client and Server (Express.js)](https://www.youtube.com/watch?v=piEYV-fsYbA)
 - [Don't Use Websockets (Until You Try This…)](https://youtu.be/6QnTNKOJk5A?si=QB2nEo8kHj6pddMJ)
+- [Server Sent Events and Websockets. How to implement in NodeJS and HTMX](https://youtu.be/aPrrfVs9mDc?si=xC2RCy3208LDKRFf)
