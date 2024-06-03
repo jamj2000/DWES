@@ -24,5 +24,13 @@ Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd
 |React DnD   |       𐄂                     |   ✓
 
 
-# Comiunicación Cliente Servidor en tiempo real
+# Comunicación Cliente-Servidor en tiempo real
 
+
+
+
+
+**Referencias:**
+
+- [Estilos arquitectónicos](https://youtu.be/vjKxkNyTfoU?si=BuVtg9ioYfPVOrbC&t=95)
+- []()
