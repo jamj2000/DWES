@@ -4,7 +4,7 @@
 
 - [1. Introducción](#1-introducción)
 - [2. Comunicación Cliente-Servidor en tiempo real](#2-comunicación-cliente-servidor-en-tiempo-real)
-- [3. Web Workers](#3-web-workers)
+- [3. Background Threads in Web Applications](#3-background-threads-in-web-applications)
 
 
 ---
@@ -36,6 +36,6 @@ A continuación encontrarás una serie de características y funcionalidades ava
 - [Server Sent Events and Websockets. How to implement in NodeJS and HTMX](https://youtu.be/aPrrfVs9mDc?si=xC2RCy3208LDKRFf)
 
 
-# 3. Web Workers
+# 3. Background Threads in Web Applications
 
 - [Web Workers Vs. Service Workers in JavaScript](https://www.dhiwise.com/post/web-workers-vs-service-workers-in-javascript)
