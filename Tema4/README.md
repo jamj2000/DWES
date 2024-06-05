@@ -436,7 +436,7 @@ Si un componente no tiene propiedades, hacemos uso de él de la siguiente forma:
 
 **Referencia:**
 
-A continuación tienes un vídeo, en inglés, donde se muestra como crear un proyecto en NextJS y React desde cero, así como se explican conceptos básicos.
+A continuación tienes un vídeo, en inglés, donde se muestra como crear un proyecto en NextJS y React desde cero, sin usar ningún asistente para generar el proyecto. También se explican conceptos básicos.
 
 - [Introduction to Next.js and React](https://youtu.be/h2BcitZPMn4)
 
