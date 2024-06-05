@@ -6,6 +6,7 @@
 **[`PROYECTOS DE EJEMPLO`](proyectos)**
 
 ---
+
 - [1. Introducción](#1-introducción)
 - [2. Datos ficticios](#2-datos-ficticios)
   - [2.1. Instalación de biblioteca](#21-instalación-de-biblioteca)
@@ -15,36 +16,41 @@
   - [3.1. Instalación de biblioteca](#31-instalación-de-biblioteca)
   - [3.2. Uso](#32-uso)
   - [3.3. Documentación](#33-documentación)
-- [4. Gráficos](#4-gráficos)
-  - [4.1. Instalación](#41-instalación)
+- [4. Arrastrar y Soltar (Drag \& Drop)](#4-arrastrar-y-soltar-drag--drop)
+  - [4.1. Instalación de biblioteca](#41-instalación-de-biblioteca)
   - [4.2. Uso](#42-uso)
-  - [4.3. Flujo de datos (streaming)](#43-flujo-de-datos-streaming)
-    - [4.3.1. Los modelos de provisión de datos](#431-los-modelos-de-provisión-de-datos)
-    - [4.3.2. Ejemplo](#432-ejemplo)
-    - [4.3.3. Colas de mensajes](#433-colas-de-mensajes)
-    - [4.3.4. InfluxDB](#434-influxdb)
-  - [4.4. Documentación](#44-documentación)
-  - [4.5. Curiosidad](#45-curiosidad)
-- [5. Creación de PDFs](#5-creación-de-pdfs)
+  - [4.3. Documentación](#43-documentación)
+- [5. Gráficos](#5-gráficos)
   - [5.1. Instalación](#51-instalación)
   - [5.2. Uso](#52-uso)
-  - [5.3. Documentación](#53-documentación)
-- [6. Envío de correos](#6-envío-de-correos)
+  - [5.3. Flujo de datos (streaming)](#53-flujo-de-datos-streaming)
+    - [5.3.1. Los modelos de provisión de datos](#531-los-modelos-de-provisión-de-datos)
+    - [5.3.2. Ejemplo](#532-ejemplo)
+    - [5.3.3. Colas de mensajes](#533-colas-de-mensajes)
+    - [5.3.4. InfluxDB](#534-influxdb)
+  - [5.4. Documentación](#54-documentación)
+  - [5.5. Curiosidad](#55-curiosidad)
+- [6. Creación de PDFs](#6-creación-de-pdfs)
   - [6.1. Instalación](#61-instalación)
   - [6.2. Uso](#62-uso)
   - [6.3. Documentación](#63-documentación)
-- [7. Pagos por internet](#7-pagos-por-internet)
+- [7. Envío de correos](#7-envío-de-correos)
   - [7.1. Instalación](#71-instalación)
   - [7.2. Uso](#72-uso)
   - [7.3. Documentación](#73-documentación)
-- [8. Mapas](#8-mapas)
+- [8. Pagos por internet](#8-pagos-por-internet)
   - [8.1. Instalación](#81-instalación)
   - [8.2. Uso](#82-uso)
   - [8.3. Documentación](#83-documentación)
-- [9. Coloreado de código](#9-coloreado-de-código)
+- [9. Mapas](#9-mapas)
   - [9.1. Instalación](#91-instalación)
   - [9.2. Uso](#92-uso)
   - [9.3. Documentación](#93-documentación)
+- [10. Coloreado de código](#10-coloreado-de-código)
+  - [10.1. Instalación](#101-instalación)
+  - [10.2. Uso](#102-uso)
+  - [10.3. Documentación](#103-documentación)
+
 
 
 
@@ -171,7 +177,53 @@ Para cargar grandes cantidades de datos desde CSV a una BD consulta el siguiente
 - [Repositorio en Github](https://github.com/mholt/PapaParse?tab=readme-ov-file)
 
 
-# 4. Gráficos
+
+
+# 4. Arrastrar y Soltar (Drag & Drop)
+
+La funcionalidad de arrastrar y soltar es propia del lado cliente y por tanto deberá ser usada desde componentes cliente. Además de poder realizarla con Vanilla JS, también disponemos de 2 bibliotecas interesantes, que son:
+
+- **[DnD Kit](https://docs.dndkit.com/)**
+- **[React DnD](https://react-dnd.github.io/react-dnd/docs/overview)**
+
+A diferencia de muchas bibliotecas de arrastrar y soltar, **DnD Kit** no está construido intencionalmente sobre la API de arrastrar y soltar HTML5. Esta fue una decisión arquitectónica deliberada, que conlleva desventajas que debe conocer antes de decidir usarla. Para la mayoría de las aplicaciones web, creemos que los beneficios superan las desventajas.
+
+La API de arrastrar y soltar de HTML5 tiene algunas limitaciones severas. No es compatible con dispositivos táctiles, lo que significa que las bibliotecas que se construyen sobre ella deben exponer una implementación completamente diferente para admitir dispositivos táctiles.
+
+La principal desventaja de que **DnD Kit** no use la API de arrastrar y soltar de HTML5 es que no podrá arrastrar desde el escritorio o entre ventanas. 
+Si el caso de uso de arrastrar y soltar que tiene en mente implica este tipo de funcionalidad, definitivamente querrá usar una biblioteca que esté construida sobre la API de arrastrar y soltar de HTML5. 
+Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd/about) para obtener una biblioteca de React que tenga un backend de arrastrar y soltar de HTML5 nativo.
+
+|            | Soporta pantallas táctiles  | DnD desde escritorio y entre ventanas  
+|------------|:---------------------------:|:-------------------------------------:
+|DnD Kit     |       ✓                     |   𐄂
+|React DnD   |       𐄂                     |   ✓
+
+
+## 4.1. Instalación de biblioteca
+
+```sh
+npm  install  react  react-dom  @dnd-kit/core 
+```
+
+```sh
+npm  install  react  react-dom  react-dnd  react-dnd-html5-backend
+```
+
+## 4.2. Uso
+
+- Para DnD Kit seguir la siguiente guía: https://docs.dndkit.com/introduction/getting-started
+- Para React DnD seguir el siguiente tutorial: https://react-dnd.github.io/react-dnd/docs/tutorial 
+
+
+
+## 4.3. Documentación
+
+- [DnD Kit](https://docs.dndkit.com/)
+- [React DnD](https://react-dnd.github.io/react-dnd/docs/overview)
+  
+
+# 5. Gráficos
 
 Esta biblioteca debe ser usada desde el lado cliente.
 
@@ -188,7 +240,7 @@ Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuen
 ![demo](assets/chart-dashboard.png)
 
 
-## 4.1. Instalación
+## 5.1. Instalación
 
 ```console
 npm  install  chart.js  react-chartjs-2
@@ -197,7 +249,7 @@ npm  install  chart.js  react-chartjs-2
 El segundo paquete (`react-chartjs-2`) nos permitirá usar directamente componentes de React, en lugar de Vanilla JS.
 
 
-## 4.2. Uso
+## 5.2. Uso
 
 
 La forma más rápida y directa de empezar a usar esta biblioteca es usando el siguiente esquema. 
@@ -309,7 +361,7 @@ Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (
 > La página donde vaya a incrustarse el gráfico debe contener la directiva **`'use client'`**
 
 
-## 4.3. Flujo de datos (streaming)
+## 5.3. Flujo de datos (streaming)
 
 En algunos casos deseamos que la gráfica muestre un flujo de datos (**streaming**) obtenido de alguna fuente. Para ello podemos usar el plugin [chartjs-plugin-streaming](https://nagix.github.io/chartjs-plugin-streaming/latest/). Su página web dispone de varios [ejemplos](https://nagix.github.io/chartjs-plugin-streaming/latest/samples/charts/line-horizontal.html).
 
@@ -320,13 +372,13 @@ Entre toda la información podemos destacar:
 1. [Los modelos de provisión de datos](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html)
 2. [El tutorial para crear app en React, también aplicable a Next.js](https://nagix.github.io/chartjs-plugin-streaming/latest/tutorials/react/app.html)
 
-### 4.3.1. Los modelos de provisión de datos
+### 5.3.1. Los modelos de provisión de datos
 
 El paquete `chartjs-plugin-streaming` soporta obtención de datos mediante los modos **pull** y **push**. Para mayor información consulta la [documentación oficial](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html#push-model-listening-based)
 
 
 
-### 4.3.2. Ejemplo
+### 5.3.2. Ejemplo
 
 Hay disponible una aplicación de ejemplo con [código fuente disponible en Github](https://github.com/jamj2000/nxchart-streaming).
 
@@ -428,7 +480,7 @@ export default grafico
 ```
 
 
-### 4.3.3. Colas de mensajes
+### 5.3.3. Colas de mensajes
 
 Una forma de recuperar los datos para realizar las gráficas es mediante el uso de una cola de mensajes.
 
@@ -443,7 +495,7 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 
 - [Pirobits: Cola de mensajes usando MySQL: SELECT * FOR UPDATE](https://www.pirobits.com/es/post/cola-de-mensajes-usando-mysql-select-for-update)
 
-### 4.3.4. InfluxDB
+### 5.3.4. InfluxDB
 
 No podemos dejar de nombrar al SGBD InfluxDB que es un sistema especialmente diseñado desde cero para trabajar con **base de datos de series temporales**.
 
@@ -468,7 +520,7 @@ Referencias:
 - [Paquete de npm para InfluxDB](https://www.npmjs.com/package/@influxdata/influxdb-client)
 - [Monitorizando datos con InfluxDB, Telegraf y Grafana](https://openwebinars.net/blog/monitorizando-datos-con-influxdb-telegraf-y-grafana/)  
 
-## 4.4. Documentación
+## 5.4. Documentación
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
 - [Código fuente de ejemplo con streaming](https://github.com/jamj2000/nxchart-streaming)
@@ -481,7 +533,7 @@ Referencias:
 - [Otra biblioteca de Charts](https://recharts.org)
 
 
-## 4.5. Curiosidad
+## 5.5. Curiosidad
 
 Existe un biblioteca para *charting* llamada **`roughViz`**. Como su nombre indica realiza la visualización de forma algo bruta. Sirve para dar un toque de originalidad en detrimento de la exactitud en la representación gráfica.
 
@@ -525,7 +577,7 @@ import {Bar, Pie } from 'react-roughviz'
 
 
 
-# 5. Creación de PDFs 
+# 6. Creación de PDFs 
 
 De las muchas bibliotecas disponibles para trabajar con archivos PDF, una de las más interesantes y potentes es [pdf-lib](https://www.npmjs.com/package/pdf-lib).
 
@@ -533,13 +585,13 @@ Permite crear nuevos documentos y modificar los existentes. Permite trabajar en 
 
 Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
-## 5.1. Instalación
+## 6.1. Instalación
 
 ```sh
 npm  install  pdf-lib
 ```
 
-## 5.2. Uso
+## 6.2. Uso
 
 Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **pdf.mjs** y ejecútalo directamente con Node. 
 
@@ -585,13 +637,13 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 - [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
 - [Aplicación de tickets de supermercado -por realizar-](#)
 
-## 5.3. Documentación
+## 6.3. Documentación
 
 - [Ejemplos de la Documentación oficial](https://pdf-lib.js.org/#examples)
 
 
 
-# 6. Envío de correos
+# 7. Envío de correos
 
 El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. 
 
@@ -623,13 +675,13 @@ Finalmente la opción más sencilla es la siguiente:
 ![gandi](assets/gandi-email-alias.png)
 
 
-## 6.1. Instalación
+## 7.1. Instalación
 
 ```sh
 npm  install  nodemailer
 ```
 
-## 6.2. Uso
+## 7.2. Uso
 
 Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **mail.mjs** y ejecútalo directamente con Node. 
 
@@ -672,7 +724,7 @@ sendMail().catch(console.error);
 > **NOTA**: Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
 
 
-## 6.3. Documentación
+## 7.3. Documentación
 
 - [Nodemailer](https://www.nodemailer.com/)
 - [react-email](https://react.email/)
@@ -681,22 +733,22 @@ sendMail().catch(console.error);
 - [Resend: Video en inglés](https://www.youtube.com/watch?v=T2xaiw7VK4A)
 
 
-# 7. Pagos por internet
+# 8. Pagos por internet
 
 
 stripe
 
-## 7.1. Instalación
+## 8.1. Instalación
 
 
-## 7.2. Uso
+## 8.2. Uso
 
 
 
-## 7.3. Documentación
+## 8.3. Documentación
 
 
-# 8. Mapas
+# 9. Mapas
 
 
 Si deseamos hacer uso de los Mapas de Google, podemos usar la biblioteca [@googlemaps/js-api-loader](https://www.npmjs.com/package/@googlemaps/js-api-loader).
@@ -706,14 +758,14 @@ Si deseamos hacer uso de los Mapas de Google, podemos usar la biblioteca [@googl
 Esta biblioteca solo puede usarse desde el lado cliente.
 
 
-## 8.1. Instalación
+## 9.1. Instalación
 
 ```sh
 npm  install  @googlemaps/js-api-loader
 npm  install  @types/google.maps          # Sólo necesario si vamos a usar Typescript
 ``` 
 
-## 8.2. Uso
+## 9.2. Uso
 
 **`.env`**
 
@@ -788,7 +840,7 @@ export default function Home() {
 }
 ```
 
-## 8.3. Documentación
+## 9.3. Documentación
 
 - [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
 - [Código fuente del video anterior](https://github.com/MG95Developer/google-maps-tutorial)
@@ -796,20 +848,20 @@ export default function Home() {
 - [Bibliotecas disponibles](https://developers.google.com/maps/documentation/javascript/libraries?hl=es-419)
 
 
-# 9. Coloreado de código
+# 10. Coloreado de código
 
 En el muy poco probable caso de que tengamos que incorporar visualización de código fuente en nuestra aplicación, podemos usar la biblioteca [bright](https://bright.codehike.org/).
 
 Esta biblioteca debe usarse en el lado servidor, aunque es probable que también pueda emplearse en la lado cliente (no la he utilizado).
 
 
-## 9.1. Instalación
+## 10.1. Instalación
 
 ```sh
 npm  install  bright
 ``` 
 
-## 9.2. Uso
+## 10.2. Uso
 
 ```js
 import { Code } from "bright"
@@ -831,7 +883,7 @@ export default function Page() {
 ```
 
 
-## 9.3. Documentación
+## 10.3. Documentación
 
 - [Documentación oficial](https://bright.codehike.org/)
 - [Código en Github](https://github.com/code-hike/bright?tab=readme-ov-file)
