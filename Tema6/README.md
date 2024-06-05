@@ -52,6 +52,18 @@ En la primera parte de este tema trabajaremos con algunas de estas bases de dato
 
 En la segunda parte de este tema trabajaremos con las mismas bases de datos, pero haciendo uso de ORM (Object-Relational Mapping), que es una técnica que nos permite realizar un mapeo objeto-relacional y evitar así tener que trabajar con el SQL específico de cada base de datos. Usaremos el ORM Prisma.
 
+En cualquier caso, siempre usaremos bases de datos del lado servidor. 
+
+> CURIOSIDAD:
+>
+> En el lado cliente también disponemos de almacenamiento gestionado por el navegador. Por ejemplo:
+> - [Local storage](https://es.javascript.info/localstorage)
+> - [Session storage](https://es.javascript.info/localstorage)
+> - [IndexedDB](https://es.wikipedia.org/wiki/Indexed_Database_API)
+> 
+> ![indexedDB](assets/indexedDB.png)
+>
+
 # 2. MySQL
 
 MySQL/MariaDB es un sistema gestor de bases de datos ampliamente usado hoy en día. Para trabajar con él los haremos con el driver **`serverless-mysql`** y usando un entorno de desarrollo local, es decir un servidor de base de datos en `localhost:3306`.
