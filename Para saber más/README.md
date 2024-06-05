@@ -1,4 +1,4 @@
-# 1. Para saber más ... <!-- omit in toc -->
+# Para saber más ... <!-- omit in toc -->
 > COMUNICACIÓN EN TIEMPO REAL, WEB WORKERS
 
 
