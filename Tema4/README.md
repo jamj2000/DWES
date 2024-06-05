@@ -335,7 +335,7 @@ En los componentes debemos distinguir 2 aspectos:
 
 **1. DEFINICIÓN**
 
-En la definición del componente establecemos su funcionalidad y las propiedades que aceptará. En el siguiente ejemplo, el componente *Productos* aceptará 3 propiedades: *children*, *productos* y *categoria*. No aceptará ninguna otra propiedad.
+En la definición del componente establecemos su funcionalidad y las propiedades que aceptará. En el siguiente ejemplo, el componente *Productos* aceptará 3 **propiedades**: *children*, *productos* y *categoria*. No aceptará ninguna otra propiedad.
 
 ```js
 function Productos ({ children, productos, categoria }) {
@@ -389,7 +389,7 @@ async function page() {
     const productos = await getProductos()
 
     return (
-      <Productos productos={productos} categoria='teclados'>
+      <Productos productos={productos} categoria={'teclados'}>
         <h2>Productos de esta categoría</h2>
         <p> /* ... */ </p>
       </Productos>
@@ -403,7 +403,7 @@ export default page
 Observa que hemos usado el componente como si de un elemento HTML se tratara:
 
 ```js
-<Productos productos={productos} categoria='teclados'>
+<Productos productos={productos} categoria={'teclados'}>
   <h2>Productos de esta categoría</h2>
   <p> /* ... */ </p>
 </Productos>
@@ -411,7 +411,7 @@ Observa que hemos usado el componente como si de un elemento HTML se tratara:
 
 Aunque hay 2 pequeñas diferencias:
 
-- En HTML el nombre de las etiquetas suele ir en minúsculas. En los componentes la primera letra es mayúsculas.
+- En HTML el nombre de las etiquetas suele ir en minúsculas. En los componentes, la primera letra es mayúsculas.
 - En HTML las etiquetas tienen atributos. En los componentes se les llama propiedades.
 
 
@@ -424,7 +424,7 @@ También podemos encontrar componentes sin elementos insertados `children`, en c
 
 ```js
  // IMPORTANTE: Colocar / al final para indicar el cierre del elemento
- <Productos productos={productos} categoria='teclados' />
+ <Productos productos={productos} categoria={'teclados'} />
 ```
 
 Si un componente no tiene propiedades, hacemos uso de él de la siguiente forma:
@@ -433,6 +433,12 @@ Si un componente no tiene propiedades, hacemos uso de él de la siguiente forma:
  // IMPORTANTE: Colocar / al final para indicar el cierre del elemento
  <Productos />
 ```
+
+**Referencia:**
+
+A continuación tienes un vídeo, en inglés, donde se muestra como crear un proyecto en NextJS y React desde cero, así como se explican conceptos básicos.
+
+- [Introduction to Next.js and React](https://youtu.be/h2BcitZPMn4)
 
 
 # 3. Componentes
