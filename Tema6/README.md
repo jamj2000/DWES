@@ -602,6 +602,7 @@ Hay dos formas alternativas de definir un modelo de datos:
 
 2. **Escribir el modelo de datos manualmente y usar Prisma Migrate**: puedes escribir tu modelo de datos manualmente y asignarlo a tu base de datos usando Prisma Migrate. En este caso, el modelo de datos es la única fuente de verdad para los modelos de tu aplicación.
 
+Nosotros usaremos la segunda forma, aunque se explica la primera forma de forma somera a continuación.
 
 
 ## 6.1. Generar el modelo de datos mediante introspección
