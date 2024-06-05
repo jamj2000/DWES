@@ -1,16 +1,20 @@
+# 1. Para saber más ... <!-- omit in toc -->
+> COMUNICACIÓN EN TIEMPO REAL, WEB WORKERS
 
-A continuación encontrarás una serie de características y funcionalidades avanzadas, muchas no relacionadas directamente con NextJS, pero sí con el ecosistema Javascript. 
+
+- [1. Introducción](#1-introducción)
+- [2. Comunicación Cliente-Servidor en tiempo real](#2-comunicación-cliente-servidor-en-tiempo-real)
+- [3. Web Workers](#3-web-workers)
+
 
 ---
 
-- [1. Comunicación Cliente-Servidor en tiempo real](#1-comunicación-cliente-servidor-en-tiempo-real)
-- [2. Web Workers](#2-web-workers)
+# 1. Introducción
+
+A continuación encontrarás una serie de características y funcionalidades avanzadas, muchas no relacionadas directamente con NextJS, pero sí con el lenguaje Javascript. 
 
 
----
-
-
-# 1. Comunicación Cliente-Servidor en tiempo real
+# 2. Comunicación Cliente-Servidor en tiempo real
 
 ![arquitecturas](assets/arquitecturas.png)
 
@@ -32,6 +36,6 @@ A continuación encontrarás una serie de características y funcionalidades ava
 - [Server Sent Events and Websockets. How to implement in NodeJS and HTMX](https://youtu.be/aPrrfVs9mDc?si=xC2RCy3208LDKRFf)
 
 
-# 2. Web Workers
+# 3. Web Workers
 
 - [Web Workers Vs. Service Workers in JavaScript](https://www.dhiwise.com/post/web-workers-vs-service-workers-in-javascript)
