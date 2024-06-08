@@ -100,3 +100,6 @@
 [submodule "Tema7/proyectos/nxgoogle-maps"]
 	path = Tema7/proyectos/nxgoogle-maps
 	url = https://github.com/jamj2000/nxgoogle-maps.git
+[submodule "Tema6/proyectos/nxprisma-crud-zoo"]
+	path = Tema6/proyectos/nxprisma-crud-zoo
+	url = https://github.com/jamj2000/nxprisma-crud-zoo.git
