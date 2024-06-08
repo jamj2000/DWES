@@ -1059,13 +1059,15 @@ El segundo ejemplo es más complejo y dispone de mayor interactividad con el usu
 
 # 11. Referencias
 
+- [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
+- [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
+- [Video: Nextjs y Prisma ORM desde Cero usando Typescript](https://www.youtube.com/watch?v=5k7ZGhL3pI0&t=3938s)
+- [Video: Prisma in Next.js](https://youtu.be/QXxy8Uv1LnQ?list=PLGvUtEHR5iM054w1doLDV0X0rsanHy9OQ)
 - [MySQL API con NextJS](https://github.com/jamj2000/nxapi-mysql)
 - [MySQL CRUD con NextJS](https://github.com/jamj2000/nxmysql-crud)
 - [BD Serverless en PlanetScale](https://planetscale.com/docs/tutorials/planetscale-serverless-driver)
 - [Usando SQLite con NextJS 13](https://plainenglish.io/blog/using-sqlite-with-next-js-13)
 - [Getting Started with Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres/quickstart)
-- [Video: Nextjs y Prisma ORM desde Cero usando Typescript](https://www.youtube.com/watch?v=5k7ZGhL3pI0&t=3938s)
 - [Get started with Prisma](https://www.prisma.io/docs/getting-started)
 - [Prisma schema](https://www.prisma.io/docs/orm/prisma-schema)
-- [Proyecto de ejemplo](https://github.com/jamj2000/nxprisma-crud)
 
