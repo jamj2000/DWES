@@ -34,6 +34,7 @@
   - [6.2. Creando rutas](#62-creando-rutas)
   - [6.3. Parámetros de URL](#63-parámetros-de-url)
   - [6.4. Organización del proyecto](#64-organización-del-proyecto)
+  - [6.5. CORS](#65-cors)
 - [7. Route Handlers](#7-route-handlers)
   - [7.1. Métodos HTTP admitidos](#71-métodos-http-admitidos)
   - [7.2. Parámetros de URL](#72-parámetros-de-url)
@@ -1235,6 +1236,34 @@ Esta estrategia almacena el código de aplicación compartido globalmente en el 
 Un muy video donde se explica la estructura de un proyecto en NextJS y los archivos más habituales es el siguiente:
 
 - [Project Structure and File Conventions in NextJs 14](https://youtu.be/i6Fa5Oyr59k?si=Y3IVfA8ZuMV38ndo)
+
+## 6.5. CORS
+
+El **intercambio de recursos entre orígenes** -Cross-Origin Resource Sharing (CORS)- es una característica de seguridad que te permite controlar qué sitios pueden acceder a tus recursos. Puedes configurar el encabezado `Access-Control-Allow-Origin` para permitir que un origen específico acceda a sus controladores de ruta.
+
+En NextJS existen 2 formas de habilitar CORS:
+
+1. [Usando la API Web estándar para un controlador de ruta](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#cors)
+2. [Agregando encabezados CORS a múltiples controladores de ruta](https://nextjs.org/docs/app/api-reference/next-config-js/headers#cors)
+
+A continuación se muestra como se haría de la primera forma:
+
+```js
+export async function GET(request: Request) {
+  return new Response('Hello, Next.js!', {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  })
+}
+```
+
+**Referencia:**
+
+- [CORS: Qué es y cómo funciona el Cross-Origin Resource Sharing](https://okitup.com/blog/que-es-y-como-funciona-el-cors)
 
 
 
