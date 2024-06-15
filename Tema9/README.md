@@ -32,7 +32,7 @@ Una [aplicación web progresiva (PWA)](https://es.wikipedia.org/wiki/Aplicaci%C3
 
 Al igual que un sitio web, una PWA puede ejecutarse en múltiples plataformas y dispositivos desde una única base de código. Al igual que una aplicación específica de una plataforma, se puede instalar en el dispositivo, puede funcionar sin conexión y en segundo plano, y puede integrarse con el dispositivo y con otras aplicaciones instaladas.
 
-![pwa](assets/pwa.png)
+<img src="assets/pwa.png" alt="pwa" width="400"/>
 
 
 # 2. Características de una PWA
