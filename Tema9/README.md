@@ -5,7 +5,10 @@
 
 **[`PROYECTOS DE EJEMPLO`](proyectos)**
 
+<img src="assets/nextdotjs.svg" width="80" height="80">
+
 ---
+
 - [1. Introducción](#1-introducción)
 - [2. Características de una PWA](#2-características-de-una-pwa)
 - [3. Pasos a seguir](#3-pasos-a-seguir)

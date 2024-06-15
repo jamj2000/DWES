@@ -5,6 +5,11 @@
 
 **[`PROYECTOS DE EJEMPLO`](proyectos)**
 
+<img src="assets/nextdotjs.svg" width="80" height="80">
+<img src="assets/mysql.svg" width="80" height="80">
+<img src="assets/sqlite.svg" width="80" height="80">
+<img src="assets/postgresql.svg" width="80" height="80">
+
 ---
 - [1. Introducción](#1-introducción)
 - [2. MySQL](#2-mysql)

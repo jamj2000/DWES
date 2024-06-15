@@ -5,6 +5,9 @@
 
 **[`CÓDIGO DE EJEMPLO`](codigo)**
 
+<img src="assets/nodedotjs.svg" width="80" height="80">
+<img src="assets/express.svg" width="80" height="80">
+
 ---
 
 - [1. Introducción](#1-introducción)
