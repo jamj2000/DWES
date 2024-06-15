@@ -7,6 +7,8 @@
 - [3. Background Threads in Web Applications](#3-background-threads-in-web-applications)
 
 
+<img src="assets/javascript.svg" alt="javascript" width="80"/>
+
 ---
 
 # 1. Introducción
