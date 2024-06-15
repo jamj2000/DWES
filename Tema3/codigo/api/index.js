@@ -1,5 +1,8 @@
 import express from "express";
+import cors from "cors";
+
 const app = express()
+
 
 let Users = [
     { id: 0, nombre: "Jose", edad: 20 },
@@ -7,7 +10,9 @@ let Users = [
     { id: 2, nombre: "Eva", edad: 22 }
 ]
 
-app.use(express.json())  // IMPORTANTE
+app.use(express.json())   // IMPORTANTE
+app.use(cors())           // Para habilitar CORS
+
 
 // GET
 app.get('/api/users', (request, response) => response.json(Users))

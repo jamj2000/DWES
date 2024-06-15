@@ -23,11 +23,13 @@
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
 - [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
 - [8. Creando nuestra propia API REST](#8-creando-nuestra-propia-api-rest)
+  - [8.1. CORS](#81-cors)
 - [9. Formularios](#9-formularios)
   - [9.1. application/x-www-form-urlencoded](#91-applicationx-www-form-urlencoded)
   - [9.2. multipart/form-data](#92-multipartform-data)
   - [9.3. JSON](#93-json)
 - [10. Referencias](#10-referencias)
+
 
 
 ---
@@ -578,6 +580,35 @@ app.delete('/api/users/:id', (request, response) => {
 
 app.listen(3000)
 ```
+
+## 8.1. CORS
+
+El **intercambio de recursos entre orígenes** -Cross-Origin Resource Sharing (CORS)- es una característica de seguridad que te permite controlar qué sitios pueden acceder a tus recursos. 
+
+Por defecto, sólo se permite el acceso a los datos de la API si se solicitan desde el mismo dominio. Por ejemplo, si nuestra API está desplegada en el dominio `http://example.com`, sólo las páginas cliente que estén bajo este dominio serán capaces de acceder a los datos.
+
+Si deseamos que nuestros datos sean accesibles desde otros dominios deberemos habilitar CORS. Una forma sencilla de hacerlo para todos los *`endpoints`* es la siguiente:
+
+```sh
+npm  install  cors
+```
+
+
+```js
+import express from "express"
+import cors from "cors"  // <------
+
+const app = express()
+app.use(express.json())  // IMPORTANTE: SOPORTE PARA JSON
+app.use(cors())          // <------ Para habilitar CORS 
+
+// ...
+```
+
+
+**Referencia:**
+
+- [CORS con Express](https://expressjs.com/en/resources/middleware/cors.html)
 
 
 # 9. Formularios

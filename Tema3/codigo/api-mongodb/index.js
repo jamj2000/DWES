@@ -1,8 +1,10 @@
 import { MongoClient, ObjectId } from 'mongodb' // Documentación CRUD: https://mongodb.github.io/node-mongodb-native/6.2/
 import express from "express"
+import cors from "cors"
 
 const app = express()
 app.use(express.json())  // IMPORTANTE: SOPORTE PARA JSON
+app.use(cors())          // Para habilitar CORS 
 
 
 const PORT = process.env.PORT ?? 3000
