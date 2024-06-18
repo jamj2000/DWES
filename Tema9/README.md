@@ -70,6 +70,8 @@ A continuación se muestran los pasos a seguir para convertir nuestra aplicació
 
 Deberemos generar un archivo `manifest.json` (también puede llamarse `manifest.webmanifest`) e iconos de varios tamaños. Para ello podemos hacer uso de alguno de los generadores de *app manifest* disponibles en la web.
 
+Un buen sitio para generar el `manifest` es [simicart](https://www.simicart.com/manifest-generator.html/)
+
 ![generator](assets/pwa-manifest-generator.png)
 
 Al generador deberemos proporcinarle, además de los datos de configuración, una imagen con fondo transparente y un tamano de 512x512 píxeles. A partir de ella, el generador nos proporcionará varias imagenes de menor tamaño.
