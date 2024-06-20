@@ -8,33 +8,33 @@
 - [1. Introducción](#1-introducción)
   - [1.1. La base de la web](#11-la-base-de-la-web)
   - [1.2. Partes de una aplicación web](#12-partes-de-una-aplicación-web)
-- [Arquitectura Cliente/Servidor](#arquitectura-clienteservidor)
-  - [Protocolo HTTP/HTTPS](#protocolo-httphttps)
-  - [Clientes web](#clientes-web)
-  - [Servidores web](#servidores-web)
-    - [Servidores de contenido estático](#servidores-de-contenido-estático)
-    - [Servidores de cómputo](#servidores-de-cómputo)
-- [2. Tecnologías para el backend](#2-tecnologías-para-el-backend)
-  - [2.1. Lenguajes del lado del servidor](#21-lenguajes-del-lado-del-servidor)
-  - [2.2. Frameworks del lado servidor](#22-frameworks-del-lado-servidor)
-  - [2.3. Resumen](#23-resumen)
-- [3. Tecnologías para el frontend](#3-tecnologías-para-el-frontend)
-  - [3.1. Lenguajes del lado del cliente](#31-lenguajes-del-lado-del-cliente)
-  - [3.2. Frameworks del lado cliente](#32-frameworks-del-lado-cliente)
+- [2. Arquitectura Cliente/Servidor](#2-arquitectura-clienteservidor)
+  - [2.1. Protocolo HTTP/HTTPS](#21-protocolo-httphttps)
+  - [2.2. Clientes web](#22-clientes-web)
+  - [2.3. Servidores web](#23-servidores-web)
+    - [2.3.1. Servidores de contenido estático](#231-servidores-de-contenido-estático)
+    - [2.3.2. Servidores de cómputo](#232-servidores-de-cómputo)
+- [3. Tecnologías para el backend](#3-tecnologías-para-el-backend)
+  - [3.1. Lenguajes del lado del servidor](#31-lenguajes-del-lado-del-servidor)
+  - [3.2. Frameworks del lado servidor](#32-frameworks-del-lado-servidor)
   - [3.3. Resumen](#33-resumen)
-- [4. Tecnologías Javascript Fullstack](#4-tecnologías-javascript-fullstack)
-  - [4.1. Frameworks para servidor y cliente](#41-frameworks-para-servidor-y-cliente)
-- [5. MVC o SPA](#5-mvc-o-spa)
-  - [5.1. Modelo-Vista-Controlador](#51-modelo-vista-controlador)
-  - [5.2. Single Page Application](#52-single-page-application)
-  - [5.3. MVC vs SPA](#53-mvc-vs-spa)
-  - [5.4. Arquitectura de 3 capas](#54-arquitectura-de-3-capas)
-- [6. Persistencia de los datos](#6-persistencia-de-los-datos)
-  - [6.1. Bases de datos relacionales](#61-bases-de-datos-relacionales)
-  - [6.2. Bases de datos no relacionales (noSQL)](#62-bases-de-datos-no-relacionales-nosql)
-- [7. Viajando al futuro, que ya es presente](#7-viajando-al-futuro-que-ya-es-presente)
-  - [7.1. WebAssembly (Wasm)](#71-webassembly-wasm)
-  - [7.2. Apps en Wasm](#72-apps-en-wasm)
+- [4. Tecnologías para el frontend](#4-tecnologías-para-el-frontend)
+  - [4.1. Lenguajes del lado del cliente](#41-lenguajes-del-lado-del-cliente)
+  - [4.2. Frameworks del lado cliente](#42-frameworks-del-lado-cliente)
+  - [4.3. Resumen](#43-resumen)
+- [5. Tecnologías Javascript Fullstack](#5-tecnologías-javascript-fullstack)
+  - [5.1. Frameworks para servidor y cliente](#51-frameworks-para-servidor-y-cliente)
+- [6. MVC o SPA](#6-mvc-o-spa)
+  - [6.1. Modelo-Vista-Controlador](#61-modelo-vista-controlador)
+  - [6.2. Single Page Application](#62-single-page-application)
+  - [6.3. MVC vs SPA](#63-mvc-vs-spa)
+  - [6.4. Arquitectura de 3 capas](#64-arquitectura-de-3-capas)
+- [7. Persistencia de los datos](#7-persistencia-de-los-datos)
+  - [7.1. Bases de datos relacionales](#71-bases-de-datos-relacionales)
+  - [7.2. Bases de datos no relacionales (noSQL)](#72-bases-de-datos-no-relacionales-nosql)
+- [8. Viajando al futuro, que ya es presente](#8-viajando-al-futuro-que-ya-es-presente)
+  - [8.1. WebAssembly (Wasm)](#81-webassembly-wasm)
+  - [8.2. Apps en Wasm](#82-apps-en-wasm)
 
 
 
@@ -78,7 +78,7 @@ En este tema abordaremos conceptos generales relacionados con las aplicaciones w
   - También se denomina capa de presentación.
 
 
-# Arquitectura Cliente/Servidor
+# 2. Arquitectura Cliente/Servidor
 
 Uno de los servicios más populares de Internet es el servicio WWW o web. Existen otros servicios como correo electrónico y mensajería, entre otros, pero la tendencia es hacia su integración con la WWW.
 
@@ -105,7 +105,7 @@ El protocolo HTTP es un protocolo Cliente/Servidor, en el cual la comunicación 
 ![cliente-servidor](assets/client-server.png)
 
 
-## Protocolo HTTP/HTTPS
+## 2.1. Protocolo HTTP/HTTPS
 
 Referencias:
 
@@ -172,18 +172,18 @@ El formato que siguen tanto las peticiones como las respuestas es el siguiente:
 
 ![request-response](assets/req-res.png)
 
-## Clientes web
+## 2.2. Clientes web
 
 
-## Servidores web
-
-
-
-### Servidores de contenido estático
+## 2.3. Servidores web
 
 
 
-### Servidores de cómputo
+### 2.3.1. Servidores de contenido estático
+
+
+
+### 2.3.2. Servidores de cómputo
 
 
 ![iaas paas saas](assets/iaas-paas-saas.jpg)
@@ -207,10 +207,10 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 
 [![paas vs serverless](assets/paas-serverless.svg)](https://www.cloudflare.com/es-es/learning/serverless/glossary/serverless-vs-paas/)
 
-# 2. Tecnologías para el backend
+# 3. Tecnologías para el backend
 
 
-## 2.1. Lenguajes del lado del servidor
+## 3.1. Lenguajes del lado del servidor
 
 ![Backend Languages](assets/backend-languages.png)
 
@@ -224,7 +224,7 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 - **Javascript (Node.js)**: cada vez más popular puesto que se usa también en el lado cliente.
 
 
-## 2.2. Frameworks del lado servidor 
+## 3.2. Frameworks del lado servidor 
 
 ![Backend Frameworks](assets/backend-frameworks.png)
 
@@ -237,20 +237,20 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 - Node.js: **Express**. 
 
 
-## 2.3. Resumen
+## 3.3. Resumen
 
 ![Desarrollo Backend](assets/back-end-development.png)
 
 
 
-# 3. Tecnologías para el frontend
+# 4. Tecnologías para el frontend
 
 
-## 3.1. Lenguajes del lado del cliente
+## 4.1. Lenguajes del lado del cliente
 
 ![Desarrollo Frontend](assets/javascript.png)
 
-## 3.2. Frameworks del lado cliente
+## 4.2. Frameworks del lado cliente
 
 ![Desarrollo Frontend](assets/frontend-frameworks.png)
 
@@ -261,16 +261,16 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 
 
 
-## 3.3. Resumen
+## 4.3. Resumen
 
 ![Desarrollo Frontend](assets/front-end-development.png)
 
 
 
-# 4. Tecnologías Javascript Fullstack
+# 5. Tecnologías Javascript Fullstack
 
 
-## 4.1. Frameworks para servidor y cliente 
+## 5.1. Frameworks para servidor y cliente 
 
 ![Desarrollo Fullstack](assets/fullstack-frameworks.png)
 
@@ -281,10 +281,10 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 
 
 
-# 5. MVC o SPA
+# 6. MVC o SPA
 
 
-## 5.1. Modelo-Vista-Controlador
+## 6.1. Modelo-Vista-Controlador
 
 ![Modelo Vista Controlador](assets/MVC.png)
 
@@ -297,7 +297,7 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador 
 
 
-## 5.2. Single Page Application
+## 6.2. Single Page Application
 
 ![Aplicación de Página Única](assets/SPA.png)
 
@@ -309,18 +309,18 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
   - **JSON** 
 
 
-## 5.3. MVC vs SPA
+## 6.3. MVC vs SPA
 
 ![MVC vs SPA](assets/mvc-spa.png)
 
 
-## 5.4. Arquitectura de 3 capas
+## 6.4. Arquitectura de 3 capas
 
 ![Arquitectura de 3 capas](assets/arquitectura-3-capas.png)
 
 
 
-# 6. Persistencia de los datos
+# 7. Persistencia de los datos
 
 - Uso de archivos
 - Bases de datos relacionales
@@ -329,25 +329,25 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
   - Subtipo importante: **BBDD noSQL**.
 
 
-## 6.1. Bases de datos relacionales
+## 7.1. Bases de datos relacionales
 
 ![BBDD relacionales](assets/SQL.png)
 
 
-## 6.2. Bases de datos no relacionales (noSQL)
+## 7.2. Bases de datos no relacionales (noSQL)
 
 ![BBDD relacionales](assets/noSQL.png)
 
 
 
-# 7. Viajando al futuro, que ya es presente
+# 8. Viajando al futuro, que ya es presente
 
 ![Wasm](assets/wasm.png)
 
 - [WebAssembly](https://es.wikipedia.org/wiki/WebAssembly)
 
 
-## 7.1. WebAssembly (Wasm)
+## 8.1. WebAssembly (Wasm)
 
 - Formato binario pequeño y rápido que promete un rendimiento casi nativo para las aplicaciones web.
 - Los principales navegadores son compatibles con WebAssembly.
@@ -360,7 +360,7 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
 - [WebAssembly explicado](https://www.ciospain.es/liderazgo--gestion-ti/que-es-webassembly-la-plataforma-web-de-proxima-generacion-explicada)
 
 
-## 7.2. Apps en Wasm
+## 8.2. Apps en Wasm
 
 ![Autocad web](assets/autocad-webassembly.jpg)
 
