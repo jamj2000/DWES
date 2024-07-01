@@ -644,6 +644,10 @@ Por ejemplo, mi configuración es la siguiente:
     "extensions.ignoreRecommendations": true,
     // Permite la edición simultánea de inicio y cierre de etiquetas HTML y JSX
     "editor.linkedEditing": true,
+    // Soporte de Emmet para JSX
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
 }
 ```
 
