@@ -252,9 +252,12 @@ Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuen
 > - Mayor interactividad
 > - Buena integración con datos en tiempo real
 >
+> A pesar de sus interesantes características, una desventaja muy importante es que su integración con NextJS es bastante mala. Sin embargo funciona muy bien con Vanilla JS.
+>
 > Más documentación:
 > - [Fundamentos](https://plotly.com/javascript/plotly-fundamentals/)
 > - [Integración con React](https://plotly.com/javascript/react/) (`npm  install  react-plotly.js  plotly.js`)
+
 
 
 ## 5.1. Instalación
