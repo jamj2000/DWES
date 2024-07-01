@@ -24,7 +24,8 @@
   - [4.1. ¿Cuándo utilizar componentes de servidor y cliente?](#41-cuándo-utilizar-componentes-de-servidor-y-cliente)
   - [4.2. Ejemplo: Paginación de datos](#42-ejemplo-paginación-de-datos)
   - [4.3. Ejemplo avanzado: Paginación y búsqueda](#43-ejemplo-avanzado-paginación-y-búsqueda)
-  - [4.4. Componentes de NextJS](#44-componentes-de-nextjs)
+  - [4.4. Componentes de React](#44-componentes-de-react)
+  - [4.5. Componentes de NextJS](#45-componentes-de-nextjs)
 - [5. Componentes listos para usar](#5-componentes-listos-para-usar)
   - [5.1. Iconos](#51-iconos)
   - [5.2. UI](#52-ui)
@@ -48,10 +49,6 @@
   - [8.4. Eliminar Cookies](#84-eliminar-cookies)
 - [9. ANEXO: Parámetros de ruta y consulta en página de cliente](#9-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [10. Referencias](#10-referencias)
-
-
-
-
 
 
 
@@ -595,7 +592,16 @@ En resumen, la mejor opción dependerá de las necesidades específicas de tu ap
 - [Aplicación de lado servidor para consultar biblioteca de libros](https://github.com/jamj2000/book-inventory)
 
 
-## 4.4. Componentes de NextJS
+## 4.4. Componentes de React
+
+[React y ReactDOM proporcionan numerosos componentes](https://react.dev/reference/react-dom/components). Algunos de ellos son:
+
+- [form](https://react.dev/reference/react-dom/components/form)
+- [select](https://react.dev/reference/react-dom/components/select)
+- [input](https://react.dev/reference/react-dom/components/input)
+- [progress](https://react.dev/reference/react-dom/components/progress)
+
+## 4.5. Componentes de NextJS
 
 **Link**
 

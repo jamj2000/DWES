@@ -604,8 +604,16 @@ import cors from "cors"  // <------
 const app = express()
 app.use(express.json())  // IMPORTANTE: SOPORTE PARA JSON
 app.use(cors())          // <------ Para habilitar CORS 
-
 // ...
+```
+
+Podemos también indicar qué dominios queremos que tengan acceso a nuestra API. Por ejemplo:
+
+```js
+app.use(cors({
+  origin: [ 'http://localhost:5731', 'http://example.com' ]
+}))
+
 ```
 
 
