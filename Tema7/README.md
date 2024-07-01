@@ -242,6 +242,21 @@ Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuen
 ![demo](assets/chart-dashboard.png)
 
 
+> **NOTA:** Otra biblioteca muy interesante es [`plotly para javascript`](https://plotly.com/javascript/)
+> 
+> ```sh
+> npm  install  plotly.js-dist-min
+> ```
+> Características:
+> - Mayor cantidad de gráficas de chart.js
+> - Mayor interactividad
+> - Buena integración con datos en tiempo real
+>
+> Más documentación:
+> - [Fundamentos](https://plotly.com/javascript/plotly-fundamentals/)
+> - [Integración con React](https://plotly.com/javascript/react/) (`npm  install  react-plotly.js  plotly.js`)
+
+
 ## 5.1. Instalación
 
 ```console
