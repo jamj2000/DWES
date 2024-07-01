@@ -10,10 +10,11 @@
   - [1.2. Partes de una aplicación web](#12-partes-de-una-aplicación-web)
 - [2. Arquitectura Cliente/Servidor](#2-arquitectura-clienteservidor)
   - [2.1. Protocolo HTTP/HTTPS](#21-protocolo-httphttps)
-  - [2.2. Clientes web](#22-clientes-web)
-  - [2.3. Servidores web](#23-servidores-web)
-    - [2.3.1. Servidores de contenido estático](#231-servidores-de-contenido-estático)
-    - [2.3.2. Servidores de cómputo](#232-servidores-de-cómputo)
+  - [2.2. Peticiones HTTP y códigos de estado](#22-peticiones-http-y-códigos-de-estado)
+  - [2.3. Clientes web](#23-clientes-web)
+  - [2.4. Servidores web](#24-servidores-web)
+    - [2.4.1. Servidores de contenido estático](#241-servidores-de-contenido-estático)
+    - [2.4.2. Servidores de cómputo](#242-servidores-de-cómputo)
 - [3. Tecnologías para el backend](#3-tecnologías-para-el-backend)
   - [3.1. Lenguajes del lado del servidor](#31-lenguajes-del-lado-del-servidor)
   - [3.2. Frameworks del lado servidor](#32-frameworks-del-lado-servidor)
@@ -35,6 +36,7 @@
 - [8. Viajando al futuro, que ya es presente](#8-viajando-al-futuro-que-ya-es-presente)
   - [8.1. WebAssembly (Wasm)](#81-webassembly-wasm)
   - [8.2. Apps en Wasm](#82-apps-en-wasm)
+
 
 
 
@@ -172,18 +174,159 @@ El formato que siguen tanto las peticiones como las respuestas es el siguiente:
 
 ![request-response](assets/req-res.png)
 
-## 2.2. Clientes web
+## 2.2. Peticiones HTTP y códigos de estado
+
+Existen diversos tipos de [peticiones a un servidor](https://developer.mozilla.org/es/docs/Web/HTTP/Methods), también conocidas como **métodos** o verbos. Algunas de ellas son:
+
+- **GET**
+- **POST**
+- **PUT**
+- **DELETE**
+- ...
+
+Los [códigos de estado que devuelve el servidor](https://developer.mozilla.org/es/docs/Web/HTTP/Status) más habituales son:
+
+- **200 OK**
+- 201 Created
+- 204 No Content
+- 301 Moved Permanently
+- 400 Bad Request
+- 401 Unauthorized
+- 403 Forbidden
+- **404 Not Found**
+- 500 Internal Server Error
 
 
-## 2.3. Servidores web
+## 2.3. Clientes web
+
+El cliente web más ampliamente usado es el navegador web o *browser*. Este tipo de software interpreta y renderiza código HTML + CSS. HTML por si sólo permite únicamente realizar peticiones de tipo GET y POST (ésta última mediante el uso de un formulario)
+
+Para realizar todo tipo de peticiones (GET, POST, PUT, DELETE, ...) deberemos hacer uso de Javascript en el navegador.
+
+A continuación se muestra como realizar estas peticiones usando Javascript.
+
+
+```js 
+fetch('/api/clientes', { method: 'GET' })
+  .then ( res => res.json())
+  .then ( data => console.log(data) );
+
+fetch('/api/clientes/5b4916cb2100bc25330b6ac9', { method: 'GET' })
+  .then ( res => res.json())
+  .then ( data => console.log(data) );
+
+fetch('/api/clientes/5b49b5e33808be1b00b982e2', { method: 'DELETE' })
+  .then ( res => res.json())
+  .then ( data => console.log(data) );
 
 
 
-### 2.3.1. Servidores de contenido estático
+var cliente = { nombre: "Isabel", apellidos: "López" };
+
+fetch('/api/clientes', {
+  method: 'POST',
+  body: JSON.stringify(cliente), 
+  headers:{
+    'Content-Type': 'application/json'
+  }
+})
+  .then(res => res.json())
+  .then(data => console.log(data))
 
 
 
-### 2.3.2. Servidores de cómputo
+var cliente = { nombre: "Pepe", apellidos: "Pérez" };
+
+fetch('/api/clientes/5b4916cb2100bc25330b6ac9', {
+  method: 'PUT',
+  body: JSON.stringify(cliente), 
+  headers:{
+    'Content-Type': 'application/json'
+  }
+})
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+Ni Javascript es el único lenguaje, ni el navegador web es el único entorno, desde el que podemos utilizar los métodos HTTP. 
+
+Por ejemplo, podemos realizar peticiones HTTP usando multitud de aplicaciones:
+
+- Clientes para API: Postman, Insomnia, ...
+- Aplicaciones de terminal
+- Aplicaciones de escritorio
+- Otro tipo de aplicaciones
+
+Como ejemplo, se muestra como realizar peticiones HTTP desde la línea de comandos, con la herramienta `curl`:
+
+
+```sh
+# GET
+curl  http://localhost:3000/api/articulos
+curl -H 'Content-Type: application/json' \
+     -X GET http://localhost:3000/api/articulos
+
+# POST
+curl -H 'Content-Type: application/json' \
+     -X POST -d '{"nombre": "Botas de invierno","precio": 99.99}' \
+     http://localhost:3000/api/articulos
+
+# PUT
+curl -H 'Content-Type: application/json' \
+     -X PUT -d '{"nombre": "Paraguas","precio": 100.20}' \
+     http://localhost:3000/api/articulos/5b609c52c60bd6656205e3d7
+
+# DELETE
+curl -H 'Content-Type: application/json' \
+     -X DELETE http://localhost:3000/api/articulos/5b609c52c60bd6656205e3d7
+```
+
+- Referencia: [Comprobando la API](https://github.com/jamj2000/jamj2000.github.io/blob/701459e108598281b9d1cd1fd668ede7a7db16e2/hlc-fullstack/4/diapositivas.md#comprobando-la-api-1)
+
+
+## 2.4. Servidores web
+
+Un servidor web es el software encargado de recibir y responder a las peticiones de los clientes.
+
+Según su nivel de complejidad y recursos necesarios, podemos dividirlos en 2 tipos:
+
+- Servidores de contenido estático
+- Servidores de cómputo
+
+Por otro lado, también podemos diferenciar entre:
+
+1. Servidores generalistas: Apache, Tomcat, nginx, IIS.
+2. Servidores específicos de aplicación
+
+Los primeros se suelen usar con aplicaciones desarrolladas con lenguajes como PHP, Java, .Net.
+Los segundos suelen programarse específicamente para implementar el backend de una aplicación web desarrollada para Python, NodeJS.
+
+Tanto unos como otros pueden ofrecer tanto contenido estático como computo. 
+
+
+### 2.4.1. Servidores de contenido estático
+
+Estos servidores web son funcionalmente muy sencillos. Se limitan a atender las peticiones de los clientes y a servir el contenido estático solicitado por ellos: HTML, CSS y Javascript para ejecutar en el lado cliente. También sirven imágenes, fuentes, ...
+
+Suelen ser muy baratos e incluso gratuitos muchas veces. Se usan para desplegar sitios web y aplicaciones sencillas (del lado cliente). 
+
+Los servidores de computo, por otro lado, ofrecen la posibilidad de ejecutar código en el propio servidor, por lo cual suponen un mayor costo al proveedor tanto energético como en tiempo. Su complejidad y gestión también es menos simple. Aunque es posible encontrar algún que otro proveedor con un *free tier*, es habitual la necesidad de realizar un pago mensual.
+
+
+
+### 2.4.2. Servidores de cómputo
+
+Llamaremos servidores de cómputo a aquellos servidores que, antes de servir el contenido, realizan algún tipo de computo. Suele ser habitual la búsqueda y modificación de información en bases de datos y el posterior renderizado y envío de vistas al cliente (la mayoría de las veces es un navegador web). Otras operaciones que se realizan en el lado servidor suelen ser la gestión de la autenticación y autorización.
+
+Los lenguajes más utilizados para estos fines, sin ningún orden en particular, son:
+
+- PHP
+- Java / JSP
+- Python
+- NodeJS
+- ...
+
+Los servidores de computo se pueden clasificar en diferentes categorías. Las más habituales son las siguientes:
 
 
 ![iaas paas saas](assets/iaas-paas-saas.jpg)
