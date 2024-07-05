@@ -18,6 +18,7 @@
   - [3.1. Instalación de biblioteca](#31-instalación-de-biblioteca)
   - [3.2. Uso](#32-uso)
   - [3.3. Documentación](#33-documentación)
+  - [3.4. Caso práctico y truco](#34-caso-práctico-y-truco)
 - [4. Arrastrar y Soltar (Drag \& Drop)](#4-arrastrar-y-soltar-drag--drop)
   - [4.1. Instalación de biblioteca](#41-instalación-de-biblioteca)
   - [4.2. Uso](#42-uso)
@@ -52,6 +53,7 @@
   - [10.1. Instalación](#101-instalación)
   - [10.2. Uso](#102-uso)
   - [10.3. Documentación](#103-documentación)
+
 
 
 
@@ -179,6 +181,67 @@ Para cargar grandes cantidades de datos desde CSV a una BD consulta el siguiente
 - [Repositorio en Github](https://github.com/mholt/PapaParse?tab=readme-ov-file)
 
 
+## 3.4. Caso práctico y truco
+
+Si tenemos un archivo `localidades.csv` con los datos en formato CSV, podemos convertirlos fácilmente a datos JSON con algún conversor, como [csvjson.com](https://csvjson.com/) y guardarlos en un archivo `localidades.json`.
+
+Los datos CSV siguientes
+
+```csv
+"id","nombre","temp_ext_ver","hr_ext_ver","temp_ext_inv","hr_ext_inv","altitud","zona_climatica"
+1,"Álava (Vitoria / Aeropuerto de Foronda)",30.1,49,-2.4,96,508,"D"
+2,"Albacete (Los Llanos-Base Aérea)",34.2,25,-3,92.3,704,"D"
+3,"Albacete (Hellín)",36.7,27,1.5,70.4,520,"D"
+```
+
+se convertirán en los datos JSON siguientes
+
+```json
+[
+    {
+        "id": 1,
+        "nombre": "Álava (Vitoria / Aeropuerto de Foronda)",
+        "temp_ext_ver": 30.1,
+        "hr_ext_ver": 49,
+        "temp_ext_inv": -2.4,
+        "hr_ext_inv": 96,
+        "altitud": 508,
+        "zona_climatica": "D"
+    },
+    {
+        "id": 2,
+        "nombre": "Albacete (Los Llanos-Base Aérea)",
+        "temp_ext_ver": 34.2,
+        "hr_ext_ver": 25,
+        "temp_ext_inv": -3,
+        "hr_ext_inv": 92.3,
+        "altitud": 704,
+        "zona_climatica": "D"
+    },
+    {
+        "id": 3,
+        "nombre": "Albacete (Hellín)",
+        "temp_ext_ver": 36.7,
+        "hr_ext_ver": 27,
+        "temp_ext_inv": 1.5,
+        "hr_ext_inv": 70.4,
+        "altitud": 520,
+        "zona_climatica": "D"
+    }
+]
+```
+
+
+**NextJS tiene soporte nativo para datos JSON**. Por ejemplo, podemos hacer
+
+``` js
+import localidades from '@/lib/localidades.json'  
+
+// ...
+
+console.log( localidades.find ( localidad => localidad.id == 1 ) )  // Mostramos localidad con id 1
+```
+
 
 
 # 4. Arrastrar y Soltar (Drag & Drop)
@@ -196,10 +259,10 @@ La principal desventaja de que **DnD Kit** no use la API de arrastrar y soltar d
 Si el caso de uso de arrastrar y soltar que tiene en mente implica este tipo de funcionalidad, definitivamente querrá usar una biblioteca que esté construida sobre la API de arrastrar y soltar de HTML5. 
 Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd/about) para obtener una biblioteca de React que tenga un backend de arrastrar y soltar de HTML5 nativo.
 
-|            | Soporta pantallas táctiles  | DnD desde escritorio y entre ventanas  
-|------------|:---------------------------:|:-------------------------------------:
-|DnD Kit     |       ✓                     |   𐄂
-|React DnD   |       𐄂                     |   ✓
+|           | Soporta pantallas táctiles | DnD desde escritorio y entre ventanas |
+| --------- | :------------------------: | :-----------------------------------: |
+| DnD Kit   |             ✓              |                   𐄂                   |
+| React DnD |             𐄂              |                   ✓                   |
 
 
 ## 4.1. Instalación de biblioteca

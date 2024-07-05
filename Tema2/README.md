@@ -676,6 +676,11 @@ Existen numerosos plugins para VSCode que nos permiten adaptar el entorno de des
 Para cambiar el idioma de VSCode a español. 
 
 
+**Material Icon Theme**
+
+Permite mostrar un icono por cada carpeta y archivo.
+
+
 **ESLint**
 
 Para hacer *lint* de Javascript.
@@ -692,6 +697,16 @@ Para mostrar los errores en la línea en la que ocurren.
 Este plugin puede considerarse opcional, según el caso. De cualquier modo, una vez instalado, puede deshabilitarse si lo consideramos intrusivo.
 
 
+**Console Ninja**
+
+Este plugin es opcional, pero recomendado para realizar tareas de depuración de código. Nos permite mostrar dentro del propio VSCode los mensajes producidos por `console.log()` sin tener que recurrir al terminal constantemente.
+
+
+**REST Client**
+
+Este plugin es opcional. Es útil cuando deseamos *testear endpoints* de una API REST.
+
+
 **Svg Preview**
 
 Este plugin es opcional, pero recomendado si trabajamos con imagenes vectoriales `.svg`. Permite su visualización gráfica.
@@ -705,6 +720,17 @@ Este plugin es opcional, pero recomendado si trabajamos con Markdown. Permite nu
 **ES7+ React/Redux/React-Native snippets**
 
 Este plugin es opcional, pero recomendado si trabajamos con React y/o NextJS.
+
+
+**Prisma**
+
+Este plugin es opcional. Recomendado si trabajamos con ORM Prisma.
+
+
+**Tailwind CSS IntelliSense** y **Tailwind Fold**
+
+Plugins opcionales. Recomentados si trabajamos con framework CSS Tailwind.
+
 
 
 
