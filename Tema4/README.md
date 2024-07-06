@@ -1604,7 +1604,7 @@ const page = () => {
 export default page
 ```
 
-y el usuario visita la URL `http://localhost:3000/product/laptop?provider=HP&screen=15, entonces obtendrá el siguiente resultado
+y el usuario visita la URL `http://localhost:3000/product/laptop?provider=HP&screen=15`, entonces obtendrá el siguiente resultado
 
 ```
 Ruta: /product/laptop
