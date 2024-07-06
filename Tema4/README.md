@@ -1575,29 +1575,44 @@ Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
 Para obtener los parámetros de ruta y los de consulta en el lado cliente, deberemos usar los hooks **`useParams`** y **`useSearchParams`**. También disponemos del hook `usePathname`, que nos devuelve la ruta (incluyento los parámetros de ruta, si existen) 
 
+Por ejemplo, si tenemos la página `src/app/product/[name]/page.js` con el siguiente código:
+
 ```js
 'use client'
 import { usePathname, useParams, useSearchParams } from 'next/navigation';
 
-export default page = () => {
+const page = () => {
   const pathname = usePathname();
-  const { projectId } = useParams();
+  const { name } = useParams();
   const searchParams = useSearchParams();
-  
-  const paramValue = searchParams.get('paramName');
+
+  const provider = searchParams.get('provider');
+  const screen = searchParams.get('screen');
+
+  console.log(pathname);
 
   return (
     <>
-      <div>
-       Current Path: {location.pathname}
-      </div>
-      <div>
-        Project ID: {projectId}
-      </div>;
+      <p> Ruta: {pathname} </p>
+      <p> Parámetro de ruta: name -&gt; {name} </p>
+      <p> Parámetro de consulta: provider -&gt; {provider} </p>
+      <p> Parámetro de consulta: screen -&gt; {screen}  </p>
     </>
   )
 };
+
+export default page
 ```
+
+y el usuario visita la URL `http://localhost:3000/product/laptop?provider=HP&screen=15, entonces obtendrá el siguiente resultado
+
+```
+Ruta: /product/laptop
+Parámetro de ruta: name -> laptop
+Parámetro de consulta: provider -> HP
+Parámetro de consulta: screen -> 15
+```
+
 
 
 # 10. Referencias
