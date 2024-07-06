@@ -1589,8 +1589,6 @@ const page = () => {
   const provider = searchParams.get('provider');
   const screen = searchParams.get('screen');
 
-  console.log(pathname);
-
   return (
     <>
       <p> Ruta: {pathname} </p>
