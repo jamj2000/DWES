@@ -1573,12 +1573,14 @@ Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
 
 # 9. ANEXO: Parámetros de ruta y consulta en página de cliente
 
+Para obtener los parámetros de ruta y los de consulta en el lado cliente, deberemos usar los hooks **`useParams`** y **`useSearchParams`**. También disponemos del hook `usePathname`, que nos devuelve la ruta (incluyento los parámetros de ruta, si existen) 
+
 ```js
 'use client'
-import { useLocation, useParams, useSearchParams } from 'next/navigation';
+import { usePathname, useParams, useSearchParams } from 'next/navigation';
 
-export default const page = () => {
-  const location = useLocation();
+export default page = () => {
+  const pathname = usePathname();
   const { projectId } = useParams();
   const searchParams = useSearchParams();
   
