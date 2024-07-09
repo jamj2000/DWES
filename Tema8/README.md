@@ -648,6 +648,7 @@ const options = {
     session: { strategy: "jwt" },
     callbacks: {
         async session({ session, token }) {
+            session.user.id = token?.sub;     // Para recuperar ID de usuario desde el token
             session.user.role = token?.role
             return session
         },
@@ -912,7 +913,7 @@ export const options = {
     },
     callbacks: {
         async session({ session, token }) {
-            // console.log(session, user);
+            session.user.id = token?.sub;     // Para recuperar ID de usuario desde el token
             session.user.role = token?.role
             return session
         },
