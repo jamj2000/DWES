@@ -53,7 +53,7 @@
   - [10.1. Instalación](#101-instalación)
   - [10.2. Uso](#102-uso)
   - [10.3. Documentación](#103-documentación)
-
+    
 
 
 
@@ -241,6 +241,8 @@ import localidades from '@/lib/localidades.json'
 
 console.log( localidades.find ( localidad => localidad.id == 1 ) )  // Mostramos localidad con id 1
 ```
+
+De esta forma tan sencilla, nos ahorramos tener que usar papaparse, y así reducir dependencias y simplificar el desarrollo.
 
 
 
