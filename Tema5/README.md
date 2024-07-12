@@ -620,7 +620,7 @@ export default Form (  ) {
 > De la misma manera, tampoco se lanzarán las acciones de los componentes `button` que estén dentro de dicho componente.
 
 
-> **NOTA:** La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.
+> **NOTA:** La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
 ### 3.5.6. Usa **`select`** correctamente
@@ -664,7 +664,6 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 
 
 - Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
-
 
 
 #  4. Validación de datos
