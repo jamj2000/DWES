@@ -25,6 +25,7 @@
     - [3.5.3. Usa **`label`** correctamente](#353-usa-label-correctamente)
     - [3.5.4. Usa **`defaultValue`** y **`value`** correctamente](#354-usa-defaultvalue-y-value-correctamente)
     - [3.5.5. Usa **`disabled`** y **`readOnly`** correctamente](#355-usa-disabled-y-readonly-correctamente)
+    - [3.5.6. Usa **`select`** correctamente](#356-usa-select-correctamente)
 - [4. Validación de datos](#4-validación-de-datos)
   - [4.1. Validación en el cliente](#41-validación-en-el-cliente)
   - [4.2. Validación en el servidor](#42-validación-en-el-servidor)
@@ -581,16 +582,16 @@ export default Form (  ) {
    <form action={action}>
               <label> Número 1:
                 <input  type="number"  name="num1"  step={0.01}
-                  defaultValue={1}   
+                  defaultValue={ 1 }   
                 />
               </label>
 
               <label> Número 2:
                 <input  type="number"  name="num2"  step={0.01}
-                  defaultValue={2}
+                  defaultValue={ 2 }
                   readOnly         // Valor no modificable. SÍ se envía al servidor                      
                 />
-              </label>
+              </label>  
 
               <label> Número 3:
                 <input  type="number"  name="num3"  step={0.01} 
@@ -603,7 +604,6 @@ export default Form (  ) {
     </form>
   )
 }
-
 ```
 
 
@@ -612,6 +612,58 @@ export default Form (  ) {
 > El componente `fieldset` también admite la propiedad `disabled`. A menudo esto es útil para deshabilitar un grupo de inputs. Sin embargo tiene el inconveniente de que los valores de los *inputs* dentro del *fieldset disabled* no serán enviados al servidor.
 > 
 > El componente `fieldset` no admite la propiedad `readOnly`. 
+
+>**IMPORTANTE:**
+>
+> Recuerda que los valores de los componentes `input`, `select`, `textarea`, ... no se enviarán al servidor si están dentro de un `fieldset disabled`. 
+> 
+> De la misma manera, tampoco se lanzarán las acciones de los componentes `button` que estén dentro de dicho componente.
+
+
+> **NOTA:** La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.
+
+
+### 3.5.6. Usa **`select`** correctamente
+
+Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
+
+En HTML hacemos
+
+```html
+<select name="localidad">
+      <option value="1"> Álava </option>
+      <option value="2"> Albacete </option>
+      <option value="3" selected> Almeria </option>
+      <option value="4"> Ávila </option>
+</select>
+```
+
+En JSX debemos hacer
+
+```js
+<select name="localidad" defaultValue={3} >
+      <option value={1}> Álava </option>
+      <option value={2}> Albacete </option>
+      <option value={3}> Almeria </option>
+      <option value={4}> Ávila </option>
+</select>
+```
+A diferencia de HTML, no se admite pasar el atributo `selected` a `option`. Para indicar la opción seleccionada por defecto usamos `defaultValue`.
+
+Por otro lado, cuando usamos array de objetos y los recorremos con el método `map`, el formato a seguir es el que aparece a continuación:
+
+```js
+<select name="localidad" defaultValue={localidad} >
+      {localidades.map(localidad => (
+        <option key={localidad.id} value={localidad.id}> {localidad.nombre} </option>
+      ))}
+</select>
+```
+
+> **IMPORTANTE:** Observa que está MAL poner `defaultValue={localidad.id}`.
+
+
+- Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
 
 
 
@@ -650,8 +702,10 @@ La validación de restricciones HTML se basa en:
 | Atributo   | Descripción                                      |
 | ---------- | ------------------------------------------------ |
 | `disabled` | el elemento de entrada debe estar deshabilitado  |
+| `readonly` | el elemento de entrada debe ser solo-lectura     |
 | `max`      | el valor máximo de un elemento de entrada        |
 | `min`      | el valor mínimo de un elemento de entrada        |
+| `step`     | el paso entre 2 valores consecutivos             |
 | `pattern`  | el patrón de valor de un elemento de entrada     |
 | `required` | el campo de entrada requiere un valor de entrada |
 | `type`     | el tipo de un elemento de entrada                |
@@ -662,6 +716,7 @@ La validación de restricciones HTML se basa en:
 | Selector    | Descripción                                                    |
 | ----------- | -------------------------------------------------------------- |
 | `:disabled` | Selecciona elementos de entrada con el atributo "disabled"     |
+| `:read-only`| Selecciona elementos de entrada con el atributo "readonly"     |
 | `:invalid`  | Selecciona elementos de entrada con valores no válido          |
 | `:optional` | Selecciona elementos de entrada sin ningún atributo "required" |
 | `:required` | Selecciona elementos de entrada con el atributo "required"     |
