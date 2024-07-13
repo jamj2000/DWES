@@ -652,17 +652,18 @@ A diferencia de HTML, no se admite pasar el atributo `selected` a `option`. Para
 
 Por otro lado, cuando usamos array de objetos y los recorremos con el método `map`, el formato a seguir es el que aparece a continuación:
 
+
 ```js
-<select name="localidad" defaultValue={localidad} >
+const localidadId = 1 
+ 
+<select name="localidad" defaultValue={localidadId} >
       {localidades.map(localidad => (
         <option key={localidad.id} value={localidad.id}> {localidad.nombre} </option>
       ))}
 </select>
 ```
 
-> **IMPORTANTE:** Observa que está MAL poner `defaultValue={localidad.id}`.
-
-
+      
 - Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
 
 
