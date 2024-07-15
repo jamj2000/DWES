@@ -521,10 +521,10 @@ La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `d
 
 A continuación tienes los contextos en los que se usa cada propiedad:
 
-| Propiedad      | Contexto                                                                           |
-| -------------- | ---------------------------------------------------------------------------------- |
-| `defaultValue` | Para valores base. Modificables por el usuario. Estados en React                   |
-| `value`        | Para valores derivados. No modificables por el usuario. Estados derivados en React |
+| Propiedad      | Contexto                                                    |
+| -------------- | ----------------------------------------------------------- |
+| **`value`**    | Para valores asociados a una variable de **estado**         |
+| `defaultValue` | Para valores no asociados a una variable de estado concreta |
 
 
 Ejemplo:
@@ -532,34 +532,35 @@ Ejemplo:
 
 ```js
 'use client'
+import { useState } from 'react';
 
-export default Cuadrado ( { long, width } ) {
 
-  const [largo, setLargo] = useState( long )
-  const [ancho, setAncho] = useState( width )
+export default function Cuadrado({ long, width }) {
 
-  return (
-    <form action={action}>
-             <label> Largo:
-                <input  type="number"  name="largo"  step={0.01}
-                  onChange={(e) => setLargo(e.target.value)}
-                  defaultValue={largo}   // Correcto. Valor base
+    const [largo, setLargo] = useState(long)
+    const [ancho, setAncho] = useState(width)
+
+    return (
+        <form>
+            <label> Largo:
+                <input type="number" name="largo" step={0.01}
+                    onChange={(e) => setLargo(e.target.value)}
+                    value={largo}                              // Correcto. Variable de estado
                 />
-              </label>
-              <label> Ancho:
-                <input  type="number"  name="ancho"  step={0.01}
-                  onChange={(e) => setAncho(e.target.value)}
-                  defaultValue={ancho}  // Correcto. Valor base                          
+            </label>
+            <label> Ancho:
+                <input type="number" name="ancho" step={0.01}
+                    onChange={(e) => setAncho(e.target.value)}
+                    value={ancho}                              // Correcto. Variable de estado
                 />
-              </label>
-               <label> Área:
-                <input  type="number"  name="area"  readOnly
-                  value={ largo * ancho }  // Correcto. Valor derivado
-                />  
-              </label>
-              <button type="submit"> </button>
-    </form>
-  )
+            </label>
+            <label> Área:
+                <input type="number" name="area" readOnly
+                    defaultValue={largo * ancho}               // Correcto. 
+                />
+            </label>
+        </form>
+    )
 }
 ```
 
@@ -567,9 +568,9 @@ export default Cuadrado ( { long, width } ) {
 >
 > React, y por tanto JSX, distingue entre **entradas controladas** y **entradas no controladas**.
 > 
-> Una entrada como `<input />` no está controlada. Incluso si pasa un valor inicial como `<input defaultValue="Initial text" />`, JSX solo especifica el valor inicial. No controla cuál debería ser el valor en este momento.      
+> Una entrada como `<input />` no está controlada. Incluso si pasamos un valor inicial como `<input defaultValue="Initial text" />`, JSX solo especifica el valor inicial. No controla cuál debería ser el valor en otro momento.      
 >
-> Para representar una **entrada controlada**, pásele la propiedad **`value`** (o `checked` para los checkbox y radio). React forzará que la entrada tenga siempre el valor que pasaste. Normalmente, esto se hace pasando una variable de estado (habitualmente actualizada con un gestor de eventos). Ejemplo:
+> Para representar una **entrada controlada**, le pasamos la propiedad **`value`** (o `checked` para los checkbox y radio). React forzará que la entrada coincida siempre con dicho valor. Este valor se guarda en una variable de estado, que es actualizada  con un gestor de eventos. Ejemplo:
 >
 > ```js
 >function Form() {
@@ -737,14 +738,14 @@ La validación de restricciones HTML se basa en:
 
 **Pseudoselectores CSS**
 
-| Selector    | Descripción                                                    |
-| ----------- | -------------------------------------------------------------- |
-| `:disabled` | Selecciona elementos de entrada con el atributo "disabled"     |
-| `:read-only`| Selecciona elementos de entrada con el atributo "readonly"     |
-| `:invalid`  | Selecciona elementos de entrada con valores no válido          |
-| `:optional` | Selecciona elementos de entrada sin ningún atributo "required" |
-| `:required` | Selecciona elementos de entrada con el atributo "required"     |
-| `:valid`    | Selecciona elementos de entrada con valores válidos.           |
+| Selector     | Descripción                                                    |
+| ------------ | -------------------------------------------------------------- |
+| `:disabled`  | Selecciona elementos de entrada con el atributo "disabled"     |
+| `:read-only` | Selecciona elementos de entrada con el atributo "readonly"     |
+| `:invalid`   | Selecciona elementos de entrada con valores no válido          |
+| `:optional`  | Selecciona elementos de entrada sin ningún atributo "required" |
+| `:required`  | Selecciona elementos de entrada con el atributo "required"     |
+| `:valid`     | Selecciona elementos de entrada con valores válidos.           |
 
 
 ## 4.2. Validación en el servidor
