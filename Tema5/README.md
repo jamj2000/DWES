@@ -563,6 +563,30 @@ export default Cuadrado ( { long, width } ) {
 }
 ```
 
+> **NOTA:**
+>
+> React, y por tanto JSX, distingue entre **entradas controladas** y **entradas no controladas**.
+> 
+> Una entrada como `<input />` no está controlada. Incluso si pasa un valor inicial como `<input defaultValue="Initial text" />`, JSX solo especifica el valor inicial. No controla cuál debería ser el valor en este momento.
+>
+> Para representar una **entrada controlada**, pásele la propiedad **`value`** (o `checked` para los checkbox y radio). React forzará que la entrada tenga siempre el valor que pasaste. Normalmente, esto se hace pasando una variable de estado (habitualmente actualizada con un gestor de eventos). Ejemplo:
+>
+> ```js
+>function Form() {
+>  const [firstName, setFirstName] = useState(''); // Declaramos variable de estado ...
+>  // ...
+>  return (
+>    <input
+>      // ...forzamos que el valor del input value coincida con el la variable de estado...
+>      value={firstName} 
+>      // ... y actualizamos la variable de estado en cada cambio
+>      onChange={e => setFirstName(e.target.value)}
+>    />
+>  );
+>}
+>```
+>
+> Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
 ### 3.5.5. Usa **`disabled`** y **`readOnly`** correctamente
 
