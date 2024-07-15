@@ -558,7 +558,7 @@ export default function Cuadrado({ long, width }) {
                 <input type="number" name="area" readOnly
                     defaultValue={largo * ancho}               // Correcto. 
                 />
-            </label>
+            </label>  
         </form>
     )
 }
