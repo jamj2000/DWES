@@ -23,8 +23,10 @@
 - [3. Linter para Javascript (y también para CSS)](#3-linter-para-javascript-y-también-para-css)
 - [4. Configuración de usuario en VSCode](#4-configuración-de-usuario-en-vscode)
   - [4.1. Archivo settings.json](#41-archivo-settingsjson)
-  - [4.2. Plugins](#42-plugins)
+  - [4.2. Archivo keybindings.json](#42-archivo-keybindingsjson)
+  - [4.3. Plugins](#43-plugins)
 - [5. Referencias](#5-referencias)
+
 
 
 
@@ -666,8 +668,31 @@ Básicamente, la configuración hace lo siguiente:
 > - Tener el plugin Stylelint instalado en VSCode
 
 
+## 4.2. Archivo keybindings.json
 
-## 4.2. Plugins
+La configuración de usuario para atajos de teclado se guarda en un archivo **`keybindings.json`**, dentro de la carpeta del usuario, en la subcarpeta `.config/Code/User`.
+
+
+Por ejemplo, mi configuración es la siguiente:
+
+```json
+// Coloque sus atajos de teclado en este archivo para sobreescribir los valores predeterminados
+[
+    {
+        "key": "ctrl+l",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus",
+        "args": {
+          "snippet": "console.log(${TM_SELECTED_TEXT}$1);"
+        }
+      }
+]
+```
+
+Esta configuración me permite seleccionar un texto o variable y envolverla dentro de `console.log`. Es muy útil para realizar tareas de depuración.
+
+
+## 4.3. Plugins
 
 Existen numerosos plugins para VSCode que nos permiten adaptar el entorno de desarrollo a nuestras necesidades. Para el desarrollo web suelen ser habituales, aunque pueden instalarse muchos otros, los siguientes:
 
