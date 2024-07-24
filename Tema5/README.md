@@ -524,7 +524,7 @@ A continuación tienes los contextos en los que se usa cada propiedad:
 | Propiedad      | Contexto                                                    |
 | -------------- | ----------------------------------------------------------- |
 | **`value`**    | Para valores asociados a una variable de **estado**         |
-| `defaultValue` | Para valores no asociados a una variable de estado concreta |
+| `defaultValue` | Para valores no asociados a una variable de estado          |
 
 
 Ejemplo:
@@ -543,6 +543,11 @@ export default function Cuadrado({ long, width }) {
     return (
         <form>
             <label> Largo:
+                <input type="number" name="escala" step={0.01}
+                    defaultValue={1}                          // Correcto. No asociado a variable de estado   
+                />
+            </label>
+            <label> Largo:
                 <input type="number" name="largo" step={0.01}
                     onChange={(e) => setLargo(e.target.value)}
                     value={largo}                              // Correcto. Variable de estado
@@ -556,7 +561,8 @@ export default function Cuadrado({ long, width }) {
             </label>
             <label> Área:
                 <input type="number" name="area" readOnly
-                    defaultValue={largo * ancho}               // Correcto. 
+                    value={largo * ancho}                      // Correcto. Valor derivado del estado
+                    onChange={() => {}}
                 />
             </label>  
         </form>
