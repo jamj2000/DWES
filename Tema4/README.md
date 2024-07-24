@@ -1486,7 +1486,7 @@ import { cookies } from 'next/headers'
 
 const oneDay = 1000 * 60 * 60 * 24  // ms
 
-async function createCookies() {
+async function createCookie() {
   cookies().set('usuario', 'jose')
   // o
   cookies().set('usuario', 'jose', { secure: true })
@@ -1563,7 +1563,7 @@ export default function Page() {
  
 import { cookies } from 'next/headers'
  
-async function deleteCookies() {
+async function deleteCookie() {
   cookies().delete('usuario')
 }
 ```
