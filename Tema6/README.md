@@ -18,31 +18,35 @@
 - [3. SQLite](#3-sqlite)
   - [3.1. Proyecto](#31-proyecto)
   - [3.2. Otros aspectos](#32-otros-aspectos)
-- [4. Postgres (Vercel)](#4-postgres-vercel)
+- [4. Postgres](#4-postgres)
   - [4.1. Proyecto](#41-proyecto)
   - [4.2. Otros aspectos](#42-otros-aspectos)
-- [5. Primeros pasos con ORM Prisma](#5-primeros-pasos-con-orm-prisma)
-  - [5.1. Instalación del paquete prisma](#51-instalación-del-paquete-prisma)
-  - [5.2. Comandos disponibles](#52-comandos-disponibles)
-  - [5.3. Inicialización](#53-inicialización)
-- [6. Definiendo el Modelo de Datos](#6-definiendo-el-modelo-de-datos)
-  - [6.1. Generar el modelo de datos mediante introspección](#61-generar-el-modelo-de-datos-mediante-introspección)
-  - [6.2. Escribir el modelo de datos manualmente](#62-escribir-el-modelo-de-datos-manualmente)
-    - [6.2.1. Modelos](#621-modelos)
-    - [6.2.2. Relaciones](#622-relaciones)
-    - [6.2.3. Sincronizando el esquema con la base de datos](#623-sincronizando-el-esquema-con-la-base-de-datos)
-- [7. Consultas CRUD](#7-consultas-crud)
-  - [7.1. CRUD](#71-crud)
-    - [7.1.1. Create](#711-create)
-    - [7.1.2. Read](#712-read)
-    - [7.1.3. Update](#713-update)
-    - [7.1.4. Delete](#714-delete)
-  - [7.2. Seleccionar campos](#72-seleccionar-campos)
-  - [7.3. Consultar varias tablas](#73-consultar-varias-tablas)
-- [8. Ver datos de las tablas](#8-ver-datos-de-las-tablas)
-- [9. Despliegue en Vercel](#9-despliegue-en-vercel)
-- [10. ANEXO: CRUD en una única página](#10-anexo-crud-en-una-única-página)
-- [11. Referencias](#11-referencias)
+- [5. Postgres (Vercel)](#5-postgres-vercel)
+  - [5.1. Proyecto](#51-proyecto)
+  - [5.2. Otros aspectos](#52-otros-aspectos)
+- [6. Primeros pasos con ORM Prisma](#6-primeros-pasos-con-orm-prisma)
+  - [6.1. Instalación del paquete prisma](#61-instalación-del-paquete-prisma)
+  - [6.2. Comandos disponibles](#62-comandos-disponibles)
+  - [6.3. Inicialización](#63-inicialización)
+- [7. Definiendo el Modelo de Datos](#7-definiendo-el-modelo-de-datos)
+  - [7.1. Generar el modelo de datos mediante introspección](#71-generar-el-modelo-de-datos-mediante-introspección)
+  - [7.2. Escribir el modelo de datos manualmente](#72-escribir-el-modelo-de-datos-manualmente)
+    - [7.2.1. Modelos](#721-modelos)
+    - [7.2.2. Relaciones](#722-relaciones)
+    - [7.2.3. Sincronizando el esquema con la base de datos](#723-sincronizando-el-esquema-con-la-base-de-datos)
+- [8. Consultas CRUD](#8-consultas-crud)
+  - [8.1. CRUD](#81-crud)
+    - [8.1.1. Create](#811-create)
+    - [8.1.2. Read](#812-read)
+    - [8.1.3. Update](#813-update)
+    - [8.1.4. Delete](#814-delete)
+  - [8.2. Seleccionar campos](#82-seleccionar-campos)
+  - [8.3. Consultar varias tablas](#83-consultar-varias-tablas)
+- [9. Ver datos de las tablas](#9-ver-datos-de-las-tablas)
+- [10. Despliegue en Vercel](#10-despliegue-en-vercel)
+- [11. ANEXO: CRUD en una única página](#11-anexo-crud-en-una-única-página)
+- [12. Referencias](#12-referencias)
+
 
 
 
@@ -364,9 +368,7 @@ export async function deleteArticulo(formData) {
 SQLite nos permite trabajar sin necesidad de instalar un SGBD, puesto que trabaja directamente con el archivo en disco. Por tanto, esta base de datos es muy adecuada cuando deseamos realizar pruebas sin la necesidad de instalar un sistema gestor de bases de datos.
 
 
-
-
-# 4. Postgres (Vercel)
+# 4. Postgres
 
 [Postgres](https://es.wikipedia.org/wiki/PostgreSQL) es un sistema gestor de bases de datos que está ganando bastante aceptación últimamente. Esto es debido principalmente a numerosos factores:
 
@@ -377,17 +379,14 @@ SQLite nos permite trabajar sin necesidad de instalar un SGBD, puesto que trabaj
 - Existe bastante documentación.
 - Cada vez existen más proveedores en la nube de este DBaaS.
 
-Aunque usaremos la base de datos Postgres proporcionada por [Vercel](https://vercel.com/docs/storage/vercel-postgres), también disponemos de otras como [Neon.tech](https://neon.tech/) o [Supabase](https://supabase.com/docs/guides/database/overviews)
-
-Para trabajar con él los haremos con el driver **`@vercel/postgres`** y usando el [DBaaS proporcionado por Vercel](https://vercel.com/storage/postgres).
+Para trabajar con él los haremos con el driver **`pg`** y usando un entorno de desarrollo local, es decir un servidor de base de datos en `localhost:5432`.
 
 
 ## 4.1. Proyecto
 
-
 La estructura del proyecto es la siguiente:
 
-![Archivos de CRUD Postgres](assets/tree-postgres-crud.png)
+![Archivos de CRUD MySQL](assets/tree-postgres-crud.png)
 
 El código fuente completo puede obtenerse desde el siguiente enlace:
 
@@ -395,9 +394,143 @@ El código fuente completo puede obtenerse desde el siguiente enlace:
 
 Los archivos directamente relacionados con la Base de Datos, son:
 
+- `src/database/config.mjs`
+- `src/database/seed.mjs`
+- `src/lib/postgres.js`
+- `src/lib/actions.js`
+
+
+```javascript
+// src/database/seed.mjs
+import pg from 'pg'
+import config from './config.mjs'
+
+const { Client } = pg
+const client = new Client(config)
+
+
+const load = async () => {
+    try {
+        await client.connect()
+
+        let result = await client.query(`
+        CREATE TABLE IF NOT EXISTS articulos (
+            id SERIAL PRIMARY KEY,
+            nombre TEXT NOT NULL,
+            descripcion TEXT,
+            precio DECIMAL(10,2)
+            );
+        `)
+        console.log("Creada tabla artículos");
+
+        result = await client.query(`
+        INSERT INTO articulos (nombre, descripcion, precio)
+        VALUES 
+           ('PC', 'Ordenador de sobremesa', 999.99),
+           ('Impresora', 'Impresora Epson', 55.99),
+           ('Teclado', 'Teclado USB', 19.91);
+        `)
+        console.log("Insertados varios artículos");
+
+    } catch (error) {
+        console.log(error);
+    } finally {
+        await client.end()
+    }
+}
+
+load()
+```
+
+```javascript
+// src/database/config.mjs
+const config = {
+    user: 'postgres',
+    password: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    database: 'postgres',
+}
+
+export default config
+```
+
+```javascript
+'use server'
+// src/lib/actions.js
+import { pool } from '@vercel/postgres';
+
+
+export async function getArticulos() {
+
+    // ...
+    const results = await pool.query('select * from articulos');
+    // ...
+
+}
+
+export async function newArticulo(formData) {
+
+    // ...
+    const query = 'insert into articulos(nombre,descripcion,precio) values ($1, $2, $3)';
+    const results = await pool.query(query, [nombre, descripcion, precio]);
+    // ...
+
+}
+
+
+export async function editArticulo(formData) {
+
+    // ...
+    const query = 'update articulos set nombre=$1, descripcion=$2, precio=$3 where id=$4';
+    const results = await pool.query(query, [nombre, descripcion, precio, id]);
+    // ...
+
+}
+
+export async function deleteArticulo(formData) {
+
+    // ...
+    const query = 'delete from articulos where id=$1';
+    const results = await pool.query(query, [id]);
+    // ...
+
+}
+```
+
+
+## 4.2. Otros aspectos
+
+[El driver *`pg`* es uno de los más descargados](https://www.npmjs.com/package/pg), con más de 5M de descargas semanales. Este driver permite disponer de un **pool** (o grupo de conexiones) de conexiones, lo cual es muy útil cuando estamos trabajando en una aplicación web u otro software que realiza consultas frecuentes. 
+
+Otro driver similar es [`postgres`](https://www.npmjs.com/package/postgres), aunque con muchas menos descargas.
+
+
+
+# 5. Postgres (Vercel)
+
+A diferencia del apartado anterior, en el que hemos trabajado con Postgres en un entorno local, en este apartado usaremos Postgres en la nube.
+
+Aunque usaremos la base de datos Postgres proporcionada por [Vercel](https://vercel.com/docs/storage/vercel-postgres), también disponemos de otras como [Neon.tech](https://neon.tech/) o [Supabase](https://supabase.com/docs/guides/database/overviews)
+
+Para trabajar con él los haremos con el driver **`@vercel/postgres`** y usando el [DBaaS proporcionado por Vercel](https://vercel.com/storage/postgres).
+
+
+## 5.1. Proyecto
+
+
+La estructura del proyecto es la siguiente:
+
+![Archivos de CRUD Postgres](assets/tree-postgres-crud-vercel.png)
+
+El código fuente completo puede obtenerse desde el siguiente enlace:
+
+- [Código fuente](https://github.com/jamj2000/nxpostgres-crud-vercel)
+
+Los archivos directamente relacionados con la Base de Datos, son:
+
 - `.env`
-- `src/database/.env`
-- `src/database/db.js`
+- `src/database/seed.mjs`
 - `src/lib/actions.js`
 
 El driver `@vercel/postgres` trabaja con la variable de entorno `POSTGRES_URL`, por lo tanto es importante que la indiquemos en el archivo **`.env`**, en este caso lo haremos en 2 sitios con el mismo formato:
@@ -407,27 +540,39 @@ POSTGRES_URL="postgres://usuario:password@host:5432/basedatos"
 ```
 
 ```javascript
-// src/database/db.js
+// src/database/seed.mjs
 import { sql } from '@vercel/postgres';
 
-async function crearTabla() {
+
+const load = async () => {
     try {
-        const result = await sql`
+        let result = await sql`
         CREATE TABLE IF NOT EXISTS articulos (
             id SERIAL PRIMARY KEY,
             nombre TEXT NOT NULL,
             descripcion TEXT,
-            precio DECIMAL(10,2),
-            createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
+            precio DECIMAL(10,2)
+            );
         `;
-        console.log(result);
+        console.log("Creada tabla artículos");
+
+        result = await sql`
+        INSERT INTO articulos (nombre, descripcion, precio)
+        VALUES 
+           ('PC', 'Ordenador de sobremesa', 999.99),
+           ('Impresora', 'Impresora Epson', 55.99),
+           ('Teclado', 'Teclado USB', 19.91);
+        `;
+        console.log("Insertados varios artículos");
+
+        await sql.end()
+
     } catch (error) {
         console.log(error);
     }
 }
 
-crearTabla();
+load();
 ```
 
 
@@ -476,7 +621,7 @@ export async function deleteArticulo(formData) {
 ```
 
 
-## 4.2. Otros aspectos
+## 5.2. Otros aspectos
 
 Por supuesto, un prerrequisito para que todo ello funcione es tener creada una base de datos en Vercel. Puedes hacerlo desde tu `dashboard` en `Add New...`, `Storage`.
 
@@ -498,7 +643,7 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 
 
 
-# 5. Primeros pasos con ORM Prisma
+# 6. Primeros pasos con ORM Prisma
 
 Un **ORM**, o **Object Relational Mapper**, es una pieza de software diseñada para traducir entre las representaciones de datos utilizadas por las bases de datos y las utilizadas en la programación orientada a objetos.
 
@@ -531,18 +676,18 @@ En general, las tareas básicas a la hora de gestionar la persistencia de datos 
 Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
 
 
-## 5.1. Instalación del paquete prisma
+## 6.1. Instalación del paquete prisma
 
 ```sh 
 npm install prisma -D
 npm install @prisma/client
 ``` 
 
-## 5.2. Comandos disponibles
+## 6.2. Comandos disponibles
 
 `npx prisma`
 
-## 5.3. Inicialización
+## 6.3. Inicialización
 
 `npx prisma init`
 
@@ -598,7 +743,7 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 > `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>'`
 
 
-# 6. Definiendo el Modelo de Datos
+# 7. Definiendo el Modelo de Datos
 
 Hay dos formas alternativas de definir un modelo de datos:
 
@@ -610,7 +755,7 @@ Hay dos formas alternativas de definir un modelo de datos:
 Nosotros usaremos la segunda forma, aunque se explica la primera forma de forma somera a continuación.
 
 
-## 6.1. Generar el modelo de datos mediante introspección
+## 7.1. Generar el modelo de datos mediante introspección
 
 En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, generaremos el modelo a partir de dichas tablas. Para ello ejecutamos:
 
@@ -626,7 +771,7 @@ npx prisma generate
 ![prisma generate](assets/generate.png)
 
 
-## 6.2. Escribir el modelo de datos manualmente
+## 7.2. Escribir el modelo de datos manualmente
 
 En este otro caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
 
@@ -643,7 +788,7 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 ![prisma migrate con cambios](assets/migrate-dev2.png)
 
 
-### 6.2.1. Modelos
+### 7.2.1. Modelos
 
 - [Modelos en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/models)
 
@@ -718,7 +863,7 @@ CockroachDB	| STRING        |BOOL        | INT      | INTEGER   | DOUBLE PRECISI
 
 
 
-### 6.2.2. Relaciones 
+### 7.2.2. Relaciones 
 
 - [Relaciones en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations)
 
@@ -818,7 +963,7 @@ model Category {
 Esto se conoce como relación implícita de muchos a muchos. Esta relación todavía se manifiesta en una tabla de relaciones en la base de datos subyacente. Sin embargo, Prisma gestiona esta tabla de relaciones.
 
 
-### 6.2.3. Sincronizando el esquema con la base de datos
+### 7.2.3. Sincronizando el esquema con la base de datos
 
 
 Siempre que actualices tu esquema Prisma, deberás actualizar el esquema de tu base de datos utilizando `npx prisma migrate dev` o `npx prisma db push`. Esto mantendrá el esquema de tu base de datos sincronizado con tu esquema Prisma. Los comandos también regenerarán Prisma Client.
@@ -840,11 +985,11 @@ npx prisma db push
 > **IMPORTANTE**: La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
 
 
-# 7. Consultas CRUD
+# 8. Consultas CRUD
 
 - [Consutlas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
 
-## 7.1. CRUD
+## 8.1. CRUD
 
 CRUD es el acrónimo para:
 
@@ -855,7 +1000,7 @@ CRUD es el acrónimo para:
 
 Estas son las 4 operaciones básicas necesarias para la gestión de información.
 
-### 7.1.1. Create
+### 8.1.1. Create
 
 ```javascript
 const user = await prisma.user.create({
@@ -866,7 +1011,7 @@ const user = await prisma.user.create({
 })
 ```
 
-### 7.1.2. Read
+### 8.1.2. Read
 
 **Encontrar un registro por ID**
 
@@ -884,7 +1029,7 @@ const user = await prisma.user.findUnique({
 const users = await prisma.user.findMany()
 ```
 
-### 7.1.3. Update
+### 8.1.3. Update
 
 **Actualizar un registro por ID**
 
@@ -899,7 +1044,7 @@ const updateUser = await prisma.user.update({
 })
 ```
 
-### 7.1.4. Delete
+### 8.1.4. Delete
 
 **Elimnar un registro por ID**
 
@@ -911,7 +1056,7 @@ const deleteUser = await prisma.user.delete({
 })
 ```
 
-## 7.2. Seleccionar campos
+## 8.2. Seleccionar campos
 
 
 **Obtener email y name del user con id 22**
@@ -928,7 +1073,7 @@ const getUser = await prisma.user.findUnique({
 })
 ```
 
-## 7.3. Consultar varias tablas
+## 8.3. Consultar varias tablas
 
 Algunos ejemplos.
 
@@ -1014,7 +1159,7 @@ const user = await prisma.user.findFirst({
 })
 ```
 
-# 8. Ver datos de las tablas
+# 9. Ver datos de las tablas
 
 Ejecutamos
 
@@ -1029,7 +1174,7 @@ y abrimos en el navegador la URL http://localhost:5555
 ![prisma studio 2](assets/studio2.png)
 
 
-# 9. Despliegue en Vercel
+# 10. Despliegue en Vercel
 
 
 Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
@@ -1047,7 +1192,7 @@ Para evitar este problema, debemos añadir `prisma generate` al script `postinst
 }
 ```
 
-# 10. ANEXO: CRUD en una única página
+# 11. ANEXO: CRUD en una única página
 
 Es posible realizar las 4 operaciones de CRUD desde una única página. Este caso es habitual cuando se trabaja con SPA (Single Page Applications). 
 
@@ -1062,7 +1207,7 @@ El segundo ejemplo es más complejo y dispone de mayor interactividad con el usu
 
 
 
-# 11. Referencias
+# 12. Referencias
 
 - [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 - [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)

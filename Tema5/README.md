@@ -35,6 +35,7 @@
 - [5. Ejemplo práctico avanzado](#5-ejemplo-práctico-avanzado)
 - [6. SSG](#6-ssg)
 - [7. ANEXO: Componentes de servidor y de cliente](#7-anexo-componentes-de-servidor-y-de-cliente)
+  - [Arquitectura](#arquitectura)
 - [8. Referencias](#8-referencias)
 
 
@@ -948,6 +949,11 @@ La estructura de carpetas es la siguiente:
 
 
 # 7. ANEXO: Componentes de servidor y de cliente
+
+
+## Arquitectura 
+
+- [nxarch](https://github.com/jamj2000/nxarch) 
 
 
 Por desarrollar ... 
