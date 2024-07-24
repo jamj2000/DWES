@@ -103,3 +103,6 @@
 [submodule "Tema6/proyectos/nxprisma-crud-zoo"]
 	path = Tema6/proyectos/nxprisma-crud-zoo
 	url = https://github.com/jamj2000/nxprisma-crud-zoo.git
+[submodule "Tema6/proyectos/nxpostgres-crud-vercel"]
+	path = Tema6/proyectos/nxpostgres-crud-vercel
+	url = https://github.com/jamj2000/nxpostgres-crud-vercel.git
