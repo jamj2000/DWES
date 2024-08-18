@@ -445,7 +445,7 @@ export default function Form() {
 - No es necesario usar  `useFormStatus` ni `useFormState`.
 - Tampoco es necesario usar un *wrapper*.
 - No es necesario poner el botón de submit en un componente separado.
-- `useActionState` no se limita a su uso en formularios, sino que es una solución general el *feedback* proporcionado por cualquier acción del servidor.
+- `useActionState` no se limita a su uso en formularios, sino que es una solución general para el *feedback* proporcionado por cualquier acción del servidor.
 
 **Cambios en las acciones**
 
