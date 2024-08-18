@@ -18,14 +18,15 @@
   - [3.1. useFormStatus](#31-useformstatus)
   - [3.2. useFormState](#32-useformstate)
   - [3.3. Usando un wrapper en lugar de useFormState](#33-usando-un-wrapper-en-lugar-de-useformstate)
-  - [3.4. Varias acciones dentro de un formulario](#34-varias-acciones-dentro-de-un-formulario)
-  - [3.5. Consejos](#35-consejos)
-    - [3.5.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#351-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
-    - [3.5.2. Pasa correctamente los valores a las propiedades en los **`input`**](#352-pasa-correctamente-los-valores-a-las-propiedades-en-los-input)
-    - [3.5.3. Usa **`label`** correctamente](#353-usa-label-correctamente)
-    - [3.5.4. Usa **`defaultValue`** y **`value`** correctamente](#354-usa-defaultvalue-y-value-correctamente)
-    - [3.5.5. Usa **`disabled`** y **`readOnly`** correctamente](#355-usa-disabled-y-readonly-correctamente)
-    - [3.5.6. Usa **`select`** correctamente](#356-usa-select-correctamente)
+  - [3.4. useActionState: simplificando lo anterior](#34-useactionstate-simplificando-lo-anterior)
+  - [3.5. Varias acciones dentro de un formulario](#35-varias-acciones-dentro-de-un-formulario)
+  - [3.6. Consejos](#36-consejos)
+    - [3.6.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#361-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
+    - [3.6.2. Pasa correctamente los valores a las propiedades en los **`input`**](#362-pasa-correctamente-los-valores-a-las-propiedades-en-los-input)
+    - [3.6.3. Usa **`label`** correctamente](#363-usa-label-correctamente)
+    - [3.6.4. Usa **`defaultValue`** y **`value`** correctamente](#364-usa-defaultvalue-y-value-correctamente)
+    - [3.6.5. Usa **`disabled`** y **`readOnly`** correctamente](#365-usa-disabled-y-readonly-correctamente)
+    - [3.6.6. Usa **`select`** correctamente](#366-usa-select-correctamente)
 - [4. Validación de datos](#4-validación-de-datos)
   - [4.1. Validación en el cliente](#41-validación-en-el-cliente)
   - [4.2. Validación en el servidor](#42-validación-en-el-servidor)
@@ -33,10 +34,11 @@
     - [4.2.2. Sea paranoico: nunca confíe en sus usuarios](#422-sea-paranoico-nunca-confíe-en-sus-usuarios)
     - [4.2.3. Resumen](#423-resumen)
 - [5. Ejemplo práctico avanzado](#5-ejemplo-práctico-avanzado)
-- [6. SSG](#6-ssg)
-- [7. ANEXO: Componentes de servidor y de cliente](#7-anexo-componentes-de-servidor-y-de-cliente)
-  - [Arquitectura](#arquitectura)
+- [6. Componentes de servidor y de cliente](#6-componentes-de-servidor-y-de-cliente)
+  - [6.1. Arquitectura](#61-arquitectura)
+- [7. SSG](#7-ssg)
 - [8. Referencias](#8-referencias)
+
 
 
 
@@ -404,8 +406,73 @@ export async function handle(formData) {
 
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
+## 3.4. useActionState: simplificando lo anterior
 
-## 3.4. Varias acciones dentro de un formulario
+A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que sustituye a los anteriores hooks y que simplifica en gran manera el trabajo con *actions*.
+
+```js
+import { createHoppy } from "@/lib/actions;
+import { useActionState } from "react";
+
+export default function Form() {
+  const { error, action, isPending } = useActionState(createHoppy, null);
+
+  return (
+    <form onSubmit={action} className="flex flex-col gap-y-2">
+      <input
+        type="text"
+        name="content"
+        placeholder="New hoppy"
+        className="py-2 px-3 rounded-sm"
+      />
+      <button
+        type="submit"
+        disabled={isPending}
+        className="bg-blue-500 text-white py-2 px-3 rounded-sm"
+      >
+        Submit
+      </button>
+      {isPending && <p>Please wait...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+    </form>
+  );
+} 
+```
+
+**Mejoras respecto a la solución previa**
+
+- El código es mucho más simple
+- No es necesario usar  `useFormStatus` ni `useFormState`.
+- Tampoco es necesario usar un *wrapper*.
+- No es necesario poner el botón de submit en un componente separado.
+- `useActionState` no se limita a su uso en formularios, sino que es una solución general el *feedback* proporcionado por cualquier acción del servidor.
+
+**Cambios en las acciones**
+
+- Con este hook, las *actions* deben tener 2 argumentos, siendo `formData` el segundo argumento.
+  
+```js
+"use server";
+
+import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
+
+export async function createHoppy(previousState, formData) {
+ 
+  try {
+    const content = formData.get("content") as string;
+    await prisma.hoppy.create({ data: { content } });
+  } catch (e) {
+    return "be attention, An error occurred.";
+  }
+
+  revalidatePath("/");
+}
+```  
+
+
+
+## 3.5. Varias acciones dentro de un formulario
 
 Quizás no mucha gente sepa que, en HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](https://www.w3schools.com/tags/att_formaction.asp) . Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
 
@@ -430,14 +497,14 @@ Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un us
 
 
 
-## 3.5. Consejos
+## 3.6. Consejos
 
 Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
 
 Aquí van algunos consejos:
 
 
-### 3.5.1. Detro de un formulario usa **`button`** únicamente para hacer submit.
+### 3.6.1. Detro de un formulario usa **`button`** únicamente para hacer submit.
 
 No pongas botones con fines distintos a submit. Si lo hacemos se disparará el *action* asociado al formulario. Para operaciones que no sean acciones del servidor usa otro elemento que no sea *button*.
 
@@ -473,7 +540,7 @@ Este comportamiento quizás se deba a algún bug en NextJS.
 
 ```
 
-### 3.5.2. Pasa correctamente los valores a las propiedades en los **`input`**
+### 3.6.2. Pasa correctamente los valores a las propiedades en los **`input`**
 
 
 **MAL**
@@ -492,7 +559,7 @@ Este comportamiento quizás se deba a algún bug en NextJS.
 <input required  disabled />               // Correcto en JSX     
 ```
 
-### 3.5.3. Usa **`label`** correctamente
+### 3.6.3. Usa **`label`** correctamente
 
 **MAL**
 
@@ -516,7 +583,7 @@ Este comportamiento quizás se deba a algún bug en NextJS.
 </label>  
 ```
 
-### 3.5.4. Usa **`defaultValue`** y **`value`** correctamente
+### 3.6.4. Usa **`defaultValue`** y **`value`** correctamente
 
 La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
 
@@ -596,7 +663,7 @@ export default function Cuadrado({ long, width }) {
 >
 > Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
-### 3.5.5. Usa **`disabled`** y **`readOnly`** correctamente
+### 3.6.5. Usa **`disabled`** y **`readOnly`** correctamente
 
 Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
 
@@ -655,7 +722,7 @@ export default Form (  ) {
 > **NOTA:** La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
-### 3.5.6. Usa **`select`** correctamente
+### 3.6.6. Usa **`select`** correctamente
 
 Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
 
@@ -815,7 +882,45 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 ![photobox demon](assets/photobox-demo.png)
 
-# 6. SSG
+
+# 6. Componentes de servidor y de cliente
+
+
+## 6.1. Arquitectura 
+
+- [nxarch](https://github.com/jamj2000/nxarch) 
+
+
+Por desarrollar ... 
+
+Al crear aplicaciones NextJS, deberás considerar qué partes de tu aplicación deben representarse en el servidor y cuales en el cliente. A continuación comentaremos algunos **patrones de composición recomendados** cuando se utilizan componentes de servidor y cliente.
+
+**BIEN**
+```js
+<ClientComponent>
+    <ServerComponent />
+</ClientComponent>
+```
+
+**MAL**
+
+```js
+<ClientComponent />
+```
+
+Referencias:
+
+- [Delicious Donut Components](https://frontendatscale.com/blog/donut-components/)
+- [Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)
+- [Server Component Patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)
+
+
+
+
+# 7. SSG
+
+NextJS también nos proporciona soporte para SSG. 
+
 
 **Static Site Generat{ion,or,ed}**
 
@@ -947,37 +1052,6 @@ La estructura de carpetas es la siguiente:
 - [Código fuente](https://github.com/jamj2000/nxmdx)
 - [Demo](https://nxmdx.vercel.app/mdx)
 
-
-# 7. ANEXO: Componentes de servidor y de cliente
-
-
-## Arquitectura 
-
-- [nxarch](https://github.com/jamj2000/nxarch) 
-
-
-Por desarrollar ... 
-
-Al crear aplicaciones NextJS, deberás considerar qué partes de tu aplicación deben representarse en el servidor y cuales en el cliente. A continuación comentaremos algunos **patrones de composición recomendados** cuando se utilizan componentes de servidor y cliente.
-
-**BIEN**
-```js
-<ClientComponent>
-    <ServerComponent />
-</ClientComponent>
-```
-
-**MAL**
-
-```js
-<ClientComponent />
-```
-
-Referencias:
-
-- [Delicious Donut Components](https://frontendatscale.com/blog/donut-components/)
-- [Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)
-- [Server Component Patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)
 
 
 # 8. Referencias
