@@ -11,9 +11,12 @@
   - [1.1. Creación de un proyecto](#11-creación-de-un-proyecto)
   - [1.2. Carpetas y archivos del proyecto](#12-carpetas-y-archivos-del-proyecto)
 - [2. JSX](#2-jsx)
-  - [2.1. Aplicar estilos](#21-aplicar-estilos)
-  - [2.2. Propiedades de una paǵina](#22-propiedades-de-una-paǵina)
-  - [2.3. Propiedades de un componente](#23-propiedades-de-un-componente)
+  - [2.1. Estructuras de iteración y de condición](#21-estructuras-de-iteración-y-de-condición)
+    - [2.1.1. Estructura de iteración](#211-estructura-de-iteración)
+    - [2.1.2. Estructuras de condición](#212-estructuras-de-condición)
+  - [2.2. Aplicar estilos](#22-aplicar-estilos)
+  - [2.3. Propiedades de una paǵina](#23-propiedades-de-una-paǵina)
+  - [2.4. Propiedades de un componente](#24-propiedades-de-un-componente)
 - [3. Componentes](#3-componentes)
   - [3.1. Componentes del Servidor](#31-componentes-del-servidor)
   - [3.2. Beneficios del renderizado en el servidor](#32-beneficios-del-renderizado-en-el-servidor)
@@ -49,6 +52,7 @@
   - [8.4. Eliminar Cookies](#84-eliminar-cookies)
 - [9. ANEXO: Parámetros de ruta y consulta en página de cliente](#9-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [10. Referencias](#10-referencias)
+
 
 
 
@@ -125,7 +129,6 @@ JSX te permite escribir marcado similar a HTML dentro de un archivo JavaScript, 
 - https://es.legacy.reactjs.org/docs/jsx-in-depth.html
 
 
-
 El código escrito en JSX requiere conversión con una herramienta como *Babel* antes de que los navegadores web puedan entenderlo. Este procesamiento generalmente se realiza durante un proceso de construcción de software antes de deslplegar la aplicación .
 
 **Ejemplo**:
@@ -154,8 +157,168 @@ const App = () => {
 - Necesidad de usar atributo **`key`** en lista de elementos similares.
 
 
+## 2.1. Estructuras de iteración y de condición
 
-## 2.1. Aplicar estilos
+Todos los frameworks web disponen de algún mecanismo para generar las vistas que enviarán al usuario o cliente web. Para esto lo más habitual es el uso de **plantillas**.
+
+Las plantillas son una especie de HTML al que se le añade:
+
+- estructuras de iteración
+- estructuras de condición
+
+Esto es debido a que HTML carece de ellas, y **cuando trabajamos con datos obtenidos de forma dinámica**, es habitual necesitar estas funcionalidades.
+
+Algunos ejemplos de plantillas muy conocidas son:
+
+| Lenguaje | Framework | Plantilla  |
+| -------- | --------- | ---------- |
+| PHP      | Symfony   | Twig       |
+| PHP      | Laravel   | Blade      |
+| Java     | Spring    | Thymeleaf  |
+| Python   | Django    | DTL        |
+
+
+En React/Next las vistas se generan mediante JSX y las estructuras de iteración y condición se indican mediante el uso de **expresiones**. **Estas expresiones deben aparecer entre llaves {}**.  Son las que aparecen a continuación.
+
+
+### 2.1.1. Estructura de iteración
+
+Es muy usado el método *array*.**map**, aunque hay otros métodos que pueden usarse como *array*.**filter**.
+
+> **NOTA**: Dentro de JSX no se permite el uso de sentencias del tipo for, while, ...
+
+
+**Método map**
+
+```js
+{
+  array.map ( (item) => (
+    // React.ReactNode
+  ))
+}
+```
+
+> **NOTA**:
+>
+> El tipo **[React.ReactNode](https://reactnative.dev/docs/react-node)** es un tipo general para cualquier cosa que se pueda representar: elementos, cadenas, números, fragmentos, nulos, booleanos y arrays que contienen estos tipos.
+
+
+Ejemplo de método map
+
+```js
+{
+  people.map(person => (
+
+     <p key={person.id}>
+       <b>{person.name}:</b>  {' ' + person.profession + ' '}
+     </p>
+
+  ))
+}
+```
+
+*Por cada persona del array people, mostramos su nombre y profesión.*
+
+
+> **IMPORTANTE:** 
+>
+> Cada elemento dentro del método map debe tener una propiedad **key**, que debe ser única.
+
+
+
+
+### 2.1.2. Estructuras de condición
+
+Existen varias expresiones que podemos usar. Las más habituales son:
+
+- Operador ternario  
+- Operador &&
+- Operador ??
+- Operador || (es menos usado)
+
+> **NOTA**: Dentro de JSX no se permite el uso de sentencias del tipo if, switch.
+
+
+**Operador ternario**
+
+```js
+{
+  condición 
+  ? // React.ReactNode si la condición es truthy
+  : // React.ReactNode si la condición es falsy
+}
+```
+
+Ejemplo de operador ternario
+
+```js
+{
+  isTaskDone 
+    ? <p> {task.name + ' ✅'} </p>
+    : <p> {task.name} </p>
+}
+```
+
+*Si la tarea se ha finalizado mostramos su nombre y un check, sino sólo mostramos su nombre.*
+
+
+**Operador &&**
+
+```js
+{
+  condición &&  // React.ReactNode a mostrar si el valor de la condición es truthy
+}
+```
+
+
+Ejemplo de operador &&
+
+```js
+{
+  role === "ADMIN" && <AdminDashboard /> 
+}
+```
+*Si el rol es ADMIN entonces mostramos componente AdminDashboard*
+
+
+
+**Operador ??**
+
+```js
+{
+  condición ??  // React.ReactNode a mostrar si el valor de la condición es nullish
+}
+```
+
+
+Ejemplo de operador ??
+
+```js
+{
+  session ??  <Dashboard />
+}
+```
+
+*Si session es distinto a null y undefined entonces mostramos componente Dashboard*
+
+
+**Un ejemplo con estructuras de iteración y de condición**
+
+
+```js
+{
+  ciudades &&
+    ciudades
+        .sort((a, b) => a.nombre.localeCompare(b.nombre.toLowerCase()))     // Ordenamos por nombre
+        .map((ciudad) => (
+            <Ciudad key={ciudad.id} ciudad={ciudad} />
+        ))
+}   
+```
+
+
+
+## 2.2. Aplicar estilos
 
 **en línea**
 
@@ -298,7 +461,7 @@ Muchos más recursos relacionados con Tailwind en
 - [Awesome Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss)
 
 
-## 2.2. Propiedades de una paǵina
+## 2.3. Propiedades de una paǵina
 
 Como hemos indicado antes, JSX se usa tanto en páginas como en componentes. En ambos es posible el paso de argumentos, llamados también propiedades. 
 
@@ -321,7 +484,7 @@ export default page
 Para un descripción más detallada de estos parámetros consultar más adelante.
 
 
-## 2.3. Propiedades de un componente
+## 2.4. Propiedades de un componente
 
 A los componentes también se les puede pasar información mediante las propiedades. A diferencia de las páginas, cuyas propiedades son recurrentes, en los componentes el nombre de las propiedades suele ser muy variado. La única propiedad que tiene un nombre reservado es **`children`** que representa los elementos hijos del componente, es decir los elementos que irán insertados entre la etiqueta de inicio y la etiqueta de cierre.
 
