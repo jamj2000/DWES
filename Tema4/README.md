@@ -31,8 +31,9 @@
   - [4.5. Componentes de NextJS](#45-componentes-de-nextjs)
 - [5. Componentes listos para usar](#5-componentes-listos-para-usar)
   - [5.1. Iconos](#51-iconos)
-  - [5.2. UI](#52-ui)
-  - [5.3. Otros](#53-otros)
+  - [5.2. Spinners](#52-spinners)
+  - [5.3. UI](#53-ui)
+  - [5.4. Otros](#54-otros)
 - [6. App Router](#6-app-router)
   - [6.1. Segmentos de ruta](#61-segmentos-de-ruta)
   - [6.2. Creando rutas](#62-creando-rutas)
@@ -170,12 +171,13 @@ Esto es debido a que HTML carece de ellas, y **cuando trabajamos con datos obten
 
 Algunos ejemplos de plantillas muy conocidas son:
 
-| Lenguaje | Framework | Plantilla  |
-| -------- | --------- | ---------- |
-| PHP      | Symfony   | Twig       |
-| PHP      | Laravel   | Blade      |
-| Java     | Spring    | Thymeleaf  |
-| Python   | Django    | DTL        |
+| Lenguaje | Framework | Plantilla           |
+| -------- | --------- | --------------------|
+| PHP      | Symfony   | Twig                |
+| PHP      | Laravel   | Blade               |
+| Java     | Spring    | Thymeleaf           |
+| Python   | Django    | DTL                 |
+| NodeJS   | Express   | Handlebars, EJS, ...|
 
 
 En React/Next las vistas se generan mediante JSX y las estructuras de iteración y condición se indican mediante el uso de **expresiones**. **Estas expresiones deben aparecer entre llaves {}**.  Son las que aparecen a continuación.
@@ -193,7 +195,7 @@ Es muy usado el método *array*.**map**, aunque hay otros métodos que pueden us
 ```js
 {
   array.map ( (item) => (
-    // React.ReactNode
+    // React.ReactNode 
   ))
 }
 ```
@@ -876,7 +878,7 @@ export default function MyComponent() {
 
 **React Icons**  ( [sitio oficial](https://react-icons.github.io/react-icons/) )
 
-Se trata de un megaconjunto de iconos, el cual incluye muchos subconjuntos, entre los que están los que hemos visto anteriormente.
+Se trata de un **megaconjunto de iconos, el cual incluye muchos subconjuntos, entre los que están los que hemos visto anteriormente**.
 
 ![react icons](assets/react-icons.png)
 
@@ -890,14 +892,56 @@ import { FaBeer } from 'react-icons/fa';
 
 class Question extends React.Component {
   render() {
-    return <h3> Lets go for a <FaBeer />? </h3>
+    return <h3> Lets go for a <FaBeer size='1rem' color='orange' />? </h3>
   }
 }
 ``` 
 
+## 5.2. Spinners
+
+**React Spinners** ( [sitio oficial](https://www.davidhu.io/react-spinners/) )
+
+Un *spinner* es algo similar a un icono animado. Se utiliza frecuentemente para indicar al usuario que debe esperar a que finalice una operación que está realizando la aplicación.
+
+Esta biblioteca debe usarse en un componente cliente, puesto que es necesario que admita el estado `loading`.
 
 
-## 5.2. UI
+```sh
+npm  install  react-spinners
+```
+
+```js
+'use client'
+import { useState } from "react";
+import RingLoader from "react-spinners/RingLoader";
+
+const styles = {
+  display: "block",
+  margin: "0 auto",
+};
+
+function Spinner() {
+  let [loading, setLoading] = useState(true);
+
+  return (
+      <RingLoader
+        color={'blue'}
+        loading={loading}
+        cssOverride={styles}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+  );
+}
+
+export default Spinner;
+``` 
+
+- Ejemplo y documentación disponibles en: https://www.npmjs.com/package/react-spinners
+
+
+## 5.3. UI
 
 **Shadcn/UI** ( [sitio oficial](https://ui.shadcn.com/) )
 
@@ -1256,7 +1300,7 @@ Puedes consultar los siguientes recursos para aprender como hacer uso de algunos
 
 
 
-## 5.3. Otros
+## 5.4. Otros
 
 **Tiptap - Editor WYSIWYG** ( [sitio oficial](https://tiptap.dev/) )
 

@@ -662,7 +662,6 @@ import {Bar, Pie } from 'react-roughviz'
 
 
 
-
 # 6. Creación de PDFs 
 
 De las muchas bibliotecas disponibles para trabajar con archivos PDF, una de las más interesantes y potentes es [pdf-lib](https://www.npmjs.com/package/pdf-lib).
@@ -671,7 +670,53 @@ Permite crear nuevos documentos y modificar los existentes. Permite trabajar en 
 
 Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
+
+> **NOTA**: 
+>
+> Otras bibliotecas que merecen atención son las siguientes:
+>
+> - [html2pdf.js](https://ekoopmans.github.io/html2pdf.js/) (sólo lado cliente)
+> - [React PDF](https://react-pdf.org/) (lado cliente y servidor)
+> - [Puppeteer](https://pptr.dev/guides/pdf-generation) (sólo lado cliente)
+>
+> Un ejemplo de uso de estas bibliotecas se muestra en [este vídeo de Youtube](https://youtu.be/4V5HbqYJCVI?si=CVMqYt8l7thVbhrv), en inglés y nivel medio-avanzado. Su código fuente del ejemplo está disponible en [Github](https://github.com/colbyfayock/my-pdf). También hay un [artículo publicado por el autor](https://spacejelly.dev/posts/generate-a-pdf-from-html-in-javascript). 
+>
+> Las 3 bibliotecas nos permiten convertir HTML a PDF incluido html2pdf.js que nos permite convertir un árbol HTML a PDF, React PDF para renderizar un PDF y Puppeteer para generar un PDF a partir de una página en vivo.
+>
+> Según la documentación oficial de Puppeteer, se trata de una biblioteca de JavaScript que proporciona una API de alto nivel para controlar Chrome o Firefox a través del protocolo DevTools o WebDriver BiDi. Puppeteer se ejecuta en la interfaz de usuario sin cabeza (sin interfaz de usuario visible) de forma predeterminada, pero se puede configurar para que se ejecute en un navegador visible ("con cabeza"). Es decir, la principal finalidad de esta biblioteca no es trabajar con PDF, aunque tiene una parte que ofrece esta funcionalidad.
+>
+> **Ejemplo muy básico**
+>
+> ```sh
+> mkdir  puppeteer
+> cd     puppeteer
+> npm  init -y
+> ```
+>
+> ```sh
+> npm  install  puppeteer
+> ```
+>
+> ```js
+> import puppeteer from 'puppeteer';
+> 
+> const browser = await puppeteer.launch();
+> const page = await browser.newPage();
+> await page.goto('https://spacejelly.dev');
+> const pdf = await page.pdf({path: './example.pdf', format: 'A4', printBackground: true});
+> await browser.close();
+> ```
+> ![puppeteer](assets/puppeteer.png)
+
+
+
 ## 6.1. Instalación
+
+```sh
+mkdir  pdf-lib
+cd     pdf-lib
+npm  init -y
+```
 
 ```sh
 npm  install  pdf-lib
