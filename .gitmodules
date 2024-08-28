@@ -106,3 +106,6 @@
 [submodule "Tema6/proyectos/nxpostgres-crud-vercel"]
 	path = Tema6/proyectos/nxpostgres-crud-vercel
 	url = https://github.com/jamj2000/nxpostgres-crud-vercel.git
+[submodule "Tema4/proyectos/nxrender"]
+	path = Tema4/proyectos/nxrender
+	url = https://github.com/jamj2000/nxrender.git
