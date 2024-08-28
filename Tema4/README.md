@@ -39,8 +39,8 @@
   - [6.2. Creando rutas](#62-creando-rutas)
   - [6.3. Parámetros de URL](#63-parámetros-de-url)
   - [6.4. Organización del proyecto](#64-organización-del-proyecto)
-  - [Contenido estático vs Contenido dinámico](#contenido-estático-vs-contenido-dinámico)
-  - [Renderizado en el Servidor vs Renderizado en el Cliente](#renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
+  - [6.5. Contenido estático vs Contenido dinámico](#65-contenido-estático-vs-contenido-dinámico)
+  - [6.6. Renderizado en el Servidor vs Renderizado en el Cliente](#66-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
 - [7. Route Handlers](#7-route-handlers)
   - [7.1. Métodos HTTP admitidos](#71-métodos-http-admitidos)
   - [7.2. Parámetros de URL](#72-parámetros-de-url)
@@ -55,6 +55,7 @@
   - [8.4. Eliminar Cookies](#84-eliminar-cookies)
 - [9. ANEXO: Parámetros de ruta y consulta en página de cliente](#9-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [10. Referencias](#10-referencias)
+
 
 
 
@@ -1454,7 +1455,7 @@ Un muy video donde se explica la estructura de un proyecto en NextJS y los archi
 - [Project Structure and File Conventions in NextJs 14](https://youtu.be/i6Fa5Oyr59k?si=Y3IVfA8ZuMV38ndo)
 
 
-## Contenido estático vs Contenido dinámico
+## 6.5. Contenido estático vs Contenido dinámico
 
 La definición de contenido estático y dinámico es muy sencilla:
 
@@ -1480,7 +1481,7 @@ export const dynamic = 'force-dynamic'
 ```
 
 
-## Renderizado en el Servidor vs Renderizado en el Cliente
+## 6.6. Renderizado en el Servidor vs Renderizado en el Cliente
 
 El renderizado es la **representación gráfica del contenido de una página**, es decir, el proceso necesario para mostrar una página web en un navegador.
 
