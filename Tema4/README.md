@@ -1492,6 +1492,11 @@ Existen 2 tipos de renderizado:
 
 NextJS soporta ambos tipos de renderizado, aunque recomienda usar SSR siempre que se pueda. Podemos entender SSR como sinónimo de generación en el lado servidor de contenido dinámico.
 
+Para indicar a NextJS que una página o componente será renderizado en el lado cliente debemos colocar la primera línea del archivo con el siguiente texto.
+
+```js
+'use client'
+```
 
 **Ejemplo práctico**
 
