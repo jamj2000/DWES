@@ -1518,8 +1518,20 @@ Para lanzar:
 npm  run  start
 ```
 
+Diferencias entre SSR y CSR
+
+SSR                                             | CSR
+------------------------------------------------|---------------------------------
+SSR significa Renderizado del lado del servidor | CSR significa Renderizado del lado del cliente
+Representa la página en el lado del servidor    | Representa la página en el lado del cliente
+Es más amigable con el SEO                      | Es menos compatible con SEO
+La interactividad del usuario es limitada       | La interactividad del usuario es altamente interactiva
+Consume los recursos del servidor               | Consume los recursos del cliente
+Ofrece un mejor rendimiento en dispositivos de baja potencia | Es posible que no ofrezca un mejor rendimiento en dispositivos de baja potencia
+Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado
 
 
+    
 # 7. Route Handlers
 
 Los `controladores de ruta` le permiten crear controladores de solicitudes personalizados para una ruta determinada mediante las APIs web [`Request`](https://developer.mozilla.org/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/docs/Web/API/Response).
