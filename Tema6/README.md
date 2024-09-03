@@ -208,6 +208,7 @@ Etiqueta  |  atributo HTML   |  atributo JSX
 `label`   | for              | **htmlFor**
 `input`   | autofocus        | **autoFocus**
 `input`   | value            | **defaultValue**
+`input`   | checked          | **defaultChecked**
 
 
 ```javascript
@@ -786,6 +787,14 @@ Si no ha habido cambios se mostrará un mensaje similar al siguiente:
 Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para la migración:
 
 ![prisma migrate con cambios](assets/migrate-dev2.png)
+
+> **NOTA:**
+>
+> Una operación muchos más cómoda y directa, es hacer:
+>
+> **`npx  prisma  db  push`**
+>
+
 
 
 ### 7.2.1. Modelos

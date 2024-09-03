@@ -34,8 +34,11 @@
   - [10.2. Aplicación Credentials](#102-aplicación-credentials)
   - [10.3. Aplicación All](#103-aplicación-all)
   - [10.4. Aplicación Middleware](#104-aplicación-middleware)
-- [11. ANEXO: Datos de sesión en el lado cliente](#11-anexo-datos-de-sesión-en-el-lado-cliente)
-- [12. Referencias:](#12-referencias)
+- [11. CASOS PRÁCTICOS](#11-casos-prácticos)
+  - [11.1. App para gestionar un blog](#111-app-para-gestionar-un-blog)
+  - [11.2. App para gestionar proyectos de climatización](#112-app-para-gestionar-proyectos-de-climatización)
+- [12. ANEXO: Datos de sesión en el lado cliente](#12-anexo-datos-de-sesión-en-el-lado-cliente)
+- [13. Referencias:](#13-referencias)
 
 
 
@@ -981,7 +984,30 @@ export async function loginGoogle() {
 Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
 
-# 11. ANEXO: Datos de sesión en el lado cliente
+# 11. CASOS PRÁCTICOS
+
+
+## 11.1. App para gestionar un blog
+
+- [Código fuente](https://github.com/jamj2000/nxapp-blog)
+- [Demo](https://nxapp-blog.vercel.app/)
+
+
+![blog demo](assets/blog.png)
+
+
+## 11.2. App para gestionar proyectos de climatización 
+
+- [Código fuente](https://github.com/jamj2000/nxapp-climatizacion)
+- [Demo](https://nxapp-climatizacion.vercel.app/)
+
+
+![blog demo](assets/climatizacion.png)
+
+
+
+
+# 12. ANEXO: Datos de sesión en el lado cliente
 
 En los ejemplos anteriores nos hemos centrado en usar los datos de sesión desde el lado servidor. NextJS, como framework fullstack, también nos permite recuperar los datos de sesión desde el lado cliente.
 
@@ -1067,7 +1093,7 @@ Referencias:
 
 
 
-# 12. Referencias:
+# 13. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Diferencias entre NextAuth4 y NextAuth5](https://authjs.dev/guides/upgrade-to-v5)
