@@ -33,11 +33,14 @@
     - [4.2.1. Ataques frecuentes](#421-ataques-frecuentes)
     - [4.2.2. Sea paranoico: nunca confíe en sus usuarios](#422-sea-paranoico-nunca-confíe-en-sus-usuarios)
     - [4.2.3. Resumen](#423-resumen)
-- [5. Ejemplo práctico avanzado](#5-ejemplo-práctico-avanzado)
+- [5. CASOS PRÁCTIOS AVANZADOS](#5-casos-práctios-avanzados)
+  - [5.1. Panel de gestión de escuela](#51-panel-de-gestión-de-escuela)
+  - [5.2. Albúm de fotos](#52-albúm-de-fotos)
 - [6. Componentes de servidor y de cliente](#6-componentes-de-servidor-y-de-cliente)
   - [6.1. Arquitectura](#61-arquitectura)
 - [7. SSG](#7-ssg)
 - [8. Referencias](#8-referencias)
+
 
 
 
@@ -867,11 +870,30 @@ Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
 
 
-# 5. Ejemplo práctico avanzado
+# 5. CASOS PRÁCTIOS AVANZADOS
+
+
+https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP
+
 
 En este tema dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
-Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar el siguiente proyecto, que está desarrollado y explicado (en inglés) con cierta profundidad. 
+Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar los siguientes proyectos, que están desarrollados y explicados (en inglés) con cierta profundidad. 
+
+## 5.1. Panel de gestión de escuela
+
+
+![dashboard](assets/dashboard.png)
+ 
+- [Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP)
+- [Código fuente del video anterior](https://github.com/safak/next-dashboard-ui/tree/completed)
+- [Demo](https://nxdashboard.vercel.app/)
+
+
+![dashboard demo](assets/dashboard.png)
+
+
+## 5.2. Albúm de fotos
 
 ![photobox](assets/photobox.png)
  
@@ -880,7 +902,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 - [Demo](https://demo.photobox.dev/)
 
 
-![photobox demon](assets/photobox-demo.png)
+![photobox demo](assets/photobox-demo.png)
 
 
 # 6. Componentes de servidor y de cliente
