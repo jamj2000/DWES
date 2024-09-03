@@ -882,10 +882,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 ## 5.1. Panel de gestión de escuela
 
-
-![dashboard](assets/dashboard.png)
- 
-- [Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP)
+- [Vídeo: Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP)
 - [Código fuente del video anterior](https://github.com/safak/next-dashboard-ui/tree/completed)
 - [Demo](https://nxdashboard.vercel.app/)
 
@@ -897,7 +894,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 ![photobox](assets/photobox.png)
  
-- [Build a Google Photos Clone with Next.js and Cloudinary – Tutorial](https://youtu.be/l71rTm_0260?si=dlqaBBnNq4y29dFF)
+- [Vídeo: Build a Google Photos Clone with Next.js and Cloudinary – Tutorial](https://youtu.be/l71rTm_0260?si=dlqaBBnNq4y29dFF)
 - [Código fuente del video anterior](https://github.com/cloudinary-community/photobox)
 - [Demo](https://demo.photobox.dev/)
 
