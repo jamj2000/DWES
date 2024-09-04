@@ -873,9 +873,6 @@ Como mencionamos anteriormente, enviar datos de formularios es fácil, pero prot
 # 5. CASOS PRÁCTIOS AVANZADOS
 
 
-https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP
-
-
 En este tema dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
 Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar los siguientes proyectos, que están desarrollados y explicados (en inglés) con cierta profundidad. 
