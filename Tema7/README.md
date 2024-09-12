@@ -8,7 +8,6 @@
 <img src="assets/nextdotjs.svg" width="80" height="80">
 
 ---
-
 - [1. Introducción](#1-introducción)
 - [2. Datos ficticios](#2-datos-ficticios)
   - [2.1. Instalación de biblioteca](#21-instalación-de-biblioteca)
@@ -33,6 +32,7 @@
     - [5.3.4. InfluxDB](#534-influxdb)
   - [5.4. Documentación](#54-documentación)
   - [5.5. Curiosidad](#55-curiosidad)
+  - [5.6. Otras librerías](#56-otras-librerías)
 - [6. Creación de PDFs](#6-creación-de-pdfs)
   - [6.1. Instalación](#61-instalación)
   - [6.2. Uso](#62-uso)
@@ -53,6 +53,7 @@
   - [10.1. Instalación](#101-instalación)
   - [10.2. Uso](#102-uso)
   - [10.3. Documentación](#103-documentación)
+
     
 
 
@@ -606,6 +607,7 @@ Referencias:
 - [Paquete de npm para InfluxDB](https://www.npmjs.com/package/@influxdata/influxdb-client)
 - [Monitorizando datos con InfluxDB, Telegraf y Grafana](https://openwebinars.net/blog/monitorizando-datos-con-influxdb-telegraf-y-grafana/)  
 
+
 ## 5.4. Documentación
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
@@ -660,6 +662,13 @@ import {Bar, Pie } from 'react-roughviz'
 
 ```
 
+## 5.6. Otras librerías
+
+Existen numerosas bibliotecas para la realización de gráficas. Algunas de ellas son:
+
+- [Recharts](https://recharts.org/)
+- [Nivo](https://nivo.rocks/) 
+- [D3.js](https://d3js.org): Una de las más potentes. Requiere de conocimientos avanzados.
 
 
 # 6. Creación de PDFs 

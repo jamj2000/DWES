@@ -460,6 +460,7 @@ Existen muchos sitios que proporcionan componentes basados en Tailwind. Algunos 
 - [Flowbite](https://flowbite.com/)
 - [DaisyUI](https://daisyui.com/)
 - [WindUI](https://wind-ui.com/)
+- [HyperUI](https://www.hyperui.dev/)
 
 Muchos más recursos relacionados con Tailwind en
 
@@ -716,7 +717,7 @@ Referencia: https://nextjs.org/docs/app/building-your-application/rendering/clie
 **Deberemos colocar al inicio del archivo la directiva `use cliente`, si un componente o una página contiene alguno de los siguientes elementos:** 
 
 - **eventos (click, change, ...)**
-- **funciones de React del lado cliente como `useState`, ...**
+- **funciones de React del lado cliente como `useState`, `useEffect`,...**
 
 
 # 4. Componentes del Servidor VS Componentes del Cliente

@@ -36,10 +36,8 @@
 - [5. CASOS PRÁCTIOS AVANZADOS](#5-casos-práctios-avanzados)
   - [5.1. Panel de gestión de escuela](#51-panel-de-gestión-de-escuela)
   - [5.2. Albúm de fotos](#52-albúm-de-fotos)
-- [6. Componentes de servidor y de cliente](#6-componentes-de-servidor-y-de-cliente)
-  - [6.1. Arquitectura](#61-arquitectura)
-- [7. SSG](#7-ssg)
-- [8. Referencias](#8-referencias)
+- [6. ANEXO: SSG](#6-anexo-ssg)
+- [7. Referencias](#7-referencias)
 
 
 
@@ -899,41 +897,11 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 ![photobox demo](assets/photobox-demo.png)
 
 
-# 6. Componentes de servidor y de cliente
-
-
-## 6.1. Arquitectura 
-
-- [nxarch](https://github.com/jamj2000/nxarch) 
-
-
-Por desarrollar ... 
-
-Al crear aplicaciones NextJS, deberás considerar qué partes de tu aplicación deben representarse en el servidor y cuales en el cliente. A continuación comentaremos algunos **patrones de composición recomendados** cuando se utilizan componentes de servidor y cliente.
-
-**BIEN**
-```js
-<ClientComponent>
-    <ServerComponent />
-</ClientComponent>
-```
-
-**MAL**
-
-```js
-<ClientComponent />
-```
-
-Referencias:
-
-- [Delicious Donut Components](https://frontendatscale.com/blog/donut-components/)
-- [Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)
-- [Server Component Patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)
 
 
 
 
-# 7. SSG
+# 6. ANEXO: SSG
 
 NextJS también nos proporciona soporte para SSG. 
 
@@ -1070,7 +1038,7 @@ La estructura de carpetas es la siguiente:
 
 
 
-# 8. Referencias
+# 7. Referencias
 
 - [MDN: Envío y rececpción de datos de formulario (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 - [W3Schools: Atributo formaction (en inglés)](https://www.w3schools.com/tags/att_formaction.asp)

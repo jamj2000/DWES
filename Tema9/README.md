@@ -16,9 +16,11 @@
   - [3.2. Añadir manifest.js al layout principal](#32-añadir-manifestjs-al-layout-principal)
 - [4. Instalar / desinstalar PWA](#4-instalar--desinstalar-pwa)
 - [5. Profundizando en las PWA](#5-profundizando-en-las-pwa)
-- [6. Otras propiedades de metadata](#6-otras-propiedades-de-metadata)
-- [7. Favicon](#7-favicon)
-- [8. Referencias](#8-referencias)
+- [6. Herramientas para auditoría](#6-herramientas-para-auditoría)
+- [7. Otras propiedades de metadata](#7-otras-propiedades-de-metadata)
+- [8. Favicon](#8-favicon)
+- [9. Referencias](#9-referencias)
+
 
 
 
@@ -132,21 +134,41 @@ Más información en el siguiente enlace:
 - https://www.dosmedia.com/que-son-progressive-web-apps/
 
 
-# 6. Otras propiedades de metadata
+# 6. Herramientas para auditoría
+
+Una herramienta muy conocida que suele venir integrada en las *dev tools* del navegador Chrome es **Lighthouse**. Al aplicar la auditoría a nuestra aplicación nos dará información acerca de las siguientes características:
+
+- Rendimiento
+- Accesibilidad
+- Prácticas recomendadas
+- SEO
+- PWA (actualmente este apartado ha sido dado de baja)
+
+Lo mismo puede realizarse a través de la web [https://pagespeed.web.dev/](https://pagespeed.web.dev/)
+
+![lighthouse 1](assets/lighthouse1.png)
+
+![lighthouse 2](assets/lighthouse2.png)
+
+> **IMPORTANTE:** Para obtener una información más fiable se recomienda lanzar la auditoría en modo incógnito, puesto que no se cargan plugins que puedan interferir en la medida.
+
+
+
+# 7. Otras propiedades de metadata
 
 La propiedad `manifest` forma parte del objeto `metadata`. Puedes encontrar otras propiedades como [openGraph](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#opengraph), [robots](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#robots), ... en el siguiente enlace:
 
 - https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields
 
 
-# 7. Favicon
+# 8. Favicon
 
 Independientemente de la PWA, para generar los distintos tamaños del [**`favicon.ico`**](https://es.wikipedia.org/wiki/Favicon) podemos usar la herramienta web [convertico.com](https://convertico.com/es/)
 
 ![png to ico](assets/png-ico.png)
 
 
-# 8. Referencias
+# 9. Referencias
 
 - [Web App Manifest Generator: simicart](https://www.simicart.com/manifest-generator.html/)
 - [Web App Manifest Generator: netlify](https://manifest-gen.netlify.app/) 
