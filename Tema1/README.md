@@ -290,18 +290,20 @@ Un servidor web es el software encargado de recibir y responder a las peticiones
 
 Según su nivel de complejidad y recursos necesarios, podemos dividirlos en 2 tipos:
 
-- Servidores de contenido estático
-- Servidores de cómputo
+- Servidores de **contenido estático**
+- Servidores de **contenido dinám**ico
 
-Por otro lado, también podemos diferenciar entre:
-
-1. Servidores generalistas: Apache, Tomcat, nginx, IIS.
-2. Servidores específicos de aplicación
-
-Los primeros se suelen usar con aplicaciones desarrolladas con lenguajes como PHP, Java, .Net.
-Los segundos suelen programarse específicamente para implementar el backend de una aplicación web desarrollada para Python, NodeJS.
-
-Tanto unos como otros pueden ofrecer tanto contenido estático como computo. 
+> **NOTA** 
+>
+> Por otro lado, también podemos diferenciar entre:
+>
+> 1. Servidores generalistas: Apache, Tomcat, nginx, IIS.
+> 2. Servidores específicos de aplicación
+> 
+> Los primeros se suelen usar con aplicaciones desarrolladas con lenguajes como PHP, Java, .Net.
+> Los segundos suelen programarse específicamente para implementar el backend de una aplicación web desarrollada para Python, NodeJS.
+>
+> Tanto unos como otros pueden ofrecer tanto contenido estático como computo. 
 
 
 ### 2.4.1. Servidores de contenido estático
@@ -314,9 +316,9 @@ Los servidores de computo, por otro lado, ofrecen la posibilidad de ejecutar có
 
 
 
-### 2.4.2. Servidores de cómputo
+### 2.4.2. Servidores de contenido dinámico
 
-Llamaremos servidores de cómputo a aquellos servidores que, antes de servir el contenido, realizan algún tipo de computo. Suele ser habitual la búsqueda y modificación de información en bases de datos y el posterior renderizado y envío de vistas al cliente (la mayoría de las veces es un navegador web). Otras operaciones que se realizan en el lado servidor suelen ser la gestión de la autenticación y autorización.
+Son aquellos servidores que, antes de servir el contenido, realizan algún tipo de computo. Suele ser habitual la búsqueda y modificación de información en bases de datos y el posterior renderizado y envío de vistas al cliente (la mayoría de las veces es un navegador web). Otras operaciones que se realizan en el lado servidor suelen ser la gestión de la autenticación y autorización.
 
 Los lenguajes más utilizados para estos fines, sin ningún orden en particular, son:
 
@@ -326,7 +328,7 @@ Los lenguajes más utilizados para estos fines, sin ningún orden en particular,
 - NodeJS
 - ...
 
-Los servidores de computo se pueden clasificar en diferentes categorías. Las más habituales son las siguientes:
+Los servidores de contenido dinámico se pueden clasificar en diferentes categorías. Las más habituales son las siguientes:
 
 
 ![iaas paas saas](assets/iaas-paas-saas.jpg)
@@ -346,7 +348,7 @@ Algunos proveedores de estos servicios son:
   - Heroku
   - Vercel
 
-Una variante de los servidores de cómputo son los [serverless](https://www.cloudflare.com/es-es/learning/serverless/what-is-serverless/)
+Una variante de los servidores de contenido dinámico son los [serverless](https://www.cloudflare.com/es-es/learning/serverless/what-is-serverless/)
 
 [![paas vs serverless](assets/paas-serverless.svg)](https://www.cloudflare.com/es-es/learning/serverless/glossary/serverless-vs-paas/)
 
@@ -359,12 +361,13 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 
 
 - **PHP**: PHP Hypertext Preprocessor. Uno de los lenguajes más utilizados para la creación de todo tipo de CMS.
-- **JSP**: JavaServer Pages. Es la propuesta de Java, y uno de los más demandados.
-- **ASP**: Active Server Pages. Es el lenguaje de desarrollo web de Microsoft. 
+- **JSP**: JavaServer Pages. Es la propuesta de Java similar a PHP.
+- **ASP**: Active Server Pages. Es la propuesta de Microsoft similar a PHP. 
 - **Java**: es un lenguaje multiplataforma propiedad de Oracle.
+- **C#**:  es un lenguaje multiplataforma propiedad de Microsoft.
 - **Ruby**: es un lenguaje de programación interpretado, reflexivo y orientado a objetos.
 - **Python**: es un lenguaje de programación multiparadigma que hace hincapié en el código legible. 
-- **Javascript (Node.js)**: cada vez más popular puesto que se usa también en el lado cliente.
+- **Javascript (NodeJS)**: cada vez más popular puesto que se usa también en el lado cliente.
 
 
 ## 3.2. Frameworks del lado servidor 
@@ -372,12 +375,14 @@ Una variante de los servidores de cómputo son los [serverless](https://www.clou
 ![Backend Frameworks](assets/backend-frameworks.png)
 
 
-- PHP: **Laravel**, **Symfony**.
-- JSP, Java: **Spring**.
-- ASP: **ASP.NET**, **ASP.NET Core**.
-- Ruby: **Ruby on rails**.
-- Python: **Django**.
-- Node.js: **Express**. 
+Framework           |  Lenguaje
+--------------------|---------------------
+**Laravel**         | PHP
+**Spring**          | Java 
+**.NET**            | C#
+**Ruby on rails**   | Ruby
+**Django**          | Python
+**Express**         | Javascript 
 
 
 ## 3.3. Resumen
