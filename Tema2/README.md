@@ -276,41 +276,34 @@ Trabajaremos con la version LTS, por ser más estable y tener soporte a largo pl
 
 ![Node download](assets/node-download.png)
 
-La instalación de NodeJS es bastante sencilla. Existen instaladores para Windows y Mac. En el caso de Linux no es tan sencilla, pero aún así no tiene excesiva dificultad.
+La instalación de NodeJS es bastante sencilla. Existen instaladores para Windows y Mac. 
 
-Se siguen los siguientes pasos:
-
-1. Se descarga archivo comprimido.
-2. Se descomprime el archivo anterior.
-3. Se copian a `/usr` las subcarpetas `bin`, `lib`, `include` y `share`.
-
-Aquí tienes los comandos. Es copiar y pegar.
+En el caso de Linux lo haremos desde el terminal de texto. Aquí tienes los comandos. Es copiar y pegar.
 
 ```bash
-wget https://nodejs.org/dist/v18.17.1/node-v18.17.1-linux-x64.tar.xz
-tar xvf node-v18.17.1-linux-x64.tar.xz
-cd node-v18.17.1-linux-x64
-sudo  cp  -r   bin  lib  include  share  /usr
+# instalamos nvm (Node Version Manager)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+
+# descargamos e instalamos Node.js (después necesitarás reiniciar el terminal)
+nvm install 22
 ```
 
-Para comprobar que se ha instalado correctamente hacemos
+Los versiones instaladas se guardarán en la carpeta del usuario, en `~/.nvm/versions/node/`
 
-```bash
-ls /usr/bin/{node,npm,npx} -l
-```
 
-Deben aparecer 3 ejecutables:
+Una vez realizada la instalación dispondremos de 3 utilidades:
 
 - **node**:  es el entorno de ejecución propiamente dicho.
 - **npm**:  es el gestor de paquetes.
 - **npx**:  es el lanzador de paquetes ejecutables.
 
-También podemos comprobar que se han instalado correctamente si ejecutamos
+Podemos comprobar que se han instalado correctamente y la version de cada utilidad:
 
 ```bash
 node --version
 npm  --version
 npx  --version
+nvm  --version
 ```
 
 Si nos muestra la versión de cada uno, es que la instalación fue exitosa.
