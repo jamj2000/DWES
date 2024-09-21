@@ -179,7 +179,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 ## 9.1. Panel de gestión de escuela (Parte 2 de 2)
 
-- [Vídeo: Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/6sfiAyKy8Jo?si=mjEALft8TuO-3fg7)
+- [Vídeo: Next.js Full-Stack School Management App Full Tutorial](https://youtu.be/6sfiAyKy8Jo?si=mjEALft8TuO-3fg7)
 - [Código fuente del video anterior](https://github.com/safak/full-stack-school)
 
 
