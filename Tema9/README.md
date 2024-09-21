@@ -168,6 +168,21 @@ Independientemente de la PWA, para generar los distintos tamaños del [**`favico
 ![png to ico](assets/png-ico.png)
 
 
+
+# CASOS PRÁCTIOS AVANZADOS
+
+En este tema dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
+
+Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar los siguientes proyectos, que están desarrollados y explicados (en inglés) con cierta profundidad. 
+
+## 5.1. Panel de gestión de escuela (Parte 2 de 2)
+
+- [Vídeo: Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/6sfiAyKy8Jo?si=mjEALft8TuO-3fg7)
+- [Código fuente del video anterior](https://github.com/safak/full-stack-school)
+
+
+![dashboard demo](assets/dashboard.png)
+
 # 9. Referencias
 
 - [Web App Manifest Generator: simicart](https://www.simicart.com/manifest-generator.html/)
