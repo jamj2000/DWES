@@ -33,11 +33,12 @@
     - [4.2.1. Ataques frecuentes](#421-ataques-frecuentes)
     - [4.2.2. Sea paranoico: nunca confíe en sus usuarios](#422-sea-paranoico-nunca-confíe-en-sus-usuarios)
     - [4.2.3. Resumen](#423-resumen)
-- [5. CASOS PRÁCTIOS AVANZADOS](#5-casos-práctios-avanzados)
-  - [5.1. Panel de gestión de escuela](#51-panel-de-gestión-de-escuela)
+- [5. CASOS PRÁCTICOS AVANZADOS](#5-casos-prácticos-avanzados)
+  - [5.1. Panel de gestión de escuela (Parte 1 de 2)](#51-panel-de-gestión-de-escuela-parte-1-de-2)
   - [5.2. Albúm de fotos](#52-albúm-de-fotos)
 - [6. ANEXO: SSG](#6-anexo-ssg)
 - [7. Referencias](#7-referencias)
+
 
 
 
@@ -868,14 +869,14 @@ Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
 
 
-# 5. CASOS PRÁCTIOS AVANZADOS
+# 5. CASOS PRÁCTICOS AVANZADOS
 
 
-En este tema dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
+En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
 Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar los siguientes proyectos, que están desarrollados y explicados (en inglés) con cierta profundidad. 
 
-## 5.1. Panel de gestión de escuela
+## 5.1. Panel de gestión de escuela (Parte 1 de 2)
 
 - [Vídeo: Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP)
 - [Código fuente del video anterior](https://github.com/safak/next-dashboard-ui/tree/completed)
