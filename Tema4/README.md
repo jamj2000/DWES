@@ -1860,7 +1860,10 @@ async function deleteCookie() {
 }
 ```
 
-Referencia: https://nextjs.org/docs/app/api-reference/functions/cookies
+Referencias: 
+
+- [Documentación de NextJS](https://nextjs.org/docs/app/api-reference/functions/cookies)
+- [Guía con ejemplos reales](https://blog.logrocket.com/guide-cookies-next-js/)
 
 
 # 9. ANEXO: Parámetros de ruta y consulta en página de cliente
