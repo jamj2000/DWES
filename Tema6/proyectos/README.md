@@ -2,6 +2,7 @@
 
 ### [CRUD usando SQLite](https://github.com/jamj2000/nxsqlite-crud)
 ### [CRUD usando MySQL](https://github.com/jamj2000/nxmysql-crud)
+### [CRUD usando MySQL Serverless](https://github.com/jamj2000/nxmysql-crud-serverless)
 ### [CRUD usando Postgres](https://github.com/jamj2000/nxpostgres-crud)
 ### [CRUD usando Postgres en Vercel](https://github.com/jamj2000/nxpostgres-crud-vercel)
 ### [CRUD usando ORM Prisma](https://github.com/jamj2000/nxprisma-crud)
