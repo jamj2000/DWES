@@ -107,3 +107,9 @@
 [submodule "Tema4/proyectos/nxrender"]
 	path = Tema4/proyectos/nxrender
 	url = https://github.com/jamj2000/nxrender.git
+[submodule "Tema6/proyectos/nxmysql-crud"]
+	path = Tema6/proyectos/nxmysql-crud
+	url = https://github.com/jamj2000/nxmysql-crud.git
+[submodule "Tema6/proyectos/nxmysql-crud-serverless"]
+	path = Tema6/proyectos/nxmysql-crud-serverless
+	url = https://github.com/jamj2000/nxmysql-crud-serverless.git
