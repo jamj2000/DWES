@@ -12,40 +12,43 @@
 
 ---
 - [1. Introducción](#1-introducción)
-- [2. MySQL](#2-mysql)
+- [2. SQLite](#2-sqlite)
   - [2.1. Proyecto](#21-proyecto)
   - [2.2. Otros aspectos](#22-otros-aspectos)
-- [3. SQLite](#3-sqlite)
+- [3. MySQL](#3-mysql)
   - [3.1. Proyecto](#31-proyecto)
   - [3.2. Otros aspectos](#32-otros-aspectos)
-- [4. Postgres](#4-postgres)
+- [4. MySQL (Serverless)](#4-mysql-serverless)
   - [4.1. Proyecto](#41-proyecto)
   - [4.2. Otros aspectos](#42-otros-aspectos)
-- [5. Postgres (Vercel)](#5-postgres-vercel)
+- [5. Postgres](#5-postgres)
   - [5.1. Proyecto](#51-proyecto)
   - [5.2. Otros aspectos](#52-otros-aspectos)
-- [6. Primeros pasos con ORM Prisma](#6-primeros-pasos-con-orm-prisma)
-  - [6.1. Instalación del paquete prisma](#61-instalación-del-paquete-prisma)
-  - [6.2. Comandos disponibles](#62-comandos-disponibles)
-  - [6.3. Inicialización](#63-inicialización)
-- [7. Definiendo el Modelo de Datos](#7-definiendo-el-modelo-de-datos)
-  - [7.1. Generar el modelo de datos mediante introspección](#71-generar-el-modelo-de-datos-mediante-introspección)
-  - [7.2. Escribir el modelo de datos manualmente](#72-escribir-el-modelo-de-datos-manualmente)
-    - [7.2.1. Modelos](#721-modelos)
-    - [7.2.2. Relaciones](#722-relaciones)
-    - [7.2.3. Sincronizando el esquema con la base de datos](#723-sincronizando-el-esquema-con-la-base-de-datos)
-- [8. Consultas CRUD](#8-consultas-crud)
-  - [8.1. CRUD](#81-crud)
-    - [8.1.1. Create](#811-create)
-    - [8.1.2. Read](#812-read)
-    - [8.1.3. Update](#813-update)
-    - [8.1.4. Delete](#814-delete)
-  - [8.2. Seleccionar campos](#82-seleccionar-campos)
-  - [8.3. Consultar varias tablas](#83-consultar-varias-tablas)
-- [9. Ver datos de las tablas](#9-ver-datos-de-las-tablas)
-- [10. Despliegue en Vercel](#10-despliegue-en-vercel)
-- [11. ANEXO: CRUD en una única página](#11-anexo-crud-en-una-única-página)
-- [12. Referencias](#12-referencias)
+- [6. Postgres (Vercel)](#6-postgres-vercel)
+  - [6.1. Proyecto](#61-proyecto)
+  - [6.2. Otros aspectos](#62-otros-aspectos)
+- [7. Primeros pasos con ORM Prisma](#7-primeros-pasos-con-orm-prisma)
+  - [7.1. Instalación del paquete prisma](#71-instalación-del-paquete-prisma)
+  - [7.2. Comandos disponibles](#72-comandos-disponibles)
+  - [7.3. Inicialización](#73-inicialización)
+- [8. Definiendo el Modelo de Datos](#8-definiendo-el-modelo-de-datos)
+  - [8.1. Generar el modelo de datos mediante introspección](#81-generar-el-modelo-de-datos-mediante-introspección)
+  - [8.2. Escribir el modelo de datos manualmente](#82-escribir-el-modelo-de-datos-manualmente)
+    - [8.2.1. Modelos](#821-modelos)
+    - [8.2.2. Relaciones](#822-relaciones)
+    - [8.2.3. Sincronizando el esquema con la base de datos](#823-sincronizando-el-esquema-con-la-base-de-datos)
+- [9. Consultas CRUD](#9-consultas-crud)
+  - [9.1. CRUD](#91-crud)
+    - [9.1.1. Create](#911-create)
+    - [9.1.2. Read](#912-read)
+    - [9.1.3. Update](#913-update)
+    - [9.1.4. Delete](#914-delete)
+  - [9.2. Seleccionar campos](#92-seleccionar-campos)
+  - [9.3. Consultar varias tablas](#93-consultar-varias-tablas)
+- [10. Ver datos de las tablas](#10-ver-datos-de-las-tablas)
+- [12. ANEXO: CRUD en una única página](#12-anexo-crud-en-una-única-página)
+- [13. Referencias](#13-referencias)
+
 
 
 
@@ -73,175 +76,8 @@ En cualquier caso, siempre usaremos bases de datos del lado servidor.
 > ![indexedDB](assets/indexedDB.png)
 >
 
-# 2. MySQL
 
-MySQL/MariaDB es un sistema gestor de bases de datos ampliamente usado hoy en día. Para trabajar con él los haremos con el driver **`serverless-mysql`** y usando un entorno de desarrollo local, es decir un servidor de base de datos en `localhost:3306`.
-
-
-## 2.1. Proyecto
-
-La estructura del proyecto es la siguiente:
-
-![Archivos de CRUD MySQL](assets/tree-mysql-crud.png)
-
-El código fuente completo puede obtenerse desde el siguiente enlace:
-
-- [Código fuente](https://github.com/jamj2000/nxmysql-crud)
-
-Los archivos directamente relacionados con la Base de Datos, son:
-
-- `src/database/db.sql`
-- `src/lib/mysql.js`
-- `src/lib/actions.js`
-
-
-```sql
--- src/database/db.sql
-CREATE TABLE articulos (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(200) NOT NULL,
-    descripcion VARCHAR(200),
-    precio DECIMAL(10,2),
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- ALTER TABLE articulos ADD COLUMN imagen VARCHAR(200) AFTER descripcion;
-```
-
-```javascript
-// src/lib/mysql.js
-import mysql from 'serverless-mysql'
-
-export const db = mysql({
-    config: {
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        port: 3306,
-        database: 'datos'
-    }
-})
-```
-
-```javascript
-'use server'
-// src/lib/actions.js
-import { db } from '@/lib/mysql'
-
-
-export async function getArticulos() {
-
-    // ...
-    const results = await db.query('select * from articulos');
-    // ...
-
-}
-
-export async function newArticulo(formData) {
-
-    // ...
-    const query = 'insert into articulos(nombre,descripcion,precio) values (?, ?, ?)';
-    const results = await db.query(query, [nombre, descripcion, precio]);
-    // ...
-
-}
-
-
-export async function editArticulo(formData) {
-
-    // ...
-    const query = 'update articulos set ? where id = ? ';
-    const results = await db.query(query, [{nombre, descripcion, precio}, id]);
-    // ...
-
-}
-
-export async function deleteArticulo(formData) {
-
-    // ...
-    const query = 'delete from articulos where id = ?';
-    const results = await db.query(query, [id]);
-    // ...
-
-}
-```
-
-## 2.2. Otros aspectos
-
-El proyecto anterior, aunque simple, es muy adecuado desde un punto de vista didáctico, pues no sólo se muestra como trabajar con MySQL, sino que lo hace con un *driver* que permite acceso a base de datos *serverless*, lo cual es cada día más habitual. Por ejemplo, desde [PlanetScale](https://planetscale.com/features) podemos leer lo siguiente:
-
-> *PlanetScale is a MySQL-compatible serverless database that brings you scale, performance, and reliability — without sacrificing developer experience.*
-
-Pero también debemos resaltar que el código anterior es interesante por los siguientes motivos:
-
-- No sólo es posible acceder a la base de datos desde `server actions`. También es posible hacerlo desde otros componentes del servidor como, por ejemplo, `src/app/articulos/edit/page.js` y `src/app/articulos/delete/page.js`
-- El componente `src/components/Articulo.js` acepta propiedades, entre ellas el famoso **`children`**, que nos permite incrustar contenido JSX.
-- El componente `src/components/Form.js` también acepta propiedades pero, en este caso, lo interesante es observar como el contenido JSX difiere del HTML tradicional.  
-
-
-**src/components/Articulo.js**
-
-Dentro del JSX, donde aparece `{children}`, podremos insertar botones a la hora de usar el componente `Articulo`.
-
-```javascript
-// src/components/Articulo.js
-function Articulo({ children, articulo }) {
-    return (
-        <div style={{ 'border': '1px solid lightgrey', 'padding': '50px' }}>
-            <p><strong>{articulo.nombre}</strong></p>
-            <p>{articulo.descripcion}</p>
-            <p>{articulo.precio} €</p>
-            {children}
-        </div>
-    )
-}
-
-export default Articulo
-```
-
-**src/components/Form.js**
-
-Cuando trabajamos con JSX es frecuente olvidar que no se trata de código HTML. Los siguientes atributos JSX son distintos a los usados en HTML:
-
-Etiqueta  |  atributo HTML   |  atributo JSX
-----------|------------------|------------------
-`label`   | for              | **htmlFor**
-`input`   | autofocus        | **autoFocus**
-`input`   | value            | **defaultValue**
-`input`   | checked          | **defaultChecked**
-
-
-```javascript
-// src/components/Form.js
-function Form({ action, title, articulo, disabled }) {
-
-    return (
-        <form action={action} >
-            <input type='hidden' name='id' value={articulo?.id} />
-            <fieldset disabled={disabled}>
-                <label htmlFor='nombre'>Nombre</label>
-                <input type='text' id='nombre' name='nombre'
-                    placeholder='Nombre'
-                    defaultValue={articulo?.nombre} autoFocus ></input>
-                <label htmlFor='descripcion'>Descripción</label>
-                <input type='text' id='descripcion' name='descripcion'
-                    placeholder='Descripción'
-                    defaultValue={articulo?.descripcion} />
-                <label htmlFor='precio'>Precio</label>
-                <input type='number' id='precio' name='precio' min='0' step={0.01}
-                    placeholder='precio'
-                    defaultValue={articulo?.precio} />
-            </fieldset>
-            <button type='submit'>{title}</button>
-        </form>
-    )
-}
-
-export default Form
-```
-
-
-# 3. SQLite
+# 2. SQLite
 
 **SQLite es una biblioteca** en proceso que implementa un motor de base de datos SQL transaccional , autónomo y sin configuración . El código de SQLite es de dominio público y, por lo tanto, se puede utilizar de forma gratuita para cualquier fin, comercial o privado.
 
@@ -249,7 +85,7 @@ export default Form
 
 Usaremos el driver **`sqlite3`**.
 
-## 3.1. Proyecto
+## 2.1. Proyecto
 
 La estructura del proyecto es la siguiente:
 
@@ -333,7 +169,7 @@ export async function getArticulos() {
 
 }
 
-export async function newArticulo(formData) {
+export async function createArticulo(formData) {
 
     // ...
     const query = 'insert into articulos(nombre,descripcion,precio) values (?, ?, ?)';
@@ -343,7 +179,7 @@ export async function newArticulo(formData) {
 }
 
 
-export async function editArticulo(formData) {
+export async function updateArticulo(formData) {
 
     // ...
     const query = 'update articulos set nombre = ?, descripcion = ?, precio = ? where id = ? ';
@@ -364,12 +200,356 @@ export async function deleteArticulo(formData) {
 
 
 
-## 3.2. Otros aspectos
+## 2.2. Otros aspectos
 
 SQLite nos permite trabajar sin necesidad de instalar un SGBD, puesto que trabaja directamente con el archivo en disco. Por tanto, esta base de datos es muy adecuada cuando deseamos realizar pruebas sin la necesidad de instalar un sistema gestor de bases de datos.
 
 
-# 4. Postgres
+
+# 3. MySQL
+
+MySQL/MariaDB es un sistema gestor de bases de datos ampliamente usado hoy en día. Para trabajar con él los haremos con el driver **`mysql2`** y usando un entorno de desarrollo local, es decir un servidor de base de datos en `localhost:3306`. El driver `mysql2` es el más usado para trabajar con bases de datos de este tipo. Tiene varios millomes de descargas semanales según el sitio [npmjs.com](https://www.npmjs.com/package/mysql2).
+
+Este driver permite disponer de un **pool** (o grupo de conexiones) de conexiones, lo cual es muy útil cuando estamos trabajando en una aplicación web u otro software que realiza consultas frecuentes. Puedes consultar en https://sidorares.github.io/node-mysql2/docs#using-connection-pools.
+
+
+## 3.1. Proyecto
+
+La estructura del proyecto es la siguiente:
+
+![Archivos de CRUD MySQL](assets/tree-mysql-crud.png)
+
+El código fuente completo puede obtenerse desde el siguiente enlace:
+
+- [Código fuente](https://github.com/jamj2000/nxmysql-crud)
+
+Los archivos directamente relacionados con la Base de Datos, son:
+
+- `src/database/db.sql`
+- `src/lib/mysql.js`
+- `src/lib/actions.js`
+
+
+```sql
+-- src/database/db.sql
+CREATE TABLE articulos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    descripcion VARCHAR(200),
+    precio DECIMAL(10,2),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ALTER TABLE articulos ADD COLUMN imagen VARCHAR(200) AFTER descripcion;
+```
+
+```javascript
+// src/lib/mysql.js
+import mysql from 'mysql2/promise';
+
+// Para inicializar una conexión
+export const db = await mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  port: 3306,
+  database: 'test',
+});
+
+// Para inicializar un pool de conexiones
+export const const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  port: 3306,
+  database: 'test',
+
+  waitForConnections: true,
+  connectionLimit: 10,
+  maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`
+  idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
+  queueLimit: 0,
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0,
+});
+```
+
+
+```javascript
+'use server'
+// src/lib/actions.js
+import { pool } from '@/lib/mysql'
+
+
+export async function getArticulos() {
+
+    const connection = await pool.getConnection();
+    // ...
+    const sql = 'select * from `articulos`';
+    const [rows] = await connection.execute(sql);
+    // ...
+    connection.release();
+
+}
+
+export async function createArticulo(formData) {
+
+    const connection = await pool.getConnection();
+    // ...
+    const sql = 'insert into `articulos` (`nombre`, `descripcion`, `precio`) values (?, ?, ?)'
+    const values = [nombre, descripcion, precio];
+  
+    const [result, fields] = await connection.execute(sql, values)
+    // ...
+    connection.release();
+
+}
+
+
+export async function updateArticulo(formData) {
+
+    const connection = await pool.getConnection();
+    // ...
+    const sql = 'update `articulos` set `nombre` = ?, `descripcion` = ?, `precio` = ? where `id` = ?'
+    const values = [nombre, descripcion, precio, id];
+  
+    const [result, fields] = await connection.execute(sql, values)
+    // ...
+    connection.release();
+
+}
+
+export async function deleteArticulo(formData) {
+
+    const connection = await pool.getConnection();
+    // ...
+    const sql = 'delete from articulos where id = ?'
+    const values = [ id ]
+  
+    const [result, fields] = await connection.execute(sql, values);
+    // ...
+    connection.release();
+
+}
+```
+
+El driver `mysql2` permite 2 tipos de consultas:
+
+1. Consultas simples
+2. Sentencias preparadas
+
+Si vamos a ejecutar muchas veces el mismo tipo de consulta, aunque sea con datos distintos, nos interesará usar sentencias preparadas, puesto que se 
+almacenará en caché para un mejor rendimiento.      
+
+Para mayor información acerca de como realizar consultas preparadas, dispones de la siguiente documentación:
+
+- [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/insert)
+- [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/select)
+- [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/update)
+- [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/delete)
+
+
+Por otro lado, hemos usado conexiones obtenidas de un *pool*, por lo cual necesitamos las sentencias:
+
+```js
+import { pool } from '@/lib/mysql'
+// ...  
+
+const connection = await pool.getConnection();
+
+// query
+
+connection.release();
+```
+
+Si no hacemos uso del *pool*, bastaría con hacer
+
+```js
+import { db } from '@/lib/mysql'
+// ...
+
+const [rows, fields] = await db.query(sql);
+```
+
+
+## 3.2. Otros aspectos
+
+Debemos resaltar que el código anterior es interesante por los siguientes motivos:
+
+- No sólo es posible acceder a la base de datos desde `server actions`. También es posible hacerlo desde otros componentes del servidor como, por ejemplo, `src/app/articulos/update/page.js` y `src/app/articulos/delete/page.js`
+- El componente `src/components/Articulo.js` acepta propiedades, entre ellas el famoso **`children`**, que nos permite incrustar contenido JSX.
+- El componente `src/components/Form.js` también acepta propiedades pero, en este caso, lo interesante es observar como el contenido JSX difiere del HTML tradicional.  
+
+
+**src/components/Articulo.js**
+
+Dentro del JSX, donde aparece `{children}`, podremos insertar botones a la hora de usar el componente `Articulo`.
+
+```javascript
+// src/components/Articulo.js
+function Articulo({ children, articulo }) {
+    return (
+        <div style={{ 'border': '1px solid lightgrey', 'padding': '50px' }}>
+            <p><strong>{articulo.nombre}</strong></p>
+            <p>{articulo.descripcion}</p>
+            <p>{articulo.precio} €</p>
+            {children}
+        </div>
+    )
+}
+
+export default Articulo
+```
+
+**src/components/Form.js**
+
+Cuando trabajamos con JSX es frecuente olvidar que no se trata de código HTML. Los siguientes atributos JSX son distintos a los usados en HTML:
+
+| Etiqueta | atributo HTML | atributo JSX       |
+| -------- | ------------- | ------------------ |
+| `label`  | for           | **htmlFor**        |
+| `input`  | autofocus     | **autoFocus**      |
+| `input`  | value         | **defaultValue**   |
+| `input`  | checked       | **defaultChecked** |
+
+
+```javascript
+// src/components/Form.js
+function Form({ action, title, articulo, disabled }) {
+
+    return (
+        <form action={action} >
+            <input type='hidden' name='id' value={articulo?.id} />
+            <fieldset disabled={disabled}>
+                <label htmlFor='nombre'>Nombre</label>
+                <input type='text' id='nombre' name='nombre'
+                    placeholder='Nombre'
+                    defaultValue={articulo?.nombre} autoFocus ></input>
+                <label htmlFor='descripcion'>Descripción</label>
+                <input type='text' id='descripcion' name='descripcion'
+                    placeholder='Descripción'
+                    defaultValue={articulo?.descripcion} />
+                <label htmlFor='precio'>Precio</label>
+                <input type='number' id='precio' name='precio' min='0' step={0.01}
+                    placeholder='precio'
+                    defaultValue={articulo?.precio} />
+            </fieldset>
+            <button type='submit'>{title}</button>
+        </form>
+    )
+}
+
+export default Form
+```
+
+
+
+# 4. MySQL (Serverless)
+
+MySQL/MariaDB es un sistema gestor de bases de datos ampliamente usado hoy en día. Para trabajar con él los haremos con el driver **`serverless-mysql`** y usando un entorno de desarrollo local, es decir un servidor de base de datos en `localhost:3306`.
+
+
+## 4.1. Proyecto
+
+La estructura del proyecto es la siguiente:
+
+![Archivos de CRUD MySQL](assets/tree-mysql-crud-serverless.png)
+
+El código fuente completo puede obtenerse desde el siguiente enlace:
+
+- [Código fuente](https://github.com/jamj2000/nxmysql-crud-serverless)
+
+Los archivos directamente relacionados con la Base de Datos, son:
+
+- `src/database/db.sql`
+- `src/lib/mysql.js`
+- `src/lib/actions.js`
+
+
+```sql
+-- src/database/db.sql
+CREATE TABLE articulos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    descripcion VARCHAR(200),
+    precio DECIMAL(10,2),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ALTER TABLE articulos ADD COLUMN imagen VARCHAR(200) AFTER descripcion;
+```
+
+```javascript
+// src/lib/mysql.js
+import mysql from 'serverless-mysql'
+
+Podemos inicializar la conexión de esta manera
+export const db = mysql({
+    config: {
+        host: 'localhost',
+        user: 'root',
+        password: 'root',
+        port: 3306,
+        database: 'crud'
+    }
+})
+
+// También podemos inicializar la conexión de esta otra manera
+// export const db = mysql('mysql://root:root@localhost:3306/crud')
+```
+
+```javascript
+'use server'
+// src/lib/actions.js
+import { db } from '@/lib/mysql'
+
+
+export async function getArticulos() {
+
+    // ...
+    const results = await db.query('select * from articulos');
+    // ...
+
+}
+
+export async function createArticulo(formData) {
+
+    // ...
+    const query = 'insert into articulos(nombre,descripcion,precio) values (?, ?, ?)';
+    const results = await db.query(query, [nombre, descripcion, precio]);
+    // ...
+
+}
+
+
+export async function updateArticulo(formData) {
+
+    // ...
+    const query = 'update articulos set ? where id = ? ';
+    const results = await db.query(query, [{nombre, descripcion, precio}, id]);
+    // ...
+
+}
+
+export async function deleteArticulo(formData) {
+
+    // ...
+    const query = 'delete from articulos where id = ?';
+    const results = await db.query(query, [id]);
+    // ...
+
+}
+```
+
+## 4.2. Otros aspectos
+
+El proyecto anterior, aunque simple, es muy adecuado desde un punto de vista didáctico, pues no sólo se muestra como trabajar con MySQL, sino que lo hace con un *driver* que permite acceso a base de datos *serverless*, lo cual es cada día más habitual. Por ejemplo, desde [PlanetScale](https://planetscale.com/features) podemos leer lo siguiente:
+
+> *PlanetScale is a MySQL-compatible serverless database that brings you scale, performance, and reliability — without sacrificing developer experience.*
+
+
+
+# 5. Postgres
 
 [Postgres](https://es.wikipedia.org/wiki/PostgreSQL) es un sistema gestor de bases de datos que está ganando bastante aceptación últimamente. Esto es debido principalmente a numerosos factores:
 
@@ -383,7 +563,7 @@ SQLite nos permite trabajar sin necesidad de instalar un SGBD, puesto que trabaj
 Para trabajar con él los haremos con el driver **`pg`** y usando un entorno de desarrollo local, es decir un servidor de base de datos en `localhost:5432`.
 
 
-## 4.1. Proyecto
+## 5.1. Proyecto
 
 La estructura del proyecto es la siguiente:
 
@@ -399,6 +579,20 @@ Los archivos directamente relacionados con la Base de Datos, son:
 - `src/database/seed.mjs`
 - `src/lib/postgres.js`
 - `src/lib/actions.js`
+
+
+```javascript
+// src/database/config.mjs
+const config = {
+    user: 'postgres',
+    password: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    database: 'postgres',
+}
+
+export default config
+```
 
 
 ```javascript
@@ -443,23 +637,32 @@ const load = async () => {
 load()
 ```
 
-```javascript
-// src/database/config.mjs
-const config = {
-    user: 'postgres',
-    password: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    database: 'postgres',
-}
 
-export default config
+```js
+// src/lib/postgres.js
+import pg from 'pg'
+import config from '../database/config.mjs'
+
+const { Pool } = pg
+
+export const pool = new Pool(config)
+
+/*
+// OTRA FORMA DE CREAR EL POOL
+import pg from 'pg';
+
+const { Pool } = pg;
+
+export const pool = new Pool({
+  connectionString: "postgres://usuario:contraseña@host:5432/basedatos?sslmode=require"
+})
 ```
+
 
 ```javascript
 'use server'
 // src/lib/actions.js
-import { pool } from '@vercel/postgres';
+import { pool } from '@/lib/postgres'
 
 
 export async function getArticulos() {
@@ -470,7 +673,7 @@ export async function getArticulos() {
 
 }
 
-export async function newArticulo(formData) {
+export async function createArticulo(formData) {
 
     // ...
     const query = 'insert into articulos(nombre,descripcion,precio) values ($1, $2, $3)';
@@ -480,7 +683,7 @@ export async function newArticulo(formData) {
 }
 
 
-export async function editArticulo(formData) {
+export async function updateArticulo(formData) {
 
     // ...
     const query = 'update articulos set nombre=$1, descripcion=$2, precio=$3 where id=$4';
@@ -500,7 +703,7 @@ export async function deleteArticulo(formData) {
 ```
 
 
-## 4.2. Otros aspectos
+## 5.2. Otros aspectos
 
 [El driver *`pg`* es uno de los más descargados](https://www.npmjs.com/package/pg), con más de 5M de descargas semanales. Este driver permite disponer de un **pool** (o grupo de conexiones) de conexiones, lo cual es muy útil cuando estamos trabajando en una aplicación web u otro software que realiza consultas frecuentes. 
 
@@ -508,7 +711,7 @@ Otro driver similar es [`postgres`](https://www.npmjs.com/package/postgres), aun
 
 
 
-# 5. Postgres (Vercel)
+# 6. Postgres (Vercel)
 
 A diferencia del apartado anterior, en el que hemos trabajado con Postgres en un entorno local, en este apartado usaremos Postgres en la nube.
 
@@ -517,7 +720,7 @@ Aunque usaremos la base de datos Postgres proporcionada por [Vercel](https://ver
 Para trabajar con él los haremos con el driver **`@vercel/postgres`** y usando el [DBaaS proporcionado por Vercel](https://vercel.com/storage/postgres).
 
 
-## 5.1. Proyecto
+## 6.1. Proyecto
 
 
 La estructura del proyecto es la siguiente:
@@ -591,7 +794,7 @@ export async function getArticulos() {
 
 }
 
-export async function newArticulo(formData) {
+export async function createArticulo(formData) {
 
     // ...
     const results = await sql`
@@ -602,7 +805,7 @@ export async function newArticulo(formData) {
 }
 
 
-export async function editArticulo(formData) {
+export async function updateArticulo(formData) {
 
     // ...
     const results = await sql` 
@@ -622,7 +825,7 @@ export async function deleteArticulo(formData) {
 ```
 
 
-## 5.2. Otros aspectos
+## 6.2. Otros aspectos
 
 Por supuesto, un prerrequisito para que todo ello funcione es tener creada una base de datos en Vercel. Puedes hacerlo desde tu `dashboard` en `Add New...`, `Storage`.
 
@@ -644,7 +847,7 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 
 
 
-# 6. Primeros pasos con ORM Prisma
+# 7. Primeros pasos con ORM Prisma
 
 Un **ORM**, o **Object Relational Mapper**, es una pieza de software diseñada para traducir entre las representaciones de datos utilizadas por las bases de datos y las utilizadas en la programación orientada a objetos.
 
@@ -677,18 +880,18 @@ En general, las tareas básicas a la hora de gestionar la persistencia de datos 
 Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
 
 
-## 6.1. Instalación del paquete prisma
+## 7.1. Instalación del paquete prisma
 
 ```sh 
 npm install prisma -D
 npm install @prisma/client
 ``` 
 
-## 6.2. Comandos disponibles
+## 7.2. Comandos disponibles
 
 `npx prisma`
 
-## 6.3. Inicialización
+## 7.3. Inicialización
 
 `npx prisma init`
 
@@ -744,7 +947,7 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 > `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>'`
 
 
-# 7. Definiendo el Modelo de Datos
+# 8. Definiendo el Modelo de Datos
 
 Hay dos formas alternativas de definir un modelo de datos:
 
@@ -756,7 +959,7 @@ Hay dos formas alternativas de definir un modelo de datos:
 Nosotros usaremos la segunda forma, aunque se explica la primera forma de forma somera a continuación.
 
 
-## 7.1. Generar el modelo de datos mediante introspección
+## 8.1. Generar el modelo de datos mediante introspección
 
 En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, generaremos el modelo a partir de dichas tablas. Para ello ejecutamos:
 
@@ -772,7 +975,7 @@ npx prisma generate
 ![prisma generate](assets/generate.png)
 
 
-## 7.2. Escribir el modelo de datos manualmente
+## 8.2. Escribir el modelo de datos manualmente
 
 En este otro caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
 
@@ -797,7 +1000,7 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 
 
 
-### 7.2.1. Modelos
+### 8.2.1. Modelos
 
 - [Modelos en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/models)
 
@@ -861,18 +1064,18 @@ Prisma define los siguientes tipos de datos:
 
 Estos tipos de datos son mapeados a los tipos nativos de cada base de datos según se muestra en la siguiente tabla:
 
-Prisma  	  | String        | Boolean    | Int      | BigInt    | Float             | Decimal        | DateTime     | Json
-------------|---------------|------------|----------|-----------|-------------------|----------------|--------------|----------------
-PostgreSQL	| text          | boolean    | integer  | bigint    | double precision  | decimal(65,30) | timestamp(3) | jsonb
-SQL Server	| nvarchar(1000)|tinyint     | int      | int       | float(53)         | decimal(32,16) | datetime2    | Not supported
-MySQL	      | varchar(191)  |TINYINT(1)  | INT      | BIGINT    | DOUBLE            | DECIMAL(65,30) | DATETIME(3)  | JSON
-MongoDB	    | String        |Bool        | Int      | Long      | Double            | Not supported  | Timestamp    | A valid BSON object (Relaxed mode) 
-SQLite	    | TEXT          |INTEGER     | INTEGER  | INTEGER   | REAL              | DECIMAL        | NUMERIC      | Not supported
-CockroachDB	| STRING        |BOOL        | INT      | INTEGER   | DOUBLE PRECISION  | DECIMAL        | TIMESTAMP    | JSONB
+| Prisma      | String         | Boolean    | Int     | BigInt  | Float            | Decimal        | DateTime     | Json                               |
+| ----------- | -------------- | ---------- | ------- | ------- | ---------------- | -------------- | ------------ | ---------------------------------- |
+| PostgreSQL  | text           | boolean    | integer | bigint  | double precision | decimal(65,30) | timestamp(3) | jsonb                              |
+| SQL Server  | nvarchar(1000) | tinyint    | int     | int     | float(53)        | decimal(32,16) | datetime2    | Not supported                      |
+| MySQL       | varchar(191)   | TINYINT(1) | INT     | BIGINT  | DOUBLE           | DECIMAL(65,30) | DATETIME(3)  | JSON                               |
+| MongoDB     | String         | Bool       | Int     | Long    | Double           | Not supported  | Timestamp    | A valid BSON object (Relaxed mode) |
+| SQLite      | TEXT           | INTEGER    | INTEGER | INTEGER | REAL             | DECIMAL        | NUMERIC      | Not supported                      |
+| CockroachDB | STRING         | BOOL       | INT     | INTEGER | DOUBLE PRECISION | DECIMAL        | TIMESTAMP    | JSONB                              |
 
 
 
-### 7.2.2. Relaciones 
+### 8.2.2. Relaciones 
 
 - [Relaciones en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations)
 
@@ -972,7 +1175,7 @@ model Category {
 Esto se conoce como relación implícita de muchos a muchos. Esta relación todavía se manifiesta en una tabla de relaciones en la base de datos subyacente. Sin embargo, Prisma gestiona esta tabla de relaciones.
 
 
-### 7.2.3. Sincronizando el esquema con la base de datos
+### 8.2.3. Sincronizando el esquema con la base de datos
 
 
 Siempre que actualices tu esquema Prisma, deberás actualizar el esquema de tu base de datos utilizando `npx prisma migrate dev` o `npx prisma db push`. Esto mantendrá el esquema de tu base de datos sincronizado con tu esquema Prisma. Los comandos también regenerarán Prisma Client.
@@ -994,11 +1197,11 @@ npx prisma db push
 > **IMPORTANTE**: La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
 
 
-# 8. Consultas CRUD
+# 9. Consultas CRUD
 
 - [Consutlas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
 
-## 8.1. CRUD
+## 9.1. CRUD
 
 CRUD es el acrónimo para:
 
@@ -1009,7 +1212,7 @@ CRUD es el acrónimo para:
 
 Estas son las 4 operaciones básicas necesarias para la gestión de información.
 
-### 8.1.1. Create
+### 9.1.1. Create
 
 ```javascript
 const user = await prisma.user.create({
@@ -1020,7 +1223,7 @@ const user = await prisma.user.create({
 })
 ```
 
-### 8.1.2. Read
+### 9.1.2. Read
 
 **Encontrar un registro por ID**
 
@@ -1038,7 +1241,7 @@ const user = await prisma.user.findUnique({
 const users = await prisma.user.findMany()
 ```
 
-### 8.1.3. Update
+### 9.1.3. Update
 
 **Actualizar un registro por ID**
 
@@ -1053,7 +1256,7 @@ const updateUser = await prisma.user.update({
 })
 ```
 
-### 8.1.4. Delete
+### 9.1.4. Delete
 
 **Elimnar un registro por ID**
 
@@ -1065,7 +1268,7 @@ const deleteUser = await prisma.user.delete({
 })
 ```
 
-## 8.2. Seleccionar campos
+## 9.2. Seleccionar campos
 
 
 **Obtener email y name del user con id 22**
@@ -1082,7 +1285,7 @@ const getUser = await prisma.user.findUnique({
 })
 ```
 
-## 8.3. Consultar varias tablas
+## 9.3. Consultar varias tablas
 
 Algunos ejemplos.
 
@@ -1168,7 +1371,7 @@ const user = await prisma.user.findFirst({
 })
 ```
 
-# 9. Ver datos de las tablas
+# 10. Ver datos de las tablas
 
 Ejecutamos
 
@@ -1183,7 +1386,7 @@ y abrimos en el navegador la URL http://localhost:5555
 ![prisma studio 2](assets/studio2.png)
 
 
-# 10. Despliegue en Vercel
+    # 11. Despliegue en Vercel
 
 
 Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
@@ -1201,7 +1404,7 @@ Para evitar este problema, debemos añadir `prisma generate` al script `postinst
 }
 ```
 
-# 11. ANEXO: CRUD en una única página
+# 12. ANEXO: CRUD en una única página
 
 Es posible realizar las 4 operaciones de CRUD desde una única página. Este caso es habitual cuando se trabaja con SPA (Single Page Applications). 
 
@@ -1216,7 +1419,7 @@ El segundo ejemplo es más complejo y dispone de mayor interactividad con el usu
 
 
 
-# 12. Referencias
+# 13. Referencias
 
 - [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 - [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)

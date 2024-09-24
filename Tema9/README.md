@@ -173,7 +173,7 @@ Independientemente de la PWA, para generar los distintos tamaños del [**`favico
 
 # 9. CASOS PRÁCTICOS AVANZADOS
 
-En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso bases de datos. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
+En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso bases de datos. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos.        
 
 Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar el siguiente proyecto, que está desarrollado y explicado (en inglés) con cierta profundidad. 
 
