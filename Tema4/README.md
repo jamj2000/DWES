@@ -880,6 +880,27 @@ export default function MyComponent() {
 ```
 
 
+**Radix UI** ( [sitio oficial](https://www.radix-ui.com/icons) )
+
+```sh
+npm  install  @radix-ui/react-icons
+```
+
+
+```js
+import { FaceIcon, ImageIcon, SunIcon } from '@radix-ui/react-icons'
+
+function MyComponent () {
+  return (
+    <div>           
+      <FaceIcon />
+      <SunIcon />
+      <ImageIcon />
+    </div>
+  )
+}
+```
+
 **React Icons**  ( [sitio oficial](https://react-icons.github.io/react-icons/) )
 
 Se trata de un **megaconjunto de iconos, el cual incluye muchos subconjuntos, entre los que están los que hemos visto anteriormente**.
