@@ -1,6 +1,8 @@
 [submodule "Tema3/proyectos/nxapp-router"]
 	path = Tema3/proyectos/nxapp-router
 	url = https://github.com/jamj2000/nxapp-router.git
+
+
 [submodule "Tema4/proyectos/nxapi-memory"]
 	path = Tema4/proyectos/nxapi-memory
 	url = https://github.com/jamj2000/nxapi-memory.git
@@ -16,6 +18,10 @@
 [submodule "Tema4/proyectos/nxpagination"]
 	path = Tema4/proyectos/nxpagination
 	url = https://github.com/jamj2000/nxpagination.git
+[submodule "Tema4/proyectos/nxrender"]
+	path = Tema4/proyectos/nxrender
+	url = https://github.com/jamj2000/nxrender.git
+
 
 [submodule "Tema5/proyectos/nxform"]
 	path = Tema5/proyectos/nxform
@@ -58,6 +64,32 @@
 [submodule "Tema6/proyectos/nxprisma-crud-simple1"]
 	path = Tema6/proyectos/nxprisma-crud-simple1
 	url = https://github.com/jamj2000/nxprisma-crud-simple1.git
+[submodule "Tema6/proyectos/nxprisma-crud-zoo"]
+	path = Tema6/proyectos/nxprisma-crud-zoo
+	url = https://github.com/jamj2000/nxprisma-crud-zoo.git
+[submodule "Tema6/proyectos/nxpostgres-crud-vercel"]
+	path = Tema6/proyectos/nxpostgres-crud-vercel
+	url = https://github.com/jamj2000/nxpostgres-crud-vercel.git
+[submodule "Tema6/proyectos/nxmysql-crud"]
+	path = Tema6/proyectos/nxmysql-crud
+	url = https://github.com/jamj2000/nxmysql-crud.git
+[submodule "Tema6/proyectos/nxmysql-crud-serverless"]
+	path = Tema6/proyectos/nxmysql-crud-serverless
+	url = https://github.com/jamj2000/nxmysql-crud-serverless.git
+
+
+[submodule "Tema7/proyectos/nxchart"]
+	path = Tema7/proyectos/nxchart
+	url = https://github.com/jamj2000/nxchart.git
+[submodule "Tema7/proyectos/nxchart-streaming"]
+	path = Tema7/proyectos/nxchart-streaming
+	url = https://github.com/jamj2000/nxchart-streaming.git
+[submodule "Tema7/proyectos/semana-fct"]
+	path = Tema7/proyectos/semana-fct
+	url = https://github.com/jamj2000/semana-fct
+[submodule "Tema7/proyectos/nxgoogle-maps"]
+	path = Tema7/proyectos/nxgoogle-maps
+	url = https://github.com/jamj2000/nxgoogle-maps.git
 
 
 [submodule "Tema8/proyectos/nxauth-middleware"]
@@ -86,30 +118,3 @@
 [submodule "examenes/examen-dwes-bis-nextjs-prisma"]
 	path = examenes/examen-dwes-bis-nextjs-prisma
 	url = https://github.com/jamj2000/examen-dwes-bis-nextjs-prisma.git
-[submodule "Tema7/proyectos/nxchart"]
-	path = Tema7/proyectos/nxchart
-	url = https://github.com/jamj2000/nxchart.git
-[submodule "Tema7/proyectos/nxchart-streaming"]
-	path = Tema7/proyectos/nxchart-streaming
-	url = https://github.com/jamj2000/nxchart-streaming.git
-[submodule "Tema7/proyectos/semana-fct"]
-	path = Tema7/proyectos/semana-fct
-	url = https://github.com/jamj2000/semana-fct
-[submodule "Tema7/proyectos/nxgoogle-maps"]
-	path = Tema7/proyectos/nxgoogle-maps
-	url = https://github.com/jamj2000/nxgoogle-maps.git
-[submodule "Tema6/proyectos/nxprisma-crud-zoo"]
-	path = Tema6/proyectos/nxprisma-crud-zoo
-	url = https://github.com/jamj2000/nxprisma-crud-zoo.git
-[submodule "Tema6/proyectos/nxpostgres-crud-vercel"]
-	path = Tema6/proyectos/nxpostgres-crud-vercel
-	url = https://github.com/jamj2000/nxpostgres-crud-vercel.git
-[submodule "Tema4/proyectos/nxrender"]
-	path = Tema4/proyectos/nxrender
-	url = https://github.com/jamj2000/nxrender.git
-[submodule "Tema6/proyectos/nxmysql-crud"]
-	path = Tema6/proyectos/nxmysql-crud
-	url = https://github.com/jamj2000/nxmysql-crud.git
-[submodule "Tema6/proyectos/nxmysql-crud-serverless"]
-	path = Tema6/proyectos/nxmysql-crud-serverless
-	url = https://github.com/jamj2000/nxmysql-crud-serverless.git
