@@ -1,5 +1,5 @@
-[submodule "Tema4/proyectos/nxapp-router"]
-	path = Tema4/proyectos/nxapp-router
+[submodule "Tema3/proyectos/nxapp-router"]
+	path = Tema3/proyectos/nxapp-router
 	url = https://github.com/jamj2000/nxapp-router.git
 [submodule "Tema4/proyectos/nxapi-memory"]
 	path = Tema4/proyectos/nxapi-memory
