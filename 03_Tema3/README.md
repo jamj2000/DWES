@@ -2,12 +2,10 @@
 
 # Tema 3: CONTENIDO ESTÁTICO <!-- omit in toc -->
 > Programación basada en lenguajes de marcas con código embebido  
-> NODE, MÓDULOS EXTERNOS, EXPRESS, APIs REST, FETCH 
+> App router, JSX, Tailwind
 
-**[`CÓDIGO DE EJEMPLO`](codigo)**
 
-<img src="assets/nodedotjs.svg" width="80" height="80">
-<img src="assets/express.svg" width="80" height="80">
+<img src="assets/nextdotjs.svg" width="80" height="80">
 
 ---
 - [1. Introducción a NextJS](#1-introducción-a-nextjs)
