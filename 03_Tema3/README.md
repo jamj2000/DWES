@@ -2,7 +2,7 @@
 
 # Tema 3: CONTENIDO ESTÁTICO <!-- omit in toc -->
 > Programación basada en lenguajes de marcas con código embebido  
-> App router, JSX, Tailwind
+> App Router, JSX, Tailwind
 
 
 <img src="assets/nextdotjs.svg" width="80" height="80">
@@ -40,6 +40,7 @@
   - [6.4. Organización del proyecto](#64-organización-del-proyecto)
   - [6.5. Contenido estático vs Contenido dinámico](#65-contenido-estático-vs-contenido-dinámico)
   - [6.6. Renderizado en el Servidor vs Renderizado en el Cliente](#66-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
+- [7. Referencias](#7-referencias)
 
 
 
@@ -1467,3 +1468,7 @@ Consume los recursos del servidor               | Consume los recursos del clien
 Ofrece un mejor rendimiento en dispositivos de baja potencia | Es posible que no ofrezca un mejor rendimiento en dispositivos de baja potencia
 Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado
 
+
+# 7. Referencias
+
+- [Documentación de NextJS](https://nextjs.org/docs)

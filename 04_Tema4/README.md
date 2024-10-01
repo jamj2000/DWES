@@ -6,12 +6,15 @@
 
 **[`PROYECTOS DE EJEMPLO`](proyectos)**
 
+<img src="assets/nextdotjs.svg" width="80" height="80">
+
 ---
 
 - [1. Introducción](#1-introducción)
 - [2. Parámetros de URL](#2-parámetros-de-url)
+  - [2.1. Parámetros de ruta vs Parámetros de consulta.](#21-parámetros-de-ruta-vs-parámetros-de-consulta)
 - [3. Funciones dinámicas](#3-funciones-dinámicas)
-  - [3.1. Renderizado en el Servidor vs Renderizado en el Cliente](#31-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
+- [4. Renderizado en el Servidor vs Renderizado en el Cliente](#4-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
 - [5. Cookies](#5-cookies)
   - [5.1. Tipos de cookies](#51-tipos-de-cookies)
   - [5.2. Generar Cookies](#52-generar-cookies)
@@ -22,12 +25,16 @@
 
 
 
+
 --- 
 
 
 # 1. Introducción
 
 # 2. Parámetros de URL
+
+
+![anatomía de una url](assets/anatomy-of-url.png)
 
 Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
 
@@ -37,7 +44,7 @@ En las páginas gestionadas por el `app router` también podemos acceder a los 2
 - **Parámetros de consulta** `Query Parameters` o `Query Strings` 
 
 
-Si tenemos la siguiente ruta:
+Si tenemos la siguiente URL:
 
 **`http://localhost:3000/products/bristol/books?sort=author&skip=1`**
 
@@ -65,6 +72,34 @@ books
 author
 1
 ``` 
+
+En este caso tenemos:
+
+- **Parámetros de ruta**: `store`, `category`
+- **Parámetros de consulta**: `sort`, `skip`
+
+
+## 2.1. Parámetros de ruta vs Parámetros de consulta.
+
+Los parámetros de ruta y los parámetros de consulta transportan información al servidor a través de la URL. Ambos se utilizan para el mismo propósito. Pero tienen algunas diferencias.
+
+- Los parámetros de ruta, debes colocarlos individualmente dentro de la ruta y son obligatorios.
+- Sólo puedes indicar los parámetros de ruta especificados en la URL y en el mismo orden estipulado.
+- Los parámetros de consulta no modifican la ruta, debes agregarlos al final de la URL y son opcionales. 
+- Puedes indicar tantos parámetros de consulta, y en el orden que quieras, después de la ruta.
+
+
+Es posible expresar una URL dinámica tanto de una forma como de la otra.
+
+![parámetros de url](assets/url-parameters.png)
+
+
+Aunque, a la hora de decidir si usar parámetros de ruta o parámetros de consulta, se siguen los siguientes convenios:
+
+- Los parámetros de ruta nos proporcionan una URL más limpia.
+- **Usamos parámetros de ruta si dicha información debe ir siempre en la URL.**
+- **Usamos parámetros de consulta si dicha información es opcional, como información de filtrado o búsqueda.**
+
 
 
 # 3. Funciones dinámicas
@@ -106,27 +141,17 @@ El uso de cualquiera de estas funciones optará por toda la ruta hacia la repres
  
 
 
-
-
-
-
-
-
-
-NextJS, por defecto, hace *build* a contenido estático. Si deseamos que el contenido de una página sea dinámico deberemos indicarlo con el siguiente código. 
-
-
-```js
-export const dynamic = 'force-dynamic'
-```
-
 > **NOTA:**
 >
-> El contenido dinámico requiere de renderizado en el lado servidor, lo cual ralentiza la respuesta al usuario.
->  
+> NextJS, por defecto, hace *build* a contenido estático. El contenido dinámico requiere de renderizado en el lado servidor, lo cual ralentiza la respuesta al usuario. Si deseamos que el contenido de una página sea dinámico deberemos indicarlo con el siguiente código. 
+>
+>
+>```js
+>export const dynamic = 'force-dynamic'
+>```
 
 
-## 3.1. Renderizado en el Servidor vs Renderizado en el Cliente
+# 4. Renderizado en el Servidor vs Renderizado en el Cliente
 
 El renderizado es la **representación gráfica del contenido de una página**, es decir, el proceso necesario para mostrar una página web en un navegador.
 
@@ -341,8 +366,7 @@ Parámetro de consulta: screen -> 15
 ```
 
 
-
 # 7. Referencias
 
-- [Documentación de NextJS](https://nextjs.org/docs)
 - [Listado de APIs públicas](https://publicapis.dev)
+
