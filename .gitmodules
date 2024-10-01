@@ -107,3 +107,15 @@
 [submodule "07_Tema7/proyectos/nxapi-mysql"]
 	path = 07_Tema7/proyectos/nxapi-mysql
 	url = https://github.com/jamj2000/nxapi-mysql.git
+[submodule "07_Tema7/proyectos/nxchart"]
+	path = 07_Tema7/proyectos/nxchart
+	url = https://github.com/jamj2000/nxchart.git
+[submodule "07_Tema7/proyectos/nxchart-streaming"]
+	path = 07_Tema7/proyectos/nxchart-streaming
+	url = https://github.com/jamj2000/nxchart-streaming.git
+[submodule "07_Tema7/proyectos/nxgoogle-maps"]
+	path = 07_Tema7/proyectos/nxgoogle-maps
+	url = https://github.com/jamj2000/nxgoogle-maps.git
+[submodule "07_Tema7/proyectos/semana-fct"]
+	path = 07_Tema7/proyectos/semana-fct
+	url = https://github.com/jamj2000/semana-fct.git
