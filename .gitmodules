@@ -69,18 +69,7 @@
 	url = https://github.com/jamj2000/nxmysql-crud-serverless.git
 
 
-[submodule "07_Tema7/proyectos/nxchart"]
-	path = 07_Tema7/proyectos/nxchart
-	url = https://github.com/jamj2000/nxchart.git
-[submodule "07_Tema7/proyectos/nxchart-streaming"]
-	path = 07_Tema7/proyectos/nxchart-streaming
-	url = https://github.com/jamj2000/nxchart-streaming.git
-[submodule "07_Tema7/proyectos/semana-fct"]
-	path = 07_Tema7/proyectos/semana-fct
-	url = https://github.com/jamj2000/semana-fct
-[submodule "07_Tema7/proyectos/nxgoogle-maps"]
-	path = 07_Tema7/proyectos/nxgoogle-maps
-	url = https://github.com/jamj2000/nxgoogle-maps.git
+
 
 
 [submodule "08_Tema8/proyectos/nxauth-middleware"]
