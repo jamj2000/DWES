@@ -3,24 +3,15 @@
 	url = https://github.com/jamj2000/nxapp-router.git
 
 
-[submodule "04_Tema4/proyectos/nxapi-memory"]
-	path = 04_Tema4/proyectos/nxapi-memory
-	url = https://github.com/jamj2000/nxapi-memory.git
-[submodule "04_Tema4/proyectos/nxapi-mongodb"]
-	path = 04_Tema4/proyectos/nxapi-mongodb
-	url = https://github.com/jamj2000/nxapi-mongodb.git
-[submodule "04_Tema4/proyectos/nxapi-mysql"]
-	path = 04_Tema4/proyectos/nxapi-mysql
-	url = https://github.com/jamj2000/nxapi-mysql.git
-[submodule "04_Tema4/proyectos/nxcookie"]
-	path = 04_Tema4/proyectos/nxcookie
-	url = https://github.com/jamj2000/nxcookie.git
 [submodule "04_Tema4/proyectos/nxpagination"]
 	path = 04_Tema4/proyectos/nxpagination
 	url = https://github.com/jamj2000/nxpagination.git
 [submodule "04_Tema4/proyectos/nxrender"]
 	path = 04_Tema4/proyectos/nxrender
 	url = https://github.com/jamj2000/nxrender.git
+[submodule "04_Tema4/proyectos/nxcookie"]
+	path = 04_Tema4/proyectos/nxcookie
+	url = https://github.com/jamj2000/nxcookie.git
 
 
 [submodule "05_Tema5/proyectos/nxform"]
