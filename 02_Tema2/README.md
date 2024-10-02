@@ -120,7 +120,76 @@ const a = { nombre: 'Juan', edad: 20 };
 
 # 6. Operaciones frecuentes con arrays
 
+**Sección de un array**
+
+```js
+let a = [ 1, 2, 3, 4, 5 ]
+
+a.slice(1)     // [ 2, 3, 4, 5 ]
+a.slice(-2)    // [ 4, 5 ]
+a.slice(0,3)   // [ 1, 2, 3 ]
+```
+
+
+**Añadir al final**
+
+
+
+**Insertar en cualquier posición**
+
+
+
+
+**Sustituir un elemento**
+
+
+
+**Sustituir varios elementos**
+
+
+
+**Operaciones de filtrado, ordenación y mapeo**
+
+```js
+const nombres = ["Ángel", "Anabel", "Eva", "Ana", "elena", "David" ];
+
+const resultado = nombres
+  .filter(nombre => nombre.length > 4)  
+  .sort( (a, b) => a.localeCompare(b));                          
+
+
+
+const nums = [-10, 5, -3, 8, -7];
+
+const resultado = nums
+  .map(num => Math.abs(num))        
+  .sort((a, b) => a - b); 
+
+
+
+const jugadores = [
+  { nombre: "Alicia", score: 4 },
+  { nombre: "Roberto", score: 7 },
+  { nombre: "Carlos", score: 9 },
+  { nombre: "David", score: 3 }
+];
+
+const resultado = jugadores
+  .filter(jugador => jugador.score > 5)  
+  .map(jugador => jugador.nombre)          
+  .sort( (a, b) => a.localeCompare(b) );   
+```
 
 
 # 7. Operaciones frecuentes con objetos
 
+```js
+```
+
+
+```js
+let persona = { nombre:"José",  edad:30,  direccion: {calle: "antigua", num: 1} };
+
+
+let copia_profunda = JSON.parse(JSON.stringify(persona));
+```
