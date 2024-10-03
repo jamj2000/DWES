@@ -4,7 +4,7 @@
 > Utilización de técnicas de acceso a datos  
 > BASES DE DATOS sin ORM. BASES DE DATOS con ORM, PRISMA
 
-**[`PROYECTOS DE EJEMPLO`](proyectos)**
+**[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
 <img src="assets/nextdotjs.svg" width="80" height="80">
 <img src="assets/mysql.svg" width="80" height="80">

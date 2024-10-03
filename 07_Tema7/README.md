@@ -4,7 +4,7 @@
 > Programación de servicios Web
 > APIs, BIBLIOTECAS DE UTILIDAD.
 
-**[`PROYECTOS DE EJEMPLO`](proyectos)**
+**[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
 <img src="assets/nextdotjs.svg" width="80" height="80">
 

@@ -4,6 +4,7 @@
 > Programación basada en lenguajes de marcas con código embebido  
 > App Router, JSX, Tailwind
 
+**[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
 <img src="assets/nextdotjs.svg" width="80" height="80">
 

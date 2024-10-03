@@ -4,7 +4,7 @@
 > Desarrollo de aplicaciones Web utilizando código embebido  
 > PARAMS, SEARCHPARAMS, COOKIES
 
-**[`PROYECTOS DE EJEMPLO`](proyectos)**
+**[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
 <img src="assets/nextdotjs.svg" width="80" height="80">
 

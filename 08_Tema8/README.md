@@ -4,7 +4,7 @@
 > Generación dinámica de páginas Web interactivas  
 > AUTENTICACIÓN DE USUARIOS, NEXT AUTH. OAUTH, CREDENTIALS.
 
-**[`PROYECTOS DE EJEMPLO`](proyectos)**
+**[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
 <img src="assets/nextdotjs.svg" width="80" height="80">
 
