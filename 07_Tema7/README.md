@@ -31,7 +31,8 @@
   - [3.3. Arrastrar y Soltar (Drag \& Drop)](#33-arrastrar-y-soltar-drag--drop)
     - [3.3.1. Instalación de biblioteca](#331-instalación-de-biblioteca)
     - [3.3.2. Uso](#332-uso)
-    - [3.3.3. Documentación](#333-documentación)
+    - [3.3.3. Otras bibliotecas](#333-otras-bibliotecas)
+    - [3.3.4. Documentación](#334-documentación)
   - [3.4. Gráficos](#34-gráficos)
     - [3.4.1. Instalación](#341-instalación)
     - [3.4.2. Uso](#342-uso)
@@ -42,7 +43,7 @@
       - [3.4.3.4. InfluxDB](#3434-influxdb)
     - [3.4.4. Documentación](#344-documentación)
     - [3.4.5. Curiosidad](#345-curiosidad)
-    - [3.4.6. Otras librerías](#346-otras-librerías)
+    - [3.4.6. Otras bibliotecas](#346-otras-bibliotecas)
   - [3.5. Creación de PDFs](#35-creación-de-pdfs)
     - [3.5.1. Instalación](#351-instalación)
     - [3.5.2. Uso](#352-uso)
@@ -67,6 +68,7 @@
     - [3.10.1. Instalación](#3101-instalación)
     - [3.10.2. Uso](#3102-uso)
     - [3.10.3. Documentación](#3103-documentación)
+
 
 
 --- 
@@ -512,8 +514,16 @@ npm  install  react  react-dom  react-dnd  react-dnd-html5-backend
 - Para React DnD seguir el siguiente tutorial: https://react-dnd.github.io/react-dnd/docs/tutorial 
 
 
+### 3.3.3. Otras bibliotecas
 
-### 3.3.3. Documentación
+Otras herramientas que nos permiten hacer DnD son:
+
+- [Swapy](https://swapy.tahazsh.com/)
+- [Dockview](https://dockview.dev/)
+- [React Mosaic](https://github.com/nomcopter/react-mosaic#readme)
+
+
+### 3.3.4. Documentación
 
 - [DnD Kit](https://docs.dndkit.com/)
 - [React DnD](https://react-dnd.github.io/react-dnd/docs/overview)
@@ -890,7 +900,7 @@ import {Bar, Pie } from 'react-roughviz'
 
 ```
 
-### 3.4.6. Otras librerías
+### 3.4.6. Otras bibliotecas
 
 Existen numerosas bibliotecas para la realización de gráficas. Algunas de ellas son:
 
@@ -1017,7 +1027,7 @@ El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el p
 
 > **NOTA:** Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
 
-Es posible usar nuestra cuenta de Gmail para ello, pero Google ha ido restringiendo este tipo de funcionalidad, y actualmente aunque es posible su configuración requiere bastantes pasos y no es tan sencilla como sería esperable.
+Es posible usar nuestra cuenta de Gmail para ello, pero Google ha ido restringiendo este tipo de funcionalidad, y actualmente aunque es posible su configuración requiere bastantes pasos y no es tan sencilla como sería esperable. No obstante, una opción gratuita, máximo 200 correos mensuales, y sencilla es usar la biblioteca [EmailJS](https://www.emailjs.com/). Aquí tienes un [vídeo de ejemplo](https://youtu.be/dgcYOm8n8ME?si=kd7cjfq1R6zKeVb0) y aquí [otro vídeo](https://youtu.be/mMnxn_hmLuI?si=bxl38WyOr7jevez5).
 
 Otra opción, es usar alguno de los servidores de correo transaccional, entre ellos:
 
@@ -1028,7 +1038,7 @@ Otra opción, es usar alguno de los servidores de correo transaccional, entre el
 
 Su configuración no suele ser demasiado complicada, pero la integración con el dominio puede dar algunos problemas. Por ejemplo, en mi caso, configurar [resend](https://resend.com) para que use mi dominio registrado con [gandi](https://gandi.net) me ha sido imposible.
 
-Finalmente la opción más sencilla es la siguiente:
+Finalmente la opción que he elegido, y explico a continuación, es la siguiente:
 
 1. Registrar un dominio con algún proveedor que ofrezca además alguna cuenta de correo. Por ejemplo, [gandi](https://gandi.net) ofrece 2 cuentas de correo. Los dominios `.eu` suelen ser bastante baratos.
 

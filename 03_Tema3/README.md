@@ -916,6 +916,42 @@ export default Spinner;
 - Ejemplo y documentación disponibles en: https://www.npmjs.com/package/react-spinners
 
 
+> **NOTA:**
+>
+> Otra forma mucho más simple de crear un spinner es usar un icono y aplicar una animación. 
+> 
+> En el siguiente ejemplo, usamos el icono **`Loader2`** y le aplicamos la clase **`animate-spin`** de Tailwind:
+>
+> ```js
+>"use client";
+>
+>import { useFormStatus } from "react-dom";
+>import { Loader2 } from "lucide-react";
+>
+>export function SubmitButton() {
+>  const { pending } = useFormStatus();
+>  return (
+>    <>
+>      {pending ? (
+>        <button disabled>
+>          <Loader2 className="size-4 mr-2 animate-spin" /> Submitting...
+>        </button>
+>      ) : (
+>        <button type="submit">Submit Message</button>
+>      )}
+>    </>
+>  );
+>}
+> ```
+
+
+
+> **CURIOSIDAD:**
+>
+> No todo son cosas desagradables, como esperar que una operación finalice. También tenemos hueco para cosas agradables, que podemos celebrar con **[confetti](https://github.com/alampros/react-confetti#readme)**.
+>
+
+
 ## 5.3. UI
 
 **Shadcn/UI** ( [sitio oficial](https://ui.shadcn.com/) )

@@ -1047,3 +1047,4 @@ La estructura de carpetas es la siguiente:
 - [W3Schools: Validación de formularios (en inglés)](https://www.w3schools.com/js/js_validation.asp)
 - [MDN: Validación de formularios (en inglés) ](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
 - [MDN: Seguridad en el lado servidor (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)
+- [Vídeo (en inglés): Forms, with Shadcn UI and Server & Client Side Validation](https://youtu.be/7DNBG2c7-RE?si=-SAvtw_qsXpRDdWX)
