@@ -116,6 +116,9 @@ const a = { nombre: 'Juan', edad: 20 };
 
 # 5. Valores vs Referencias
 
+- **Los datos simples (number, string, boolean) son tratados como valores.**
+- **Los datos compuestos (arrays, objetos) son tratados como referencias.**
+
 ![Valores vs Referencias](assets/valor-referencia.png)
 
 # 6. Operaciones frecuentes con arrays

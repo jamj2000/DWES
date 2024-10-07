@@ -17,7 +17,8 @@
   - [2.4. Creación de API REST](#24-creación-de-api-rest)
   - [2.5. API REST con datos en memoria RAM](#25-api-rest-con-datos-en-memoria-ram)
   - [2.6. API REST con datos en BD MongoDB](#26-api-rest-con-datos-en-bd-mongodb)
-  - [2.7. CORS](#27-cors)
+  - [2.7. Herramientas para probar la API](#27-herramientas-para-probar-la-api)
+  - [2.8. CORS](#28-cors)
 - [3. BIBLIOTECAS](#3-bibliotecas)
   - [3.1. Datos ficticios](#31-datos-ficticios)
     - [3.1.1. Instalación de biblioteca](#311-instalación-de-biblioteca)
@@ -252,7 +253,27 @@ Gestión de datos en archivo `lib/mongodb.js`.
 
 - [Código fuente](https://github.com/jamj2000/nxapi-mongodb)
 
-## 2.7. CORS
+
+## 2.7. Herramientas para probar la API
+
+Para comprobar el correcto funcionamiento de la API, tenemos muchas herramientas. Las más conocidas son:
+
+- [Postman](https://www.postman.com/)
+- [Insomnia](https://insomnia.rest/)
+- [Rest Client (plugin para VSCode)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+
+Una herramienta muy interesante es [HTTPie](https://httpie.io/), en especial su [CLI](https://httpie.io/cli), debido a su accesibilidad e inmediatez.
+
+![httpie-cli](assets/httpie-cli.png)
+
+Aunque también dispone de su versión [GUI](https://httpie.io/desktop)
+
+![httpie-gui](assets/httpie-gui.png)
+
+
+
+## 2.8. CORS
 
 El **intercambio de recursos entre orígenes** -Cross-Origin Resource Sharing (CORS)- es una característica de seguridad que te permite controlar qué sitios pueden acceder a tus recursos. Puedes configurar el encabezado `Access-Control-Allow-Origin` para permitir que un origen específico acceda a sus controladores de ruta.
 

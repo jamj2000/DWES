@@ -23,12 +23,14 @@
   - [6.2. Parámetros de consulta (Query Parameters o Query Strings)](#62-parámetros-de-consulta-query-parameters-o-query-strings)
 - [7. Fetch desde el servidor](#7-fetch-desde-el-servidor)
 - [8. Creando nuestra propia API REST](#8-creando-nuestra-propia-api-rest)
-  - [8.1. CORS](#81-cors)
+  - [8.1. Herramientas para probar la API](#81-herramientas-para-probar-la-api)
+  - [8.2. CORS](#82-cors)
 - [9. Formularios](#9-formularios)
   - [9.1. application/x-www-form-urlencoded](#91-applicationx-www-form-urlencoded)
   - [9.2. multipart/form-data](#92-multipartform-data)
   - [9.3. JSON](#93-json)
 - [10. Referencias](#10-referencias)
+
 
 
 
@@ -577,7 +579,24 @@ app.delete('/api/users/:id', (request, response) => {
 app.listen(3000)
 ```
 
-## 8.1. CORS
+## 8.1. Herramientas para probar la API
+
+Para comprobar el correcto funcionamiento de la API, tenemos muchas herramientas. Las más conocidas son:
+
+- [Postman](https://www.postman.com/)
+- [Insomnia](https://insomnia.rest/)
+- [Rest Client (plugin para VSCode)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+
+Una herramienta muy interesante es [HTTPie](https://httpie.io/), en especial su [CLI](https://httpie.io/cli), debido a su accesibilidad e inmediatez.
+
+![httpie-cli](assets/httpie-cli.png)
+
+Aunque también dispone de su versión [GUI](https://httpie.io/desktop)
+
+![httpie-gui](assets/httpie-gui.png)
+
+## 8.2. CORS
 
 El **intercambio de recursos entre orígenes** -Cross-Origin Resource Sharing (CORS)- es una característica de seguridad que te permite controlar qué sitios pueden acceder a tus recursos. 
 
