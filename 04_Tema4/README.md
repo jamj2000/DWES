@@ -263,10 +263,10 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
     // Creamos cookie
-    cookies().set("token", JSON.stringify({ id: 1, user: "Pepe", fecha: new Date() }))
+    cookies().set("usuario", JSON.stringify({ id: 1, user: "Pepe", fecha: new Date() }))
 
     // Leemos cookie
-    const data = cookies().get('token').value
+    const data = cookies().get('usuario').value
     const cookie = JSON.parse(data)
     cookie.fecha = new Date(cookie.fecha)
 
@@ -319,6 +319,15 @@ async function deleteCookie() {
 }
 ```
 
+> **NOTA:**
+>
+> Otra forma de eliminar una cookie es:
+> 
+> ```js
+>  cookies().set("usuario", "", { expires: new Date(0) }); 
+>```
+
+    
 Referencias: 
 
 - [Documentación de NextJS](https://nextjs.org/docs/app/api-reference/functions/cookies)
