@@ -69,10 +69,18 @@ Para crear proyecto llamado `miapp`
 npx  create-next-app  miapp
 ```
 
-Nos aparecerá un asistente solicitando las funcionalidades con las que vamos a trabajar. En principio, pulsaremos `Intro` para todo, instalando sólo 3 dependencias: `react`, `react-dom` y `next`.
+Nos aparecerá un asistente solicitando las funcionalidades con las que vamos a trabajar. En principio, pulsaremos `Intro` para todo. Se instalarán 3 dependencias: `react`, `react-dom` y `next`.
 
 ![create next app](assets/create-next-app.png)
- 
+
+> **NOTA:**
+>
+> Otra forma de crear una nueva aplicación, evitando el uso del asistente, es la siguiente:
+>
+> ```sh
+> npx create-next-app  --typescript  --eslint  --tailwind  --src-dir  --app   miapp
+>```
+
 
 Para entrar dentro del proyecto
 
