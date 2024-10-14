@@ -13,12 +13,13 @@
   - [1.1. Creación de un proyecto](#11-creación-de-un-proyecto)
   - [1.2. Carpetas y archivos del proyecto](#12-carpetas-y-archivos-del-proyecto)
 - [2. JSX](#2-jsx)
-  - [2.1. Estructuras de iteración y de condición](#21-estructuras-de-iteración-y-de-condición)
-    - [2.1.1. Estructura de iteración](#211-estructura-de-iteración)
-    - [2.1.2. Estructuras de condición](#212-estructuras-de-condición)
-  - [2.2. Aplicar estilos](#22-aplicar-estilos)
-  - [2.3. Propiedades de una paǵina](#23-propiedades-de-una-paǵina)
-  - [2.4. Propiedades de un componente](#24-propiedades-de-un-componente)
+  - [2.1. Valores, constantes y variables](#21-valores-constantes-y-variables)
+  - [2.2. Estructuras de iteración y de condición](#22-estructuras-de-iteración-y-de-condición)
+    - [2.2.1. Estructura de iteración](#221-estructura-de-iteración)
+    - [2.2.2. Estructuras de condición](#222-estructuras-de-condición)
+  - [2.3. Aplicar estilos](#23-aplicar-estilos)
+  - [2.4. Propiedades de una paǵina](#24-propiedades-de-una-paǵina)
+  - [2.5. Propiedades de un componente](#25-propiedades-de-un-componente)
 - [3. Componentes](#3-componentes)
   - [3.1. Componentes del Servidor](#31-componentes-del-servidor)
   - [3.2. Beneficios del renderizado en el servidor](#32-beneficios-del-renderizado-en-el-servidor)
@@ -42,6 +43,7 @@
   - [6.5. Contenido estático vs Contenido dinámico](#65-contenido-estático-vs-contenido-dinámico)
   - [6.6. Renderizado en el Servidor vs Renderizado en el Cliente](#66-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
 - [7. Referencias](#7-referencias)
+
 
 
 
@@ -155,7 +157,21 @@ const App = () => {
 - Necesidad de usar atributo **`key`** en lista de elementos similares.
 
 
-## 2.1. Estructuras de iteración y de condición
+## 2.1. Valores, constantes y variables
+
+**En JSX podemos insertar valores, constantes y variables** colocándolas entre llaves **`{ }`**. 
+
+Por ejemplo, para valores simples ...
+
+```js
+{true}
+{42}
+{"cadena de texto"}  // en este caso las llaves son opcionales
+{'cadena de texto'}  // en este caso las llaves son opcionales
+{`cadena de texto`}  
+```
+
+## 2.2. Estructuras de iteración y de condición
 
 Todos los frameworks web disponen de algún mecanismo para generar las vistas que enviarán al usuario o cliente web. Para esto lo más habitual es el uso de **plantillas**.
 
@@ -180,7 +196,7 @@ Algunos ejemplos de plantillas muy conocidas son:
 En React/Next las vistas se generan mediante JSX y las estructuras de iteración y condición se indican mediante el uso de **expresiones**. **Estas expresiones deben aparecer entre llaves {}**.  Son las que aparecen a continuación.
 
 
-### 2.1.1. Estructura de iteración
+### 2.2.1. Estructura de iteración
 
 Es muy usado el método *array*.**map**, aunque hay otros métodos que pueden usarse como *array*.**filter**.
 
@@ -226,7 +242,7 @@ Ejemplo de método map
 
 
 
-### 2.1.2. Estructuras de condición
+### 2.2.2. Estructuras de condición
 
 Existen varias expresiones que podemos usar. Las más habituales son:
 
@@ -317,7 +333,7 @@ Ejemplo de operador ??
 
 
 
-## 2.2. Aplicar estilos
+## 2.3. Aplicar estilos
 
 **en línea**
 
@@ -461,7 +477,7 @@ Muchos más recursos relacionados con Tailwind en
 - [Awesome Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss)
 
 
-## 2.3. Propiedades de una paǵina
+## 2.4. Propiedades de una paǵina
 
 Como hemos indicado antes, JSX se usa tanto en páginas como en componentes. En ambos es posible el paso de argumentos, llamados también propiedades. 
 
@@ -484,7 +500,7 @@ export default page
 Para un descripción más detallada de estos parámetros consultar más adelante.
 
 
-## 2.4. Propiedades de un componente
+## 2.5. Propiedades de un componente
 
 A los componentes también se les puede pasar información mediante las propiedades. A diferencia de las páginas, cuyas propiedades son recurrentes, en los componentes el nombre de las propiedades suele ser muy variado. La única propiedad que tiene un nombre reservado es **`children`** que representa los elementos hijos del componente, es decir los elementos que irán insertados entre la etiqueta de inicio y la etiqueta de cierre.
 
