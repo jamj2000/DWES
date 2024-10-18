@@ -1009,6 +1009,9 @@ export function SkeletonCard() {
 }
 ```
 
+> [APP ONLINE para generar componentes](https://app.layouts.dev/)
+
+
 
 **HeadlessUI** ( [sitio oficial](https://headlessui.com/) )
 
