@@ -18,8 +18,11 @@
     - [2.2.1. Estructura de iteración](#221-estructura-de-iteración)
     - [2.2.2. Estructuras de condición](#222-estructuras-de-condición)
   - [2.3. Aplicar estilos](#23-aplicar-estilos)
-  - [2.4. Propiedades de una paǵina](#24-propiedades-de-una-paǵina)
-  - [2.5. Propiedades de un componente](#25-propiedades-de-un-componente)
+  - [2.4. Propiedades](#24-propiedades)
+    - [2.4.1. Propiedades de un layout](#241-propiedades-de-un-layout)
+    - [2.4.2. Propiedades de una paǵina](#242-propiedades-de-una-paǵina)
+    - [2.4.3. Propiedades de un componente](#243-propiedades-de-un-componente)
+    - [2.4.4. Resumen](#244-resumen)
 - [3. Componentes](#3-componentes)
   - [3.1. Componentes del Servidor](#31-componentes-del-servidor)
   - [3.2. Beneficios del renderizado en el servidor](#32-beneficios-del-renderizado-en-el-servidor)
@@ -43,7 +46,6 @@
   - [6.5. Contenido estático vs Contenido dinámico](#65-contenido-estático-vs-contenido-dinámico)
   - [6.6. Renderizado en el Servidor vs Renderizado en el Cliente](#66-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
 - [7. Referencias](#7-referencias)
-
 
 
 
@@ -332,7 +334,6 @@ Ejemplo de operador ??
 ```
 
 
-
 ## 2.3. Aplicar estilos
 
 **en línea**
@@ -477,9 +478,31 @@ Muchos más recursos relacionados con Tailwind en
 - [Awesome Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss)
 
 
-## 2.4. Propiedades de una paǵina
 
-Como hemos indicado antes, JSX se usa tanto en páginas como en componentes. En ambos es posible el paso de argumentos, llamados también propiedades. 
+## 2.4. Propiedades
+
+
+### 2.4.1. Propiedades de un layout
+
+Todos los *layouts* deben tener una propiedad **children**, que situaremos dentro del código JSX, justo en el lugar donde queremos que se rendericen las páginas.
+
+```js
+function Layout({children}) {
+    // ...
+
+    return (
+      // JSX
+      {children}
+      // JSX
+    )
+}
+
+export default Layout
+```
+
+### 2.4.2. Propiedades de una paǵina
+
+Como hemos indicado antes, JSX se usa tanto en layouts, como páginas y componentes. En estos casos es posible el paso de argumentos, llamados también propiedades. 
 
 Las propiedades más importantes que puede recibir una página son **`params`** y **`searchParams`**. A través de ellas podemos acceder a los **parámetros de ruta** y los **parámetros de consulta** correspondientes
 
@@ -500,7 +523,7 @@ export default page
 Para un descripción más detallada de estos parámetros consultar más adelante.
 
 
-## 2.5. Propiedades de un componente
+### 2.4.3. Propiedades de un componente
 
 A los componentes también se les puede pasar información mediante las propiedades. A diferencia de las páginas, cuyas propiedades son recurrentes, en los componentes el nombre de las propiedades suele ser muy variado. La única propiedad que tiene un nombre reservado es **`children`** que representa los elementos hijos del componente, es decir los elementos que irán insertados entre la etiqueta de inicio y la etiqueta de cierre.
 
@@ -612,11 +635,19 @@ Si un componente no tiene propiedades, hacemos uso de él de la siguiente forma:
  <Productos />
 ```
 
-**Referencia:**
 
-A continuación tienes un vídeo, en inglés, donde se muestra como crear un proyecto en NextJS y React desde cero, sin usar ningún asistente para generar el proyecto. También se explican conceptos básicos.
+### 2.4.4. Resumen
 
-- [Introduction to Next.js and React](https://youtu.be/h2BcitZPMn4)
+
+La forma que adquieren las propiedades para *layouts*, *páginas* y *componentes* son las siguientes:
+
+```js
+function Layout ( {children} )
+
+function Page ( {params, searchParams} )
+
+function Component ( {children, /* otras propiedades */})
+```
 
 
 # 3. Componentes
@@ -1536,3 +1567,4 @@ Es posible que se requieran más recursos del servidor para manejar las tareas d
 # 7. Referencias
 
 - [Documentación de NextJS](https://nextjs.org/docs)
+- [Video: Introduction to Next.js and React](https://youtu.be/h2BcitZPMn4)
