@@ -926,6 +926,7 @@ import {Bar, Pie } from 'react-roughviz'
 Existen numerosas bibliotecas para la realización de gráficas. Algunas de ellas son:
 
 - [Recharts](https://recharts.org/)
+- [Highcharts]( https://www.highcharts.com/ )
 - [Nivo](https://nivo.rocks/) 
 - [D3.js](https://d3js.org): Una de las más potentes. Requiere de conocimientos avanzados.
 
