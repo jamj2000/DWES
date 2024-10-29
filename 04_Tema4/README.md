@@ -259,7 +259,8 @@ async function setCookie( name ) {
 
 ## 5.3. Leer Cookies 
 
-**cookies().get(name)**
+**`const cookieStore = await cookies()`**
+**`cookieStore.get(name)`**
 
 ```javascript
 import { cookies } from 'next/headers'
@@ -277,29 +278,24 @@ export async function getCookie(name) {
 
 ## 5.4. Eliminar Cookies
 
-**cookies().delete(name)**
+**`const cookieStore = await cookies()`**
+**`cookieStore.delete(name)`**
 
 > **IMPORTANTE:** 
 >
 > Sólo es posible eliminar cookies en un `Server Action` o un `Route Handler`.
 
 ```javascript
-'use server'
- 
 import { cookies } from 'next/headers'
  
-async function deleteCookie() {
-  cookies().delete('usuario')
-}
-```
+async function deleteCookie( name ) {
+  const cookieStore = await cookies()
+  cookieStore.delete(name)
 
-> **NOTA:**
->
-> Otra forma de eliminar una cookie es:
-> 
-> ```js
->  cookies().set("usuario", "", { expires: new Date(0) }); 
->```
+  // Otras formas de eliminar una cookie
+  cookieStore.set( name, "", expires: new Date(0) );
+  cookieStore.set( name, "", maxAge: 0 );
+}
 
     
 Referencias: 
