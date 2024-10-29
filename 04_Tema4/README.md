@@ -109,21 +109,19 @@ Las funciones dinámicas se basan en información que sólo se puede conocer en 
 
 - `params` (**parámetros de ruta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud. Aunque existe la posibilidad de generar el contenido de forma estática durante el despliegue realizando SSG.
 - `searchParams` (**parámetros de consulta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud.
-- `useSearchParams()` (**parámetros de consulta**): En componentes del cliente, el uso de esta función omitirá la renderización estática y en su lugar se realizará renderizado en el cliente (`CSR: Client Side Rendering`) de todos los componentes del cliente hasta el *Suspense* padre más cercano. Recomendamos envolver el componente del cliente que utilice useSearchParams() en un <Suspense/>. Esto permitirá que cualquier componente del cliente que se encuentre encima se renderice estáticamente. 
-- `cookies()` y `headers()`: al usarlos en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
+- `cookies()`:  al usarse en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
+- `headers()`: al usarse en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
+
 
 **Ejemplo:**
 
 ```javascript
-// src/app/blog/[slug]/page.tsx
-interface Props {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+// src/app/blog/[slug]/page.jsx
 
-// params: Parámetros de ruta
-// searchParams: Párametros de consulta
-function Page({params, searchParams}: Props) {
+function Page( {params, searchParams} ) {
+  const { slug } = await params
+  const { query } = await searchParams
+
   return <h1>My Page</h1>
 }
 
@@ -139,16 +137,6 @@ El uso de cualquiera de estas funciones optará por toda la ruta hacia la repres
 - https://nextjs.org/docs/app/api-reference/functions/use-params
 - https://nextjs.org/docs/app/api-reference/functions/use-search-params
  
-
-
-> **NOTA:**
->
-> NextJS, por defecto, hace *build* a contenido estático. El contenido dinámico requiere de renderizado en el lado servidor, lo cual ralentiza la respuesta al usuario. Si deseamos que el contenido de una página sea dinámico deberemos indicarlo con el siguiente código. 
->
->
->```js
->export const dynamic = 'force-dynamic'
->```
 
 
 # 4. Renderizado en el Servidor vs Renderizado en el Cliente
@@ -293,15 +281,22 @@ async function deleteCookie( name ) {
   cookieStore.delete(name)
 
   // Otras formas de eliminar una cookie
-  cookieStore.set( name, "", expires: new Date(0) );
-  cookieStore.set( name, "", maxAge: 0 );
+  cookieStore.set( { name, "", expires: new Date(0) } );
+  cookieStore.set( { name, "", maxAge: 0 } );
 }
 
+**Ejemplo práctico**
+
+A continuación tienes el código fuente para trabajar los conceptos anteriores.
+
+- [Gestión de cookies y sesión](https://github.com/jamj2000/nxsession)
+
+En el proyecto anterior también se hace uso de `middleware`. Consulta el apartado siguiente.
+
     
-Referencias: 
+**Referencias**: 
 
 - [Documentación de NextJS](https://nextjs.org/docs/app/api-reference/functions/cookies)
-- [Guía con ejemplos reales](https://blog.logrocket.com/guide-cookies-next-js/)
 
 
 # 6. ANEXO: Parámetros de ruta y consulta en página de cliente
