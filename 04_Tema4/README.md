@@ -234,8 +234,6 @@ A continuación se muestra como trabjar con cookies desde NextJS.
 > HTTP no permite generar cookies después del comienzo de la respuesta.
 
 ```javascript
-'use server'
- 
 import { cookies } from 'next/headers'
 
 const oneDay = 1000 * 60 * 60 * 24  // ms
@@ -243,51 +241,32 @@ const oneDay = 1000 * 60 * 60 * 24  // ms
 async function setCookie( name ) {
   const cookieStore = await cookies()
 
+  // Ejemplos
   cookieStore.set( name, 'jose')
-  // o
-  cookies().set( name, 'jose', { secure: true })
-  // o
-  cookies().set({
-    name: 'usuario',
+  cookieStore.set( name, 'jose', { secure: true })
+  cookieStore.set({
+    name: name,
     value: 'jose', 
     httpOnly: true,
     path: '/',
     expires: Date.now() + oneDay 
     })
+  cookieStore.set(name, JSON.stringify({ id: 1, user: "Pepe", loginDate: new Date() }))
 }
 ```
 > **NOTA:** Para crear una cookie de sesión debes omitir la opción `expires`. 
 > 
 
 ```javascript
-// damecookie/route.js  => http://localhost:3000/damecookie
-
 import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
 
-
-export async function GET() {
-    // Creamos cookie
-    cookies().set("usuario", JSON.stringify({ id: 1, user: "Pepe", fecha: new Date() }))
+export async function getCookie(name) {
+    const cookieStore = await cookies()
 
     // Leemos cookie
-    const data = cookies().get('usuario').value
-    const cookie = JSON.parse(data)
-    cookie.fecha = new Date(cookie.fecha)
+    const cookie = cookieStore.get( name )?.value
 
-    // Mostramos información de la cookie
-    console.log(
-        cookie.id,
-        cookie.user,
-        cookie.fecha.getDate(), 
-        cookie.fecha.getMonth() + 1,
-        cookie.fecha.getFullYear(),
-        cookie.fecha.getHours(),
-        cookie.fecha.getMinutes(),
-        cookie.fecha.getSeconds()
-        )
-
-    return NextResponse.json({ mensaje: 'Cookie enviada' })
+    return cookie
 }
 ```
 
