@@ -255,7 +255,11 @@ async function setCookie( name ) {
 }
 ```
 > **NOTA:** Para crear una cookie de sesión debes omitir la opción `expires`. 
-> 
+
+
+## 5.3. Leer Cookies 
+
+**cookies().get(name)**
 
 ```javascript
 import { cookies } from 'next/headers'
@@ -267,20 +271,6 @@ export async function getCookie(name) {
     const cookie = cookieStore.get( name )?.value
 
     return cookie
-}
-```
-
-## 5.3. Leer Cookies 
-
-**cookies().get(name)**
-
-```javascript
-import { cookies } from 'next/headers'
- 
-export default function Page() {
-  const usuario = cookies().get('usuario')
-
-  return '<h1>Bienvendio {usuario}</h1>'
 }
 ```
 
