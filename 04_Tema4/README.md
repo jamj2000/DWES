@@ -217,13 +217,16 @@ Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas mucho
 ## 5.1. Tipos de cookies
 
 - **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
-- **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. 
+- **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. También existe la posibilidad de indicar un tiempo de expiración usando la propiedad `expires`, o usando la propiedad `maxAge`. 
+
+> **NOTA:** A partir de NextJS 15, el manejo de cookies se realiza de forma asíncrona. Por tanto deberemos usar `await cookies()
 
 A continuación se muestra como trabjar con cookies desde NextJS.
 
 ## 5.2. Generar Cookies 
 
-**`cookies().set(name, value, options)`**
+**`const cookieStore = await cookies()`**
+**`cookieStore.set(name, value, options)`**
 
 > **IMPORTANTE:** 
 >
@@ -237,10 +240,12 @@ import { cookies } from 'next/headers'
 
 const oneDay = 1000 * 60 * 60 * 24  // ms
 
-async function createCookie() {
-  cookies().set('usuario', 'jose')
+async function setCookie( name ) {
+  const cookieStore = await cookies()
+
+  cookieStore.set( name, 'jose')
   // o
-  cookies().set('usuario', 'jose', { secure: true })
+  cookies().set( name, 'jose', { secure: true })
   // o
   cookies().set({
     name: 'usuario',
