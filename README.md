@@ -34,4 +34,6 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 - [Learn NextJS](https://nextjs.org/learn)
 - [Características básicas de Nextjs 13 -en inglés-](https://makerkit.dev/blog/tutorials/nextjs13)
+- [Video: 20 Browser Extensions For Web Design & Developmen ](https://youtu.be/OhU4yaNih2M?si=EbTO_TflU7UFDV-F)
+- [Web article: 20 Browser Extensions For Web Design & Developmen ](https://www.traversymedia.com/blog/20-browser-extensions)
 
