@@ -12,11 +12,11 @@
 
 - [1. Introducción](#1-introducción)
 - [2. Renderizado en el Servidor vs Renderizado en el Cliente](#2-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
-- [4. Características dinámicas](#4-características-dinámicas)
-- [3. Parámetros de URL](#3-parámetros-de-url)
-  - [Parámetros de ruta](#parámetros-de-ruta)
-  - [Parámetros de consulta](#parámetros-de-consulta)
-  - [3.1. Parámetros de ruta vs Parámetros de consulta.](#31-parámetros-de-ruta-vs-parámetros-de-consulta)
+- [3. Características dinámicas](#3-características-dinámicas)
+- [4. Parámetros de URL](#4-parámetros-de-url)
+  - [4.1. Parámetros de ruta](#41-parámetros-de-ruta)
+  - [4.2. Parámetros de consulta](#42-parámetros-de-consulta)
+  - [4.3. Parámetros de ruta vs Parámetros de consulta.](#43-parámetros-de-ruta-vs-parámetros-de-consulta)
 - [5. Cookies](#5-cookies)
   - [5.1. Tipos de cookies](#51-tipos-de-cookies)
   - [5.2. Generar Cookies](#52-generar-cookies)
@@ -25,6 +25,7 @@
 - [6. Middleware](#6-middleware)
 - [7. ANEXO: Parámetros de ruta y consulta en página de cliente](#7-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [8. Referencias](#8-referencias)
+
 
 
 --- 
@@ -93,7 +94,7 @@ Diferencias entre SSR y CSR
 | Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado    |
 
 
-# 4. Características dinámicas
+# 3. Características dinámicas
 
 
 Las características dinámicas se basan en información que sólo se puede conocer en el momento de la solicitud, como las cookies del usuario, los encabezados de las solicitudes actuales o los parámetros de ruta y consulta de la URL. En Next.js, estas características dinámicas son:
@@ -130,7 +131,7 @@ Las características dinámicas se basan en información que sólo se puede cono
 
 
 
-# 3. Parámetros de URL
+# 4. Parámetros de URL
 
 
 ![anatomía de una url](assets/anatomy-of-url.png)
@@ -142,13 +143,13 @@ En las páginas podemos acceder a los 2 tipos que existen:
 - **Parámetros de ruta** `Path Parameters`
 - **Parámetros de consulta** `Query Parameters` o `Query Strings` 
 
-## Parámetros de ruta
+## 4.1. Parámetros de ruta
 
 ![params folders](assets/params-folders.png)
 
 ![params view](assets/params-view.png)
 
-## Parámetros de consulta
+## 4.2. Parámetros de consulta
 
 ![searchparams view](assets/searchparams-view.png)
 
@@ -184,7 +185,7 @@ bristol books author 1
 
 
 
-## 3.1. Parámetros de ruta vs Parámetros de consulta.
+## 4.3. Parámetros de ruta vs Parámetros de consulta.
 
 Los parámetros de ruta y los parámetros de consulta transportan información al servidor a través de la URL. Ambos se utilizan para el mismo propósito. Pero tienen algunas diferencias.
 
