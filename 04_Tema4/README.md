@@ -12,9 +12,11 @@
 
 - [1. Introducción](#1-introducción)
 - [2. Renderizado en el Servidor vs Renderizado en el Cliente](#2-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
-- [3. Parámetros de URL](#3-parámetros-de-url)
-  - [3.1. Parámetros de ruta vs Parámetros de consulta.](#31-parámetros-de-ruta-vs-parámetros-de-consulta)
 - [4. Características dinámicas](#4-características-dinámicas)
+- [3. Parámetros de URL](#3-parámetros-de-url)
+  - [Parámetros de ruta](#parámetros-de-ruta)
+  - [Parámetros de consulta](#parámetros-de-consulta)
+  - [3.1. Parámetros de ruta vs Parámetros de consulta.](#31-parámetros-de-ruta-vs-parámetros-de-consulta)
 - [5. Cookies](#5-cookies)
   - [5.1. Tipos de cookies](#51-tipos-de-cookies)
   - [5.2. Generar Cookies](#52-generar-cookies)
@@ -91,6 +93,42 @@ Diferencias entre SSR y CSR
 | Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado    |
 
 
+# 4. Características dinámicas
+
+
+Las características dinámicas se basan en información que sólo se puede conocer en el momento de la solicitud, como las cookies del usuario, los encabezados de las solicitudes actuales o los parámetros de ruta y consulta de la URL. En Next.js, estas características dinámicas son:
+
+- `params` (**parámetros de ruta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud. 
+- `searchParams` (**parámetros de consulta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud.
+- `cookies()` (**cookies**):  al usarse en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
+- `headers()` (**cabeceras**): al usarse en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
+
+
+> **NOTA:** A partir de NextJS 15, deberemos hacer uso asíncrono de las características anteriores.
+>
+> ```js
+> // Ejemplo
+> import { cookies, headers } from 'next/headers'
+>
+> async function Page ( { params, searchParams }) {
+>    const { id, slug } = await params
+>    const { query, sort } = await searchParams
+>
+>    const cookieStore = await cookies()
+>    const cabeceras = await headers()
+>
+>    // ...
+> }
+>
+> export default Page
+> ```
+
+
+**Referencia:**
+
+- https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-apis
+
+
 
 # 3. Parámetros de URL
 
@@ -99,10 +137,21 @@ Diferencias entre SSR y CSR
 
 Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
 
-En las páginas gestionadas por el `app router` también podemos acceder a los 2 tipos que existen:
+En las páginas podemos acceder a los 2 tipos que existen:
 
 - **Parámetros de ruta** `Path Parameters`
 - **Parámetros de consulta** `Query Parameters` o `Query Strings` 
+
+## Parámetros de ruta
+
+![params folders](assets/params-folders.png)
+
+![params view](assets/params-view.png)
+
+## Parámetros de consulta
+
+![searchparams view](assets/searchparams-view.png)
+
 
 
 **Ejemplo**
@@ -155,44 +204,6 @@ Aunque, a la hora de decidir si usar parámetros de ruta o parámetros de consul
 - Los parámetros de ruta nos proporcionan una URL más limpia.
 - **Usamos parámetros de ruta si dicha información debe ir siempre en la URL.**
 - **Usamos parámetros de consulta si dicha información es opcional, como información de filtrado o búsqueda.**
-
-
-
-# 4. Características dinámicas
-
-
-Las características dinámicas se basan en información que sólo se puede conocer en el momento de la solicitud, como las cookies del usuario, los encabezados de las solicitudes actuales o los parámetros de ruta y consulta de la URL. En Next.js, estas características dinámicas son:
-
-- `params` (**parámetros de ruta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud. 
-- `searchParams` (**parámetros de consulta**): El uso de esta propiedad en las `props` de una página habilitará la página para el renderizado dinámico en el momento de la solicitud.
-- `cookies()` (**cookies**):  al usarse en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
-- `headers()` (**cabeceras**): al usarse en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
-
-
-> **NOTA:** A partir de NextJS 15, deberemos hacer uso asíncrono de las características anteriores.
->
-> ```js
-> // Ejemplo
-> import { cookies, headers } from 'next/headers'
->
-> async function Page ( { params, searchParams }) {
->    const { id, slug } = await params
->    const { query, sort } = await searchParams
->
->    const cookieStore = await cookies()
->    const cabeceras = await headers()
->
->    // ...
-> }
->
-> export default Page
-> ```
-
-
-**Referencia:**
-
-- https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-apis
-
 
 
 
