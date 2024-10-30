@@ -41,9 +41,9 @@
 - [6. App Router](#6-app-router)
   - [6.1. Segmentos de ruta](#61-segmentos-de-ruta)
   - [6.2. Creando rutas](#62-creando-rutas)
-  - [6.3. Parámetros de URL](#63-parámetros-de-url)
-  - [6.4. Organización del proyecto](#64-organización-del-proyecto)
+  - [6.3. Organización del proyecto](#63-organización-del-proyecto)
 - [7. Referencias](#7-referencias)
+
 
 
 
@@ -1411,46 +1411,7 @@ Se utiliza un archivo especial **`page.js`** para hacer que los segmentos de rut
 En este ejemplo, la ruta URL `/dashboard/analytics` no es accesible públicamente porque no tiene un archivo `page.js` correspondiente. Esta carpeta podría usarse para almacenar componentes, hojas de estilo, imágenes u otros archivos colocados.
 
 
-## 6.3. Parámetros de URL
-
-Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
-
-En las páginas gestionadas por el `app router` también podemos acceder a los 2 tipos que existen:
-
-- **Parámetros de ruta** `Path Parameters`
-- **Parámetros de consulta** `Query Parameters` o `Query Strings` 
-
-
-Si tenemos la siguiente ruta:
-
-**`http://localhost:3000/products/bristol/books?sort=author&skip=1`**
-
-
-Y el siguiente código en `src/app/products/[store]/[category]/page.js`
-
-
-```js
-export default function page({ params, searchParams }) {
-
-    console.log( params.store )
-    console.log( params.category )
-    console.log( searchParams.sort )
-    console.log( searchParams.skip )
-
-    // ...
-}
-```
-
-Producirá la siguiente salida:
-
-```
-bristol
-books
-author
-1
-``` 
-
-## 6.4. Organización del proyecto
+## 6.3. Organización del proyecto
 
 Aparte de las convenciones de enrutamiento de carpetas y archivos, Next.js no tiene opiniones sobre cómo organizar y colocar los archivos de su proyecto.
 
