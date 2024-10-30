@@ -11,20 +11,23 @@
 ---
 
 - [1. Introducción](#1-introducción)
-- [2. Renderizado en el Servidor vs Renderizado en el Cliente](#2-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
-- [3. Características dinámicas](#3-características-dinámicas)
-- [4. Parámetros de URL](#4-parámetros-de-url)
-  - [4.1. Parámetros de ruta](#41-parámetros-de-ruta)
-  - [4.2. Parámetros de consulta](#42-parámetros-de-consulta)
-  - [4.3. Parámetros de ruta vs Parámetros de consulta.](#43-parámetros-de-ruta-vs-parámetros-de-consulta)
-- [5. Cookies](#5-cookies)
-  - [5.1. Tipos de cookies](#51-tipos-de-cookies)
-  - [5.2. Generar Cookies](#52-generar-cookies)
-  - [5.3. Leer Cookies](#53-leer-cookies)
-  - [5.4. Eliminar Cookies](#54-eliminar-cookies)
-- [6. Middleware](#6-middleware)
-- [7. ANEXO: Parámetros de ruta y consulta en página de cliente](#7-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
-- [8. Referencias](#8-referencias)
+- [2. Contenido estático vs Contenido dinámico](#2-contenido-estático-vs-contenido-dinámico)
+- [3. Renderizado en el Servidor vs Renderizado en el Cliente](#3-renderizado-en-el-servidor-vs-renderizado-en-el-cliente)
+- [4. Características dinámicas](#4-características-dinámicas)
+- [5. Parámetros de URL](#5-parámetros-de-url)
+  - [5.1. Parámetros de ruta](#51-parámetros-de-ruta)
+  - [5.2. Parámetros de consulta](#52-parámetros-de-consulta)
+  - [5.3. Parámetros de ruta vs Parámetros de consulta.](#53-parámetros-de-ruta-vs-parámetros-de-consulta)
+- [6. Cookies](#6-cookies)
+  - [6.1. Tipos de cookies](#61-tipos-de-cookies)
+  - [6.2. Generar Cookies](#62-generar-cookies)
+  - [6.3. Leer Cookies](#63-leer-cookies)
+  - [6.4. Eliminar Cookies](#64-eliminar-cookies)
+- [7. Middleware](#7-middleware)
+- [8. ANEXO: Parámetros de ruta y consulta en página de cliente](#8-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
+- [9. Referencias](#9-referencias)
+
+
 
 
 
@@ -44,7 +47,33 @@ Después de haber estudiado los parámetros de las páginas dinámicas, pasaremo
 Por último, aunque no está directamente relacionado con el contenido de este tema, haremos una breve incursión al `middleware`.
 
 
-# 2. Renderizado en el Servidor vs Renderizado en el Cliente
+
+# 2. Contenido estático vs Contenido dinámico
+
+La definición de contenido estático y dinámico es muy sencilla:
+
+- **Contenido estático** es aquel que **NO cambia** a lo largo del tiempo.
+- **Contenido dinámico** es aquel que **SÍ cambia** a lo largo del tiempo.
+
+> **MUY IMPORTANTE:**
+>
+> **Cuando hablamos de contenido, nos referiremos al código fuente de la página**, no a lo que ve el usuario.
+>
+> Por ejemplo, podemos tener una página con código javascript que se ejecuta en el navegador. Dicho código se encarga de generar un número aleatorio, por lo cual el usuario verá un número distinto cada vez que refresque la página. Sin embargo el código javascript no cambia nunca. Decimos por tanto que el contenido es estático. 
+>
+> Lo dicho anteriormente puede resultar contraintuitivo pero, debido a razones históricas, ésta es la terminología empleada. En los inicios, los servidores web sólo eran capaces de servir contenido estático: HTML, CSS, Javascript, imágenes, ... No se entraba a valorar si el código javascript enviado al navegador modificaba o no dicha información. **Desde el punto de vista del lado servidor, el contenido enviado al navegador es estático**. Hoy en día, con el uso de AJAX y `fetch` en el navegador resulta aún más contraintuitivo decir que el contenido es estático, pero  así es considerado por muchos desarrolladores y por NextJS, como veremos más adelante con un ejemplo práctico.
+>
+> **El término de contenido dinámico se reserva en exclusiva para cuando dicho contenido es generado desde el lado servidor**. Uno de los primeros procedimientos que se usó para generar contenido dinámico fue [CGI](https://es.wikipedia.org/wiki/Interfaz_de_entrada_com%C3%BAn). Luego vendrían gran cantidad de lenguajes interpretados en el servidor, siendo PHP uno de los más populares. La generación de contenido dinámico requiere de un servidor web más complejo, que sea capaz de ejecutar código y de manejar los problemas de seguridad que ello pudiera acarrear.
+
+
+
+> **NOTA:**
+>
+> El contenido dinámico requiere de renderizado en el lado servidor, lo cual ralentiza la respuesta al usuario.
+>  
+
+
+# 3. Renderizado en el Servidor vs Renderizado en el Cliente
 
 El renderizado es la **representación gráfica del contenido de una página**, es decir, el proceso necesario para mostrar una página web en un navegador.
 
@@ -83,18 +112,19 @@ npm  run  start
 
 Diferencias entre SSR y CSR
 
-| SSR                                                                                          | CSR                                                                             |
-| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| SSR significa Renderizado del lado del servidor                                              | CSR significa Renderizado del lado del cliente                                  |
-| Representa la página en el lado del servidor                                                 | Representa la página en el lado del cliente                                     |
-| Es más amigable con el SEO                                                                   | Es menos compatible con SEO                                                     |
-| La interactividad del usuario es limitada                                                    | La interactividad del usuario es altamente interactiva                          |
-| Consume los recursos del servidor                                                            | Consume los recursos del cliente                                                |
-| Ofrece un mejor rendimiento en dispositivos de baja potencia                                 | Es posible que no ofrezca un mejor rendimiento en dispositivos de baja potencia |
-| Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado    |
+SSR                                             | CSR
+------------------------------------------------|---------------------------------
+SSR significa Renderizado del lado del servidor | CSR significa Renderizado del lado del cliente
+Representa la página en el lado del servidor    | Representa la página en el lado del cliente
+Es más amigable con el SEO                      | Es menos compatible con SEO
+La interactividad del usuario es limitada       | La interactividad del usuario es altamente interactiva
+Consume los recursos del servidor               | Consume los recursos del cliente
+Ofrece un mejor rendimiento en dispositivos de baja potencia | Es posible que no ofrezca un mejor rendimiento en dispositivos de baja potencia
+Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado
 
 
-# 3. Características dinámicas
+
+# 4. Características dinámicas
 
 
 Las características dinámicas se basan en información que sólo se puede conocer en el momento de la solicitud, como las cookies del usuario, los encabezados de las solicitudes actuales o los parámetros de ruta y consulta de la URL. En Next.js, estas características dinámicas son:
@@ -131,7 +161,7 @@ Las características dinámicas se basan en información que sólo se puede cono
 
 
 
-# 4. Parámetros de URL
+# 5. Parámetros de URL
 
 
 ![anatomía de una url](assets/anatomy-of-url.png)
@@ -143,13 +173,13 @@ En las páginas podemos acceder a los 2 tipos que existen:
 - **Parámetros de ruta** `Path Parameters`
 - **Parámetros de consulta** `Query Parameters` o `Query Strings` 
 
-## 4.1. Parámetros de ruta
+## 5.1. Parámetros de ruta
 
 ![params folders](assets/params-folders.png)
 
 ![params view](assets/params-view.png)
 
-## 4.2. Parámetros de consulta
+## 5.2. Parámetros de consulta
 
 ![searchparams view](assets/searchparams-view.png)
 
@@ -185,7 +215,7 @@ bristol books author 1
 
 
 
-## 4.3. Parámetros de ruta vs Parámetros de consulta.
+## 5.3. Parámetros de ruta vs Parámetros de consulta.
 
 Los parámetros de ruta y los parámetros de consulta transportan información al servidor a través de la URL. Ambos se utilizan para el mismo propósito. Pero tienen algunas diferencias.
 
@@ -208,7 +238,7 @@ Aunque, a la hora de decidir si usar parámetros de ruta o parámetros de consul
 
 
 
-# 5. Cookies
+# 6. Cookies
 
 Una cookie es un fichero de datos que una página web le envía a tu ordenador o móvil cuando la visitas. 
 
@@ -218,7 +248,7 @@ Gracias a las cookies la página web podrá recordar que eres tú, y por lo tant
 
 Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas muchos archivos en tu cesta de la compra sin tener una cuenta, pero luego te vas. Entonces, cuando vuelvas a entrar, gracias a tu IP y los otros identificadores que miran las cookies, Amazon sabrá quién eres y qué hiciste antes, y muy posiblemente todavía podrá recordar lo que tenías en la cesta de la compra para que no tengas que volver a meterlo.
 
-## 5.1. Tipos de cookies
+## 6.1. Tipos de cookies
 
 - **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
 - **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. También existe la posibilidad de indicar un tiempo de expiración usando la propiedad `expires`, o usando la propiedad `maxAge`. 
@@ -227,7 +257,7 @@ Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas mucho
 
 A continuación se muestra como trabjar con cookies desde NextJS.
 
-## 5.2. Generar Cookies 
+## 6.2. Generar Cookies 
 
 **`const cookieStore = await cookies()`**  
 **`cookieStore.set(name, value, options)`**
@@ -265,7 +295,7 @@ async function setCookie( name ) {
 > **NOTA:** Para crear una cookie de sesión que se elimine al cerrar la pestaña del navegador debes omitir la opción `expires`. 
 
 
-## 5.3. Leer Cookies 
+## 6.3. Leer Cookies 
 
 **`const cookieStore = await cookies()`**  
 **`cookieStore.get(name)`**
@@ -284,7 +314,7 @@ export async function getCookie(name) {
 ```
 
 
-## 5.4. Eliminar Cookies
+## 6.4. Eliminar Cookies
 
 **`const cookieStore = await cookies()`**  
 **`cookieStore.delete(name)`**
@@ -320,11 +350,11 @@ En el proyecto anterior también se hace uso de `middleware`. Consulta el aparta
 - [Documentación de NextJS](https://nextjs.org/docs/app/api-reference/functions/cookies)
 
 
-# 6. Middleware
+# 7. Middleware
 
 
 
-# 7. ANEXO: Parámetros de ruta y consulta en página de cliente
+# 8. ANEXO: Parámetros de ruta y consulta en página de cliente
 
 También es posible obtener los parámetros de ruta y los de consulta en el lado cliente. Para ello deberemos usar los hooks **`useParams`** y **`useSearchParams`**. También disponemos del hook `usePathname`, que nos devuelve la ruta (incluyento los parámetros de ruta, si existen) 
 
@@ -371,7 +401,7 @@ Parámetro de consulta: screen -> 15
  
 
 
-# 8. Referencias
+# 9. Referencias
 
 - [Listado de APIs públicas](https://publicapis.dev)
 
