@@ -20,9 +20,10 @@
 - [6. Herramientas para auditoría](#6-herramientas-para-auditoría)
 - [7. Otras propiedades de metadata](#7-otras-propiedades-de-metadata)
 - [8. Favicon](#8-favicon)
-- [9. CASOS PRÁCTICOS AVANZADOS](#9-casos-prácticos-avanzados)
-  - [9.1. Panel de gestión de escuela (Parte 2 de 2)](#91-panel-de-gestión-de-escuela-parte-2-de-2)
-- [10. Referencias](#10-referencias)
+- [9. Optimización](#9-optimización)
+- [10. CASOS PRÁCTICOS AVANZADOS](#9-casos-prácticos-avanzados)
+  - [10.1. Panel de gestión de escuela (Parte 2 de 2)](#91-panel-de-gestión-de-escuela-parte-2-de-2)
+- [11. Referencias](#10-referencias)
 
 
 
@@ -170,15 +171,23 @@ Independientemente de la PWA, para generar los distintos tamaños del [**`favico
 
 ![png to ico](assets/png-ico.png)
 
+# 9. Optimización
+
+Algunas técnicas novedosas para optimizar nuestra aplicación Next, pueden verse en los siguientes enlaces:
+
+- [Demo](https://next-faster.vercel.app/)
+- [Código fuente](https://github.com/ethanniser/NextFaster)
+- [Vídeo explicativo en inglés]()
 
 
-# 9. CASOS PRÁCTICOS AVANZADOS
+
+# 10. CASOS PRÁCTICOS AVANZADOS
 
 En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso bases de datos. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos.        
 
 Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar el siguiente proyecto, que está desarrollado y explicado (en inglés) con cierta profundidad. 
 
-## 9.1. Panel de gestión de escuela (Parte 2 de 2)
+## 10.1. Panel de gestión de escuela (Parte 2 de 2)
 
 - [Vídeo: Next.js Full-Stack School Management App Full Tutorial](https://youtu.be/6sfiAyKy8Jo?si=mjEALft8TuO-3fg7)
 - [Código fuente del video anterior](https://github.com/safak/full-stack-school)
@@ -187,7 +196,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 ![dashboard demo](assets/dashboard.png)
 
 
-# 10. Referencias
+# 11. Referencias
 
 - [Web App Manifest Generator: simicart](https://www.simicart.com/manifest-generator.html/)
 - [Web App Manifest Generator: netlify](https://manifest-gen.netlify.app/) 
