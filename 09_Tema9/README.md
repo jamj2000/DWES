@@ -177,7 +177,7 @@ Algunas técnicas novedosas para optimizar nuestra aplicación Next, pueden vers
 
 - [Demo](https://next-faster.vercel.app/)
 - [Código fuente](https://github.com/ethanniser/NextFaster)
-- [Vídeo explicativo en inglés]()
+- [Vídeo explicativo en inglés](https://youtu.be/fWfIf7Vfjec?si=xe_aIduZKmF6XLAB)
 
 
 
