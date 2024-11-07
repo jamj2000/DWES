@@ -34,14 +34,10 @@
     - [4.2.1. Ataques frecuentes](#421-ataques-frecuentes)
     - [4.2.2. Sea paranoico: nunca confíe en sus usuarios](#422-sea-paranoico-nunca-confíe-en-sus-usuarios)
     - [4.2.3. Resumen](#423-resumen)
-- [5. CASOS PRÁCTICOS AVANZADOS](#5-casos-prácticos-avanzados)
+- [5. Casos prácticos avanzados](#5-casos-prácticos-avanzados)
   - [5.1. Panel de gestión de escuela (Parte 1 de 2)](#51-panel-de-gestión-de-escuela-parte-1-de-2)
   - [5.2. Albúm de fotos](#52-albúm-de-fotos)
-- [6. ANEXO: SSG](#6-anexo-ssg)
-- [7. Referencias](#7-referencias)
-
-
-
+- [6. Referencias](#6-referencias)
 
 
 
@@ -870,8 +866,7 @@ Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
 
 
-# 5. CASOS PRÁCTICOS AVANZADOS
-
+# 5. Casos prácticos avanzados
 
 En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
@@ -903,144 +898,8 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 
 
-# 6. ANEXO: SSG
 
-NextJS también nos proporciona soporte para SSG. 
-
-
-**Static Site Generat{ion,or,ed}**
-
-Los generadores de sitios estáticos (SSG) son motores que utilizan archivos de entrada de texto (como Markdown , reStructuredText y AsciiDoc ) para generar páginas web estáticas. Los sitios estáticos generados por generadores de sitios estáticos no requieren un backend después de la generación del sitio, lo que los convierte en ciudadanos de primera clase en las redes de entrega de contenido (CDN). Algunos de los generadores de sitios estáticos más populares son:
-
-| Framework | Lenguaje   |
-| --------- | ---------- |
-| Jekyll    | Ruby       |
-| Hugo      | Go         |
-| Gatsby    | Javascript |
-| Next.js   | Javascript |
-| Astro     | Javascript |
-
-Una lista exhaustiva puede encontrarse en [jamjstack.org](https://jamstack.org/generators/)
-
-**Los SSG suelen ser para contenido informativo que rara vez cambia**, como páginas de productos, sitios web de noticias, documentación (software), manuales y blogs.
-
-
-**Ejemplo**
-
-La estructura de carpetas del proyecto es la siguiente:
-
-```sh
-.
-├── jsconfig.json
-├── next.config.js
-├── package.json
-├── package-lock.json
-├── posts
-│   ├── markdown.md
-│   ├── pre-rendering.md
-│   └── ssg-ssr.md
-├── public
-│   ├── avatar.png
-│   ├── next.svg
-│   └── vercel.svg
-├── README.md
-└── src
-    ├── app
-    │   ├── about
-    │   │   └── page.js
-    │   ├── blog
-    │   │   ├── layout.js
-    │   │   ├── page.js
-    │   │   └── [slug]
-    │   │       ├── error.js
-    │   │       └── page.js
-    │   ├── favicon.ico
-    │   ├── globals.css
-    │   ├── layout.js
-    │   ├── not-found.js
-    │   └── page.js
-    └── components
-        ├── getPosts.js
-        └── PostPreview.js
-```
-
-Para convertir rutas, que en un principio son dinámicas (creadas mediante parámetros de ruta), necesitamos indicar qué rutas estaran finalmente disponibles. Para ello usamos **`generateStaticParams()`** (ver archivo `src/app/blog/[slug]/page.js`). Esta función permite generar de forma estática esas rutas durante el proceso de construcción (build time).
-
-![SSG Blog build](assets/ssg-blog-build.png)
-
-Un aspecto muy recomendable es disponer de los siguientes archivos:
-
-- `not-found.js`
-- `error.js`
-
-En este ejemplo, se mostrará `No encontrado` cuando el usuario acceda a rutas distintas de las siguientes:
-
-- ✅ / 
-- ✅ /about
-- ✅ /blog
-
-Por ejemplo, rutas que mostrarán `No encontrado` son:
-
-- ❌ /hola
-- ❌ /acerca
-- ❌ /posts
-
-Se mostrará `Error` cuando el usario acceda a rutas distintas de las siguientes:
-
-- ✅ /blog/markdown
-- ✅ /blog/ssg-ssr
-- ✅ /blog/pre-rendering
-
-Por ejemplo, rutas que provocaran `Error` son:
-
-- ❌ /blog/este-post-no-existe
-- ❌ /blog/este-tampoco
-  
-**Enlaces**
-
-- [Código fuente](https://github.com/jamj2000/nxblog)
-- [Demo](https://jamblog.vercel.app/)
-
-
-**Ejemplo 2**
-
-En este ejemplo, nos ahorramos tener que utilizar `generateStaticParams()`. 
-
-Para ello hacemos uso de [`MDX`](https://mdxjs.com/). Existe un tutorial en [dev.to](https://dev.to/mikeesto/next-js-mdx-w-code-highlighting-16fi)
-
-La estructura de carpetas es la siguiente:
-
-```
-.
-├── jsconfig.json
-├── next.config.js
-├── next-env.d.ts
-├── package.json
-├── package-lock.json
-├── public
-│   ├── next.svg
-│   └── vercel.svg
-├── README.md
-├── src
-│   ├── app
-│   │   ├── favicon.ico
-│   │   ├── globals.css
-│   │   ├── layout.js
-│   │   ├── mdx
-│   │   │   └── page.mdx
-│   │   └── page.js
-│   └── mdx-components.tsx
-└── tsconfig.json
-```
-
-**Enlaces**
-
-- [Código fuente](https://github.com/jamj2000/nxmdx)
-- [Demo](https://nxmdx.vercel.app/mdx)
-
-
-
-# 7. Referencias
+# 6. Referencias
 
 - [MDN: Envío y rececpción de datos de formulario (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 - [W3Schools: Atributo formaction (en inglés)](https://www.w3schools.com/tags/att_formaction.asp)

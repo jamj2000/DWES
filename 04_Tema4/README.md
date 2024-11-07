@@ -27,9 +27,10 @@
   - [7.3. Leer Cookies](#73-leer-cookies)
   - [7.4. Eliminar Cookies](#74-eliminar-cookies)
 - [8. Middleware](#8-middleware)
-- [9. ANEXO: Parámetros de ruta y consulta en página de cliente](#9-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
-- [6. ANEXO: SSG](#6-anexo-ssg)
-- [10. Referencias](#10-referencias)
+- [9. ANEXO I: Parámetros de ruta y consulta en página de cliente](#9-anexo-i-parámetros-de-ruta-y-consulta-en-página-de-cliente)
+- [10. ANEXO II: SSG](#10-anexo-ii-ssg)
+- [11. Referencias](#11-referencias)
+
 
 
 
@@ -384,7 +385,7 @@ En el proyecto anterior también se hace uso de `middleware`. Consulta el aparta
 
 
 
-# 9. ANEXO: Parámetros de ruta y consulta en página de cliente
+# 9. ANEXO I: Parámetros de ruta y consulta en página de cliente
 
 También es posible obtener los parámetros de ruta y los de consulta en el lado cliente. Para ello deberemos usar los hooks **`useParams`** y **`useSearchParams`**. También disponemos del hook `usePathname`, que nos devuelve la ruta (incluyento los parámetros de ruta, si existen) 
 
@@ -430,7 +431,7 @@ Parámetro de consulta: screen -> 15
 - https://nextjs.org/docs/app/api-reference/functions/use-search-params
  
 
-# 6. ANEXO: SSG
+# 10. ANEXO II: SSG
 
 NextJS también nos proporciona soporte para SSG. Esta técnica proporciona un mecanismo mediante el cual podemos generar contenido estático en el momento del despliegue a producción a partir de diversas fuentes de datos.
 
@@ -572,7 +573,7 @@ La estructura de carpetas es la siguiente:
 
 
 
-# 10. Referencias
+# 11. Referencias
 
 - [Listado de APIs públicas](https://publicapis.dev)
 
