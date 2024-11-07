@@ -2,7 +2,7 @@
 
 # Tema 5: FORMULARIOS  <!-- omit in toc -->
 > Generación dinámica de páginas Web  
-> SSG, SERVER ACTIONS, FORMULARIOS, IMÁGENES 
+> SERVER ACTIONS, FORMULARIOS, IMÁGENES 
 
 **[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
