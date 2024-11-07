@@ -414,7 +414,7 @@ export async function handle(formData) {
 A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que sustituye a los anteriores hooks y que simplifica en gran manera el trabajo con *actions*.
 
 ```js
-import { createHoppy } from "@/lib/actions;
+import { createHoppy } from "@/lib/actions";
 import { useActionState } from "react";
 
 export default function Form() {
@@ -743,7 +743,7 @@ En HTML hacemos
 En JSX debemos hacer
 
 ```js
-<select name="localidad" defaultValue={3} >
+<select name="localidad" defaultValue={3}>
       <option value={1}> Álava </option>
       <option value={2}> Albacete </option>
       <option value={3}> Almeria </option>

@@ -18,14 +18,18 @@
   - [5.1. Parámetros de ruta](#51-parámetros-de-ruta)
   - [5.2. Parámetros de consulta](#52-parámetros-de-consulta)
   - [5.3. Parámetros de ruta vs Parámetros de consulta.](#53-parámetros-de-ruta-vs-parámetros-de-consulta)
-- [6. Cookies](#6-cookies)
-  - [6.1. Tipos de cookies](#61-tipos-de-cookies)
-  - [6.2. Generar Cookies](#62-generar-cookies)
-  - [6.3. Leer Cookies](#63-leer-cookies)
-  - [6.4. Eliminar Cookies](#64-eliminar-cookies)
-- [7. Middleware](#7-middleware)
-- [8. ANEXO: Parámetros de ruta y consulta en página de cliente](#8-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
-- [9. Referencias](#9-referencias)
+- [6. Paginación de datos](#6-paginación-de-datos)
+  - [6.1. Ejemplo](#61-ejemplo)
+  - [6.2. Ejemplo avanzado: Paginación y búsqueda](#62-ejemplo-avanzado-paginación-y-búsqueda)
+- [7. Cookies](#7-cookies)
+  - [7.1. Tipos de cookies](#71-tipos-de-cookies)
+  - [7.2. Generar Cookies](#72-generar-cookies)
+  - [7.3. Leer Cookies](#73-leer-cookies)
+  - [7.4. Eliminar Cookies](#74-eliminar-cookies)
+- [8. Middleware](#8-middleware)
+- [9. ANEXO: Parámetros de ruta y consulta en página de cliente](#9-anexo-parámetros-de-ruta-y-consulta-en-página-de-cliente)
+- [10. Referencias](#10-referencias)
+
 
 
 
@@ -237,8 +241,33 @@ Aunque, a la hora de decidir si usar parámetros de ruta o parámetros de consul
 - **Usamos parámetros de consulta si dicha información es opcional, como información de filtrado o búsqueda.**
 
 
+# 6. Paginación de datos
 
-# 6. Cookies
+Cuando recuperamos datos de una fuente (base de datos o API), a menudo deseamos no mostrar todos los datos de golpe, sino mostrarlos poco a poco en porciones más pequeñas. Esta técnica se conoce como paginación.
+
+La decisión de realizar la paginación en el lado del servidor o del cliente en Next.js depende de varios factores, como el tamaño de los datos, la frecuencia de actualización de los datos y las necesidades de rendimiento de tu aplicación.
+
+- **Paginación en el lado del servidor**: Si estás trabajando con **grandes conjuntos de datos** o necesitas una carga inicial rápida, puede ser más eficiente implementar la paginación en el lado del servidor. Esto significa que la lógica de paginación se ejecuta en el servidor y solo se envían al cliente los datos necesarios para la página actual. Esto puede ayudar a reducir el tiempo de carga inicial y mejorar la experiencia del usuario.
+- **Paginación en el lado del cliente**: Si estás trabajando con **conjuntos de datos más pequeños** o si los datos se actualizan frecuentemente, puede ser más práctico implementar la paginación en el lado del cliente. Esto significa que todos los datos se cargan inicialmente en el cliente y la paginación se gestiona mediante JavaScript en el navegador. Esto puede simplificar la lógica del servidor y permitir una interacción más fluida con la página sin necesidad de recargarla.
+
+En resumen, la mejor opción dependerá de las necesidades específicas de tu aplicación. En algunos casos, puede ser beneficioso combinar ambas estrategias, utilizando la paginación en el lado del servidor para la carga inicial y luego la paginación en el lado del cliente para una navegación más fluida.
+
+## 6.1. Ejemplo
+
+- [Código fuente de ejemplo](https://github.com/jamj2000/nxpagination.git) 
+
+> **ACTIVIDAD:**
+>
+> Descarga y ejectua el código fuente anterior.
+> 
+> ¿Qué tipo de paginación se realiza en la aplicacón del código fuente anterior?.
+
+## 6.2. Ejemplo avanzado: Paginación y búsqueda
+
+- [Aplicación de lado servidor para consultar biblioteca de libros](https://github.com/jamj2000/book-inventory)
+
+
+# 7. Cookies
 
 Una cookie es un fichero de datos que una página web le envía a tu ordenador o móvil cuando la visitas. 
 
@@ -248,7 +277,7 @@ Gracias a las cookies la página web podrá recordar que eres tú, y por lo tant
 
 Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas muchos archivos en tu cesta de la compra sin tener una cuenta, pero luego te vas. Entonces, cuando vuelvas a entrar, gracias a tu IP y los otros identificadores que miran las cookies, Amazon sabrá quién eres y qué hiciste antes, y muy posiblemente todavía podrá recordar lo que tenías en la cesta de la compra para que no tengas que volver a meterlo.
 
-## 6.1. Tipos de cookies
+## 7.1. Tipos de cookies
 
 - **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
 - **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. También existe la posibilidad de indicar un tiempo de expiración usando la propiedad `expires`, o usando la propiedad `maxAge`. 
@@ -257,7 +286,7 @@ Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas mucho
 
 A continuación se muestra como trabjar con cookies desde NextJS.
 
-## 6.2. Generar Cookies 
+## 7.2. Generar Cookies 
 
 **`const cookieStore = await cookies()`**  
 **`cookieStore.set(name, value, options)`**
@@ -295,7 +324,7 @@ async function setCookie( name ) {
 > **NOTA:** Para crear una cookie de sesión que se elimine al cerrar la pestaña del navegador debes omitir la opción `expires`. 
 
 
-## 6.3. Leer Cookies 
+## 7.3. Leer Cookies 
 
 **`const cookieStore = await cookies()`**  
 **`cookieStore.get(name)`**
@@ -314,7 +343,7 @@ export async function getCookie(name) {
 ```
 
 
-## 6.4. Eliminar Cookies
+## 7.4. Eliminar Cookies
 
 **`const cookieStore = await cookies()`**  
 **`cookieStore.delete(name)`**
@@ -350,11 +379,11 @@ En el proyecto anterior también se hace uso de `middleware`. Consulta el aparta
 - [Documentación de NextJS](https://nextjs.org/docs/app/api-reference/functions/cookies)
 
 
-# 7. Middleware
+# 8. Middleware
 
 
 
-# 8. ANEXO: Parámetros de ruta y consulta en página de cliente
+# 9. ANEXO: Parámetros de ruta y consulta en página de cliente
 
 También es posible obtener los parámetros de ruta y los de consulta en el lado cliente. Para ello deberemos usar los hooks **`useParams`** y **`useSearchParams`**. También disponemos del hook `usePathname`, que nos devuelve la ruta (incluyento los parámetros de ruta, si existen) 
 
@@ -401,7 +430,7 @@ Parámetro de consulta: screen -> 15
  
 
 
-# 9. Referencias
+# 10. Referencias
 
 - [Listado de APIs públicas](https://publicapis.dev)
 

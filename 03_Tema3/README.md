@@ -17,32 +17,28 @@
   - [2.2. Estructuras de iteración y de condición](#22-estructuras-de-iteración-y-de-condición)
     - [2.2.1. Estructura de iteración](#221-estructura-de-iteración)
     - [2.2.2. Estructuras de condición](#222-estructuras-de-condición)
-  - [2.3. Aplicar estilos](#23-aplicar-estilos)
-  - [2.4. Propiedades](#24-propiedades)
-    - [2.4.1. Propiedades de un layout](#241-propiedades-de-un-layout)
-    - [2.4.2. Propiedades de una paǵina](#242-propiedades-de-una-paǵina)
-    - [2.4.3. Propiedades de un componente](#243-propiedades-de-un-componente)
-    - [2.4.4. Resumen](#244-resumen)
+  - [2.3. Propiedades](#23-propiedades)
+    - [2.3.1. Propiedades de un layout](#231-propiedades-de-un-layout)
+    - [2.3.2. Propiedades de una paǵina](#232-propiedades-de-una-paǵina)
+    - [2.3.3. Propiedades de un componente](#233-propiedades-de-un-componente)
+    - [2.3.4. Resumen](#234-resumen)
+  - [2.4. Aplicar estilos](#24-aplicar-estilos)
 - [3. Componentes](#3-componentes)
   - [3.1. Componentes del Servidor](#31-componentes-del-servidor)
-  - [3.2. Beneficios del renderizado en el servidor](#32-beneficios-del-renderizado-en-el-servidor)
-  - [3.3. Componentes del Cliente](#33-componentes-del-cliente)
-  - [3.4. Beneficios del renderizado en el cliente](#34-beneficios-del-renderizado-en-el-cliente)
-- [4. Componentes del Servidor VS Componentes del Cliente](#4-componentes-del-servidor-vs-componentes-del-cliente)
-  - [4.1. ¿Cuándo utilizar componentes de servidor y cliente?](#41-cuándo-utilizar-componentes-de-servidor-y-cliente)
-  - [4.2. Ejemplo: Paginación de datos](#42-ejemplo-paginación-de-datos)
-  - [4.3. Ejemplo avanzado: Paginación y búsqueda](#43-ejemplo-avanzado-paginación-y-búsqueda)
-  - [4.4. Componentes de React](#44-componentes-de-react)
-  - [4.5. Componentes de NextJS](#45-componentes-de-nextjs)
-- [5. Componentes listos para usar](#5-componentes-listos-para-usar)
-  - [5.1. Iconos](#51-iconos)
-  - [5.2. Spinners](#52-spinners)
-  - [5.3. UI](#53-ui)
-- [6. App Router](#6-app-router)
-  - [6.1. Segmentos de ruta](#61-segmentos-de-ruta)
-  - [6.2. Creando rutas](#62-creando-rutas)
-  - [6.3. Organización del proyecto](#63-organización-del-proyecto)
-- [7. Referencias](#7-referencias)
+  - [3.2. Componentes del Cliente](#32-componentes-del-cliente)
+  - [3.3. Comparativa. Cuándo usar cada tipo](#33-comparativa-cuándo-usar-cada-tipo)
+  - [3.4. Componentes proporcionados por React](#34-componentes-proporcionados-por-react)
+  - [3.5. Componentes proporcionados por NextJS](#35-componentes-proporcionados-por-nextjs)
+  - [3.6. Componentes proporcionados por terceros](#36-componentes-proporcionados-por-terceros)
+    - [3.6.1. Iconos](#361-iconos)
+    - [3.6.2. Spinners](#362-spinners)
+    - [3.6.3. UI](#363-ui)
+- [4. App Router](#4-app-router)
+  - [4.1. Segmentos de ruta](#41-segmentos-de-ruta)
+  - [4.2. Creando rutas](#42-creando-rutas)
+  - [4.3. Organización del proyecto](#43-organización-del-proyecto)
+- [5. Referencias](#5-referencias)
+
 
 
 
@@ -118,7 +114,11 @@ Otros archivos opcionales que podemos añadir son:
 
 # 2. JSX
 
-En NextJS, tanto las páginas como los componentes hacen uso de JSX (JavaScript Syntax Extension).
+En NextJS, se hace uso de JSX (JavaScript Syntax Extension) en los siguientes elementos:
+
+- Layouts
+- Páginas
+- Componentes
 
 JSX (JavaScript Syntax Extension y ocasionalmente denominada JavaScript XML) es una extensión de JavaScript que permite la creación de árboles DOM utilizando una sintaxis similar a XML. Creado inicialmente por Facebook para su uso con React, JSX ha sido adoptado por múltiples frameworks.
 
@@ -332,155 +332,10 @@ Ejemplo de operador ??
 ```
 
 
-## 2.3. Aplicar estilos
-
-**en línea**
-
-```javascript 
-function Test () {
-  return (
-    <div style={{ backgroundColor: "yellow", fontSize: "24px" }}> 
-      Hola 
-    </div>
-  )
-}
-
-export default Test;
-```
-
-**interno**
-
-```javascript
-const style = {
-  backgroundColor: "yellow",
-  fontSize: "24px"
-}
-
-function Test () {
-  return <div style={style}> Hola </div>
-}
-
-export default Test;
-```
-
-También es válido lo siguiente:
-
-```javascript
-function Test () {
-  return <div style={{ backgroundColor: "yellow", fontSize: "24px" }}> Hola </div>
-}
-
-export default Test;
-```
-
-> **NOTA:** Observa que las **propiedades** se escriben en **camelCase** y el separador es la coma.
+## 2.3. Propiedades
 
 
-**externo en módulo CSS**
-
-```css
-/* Test.module.css */
-.clase {
-  background-color: "yellow";
-  font-size: 24px;
-}
-```
-
-```javascript
-import style from 'Test.module.css'
-
-function Test () {
-  return <div className={style.clase}> Hola </div>
-}
-
-export default Test;
-```
-
-Para aplicar múltiples clases:
-
-```javascript
-import styles from "./App.module.css"
-
-export const App = () => {
-  return(
-      <button className={`${styles.buttonClass} ${styles.buttonColor}`}>CSS Styles</button>
-  )
-}
-export default App
-```
-
-**externo en CSS global**
-
-```css
-/* globals.css */
-
-.bg-lavanda {
-  background-color: Lavender;
-}
-
-.borde {
-  border: solid 1px LightSlateGray;
-}
-
-.relleno {
-  padding: 30px;
-}
-```
-
-```javascript
-import './globals.css'
-
-export default function Home() {
-  return (
-    <main className="borde relleno bg-lavanda">
-      <h1>Inicio</h1>
-    </main>
-  )
-}
-```
-
-
-**Tailwind**
-
-```css
-/* globals.css */ 
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-
-```javascript
-import "./globals.css"
-
-function Home () {
-  return <div className="bg-yellow-100  text-2xl"> Hola </div>
-}
-
-export default Home;
-```
-
-Tailwind es un framework CSS bastante popular y muy peculiar. 
-
-Existen muchos sitios que proporcionan componentes basados en Tailwind. Algunos de ellos son:
-
-- [Shadcn](https://ui.shadcn.com/)
-- [Flowbite](https://flowbite.com/)
-- [DaisyUI](https://daisyui.com/)
-- [WindUI](https://wind-ui.com/)
-- [HyperUI](https://www.hyperui.dev/)
-
-Muchos más recursos relacionados con Tailwind en
-
-- [Awesome Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss)
-
-
-
-## 2.4. Propiedades
-
-
-### 2.4.1. Propiedades de un layout
+### 2.3.1. Propiedades de un layout
 
 Todos los *layouts* deben tener una propiedad **children**, que situaremos dentro del código JSX, justo en el lugar donde queremos que se rendericen las páginas.
 
@@ -498,7 +353,7 @@ function Layout({children}) {
 export default Layout
 ```
 
-### 2.4.2. Propiedades de una paǵina
+### 2.3.2. Propiedades de una paǵina
 
 Como hemos indicado antes, JSX se usa tanto en layouts, como páginas y componentes. En estos casos es posible el paso de argumentos, llamados también propiedades. 
 
@@ -507,7 +362,7 @@ Las propiedades más importantes que puede recibir una página son **`params`** 
 La estructura básica de la página es la siguiente:
 
 ```js
-function page({ params, searchParams}) {
+function Page({ params, searchParams}) {
     // ...
 
     return (
@@ -515,16 +370,29 @@ function page({ params, searchParams}) {
     )
 }
 
-export default page
+export default Page
 ```
 
 Para un descripción más detallada de estos parámetros consultar más adelante.
 
 
-### 2.4.3. Propiedades de un componente
+### 2.3.3. Propiedades de un componente
 
 A los componentes también se les puede pasar información mediante las propiedades. A diferencia de las páginas, cuyas propiedades son recurrentes, en los componentes el nombre de las propiedades suele ser muy variado. La única propiedad que tiene un nombre reservado es **`children`** que representa los elementos hijos del componente, es decir los elementos que irán insertados entre la etiqueta de inicio y la etiqueta de cierre.
 
+La estructura básica de la página es la siguiente:
+
+```js
+function Component({ children, /* otras propiedades */}) {
+    // ...
+
+    return (
+      // JSX
+    )
+}
+
+export default Component
+```
 
 En los componentes debemos distinguir 2 aspectos:
 
@@ -634,7 +502,7 @@ Si un componente no tiene propiedades, hacemos uso de él de la siguiente forma:
 ```
 
 
-### 2.4.4. Resumen
+### 2.3.4. Resumen
 
 
 La forma que adquieren las propiedades para *layouts*, *páginas* y *componentes* son las siguientes:
@@ -646,6 +514,120 @@ function Page ( {params, searchParams} )
 
 function Component ( {children, /* otras propiedades */})
 ```
+
+
+## 2.4. Aplicar estilos
+
+Existen múltiples formas de aplicar estilos a JSX. Estas formas no se excluyen entre sí.
+
+**en línea**
+
+```javascript 
+function Test () {
+  return (
+    <div style={{ backgroundColor: "yellow", fontSize: "24px" }}> 
+      Hola 
+    </div>
+  )
+}
+
+export default Test;
+```
+
+**interno**
+
+```javascript
+const style = {
+  backgroundColor: "yellow",
+  fontSize: "24px"
+}
+
+function Test () {
+  return <div style={style}> Hola </div>
+}
+
+export default Test;
+```
+
+También es válido lo siguiente:
+
+```javascript
+function Test () {
+  return <div style={{ backgroundColor: "yellow", fontSize: "24px" }}> Hola </div>
+}
+
+export default Test;
+```
+
+> **NOTA:** Observa que las **propiedades** se escriben en **camelCase** y el separador es la coma.
+
+
+
+**externo en CSS global**
+
+```css
+/* globals.css */
+
+.bg-lavanda {
+  background-color: Lavender;
+}
+
+.borde {
+  border: solid 1px LightSlateGray;
+}
+
+.relleno {
+  padding: 30px;
+}
+```
+
+```javascript
+import './globals.css'
+
+export default function Home() {
+  return (
+    <main className="borde relleno bg-lavanda">
+      <h1>Inicio</h1>
+    </main>
+  )
+}
+```
+
+
+**Tailwind**
+
+```css
+/* globals.css */ 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+
+```javascript
+import "./globals.css"
+
+function Home () {
+  return <div className="bg-yellow-100  text-2xl"> Hola </div>
+}
+
+export default Home;
+```
+
+Tailwind es un framework CSS bastante popular y muy peculiar. 
+
+Existen muchos sitios que proporcionan componentes basados en Tailwind. Algunos de ellos son:
+
+- [Shadcn](https://ui.shadcn.com/)
+- [Flowbite](https://flowbite.com/)
+- [DaisyUI](https://daisyui.com/)
+- [WindUI](https://wind-ui.com/)
+- [HyperUI](https://www.hyperui.dev/)
+
+Muchos más recursos relacionados con Tailwind en
+
+- [Awesome Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss)
 
 
 # 3. Componentes
@@ -669,7 +651,7 @@ En Next.js, el trabajo de renderizado se divide por segmentos de ruta para permi
 - Renderizado dinámico
 - Streaming
 
-## 3.2. Beneficios del renderizado en el servidor
+**Beneficios del renderizado en el servidor**
 
 Hay una serie de beneficios al realizar el trabajo de renderizado en el servidor, que incluyen:
 
@@ -682,11 +664,11 @@ Hay una serie de beneficios al realizar el trabajo de renderizado en el servidor
 - **Streaming**: los componentes del servidor le permiten dividir el trabajo de renderizado en partes y transmitirlas al cliente a medida que estén listas. Esto permite al usuario ver partes de la página antes sin tener que esperar a que se represente toda la página en el servidor.
 
 
-## 3.3. Componentes del Cliente
+## 3.2. Componentes del Cliente
 
 Los componentes del cliente permiten escribir una interfaz de usuario interactiva que se puede renderizar en el cliente (`CSR: Client Side Rendering`) en el momento de la solicitud. En Next.js, la renderización en el cliente es opcional, lo que significa que debe decidir explícitamente qué componentes React serán renderizados en el cliente.
 
-## 3.4. Beneficios del renderizado en el cliente
+**Beneficios del renderizado en el cliente**
 
 Hay un par de beneficios al realizar el trabajo de renderizado en el cliente, que incluyen:
 
@@ -723,9 +705,8 @@ Referencia: https://nextjs.org/docs/app/building-your-application/rendering/clie
 - **funciones de React del lado cliente como `useState`, `useEffect`,...**
 
 
-# 4. Componentes del Servidor VS Componentes del Cliente
+## 3.3. Comparativa. Cuándo usar cada tipo
 
-## 4.1. ¿Cuándo utilizar componentes de servidor y cliente?
 
 A continuación se ofrece un resumen rápido de los diferentes casos de uso de los componentes de servidor y cliente:
 
@@ -742,29 +723,8 @@ A continuación se ofrece un resumen rápido de los diferentes casos de uso de l
 
 
 
-## 4.2. Ejemplo: Paginación de datos
 
-La decisión de realizar la paginación en el lado del servidor o del cliente en Next.js depende de varios factores, como el tamaño de los datos, la frecuencia de actualización de los datos y las necesidades de rendimiento de tu aplicación.
-
-- **Paginación en el lado del servidor**: Si estás trabajando con grandes conjuntos de datos o necesitas una carga inicial rápida, puede ser más eficiente implementar la paginación en el lado del servidor. Esto significa que la lógica de paginación se ejecuta en el servidor y solo se envían al cliente los datos necesarios para la página actual. Esto puede ayudar a reducir el tiempo de carga inicial y mejorar la experiencia del usuario.
-- **Paginación en el lado del cliente**: Si estás trabajando con conjuntos de datos más pequeños o si los datos se actualizan frecuentemente, puede ser más práctico implementar la paginación en el lado del cliente. Esto significa que todos los datos se cargan inicialmente en el cliente y la paginación se gestiona mediante JavaScript en el navegador. Esto puede simplificar la lógica del servidor y permitir una interacción más fluida con la página sin necesidad de recargarla.
-
-En resumen, la mejor opción dependerá de las necesidades específicas de tu aplicación. En algunos casos, puede ser beneficioso combinar ambas estrategias, utilizando la paginación en el lado del servidor para la carga inicial y luego la paginación en el lado del cliente para una navegación más fluida.
-
-- [Código fuente de ejemplo](https://github.com/jamj2000/nxpagination.git) 
-
-> **ACTIVIDAD:**
->
-> Descarga y ejectua el código fuente anterior.
-> 
-> ¿Qué tipo de paginación se realiza en la aplicacón del código fuente anterior?.
-
-## 4.3. Ejemplo avanzado: Paginación y búsqueda
-
-- [Aplicación de lado servidor para consultar biblioteca de libros](https://github.com/jamj2000/book-inventory)
-
-
-## 4.4. Componentes de React
+## 3.4. Componentes proporcionados por React
 
 [React y ReactDOM proporcionan numerosos componentes](https://react.dev/reference/react-dom/components). Algunos de ellos son:
 
@@ -773,7 +733,7 @@ En resumen, la mejor opción dependerá de las necesidades específicas de tu ap
 - [input](https://react.dev/reference/react-dom/components/input)
 - [progress](https://react.dev/reference/react-dom/components/progress)
 
-## 4.5. Componentes de NextJS
+## 3.5. Componentes proporcionados por NextJS
 
 **Link**
 
@@ -835,9 +795,9 @@ El componente `<Image>` de Next.js amplía el elemento <img> de HTML con funcion
 - Más información: https://nextjs.org/docs/app/api-reference/components/image#configuration-options
 
 
-# 5. Componentes listos para usar
+## 3.6. Componentes proporcionados por terceros
 
-## 5.1. Iconos
+### 3.6.1. Iconos
 
 **Lucide** ( [sitio oficial](https://lucide.dev/) )
 
@@ -925,7 +885,7 @@ class Question extends React.Component {
 }
 ``` 
 
-## 5.2. Spinners
+### 3.6.2. Spinners
 
 **React Spinners** ( [sitio oficial](https://www.davidhu.io/react-spinners/) )
 
@@ -1005,7 +965,7 @@ export default Spinner;
 >
 
 
-## 5.3. UI
+### 3.6.3. UI
 
 **Shadcn/UI** ( [sitio oficial](https://ui.shadcn.com/) )
 
@@ -1154,6 +1114,9 @@ Dependiendo de los componentes utilizados, puede no ser necesario instalar algun
 También es necesario, realizar una configuración en el archivo `tailwind.config.ts`. Consulta las [instrucciones generales](https://ui.aceternity.com/docs/add-utilities) y la documentación de cada componente.  
 
 La forma de usar los componentes, grosso modo, se basa en copiar el código del componente a la carpeta `components`
+
+<details>
+<summary>Código fuente de ejemplo</summary>
 
 ```js
 // components/ui/background-gradient-animation.tsx
@@ -1339,8 +1302,9 @@ export const BackgroundGradientAnimation = ({
   );
 };
 ```
-
-
+</details>
+  
+  
 Y luego usar dicho componente:
 
 
@@ -1367,7 +1331,7 @@ Puedes consultar los siguientes recursos para aprender como hacer uso de algunos
 
 
 
-# 6. App Router
+# 4. App Router
 
 En la versión 13, Next.js introdujo un nuevo `App Router` construido sobre `React Server Components` , que admite diseños compartidos, enrutamiento anidado, estados de carga, manejo de errores y más.
 
@@ -1382,7 +1346,7 @@ App Router funciona en un nuevo directorio llamado `app` (en versiones anteriore
 - **Segmento de URL**: Parte de la ruta de la URL delimitada por barras.
 - **Ruta URL**: Parte de la URL que viene después del dominio (compuesta por segmentos).
 
-## 6.1. Segmentos de ruta
+## 4.1. Segmentos de ruta
 
 Cada carpeta en una ruta representa un segmento de ruta. Cada segmento de ruta se asigna a un segmento correspondiente en una ruta URL.
 
@@ -1396,7 +1360,7 @@ Esto significa que los archivos de proyecto se pueden colocar de forma segura de
 
 - Referencia: https://nextjs.org/docs/app/building-your-application/routing
 
-## 6.2. Creando rutas
+## 4.2. Creando rutas
 
 Next.js utiliza un enrutador basado en un sistema de archivos donde se utilizan carpetas para definir rutas.
 
@@ -1411,7 +1375,7 @@ Se utiliza un archivo especial **`page.js`** para hacer que los segmentos de rut
 En este ejemplo, la ruta URL `/dashboard/analytics` no es accesible públicamente porque no tiene un archivo `page.js` correspondiente. Esta carpeta podría usarse para almacenar componentes, hojas de estilo, imágenes u otros archivos colocados.
 
 
-## 6.3. Organización del proyecto
+## 4.3. Organización del proyecto
 
 Aparte de las convenciones de enrutamiento de carpetas y archivos, Next.js no tiene opiniones sobre cómo organizar y colocar los archivos de su proyecto.
 
@@ -1442,7 +1406,7 @@ Un muy video donde se explica la estructura de un proyecto en NextJS y los archi
 - [Project Structure and File Conventions in NextJs 14](https://youtu.be/i6Fa5Oyr59k?si=Y3IVfA8ZuMV38ndo)
 
 
-# 7. Referencias
+# 5. Referencias
 
 - [Documentación de NextJS](https://nextjs.org/docs)
 - [Video: Introduction to Next.js and React](https://youtu.be/h2BcitZPMn4)
