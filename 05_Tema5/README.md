@@ -478,12 +478,15 @@ Quizás no mucha gente sepa que, en HTML, los `input` y `button` pueden tener un
 NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
 
 ```html
-       <form key={user.id} style={{ 'padding': '30px', 'border': 'solid 1px gray', 'marginTop': '20px' }}>
+       <form key={user.id}>
           <input type='hidden' name='id' defaultValue={user.id}></input>
+
           <label htmlFor='nombre'>Usuario</label>
           <input type='text' id='nombre' name='nombre' defaultValue={user.nombre}></input>
+
           <label htmlFor='edad'>Edad</label>
           <input type='text' id='edad' name='edad' defaultValue={user.edad}></input>
+
           <button formAction={userUpdate}>Actualizar</button>
           <button formAction={userDelete}>Eliminar</button>
         </form>
@@ -492,7 +495,7 @@ NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX
 Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar distintas acciones: actualizar, eliminar, ...
 
 
-[Código fuente con ejemplo completo](https://github.com/jamj2000/nxfactions)
+[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
 
