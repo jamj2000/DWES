@@ -510,8 +510,6 @@ Aquí van algunos consejos:
 
 No pongas botones con fines distintos a submit. Si lo hacemos se disparará el *action* asociado al formulario. Para operaciones que no sean acciones del servidor usa otro elemento que no sea *button*.
 
-Este comportamiento quizás se deba a algún bug en NextJS.
-
 
 **MAL**
 
@@ -539,7 +537,22 @@ Este comportamiento quizás se deba a algún bug en NextJS.
     <button formAction={accion3} > Accion 3</button>  // Bien
     <button type='submit'> Acción 1 </button>         // Bien
 </form>
+```
 
+Otra solución es desactivar el comportamiento por defecto del botón con el método `preventDefault` del evento.
+
+**BIEN**
+
+```js
+'use client'
+
+<form action={accion1} >
+    <button onClick={(e) => { e.preventDefault(); otraOperacion() }}> Otra operación que no es acción </button> // Bien
+
+    <button formAction={accion2} > Accion 2</button>  // Bien
+    <button formAction={accion3} > Accion 3</button>  // Bien
+    <button type='submit'> Acción 1 </button>         // Bien
+</form>
 ```
 
 ### 3.6.2. Pasa correctamente los valores a las propiedades en los **`input`**
