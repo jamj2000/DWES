@@ -5,4 +5,4 @@
 ### [Mostrar imágenes del cloud Cloudinary](https://github.com/jamj2000/nxcloudinary-gallery)
 ### [Subir imágenes al cloud Cloudinary](https://github.com/jamj2000/nxcloudinary-upload)
 ### [Operaciones CRUD en el cloud de imágenes de Cloudinary](https://github.com/jamj2000/nxcloudinary-crud)
-### [CRUD local](https://github.com/jamj2000/nxcrud)
+### [CRUD paginado local](https://github.com/jamj2000/nxcrud-pag)
