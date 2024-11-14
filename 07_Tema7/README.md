@@ -1297,6 +1297,11 @@ export default Tiptap
 
 También hay una aplicación de ejemplo, que además hace uso de iconos Lucide, en https://github.com/jamj2000/nxeditor-icons
 
+**Otros editores interesantes**
+
+- [Jodit](https://xdsoft.net/jodit/)
+- [Quill](https://quilljs.com/)
+  
 
 ## 3.10. Coloreado de código
 
