@@ -20,6 +20,7 @@
   - [2.7. Módulos incorporados (built-in) en Node](#27-módulos-incorporados-built-in-en-node)
 - [3. Linter para Javascript (y también para CSS)](#3-linter-para-javascript-y-también-para-css)
 - [4. Configuración de usuario en VSCode](#4-configuración-de-usuario-en-vscode)
+  - [Atajos imprescindibles del teclado](#atajos-imprescindibles-del-teclado)
   - [4.1. Archivo settings.json](#41-archivo-settingsjson)
   - [4.2. Archivo keybindings.json](#42-archivo-keybindingsjson)
   - [4.3. Plugins](#43-plugins)
@@ -583,6 +584,20 @@ E insertamos en `package.json`
 ``` 
 
 # 4. Configuración de usuario en VSCode
+
+## Atajos imprescindibles del teclado
+
+- `Ctrl+K`, `Ctrl+S`: Configuración de atajos del teclado
+- `Ctrl+,`: Prefeencias del usuario
+- `Ctrl+P`: Ir a archivo, ...
+- `Ctrl+Shift+P`: Paleta de comandos
+
+**Referencias**:
+
+- [keyboard-shortcuts-windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+- [keyboard-shortcuts-linux](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf)
+- [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+
 
 
 ## 4.1. Archivo settings.json
