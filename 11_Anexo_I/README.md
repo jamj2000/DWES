@@ -20,11 +20,12 @@
   - [2.7. Módulos incorporados (built-in) en Node](#27-módulos-incorporados-built-in-en-node)
 - [3. Linter para Javascript (y también para CSS)](#3-linter-para-javascript-y-también-para-css)
 - [4. Configuración de usuario en VSCode](#4-configuración-de-usuario-en-vscode)
-  - [Atajos imprescindibles del teclado](#atajos-imprescindibles-del-teclado)
-  - [4.1. Archivo settings.json](#41-archivo-settingsjson)
-  - [4.2. Archivo keybindings.json](#42-archivo-keybindingsjson)
-  - [4.3. Plugins](#43-plugins)
+  - [4.1. Atajos imprescindibles del teclado](#41-atajos-imprescindibles-del-teclado)
+  - [4.2. Archivo settings.json](#42-archivo-settingsjson)
+  - [4.3. Archivo keybindings.json](#43-archivo-keybindingsjson)
+  - [4.4. Plugins](#44-plugins)
 - [5. Referencias](#5-referencias)
+
 
 
 ---
@@ -585,7 +586,7 @@ E insertamos en `package.json`
 
 # 4. Configuración de usuario en VSCode
 
-## Atajos imprescindibles del teclado
+## 4.1. Atajos imprescindibles del teclado
 
 - `Ctrl+K`, `Ctrl+S`: Configuración de atajos del teclado
 - `Ctrl+,`: Prefeencias del usuario
@@ -600,7 +601,7 @@ E insertamos en `package.json`
 
 
 
-## 4.1. Archivo settings.json
+## 4.2. Archivo settings.json
 
 La configuración de usuario se guarda en un archivo **`settings.json`**, dentro de la carpeta del usuario, en la subcarpeta `.config/Code/User`.
 
@@ -665,7 +666,7 @@ Básicamente, la configuración hace lo siguiente:
 > - Tener el plugin Stylelint instalado en VSCode
 
 
-## 4.2. Archivo keybindings.json
+## 4.3. Archivo keybindings.json
 
 La configuración de usuario para atajos de teclado se guarda en un archivo **`keybindings.json`**, dentro de la carpeta del usuario, en la subcarpeta `.config/Code/User`.
 
@@ -689,7 +690,7 @@ Por ejemplo, mi configuración es la siguiente:
 Esta configuración me permite seleccionar un texto o variable y envolverla dentro de `console.log`. Es muy útil para realizar tareas de depuración.
 
 
-## 4.3. Plugins
+## 4.4. Plugins
 
 Existen numerosos plugins para VSCode que nos permiten adaptar el entorno de desarrollo a nuestras necesidades. Para el desarrollo web suelen ser habituales, aunque pueden instalarse muchos otros, los siguientes:
 
