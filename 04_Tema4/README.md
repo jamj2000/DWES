@@ -387,11 +387,9 @@ En el proyecto anterior también se hace uso de `middleware`. Consulta el aparta
 
 Desde el punto de vista de una aplicación NextJS, el middleware es un software que funciona como capa de conversión, traducción y/o integración.
 
-![middleware request-response](assets/middleware.webp)
-
 En este escenario, el middleware permite ejecutar código antes de que se complete una petición (request). Según la petición entrante, se puede modificar la respuesta reescribiendo, redirigiendo, modificando los encabezados de petición o respuesta, o respondiendo directamente.
 
-![middleware](assets/middleware.avif)
+![middleware request-response](assets/middleware.webp)
 
 La integración de middleware en una aplicación puede generar mejoras significativas en el rendimiento, la seguridad y la experiencia del usuario. Algunos escenarios comunes en los que el middleware es particularmente eficaz incluyen:
 
