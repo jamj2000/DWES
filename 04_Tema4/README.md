@@ -260,11 +260,6 @@ En resumen, la mejor opción dependerá de las necesidades específicas de tu ap
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxpagination.git) 
 
-> **ACTIVIDAD:**
->
-> Descarga y ejectua el código fuente anterior.
-> 
-> ¿Qué tipo de paginación se realiza en la aplicacón del código fuente anterior?.
 
 ## 6.2. Ejemplo avanzado: Paginación y búsqueda
 
