@@ -27,9 +27,11 @@
   - [7.3. Leer Cookies](#73-leer-cookies)
   - [7.4. Eliminar Cookies](#74-eliminar-cookies)
 - [8. Middleware](#8-middleware)
+  - [8.1. Archivo middleware.js](#81-archivo-middlewarejs)
 - [9. ANEXO I: Parámetros de ruta y consulta en página de cliente](#9-anexo-i-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [10. ANEXO II: SSG](#10-anexo-ii-ssg)
 - [11. Referencias](#11-referencias)
+
 
 
 
@@ -291,7 +293,7 @@ A continuación se muestra como trabjar con cookies desde NextJS.
 ## 7.2. Generar Cookies 
 
 **`const cookieStore = await cookies()`**  
-**`cookieStore.set(name, value, options)`**
+**`cookieStore.set(name, value, options)`**  
 **`cookieStore.set( { name, value, /* options */ } )`**
 
 > **IMPORTANTE:** 
@@ -383,6 +385,61 @@ En el proyecto anterior también se hace uso de `middleware`. Consulta el aparta
 
 # 8. Middleware
 
+Desde el punto de vista de una aplicación NextJS, el middleware es un software que funciona como capa de conversión, traducción y/o integración.
+
+![middleware request-response](assets/middleware.webp)
+
+En este escenario, el middleware permite ejecutar código antes de que se complete una petición (request). Según la petición entrante, se puede modificar la respuesta reescribiendo, redirigiendo, modificando los encabezados de petición o respuesta, o respondiendo directamente.
+
+![middleware](assets/middleware.avif)
+
+La integración de middleware en una aplicación puede generar mejoras significativas en el rendimiento, la seguridad y la experiencia del usuario. Algunos escenarios comunes en los que el middleware es particularmente eficaz incluyen:
+
+- **Autenticación y autorización**: garantizar la identidad del usuario y verificar las cookies de sesión antes de otorgar acceso a páginas específicas o rutas API.
+- **Redireccionamientos del lado del servidor**: redireccionar a los usuarios a nivel del servidor según ciertas condiciones (por ejemplo, configuración regional, rol del usuario).
+- **Reescritura de rutas**: implementar funcionalidades o gestionar rutas heredadas al reescribir dinámicamente rutas a rutas API o páginas según las propiedades de la solicitud.
+- **Detección de bots**: proteger los recursos detectando y bloqueando el tráfico de bots.
+- **Registro y análisis**: capturar y analizar datos de solicitudes para obtener información antes de procesarlos en la página o API.
+- **Marcado de funcionalidades**: habilitar o deshabilitar funcionalidades dinámicamente para implementar o probar sin problemas dichas funcionalidades.
+
+Debido a la extensión de funcionalidades que pueden implementarse en el middleware, su implementación tiene cierta complejidad y require de conocimientos avanzados por parte del programador.
+
+Para implementar dicho middleware, NextJS hace uso de un archivo `middleware.js` o `middleware.ts` que debe situarse en la raíz del proyecto. **Si tenemos carpeta `src` será ahí donde pondremos dicho archivo.** Si no tenemos carpeta `src` pondremos el archivo en la carpeta `app`.
+
+
+**Referencia:**
+
+- [Funcionalidades del middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+
+
+## 8.1. Archivo middleware.js 
+
+A continuación se muestra un ejemplo muy, muy básico, con el contenido esencial de este archivo:
+
+```js
+// Esta función puede ser `async` si usas `await` en su interior
+export default function middleware(request) {
+  // Lógica del Middleware
+}
+
+export const config = {
+  matcher: [ '/about/:path*' ],
+}
+```
+
+La opción **`matcher`** permite seleccionar las rutas específicas a las que se aplicará la función **`middleware`**.
+
+Esta opción admite una lista de rutas (strings), cada cual:
+
+- DEBE comenzar con `/`
+- Puede incluir parámetros con nombre: `/about/:path` coincide con `/about/a` y `/about/b` pero no con `/about/a/c`
+- Puede tener modificadores en parámetros con nombre (comenzando con :): `/about/:path*` coincide con `/about/a/b/c` porque **`*`** es cero o más. **`?`** es cero o uno y **`+`** uno o más
+- Puede utilizar una expresión regular entre paréntesis: `/about/(.*)` es lo mismo que `/about/:path*`
+
+
+**Referencia:**
+
+- [Archivo middleware.js](https://nextjs.org/docs/app/api-reference/file-conventions/middleware)
 
 
 # 9. ANEXO I: Parámetros de ruta y consulta en página de cliente

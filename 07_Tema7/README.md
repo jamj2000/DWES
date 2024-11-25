@@ -277,7 +277,7 @@ Aunque también dispone de su versión [GUI](https://httpie.io/desktop)
 
 El **intercambio de recursos entre orígenes** -Cross-Origin Resource Sharing (CORS)- es una característica de seguridad que te permite controlar qué sitios pueden acceder a tus recursos. Puedes configurar el encabezado `Access-Control-Allow-Origin` para permitir que un origen específico acceda a sus controladores de ruta.
 
-En NextJS existen 2 formas de habilitar CORS:
+En NextJS existen 2 formas sencillas de habilitar CORS:
 
 1. [Usando la API Web estándar para un controlador de ruta](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#cors)
 2. [Agregando encabezados CORS a múltiples controladores de ruta](https://nextjs.org/docs/app/api-reference/next-config-js/headers#cors)
@@ -328,7 +328,7 @@ const nextConfig = {
 **Referencia:**
 
 - [CORS: Qué es y cómo funciona el Cross-Origin Resource Sharing](https://okitup.com/blog/que-es-y-como-funciona-el-cors)
-
+- [https://nextjs.org/docs/app/building-your-application/routing/middleware#cors](Una tercera forma de habilitar CORS usando Middleware)
 
 
 # 3. BIBLIOTECAS
