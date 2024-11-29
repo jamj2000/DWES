@@ -16,18 +16,22 @@
   - [2.2. Ejecutar acciones del servidor](#22-ejecutar-acciones-del-servidor)
   - [2.3. ¿Qué hace la acción del servidor al finalizar?](#23-qué-hace-la-acción-del-servidor-al-finalizar)
 - [3. Formularios](#3-formularios)
-  - [3.1. useFormStatus](#31-useformstatus)
-  - [3.2. useFormState](#32-useformstate)
-  - [3.3. Usando un wrapper en lugar de useFormState](#33-usando-un-wrapper-en-lugar-de-useformstate)
-  - [3.4. useActionState: simplificando lo anterior](#34-useactionstate-simplificando-lo-anterior)
-  - [3.5. Varias acciones dentro de un formulario](#35-varias-acciones-dentro-de-un-formulario)
-  - [3.6. Consejos](#36-consejos)
-    - [3.6.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#361-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
-    - [3.6.2. Pasa correctamente los valores a las propiedades en los **`input`**](#362-pasa-correctamente-los-valores-a-las-propiedades-en-los-input)
-    - [3.6.3. Usa **`label`** correctamente](#363-usa-label-correctamente)
-    - [3.6.4. Usa **`defaultValue`** y **`value`** correctamente](#364-usa-defaultvalue-y-value-correctamente)
-    - [3.6.5. Usa **`disabled`** y **`readOnly`** correctamente](#365-usa-disabled-y-readonly-correctamente)
-    - [3.6.6. Usa **`select`** correctamente](#366-usa-select-correctamente)
+  - [3.1. POST vs GET](#31-post-vs-get)
+    - [3.1.1. POST](#311-post)
+    - [3.1.2. GET](#312-get)
+  - [3.2. Funciones del lado cliente](#32-funciones-del-lado-cliente)
+  - [3.3. useFormStatus](#33-useformstatus)
+  - [3.4. useFormState](#34-useformstate)
+  - [3.5. Usando un wrapper en lugar de useFormState](#35-usando-un-wrapper-en-lugar-de-useformstate)
+  - [3.6. useActionState: simplificando lo anterior](#36-useactionstate-simplificando-lo-anterior)
+  - [3.7. Varias acciones dentro de un formulario](#37-varias-acciones-dentro-de-un-formulario)
+  - [3.8. Consejos](#38-consejos)
+    - [3.8.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#381-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
+    - [3.8.2. Pasa correctamente los valores a las propiedades en los **`input`**](#382-pasa-correctamente-los-valores-a-las-propiedades-en-los-input)
+    - [3.8.3. Usa **`label`** correctamente](#383-usa-label-correctamente)
+    - [3.8.4. Usa **`defaultValue`** y **`value`** correctamente](#384-usa-defaultvalue-y-value-correctamente)
+    - [3.8.5. Usa **`disabled`** y **`readOnly`** correctamente](#385-usa-disabled-y-readonly-correctamente)
+    - [3.8.6. Usa **`select`** correctamente](#386-usa-select-correctamente)
 - [4. Validación de datos](#4-validación-de-datos)
   - [4.1. Validación en el cliente](#41-validación-en-el-cliente)
   - [4.2. Validación en el servidor](#42-validación-en-el-servidor)
@@ -38,6 +42,7 @@
   - [5.1. Panel de gestión de escuela (Parte 1 de 2)](#51-panel-de-gestión-de-escuela-parte-1-de-2)
   - [5.2. Albúm de fotos](#52-albúm-de-fotos)
 - [6. Referencias](#6-referencias)
+
 
 
 
@@ -252,10 +257,101 @@ export async function logout() {
 
 # 3. Formularios
 
-NextJS tiene 2 funciones para mejorar la experiencia con formularios:
+## 3.1. POST vs GET
+
+La información recogida en un formulario puede enviarse al servidor de 2 maneras distintas:
+
+- **POST** 
+- **GET**
+
+### 3.1.1. POST
+
+Cuando usamos el método POST, **la información se envía en el cuerpo de la petición** y no es visible para el usuario. 
+
+**Esta es la forma recomendada en la mayoría de los casos**, por ejemplo:
+
+- Hay campos con información confidencial, como puede ser contraseñas y similar.
+- Hay gran cantidad de información a enviar al servidor, como muchos inputs, textareas, ...
+- Necesitamos enviar archivos al servidor mediante `input type='file'`.
+
+En JSX se escribe de la siguiente forma:
+
+```js
+<form  action="...">
+
+  {/* Elementos del formulario */}
+
+</form>
+```
+ 
+Su equivalencia en HTML es la siguiente:
+
+
+```html
+<form  action="..."  method="POST"  enctype="multipart/form-data">
+
+  <!-- Elementos del formulario -->
+
+</form>
+```
+
+
+### 3.1.2. GET
+
+Cuando usamos el método GET, **la información se envía en la URL de la petición** y es visible para el usuario.
+
+Su uso es menos habitual, aunque es adecuado en el siguiente caso:
+
+- Necesitamos enviar poca información al servidor y deseamos que esa información sea pública.
+
+Suele usarse para enviar información de filtrado en la URL de una página, por ejemplo:
+
+http://www.example.com/products?**query=laptop&sort=price&page=2**
+
+Esta información de filtrado suele clasificarse en 3 categorías:
+
+- **Búsqueda**
+- **Ordenación**
+- **Paginación**
+
+En JSX se escribe de la siguiente forma:
+
+```js
+import Form from 'next/form'; // IMPORTANTE. Disponible a partir de NextJS 15
+
+// ...
+
+<Form  action="...">
+
+  <input name='query' {/* ... */} />
+  <input name='sort'  {/* ... */} />
+  <input name='page'  {/* ... */} />
+
+</Form>
+```
+
+**NOTA**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas.
+
+Su equivalencia en HTML es la siguiente:
+
+```html
+<form  action="..."  method="GET"  enctype="application/x-www-form-urlencoded">
+
+  <input name='query' <!-- ... --> />
+  <input name='sort'  <!-- ... --> />
+  <input name='page'  <!-- ... --> />
+
+</form>
+```
+
+
+## 3.2. Funciones del lado cliente
+
+NextJS tiene 3 funciones para mejorar la experiencia con formularios, que deben ejecutarse desde el lado cliente:
 
 - Mostrar estados de carga en el cliente con `useFormStatus()`
 - Capturar y mostrar errores del servidor con `useFormState()`
+- Mostrar estados, capturar y mostrar errores del servidor con `useActionState()` (a partir de Next 15)
 
 > **IMPORTANTE**: **Componentes del lado cliente**
 >
@@ -277,7 +373,7 @@ export async function handle(formData) {
 ```
 
 
-## 3.1. useFormStatus
+## 3.3. useFormStatus
 
 Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
 
@@ -301,7 +397,7 @@ export function SubmitButton() {
 ```  
 
 
-## 3.2. useFormState
+## 3.4. useFormState
 
 Este *hook* permite al formulario recibir el mensaje generado por el `server action` tras su ejecución, y poder dar retroalimentación al usuario.
 
@@ -351,7 +447,7 @@ export async function handle(prevState, formData) {
 }
 ```
 
-## 3.3. Usando un wrapper en lugar de useFormState
+## 3.5. Usando un wrapper en lugar de useFormState
 
 Una técnica que considero más elegante que la anterior es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
 
@@ -405,7 +501,7 @@ export async function handle(formData) {
 
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
-## 3.4. useActionState: simplificando lo anterior
+## 3.6. useActionState: simplificando lo anterior
 
 A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que sustituye a los anteriores hooks y que simplifica en gran manera el trabajo con *actions*.
 
@@ -471,7 +567,7 @@ export async function createHoppy(previousState, formData) {
 
 
 
-## 3.5. Varias acciones dentro de un formulario
+## 3.7. Varias acciones dentro de un formulario
 
 Quizás no mucha gente sepa que, en HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](https://www.w3schools.com/tags/att_formaction.asp) . Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
 
@@ -499,14 +595,14 @@ Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un us
 
 
 
-## 3.6. Consejos
+## 3.8. Consejos
 
 Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
 
 Aquí van algunos consejos:
 
 
-### 3.6.1. Detro de un formulario usa **`button`** únicamente para hacer submit.
+### 3.8.1. Detro de un formulario usa **`button`** únicamente para hacer submit.
 
 No pongas botones con fines distintos a submit. Si lo hacemos se disparará el *action* asociado al formulario. Para operaciones que no sean acciones del servidor usa otro elemento que no sea *button*.
 
@@ -555,7 +651,7 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 </form>
 ```
 
-### 3.6.2. Pasa correctamente los valores a las propiedades en los **`input`**
+### 3.8.2. Pasa correctamente los valores a las propiedades en los **`input`**
 
 
 **MAL**
@@ -574,7 +670,7 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 <input required  disabled />               // Correcto en JSX     
 ```
 
-### 3.6.3. Usa **`label`** correctamente
+### 3.8.3. Usa **`label`** correctamente
 
 **MAL**
 
@@ -598,16 +694,16 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 </label>  
 ```
 
-### 3.6.4. Usa **`defaultValue`** y **`value`** correctamente
+### 3.8.4. Usa **`defaultValue`** y **`value`** correctamente
 
 La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
 
 A continuación tienes los contextos en los que se usa cada propiedad:
 
-| Propiedad      | Contexto                                                    |
-| -------------- | ----------------------------------------------------------- |
-| **`value`**    | Para valores asociados a una variable de **estado**         |
-| `defaultValue` | Para valores no asociados a una variable de estado          |
+| Propiedad      | Contexto                                            |
+| -------------- | --------------------------------------------------- |
+| **`value`**    | Para valores asociados a una variable de **estado** |
+| `defaultValue` | Para valores no asociados a una variable de estado  |
 
 
 Ejemplo:
@@ -678,7 +774,7 @@ export default function Cuadrado({ long, width }) {
 >
 > Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
-### 3.6.5. Usa **`disabled`** y **`readOnly`** correctamente
+### 3.8.5. Usa **`disabled`** y **`readOnly`** correctamente
 
 Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
 
@@ -737,7 +833,7 @@ export default Form (  ) {
 > **NOTA:** La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
-### 3.6.6. Usa **`select`** correctamente
+### 3.8.6. Usa **`select`** correctamente
 
 Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
 
