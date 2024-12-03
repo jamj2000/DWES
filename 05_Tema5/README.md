@@ -274,6 +274,19 @@ Cuando usamos el método POST, **la información se envía en el cuerpo de la pe
 - Hay gran cantidad de información a enviar al servidor, como muchos inputs, textareas, ...
 - Necesitamos enviar archivos al servidor mediante `input type='file'`.
 
+Es habitual su uso para enviar información de un formulario para su procesamiento en el servidor. Las operaciones que se realizan, normalmente sobre una BD, son:
+
+- **Inserción**
+- **Modificación**
+- **Eliminación**
+
+Este método también se usa en operaciones de autenticación, como:
+
+- **Registro**
+- **Login**
+- **Logout**
+  
+
 En JSX se escribe de la siguiente forma:
 
 ```js
@@ -283,7 +296,7 @@ En JSX se escribe de la siguiente forma:
 
 </form>
 ```
- 
+
 Su equivalencia en HTML es la siguiente:
 
 
@@ -317,7 +330,7 @@ Esta información de filtrado suele clasificarse en 3 categorías:
 En JSX se escribe de la siguiente forma:
 
 ```js
-import Form from 'next/form'; // IMPORTANTE. Disponible a partir de NextJS 15
+import Form from 'next/form'; // IMPORTANTE. Necesario importar. 
 
 // ...
 
@@ -330,7 +343,7 @@ import Form from 'next/form'; // IMPORTANTE. Disponible a partir de NextJS 15
 </Form>
 ```
 
-**NOTA**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas.
+**NOTA**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
 
 Su equivalencia en HTML es la siguiente:
 
@@ -363,7 +376,7 @@ Supongamos que disponemos del siguiente `server action`:
 ```js                                                        
 'use server'
 
-export async function handle(formData) {
+export async function insertData(formData) {
     const nombre = formData.get('nombre')
     const apellidos = formData.get('apellidos')
     
@@ -378,7 +391,7 @@ export async function handle(formData) {
 Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
 
 
-**/app/submitButton.js**
+**/app/SubmitButton.js**
 
 ```js
 'use client'
@@ -408,17 +421,17 @@ La documentación puede consultarse en https://react.dev/reference/react-dom/hoo
 **/app/formulario.js**
 ```js
 'use client'
-import { SubmitButton } from '@/app/submitButton'
-import { handle } from '@/app/actions'
+import { SubmitButton } from '@/app/SubmitButton'
+import { insertData } from '@/app/actions'
 import { useFormState } from 'react-dom';
 
 
 export function Formulario() {
-    // El server action real es handle
-    const [respuesta, formAction] = useFormState(handle, null);
+    // El server action real es insertData
+    const [respuesta, action] = useFormState(insertData, null);
 
     return (
-        <form action={formAction}>
+        <form action={action}>
             <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
             <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
             <label htmlFor="avatar">
@@ -438,7 +451,7 @@ Un inconveniente de esta técnica es que debemos modificar el `server action` pa
 ```js                                                        
 'use server'
 
-export async function handle(prevState, formData) {
+export async function insertData(prevState, formData) {
     const nombre = formData.get('nombre')
     const apellidos = formData.get('apellidos')
     
@@ -457,20 +470,22 @@ Como ventaja tiene que es más legible y que no tenemos que modificar el `server
 **/app/formulario.js**
 ```js
 'use client'
-import { SubmitButton } from '@/app/submitButton'
-import { handle } from '@/app/actions'
+import { SubmitButton } from '@/app/SubmitButton'
+import { insertData } from '@/app/actions'
 import { toast } from 'react-hot-toast';
 
 
 export function Formulario() {
-    async function wrapper (data) {
-        const {type, message} = await handle(data);
+
+    // action es un wrapper de insertData
+    async function action (formData) {
+        const { type, message } = await insertData(formData);
         if (type == 'success') toast.success(message)
         if (type == 'error') toast.error(message)
     }
 
     return (
-        <form action={wrapper}>
+        <form action={action}>
             <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
             <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
             <label htmlFor="avatar">
@@ -489,46 +504,48 @@ Si usamos esta técnica, no necesitamos modificar el `server action`, quedando �
 ```js                                                        
 'use server'
 
-export async function handle(formData) {
+export async function insertData(formData) {
     const nombre = formData.get('nombre')
     const apellidos = formData.get('apellidos')
     
     // ...
+    return { type: 'error', message: '...' }
  
 }
 ```
 
-
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
+
 
 ## 3.6. useActionState: simplificando lo anterior
 
 A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que sustituye a los anteriores hooks y que simplifica en gran manera el trabajo con *actions*.
 
 ```js
-import { createHoppy } from "@/lib/actions";
+import { createProduct } from "@/lib/actions";
 import { useActionState } from "react";
 
 export default function Form() {
-  const { error, action, isPending } = useActionState(createHoppy, null);
+
+  const [ status, action, pending ] = useActionState(createProduct, null);
 
   return (
     <form onSubmit={action} className="flex flex-col gap-y-2">
       <input
         type="text"
         name="content"
-        placeholder="New hoppy"
+        placeholder="New Product"
         className="py-2 px-3 rounded-sm"
       />
       <button
         type="submit"
-        disabled={isPending}
+        disabled={pending}
         className="bg-blue-500 text-white py-2 px-3 rounded-sm"
       >
         Submit
       </button>
-      {isPending && <p>Please wait...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {pending && <p>Please wait...</p>}
+      {status && <p className="text-red-500">{status}</p>}
     </form>
   );
 } 
@@ -552,11 +569,11 @@ export default function Form() {
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
-export async function createHoppy(previousState, formData) {
+export async function createProduct(previousState, formData) {
  
   try {
     const content = formData.get("content") as string;
-    await prisma.hoppy.create({ data: { content } });
+    await prisma.product.create({ data: { content } });
   } catch (e) {
     return "be attention, An error occurred.";
   }
@@ -575,13 +592,13 @@ NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX
 
 ```html
        <form key={user.id}>
-          <input type='hidden' name='id' defaultValue={user.id}></input>
+          <input type='hidden' name='id' defaultValue={user.id} />
 
           <label htmlFor='nombre'>Usuario</label>
-          <input type='text' id='nombre' name='nombre' defaultValue={user.nombre}></input>
+          <input type='text' id='nombre' name='nombre' defaultValue={user.nombre} />
 
           <label htmlFor='edad'>Edad</label>
-          <input type='text' id='edad' name='edad' defaultValue={user.edad}></input>
+          <input type='text' id='edad' name='edad' defaultValue={user.edad} />
 
           <button formAction={userUpdate}>Actualizar</button>
           <button formAction={userDelete}>Eliminar</button>
