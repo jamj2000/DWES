@@ -803,7 +803,7 @@ La principal diferencia es la siguiente:
 Ejemplo:
 
 ```js
-export default Form (  ) {
+export default Formulario (  ) {
 
   return (
    <form action={action}>
