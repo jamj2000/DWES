@@ -321,7 +321,7 @@ Su uso es menos habitual, aunque es adecuado en el siguiente caso:
 
 Suele usarse para enviar información de filtrado en la URL de una página, por ejemplo:
 
-http://www.example.com/products?**query=laptop&sort=price&page=2**
+http://www.example.com/products **?query=laptop&sort=price&page=2**
 
 Esta información de filtrado suele clasificarse en 3 categorías:
 
@@ -347,7 +347,7 @@ import Form from 'next/form'; // IMPORTANTE. Necesario importar.
 
 **NOTA1**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
 
-**NOTA2**: `action` es la página que recibe la información en forma de parámetros de consulta. Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
+**NOTA2**: `action` es la página que recibirá la información en forma de parámetros de consulta. Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
 
 Su equivalencia en HTML es la siguiente:
 
