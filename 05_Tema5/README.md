@@ -596,7 +596,7 @@ Quizás no mucha gente sepa que, en HTML, los `input` y `button` pueden tener un
 NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
 
 ```html
-       <form key={user.id}>
+       <form>
           <input type='hidden' name='id' defaultValue={user.id} />
 
           <label htmlFor='nombre'>Usuario</label>
