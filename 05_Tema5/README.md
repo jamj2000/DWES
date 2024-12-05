@@ -290,12 +290,14 @@ Este método también se usa en operaciones de autenticación, como:
 En JSX se escribe de la siguiente forma:
 
 ```js
-<form  action="...">
+<form  action={...}>
 
   {/* Elementos del formulario */}
 
 </form>
 ```
+
+**NOTA**: `action` es una función asíncrona ejecutada en el servidor, es decir un *server action*
 
 Su equivalencia en HTML es la siguiente:
 
@@ -343,7 +345,9 @@ import Form from 'next/form'; // IMPORTANTE. Necesario importar.
 </Form>
 ```
 
-**NOTA**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
+**NOTA1**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
+
+**NOTA2**: `action` es la página que recibe la información en forma de parámetros de consulta. Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
 
 Su equivalencia en HTML es la siguiente:
 
@@ -519,18 +523,20 @@ export async function insertData(formData) {
 
 ## 3.6. useActionState: simplificando lo anterior
 
-A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que sustituye a los anteriores hooks y que simplifica en gran manera el trabajo con *actions*.
+A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplifica el trabajo con *actions*.
 
 ```js
+"use client"
 import { createProduct } from "@/lib/actions";
 import { useActionState } from "react";
 
 export default function Form() {
 
+  // createProduct es la acción del servidor
   const [ status, action, pending ] = useActionState(createProduct, null);
 
   return (
-    <form onSubmit={action} className="flex flex-col gap-y-2">
+    <form action={action} className="flex flex-col gap-y-2">
       <input
         type="text"
         name="content"
@@ -551,11 +557,10 @@ export default function Form() {
 } 
 ```
 
-**Mejoras respecto a la solución previa**
+**Características**
 
-- El código es mucho más simple
+- El código es más simple
 - No es necesario usar  `useFormStatus` ni `useFormState`.
-- Tampoco es necesario usar un *wrapper*.
 - No es necesario poner el botón de submit en un componente separado.
 - `useActionState` no se limita a su uso en formularios, sino que es una solución general para el *feedback* proporcionado por cualquier acción del servidor.
 
@@ -1021,10 +1026,6 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 
 ![photobox demo](assets/photobox-demo.png)
-
-
-
-
 
 
 
