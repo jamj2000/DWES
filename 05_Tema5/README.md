@@ -293,7 +293,7 @@ Este método también se usa en operaciones de autenticación, como:
 - **Logout**
   
 
-En JSX se escribe de la siguiente forma:
+En **JSX** se escribe de la siguiente forma:
 
 ```js
 <form  action={...}>
@@ -305,7 +305,7 @@ En JSX se escribe de la siguiente forma:
 
 > **NOTA**: `action` es una función asíncrona ejecutada en el servidor, por ejemplo `action={insertarProducto}`
 
-Su equivalencia en HTML es la siguiente:
+Su equivalencia en **HTML** es la siguiente:
 
 
 ```html
