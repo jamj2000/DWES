@@ -61,7 +61,7 @@ Como comparativa para constrastar, también incluimos en este tema la técnica `
 
 # 2. Server Actions
 
-Las acciones de servidor son funciones que serán ejecutadas en el servidor. Fueron introducidas en NextJS 13. 
+**Las acciones de servidor son funciones asíncronas que serán ejecutadas en el servidor**. Fueron introducidas en NextJS 13. 
 
 **Se usan habitualmente para procesar, en el lado servidor, datos procedentes de un formulario.**
 
