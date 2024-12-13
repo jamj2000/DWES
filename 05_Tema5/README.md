@@ -22,8 +22,8 @@
   - [3.2. Funciones del lado cliente](#32-funciones-del-lado-cliente)
   - [3.3. useFormStatus](#33-useformstatus)
   - [3.4. useFormState](#34-useformstate)
-  - [3.5. Usando un wrapper en lugar de useFormState](#35-usando-un-wrapper-en-lugar-de-useformstate)
-  - [3.6. useActionState: simplificando lo anterior](#36-useactionstate-simplificando-lo-anterior)
+  - [3.5. useActionState: simplificando lo anterior](#35-useactionstate-simplificando-lo-anterior)
+  - [3.6. Usando un envoltorio (wrapper)](#36-usando-un-envoltorio-wrapper)
   - [3.7. Varias acciones dentro de un formulario](#37-varias-acciones-dentro-de-un-formulario)
   - [3.8. Consejos](#38-consejos)
     - [3.8.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#381-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
@@ -42,6 +42,7 @@
   - [5.1. Panel de gestión de escuela (Parte 1 de 2)](#51-panel-de-gestión-de-escuela-parte-1-de-2)
   - [5.2. Albúm de fotos](#52-albúm-de-fotos)
 - [6. Referencias](#6-referencias)
+
 
 
 
@@ -189,8 +190,9 @@ export default Login
 Básicamente, el `server action` al finalizar puede realizar alguna de las 3 operaciones siguientes:
 
 - **Devolver un mensaje** de confirmación o de error, usando **`return`**
-- **Redirigir a otra página**, p. ej. tras validar un usuario, usando **`redirect`**
 - **Actualizar el contenido de una página**, usando **`revalidatePath`**.  
+- **Redirigir a otra página**, p. ej. tras validar un usuario, usando **`redirect`**
+
 
 Las 2 últimas operaciones no son excluyentes entre sí.
 
@@ -213,7 +215,7 @@ export async function uploadAvatar(formData) {
 ```
 
 
-**Ejemplo: redirigir y/o actualizar página**
+**Ejemplo: actualizar y/o redirigir a página**
 ```js
 'use server'
 import { redirect } from 'next/navigation'
@@ -239,7 +241,7 @@ export async function login(formData) {
 
 
 export async function logout() {
-    cookies().delete('usuario')
+    await cookies().delete('usuario')
 
     redirect('/')
 }
@@ -247,15 +249,17 @@ export async function logout() {
 
 > **NOTA**: 
 >
-> - `redirect` se importa desde el paquete `next/navigation`
 > - `revalidatePath` se importa desde el paquete `next/cache`
-
+> - `redirect` se importa desde el paquete `next/navigation`
 > **NOTA**:
 >
 > NextJS hace uso de una caché de contenido, por ello para volver a actualizar el contenido de una página, actualizando además la caché, necesitamos la función `revalidatePath`.
 
 
 # 3. Formularios
+
+
+
 
 ## 3.1. POST vs GET
 
@@ -297,7 +301,7 @@ En JSX se escribe de la siguiente forma:
 </form>
 ```
 
-**NOTA**: `action` es una función asíncrona ejecutada en el servidor, es decir un *server action*
+> **NOTA**: `action` es una función asíncrona ejecutada en el servidor
 
 Su equivalencia en HTML es la siguiente:
 
@@ -309,6 +313,14 @@ Su equivalencia en HTML es la siguiente:
 
 </form>
 ```
+
+> **NOTA**: 
+> 
+> En HTML, si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
+>  
+> Sin embargo en JSX, de forma implícita, por defecto es ` enctype="multipart/form-data"`. Esto permite el uso de `input type="file"`, y por tanto la subida de archivos al servidor.  
+>
+> Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
 
 
 ### 3.1.2. GET
@@ -364,7 +376,16 @@ Su equivalencia en HTML es la siguiente:
 
 ## 3.2. Funciones del lado cliente
 
-NextJS tiene 3 funciones para mejorar la experiencia con formularios, que deben ejecutarse desde el lado cliente:
+Aunque podemos renderizar un formulario en el lado del servidor, a menudo necesitaremos que dicho formulario ofrezca funcionalidades del lado cliente, como:
+
+- gestión de eventos: click, change, ...
+- gestión de estados: hooks useState, useEffect, ...
+- mostrar algún tipo de mensaje o `toast` después de finalizar una operación
+
+En estos casos necesitaremos colocar el formulario en un componente del lado cliente y colocar, al comienzo de dicho archivo, la directiva **'use client'** (con comillas, simples o dobles)
+
+
+NextJS tiene 3 funciones para mejorar la experiencia con formularios en el lado cliente:
 
 - Mostrar estados de carga en el cliente con `useFormStatus()`
 - Capturar y mostrar errores del servidor con `useFormState()`
@@ -374,7 +395,7 @@ NextJS tiene 3 funciones para mejorar la experiencia con formularios, que deben 
 >
 > En React, y en NextJS, todas las funciones que comienzan por `use` se consideran `hooks` y deben ser ejecutadas en el cliente. También es necesario usar componentes del cliente si queremos hacer uso de eventos como onclick, onchange, ...
 
-Supongamos que disponemos del siguiente `server action`:
+Supongamos que disponemos del siguiente **`server action`**:
 
 **/app/actions.js**
 ```js                                                        
@@ -464,64 +485,7 @@ export async function insertData(prevState, formData) {
 }
 ```
 
-## 3.5. Usando un wrapper en lugar de useFormState
-
-Una técnica que considero más elegante que la anterior es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
-
-Como ventaja tiene que es más legible y que no tenemos que modificar el `server action` para recibir 2 argumentos. Además no rompe nada en NextJS. Simplemente estamos haciendo uso de funcionalidades que proporciona Javascript.
-
-
-**/app/formulario.js**
-```js
-'use client'
-import { SubmitButton } from '@/app/SubmitButton'
-import { insertData } from '@/app/actions'
-import { toast } from 'react-hot-toast';
-
-
-export function Formulario() {
-
-    // action es un wrapper de insertData
-    async function action (formData) {
-        const { type, message } = await insertData(formData);
-        if (type == 'success') toast.success(message)
-        if (type == 'error') toast.error(message)
-    }
-
-    return (
-        <form action={action}>
-            <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
-            <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
-            <label htmlFor="avatar">
-                Selecciona un avatar para enviar al servidor
-            </label>
-            <input type="file" required name="avatar" accept="image/*" />
-            <SubmitButton />
-        </form>
-    )
-}
-```
-
-Si usamos esta técnica, no necesitamos modificar el `server action`, quedando éste de la siguiente manera:
-
-**/app/actions.js**
-```js                                                        
-'use server'
-
-export async function insertData(formData) {
-    const nombre = formData.get('nombre')
-    const apellidos = formData.get('apellidos')
-    
-    // ...
-    return { type: 'error', message: '...' }
- 
-}
-```
-
-[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
-
-
-## 3.6. useActionState: simplificando lo anterior
+## 3.5. useActionState: simplificando lo anterior
 
 A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplifica el trabajo con *actions*.
 
@@ -530,7 +494,7 @@ A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplific
 import { createProduct } from "@/lib/actions";
 import { useActionState } from "react";
 
-export default function Form() {
+export default function Formulario() {
 
   // createProduct es la acción del servidor
   const [ status, action, pending ] = useActionState(createProduct, null);
@@ -586,6 +550,63 @@ export async function createProduct(previousState, formData) {
   revalidatePath("/");
 }
 ```  
+
+
+## 3.6. Usando un envoltorio (wrapper)
+
+Una técnica que considero muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
+
+Como ventaja tiene que es más legible y que no tenemos que modificar el `server action` para recibir 2 argumentos. Además no rompe nada en NextJS. Simplemente estamos haciendo uso de funcionalidades que proporciona Javascript.
+
+
+**/app/formulario.js**
+```js
+'use client'
+import { SubmitButton } from '@/app/SubmitButton'
+import { insertData } from '@/app/actions'
+import { toast } from 'react-hot-toast';
+
+
+export function Formulario() {
+
+    // action es un wrapper de insertData
+    async function action (formData) {
+        const { type, message } = await insertData(formData);
+        if (type == 'success') toast.success(message)
+        if (type == 'error') toast.error(message)
+    }
+
+    return (
+        <form action={action}>
+            <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
+            <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
+            <label htmlFor="avatar">
+                Selecciona un avatar para enviar al servidor
+            </label>
+            <input type="file" required name="avatar" accept="image/*" />
+            <SubmitButton />
+        </form>
+    )
+}
+```
+
+Si usamos esta técnica, no necesitamos modificar el `server action`, quedando éste de la siguiente manera:
+
+**/app/actions.js**
+```js                                                        
+'use server'
+
+export async function insertData(formData) {
+    const nombre = formData.get('nombre')
+    const apellidos = formData.get('apellidos')
+    
+    // ...
+    return { type: 'error', message: '...' }
+ 
+}
+```
+
+[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
 
