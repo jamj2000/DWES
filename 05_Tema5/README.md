@@ -258,7 +258,9 @@ export async function logout() {
 
 # 3. Formularios
 
+El uso de formularios para la recogida de datos y su envío al servidor es una tarea muy habitual. 
 
+El diseño e implementación de formularios y sus *inputs* y *buttons* asociados no es tan trivial como puede parecer a primera vista. En este apartado estudiaremos las bases para ello, y veremos las diferencias entre la forma en la que se trabaja en HTML frente a JSX. Existen algunas pequeñas diferencias que son clave y que pueden complicarnos la vida cuando no se conocen.  
 
 
 ## 3.1. POST vs GET
@@ -301,7 +303,7 @@ En JSX se escribe de la siguiente forma:
 </form>
 ```
 
-> **NOTA**: `action` es una función asíncrona ejecutada en el servidor
+> **NOTA**: `action` es una función asíncrona ejecutada en el servidor, por ejemplo `action={insertarProducto}`
 
 Su equivalencia en HTML es la siguiente:
 
@@ -316,9 +318,11 @@ Su equivalencia en HTML es la siguiente:
 
 > **NOTA**: 
 > 
-> En HTML, si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
+> En HTML, 
+> - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
+> - si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
 >  
-> Sin embargo en JSX, de forma implícita, por defecto es ` enctype="multipart/form-data"`. Esto permite el uso de `input type="file"`, y por tanto la subida de archivos al servidor.  
+> Sin embargo en JSX, en el componente `form` (con f minúscula), de forma implícita, por defecto es  `method="POST"` y `enctype="multipart/form-data"`. Esto último permite el uso de `input type="file"`, y por tanto la subida de archivos al servidor.  
 >
 > Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
 
@@ -357,9 +361,18 @@ import Form from 'next/form'; // IMPORTANTE. Necesario importar.
 </Form>
 ```
 
-**NOTA1**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
+> **NOTA1**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
 
-**NOTA2**: `action` es la página que recibirá la información en forma de parámetros de consulta. Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
+> **NOTA2**: `action` es la página que recibirá la información en forma de parámetros de consulta, por ejemplo `action="/productos"`.  Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
+
+> **NOTA3**: 
+> 
+> En HTML, 
+> - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
+> - si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
+>  
+> **En JSX**, en el componente `Form` (con F mayúscula), también es así, pero **no debemos indicar `method` ni `enctype`, puesto que dará error**.
+
 
 Su equivalencia en HTML es la siguiente:
 
