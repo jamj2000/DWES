@@ -26,7 +26,7 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
     
 ---
 
-- [Exámenes resueltos Curso 23-24](examenes)
+- [Exámenes resueltos](examenes)
 
 ---
 
