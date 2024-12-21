@@ -567,9 +567,9 @@ export async function createProduct(previousState, formData) {
 
 ## 3.6. Usando un envoltorio (wrapper)
 
-Una técnica que considero muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
+Otra técnica muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
 
-Como ventaja tiene que es más legible y que no tenemos que modificar el `server action` para recibir 2 argumentos. Además no rompe nada en NextJS. Simplemente estamos haciendo uso de funcionalidades que proporciona Javascript.
+Como ventaja tiene que es más legible y que no tenemos que modificar el `server action` para recibir 2 argumentos. 
 
 
 **/app/formulario.js**
