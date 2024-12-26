@@ -16,32 +16,35 @@
   - [2.2. Ejecutar acciones del servidor](#22-ejecutar-acciones-del-servidor)
   - [2.3. ¿Qué hace la acción del servidor al finalizar?](#23-qué-hace-la-acción-del-servidor-al-finalizar)
 - [3. Formularios](#3-formularios)
-  - [3.1. POST vs GET](#31-post-vs-get)
-    - [3.1.1. POST](#311-post)
-    - [3.1.2. GET](#312-get)
-  - [3.2. Funciones del lado cliente](#32-funciones-del-lado-cliente)
-  - [3.3. useFormStatus](#33-useformstatus)
-  - [3.4. useFormState](#34-useformstate)
-  - [3.5. useActionState: simplificando lo anterior](#35-useactionstate-simplificando-lo-anterior)
-  - [3.6. Usando un envoltorio (wrapper)](#36-usando-un-envoltorio-wrapper)
-  - [3.7. Varias acciones dentro de un formulario](#37-varias-acciones-dentro-de-un-formulario)
-  - [3.8. Consejos](#38-consejos)
-    - [3.8.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#381-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
-    - [3.8.2. Pasa correctamente los valores a las propiedades en los **`input`**](#382-pasa-correctamente-los-valores-a-las-propiedades-en-los-input)
-    - [3.8.3. Usa **`label`** correctamente](#383-usa-label-correctamente)
-    - [3.8.4. Usa **`defaultValue`** y **`value`** correctamente](#384-usa-defaultvalue-y-value-correctamente)
-    - [3.8.5. Usa **`disabled`** y **`readOnly`** correctamente](#385-usa-disabled-y-readonly-correctamente)
-    - [3.8.6. Usa **`select`** correctamente](#386-usa-select-correctamente)
-- [4. Validación de datos](#4-validación-de-datos)
-  - [4.1. Validación en el cliente](#41-validación-en-el-cliente)
-  - [4.2. Validación en el servidor](#42-validación-en-el-servidor)
-    - [4.2.1. Ataques frecuentes](#421-ataques-frecuentes)
-    - [4.2.2. Sea paranoico: nunca confíe en sus usuarios](#422-sea-paranoico-nunca-confíe-en-sus-usuarios)
-    - [4.2.3. Resumen](#423-resumen)
-- [5. Casos prácticos avanzados](#5-casos-prácticos-avanzados)
-  - [5.1. Panel de gestión de escuela (Parte 1 de 2)](#51-panel-de-gestión-de-escuela-parte-1-de-2)
-  - [5.2. Albúm de fotos](#52-albúm-de-fotos)
-- [6. Referencias](#6-referencias)
+  - [3.1. Varias acciones dentro de un formulario](#31-varias-acciones-dentro-de-un-formulario)
+  - [3.2. POST vs GET](#32-post-vs-get)
+    - [3.2.1. POST](#321-post)
+    - [3.2.2. GET](#322-get)
+  - [3.3. Consejos](#33-consejos)
+    - [3.3.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#331-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
+    - [3.3.2. Pasa correctamente los valores a las propiedades en los **`input`**](#332-pasa-correctamente-los-valores-a-las-propiedades-en-los-input)
+    - [3.3.3. Usa **`label`** correctamente](#333-usa-label-correctamente)
+    - [3.3.4. Usa **`defaultValue`** y **`value`** correctamente](#334-usa-defaultvalue-y-value-correctamente)
+    - [3.3.5. Usa **`disabled`** y **`readOnly`** correctamente](#335-usa-disabled-y-readonly-correctamente)
+    - [3.3.6. Usa **`select`** correctamente](#336-usa-select-correctamente)
+- [4. Funciones del lado cliente](#4-funciones-del-lado-cliente)
+  - [4.1. useFormStatus](#41-useformstatus)
+  - [4.2. useFormState](#42-useformstate)
+  - [4.3. useActionState: simplificando lo anterior](#43-useactionstate-simplificando-lo-anterior)
+  - [4.4. Usando un envoltorio (wrapper)](#44-usando-un-envoltorio-wrapper)
+  - [4.5. Un método unificado de trabajo](#45-un-método-unificado-de-trabajo)
+- [5. Validación de datos](#5-validación-de-datos)
+  - [5.1. Validación en el cliente](#51-validación-en-el-cliente)
+  - [5.2. Validación en el servidor](#52-validación-en-el-servidor)
+    - [5.2.1. Ataques frecuentes](#521-ataques-frecuentes)
+    - [5.2.2. Sea paranoico: nunca confíe en sus usuarios](#522-sea-paranoico-nunca-confíe-en-sus-usuarios)
+    - [5.2.3. Resumen](#523-resumen)
+- [6. ANEXO: Casos prácticos avanzados](#6-anexo-casos-prácticos-avanzados)
+  - [6.1. Panel de gestión de escuela (Parte 1 de 2)](#61-panel-de-gestión-de-escuela-parte-1-de-2)
+  - [6.2. Albúm de fotos](#62-albúm-de-fotos)
+- [7. Referencias](#7-referencias)
+
+
 
 
 
@@ -260,17 +263,48 @@ export async function logout() {
 
 El uso de formularios para la recogida de datos y su envío al servidor es una tarea muy habitual. 
 
-El diseño e implementación de formularios y sus *inputs* y *buttons* asociados no es tan trivial como puede parecer a primera vista. En este apartado estudiaremos las bases para ello, y veremos las diferencias entre la forma en la que se trabaja en HTML frente a JSX. Existen algunas pequeñas diferencias que son clave y que pueden complicarnos la vida cuando no se conocen.  
+El diseño e implementación de formularios y sus *inputs* y *buttons* asociados no es tan trivial como puede parecer a primera vista. En este tema estudiaremos las bases para ello, y veremos las diferencias entre la forma en la que se trabaja en HTML frente a JSX. Existen algunas pequeñas diferencias que son clave y que pueden complicarnos la vida cuando no se conocen.  
 
 
-## 3.1. POST vs GET
+## 3.1. Varias acciones dentro de un formulario
+
+La forma tradicional, y más intuitiva, de gestionar la información de un formulario es vinculándolo a una **acción de servidor**.   
+
+Además es posible indicar varias **acciones** dentro del formulario, lo cual puede ser muy interesante cuando deseamos realizar distintas operaciones con los datos.
+
+En HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](https://www.w3schools.com/tags/att_formaction.asp) . Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
+
+NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
+
+```html
+       <form>
+          <input type='hidden' name='id' defaultValue={user.id} />
+
+          <label htmlFor='nombre'>Usuario</label>
+          <input type='text' id='nombre' name='nombre' defaultValue={user.nombre} />
+
+          <label htmlFor='edad'>Edad</label>
+          <input type='text' id='edad' name='edad' defaultValue={user.edad} />
+
+          <button formAction={userUpdate}>Actualizar</button>
+          <button formAction={userDelete}>Eliminar</button>
+        </form>
+```
+
+Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar distintas acciones: actualizar, eliminar, ...
+
+
+[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
+
+
+## 3.2. POST vs GET
 
 La información recogida en un formulario puede enviarse al servidor de 2 maneras distintas:
 
 - **POST** 
 - **GET**
 
-### 3.1.1. POST
+### 3.2.1. POST
 
 Cuando usamos el método POST, **la información se envía en el cuerpo de la petición** y no es visible para el usuario. 
 
@@ -327,7 +361,7 @@ Su equivalencia en **HTML** es la siguiente:
 > Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
 
 
-### 3.1.2. GET
+### 3.2.2. GET
 
 Cuando usamos el método GET, **la información se envía en la URL de la petición** y es visible para el usuario.
 
@@ -386,279 +420,14 @@ Su equivalencia en HTML es la siguiente:
 </form>
 ```
 
-
-## 3.2. Funciones del lado cliente
-
-Aunque podemos renderizar un formulario en el lado del servidor, a menudo necesitaremos que dicho formulario ofrezca funcionalidades del lado cliente, como:
-
-- gestión de eventos: click, change, ...
-- gestión de estados: hooks useState, useEffect, ...
-- mostrar algún tipo de mensaje o `toast` después de finalizar una operación
-
-En estos casos necesitaremos colocar el formulario en un componente del lado cliente y colocar, al comienzo de dicho archivo, la directiva **'use client'** (con comillas, simples o dobles)
-
-
-NextJS tiene 3 funciones para mejorar la experiencia con formularios en el lado cliente:
-
-- Mostrar estados de carga en el cliente con `useFormStatus()`
-- Capturar y mostrar errores del servidor con `useFormState()`
-- Mostrar estados, capturar y mostrar errores del servidor con `useActionState()` (a partir de Next 15)
-
-> **IMPORTANTE**: **Componentes del lado cliente**
->
-> En React, y en NextJS, todas las funciones que comienzan por `use` se consideran `hooks` y deben ser ejecutadas en el cliente. También es necesario usar componentes del cliente si queremos hacer uso de eventos como onclick, onchange, ...
-
-Supongamos que disponemos del siguiente **`server action`**:
-
-**/app/actions.js**
-```js                                                        
-'use server'
-
-export async function insertData(formData) {
-    const nombre = formData.get('nombre')
-    const apellidos = formData.get('apellidos')
-    
-    // ...
- 
-}
-```
-
-
-## 3.3. useFormStatus
-
-Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
-
-
-**/app/SubmitButton.js**
-
-```js
-'use client'
-
-import { useFormStatus } from 'react-dom'
-
-export function SubmitButton() {
-  const { pending } = useFormStatus()
-
-  return (
-    <button type="submit" disabled={pending}>
-      {pending ? 'Enviando...' : "Enviar"}
-    </button>
-  )
-}
-```  
-
-
-## 3.4. useFormState
-
-Este *hook* permite al formulario recibir el mensaje generado por el `server action` tras su ejecución, y poder dar retroalimentación al usuario.
-
-Esta técnica es la que aparece en la mayoría de tutoriales y documentación. Voy a pasar a exponerla para que puedas entienda su funcionamiento y la forma de aplicarla. Aunque yo personalmente considero que es muy engorrosa y que es bastante mejorable.
-
-La documentación puede consultarse en https://react.dev/reference/react-dom/hooks/useFormState
-
-**/app/formulario.js**
-```js
-'use client'
-import { SubmitButton } from '@/app/SubmitButton'
-import { insertData } from '@/app/actions'
-import { useFormState } from 'react-dom';
-
-
-export function Formulario() {
-    // El server action real es insertData
-    const [respuesta, action] = useFormState(insertData, null);
-
-    return (
-        <form action={action}>
-            <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
-            <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
-            <label htmlFor="avatar">
-                Selecciona un avatar para enviar al servidor
-            </label>
-            <input type="file" required name="avatar" accept="image/*" />
-            <SubmitButton />
-            {respuesta?.message}
-        </form>
-    )
-}
-```
-Un inconveniente de esta técnica es que debemos modificar el `server action` para que reciba 2 argumentos. Quedaría así:
-
-**/app/actions.js**
-
-```js                                                        
-'use server'
-
-export async function insertData(prevState, formData) {
-    const nombre = formData.get('nombre')
-    const apellidos = formData.get('apellidos')
-    
-    // ...
- 
-}
-```
-
-## 3.5. useActionState: simplificando lo anterior
-
-A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplifica el trabajo con *actions*.
-
-```js
-"use client"
-import { createProduct } from "@/lib/actions";
-import { useActionState } from "react";
-
-export default function Formulario() {
-
-  // createProduct es la acción del servidor
-  const [ status, action, pending ] = useActionState(createProduct, null);
-
-  return (
-    <form action={action} className="flex flex-col gap-y-2">
-      <input
-        type="text"
-        name="content"
-        placeholder="New Product"
-        className="py-2 px-3 rounded-sm"
-      />
-      <button
-        type="submit"
-        disabled={pending}
-        className="bg-blue-500 text-white py-2 px-3 rounded-sm"
-      >
-        Submit
-      </button>
-      {pending && <p>Please wait...</p>}
-      {status && <p className="text-red-500">{status}</p>}
-    </form>
-  );
-} 
-```
-
-**Características**
-
-- El código es más simple
-- No es necesario usar  `useFormStatus` ni `useFormState`.
-- No es necesario poner el botón de submit en un componente separado.
-- `useActionState` no se limita a su uso en formularios, sino que es una solución general para el *feedback* proporcionado por cualquier acción del servidor.
-
-**Cambios en las acciones**
-
-- Con este hook, las *actions* deben tener 2 argumentos, siendo `formData` el segundo argumento.
-  
-```js
-"use server";
-
-import prisma from "@/lib/db";
-import { revalidatePath } from "next/cache";
-
-export async function createProduct(previousState, formData) {
- 
-  try {
-    const content = formData.get("content") as string;
-    await prisma.product.create({ data: { content } });
-  } catch (e) {
-    return "be attention, An error occurred.";
-  }
-
-  revalidatePath("/");
-}
-```  
-
-
-## 3.6. Usando un envoltorio (wrapper)
-
-Otra técnica muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
-
-Como ventaja tiene que es más legible y que no tenemos que modificar el `server action` para recibir 2 argumentos. 
-
-
-**/app/formulario.js**
-```js
-'use client'
-import { SubmitButton } from '@/app/SubmitButton'
-import { insertData } from '@/app/actions'
-import { toast } from 'react-hot-toast';
-
-
-export function Formulario() {
-
-    // action es un wrapper de insertData
-    async function action (formData) {
-        const { type, message } = await insertData(formData);
-        if (type == 'success') toast.success(message)
-        if (type == 'error') toast.error(message)
-    }
-
-    return (
-        <form action={action}>
-            <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
-            <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
-            <label htmlFor="avatar">
-                Selecciona un avatar para enviar al servidor
-            </label>
-            <input type="file" required name="avatar" accept="image/*" />
-            <SubmitButton />
-        </form>
-    )
-}
-```
-
-Si usamos esta técnica, no necesitamos modificar el `server action`, quedando éste de la siguiente manera:
-
-**/app/actions.js**
-```js                                                        
-'use server'
-
-export async function insertData(formData) {
-    const nombre = formData.get('nombre')
-    const apellidos = formData.get('apellidos')
-    
-    // ...
-    return { type: 'error', message: '...' }
- 
-}
-```
-
-[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
-
-
-
-## 3.7. Varias acciones dentro de un formulario
-
-Quizás no mucha gente sepa que, en HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](https://www.w3schools.com/tags/att_formaction.asp) . Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
-
-NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
-
-```html
-       <form>
-          <input type='hidden' name='id' defaultValue={user.id} />
-
-          <label htmlFor='nombre'>Usuario</label>
-          <input type='text' id='nombre' name='nombre' defaultValue={user.nombre} />
-
-          <label htmlFor='edad'>Edad</label>
-          <input type='text' id='edad' name='edad' defaultValue={user.edad} />
-
-          <button formAction={userUpdate}>Actualizar</button>
-          <button formAction={userDelete}>Eliminar</button>
-        </form>
-```
-
-Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar distintas acciones: actualizar, eliminar, ...
-
-
-[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
-
-
-
-## 3.8. Consejos
+## 3.3. Consejos
 
 Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
 
 Aquí van algunos consejos:
 
 
-### 3.8.1. Detro de un formulario usa **`button`** únicamente para hacer submit.
+### 3.3.1. Detro de un formulario usa **`button`** únicamente para hacer submit.
 
 No pongas botones con fines distintos a submit. Si lo hacemos se disparará el *action* asociado al formulario. Para operaciones que no sean acciones del servidor usa otro elemento que no sea *button*.
 
@@ -707,7 +476,7 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 </form>
 ```
 
-### 3.8.2. Pasa correctamente los valores a las propiedades en los **`input`**
+### 3.3.2. Pasa correctamente los valores a las propiedades en los **`input`**
 
 
 **MAL**
@@ -726,7 +495,7 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 <input required  disabled />               // Correcto en JSX     
 ```
 
-### 3.8.3. Usa **`label`** correctamente
+### 3.3.3. Usa **`label`** correctamente
 
 **MAL**
 
@@ -750,7 +519,7 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 </label>  
 ```
 
-### 3.8.4. Usa **`defaultValue`** y **`value`** correctamente
+### 3.3.4. Usa **`defaultValue`** y **`value`** correctamente
 
 La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
 
@@ -830,7 +599,7 @@ export default function Cuadrado({ long, width }) {
 >
 > Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
-### 3.8.5. Usa **`disabled`** y **`readOnly`** correctamente
+### 3.3.5. Usa **`disabled`** y **`readOnly`** correctamente
 
 Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
 
@@ -889,7 +658,7 @@ export default Formulario (  ) {
 > **NOTA:** La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
-### 3.8.6. Usa **`select`** correctamente
+### 3.3.6. Usa **`select`** correctamente
 
 Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
 
@@ -933,7 +702,377 @@ const localidadId = 1
 - Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
 
 
-#  4. Validación de datos
+# 4. Funciones del lado cliente
+
+Aunque podemos renderizar un formulario en el lado del servidor, a menudo necesitaremos que dicho formulario ofrezca funcionalidades del lado cliente, como:
+
+- gestión de eventos: click, change, ...
+- gestión de estados: hooks useState, useEffect, ...
+- mostrar algún tipo de mensaje o `toast` después de finalizar una operación
+
+En estos casos necesitaremos colocar el formulario en un componente del lado cliente y colocar, al comienzo de dicho archivo, la directiva **'use client'** (con comillas, simples o dobles)
+
+
+NextJS tiene 3 funciones para mejorar la experiencia con formularios en el lado cliente:
+
+- Mostrar estados de carga en el cliente con `useFormStatus()`
+- Capturar y mostrar errores del servidor con `useFormState()`
+- Mostrar estados, capturar y mostrar errores del servidor con `useActionState()` (a partir de Next 15)
+
+> **IMPORTANTE**: **Componentes del lado cliente**
+>
+> En React, y en NextJS, todas las funciones que comienzan por `use` se consideran `hooks` y deben ser ejecutadas en el cliente. También es necesario usar componentes del cliente si queremos hacer uso de eventos como onclick, onchange, ...
+
+Supongamos que disponemos del siguiente **`server action`**:
+
+**/app/actions.js**
+```js                                                        
+'use server'
+
+export async function insertData(formData) {
+    const nombre = formData.get('nombre')
+    const apellidos = formData.get('apellidos')
+    
+    // ...
+ 
+}
+```
+
+
+## 4.1. useFormStatus
+
+Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
+
+
+**/app/SubmitButton.js**
+
+```js
+'use client'
+
+import { useFormStatus } from 'react-dom'
+
+export function SubmitButton() {
+  const { pending } = useFormStatus()
+
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? 'Enviando...' : "Enviar"}
+    </button>
+  )
+}
+```  
+
+
+## 4.2. useFormState
+
+Este *hook* permite al formulario recibir el mensaje generado por el `server action` tras su ejecución, y poder dar retroalimentación al usuario.
+
+Esta técnica es la que aparece en la mayoría de tutoriales y documentación. Voy a pasar a exponerla para que puedas entienda su funcionamiento y la forma de aplicarla. Aunque yo personalmente considero que es muy engorrosa y que es bastante mejorable.
+
+La documentación puede consultarse en https://react.dev/reference/react-dom/hooks/useFormState
+
+**/app/formulario.js**
+```js
+'use client'
+import { SubmitButton } from '@/app/SubmitButton'
+import { insertData } from '@/app/actions'
+import { useFormState } from 'react-dom';
+
+
+export function Formulario() {
+    // El server action real es insertData
+    const [respuesta, action] = useFormState(insertData, null);
+
+    return (
+        <form action={action}>
+            <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
+            <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
+            <label htmlFor="avatar">
+                Selecciona un avatar para enviar al servidor
+            </label>
+            <input type="file" required name="avatar" accept="image/*" />
+            <SubmitButton />
+            {respuesta?.message}
+        </form>
+    )
+}
+```
+Un inconveniente de esta técnica es que debemos modificar el `server action` para que reciba 2 argumentos. Quedaría así:
+
+**/app/actions.js**
+
+```js                                                        
+'use server'
+
+export async function insertData(prevState, formData) {
+    const nombre = formData.get('nombre')
+    const apellidos = formData.get('apellidos')
+    
+    // ...
+ 
+}
+```
+
+## 4.3. useActionState: simplificando lo anterior
+
+A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplifica el trabajo con *actions*.
+
+```js
+"use client"
+import { createProduct } from "@/lib/actions";
+import { useActionState } from "react";
+
+export default function Formulario() {
+
+  // createProduct es la acción del servidor
+  const [ status, action, pending ] = useActionState(createProduct, null);
+
+  return (
+    <form action={action} className="flex flex-col gap-y-2">
+      <input
+        type="text"
+        name="content"
+        placeholder="New Product"
+        className="py-2 px-3 rounded-sm"
+      />
+      <button
+        type="submit"
+        disabled={pending}
+        className="bg-blue-500 text-white py-2 px-3 rounded-sm"
+      >
+        Submit
+      </button>
+      {pending && <p>Please wait...</p>}
+      {status && <p className="text-red-500">{status}</p>}
+    </form>
+  );
+} 
+```
+
+**Características**
+
+- El código es más simple
+- No es necesario usar  `useFormStatus` ni `useFormState`.
+- No es necesario poner el botón de submit en un componente separado.
+- `useActionState` no se limita a su uso en formularios, sino que es una solución general para el *feedback* proporcionado por cualquier acción del servidor.
+
+**Cambios en las acciones**
+
+- Con este hook, las *actions* deben tener 2 argumentos, siendo `formData` el segundo argumento.
+  
+```js
+"use server";
+
+import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
+
+export async function createProduct(previousState, formData) {
+ 
+  try {
+    const content = formData.get("content") as string;
+    await prisma.product.create({ data: { content } });
+  } catch (e) {
+    return "be attention, An error occurred.";
+  }
+
+  revalidatePath("/");
+}
+```  
+
+
+## 4.4. Usando un envoltorio (wrapper)
+
+Otra técnica muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
+
+Como ventaja tiene que es más legible y que no tenemos que modificar el `server action` para recibir 2 argumentos. 
+
+
+**/app/formulario.js**
+```js
+'use client'
+import { SubmitButton } from '@/app/SubmitButton'
+import { insertData } from '@/app/actions'
+import { toast } from 'react-hot-toast';
+
+
+export function Formulario() {
+
+    // action es un wrapper de insertData
+    async function action (formData) {
+        const { type, message } = await insertData(formData);
+        if (type == 'success') toast.success(message)
+        if (type == 'error') toast.error(message)
+    }
+
+    return (
+        <form action={action}>
+            <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
+            <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
+            <label htmlFor="avatar">
+                Selecciona un avatar para enviar al servidor
+            </label>
+            <input type="file" required name="avatar" accept="image/*" />
+            <SubmitButton />
+        </form>
+    )
+}
+```
+
+Si usamos esta técnica, no necesitamos modificar el `server action`, quedando éste de la siguiente manera:
+
+**/app/actions.js**
+```js                                                        
+'use server'
+
+export async function insertData(formData) {
+    const nombre = formData.get('nombre')
+    const apellidos = formData.get('apellidos')
+    
+    // ...
+    return { type: 'error', message: '...' }
+ 
+}
+```
+
+[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
+
+
+## 4.5. Un método unificado de trabajo
+
+Después de todas las posibilidades mostradas en los apartados anteriores, cualquiera puede llegar al *cortocircuito*.
+
+Existen muchas alternativas, ya que NextJS proporciona métodos varios para situaciones variadas que se adecuen al estilo de codificación de cada programador. No obstante, tanta variedad puede llegar a confudir y en última instancia ser contraproducente.
+
+A continuación propongo un método de trabajo unificado que pretende servir ante cualquier circunstancia y ofrecer cualquier funcionalidad requerida.
+
+Este método cumple los siguientes requisitos y funcionalidades:
+
+- el formulario funciona en el lado cliente ofreciendo las siguientes funcionalidades:
+  - gestión de eventos: click, change, ...
+  - gestión de estados: hooks useState, useEffect, ...
+- el botón o botones que solicitan la ejecución una acción al servidor muestran un estado `pending` mientras el servidor está realizando la acción.
+- el formulario, después de completarse una operación en el servidor, muestra mensajes de retroalimentación que pueden ser de 2 tipos:
+  - mensajes temporales mediante `toast` 
+  - mensajes permanentes mediante un estado
+  
+
+[ ![Proyecto y Demo](assets/form-feedback.png) ](https://github.com/jamj2000/nxform-feedback)
+
+
+**Código de ejemplo:**
+
+
+
+```js
+'use client'
+import { realAction1, realAction2, realAction3 } from "@/lib/actions";
+import { useActionState, useEffect } from "react";
+import { CircleCheck, CircleAlert, RefreshCcw } from 'lucide-react'
+import { toast } from "sonner";
+
+
+
+
+function Formulario() {
+
+    const [state1, action1, pending1] = useActionState(realAction1, null)
+    const [state2, action2, pending2] = useActionState(realAction2, null)
+    const [state3, action3, pending3] = useActionState(realAction3, null)
+
+    useEffect(() => {
+        if (state1?.error) toast.error(state1.error, { closeButton: true })       // duration: 4000
+        if (state1?.success) toast.success(state1.success, { closeButton: true }) // duration: 4000
+    }, [state1])
+
+    useEffect(() => {
+        if (state2?.error) toast.error(state2.error, { duration: 2000 })
+        if (state2?.success) toast.success(state2.success, { duration: 2000 })
+    }, [state2])
+
+    useEffect(() => {
+        if (state3?.error) toast.error(state3.error, { closeButton: true, duration: 2000 })
+        if (state3?.success) toast.success(state3.success, { closeButton: true, duration: 2000 })
+    }, [state3])
+
+
+    return (
+        <form action={action1} className="my-20 border-2 p-4 flex flex-col gap-4">
+            <h1 className="text-center text-xl">Formulario</h1>
+            <div className="flex justify-between">
+                <label htmlFor="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" />
+            </div>
+            <div className="flex justify-between">
+                <label htmlFor="fecha_nacimiento">Fecha nacimento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" />
+            </div>
+
+            {/* Si el botón no tiene propiedad formAction, 
+            entonces usa la action indicada en etiqueta form */}
+            <button
+                // formAction={action1}
+                disabled={pending1}
+                className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
+                {pending1 ? <RefreshCcw className="inline animate-spin size-4" /> : 'Action 1'}
+            </button>
+
+
+            {state1?.error && !pending1 &&
+                < div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
+                    {<CircleAlert className="inline m-4 mr-2 size-4" />} {state1.error}
+                </div>
+            }
+            {state1?.success && !pending1 &&
+                <div className="text-sm font-medium text-green-600 bg-green-50 rounded-md flex items-center border">
+                    {<CircleCheck className="inline m-4 mr-2 size-4" />} {state1.success}
+                </div>
+            }
+
+            <button
+                formAction={action2}
+                disabled={pending2}
+                className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
+                {pending2 ? <RefreshCcw className="inline animate-spin size-4" /> : 'Action 2'}
+            </button>
+            {state2?.error && !pending2 &&
+                <div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
+                    {<CircleAlert className="inline m-4 size-4" />} {state2.error}
+                </div>
+            }
+            {state2?.success && !pending2 &&
+                <div className="text-sm font-medium text-green-600 bg-green-50 rounded-md flex items-center border">
+                    {<CircleCheck className="inline m-4 size-4" />} {state2.success}
+                </div>
+            }
+
+            <button
+                formAction={action3}
+                disabled={pending3}
+                className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
+                {pending3 ? <RefreshCcw className="inline animate-spin size-4" /> : 'Action 3'}
+            </button>
+            {state3?.error && !pending3 &&
+                <div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
+                    {<CircleAlert className="inline m-4 size-4" />} {state3.error}
+                </div>
+            }
+            {state3?.success && !pending3 &&
+                <div className="text-sm font-medium text-green-600 bg-green-50 rounded-md flex items-center border">
+                    {<CircleCheck className="inline m-4 size-4" />} {state3.success}
+                </div>
+            }
+
+        </form >
+    );
+}
+
+export default Formulario;
+```
+
+
+
+
+#  5. Validación de datos
 
 La validación de datos es el proceso de garantizar que la entrada del usuario sea limpia, correcta y útil.
 
@@ -952,7 +1091,7 @@ La **validación del lado del cliente** la realiza un navegador web, antes de en
 La **validación del lado del servidor** la realiza un servidor web, después de que la entrada se haya enviado al servidor.
 
 
-## 4.1. Validación en el cliente
+## 5.1. Validación en el cliente
 
 HTML5 introdujo un nuevo concepto de validación HTML llamado validación de restricciones .
 
@@ -989,13 +1128,13 @@ La validación de restricciones HTML se basa en:
 | `:valid`     | Selecciona elementos de entrada con valores válidos.           |
 
 
-## 4.2. Validación en el servidor
+## 5.2. Validación en el servidor
 
 > **ADVERTENCIA**: nunca confíe en los datos pasados ​​a su servidor desde el cliente. Incluso si su formulario se valida correctamente y evita entradas con formato incorrecto en el lado del cliente, un usuario malintencionado aún puede alterar la solicitud de red.
 
 Cada vez que envía datos a un servidor, debe considerar la seguridad. Los formularios HTML son, con diferencia, los vectores de ataque a servidores más comunes (lugares donde pueden ocurrir ataques). Los problemas nunca provienen de los formularios HTML en sí, sino de cómo el servidor maneja los datos.
 
-### 4.2.1. Ataques frecuentes
+### 5.2.1. Ataques frecuentes
 
 En [este artículo](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security) se analiza en detalle varios ataques comunes y posibles defensas contra ellos. Es muy recomendable su lectura. Los ataques más conocidos son los siguientes:
 
@@ -1018,7 +1157,7 @@ Las vulnerabilidades de inyección SQL permiten a usuarios malintencionados ejec
 Los ataques CSRF permiten a un usuario malintencionado ejecutar acciones utilizando las credenciales de otro usuario sin el conocimiento o consentimiento de ese usuario.
 
 
-### 4.2.2. Sea paranoico: nunca confíe en sus usuarios
+### 5.2.2. Sea paranoico: nunca confíe en sus usuarios
 
 Entonces, ¿cómo se lucha contra estas amenazas? Este es un tema que va mucho más allá de esta guía, pero hay algunas reglas a tener en cuenta. La regla más importante es: nunca confíes en tus usuarios, incluido tú mismo; Incluso un usuario de confianza podría haber sido secuestrado.
 
@@ -1029,18 +1168,18 @@ Todos los datos que llegan a su servidor deben ser verificados y desinfectados (
 - **Archivos subidos a la zona de pruebas**. Guárdelos en un servidor diferente y permita el acceso al archivo sólo a través de un subdominio diferente o, mejor aún, a través de un dominio completamente diferente.
 Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres reglas, pero siempre es una buena idea que un tercero competente realice una revisión de seguridad. No asuma que ha visto todos los problemas posibles.
 
-### 4.2.3. Resumen
+### 5.2.3. Resumen
 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
 
 
-# 5. Casos prácticos avanzados
+# 6. ANEXO: Casos prácticos avanzados
 
 En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
 Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar los siguientes proyectos, que están desarrollados y explicados (en inglés) con cierta profundidad. 
 
-## 5.1. Panel de gestión de escuela (Parte 1 de 2)
+## 6.1. Panel de gestión de escuela (Parte 1 de 2)
 
 - [Vídeo: Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP)
 - [Código fuente del video anterior](https://github.com/safak/next-dashboard-ui/tree/completed)
@@ -1050,7 +1189,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 ![dashboard demo](assets/dashboard.png)
 
 
-## 5.2. Albúm de fotos
+## 6.2. Albúm de fotos
 
 ![photobox](assets/photobox.png)
  
@@ -1063,7 +1202,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 
 
-# 6. Referencias
+# 7. Referencias
 
 - [MDN: Envío y rececpción de datos de formulario (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 - [W3Schools: Atributo formaction (en inglés)](https://www.w3schools.com/tags/att_formaction.asp)
