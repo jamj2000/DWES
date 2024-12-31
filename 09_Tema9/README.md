@@ -93,6 +93,60 @@ Una vez descargados los archivos, los colocaremos en la carpeta **`/public`** de
 ![put into public](assets/public-manifest.png)
 
 
+**IMPORTANTE:**
+
+Teniendo en cuenta que la aplicación anterior ya no está disponible en Internet y que las aplicaciones que sí están disponibles no funcionan correctamente, podemos recurrir a la solución directa, que consiste en los 2 pasos siguientes:
+
+1. Usar un archivo **manifest.json** previo como base para elaborar el nuestro
+2. Generar los distintos tamaños de los iconos con alguna herramienta de escritorio u on-line (p. ej: [derivv](https://derivv.com/)
+
+Para el **primer paso**, aquí tienes el contenido de un manifest.json de ejemplo:
+
+```json
+{
+    "theme_color": "#2e30a1",
+    "background_color": "#3e586f",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "name": "NextJS Cloudinary CRUD",
+    "short_name": "nxcloudinary-crud",
+    "description": "NextJS Photo Gallery App using Cloudinary",
+    "icons": [
+        {
+            "src": "icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
+```
+
+Para el **segundo paso**, busca una imagen con un tamaño **512x512** y genera los siguientes tamaños adicionales:
+
+- **384x384**
+- **256x256**
+- **192x192**
+
+Por último deberás renombrar las imágenes para que su nombre y ruta coincida con el indicado en el archivo manifest.json previo, y subir todo a la carpeta public del proyecto. 
+
+![manifest tree](assets/manifest-tree.png)
+
 ## 3.2. Añadir manifest.js al layout principal
 
 Indicaremos a nuestra aplicación que haga uso del manifiesto anterior.
