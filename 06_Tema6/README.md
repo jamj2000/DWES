@@ -11,7 +11,7 @@
 <img src="assets/sqlite.svg" width="80" height="80">
 <img src="assets/postgresql.svg" width="80" height="80">
 
----
+---- 
 - [1. Introducción](#1-introducción)
 - [2. SQLite](#2-sqlite)
   - [2.1. Proyecto](#21-proyecto)
@@ -38,17 +38,21 @@
     - [8.2.1. Modelos](#821-modelos)
     - [8.2.2. Relaciones](#822-relaciones)
     - [8.2.3. Sincronizando el esquema con la base de datos](#823-sincronizando-el-esquema-con-la-base-de-datos)
-- [9. Consultas CRUD](#9-consultas-crud)
-  - [9.1. CRUD](#91-crud)
+- [9. Consultas](#9-consultas)
+  - [9.1. Consultas CRUD](#91-consultas-crud)
     - [9.1.1. Create](#911-create)
     - [9.1.2. Read](#912-read)
     - [9.1.3. Update](#913-update)
     - [9.1.4. Delete](#914-delete)
-  - [9.2. Seleccionar campos](#92-seleccionar-campos)
-  - [9.3. Consultar varias tablas](#93-consultar-varias-tablas)
+  - [9.2. Otras consultas](#92-otras-consultas)
+    - [9.2.1. count](#921-count)
+    - [9.2.2. groupBy](#922-groupby)
 - [10. Ver datos de las tablas](#10-ver-datos-de-las-tablas)
+- [11. Despliegue en Vercel](#11-despliegue-en-vercel)
 - [12. ANEXO: CRUD en una única página](#12-anexo-crud-en-una-única-página)
 - [13. Referencias](#13-referencias)
+
+
 
 
 
@@ -1198,11 +1202,12 @@ npx prisma db push
 > **IMPORTANTE**: La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
 
 
-# 9. Consultas CRUD
+# 9. Consultas
 
-- [Consutlas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
+- [Consultas con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries)
 
-## 9.1. CRUD
+
+## 9.1. Consultas CRUD
 
 CRUD es el acrónimo para:
 
@@ -1212,6 +1217,54 @@ CRUD es el acrónimo para:
 - **Delete**
 
 Estas son las 4 operaciones básicas necesarias para la gestión de información.
+
+- [Consultas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
+
+A continuación, a menudo, usaremos ejemplos con valores explícitos. Usaremos el siguiente esquema:
+
+![diagrama ER](assets/prisma-erd.svg)
+
+<details>
+<summary>Esquema Prisma</summary>
+
+<pre>
+
+model User {
+  id           Int       @id 
+  name         String?
+  email        String    @unique
+  password     String
+  age          Int?
+  country      String?
+  profileViews Int
+  role         Role      @default(USER)
+  coinflips    Boolean[]
+  posts        Post[]
+  profile      Profile?
+}
+
+model Post {
+  id        Int     @id 
+  title     String
+  published Boolean @default(true)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model Profile {
+  id        Int    @id 
+  biography String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int    @unique
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+</pre> 
+</details>
 
 ### 9.1.1. Create
 
@@ -1223,6 +1276,29 @@ const user = await prisma.user.create({
   },
 })
 ```
+
+
+**Insertar user y algunos posts asociados**
+
+```javascript 
+const user = await prisma.user.create({
+  data: {
+    email: 'ariadne@prisma.io',
+    name: 'Ariadne',
+    posts: {
+      create: [
+        {
+          title: 'My first day at Prisma',
+        },
+        {
+          title: 'How to connect to a SQLite database',          
+        },
+      ],
+    },
+  },
+})
+```
+
 
 ### 9.1.2. Read
 
@@ -1236,23 +1312,151 @@ const user = await prisma.user.findUnique({
 })
 ```  
 
+**Encontrar el primer registro por nombre**
+
+```javascript
+const user = await prisma.user.findFirst({
+  where: {
+    name: 'Lenny',
+  },
+})
+```  
+
 **Encontrar todos los registros**
 
 ```javascript
 const users = await prisma.user.findMany()
+const users = await prisma.user.findMany({}) // equivalente a la anterior
 ```
+
+
+**Estructura general de consultas find**
+
+
+> **NOTA**: **Cada una de las siguentes propiedades es opcional y puede colocarse en cualquier orden.**
+
+Podemos usar esta forma
+
+```javascript
+const users = await prisma.user.findMany({
+  select: { /*...*/},
+  where: { /*...*/},
+  orderBy: {/*...*/},
+  skip: /*...*/,        // corresponde al LIMIT de SQL
+  take: /*...*/,        // corresponde al OFFSET de SQL
+})
+```
+
+o, también podemos usar
+
+```javascript
+const users = await prisma.user.findMany({
+  include: { /*...*/},  // corresponde al JOIN de SQL
+  where: { /*...*/},
+  orderBy: {/*...*/},
+  skip: /*...*/,        // corresponde al LIMIT de SQL
+  take: /*...*/,        // corresponde al OFFSET de SQL
+})
+```
+
+> **IMPORTANTE**: NO SE PERMITE USAR `select` E `include` A LA VEZ EN EL MISMO NIVEL.
+>
+> **INCORRECTO**
+> 
+> ![ko - skip & take](assets/ko-select-include.png)
+>
+> **CORRECTO**
+> 
+> ![ok - skip & take](assets/ok-select-include.png)
+
+
+**Ejemplo**
+
+```javascript
+const getUser = await prisma.user.findMany({
+  select: {
+    email: true,
+    name: true,
+    age: true,
+    posts: true,     // todos los campos de posts
+    // posts: {
+    //   select: {   // sólo algunos campos de posts
+    //     id: true,
+    //     title: true,
+    //     published: true,
+    //   },
+    // }
+  },
+  where: {
+    name: {
+      not: 'Lenny',
+      contains: 'le',  
+      // startsWith: 'le',
+      // endsWith: 'le',
+      mode: 'insensitive',  // no diferencia entre mayúsculas y minúsculas
+    },
+    age: {
+      gt: 30,     // gte, lt, lte, not
+    }
+  },
+  orderBy: {
+    age: 'desc',  //  'asc'
+  },
+  skip: 100,      // ignoramos los primeros 100 registros
+  take: 25,       // obtenenos sólo 25 registros 
+})
+```
+
+Si deseamos obtener todos los campos de `user` y todos los campos de `posts`, podemos simplificar la consulta
+
+```javascript
+const getUser = await prisma.user.findMany({
+  include: { 
+    posts: true,
+  }
+  where: {
+    name: {
+      not: 'Lenny',
+      contains: 'le',  
+      // startsWith: 'le',
+      // endsWith: 'le',
+      mode: 'insensitive',  // no diferencia entre mayúsculas y minúsculas
+    },
+    age: {
+      gt: 30,     // gte, lt, lte, not
+    }
+  },
+  orderBy: {
+    age: 'desc',  //  'asc'
+  },
+  skip: 100,      // ignoramos los primeros 100 registros
+  take: 25,       // obtenenos sólo 25 registros 
+})
+```
+
+
+![skip & take](assets/skip-take.png)
+
+
+> **NOTA**: la documentación referida a **operadores** y **condiciones de filtrado** está accesible en
+>
+> https://www.prisma.io/docs/orm/reference/prisma-client-reference#filter-conditions-and-operators
+
 
 ### 9.1.3. Update
 
 **Actualizar un registro por ID**
 
+La forma de esta consulta es muy similar a `create`. La única diferencia, aparte del uso de **`update`**, es que es necesario usar una propiedad `where`.
+
 ```javascript
-const updateUser = await prisma.user.update({
+const user = await prisma.user.update({
   where: {
     id: 1,
-  },
+  }
   data: {
-    name: 'Eva York',
+    email: 'elsa@prisma.io',
+    name: 'Elsa Prisma',
   },
 })
 ```
@@ -1260,6 +1464,8 @@ const updateUser = await prisma.user.update({
 ### 9.1.4. Delete
 
 **Elimnar un registro por ID**
+
+Esta es una de las consultas más sencillas de expresar.
 
 ```javascript
 const deleteUser = await prisma.user.delete({
@@ -1269,108 +1475,66 @@ const deleteUser = await prisma.user.delete({
 })
 ```
 
-## 9.2. Seleccionar campos
+## 9.2. Otras consultas
 
+### 9.2.1. count
 
-**Obtener email y name del user con id 22**
+Usaremos **`count()`** para contar la cantidad de registros o valores de campos no nulos. La siguiente consulta de ejemplo cuenta todos los usuarios:
 
-```javascript
-const getUser = await prisma.user.findUnique({
+```js
+const userCount = await prisma.user.count()
+```
+
+Para contar cuantos usuarios tienen el campo `profileViews` igual o superior a 100.
+
+```js
+const userCount = await prisma.user.count({
   where: {
-    id: 22,
-  },
-  select: {
-    email: true,
-    name: true,
-  },
-})
-```
-
-## 9.3. Consultar varias tablas
-
-Algunos ejemplos.
-
-**Insertar user, algunos posts y categories asociadas**
-
-```javascript 
-const user = await prisma.user.create({
-  data: {
-    email: 'ariadne@prisma.io',
-    name: 'Ariadne',
-    posts: {
-      create: [
-        {
-          title: 'My first day at Prisma',
-          categories: {
-            create: {
-              name: 'Office',
-            },
-          },
-        },
-        {
-          title: 'How to connect to a SQLite database',
-          categories: {
-            create: [{ name: 'Databases' }, { name: 'Tutorials' }],
-          },
-        },
-      ],
+    profileViews: {
+      gte: 100,
     },
   },
 })
 ```
 
-**Obtener user y todos sus posts**
+### 9.2.2. groupBy
 
-```javascript
-const user = await prisma.user.findFirst({
-  include: {
-    posts: true,
+El uso de **`groupBy()`** nos permite agrupar registros por uno o más valores de campo, como país o país y ciudad, y realizar agregaciones en cada grupo, como encontrar la edad promedio de las personas que viven en una ciudad en particular.
+
+Para agregar valores usaremos:
+
+- `_count`
+- `_sum`
+- `_avg`
+- `_min`
+- `_max`
+
+
+```js
+const groupUsers = await prisma.user.groupBy({
+  by: ['country'],
+  where: {
+    country: {
+      notIn: ['Sweden', 'Ghana'],
+    },
   },
-}
-```
-
-**Obtener user, sus posts y categories**
-
-```javascript
-const user = await prisma.user.findFirst({
-  include: {
-    posts: {
-      include: {
-        categories: true,
+  _sum: {
+    profileViews: true,
+  },
+  having: {
+    profileViews: {
+      _min: {
+        gte: 10,
       },
     },
   },
 })
 ```
 
-**Obtener name de user y todos los title de sus posts**
+Documentación disponible en:
 
-```javascript
-const user = await prisma.user.findFirst({
-  select: {
-    name: true,
-    posts: {
-      select: {
-        title: true,
-      },
-    },
-  },
-})
-```
+- [Aggregation, Grouping, Summarizing](https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing)
 
-**Obtener todos los campos de user y todos los title de sus posts**
-
-```javascript
-const user = await prisma.user.findFirst({
-  include: {
-    posts: {
-      select: {
-        title: true,
-      },
-    },
-  },
-})
-```
 
 # 10. Ver datos de las tablas
 
@@ -1387,7 +1551,7 @@ y abrimos en el navegador la URL http://localhost:5555
 ![prisma studio 2](assets/studio2.png)
 
 
-    # 11. Despliegue en Vercel
+# 11. Despliegue en Vercel
 
 
 Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
