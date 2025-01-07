@@ -548,24 +548,24 @@ export default function Cuadrado({ long, width }) {
         <form>
             <label> Largo:
                 <input type="number" name="escala" step={0.01}
-                    defaultValue={1}                          // Correcto. No asociado a variable de estado   
+                    defaultValue={1}    // Correcto. No asociado a variable de estado   
                 />
             </label>
             <label> Largo:
                 <input type="number" name="largo" step={0.01}
                     onChange={(e) => setLargo(e.target.value)}
-                    value={largo}                              // Correcto. Variable de estado
+                    value={largo}      // Correcto. Variable de estado
                 />
             </label>
             <label> Ancho:
                 <input type="number" name="ancho" step={0.01}
                     onChange={(e) => setAncho(e.target.value)}
-                    value={ancho}                              // Correcto. Variable de estado
+                    value={ancho}       // Correcto. Variable de estado
                 />
             </label>
             <label> Área:
                 <input type="number" name="area" readOnly
-                    value={largo * ancho}                      // Correcto. Valor derivado del estado
+                    value={largo * ancho}   // Correcto. Valor derivado del estado
                     onChange={() => {}}
                 />
             </label>  
@@ -676,7 +676,10 @@ En HTML hacemos
 En JSX debemos hacer
 
 ```js
-<select name="localidad" defaultValue={3}>
+<select
+  key={3}
+  name="localidad"
+  defaultValue={3}>
       <option value={1}> Álava </option>
       <option value={2}> Albacete </option>
       <option value={3}> Almeria </option>
@@ -689,15 +692,25 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 
 
 ```js
-const localidadId = 1 
- 
-<select name="localidad" defaultValue={localidadId} >
-      {localidades.map(localidad => (
+<select
+  key={localidadId}
+  name="localidad"
+  defaultValue={localidadId} >
+    {localidades.map(localidad => (
         <option key={localidad.id} value={localidad.id}> {localidad.nombre} </option>
-      ))}
+    ))}
 </select>
 ```
 
+> **CONSEJO IMPORTANTE**:
+>
+> Usa siempre una propiedad **key** en el select, cuando trabajes con entrada no controlada. 
+> El valor de dicha propiedad debe ser dinámico, y cambiar cuando el usuario seleccione una opción distinta a la anterior.
+>
+> El motivo es que [React trabaja con un Virtual DOM y necesita saber que un elemento ha cambiado para sincronizar cambios con el DOM](https://www.escuelafrontend.com/prop-key-en-react). 
+> 
+> Si no lo hacemos así los cambios realizados en VDOM no se verán reflejados en el DOM. 
+ 
       
 - Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
 
