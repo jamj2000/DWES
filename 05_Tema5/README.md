@@ -33,16 +33,19 @@
   - [4.3. useActionState: simplificando lo anterior](#43-useactionstate-simplificando-lo-anterior)
   - [4.4. Usando un envoltorio (wrapper)](#44-usando-un-envoltorio-wrapper)
   - [4.5. Un método unificado de trabajo](#45-un-método-unificado-de-trabajo)
+  - [4.6. Ejemplo práctico: Formulario con feedback](#46-ejemplo-práctico-formulario-con-feedback)
 - [5. Validación de datos](#5-validación-de-datos)
   - [5.1. Validación en el cliente](#51-validación-en-el-cliente)
   - [5.2. Validación en el servidor](#52-validación-en-el-servidor)
     - [5.2.1. Ataques frecuentes](#521-ataques-frecuentes)
     - [5.2.2. Sea paranoico: nunca confíe en sus usuarios](#522-sea-paranoico-nunca-confíe-en-sus-usuarios)
     - [5.2.3. Resumen](#523-resumen)
+  - [5.3. Ejemplo práctico: Formulario con validación en el servidor](#53-ejemplo-práctico-formulario-con-validación-en-el-servidor)
 - [6. ANEXO: Casos prácticos avanzados](#6-anexo-casos-prácticos-avanzados)
   - [6.1. Panel de gestión de escuela (Parte 1 de 2)](#61-panel-de-gestión-de-escuela-parte-1-de-2)
   - [6.2. Albúm de fotos](#62-albúm-de-fotos)
 - [7. Referencias](#7-referencias)
+
 
 
 
@@ -968,19 +971,82 @@ Este método cumple los siguientes requisitos y funcionalidades:
   - mensajes temporales mediante `toast` 
   - mensajes permanentes mediante un estado
   
+![form feedback](assets/form-feedback.png)
 
-[ ![Proyecto y Demo](assets/form-feedback.png) ](https://github.com/jamj2000/nxform-feedback)
+
+El método explicado de forma esquemática es el siguiente:
+
+1. Los formularios son declarados como componente cliente, iniciando el código con la directiva `'use client'`
+2. **En el formulario**, para gestionar el estado y si está pendiente o no, usaremos el hook `useActionState( accion, valorInicial)`
+3. **En la acción** declararemos 2 argumentos, `async function accion(prevState, formData)`
 
 
-**Código de ejemplo:**
-
+**Código simplificado**
 
 
 ```js
+// form.jsx, declarado como componente cliente
+'use client'
+
+import { accionReal } from "@/lib/actions";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
+
+fuction Formulario() {
+
+    const [ state, action, pending ] = useActionState( accionReal, {})
+
+    useEffect(() => {
+        if (state.error) toast.error(state.error)       
+        if (state.success) toast.success(state.success) 
+    }, [state])
+
+
+    return (
+        <form action={action}>
+
+            <button disabled={pending} >
+                {pending ? 'Realizando acción' : 'Acción 1'}
+            </button>
+        </form>
+    )
+}
+```
+
+```js
+// actions.js, declaradas como funciones de servidor
+'use server'
+
+// IMPORTANTE: Dos argumentos
+// - prevState
+// - formData
+export async function accionReal(prevState, formData) {
+    // Realizamos operación en el servidor
+
+    // Devolvemos mensaje de estado
+    return { success: 'Éxito en la acción' }
+}
+```
+
+
+
+## 4.6. Ejemplo práctico: Formulario con feedback
+
+En el siguiente enlace tienes el código completo de una aplicación que muestra como gestionar mensajes de *feedback* en un formulario.
+
+[Código fuente completo](https://github.com/jamj2000/nxform-feedback)
+
+
+A continuación tienes un código muy simplificado. Para mayor detalle, consulta en enlace anterior.
+
+
+**Código simplificado**
+
+```js
+// src/components/form.jsx
 'use client'
 import { realAction1, realAction2, realAction3 } from "@/lib/actions";
 import { useActionState, useEffect } from "react";
-import { CircleCheck, CircleAlert, RefreshCcw } from 'lucide-react'
 import { toast } from "sonner";
 
 
@@ -988,92 +1054,55 @@ import { toast } from "sonner";
 
 function Formulario() {
 
-    const [state1, action1, pending1] = useActionState(realAction1, null)
-    const [state2, action2, pending2] = useActionState(realAction2, null)
-    const [state3, action3, pending3] = useActionState(realAction3, null)
+    const [state1, action1, pending1] = useActionState(realAction1, {})
+    const [state2, action2, pending2] = useActionState(realAction2, {})
+
 
     useEffect(() => {
-        if (state1?.error) toast.error(state1.error, { closeButton: true })       // duration: 4000
-        if (state1?.success) toast.success(state1.success, { closeButton: true }) // duration: 4000
+        if (state1.error) toast.error(state1.error)       
+        if (state1.success) toast.success(state1.success) 
     }, [state1])
 
     useEffect(() => {
-        if (state2?.error) toast.error(state2.error, { duration: 2000 })
-        if (state2?.success) toast.success(state2.success, { duration: 2000 })
+        if (state2.error) toast.error(state2.error)
+        if (state2.success) toast.success(state2.success)
     }, [state2])
 
-    useEffect(() => {
-        if (state3?.error) toast.error(state3.error, { closeButton: true, duration: 2000 })
-        if (state3?.success) toast.success(state3.success, { closeButton: true, duration: 2000 })
-    }, [state3])
-
-
+  
     return (
-        <form action={action1} className="my-20 border-2 p-4 flex flex-col gap-4">
+        <form className="my-20 border-2 p-4 flex flex-col gap-4">
             <h1 className="text-center text-xl">Formulario</h1>
+
+
             <div className="flex justify-between">
                 <label htmlFor="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" />
             </div>
+
             <div className="flex justify-between">
                 <label htmlFor="fecha_nacimiento">Fecha nacimento:</label>
                 <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" />
             </div>
 
-            {/* Si el botón no tiene propiedad formAction, 
-            entonces usa la action indicada en etiqueta form */}
             <button
-                // formAction={action1}
+                formAction={action1}
                 disabled={pending1}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
-                {pending1 ? <RefreshCcw className="inline animate-spin size-4" /> : 'Action 1'}
+                {pending1 ? 'Realizando acción 1' : 'Acción 1'}
             </button>
 
-
-            {state1?.error && !pending1 &&
-                < div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
-                    {<CircleAlert className="inline m-4 mr-2 size-4" />} {state1.error}
-                </div>
-            }
-            {state1?.success && !pending1 &&
-                <div className="text-sm font-medium text-green-600 bg-green-50 rounded-md flex items-center border">
-                    {<CircleCheck className="inline m-4 mr-2 size-4" />} {state1.success}
-                </div>
-            }
-
+            {state1.error  && state1.error}
+            {state1.success  && state1.success}
+    
             <button
                 formAction={action2}
                 disabled={pending2}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
-                {pending2 ? <RefreshCcw className="inline animate-spin size-4" /> : 'Action 2'}
+                {pending2 ? 'Realizando acción 2' : 'Acción 2'}
             </button>
-            {state2?.error && !pending2 &&
-                <div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
-                    {<CircleAlert className="inline m-4 mr-2 size-4" />} {state2.error}
-                </div>
-            }
-            {state2?.success && !pending2 &&
-                <div className="text-sm font-medium text-green-600 bg-green-50 rounded-md flex items-center border">
-                    {<CircleCheck className="inline m-4 mr-2 size-4" />} {state2.success}
-                </div>
-            }
-
-            <button
-                formAction={action3}
-                disabled={pending3}
-                className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
-                {pending3 ? <RefreshCcw className="inline animate-spin size-4" /> : 'Action 3'}
-            </button>
-            {state3?.error && !pending3 &&
-                <div className="text-sm font-medium text-red-600 bg-red-50 rounded-md flex items-center border">
-                    {<CircleAlert className="inline m-4 mr-2 size-4" />} {state3.error}
-                </div>
-            }
-            {state3?.success && !pending3 &&
-                <div className="text-sm font-medium text-green-600 bg-green-50 rounded-md flex items-center border">
-                    {<CircleCheck className="inline m-4 mr-2 size-4" />} {state3.success}
-                </div>
-            }
+  
+            {state2.error && state2.error}
+            {state2.success && state2.success}
 
         </form >
     );
@@ -1081,6 +1110,42 @@ function Formulario() {
 
 export default Formulario;
 ```
+
+
+
+
+```js
+// src/lib/actions.js
+'use server'
+
+
+// Observa que la acción recibe dos parámetros: prevState y formData
+export async function realAction1(prevState, formData) {
+    // Recogemos datos del formulario
+    // Validamos datos
+    // Realizamos operación en el servidor
+
+    // Unas veces devolvemos mensaje de error y otras mensaje de success
+    if (Math.random() > 0.5)
+        return { error: 'Error en acción 1' }
+    else
+        return { success: 'Éxito en acción 1' }
+}
+
+
+// Observa que la acción recibe dos parámetros: prevState y formData
+export async function realAction2(prevState, formData) {
+    // Recogemos datos del formulario
+    // Validamos datos
+    // Realizamos operación en el servidor
+
+    // Unas veces devolvemos mensaje de error y otras mensaje de success
+    if (Math.random() > 0.5)
+        return { error: 'Error en acción 2' }
+    else
+        return { success: 'Éxito en acción 2' }
+}
+``` 
 
 
 
@@ -1184,6 +1249,136 @@ Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres 
 ### 5.2.3. Resumen
 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
+
+
+## 5.3. Ejemplo práctico: Formulario con validación en el servidor
+
+En el siguiente enlace tienes el código completo de una aplicación que muestra como realizar la validación de datos de un formulario en el servidor.
+
+[Código fuente completo](https://github.com/jamj2000/nxform-validate)
+
+
+A continuación tienes un código muy simplificado. Para mayor detalle, consulta en enlace anterior.
+
+
+**Código simplificado**
+
+```js
+// src/components/form.jsx
+'use client'
+import { realAction1, realAction2, realAction3 } from "@/lib/actions";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
+
+
+
+
+function Formulario() {
+
+    const [state, action, pending] = useActionState(realAction, {})
+
+
+    useEffect(() => {
+        if (state.error) toast.error(state.error)       
+        if (state.success) toast.success(state.success) 
+    }, [state])
+
+
+  
+    return (
+        <form className="my-20 border-2 p-4 flex flex-col gap-4">
+            <h1 className="text-center text-xl">Formulario</h1>
+            
+
+            <div className="flex justify-between">
+                <label>Nombre:
+                  <input 
+                    name="nombre"
+                    defaultValue={state.payload?.get("nombre") || ""}  // para recuperar el valor introducido previamente
+                  />
+                </label>                
+            </div>
+             {state.issues?.nombre && state.issues.nombre}
+
+
+            <div className="flex justify-between">
+                <label>Edad
+                  <input type="number" 
+                     name="edad" 
+                     defaultValue={state.payload?.get("edad") || ""}  // para recuperar el valor introducido previamente
+                   />
+                </label>
+            </div>
+            {state.issues?.edad && state.issues.edad}
+
+
+            <button
+                formAction={action}
+                disabled={pending}
+                className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
+                {pending ? 'Realizando acción' : 'Action'}
+            </button>
+         
+        </form >
+    );
+}
+
+export default Formulario;
+```
+
+
+
+
+```js
+// src/lib/actions.js
+'use server'
+
+
+import { z } from "zod";
+
+const schema = z.object({
+    nombre: z.string().trim()
+        .min(1, "Al menos debe tener una letra")
+        .max(5, "Como máximo debe haber 5 letras"),
+    edad: z.coerce.number()
+        .min(18, "La edad mínima debe ser 18 años")
+        .max(65, "La edad máxima debe ser 65 años")
+})
+
+
+
+function validate(formData) {
+    const datos = Object.fromEntries(formData.entries())
+
+    const result = schema.safeParse(datos)
+    return result
+}
+
+
+
+
+// Observa que la acción recibe dos parámetros: prevState y formData
+export async function realAction1(prevState, formData) {
+
+    const result = validate(formData)
+
+    if (!result.success) {
+        const simplified = result.error.issues.map(issue => [issue.path[0], issue.message])
+        const issues = Object.fromEntries(simplified)
+        return { issues, payload: formData }
+    }
+
+
+    try {
+        // Hacemos algo (guardar en BD, enviar a API, ...) con
+        // result.data
+        return { success: 'Éxito al realizar acción' }
+    } catch (error) {
+        console.log("Error:", error);
+        return { error }
+}
+}
+``` 
 
 
 # 6. ANEXO: Casos prácticos avanzados
