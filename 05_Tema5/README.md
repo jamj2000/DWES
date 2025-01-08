@@ -111,7 +111,7 @@ Debemos tener en cuenta que la finalidad de los `server actions` es ejecutar có
 // Archivo /lib/actions.js
 'use server'
 
-export function testData(formData) {
+export async function testData(formData) {
     const nombre = formData.get('nombre')
     const apellidos = formData.get('apellidos')
 
@@ -126,9 +126,9 @@ export async function uploadAvatar(formData) {
 
     try {
         // guardamos en el servidor
-        return { type: 'success', message: 'Datos guardados'}
+        return { success: 'Datos guardados'}
     } catch (error) {
-        return { type: 'error', message: error.message}
+        return { error: error.message}
     }
 }
 ```
@@ -139,8 +139,8 @@ export async function uploadAvatar(formData) {
 'use server'
 
 export async function login(formData) {
-    const email = await formData.get('email')
-    const password = await formData.get('password')
+    const email = formData.get('email')
+    const password = formData.get('password')
 
     // validamos datos de usuario
 
@@ -852,14 +852,13 @@ export default function Formulario() {
         className="py-2 px-3 rounded-sm"
       />
       <button
-        type="submit"
         disabled={pending}
         className="bg-blue-500 text-white py-2 px-3 rounded-sm"
       >
-        Submit
-      </button>
-      {pending && <p>Please wait...</p>}
+         {pending ? 'Please wait...' : 'Submit' }
+      </button>     
       {state && <p className="text-red-500">{state}</p>}
+
     </form>
   );
 } 
@@ -883,9 +882,9 @@ import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
 export async function createProduct(previousState, formData) {
- 
+  const content = formData.get("content");
+
   try {
-    const content = formData.get("content") as string;
     await prisma.product.create({ data: { content } });
   } catch (e) {
     return "be attention, An error occurred.";
