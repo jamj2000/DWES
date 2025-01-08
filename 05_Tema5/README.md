@@ -546,7 +546,7 @@ export default function Cuadrado({ long, width }) {
 
     return (
         <form>
-            <label> Largo:
+            <label> Escala:
                 <input type="number" name="escala" step={0.01}
                     defaultValue={1}    // Correcto. No asociado a variable de estado   
                 />
@@ -717,13 +717,13 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 
 # 4. Funciones del lado cliente
 
-Aunque podemos renderizar un formulario en el lado del servidor, a menudo necesitaremos que dicho formulario ofrezca funcionalidades del lado cliente, como:
+Aunque podemos definir un formulario en el lado servidor, a menudo necesitaremos que dicho formulario ofrezca funcionalidades del lado cliente, como:
 
 - gestión de eventos: click, change, ...
 - gestión de estados: hooks useState, useEffect, ...
 - mostrar algún tipo de mensaje o `toast` después de finalizar una operación
 
-En estos casos necesitaremos colocar el formulario en un componente del lado cliente y colocar, al comienzo de dicho archivo, la directiva **'use client'** (con comillas, simples o dobles)
+En estos casos necesitaremos convertir el formulario en un componente del lado cliente y colocar, al comienzo de dicho archivo, la directiva **'use client'** (con comillas, simples o dobles)
 
 
 NextJS tiene 3 funciones para mejorar la experiencia con formularios en el lado cliente:
