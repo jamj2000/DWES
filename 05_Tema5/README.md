@@ -841,7 +841,7 @@ import { useActionState } from "react";
 export default function Formulario() {
 
   // createProduct es la acción del servidor
-  const [ status, action, pending ] = useActionState(createProduct, null);
+  const [ state, action, pending ] = useActionState(createProduct, {});
 
   return (
     <form action={action} className="flex flex-col gap-y-2">
@@ -859,7 +859,7 @@ export default function Formulario() {
         Submit
       </button>
       {pending && <p>Please wait...</p>}
-      {status && <p className="text-red-500">{status}</p>}
+      {state && <p className="text-red-500">{state}</p>}
     </form>
   );
 } 
