@@ -1050,8 +1050,6 @@ import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 
-
-
 function Formulario() {
 
     const [state1, action1, pending1] = useActionState(realAction1, {})
