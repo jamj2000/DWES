@@ -11,6 +11,9 @@
 ### [CLOUDINARY: Mostrar imágenes del cloud](https://github.com/jamj2000/nxcloudinary-gallery)
 ### [CLOUDINARY: Operaciones CRUD en el cloud](https://github.com/jamj2000/nxcloudinary-crud)
 
+<!-- 
 --- 
 
 ### [Operaciones en el cloud de imágenes de Cloudinary](https://github.com/jamj2000/cloudinary)
+
+-->
