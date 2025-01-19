@@ -13,6 +13,7 @@
 <img src="assets/prisma.svg" width="80" height="80">
 
 ---- 
+
 - [1. Introducción](#1-introducción)
 - [2. SQLite](#2-sqlite)
   - [2.1. Proyecto](#21-proyecto)
@@ -34,11 +35,11 @@
   - [7.2. Comandos disponibles](#72-comandos-disponibles)
   - [7.3. Inicialización](#73-inicialización)
 - [8. Definiendo el Modelo de Datos](#8-definiendo-el-modelo-de-datos)
-  - [8.1. Generar el modelo de datos mediante introspección](#81-generar-el-modelo-de-datos-mediante-introspección)
-  - [8.2. Escribir el modelo de datos manualmente](#82-escribir-el-modelo-de-datos-manualmente)
-    - [8.2.1. Modelos](#821-modelos)
-    - [8.2.2. Relaciones](#822-relaciones)
-    - [8.2.3. Sincronizando el esquema con la base de datos](#823-sincronizando-el-esquema-con-la-base-de-datos)
+  - [8.1. Escribir el modelo de datos manualmente](#81-escribir-el-modelo-de-datos-manualmente)
+    - [8.1.1. Modelos](#811-modelos)
+    - [8.1.2. Relaciones](#812-relaciones)
+    - [8.1.3. Sincronizando el esquema con la base de datos](#813-sincronizando-el-esquema-con-la-base-de-datos)
+  - [8.2. Generar el modelo de datos mediante introspección](#82-generar-el-modelo-de-datos-mediante-introspección)
 - [9. Consultas](#9-consultas)
   - [9.1. Consultas CRUD](#91-consultas-crud)
     - [9.1.1. Create](#911-create)
@@ -52,6 +53,7 @@
 - [11. Despliegue en Vercel](#11-despliegue-en-vercel)
 - [12. ANEXO: CRUD en una única página](#12-anexo-crud-en-una-única-página)
 - [13. Referencias](#13-referencias)
+
 
 
 
@@ -957,33 +959,17 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 
 Hay dos formas alternativas de definir un modelo de datos:
 
-1. **Generar el modelo de datos mediante introspección**: cuando tienes una base de datos existente o prefieres migrar el esquema de tu base de datos con SQL, genera el modelo de datos mediante una introspección de tu base de datos. En este caso, el esquema de la base de datos es la única fuente de verdad para los modelos de tu aplicación.
+1. **Escribir el modelo de datos manualmente y usar Prisma Migrate**: puedes escribir tu modelo de datos manualmente y asignarlo a tu base de datos usando Prisma Migrate. En este caso, el modelo de datos es la única fuente de verdad para los modelos de tu aplicación.
+
+2. **Generar el modelo de datos mediante introspección**: cuando tienes una base de datos existente o prefieres migrar el esquema de tu base de datos con SQL, genera el modelo de datos mediante una introspección de tu base de datos. En este caso, el esquema de la base de datos es la única fuente de verdad para los modelos de tu aplicación.
 
 
-2. **Escribir el modelo de datos manualmente y usar Prisma Migrate**: puedes escribir tu modelo de datos manualmente y asignarlo a tu base de datos usando Prisma Migrate. En este caso, el modelo de datos es la única fuente de verdad para los modelos de tu aplicación.
-
-Nosotros usaremos la segunda forma, aunque se explica la primera forma de forma somera a continuación.
+Nosotros usaremos la primera forma, aunque se explica la segunda forma de manera somera más adelante.
 
 
-## 8.1. Generar el modelo de datos mediante introspección
+## 8.1. Escribir el modelo de datos manualmente
 
-En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, generaremos el modelo a partir de dichas tablas. Para ello ejecutamos:
-
-```sh
-npx prisma db pull    
-npx prisma generate
-```
-
-> **IMPORTANTE**: La operación `npx prisma db pull` borra el modelo previo de `prisma/schema.prisma`. 
-
-![prisma db pull](assets/introspect.png)
-
-![prisma generate](assets/generate.png)
-
-
-## 8.2. Escribir el modelo de datos manualmente
-
-En este otro caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
+En este caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
 
 ```sh
 npx prisma migrate dev   
@@ -1006,7 +992,7 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 
 
 
-### 8.2.1. Modelos
+### 8.1.1. Modelos
 
 - [Modelos en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/models)
 
@@ -1081,7 +1067,7 @@ Estos tipos de datos son mapeados a los tipos nativos de cada base de datos seg�
 
 
 
-### 8.2.2. Relaciones 
+### 8.1.2. Relaciones 
 
 - [Relaciones en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/relations)
 
@@ -1181,7 +1167,7 @@ model Category {
 Esto se conoce como relación implícita de muchos a muchos. Esta relación todavía se manifiesta en una tabla de relaciones en la base de datos subyacente. Sin embargo, Prisma gestiona esta tabla de relaciones.
 
 
-### 8.2.3. Sincronizando el esquema con la base de datos
+### 8.1.3. Sincronizando el esquema con la base de datos
 
 
 Siempre que actualices tu esquema Prisma, deberás actualizar el esquema de tu base de datos utilizando `npx prisma migrate dev` o `npx prisma db push`. Esto mantendrá el esquema de tu base de datos sincronizado con tu esquema Prisma. Los comandos también regenerarán Prisma Client.
@@ -1201,6 +1187,23 @@ npx prisma db push
 ```
 
 > **IMPORTANTE**: La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
+
+
+
+## 8.2. Generar el modelo de datos mediante introspección
+
+En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, generaremos el modelo a partir de dichas tablas. Para ello ejecutamos:
+
+```sh
+npx prisma db pull    
+npx prisma generate
+```
+
+> **IMPORTANTE**: La operación `npx prisma db pull` borra el modelo previo de `prisma/schema.prisma`. 
+
+![prisma db pull](assets/introspect.png)
+
+![prisma generate](assets/generate.png)
 
 
 # 9. Consultas
