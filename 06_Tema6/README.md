@@ -1226,7 +1226,7 @@ Estas son las 4 operaciones básicas necesarias para la gestión de información
 
 A continuación, a menudo, usaremos ejemplos con valores explícitos. Usaremos el siguiente esquema:
 
-![diagrama ER](assets/prisma-erd.svg)
+![diagrama ER](assets/prisma-erd.png)
 
 <details>
 <summary>Esquema Prisma</summary>
