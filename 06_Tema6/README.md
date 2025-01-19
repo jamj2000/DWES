@@ -1192,7 +1192,7 @@ npx prisma db push
 
 ## 8.2. Generar el modelo de datos mediante introspección
 
-En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, generaremos el modelo a partir de dichas tablas. Para ello ejecutamos:
+En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, podemos generar el modelo a partir de dichas tablas. Para ello ejecutamos:
 
 ```sh
 npx prisma db pull    
