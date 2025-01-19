@@ -10,6 +10,7 @@
 <img src="assets/mysql.svg" width="80" height="80">
 <img src="assets/sqlite.svg" width="80" height="80">
 <img src="assets/postgresql.svg" width="80" height="80">
+<img src="assets/prisma.svg" width="80" height="80">
 
 ---- 
 - [1. Introducción](#1-introducción)
