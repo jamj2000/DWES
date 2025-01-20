@@ -50,9 +50,13 @@
     - [9.2.1. count](#921-count)
     - [9.2.2. groupBy](#922-groupby)
 - [10. Ver datos de las tablas](#10-ver-datos-de-las-tablas)
-- [11. Despliegue en Vercel](#11-despliegue-en-vercel)
-- [12. ANEXO: CRUD en una única página](#12-anexo-crud-en-una-única-página)
-- [13. Referencias](#13-referencias)
+- [11. Cómo organizar el código](#11-cómo-organizar-el-código)
+  - [11.1. Obtener datos](#111-obtener-datos)
+  - [11.2. Mutar datos](#112-mutar-datos)
+- [12. Despliegue en Vercel](#12-despliegue-en-vercel)
+- [13. ANEXO: CRUD en una única página](#13-anexo-crud-en-una-única-página)
+- [14. Referencias](#14-referencias)
+
 
 
 
@@ -1555,7 +1559,253 @@ y abrimos en el navegador la URL http://localhost:5555
 ![prisma studio 2](assets/studio2.png)
 
 
-# 11. Despliegue en Vercel
+# 11. Cómo organizar el código
+
+En la mayoría de frameworks tradicionales el código se organiza según el [patrón MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). 
+
+Sin embargo, Next.js trabaja por componentes y no sigue este patrón. Aunque este framework deja bastante libertad a la hora de organizar nuestro código, una propuesta recomendable es la siguiente. 
+
+1. Como mínimo, **trabaja con 3 carpetas: app, components y lib**
+
+
+```
+src
+├── app           (Páginas)
+├── components    (Componentes de servidor y de cliente)
+└── lib           (Conexión a BD, leer BD, modificar BD)
+```
+
+2. Como mínimo, coloca **2 archivos en la carpeta lib: data.js y action.js**
+
+```
+src/lib
+├── actions.js    (Mutar Datos)
+└── data.js       (Obtener datos) 
+```
+
+A continuación se muestra como organizar los archivos en una aplicación que trabaja con Productos.
+
+<details>
+<summary>
+  Esquema de Prisma
+</summary>
+
+```prisma
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // provider = "postgresql"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Producto {
+  id     Int    @id @default(autoincrement())
+  nombre String
+}
+```
+</details>
+
+
+```
+src
+├── app
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.jsx
+│   ├── page.jsx
+│   └── productos
+│       ├── [id]
+│       │   └── page.jsx
+│       └── page.jsx
+├── components
+│   ├── Producto.jsx
+│   └── Productos.jsx
+└── lib
+    ├── actions.js
+    └── data.js
+```
+
+
+
+
+## 11.1. Obtener datos
+
+Todas las operaciones para realizar consultas de lectura en la BD las colocaremos en el archivo **lib/data.js**
+
+```js
+// src/lib/data.js
+'use server'
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient()
+
+
+
+export async function obtenerProductos() {
+    const produtos = await prisma.producto.findMany()
+    return produtos
+}
+
+
+
+export async function obtenerProducto(id) {
+    const producto = await prisma.producto.findUnique({
+        where: {
+            id: +id
+        }
+    })
+    return producto
+}
+
+```
+
+A la hora de recuperar datos de la BD lo haremos dentro de un componente de servidor, esto nos permite envolver dicho componente dentro de **Suspense** y que la página cargue inmediatamente sin esperar a recibir todos los datos.
+
+
+```js
+// src/app/productos/page.jsx
+import { obtenerProductos } from "@/lib/data";
+import { Suspense } from "react";
+
+export default function ProductosPage() {
+    return (
+        <div>
+            <h1>Listado</h1>
+
+            <Suspense fallback={"..."}>
+                <Productos />
+            </Suspense>
+
+        </div>
+    );
+}
+
+// --------------------- Componente de servidor -------------------
+
+async function Productos() {
+    const productos = await obtenerProductos()
+
+    return (
+        <div>
+            {productos.map(producto =>
+                <p key={producto.id}>
+                    {producto.nombre}
+                </p>
+            )}
+        </div>
+
+    );
+}
+```
+
+
+
+```js
+// src/app/productos/[id]/page.jsx
+import { obtenerProducto } from "@/lib/data";
+import { Suspense } from "react";
+
+export default async function ProductoPage({ params }) {
+
+    const { id } = await params
+
+    return (
+        <div>
+            <h1>Producto #{id}</h1>
+
+            <Suspense fallback={"..."}>
+                <Producto id={id} />
+            </Suspense>
+
+        </div>
+    );
+}
+
+// --------------------- Componente de servidor -------------------
+
+async function Producto({ id }) {
+
+    const producto = await obtenerProducto(id)
+
+    return (
+        <div>
+            {producto.nombre}
+        </div>
+
+    );
+}
+```
+
+
+> **NOTA:**
+>
+> Aunque **Next.js recomienda usar páginas y componentes del lado servidor cuando recuperamos y mostramos datos**, también es posible usar para el mismo fin una página del lado cliente. A continuación tienes el código fuente para hacer un listado de Productos:
+>
+> ```js
+> 'use client'
+> 
+> import { useEffect, useState } from "react";
+> import { obtenerProductos } from "@/lib/data";
+> 
+> 
+> function ClientPage() {
+> 
+>    const [productos, setProductos] = useState([])
+> 
+>    async function obtenerDatos() {
+>        const productos = await obtenerProductos()
+>        setProductos(productos)
+>    }
+> 
+>    useEffect(() => {
+>        // esto equivale a hacer fetch pero sin la necesidad de disponer de una API 
+>        obtenerDatos()  
+>    }, [])
+> 
+> 
+>    return (
+>        <div>
+>            {/* Si desas interactividad descomenta las siguientes líneas */}
+>            {/*
+>            <div onClick={obtenerDatos}>
+>                Obtener datos
+>            </div>
+>            */}
+> 
+>            <h1>Listado</h1>
+> 
+>            {productos.map(producto =>
+>                <p key={producto.id}>
+>                    {producto.nombre}
+>                </p>
+>            )}
+>        </div>
+>    );
+> } 
+>
+> export default ClientPage;
+> ```
+
+
+
+## 11.2. Mutar datos
+
+Entendemos por mutación datos a las operaciones de:
+
+- Insertar
+- Modificar
+- Eliminar
+
+Todas las operaciones para realizar consultas de mutación en la BD las colocaremos en el archivo **lib/actions.js**
+
+
+
+
+# 12. Despliegue en Vercel
 
 
 Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
@@ -1573,7 +1823,7 @@ Para evitar este problema, debemos añadir `prisma generate` al script `postinst
 }
 ```
 
-# 12. ANEXO: CRUD en una única página
+# 13. ANEXO: CRUD en una única página
 
 Es posible realizar las 4 operaciones de CRUD desde una única página. Este caso es habitual cuando se trabaja con SPA (Single Page Applications). 
 
@@ -1588,7 +1838,7 @@ El segundo ejemplo es más complejo y dispone de mayor interactividad con el usu
 
 
 
-# 13. Referencias
+# 14. Referencias
 
 - [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 - [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
