@@ -53,15 +53,10 @@
 - [11. Cómo organizar el código](#11-cómo-organizar-el-código)
   - [11.1. Obtener datos](#111-obtener-datos)
   - [11.2. Mutar datos](#112-mutar-datos)
-- [12. Despliegue en Vercel](#12-despliegue-en-vercel)
-- [13. ANEXO: CRUD en una única página](#13-anexo-crud-en-una-única-página)
-- [14. Referencias](#14-referencias)
-
-
-
-
-
-
+- [12. Cliente de Prisma](#12-cliente-de-prisma)
+- [13. Despliegue en Vercel](#13-despliegue-en-vercel)
+- [14. ANEXO: CRUD en una única página](#14-anexo-crud-en-una-única-página)
+- [15. Referencias](#15-referencias)
 
 
 
@@ -1972,9 +1967,39 @@ export default async function ProductoPage({ params }) {
 }
 ```
 
+# 12. Cliente de Prisma
+
+El cliente de prisma es el objeto que nos permite a nuestra aplicación (cliente) conectar e interactuar con el servidor de la base de datos.
+
+En la fase de desarrollo de nuestra aplicación es habitual que ésta sea reiniciada cada vez que realizamos un cambio en ella. Esto provoca que las conexiones a la base de datos se cierren y se abran de forma frecuente, lo cual puede acarrear costos económicos si nuestro plan gratuito tiene límite de conexiones.
+
+Para evitar esto durante la fase de desarrollo reutilizamos la conexión previa de prisma guardándola en el objeto [`global`](https://developer.mozilla.org/en-US/docs/Glossary/Global_object).
+
+Por este motivo es frecuente implementar un archivo `lib/prisma.js` con el código mostrado a continuación o similar, donde exportarmos el objeto prisma que luego importaremos en `lib/data.js` y `lib/actions.js`.
 
 
-# 12. Despliegue en Vercel
+```js
+// lib/prisma.js
+import { PrismaClient } from '@prisma/client';
+
+let prisma;
+
+if (process.env.NODE_ENV === 'production') {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
+  }
+  prisma = global.prisma;
+}
+
+export default prisma;
+```
+
+
+
+
+# 13. Despliegue en Vercel
 
 
 Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
@@ -1992,7 +2017,7 @@ Para evitar este problema, debemos añadir `prisma generate` al script `postinst
 }
 ```
 
-# 13. ANEXO: CRUD en una única página
+# 14. ANEXO: CRUD en una única página
 
 Es posible realizar las 4 operaciones de CRUD desde una única página. Este caso es habitual cuando se trabaja con SPA (Single Page Applications). 
 
@@ -2007,7 +2032,7 @@ El segundo ejemplo es más complejo y dispone de mayor interactividad con el usu
 
 
 
-# 14. Referencias
+# 15. Referencias
 
 - [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 - [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
