@@ -1804,6 +1804,175 @@ Todas las operaciones para realizar consultas de mutación en la BD las colocare
 
 
 
+```js
+// src/lib/actions.js
+'use server'
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";  // IMPORTANTE: importar desde next/navigation
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient()
+
+
+
+export async function insertarProducto(formData) {
+
+    const nombre = formData.get('nombre')
+
+    const produto = await prisma.producto.create({
+        data: { nombre }
+    })
+
+    revalidatePath("/productos")
+}
+
+
+
+export async function modificarProducto(formData) {
+
+    const id = Number(formData.get('id'))
+    const nombre = formData.get('nombre')
+
+    const produto = await prisma.producto.update({
+        where: {  id  },
+        data: {  nombre  }
+    })
+
+    revalidatePath("/productos")
+    redirect("/productos")
+}
+
+
+
+export async function eliminarProducto(formData) {
+
+    const id = Number(formData.get('id'))
+
+    const produto = await prisma.producto.delete({
+        where: {  id  },
+    })
+
+    revalidatePath("/productos")
+    redirect("/productos")
+}
+```
+
+
+```js
+// src/components/Productos.jsx
+import { eliminarProducto, insertarProducto, modificarProducto } from "@/lib/actions";
+import { obtenerProductos } from "@/lib/data";
+import Link from "next/link";
+
+export default
+    async function Productos() {
+    const productos = await obtenerProductos()
+
+    return (
+        <div>
+            {productos.map(producto =>
+                <div key={producto.id}>
+                    <Links
+                        href={`/productos/${producto.id}`}
+                        className="block">
+                        {producto.nombre}
+                    </Link>
+
+                    <form >
+                        <input type="hidden" 
+                            name="id" defaultValue={producto.id}/>
+                        <input 
+                            name="nombre" defaultValue={producto.nombre} />
+
+                        <button formAction={modificarProducto}>Modificar</button>
+                        <button formAction={eliminarProducto}>Eliminar</button>
+                    </form>
+                </div>
+            )}
+
+            <form action={insertarProducto}>
+                <input name="nombre" />
+                <button>Insertar</button>
+            </form>
+        </div>
+    );
+}
+```
+
+
+
+```js
+// src/components/Producto.jsx
+import { eliminarProducto, modificarProducto } from "@/lib/actions";
+import { obtenerProducto } from "@/lib/data";
+
+
+export default
+    async function Producto({ id }) {
+    const producto = await obtenerProducto(id)
+
+    return (
+        <>
+            <p>{producto.nombre}</p>
+            <form>
+                <input type="hidden" name="id" defaultValue={producto.id}/>
+                <input
+                    name="nombre"                       
+                    defaultValue={producto.nombre} />
+
+                <button formAction={modificarProducto}>Modificar</button>
+                <button formAction={eliminarProducto}>Eliminar</button>
+            </form>
+        </>
+    );
+}
+```
+
+
+```js
+// src/app/productos/page.jsx
+import Productos from "@/components/Productos";
+import { Suspense } from "react";
+
+
+export default function ProductosPage() {
+    return (
+        <div>
+            <h1 className="text-2xl">Listado</h1>
+
+            <Suspense fallback={"..."}>
+                <Productos />
+            </Suspense>
+
+        </div>
+    );
+}
+```
+
+
+```js
+// src/app/productos/[id]/page.jsx
+import { Suspense } from "react";
+import Producto from "@/components/Producto";
+
+export default async function ProductoPage({ params }) {
+
+    const { id } = await params
+
+    return (
+        <div>
+            <h1 className="text-2xl">Producto #{id}</h1>
+
+            <Suspense fallback={"..."}>
+                <Producto id={id} />
+            </Suspense>
+
+        </div>
+    );
+}
+```
+
+
 
 # 12. Despliegue en Vercel
 
