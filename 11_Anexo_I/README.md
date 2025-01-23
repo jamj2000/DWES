@@ -704,6 +704,11 @@ Para cambiar el idioma de VSCode a español.
 Permite mostrar un icono por cada carpeta y archivo.
 
 
+**Multiple cursor case preserve**
+
+Nos permite preservar mayúsculas y minúsculas cuando editamos con cursor múltiple (Ctrl+D)
+
+
 **ESLint**
 
 Para hacer *lint* de Javascript.
