@@ -1982,18 +1982,10 @@ Por este motivo es frecuente implementar un archivo `lib/prisma.js` con el códi
 // lib/prisma.js
 import { PrismaClient } from '@prisma/client';
 
-let prisma;
+const prisma = global.prisma || new PrismaClient();
+if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient();
-} else {
-  if (!global.prisma) {
-    global.prisma = new PrismaClient();
-  }
-  prisma = global.prisma;
-}
-
-export default prisma;
+export default prisma
 ```
 
 
@@ -2004,14 +1996,14 @@ export default prisma;
 
 Vercel almacenará en caché automáticamente las dependencias durante el despliegue. Para la mayoría de las aplicaciones, esto no causará ningún problema. Sin embargo, para Prisma, puede resultar en una versión obsoleta de Prisma Client si se cambia su esquema de Prisma. 
 
-Para evitar este problema, debemos añadir `prisma generate` al script `postinstall` en el archivo **`package.json`**:
+Para evitar este problema, debemos insertar `prisma generate` al script `build` en el archivo **`package.json`**:
 
 ```json
 {
   ...
   "scripts" {
     ...
-    "postinstall": "prisma generate"
+    "build": "prisma generate && next build",
   }
   ...
 }
