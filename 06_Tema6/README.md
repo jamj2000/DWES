@@ -1789,7 +1789,7 @@ async function Producto({ id }) {
 
 ## 11.2. Mutar datos
 
-Entendemos por mutación datos a las operaciones de:
+Entendemos por mutación de datos a las operaciones de:
 
 - Insertar
 - Modificar
@@ -1969,9 +1969,9 @@ export default async function ProductoPage({ params }) {
 
 # 12. Cliente de Prisma
 
-El cliente de prisma es el objeto que nos permite a nuestra aplicación (cliente) conectar e interactuar con el servidor de la base de datos.
+El cliente de prisma es el objeto que permite a nuestra aplicación (cliente) conectar e interactuar con el servidor de la base de datos.
 
-En la fase de desarrollo de nuestra aplicación es habitual que ésta sea reiniciada cada vez que realizamos un cambio en ella. Esto provoca que las conexiones a la base de datos se cierren y se abran de forma frecuente, lo cual puede acarrear costos económicos si nuestro plan gratuito tiene límite de conexiones.
+En la fase de desarrollo de nuestra aplicación es habitual que ésta sea reiniciada cada vez que realizamos un cambio en ella. Esto provoca que las conexiones a la base de datos se abran de forma frecuente, lo cual puede acarrear problemas si nuestro plan gratuito tiene límite de conexiones o costos económicos en planes no gratuitos.
 
 Para evitar esto durante la fase de desarrollo reutilizamos la conexión previa de prisma guardándola en el objeto [`global`](https://developer.mozilla.org/en-US/docs/Glossary/Global_object).
 
@@ -2028,6 +2028,7 @@ El segundo ejemplo es más complejo y dispone de mayor interactividad con el usu
 
 - [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 - [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
+- [Ejemplo con Prisma y Relaciones 1:N y N:M](https://github.com/jamj2000/nxprisma-crud-protectoras)
 - [Video: Nextjs y Prisma ORM desde Cero usando Typescript](https://www.youtube.com/watch?v=5k7ZGhL3pI0&t=3938s)
 - [Video: Prisma in Next.js](https://youtu.be/QXxy8Uv1LnQ)
 - [MySQL API con NextJS](https://github.com/jamj2000/nxapi-mysql)
