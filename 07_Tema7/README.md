@@ -119,6 +119,9 @@ Los controladores de ruta se definen en un archivo `route.js|ts` dentro del dire
 export async function GET(request: Request) {}
 ```
 
+> NOTA: No puede haber un archivo `route.js` en el mismo nivel de segmento de ruta que `page.js`.
+
+
 ## 2.2. Métodos HTTP admitidos
 
 Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATCH**, **DELETE**, **HEAD**, y **OPTIONS**. Si se llama a un método no compatible, Next.js devolverá una respuesta *405 Method Not Allowed*.
@@ -151,13 +154,17 @@ Y el siguiente código en `src/app/api/products/[store]/[category]/route.js`
 
 ```js
 export function GET(request, { params }) {
-    
-    const sort = request.nextUrl.searchParams.get("sort")
-    const skip = request.nextUrl.searchParams.get("skip")
     console.log( request.nextUrl.origin )
     console.log( request.nextUrl.pathname )
-    console.log( params.store )
-    console.log( params.category )
+
+    // Params
+    const { store, category } = await params
+    console.log( store )
+    console.log( category )
+
+    // SearchParams
+    const sort = request.nextUrl.searchParams.get("sort")
+    const skip = request.nextUrl.searchParams.get("skip")
     console.log( sort )
     console.log( skip )
 
