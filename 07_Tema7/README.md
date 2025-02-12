@@ -153,7 +153,7 @@ Y el siguiente código en `src/app/api/products/[store]/[category]/route.js`
 
 
 ```js
-export function GET(request, { params }) {
+export async function GET(request, { params }) {
     console.log( request.nextUrl.origin )
     console.log( request.nextUrl.pathname )
 
