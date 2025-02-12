@@ -436,7 +436,7 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 - [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
 - [Aplicación de lado servidor para consultar biblioteca de libros](https://github.com/jamj2000/book-inventory)
 
-La segunda aplicación contiene los datos en el archivo [book.csv](https://github.com/jamj2000/book-inventory/blob/main/books.csv). CUIDADO: son unos 7OMB.
+La segunda aplicación contiene los datos en el archivo [book.csv](https://github.com/jamj2000/book-inventory/blob/main/books.csv). CUIDADO: son unos 70MB.
 
 Para cargar grandes cantidades de datos desde CSV a una BD consulta el siguiente vídeo:
 
