@@ -344,7 +344,7 @@ const nextConfig = {
 **Referencia:**
 
 - [CORS: Qué es y cómo funciona el Cross-Origin Resource Sharing](https://okitup.com/blog/que-es-y-como-funciona-el-cors)
-- [https://nextjs.org/docs/app/building-your-application/routing/middleware#cors](Una tercera forma de habilitar CORS usando Middleware)
+- [Una tercera forma de habilitar CORS usando Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware#cors)
 
 
 # 3. BIBLIOTECAS
