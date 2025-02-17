@@ -93,12 +93,12 @@ npm install nodemailer -D
 # 3. Creación de archivos necesarios
 
 
-Ruta           |   Archivo
----------------|--------------------------------------
-**`/`**        | **`.env`**
-**`/src`**     | **`auth.js`** 
-**`/src`**     | **`middleware.js`** 
-**`/src/app`** | **`api/auth/[...nextauth]/route.js`**
+| Ruta           | Archivo                               |
+| -------------- | ------------------------------------- |
+| **`/`**        | **`.env`**                            |
+| **`/src`**     | **`auth.js`**                         |
+| **`/src`**     | **`middleware.js`**                   |
+| **`/src/app`** | **`api/auth/[...nextauth]/route.js`** |
 
 
 
@@ -664,17 +664,21 @@ const options = {
     callbacks: {
         async session({ session, token }) {
             session.user.id = token?.sub;     // Para recuperar ID de usuario desde el token
-            session.user.role = token?.role
+            session.user.role = token?.role   // Para recuperar Rol de usuario desde el token
             return session
         },
+
         async jwt({ token }) {  
-            const { role } = await prisma.user.findUnique({
+            if (!token.sub) return token;
+            
+            const user = await prisma.user.findUnique({
                 where: {
-                    email: token.email
+                    id: token.sub
                 }
             })
-            token.role = role
+            if (!user) return token;
 
+            token.role = user?.role
             return token
         }
     }
@@ -690,8 +694,8 @@ export const {
 
 Los callbacks **`jwt`** y **`session`** son muy importantes. Se ejecutan en el orden indicado anteriormente y nos permiten:
 
-1. recoger la información de *role* del usuario desde la BD e introducirla en el JWT.
-2. recoger la información de *role* del usuario desde el JWT e introducirla en la sesión.
+1. recoger la información de *id* y *role* del usuario desde la BD e introducirla en el JWT.
+2. recoger la información de *id* y *role* del usuario desde el JWT e introducirla en la sesión.
 
 Los datos de sesión tendrán por tanto un aspecto similar al siguiente:
 
@@ -701,6 +705,7 @@ Los datos de sesión tendrán por tanto un aspecto similar al siguiente:
     "name": "José Antonio Muñoz Jiménez",
     "email": "jamj2000@gmail.com",
     "image": "https://avatars.githubusercontent.com/u/2934084?v=4",
+    "id": "cm798cj3t0020p8bilrdj93dv",
     "role": "USER",    
   },
   "expires": "2024-02-20T12:02:43.639Z"
@@ -757,7 +762,7 @@ export async function logout() {
 
 - [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
 
-En la segunda aplicación, nos centramos en el código necesario para trabajar  con Credentials.
+En la segunda aplicación, nos centramos en el código necesario para trabajar con Credentials.
 
 Bastantes archivos se ven afectados.
 
@@ -786,7 +791,8 @@ export const options = {
                     },
                 })
 
-                if (user) {  // && user.emailVerified
+                if (user)   // && user.emailVerified
+                {
                     const matchPassword = bcrypt.compare(credentials.password, user?.password)
                     if (matchPassword) return user
                 } else {
