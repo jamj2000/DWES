@@ -112,7 +112,7 @@ Ruta           |   Archivo
 En este archivo guardamos las variables de entorno de los proveedores OAuth, conexión a BD, ...
 
 ```
-AUTH_SECRET=         # Linux: `openssl rand -hex 32` or go to https://generate-secret.vercel.app/32
+AUTH_SECRET=         
 
 AUTH_GITHUB_ID=
 AUTH_GITHUB_SECRET=
@@ -124,9 +124,20 @@ AUTH_FACEBOOK_ID=
 AUTH_FACEBOOK_SECRET=
 ```
 
-> **NOTA**: También es posible generar **AUTH_SECRET** con el comando:
+> **NOTA**: Podemos generar **AUTH_SECRET** con una de las siguientes formas:
+> 
+> 1. Ejecutar en el terminal el comando
 > ```sh
 > npx  auth  secret
+> ```
+> 2. Ejecutar en el terminal el comando
+> ```sh
+> openssl rand -hex 32    # Sólo en Linux
+> ```
+>
+> 3. Visitar 
+> ```
+> https://generate-secret.vercel.app/32
 > ```
 
 > **IMPORTANTE**: NextAuth 5 simplifica el proceso de gestión de variables de entorno con respecto a NextAuth4. La nueva forma de nombrado de variables es la mostrada arriba. Si seguimos esta convención, AuthJs las reconocerá automáticamente y nuestra configuración de archivos se verá simplificada de forma notable. 
@@ -268,7 +279,7 @@ Debido a las limitaciones que tienen HTTP / HTTPS para este fin, ya hace tiempo 
 
 El mecanismo más usado para gestionar sesiones se compone de 2 elementos:
 
-- **cookies** en la lado cliente
+- **cookies** en el lado cliente
 - **variables de sesión** en el lado servidor
 
 
@@ -291,7 +302,7 @@ La sesión activa puede consultarse en el *endpoint* `/api/auth/session` proporc
 
 # 5. Proveedores. Tipos de autenticación
 
-Los proveedores de autenticación en NextAuth.js son servicios que se pueden utilizar para iniciar sesión en un usuario. Existen varios tipos. Los más usados son:
+Los proveedores de autenticación en NextAuth.js son servicios que se pueden utilizar para iniciar sesión un usuario. Existen varios tipos. Los más usados son:
 
 - **OAuth**
 - **Email**
@@ -304,7 +315,7 @@ Los proveedores disponibles en nuestra app pueden consultarse en el *endpoint* `
 
 - [Documentación de OAuth](https://authjs.dev/getting-started/providers/oauth-tutorial)
 
-Open Authorization es un estándar cerrado que permite flujos simples de autorización para sitios web o aplicaciones informáticas. Se trata de un protocolo propuesto por Blaine Cook y Chris Messina, que permite autorización segura de una API de modo estándar y simple para aplicaciones de escritorio, móviles y web.
+**Open Authorization (OAuth)** es un estándar abierto que permite flujos simples de autorización para sitios web o aplicaciones informáticas. Se trata de un protocolo propuesto por Blaine Cook y Chris Messina, que permite autorización segura de una API de modo estándar y simple para aplicaciones de escritorio, móviles y web.
 
 OAuth permite a un usuario del sitio A (proveedor de servicio) compartir su información con el sitio B (llamado consumidor) sin compartir toda su identidad. Para desarrolladores de consumidores, OAuth es un método de interactuar con datos protegidos y publicarlos. Para desarrolladores de proveedores de servicio, OAuth proporciona a los usuarios un acceso a sus datos al mismo tiempo que protege las credenciales de su cuenta. Este mecanismo es utilizado por compañías como Google, Facebook, Microsoft, Twitter y Github para permitir a los usuarios compartir información sobre sus cuentas con aplicaciones de terceros o sitios web.
 
