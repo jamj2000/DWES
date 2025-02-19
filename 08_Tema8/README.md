@@ -10,7 +10,6 @@
 
 ---- 
 
-[1. Introducción](#1-introducción)
 - [1. Introducción](#1-introducción)
 - [2. Instalación de dependencias](#2-instalación-de-dependencias)
 - [3. Creación de archivos necesarios](#3-creación-de-archivos-necesarios)
@@ -33,13 +32,13 @@
 - [10. Aplicaciones de ejemplo](#10-aplicaciones-de-ejemplo)
   - [10.1. Aplicación OAuth](#101-aplicación-oauth)
   - [10.2. Aplicación Credentials](#102-aplicación-credentials)
-  - [10.3. Aplicación All](#103-aplicación-all)
-  - [10.4. Aplicación Middleware](#104-aplicación-middleware)
+  - [10.3. Aplicación Middleware](#103-aplicación-middleware)
 - [11. CASOS PRÁCTICOS](#11-casos-prácticos)
   - [11.1. App para gestionar un blog](#111-app-para-gestionar-un-blog)
   - [11.2. App para gestionar proyectos de climatización](#112-app-para-gestionar-proyectos-de-climatización)
 - [12. ANEXO: Datos de sesión en el lado cliente](#12-anexo-datos-de-sesión-en-el-lado-cliente)
 - [13. Referencias:](#13-referencias)
+
 
 
 
@@ -603,12 +602,11 @@ Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en lo
 
 # 10. Aplicaciones de ejemplo
 
-En este tema trabajaremos con el código fuente de 4 aplicaciones:
+En este tema trabajaremos con el código fuente de 3 aplicaciones:
 
 1. [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
 2. [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
-3. [nxauth-all](https://github.com/jamj2000/nxauth-all)
-4. [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
+3. [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
    
 Las directrices seguidas para su desarrollan han sido comunes, y se listan a continuación.
 
@@ -823,22 +821,11 @@ await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 > NOTA: Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
 
 
-## 10.3. Aplicación All
-
-- [nxauth-all](https://github.com/jamj2000/nxauth-all)
-  
-En la tercera aplicación, desarrollamos el código necesario para trabajar tanto con OAuth como Credentials y afinamos algunos detalles finales.
-
-En esta aplicación final, se revisa el correcto funcionamiento de ambos tipos de autenticación y se revisa la correcta autorización de acceso a las rutas.
-
-Hay una demo disponible en [vercel](https://auth5.vercel.app/).
-
-
-## 10.4. Aplicación Middleware
+## 10.3. Aplicación Middleware
 
 - [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
 
-En la cuarta aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas. 
+En la última aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas. 
 
 El contenido del archivo `src/middleware.js` es el siguiente:
 
@@ -935,7 +922,7 @@ export const options = {
     callbacks: {
         async session({ session, token }) {
             session.user.id = token?.sub;     // Para recuperar ID de usuario desde el token
-            session.user.role = token?.role
+            session.user.role = token?.role  // Para recuperar Rol de usuario desde el token
             return session
         },
         async jwt({ token }) {
