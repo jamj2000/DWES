@@ -16,28 +16,29 @@
   - [3.1. Ejemplos:](#31-ejemplos)
 - [4. Conceptos teóricos](#4-conceptos-teóricos)
   - [4.1. Sesiones](#41-sesiones)
-- [5. Proveedores. Tipos de autenticación](#5-proveedores-tipos-de-autenticación)
-  - [5.1. OAuth (Open Authentication)](#51-oauth-open-authentication)
-    - [5.1.1. Google](#511-google)
-    - [5.1.2. GitHub](#512-github)
-    - [5.1.3. Discord](#513-discord)
-  - [5.2. Email](#52-email)
-  - [5.3. Credentials](#53-credentials)
+- [5. Estrategias de gestión de sesiones](#5-estrategias-de-gestión-de-sesiones)
 - [6. Adaptadores. Tipos de persistencia de datos](#6-adaptadores-tipos-de-persistencia-de-datos)
   - [6.1. Prisma](#61-prisma)
   - [6.2. Neon.tech](#62-neontech)
-- [7. Estrategias de gestión de sesiones](#7-estrategias-de-gestión-de-sesiones)
-- [8. Envío de correo](#8-envío-de-correo)
-- [9. Despliegue](#9-despliegue)
-- [10. Aplicaciones de ejemplo](#10-aplicaciones-de-ejemplo)
-  - [10.1. Aplicación OAuth](#101-aplicación-oauth)
-  - [10.2. Aplicación Credentials](#102-aplicación-credentials)
-  - [10.3. Aplicación Middleware](#103-aplicación-middleware)
-- [11. CASOS PRÁCTICOS](#11-casos-prácticos)
-  - [11.1. App para gestionar un blog](#111-app-para-gestionar-un-blog)
-  - [11.2. App para gestionar proyectos de climatización](#112-app-para-gestionar-proyectos-de-climatización)
-- [12. ANEXO: Datos de sesión en el lado cliente](#12-anexo-datos-de-sesión-en-el-lado-cliente)
-- [13. Referencias:](#13-referencias)
+- [7. Proveedores. Tipos de autenticación](#7-proveedores-tipos-de-autenticación)
+  - [7.1. OAuth (Open Authentication)](#71-oauth-open-authentication)
+    - [7.1.1. Google](#711-google)
+    - [7.1.2. GitHub](#712-github)
+    - [7.1.3. Discord](#713-discord)
+  - [7.2. Email](#72-email)
+  - [7.3. Credentials](#73-credentials)
+- [8. Despliegue](#8-despliegue)
+- [9. Aplicaciones de ejemplo](#9-aplicaciones-de-ejemplo)
+  - [9.1. Aplicación OAuth](#91-aplicación-oauth)
+  - [9.2. Aplicación Credentials](#92-aplicación-credentials)
+  - [9.3. Aplicación Middleware](#93-aplicación-middleware)
+- [10. CASOS PRÁCTICOS](#10-casos-prácticos)
+  - [10.1. App para gestionar un blog](#101-app-para-gestionar-un-blog)
+  - [10.2. App para gestionar proyectos de climatización](#102-app-para-gestionar-proyectos-de-climatización)
+- [11. ANEXO: Datos de sesión en el lado cliente](#11-anexo-datos-de-sesión-en-el-lado-cliente)
+- [12. Referencias:](#12-referencias)
+
+
 
 
 
@@ -81,13 +82,6 @@ Si vamos a necesitar cifrar contraseñas:
 npm install bcryptjs
 ```
 
-Si queremos enviar correos para verificar cuentas:
-
-```sh
-npm install nodemailer -D
-```
-
-
 
 # 3. Creación de archivos necesarios
 
@@ -121,6 +115,8 @@ AUTH_GOOGLE_SECRET=
 
 AUTH_FACEBOOK_ID=
 AUTH_FACEBOOK_SECRET=
+
+AUTH_RESEND_KEY=
 ```
 
 > **NOTA**: Podemos generar **AUTH_SECRET** con una de las siguientes formas:
@@ -192,6 +188,14 @@ api/auth/signout      -> muestra formulario por defecto para logout
 api/auth/error        -> muestra página por defecto para error
 api/auth/verify-request
 ```
+
+**Ejemplo de página signin**
+
+![Signin page](assets/signin.png)
+
+**Ejemplo de página signout**
+
+![Signout page](assets/signout.png)
 
 
 **`middleware.js`**
@@ -299,185 +303,19 @@ En Auth.js, los datos de sesión tienen una forma similar a la siguiente:
 La sesión activa puede consultarse en el *endpoint* `/api/auth/session` proporcionado por la API de Auth.js.
 
 
-# 5. Proveedores. Tipos de autenticación
+# 5. Estrategias de gestión de sesiones
 
-Los proveedores de autenticación en NextAuth.js son servicios que se pueden utilizar para iniciar sesión un usuario. Existen varios tipos. Los más usados son:
+[Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar el adaptador de base de datos para almacenar la sesión en una base de datos  (`strategy: "database"`).
 
-- **OAuth**
-- **Email**
-- **Credentials**
-
-Los proveedores disponibles en nuestra app pueden consultarse en el *endpoint* `/api/auth/providers` proporcionado por la API de Auth.js.
-
-
-## 5.1. OAuth (Open Authentication)
-
-- [Documentación de OAuth](https://authjs.dev/getting-started/providers/oauth-tutorial)
-
-**Open Authorization (OAuth)** es un estándar abierto que permite flujos simples de autorización para sitios web o aplicaciones informáticas. Se trata de un protocolo propuesto por Blaine Cook y Chris Messina, que permite autorización segura de una API de modo estándar y simple para aplicaciones de escritorio, móviles y web.
-
-OAuth permite a un usuario del sitio A (proveedor de servicio) compartir su información con el sitio B (llamado consumidor) sin compartir toda su identidad. Para desarrolladores de consumidores, OAuth es un método de interactuar con datos protegidos y publicarlos. Para desarrolladores de proveedores de servicio, OAuth proporciona a los usuarios un acceso a sus datos al mismo tiempo que protege las credenciales de su cuenta. Este mecanismo es utilizado por compañías como Google, Facebook, Microsoft, Twitter y Github para permitir a los usuarios compartir información sobre sus cuentas con aplicaciones de terceros o sitios web.
-
-NextAuth.js está diseñado para funcionar con cualquier servicio OAuth, es **compatible con OAuth 1.0, 1.0A, 2.0 y OpenID Connect** y tiene soporte integrado para los servicios de inicio de sesión más populares.
-
-Los lista proveedores soportados de forma oficial está disponible en el siguiente enlace:
-
-- https://authjs.dev/getting-started/providers
-
-
-Para configurar dicha funcionalidad necesitaremos editar 2 archivos. A continuación se muestra un ejemplo:
- 
-- Archivo **/.env**
-
-```
-AUTH_GITHUB_ID=
-AUTH_GITHUB_SECRET=
-
-AUTH_GOOGLE_ID=
-AUTH_GOOGLE_SECRET=
-```
-
-- Archivo **/src/auth.js**
+Para la gestión de información de la sesión, nosotros usaremos la estrategia `jwt`:
 
 ```js
-import Github from "@auth/core/providers/github"
-import Google from "@auth/core/providers/google"
-
-  // ...
-
-  providers: [ Github, Google ],
-```
-
-> **NOTA**: A diferencia de versiones anteriores, en NextAuth 5 no es necesario indicar en este archivo las variables de entorno, siempre que la hayamos declarado en el archivo `.env` con la forma `AUTH_PROVEEDOR_ID` y `AUTH_PROVEEDOR_SECRET`.
-
-Para poder ofrecer OAuth necesitaremos **registrar nuestra aplicación** web en la **sección destinada a desarrolladores que ofrece el proveedor** para estos fines.
-
-Una vez hecho esto, el proveedor nos proporcionará 2 valores, que deberemos añadir a nuestro archivo `.env`, que son:
-
-- **ID**
-- **SECRET**
-
-A continuación se muestra el proceso resumido de registro de una aplicación web en los proveedores Google y Github, aunque existen muchos otros.
-
-
-### 5.1.1. Google
-
-https://console.developers.google.com/apis/credentials
-
-
-![google 1](assets/oauth-google1.png)
-
-![google 2](assets/oauth-google2.png)
-
-> **IMPORTANTE**: Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
-
-![google 3](assets/oauth-google3.png)
-
-![google 4](assets/oauth-google4.png)
-
-Si no has usado nunca está consola, Google te pedirá que primero crees un Proyecto, y después que rellenes una Pantalla de Consentimiento. Y finalmente podrás dar de alta las credenciales de tu app tal como se muestra en las capturas anteriores.
-
-Si tienes algún problema puedes consultar la página https://support.google.com/cloud/answer/10311615 
-
-
-### 5.1.2. GitHub
-
-https://github.com/settings/apps
-
-![github 1](assets/oauth-github1.png)
-
-![github 2](assets/oauth-github2.png)
-
-> **IMPORTANTE**: Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
-
-![github 3](assets/oauth-github3.png) 
-
-![github 4](assets/oauth-github4.png)
-
-
-### 5.1.3. Discord
-
-https://discord.com/developers/applications
-
-![oauth discord despliegue](assets/oauth-discord.png)
-
-
-## 5.2. Email
-
-- [Documentación de Email](https://authjs.dev/getting-started/providers/email-tutorial)
-
-Además de autenticar usuarios en Auth.js mediante OAuth, también puedes habilitar la opción de autenticarlos mediante `magic links`. Son enlaces que se envían al correo electrónico del usuario y al hacer clic en ellos se registrará el usuario automáticamente.
-
-Agregar soporte para iniciar sesión por correo electrónico además de uno o más servicios OAuth proporciona una manera para que los usuarios inicien sesión si pierden el acceso a su cuenta OAuth (por ejemplo, si está bloqueada o eliminada).
-
-El proveedor de correo electrónico se puede utilizar junto con (o en lugar de) uno o más proveedores de OAuth.
-
-
-Para configurar dicha funcionalidad necesitaremos editar 2 archivos. A continuación se muestra un ejemplo:
- 
-- Archivo **/.env**
-
-```
-SMTP_USER=apikey
-SMTP_PASSWORD={API_KEY}
-SMTP_HOST=smtp.sendgrid.net
-SMTP_PORT=587
-EMAIL_FROM={SENDER_EMAIL}
-```
-
-- Archivo **/src/auth.js**
-
-```js
-import Email from "@auth/core/providers/email"
-
-  providers: [
-    Email({
-      server: {
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT),
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASSWORD,
-        },
-      },
-      from: process.env.EMAIL_FROM,
-    }),
-  ],
-```
-
-## 5.3. Credentials
-
-- [Documentación de Credentials](https://authjs.dev/getting-started/providers/credentials-tutorial)
-
-Tradicionalmente, y aún hoy en día, se trabaja con el clásico método **usuario / contraseña**, y es la mayoría de las veces como **email / contraseña**. Sin embargo, este método se considere inseguro y además requiere de trabajo extra para su gestión. Al menos se debería realizar un proceso de verificación del email para aumentar la seguridad.
-
-Desde AuthJS se limita intencionalmente para desalentar el uso de contraseñas debido a los riesgos de seguridad inherentes asociados con ellas y la complejidad adicional asociada con el soporte de nombres de usuario y contraseñas.
-
-AuthJS ha sido diseñado para manejar la sesión del usuario desde el punto de vista del cliente, para admitir múltiples métodos de autenticación (OAuth, correo electrónico, etc.) para que no se vea obligado a ejecutar su propio servicio de autenticación.
-
-
-
-```js
-import Credentials from "@auth/core/providers/credentials"
-
- providers: [
-    Credentials({
-
-      async authorize(credentials) {
-
-          const user = await getUserByEmail(credentials.email);
-          if (!user || !user.password) return null;
-
-          if (user) {  // && user.emailVerified
-              const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
-              if (passwordsMatch) return user
-          } else {
-              return null
-          }
-
-      },
-    }),
-  ],
+const options = {
+    providers: [Google, GitHub],
+    adapter: PrismaAdapter(prisma),
+    session: { strategy: "jwt" },
+    /* ... */
+}
 ```
 
 
@@ -538,7 +376,67 @@ Los Modelos que usa Auth.js son los siguientes:
 ![Modelos para Auth](assets/authjs-models.png)
 
 **IMPORTANTE**: 
-Sólo necesitaremos los modelos User y Account. Al modelo User añadiremos los campos password y role. Ver más abajo.
+Sólo necesitaremos los modelos User y Account. Se ha **ampliado del módelo `User` con campos `password` y `role`**.
+
+```prisma
+model User {
+  id            String  @id @default(cuid())
+  // ...
+  password      String?
+  role          String?   @default("USER")  // o  ADMIN
+  // ...
+}
+```
+
+Vamos a necesitar el campo `password` para el trabajo con credenciales. Y el campo `role` nos permitirá distinguir entre roles USER y ADMIN.
+
+<details>
+<summary>Esquema de Prisma</summary>
+
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id            String  @id @default(cuid())
+  name          String
+  email         String?   @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  role          String?   @default("USER")  // o  ADMIN
+  accounts      Account[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+```
+</details>
+
 
 ## 6.2. Neon.tech
 
@@ -551,37 +449,219 @@ Una vez nos hayamos registrado y creado una base de datos, podemos acceder a los
 ![neon .env](assets/neon-env.png)
 
 
-# 7. Estrategias de gestión de sesiones
 
-[Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar el adaptador de base de datos para almacenar la sesión en una base de datos  (`strategy: "database"`).
+# 7. Proveedores. Tipos de autenticación
 
-Para la gestión de información de la sesión, nosotros usaremos la estrategia `jwt`:
+Los proveedores de autenticación en NextAuth.js son servicios que se pueden utilizar para iniciar sesión un usuario. Existen varios tipos. Los más usados son:
 
-```js
-const options = {
-    providers: [Google, GitHub],
-    adapter: PrismaAdapter(prisma),
-    session: { strategy: "jwt" },
-    /* ... */
-}
+- **OAuth**
+- **Email**
+- **Credentials**
+
+Los proveedores disponibles en nuestra app pueden consultarse en el *endpoint* `/api/auth/providers` proporcionado por la API de Auth.js.
+
+
+## 7.1. OAuth (Open Authentication)
+
+- [Documentación de OAuth](https://authjs.dev/getting-started/providers/oauth-tutorial)
+
+**Open Authorization (OAuth)** es un estándar abierto que permite flujos simples de autorización para sitios web o aplicaciones informáticas. Se trata de un protocolo propuesto por Blaine Cook y Chris Messina, que permite autorización segura de una API de modo estándar y simple para aplicaciones de escritorio, móviles y web.
+
+OAuth permite a un usuario del sitio A (proveedor de servicio) compartir su información con el sitio B (llamado consumidor) sin compartir toda su identidad. Para desarrolladores de consumidores, OAuth es un método de interactuar con datos protegidos y publicarlos. Para desarrolladores de proveedores de servicio, OAuth proporciona a los usuarios un acceso a sus datos al mismo tiempo que protege las credenciales de su cuenta. Este mecanismo es utilizado por compañías como Google, Facebook, Microsoft, Twitter y Github para permitir a los usuarios compartir información sobre sus cuentas con aplicaciones de terceros o sitios web.
+
+NextAuth.js está diseñado para funcionar con cualquier servicio OAuth, es **compatible con OAuth 1.0, 1.0A, 2.0 y OpenID Connect** y tiene soporte integrado para los servicios de inicio de sesión más populares.
+
+Los lista proveedores soportados de forma oficial está disponible en el siguiente enlace:
+
+- https://authjs.dev/getting-started/providers
+
+
+Para configurar dicha funcionalidad necesitaremos editar 2 archivos. A continuación se muestra un ejemplo:
+ 
+- Archivo **/.env**
+
+```
+AUTH_GITHUB_ID=
+AUTH_GITHUB_SECRET=
+
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
 ```
 
-# 8. Envío de correo
+- Archivo **/src/auth.js**
+
+```js
+import Github from "@auth/core/providers/github"
+import Google from "@auth/core/providers/google"
+
+  // ...
+
+  providers: [ Github, Google ],
+```
+
+> **NOTA**: A diferencia de versiones anteriores, en NextAuth 5 no es necesario indicar en este archivo las variables de entorno, siempre que la hayamos declarado en el archivo `.env` con la forma `AUTH_PROVEEDOR_ID` y `AUTH_PROVEEDOR_SECRET`.
+
+Para poder ofrecer OAuth necesitaremos **registrar nuestra aplicación** web en la **sección destinada a desarrolladores que ofrece el proveedor** para estos fines.
+
+Una vez hecho esto, el proveedor nos proporcionará 2 valores, que deberemos añadir a nuestro archivo `.env`, que son:
+
+- **ID**
+- **SECRET**
+
+A continuación se muestra el proceso resumido de registro de una aplicación web en los proveedores Google y Github, aunque existen muchos otros.
+
+
+### 7.1.1. Google
+
+https://console.developers.google.com/apis/credentials
+
+
+![google 1](assets/oauth-google1.png)
+
+![google 2](assets/oauth-google2.png)
+
+> **IMPORTANTE**: Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
+
+![google 3](assets/oauth-google3.png)
+
+![google 4](assets/oauth-google4.png)
+
+Si no has usado nunca está consola, Google te pedirá que primero crees un Proyecto, y después que rellenes una Pantalla de Consentimiento. Y finalmente podrás dar de alta las credenciales de tu app tal como se muestra en las capturas anteriores.
+
+Si tienes algún problema puedes consultar la página https://support.google.com/cloud/answer/10311615 
+
+
+### 7.1.2. GitHub
+
+https://github.com/settings/apps
+
+![github 1](assets/oauth-github1.png)
+
+![github 2](assets/oauth-github2.png)
+
+> **IMPORTANTE**: Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
+
+![github 3](assets/oauth-github3.png) 
+
+![github 4](assets/oauth-github4.png)
+
+
+### 7.1.3. Discord
+
+https://discord.com/developers/applications
+
+![oauth discord despliegue](assets/oauth-discord.png)
+
+
+## 7.2. Email
+
+- [Documentación de Email](https://authjs.dev/getting-started/providers/email-tutorial)
+
+Además de autenticar usuarios en Auth.js mediante OAuth, también puedes habilitar la opción de autenticarlos mediante `magic links`. Son enlaces que se envían al correo electrónico del usuario y al hacer clic en ellos se registrará el usuario automáticamente.
+
+Agregar soporte para iniciar sesión por correo electrónico además de uno o más servicios OAuth proporciona una manera para que los usuarios inicien sesión si pierden el acceso a su cuenta OAuth (por ejemplo, si está bloqueada o eliminada).
+
+El proveedor de correo electrónico se puede utilizar junto con (o en lugar de) uno o más proveedores de OAuth.
+
+<!-- 
+Para configurar dicha funcionalidad necesitaremos editar 2 archivos. A continuación se muestra un ejemplo:
+ 
+- Archivo **/.env**
+
+```
+SMTP_USER=apikey
+SMTP_PASSWORD={API_KEY}
+SMTP_HOST=smtp.sendgrid.net
+SMTP_PORT=587
+EMAIL_FROM={SENDER_EMAIL}
+```
+
+- Archivo **/src/auth.js**
+
+```js
+import Email from "@auth/core/providers/email"
+
+  providers: [
+    Email({
+      server: {
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT),
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
+        },
+      },
+      from: process.env.EMAIL_FROM,
+    }),
+  ],
+```
+-->
 
 Si desaas realizar la verificación de email, por ejemplo al usar credenciales, necesitarás enviar un correo de confirmación al usuario. Y para ello puedes usar alguno de los correos transaccionales que aparecen a continuación.
 
 **Servidores de correo transaccional**
 
-- [Brevo](https://brevo.com)
 - [Resend](https://resend.com)
 - [Sendgrid](https://sendgrid.com)
 - [Mailtrap](https://mailtrap.io/)
+- [Brevo](https://brevo.com)
 
 El proceso de verificación de email es complejo y no se aboradará en este tema. Si te interesa, en [este vídeo](https://youtu.be/MNm1XhDjX1s?si=XtUeR4FxpEY5MYSy) puedes ver como se realiza.
 
 
+Simplificando mucho, podemos decir que el proceso a seguir sería el siguiente:
 
-# 9. Despliegue
+1. Disponer de cuenta en un servidor con DNS y reenvío de correo (p. ej: https://gandi.net)
+2. Disponer de cuenta en un servidor de envío de correo transaccional (p. ej: https://resend.com)
+   - Dar de alta el dominio DNS personal
+   - Obtener API KEY 
+3. Actualizar los registros DNS de nuestro servidor de dominio.
+4. Editar el código siguiendo la documentación disponible en https://authjs.dev/getting-started/providers/resend?framework=next-js
+   
+A continuación se muestran capturas de pantalla de los pasos 2 y 3.
+
+![Resend configuration](assets/resend-add-domain.png)
+
+![DNS configuration](assets/gandi-resend-dns-entries.png)
+
+## 7.3. Credentials
+
+- [Documentación de Credentials](https://authjs.dev/getting-started/providers/credentials-tutorial)
+
+Tradicionalmente, y aún hoy en día, se trabaja con el clásico método **usuario / contraseña**, y es la mayoría de las veces como **email / contraseña**. Sin embargo, este método se considere inseguro y además requiere de trabajo extra para su gestión. Al menos se debería realizar un proceso de verificación del email para aumentar la seguridad.
+
+Desde AuthJS se limita intencionalmente para desalentar el uso de contraseñas debido a los riesgos de seguridad inherentes asociados con ellas y la complejidad adicional asociada con el soporte de nombres de usuario y contraseñas.
+
+AuthJS ha sido diseñado para manejar la sesión del usuario desde el punto de vista del cliente, para admitir múltiples métodos de autenticación (OAuth, correo electrónico, etc.) para que no se vea obligado a ejecutar su propio servicio de autenticación.
+
+
+
+```js
+import Credentials from "@auth/core/providers/credentials"
+
+ providers: [
+    Credentials({
+
+      async authorize(credentials) {
+
+          const user = await getUserByEmail(credentials.email);
+          if (!user || !user.password) return null;
+
+          if (user) {  // && user.emailVerified
+              const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
+              if (passwordsMatch) return user
+          } else {
+              return null
+          }
+
+      },
+    }),
+  ],
+```
+
+
+
+# 8. Despliegue
 
 **MUY IMPORTANTE:**
 
@@ -600,7 +680,7 @@ Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en lo
 ![oauth discord despliegue](assets/oauth-discord.png)
 
 
-# 10. Aplicaciones de ejemplo
+# 9. Aplicaciones de ejemplo
 
 En este tema trabajaremos con el código fuente de 3 aplicaciones:
 
@@ -608,7 +688,7 @@ En este tema trabajaremos con el código fuente de 3 aplicaciones:
 2. [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
 3. [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
    
-Las directrices seguidas para su desarrollan han sido comunes, y se listan a continuación.
+Las directrices seguidas para su desarrollo han sido comunes, y se listan a continuación.
 
 Se ha realizado la **autenticación siempre desde el lado servidor**.
 
@@ -623,22 +703,8 @@ async function page() {
 }
 ```
 
-Se ha **ampliado del módelo `User` con campos `password` y `role`**.
 
-```prisma
-model User {
-  id            String  @id @default(cuid())
-  // ...
-  password      String?
-  role          String?   @default("USER")  // o  ADMIN
-  // ...
-}
-```
-
-Vamos a necesitar el campo `password` para el trabajo con credenciales. Y el campo `role` nos permitirá distinguir entre roles USER y ADMIN.
-
-
-## 10.1. Aplicación OAuth
+## 9.1. Aplicación OAuth
 
 - [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
 
@@ -756,7 +822,7 @@ export async function logout() {
 ```
 
 
-## 10.2. Aplicación Credentials
+## 9.2. Aplicación Credentials
 
 - [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
 
@@ -821,7 +887,7 @@ await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 > NOTA: Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
 
 
-## 10.3. Aplicación Middleware
+## 9.3. Aplicación Middleware
 
 - [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
 
@@ -830,28 +896,20 @@ En la última aplicación controlamos el acceso a las rutas mediante `middleware
 El contenido del archivo `src/middleware.js` es el siguiente:
 
 ```js
+// Run on edge
 import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
-    // console.log(req.auth);
-    // console.log(req.nextUrl);
+  console.log(`MIDDLEWARE`, req.nextUrl.pathname, req.auth);
 
+  if (!req.auth) {  // No autenticado
+    const callbackUrl = req.nextUrl.pathname + req.nextUrl.search
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
-    if (!req.auth) {
-        console.log('no autenticado');
-
-        let callbackUrl = req.nextUrl.pathname;
-        if (req.nextUrl.search) {
-          callbackUrl += req.nextUrl.search;
-        }
-    
-        const encodedCallbackUrl = encodeURIComponent(callbackUrl);
-        return Response.redirect(req.nextUrl.origin
-            + `/auth/login?callbackUrl=${encodedCallbackUrl}`)
-    }
+    return Response.redirect(req.nextUrl.origin + `/auth/login?callbackUrl=${encodedCallbackUrl}`)
     
 })
 
@@ -861,10 +919,7 @@ export const config = {
         "/dashboard(.*)",
         "/admin(.*)",
         "/proveedores(.*)",
-        "/articulos",
-        "/articulos/new",
-        "/articulos/edit",
-        "/articulos/delete",
+        "/productos(.*)",
     ],
 };
 ```
@@ -922,7 +977,7 @@ export const options = {
     callbacks: {
         async session({ session, token }) {
             session.user.id = token?.sub;     // Para recuperar ID de usuario desde el token
-            session.user.role = token?.role  // Para recuperar Rol de usuario desde el token
+            session.user.role = token?.role   // Para recuperar Rol de usuario desde el token
             return session
         },
         async jwt({ token }) {
@@ -989,10 +1044,10 @@ export async function loginGoogle() {
 Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
 
-# 11. CASOS PRÁCTICOS
+# 10. CASOS PRÁCTICOS
 
 
-## 11.1. App para gestionar un blog
+## 10.1. App para gestionar un blog
 
 - [Código fuente](https://github.com/jamj2000/nxapp-blog)
 - [Demo](https://nxapp-blog.vercel.app/)
@@ -1001,7 +1056,7 @@ Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 ![blog demo](assets/blog.png)
 
 
-## 11.2. App para gestionar proyectos de climatización 
+## 10.2. App para gestionar proyectos de climatización 
 
 - [Código fuente](https://github.com/jamj2000/nxapp-climatizacion)
 - [Demo](https://nxapp-climatizacion.vercel.app/)
@@ -1012,7 +1067,7 @@ Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
 
 
-# 12. ANEXO: Datos de sesión en el lado cliente
+# 11. ANEXO: Datos de sesión en el lado cliente
 
 En los ejemplos anteriores nos hemos centrado en usar los datos de sesión desde el lado servidor. NextJS, como framework fullstack, también nos permite recuperar los datos de sesión desde el lado cliente.
 
@@ -1098,7 +1153,7 @@ Referencias:
 
 
 
-# 13. Referencias:
+# 12. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Diferencias entre NextAuth4 y NextAuth5](https://authjs.dev/guides/upgrade-to-v5)
