@@ -639,7 +639,7 @@ AuthJS ha sido diseñado para manejar la sesión del usuario desde el punto de v
 
 ```js
 import Credentials from "@auth/core/providers/credentials"
-
+// ...
  providers: [
     Credentials({
         async authorize(credentials) {
@@ -826,7 +826,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/prisma'
 import NextAuth from 'next-auth'
 import Credentials from '@auth/core/providers/credentials'
-import bcrypt from 'bcryptjs'
+
 
 export const options = {
     session: { strategy: 'jwt' },
@@ -839,20 +839,7 @@ export const options = {
     providers: [
         Credentials({
             async authorize(credentials) {
-                const user = await prisma.user.findUnique({
-                    where: {
-                        email: credentials.email
-                    },
-                })
-
-                if (user)   // && user.emailVerified
-                {
-                    const matchPassword = bcrypt.compare(credentials.password, user?.password)
-                    if (matchPassword) return user
-                } else {
-                    return null
-                }
-
+              return getUserByEmail(credentials.email)
             },
         }),
      ]
@@ -864,7 +851,7 @@ export const {
     auth,
     signIn,
     signOut
-} = NextAuth({ ...options })
+} = NextAuth( options )
 ```
 
 La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y después de la ejecución del server action de login. 
@@ -938,7 +925,6 @@ export default {
         Discord,
         Credentials({
             async authorize(credentials) {
-                console.log('AUTHORIZE');
                 return getUserByEmail(credentials.email)
             },
         }),
@@ -1078,7 +1064,7 @@ Sin embargo, en el lado cliente, deberemos hacer uso del *hook* `useSession` de 
 "use client";
 import {useSession} from "next-auth/react";
 
-export default function page() {
+export default function Page() {
   const {data: session, status} = useSession();
   console.log("status", status);
   console.log("session", session);
