@@ -13,30 +13,32 @@
 - [1. Introducción](#1-introducción)
 - [2. Instalación de dependencias](#2-instalación-de-dependencias)
 - [3. Creación de archivos necesarios](#3-creación-de-archivos-necesarios)
-  - [3.1. Ejemplos:](#31-ejemplos)
-- [4. Conceptos teóricos](#4-conceptos-teóricos)
-  - [4.1. Sesiones](#41-sesiones)
-- [5. Estrategias de gestión de sesiones](#5-estrategias-de-gestión-de-sesiones)
-- [6. Adaptadores. Tipos de persistencia de datos](#6-adaptadores-tipos-de-persistencia-de-datos)
-  - [6.1. Prisma](#61-prisma)
-  - [6.2. Neon.tech](#62-neontech)
-- [7. Proveedores. Tipos de autenticación](#7-proveedores-tipos-de-autenticación)
-  - [7.1. OAuth (Open Authentication)](#71-oauth-open-authentication)
-    - [7.1.1. Google](#711-google)
-    - [7.1.2. GitHub](#712-github)
-    - [7.1.3. Discord](#713-discord)
-  - [7.2. Email](#72-email)
-  - [7.3. Credentials](#73-credentials)
-- [8. Despliegue](#8-despliegue)
-- [9. Aplicaciones de ejemplo](#9-aplicaciones-de-ejemplo)
-  - [9.1. Aplicación OAuth](#91-aplicación-oauth)
-  - [9.2. Aplicación Credentials](#92-aplicación-credentials)
-  - [9.3. Aplicación Middleware](#93-aplicación-middleware)
-- [10. CASOS PRÁCTICOS](#10-casos-prácticos)
-  - [10.1. App para gestionar un blog](#101-app-para-gestionar-un-blog)
-  - [10.2. App para gestionar proyectos de climatización](#102-app-para-gestionar-proyectos-de-climatización)
-- [11. ANEXO: Datos de sesión en el lado cliente](#11-anexo-datos-de-sesión-en-el-lado-cliente)
-- [12. Referencias:](#12-referencias)
+  - [3.1. .env](#31-env)
+  - [3.2. src/auth.js](#32-srcauthjs)
+  - [3.3. src/app/api/auth/\[...nextauth\]/route.js](#33-srcappapiauthnextauthroutejs)
+  - [3.4. src/middleware.js](#34-srcmiddlewarejs)
+- [4. Sesiones](#4-sesiones)
+  - [4.1. Estrategias de gestión de sesiones](#41-estrategias-de-gestión-de-sesiones)
+- [5. Adaptadores. Tipos de persistencia de datos](#5-adaptadores-tipos-de-persistencia-de-datos)
+  - [5.1. Prisma](#51-prisma)
+  - [5.2. Neon.tech](#52-neontech)
+- [6. Proveedores. Tipos de autenticación](#6-proveedores-tipos-de-autenticación)
+  - [6.1. OAuth (Open Authentication)](#61-oauth-open-authentication)
+    - [6.1.1. Google](#611-google)
+    - [6.1.2. GitHub](#612-github)
+    - [6.1.3. Discord](#613-discord)
+  - [6.2. Email](#62-email)
+  - [6.3. Credentials](#63-credentials)
+- [7. Despliegue](#7-despliegue)
+- [8. Aplicaciones de ejemplo](#8-aplicaciones-de-ejemplo)
+  - [8.1. Aplicación OAuth](#81-aplicación-oauth)
+  - [8.2. Aplicación Credentials](#82-aplicación-credentials)
+  - [8.3. Aplicación Middleware](#83-aplicación-middleware)
+- [9. CASOS PRÁCTICOS](#9-casos-prácticos)
+  - [9.1. App para gestionar un blog](#91-app-para-gestionar-un-blog)
+  - [9.2. App para gestionar proyectos de climatización](#92-app-para-gestionar-proyectos-de-climatización)
+- [10. ANEXO: Datos de sesión en el lado cliente](#10-anexo-datos-de-sesión-en-el-lado-cliente)
+- [11. Referencias:](#11-referencias)
 
 
 
@@ -98,9 +100,9 @@ npm install bcryptjs
 > **NOTA**: Trabajaremos con archivos de Javascript, en lugar de Typescript, para evitar complejidad. 
 
 
-## 3.1. Ejemplos:
 
-**`.env`**
+
+## 3.1. .env
 
 En este archivo guardamos las variables de entorno de los proveedores OAuth, conexión a BD, ...
 
@@ -137,7 +139,7 @@ AUTH_RESEND_KEY=
 
 > **IMPORTANTE**: NextAuth 5 simplifica el proceso de gestión de variables de entorno con respecto a NextAuth4. La nueva forma de nombrado de variables es la mostrada arriba. Si seguimos esta convención, AuthJs las reconocerá automáticamente y nuestra configuración de archivos se verá simplificada de forma notable. 
 
-**`auth.js`**
+## 3.2. src/auth.js
 
 Es el archivo más importante, puesto que incluye toda la configuración para la autenticación.
 
@@ -170,7 +172,7 @@ export const {
 > **NOTA**: En la versión 5 de NextAuth importamos los proveedores desde `@auth/core/providers/*` en lugar de `next-auth/providers/*` como se realizaba en la versión 4, aunque esta última forma se mantiene por motivos de retrocompatibilidad.
 
 
-**`app/api/auth/[...nextauth]/route.js`**
+## 3.3. src/app/api/auth/[...nextauth]/route.js
 
 Esta archivo proporciona una API para autenticación.
 
@@ -198,7 +200,7 @@ api/auth/verify-request
 ![Signout page](assets/signout.png)
 
 
-**`middleware.js`**
+## 3.4. src/middleware.js
 
 La configuración de este archivo nos permite indicar qué rutas de nuestra aplicación están disponibles y cuales no según las condiciones. 
 
@@ -263,7 +265,7 @@ El acceso a las rutas se puede configurar también sin necesidad de *middleware*
 
 
 
-# 4. Conceptos teóricos
+# 4. Sesiones
 
 Antes de nada es importante diferenciar 2 conceptos:
 
@@ -272,7 +274,6 @@ Antes de nada es importante diferenciar 2 conceptos:
 
 AuthJS es esencialmente una solución de **autenticación** para aplicaciones web. Pero junto con el manejo de sesiones y el middleware podemos conseguir una solución completa de autenticación/autorización.
 
-## 4.1. Sesiones
 
 HTTP / HTTPS son protocolos sin estado. Esto quiere decir, que aunque realicemos una conexión desde la misma IP, dichos protocolos no son capaces por si mismos de gestionar una sesión. 
 
@@ -303,7 +304,7 @@ En Auth.js, los datos de sesión tienen una forma similar a la siguiente:
 La sesión activa puede consultarse en el *endpoint* `/api/auth/session` proporcionado por la API de Auth.js.
 
 
-# 5. Estrategias de gestión de sesiones
+## 4.1. Estrategias de gestión de sesiones
 
 [Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar el adaptador de base de datos para almacenar la sesión en una base de datos  (`strategy: "database"`).
 
@@ -319,7 +320,7 @@ const options = {
 ```
 
 
-# 6. Adaptadores. Tipos de persistencia de datos
+# 5. Adaptadores. Tipos de persistencia de datos
 
 Un adaptador en Auth.js conecta la aplicación a cualquier base de datos o sistema backend que desees utilizar para almacenar datos de los usuarios, sus cuentas, sesiones, etc. Los adaptadores son opcionales, a menos que necesites conservar la información del usuario en su propia base de datos, o desees implementar ciertos flujos. Por ejemplo, el proveedor de correo electrónico requiere un adaptador para poder guardar tokens de verificación.
 
@@ -328,7 +329,7 @@ La lista de adaptadores soportados de forma oficial está disponible en el sigui
 - https://authjs.dev/getting-started/adapters
 
 
-## 6.1. Prisma
+## 5.1. Prisma
 
 - Referencia: https://authjs.dev/reference/adapter/prisma
 
@@ -438,7 +439,7 @@ model Account {
 </details>
 
 
-## 6.2. Neon.tech
+## 5.2. Neon.tech
 
 [neon.tech](https://neon.tech) es un DBaaS muy sencillo de usar y con un plan gratis bastante generoso. Se recomienda su uso para las tareas de este Tema. 
 
@@ -450,7 +451,7 @@ Una vez nos hayamos registrado y creado una base de datos, podemos acceder a los
 
 
 
-# 7. Proveedores. Tipos de autenticación
+# 6. Proveedores. Tipos de autenticación
 
 Los proveedores de autenticación en NextAuth.js son servicios que se pueden utilizar para iniciar sesión un usuario. Existen varios tipos. Los más usados son:
 
@@ -461,7 +462,7 @@ Los proveedores de autenticación en NextAuth.js son servicios que se pueden uti
 Los proveedores disponibles en nuestra app pueden consultarse en el *endpoint* `/api/auth/providers` proporcionado por la API de Auth.js.
 
 
-## 7.1. OAuth (Open Authentication)
+## 6.1. OAuth (Open Authentication)
 
 - [Documentación de OAuth](https://authjs.dev/getting-started/providers/oauth-tutorial)
 
@@ -511,7 +512,7 @@ Una vez hecho esto, el proveedor nos proporcionará 2 valores, que deberemos añ
 A continuación se muestra el proceso resumido de registro de una aplicación web en los proveedores Google y Github, aunque existen muchos otros.
 
 
-### 7.1.1. Google
+### 6.1.1. Google
 
 https://console.developers.google.com/apis/credentials
 
@@ -531,7 +532,7 @@ Si no has usado nunca está consola, Google te pedirá que primero crees un Proy
 Si tienes algún problema puedes consultar la página https://support.google.com/cloud/answer/10311615 
 
 
-### 7.1.2. GitHub
+### 6.1.2. GitHub
 
 https://github.com/settings/apps
 
@@ -546,14 +547,14 @@ https://github.com/settings/apps
 ![github 4](assets/oauth-github4.png)
 
 
-### 7.1.3. Discord
+### 6.1.3. Discord
 
 https://discord.com/developers/applications
 
 ![oauth discord despliegue](assets/oauth-discord.png)
 
 
-## 7.2. Email
+## 6.2. Email
 
 - [Documentación de Email](https://authjs.dev/getting-started/providers/email-tutorial)
 
@@ -625,7 +626,7 @@ A continuación se muestran capturas de pantalla de los pasos 2 y 3.
 
 ![DNS configuration](assets/gandi-resend-dns-entries.png)
 
-## 7.3. Credentials
+## 6.3. Credentials
 
 - [Documentación de Credentials](https://authjs.dev/getting-started/providers/credentials-tutorial)
 
@@ -651,7 +652,7 @@ import Credentials from "@auth/core/providers/credentials"
 
 
 
-# 8. Despliegue
+# 7. Despliegue
 
 **MUY IMPORTANTE:**
 
@@ -670,7 +671,7 @@ Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en lo
 ![oauth discord despliegue](assets/oauth-discord.png)
 
 
-# 9. Aplicaciones de ejemplo
+# 8. Aplicaciones de ejemplo
 
 En este tema trabajaremos con el código fuente de 3 aplicaciones:
 
@@ -694,7 +695,7 @@ async function page() {
 ```
 
 
-## 9.1. Aplicación OAuth
+## 8.1. Aplicación OAuth
 
 - [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
 
@@ -812,7 +813,7 @@ export async function logout() {
 ```
 
 
-## 9.2. Aplicación Credentials
+## 8.2. Aplicación Credentials
 
 - [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
 
@@ -864,7 +865,7 @@ await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 > NOTA: Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
 
 
-## 9.3. Aplicación Middleware
+## 8.3. Aplicación Middleware
 
 - [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
 
@@ -1020,10 +1021,10 @@ export async function loginGoogle() {
 Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
 
-# 10. CASOS PRÁCTICOS
+# 9. CASOS PRÁCTICOS
 
 
-## 10.1. App para gestionar un blog
+## 9.1. App para gestionar un blog
 
 - [Código fuente](https://github.com/jamj2000/nxapp-blog)
 - [Demo](https://nxapp-blog.vercel.app/)
@@ -1032,7 +1033,7 @@ Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 ![blog demo](assets/blog.png)
 
 
-## 10.2. App para gestionar proyectos de climatización 
+## 9.2. App para gestionar proyectos de climatización 
 
 - [Código fuente](https://github.com/jamj2000/nxapp-climatizacion)
 - [Demo](https://nxapp-climatizacion.vercel.app/)
@@ -1043,7 +1044,7 @@ Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
 
 
 
-# 11. ANEXO: Datos de sesión en el lado cliente
+# 10. ANEXO: Datos de sesión en el lado cliente
 
 En los ejemplos anteriores nos hemos centrado en usar los datos de sesión desde el lado servidor. NextJS, como framework fullstack, también nos permite recuperar los datos de sesión desde el lado cliente.
 
@@ -1129,7 +1130,7 @@ Referencias:
 
 
 
-# 12. Referencias:
+# 11. Referencias:
 
 - [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
 - [Diferencias entre NextAuth4 y NextAuth5](https://authjs.dev/guides/upgrade-to-v5)
