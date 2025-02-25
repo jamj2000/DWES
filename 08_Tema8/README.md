@@ -621,6 +621,7 @@ Simplificando mucho, podemos decir que el proceso a seguir sería el siguiente:
 A continuación se muestran capturas de pantalla de los pasos 2 y 3.
 
 ![Resend configuration](assets/resend-add-domain.png)
+![Resend configuration](assets/resend-create-api-key.png)
 
 ![DNS configuration](assets/gandi-resend-dns-entries.png)
 
@@ -641,20 +642,9 @@ import Credentials from "@auth/core/providers/credentials"
 
  providers: [
     Credentials({
-
-      async authorize(credentials) {
-
-          const user = await getUserByEmail(credentials.email);
-          if (!user || !user.password) return null;
-
-          if (user) {  // && user.emailVerified
-              const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
-              if (passwordsMatch) return user
-          } else {
-              return null
-          }
-
-      },
+        async authorize(credentials) {
+              return getUserByEmail(credentials.email)
+        },
     }),
   ],
 ```
