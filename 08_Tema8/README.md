@@ -202,7 +202,9 @@ api/auth/verify-request
 
 ## 3.4. src/middleware.js
 
-La configuración de este archivo nos permite indicar qué rutas de nuestra aplicación están disponibles y cuales no según las condiciones. 
+Este archivo es opcional.
+
+La configuración de este archivo nos permite indicar qué rutas de nuestra aplicación están protegidas y cuales no según las configuración. 
 
 
 ```js
@@ -256,13 +258,12 @@ export const config = {
     matcher: [
         '/',
         '/about',
-        '/(dashboard)(.*)' 
+        '/dashboard(.*)' 
     ]
 };
 ```
 
-El acceso a las rutas se puede configurar también sin necesidad de *middleware*. En este tema realizaremos el proceso de autorización sin necesidad de hacer uso de éste.
-
+El acceso a las rutas se puede configurar también sin necesidad de *middleware*. 
 
 
 # 4. Sesiones
@@ -871,6 +872,8 @@ await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 
 En la última aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas. 
 
+![middleware](assets/middleware.jpg)
+
 El contenido del archivo `src/middleware.js` es el siguiente:
 
 ```js
@@ -1018,7 +1021,7 @@ export async function loginGoogle() {
 // ...
 ```
 
-Hay una demo disponible en [vercel](https://auth5middleware.vercel.app/).
+Hay una demo disponible en [vercel](https://nxauth-middleware.vercel.app/).
 
 
 # 9. CASOS PRÁCTICOS
