@@ -6,6 +6,7 @@
 - [1. Introducción](#1-introducción)
 - [2. Comunicación Cliente-Servidor en tiempo real](#2-comunicación-cliente-servidor-en-tiempo-real)
 - [3. Background Threads in Web Applications](#3-background-threads-in-web-applications)
+- [4. Despliegue](#4-despliegue)
 
 
 <img src="assets/javascript.svg" alt="javascript" width="80"/>
@@ -42,3 +43,8 @@ A continuación encontrarás una serie de características y funcionalidades ava
 # 3. Background Threads in Web Applications
 
 - [Web Workers Vs. Service Workers in JavaScript](https://www.dhiwise.com/post/web-workers-vs-service-workers-in-javascript)
+
+
+# 4. Despliegue
+
+Los servicios web de [Render](https://render.com) son compatibles con Websockets, que son esenciales para las aplicaciones modernas en tiempo real, como el chat y los juegos en línea. [Vercel](https://vercel.com) no admite Websockets debido a su arquitectura sin servidor. Para utilizar la comunicación en tiempo real en una aplicación Vercel, debe integrarse con un proveedor externo.
