@@ -14,7 +14,7 @@
 - [2. Características de una PWA](#2-características-de-una-pwa)
 - [3. Pasos a seguir](#3-pasos-a-seguir)
   - [3.1. Generar manifest.json e iconos](#31-generar-manifestjson-e-iconos)
-  - [3.2. Añadir manifest.js al layout principal](#32-añadir-manifestjs-al-layout-principal)
+  - [3.2. Añadir manifest.json al layout principal](#32-añadir-manifestjs-al-layout-principal)
 - [4. Instalar / desinstalar PWA](#4-instalar--desinstalar-pwa)
 - [5. Profundizando en las PWA](#5-profundizando-en-las-pwa)
 - [6. Herramientas para auditoría](#6-herramientas-para-auditoría)
@@ -147,7 +147,7 @@ Por último deberás renombrar las imágenes para que su nombre y ruta coincida 
 
 ![manifest tree](assets/manifest-tree.png)
 
-## 3.2. Añadir manifest.js al layout principal
+## 3.2. Añadir manifest.json al layout principal
 
 Indicaremos a nuestra aplicación que haga uso del manifiesto anterior.
 
