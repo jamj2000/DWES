@@ -65,10 +65,12 @@
     - [3.9.1. Instalación](#391-instalación)
     - [3.9.2. Uso](#392-uso)
     - [3.9.3. Documentación](#393-documentación)
+    - [3.9.4. Curiosidad](#394-curiosidad)
   - [3.10. Coloreado de código](#310-coloreado-de-código)
     - [3.10.1. Instalación](#3101-instalación)
     - [3.10.2. Uso](#3102-uso)
     - [3.10.3. Documentación](#3103-documentación)
+
 
 
 
@@ -1318,6 +1320,35 @@ También hay una aplicación de ejemplo, que además hace uso de iconos Lucide, 
 - [Jodit](https://xdsoft.net/jodit/)
 - [Quill](https://quilljs.com/)
   
+
+### 3.9.4. Curiosidad
+
+Al usar bibliotecas com Tiptap es muy probable que te encuentres ante la necesidad de rellenar un elemento <div> con datos provenientes de un **editor de texto enriquecido**. En este caso es de gran utilidad la propiedad **`dangerouslySetInnerHTML`**.
+
+Esta propiedad en una aplicación React es equivalente al atributo `innerHTML` en el DOM del navegador. En JavaScript estándar, `innerHTML` es un atributo de los elementos DOM que permite obtener o configurar el contenido HTML dentro de un elemento y forma parte de la API DOM estándar, no es específica de React.
+
+Como sustituto de `innerHTML`, React dispone de `dangerouslySetInnerHTML` que es una propiedad que se puede usar en elementos HTML de una aplicación React para configurar su contenido mediante programación. En lugar de usar un selector para obtener el elemento HTML y luego configurar su `innerHTML`, se puede usar esta propiedad directamente en el elemento.
+
+Cuando se usa `dangerouslySetInnerHTML`, React también sabe que el contenido de ese elemento específico es dinámico y, para los hijos de ese nodo, simplemente omite la comparación con el DOM virtual para obtener un rendimiento adicional.
+
+Imagina que tienes una página web donde se pueden enviar comentarios usando un editor de texto enriquecido. En este caso, el resultado de dicho editor probablemente será HTML con etiquetas como <p>, <b> e <img>.
+
+Cuando se usa `dangerouslySetInnerHTML`, React toma conciencia de las etiquetas HTML y las procesa correctamente.
+
+```js
+  const data = 'lorem <b>ipsum</b>';
+
+  return (
+    <div dangerouslySetInnerHTML={{__html: data}}  />
+    // ...
+  )
+```
+
+Hay que tener en cuenta que el valor pasado a `dangerouslySetInnerHTML` debe ser un objeto con la clave `__html`. Además, el elemento en el que se utilice la propiedad **`dangerouslySetInnerHTML` no debe tener hijos**, de ahí el uso del elemento <div> con etiqueta de cierre automático.
+
+Como sugiere el nombre de la propiedad, usar `dangerouslySetInnerHTML` puede ser peligroso, ya que expone el código a ataques de scripts entre sitios (XSS). Esto puede convertirse en un problema especialmente grave si se obtienen datos de una fuente externa o se renderiza contenido enviado por los usuarios.
+
+
 
 ## 3.10. Coloreado de código
 
