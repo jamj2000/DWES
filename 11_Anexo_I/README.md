@@ -760,6 +760,14 @@ Este plugin es opcional. Recomendado si trabajamos con ORM Prisma.
 Plugins opcionales. Recomentados si trabajamos con framework CSS Tailwind.
 
 
+**Codeium**
+
+Plugin opcional. Asistente de IA muy potente.
+
+
+**Supermaven**
+
+Plugin opcional. Asistente de IA muy rápido.
 
 
 # 5. Referencias

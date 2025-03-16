@@ -5,7 +5,7 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 ![Javascript](https://img.shields.io/badge/Javascript-7+-yellow?logo=javascript&style=for-the-badge)
 ![NodeJS](https://img.shields.io/badge/NodeJS-18+-green?logo=nodedotjs&style=for-the-badge)
-![NextJS](https://img.shields.io/badge/NextJS-14+-black?logo=nextdotjs&style=for-the-badge)
+![NextJS](https://img.shields.io/badge/NextJS-15+-black?logo=nextdotjs&style=for-the-badge)
 
 ## Temas del Módulo
 
@@ -36,4 +36,4 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 - [Características básicas de Nextjs 13 -en inglés-](https://makerkit.dev/blog/tutorials/nextjs13)
 - [Video: 20 Browser Extensions For Web Design & Development ](https://youtu.be/OhU4yaNih2M?si=EbTO_TflU7UFDV-F)
 - [Web article: 20 Browser Extensions For Web Design & Development ](https://www.traversymedia.com/blog/20-browser-extensions)
-
+- [Lista de recursos para desarrolladores](https://free-for.dev/)
