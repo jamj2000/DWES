@@ -120,15 +120,15 @@ npm  run  start
 
 Diferencias entre SSR y CSR
 
-SSR                                             | CSR
-------------------------------------------------|---------------------------------
-SSR significa Renderizado del lado del servidor | CSR significa Renderizado del lado del cliente
-Representa la página en el lado del servidor    | Representa la página en el lado del cliente
-Es más amigable con el SEO                      | Es menos compatible con SEO
-La interactividad del usuario es limitada       | La interactividad del usuario es altamente interactiva
-Consume los recursos del servidor               | Consume los recursos del cliente
-Ofrece un mejor rendimiento en dispositivos de baja potencia | Es posible que no ofrezca un mejor rendimiento en dispositivos de baja potencia
-Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado
+| SSR                                                                                          | CSR                                                                             |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| SSR significa Renderizado del lado del servidor                                              | CSR significa Renderizado del lado del cliente                                  |
+| Representa la página en el lado del servidor                                                 | Representa la página en el lado del cliente                                     |
+| Es más amigable con el SEO                                                                   | Es menos compatible con SEO                                                     |
+| La interactividad del usuario es limitada                                                    | La interactividad del usuario es altamente interactiva                          |
+| Consume los recursos del servidor                                                            | Consume los recursos del cliente                                                |
+| Ofrece un mejor rendimiento en dispositivos de baja potencia                                 | Es posible que no ofrezca un mejor rendimiento en dispositivos de baja potencia |
+| Es posible que se requieran más recursos del servidor para manejar las tareas de renderizado | No requiere más recursos del servidor para manejar las tareas de renderizado    |
 
 
 
@@ -475,11 +475,42 @@ Parámetro de consulta: provider -> HP
 Parámetro de consulta: screen -> 15
 ```
 
+**A partir de React 19**, disponemos del hook **`use`** que permite leer el valor de un recurso, ya sea un contexto o una promesa. Este hook se puede usar para leer el valor de las promesas `params` y `searchParams` y evitar el uso de `useParams` y `useSearchParams`. 
+
+De esta manera se simplifica el código, obtenemos una sintaxis más limpia y la forma de declarar las propiedades de una página se unifica para ser igual en una página en el lado servidor y en una página en el lado cliente. Por ejemplo, el código anterior, quedaría así:
+
+```js
+'use client'
+import { usePathname } from 'next/navigation';
+import { use } from 'react'                          // <----
+
+
+const Page = ({ params, searchParams }) => {         // <---- 
+    const { name }             = use(params)         // <----
+    const { provider, screen } = use(searchParams)   // <----
+
+    const pathname = usePathname() 
+
+    return (
+        <>
+            <p> Ruta: {pathname} </p>
+            <p> Parámetro de ruta: name -&gt; {name} </p>
+            <p> Parámetro de consulta: provider -&gt; {provider} </p>
+            <p> Parámetro de consulta: screen -&gt; {screen}  </p>
+        </>
+    )
+};
+
+export default Page
+```
+
+
 **Referencias**:
 
 - https://nextjs.org/docs/app/api-reference/functions/use-params
 - https://nextjs.org/docs/app/api-reference/functions/use-search-params
- 
+- https://react.dev/reference/react/use
+  
 
 # 10. ANEXO II: SSG
 
