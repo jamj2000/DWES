@@ -5,7 +5,9 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 ![Javascript](https://img.shields.io/badge/Javascript-7+-yellow?logo=javascript&style=for-the-badge)
 ![NodeJS](https://img.shields.io/badge/NodeJS-18+-green?logo=nodedotjs&style=for-the-badge)
+![React](https://img.shields.io/badge/React-19+-blue?logo=reactjs&style=for-the-badge)
 ![NextJS](https://img.shields.io/badge/NextJS-15+-black?logo=nextdotjs&style=for-the-badge)
+
 
 ## Temas del Módulo
 
