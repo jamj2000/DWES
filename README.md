@@ -25,10 +25,97 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 12. [Anexo II](12_Anexo_II/README.md)
 13. [Anexo III](13_Anexo_III/README.md)
 
-    
 ---
 
-- [Exámenes resueltos](examenes)
+## Proyectos
+
+- [Páginas y Layouts](https://github.com/jamj2000/nxapp-router)
+- [Contenido estático](https://github.com/jamj2000/nx-static)
+--- 
+
+- [Contenido estático/dinámico. CSR/SSR](https://github.com/jamj2000/nxrender)
+- [Contenido dinámico](https://github.com/jamj2000/nx-dynamic)
+- [Paginación](https://github.com/jamj2000/nxpagination)
+- [Cookies y Sesión](https://github.com/jamj2000/nxsession)
+
+---
+
+- [Formulario: action, formAction ](https://github.com/jamj2000/nxform)
+- [Formulario: feedback](https://github.com/jamj2000/nxform-feedback)
+- [Formulario: validación](https://github.com/jamj2000/nxform-validate)
+- [CRUD local con Paginación](https://github.com/jamj2000/nxcrud-pagination)
+- [CLOUDINARY: Subir imágenes al cloud](https://github.com/jamj2000/nxcloudinary-upload)
+- [CLOUDINARY: Mostrar imágenes del cloud](https://github.com/jamj2000/nxcloudinary-gallery)
+- [CLOUDINARY: Operaciones CRUD en el cloud](https://github.com/jamj2000/nxcloudinary-crud)
+ 
+---
+
+- [CRUD usando SQLite](https://github.com/jamj2000/nxsqlite-crud)
+- [CRUD usando MySQL](https://github.com/jamj2000/nxmysql-crud)
+- [CRUD usando MySQL Serverless](https://github.com/jamj2000/nxmysql-crud-serverless)
+- [CRUD usando Postgres](https://github.com/jamj2000/nxpostgres-crud)
+- [CRUD usando Postgres en Vercel](https://github.com/jamj2000/nxpostgres-crud-vercel)
+- [CRUD usando MySQL y cloud de imágenes Cloudinary](https://github.com/jamj2000/nxmysql-app)
+
+---
+
+- [CRUD usando ORM Prisma en una única página de servidor](https://github.com/jamj2000/nxprisma-crud-simple1)
+- [CRUD usando ORM Prisma en una única página de cliente](https://github.com/jamj2000/nxprisma-crud-simple2)
+
+---
+
+- [CRUD usando ORM Prisma con 1 tabla](https://github.com/jamj2000/nxprisma-crud)
+- [CRUD usando ORM Prisma con 2 tablas en relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
+- [CRUD usando ORM Prisma con 2 tablas en relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
+- [CRUD usando ORM Prisma con 3 tablas en relación 1:N y N:M](https://github.com/jamj2000/nxprisma-crud-protectoras)
+
+--- 
+
+- [API con datos en memoria RAM](https://github.com/jamj2000/nxapi-memory)
+- [API con datos en BD MongoDB](https://github.com/jamj2000/nxapi-mongodb)
+- [API con datos en BD MySQL](https://github.com/jamj2000/nxapi-mysql)
+
+--- 
+
+- [Gráficos Chart estáticos](https://github.com/jamj2000/nxchart)
+- [Gráficos Chart dinámicos](https://github.com/jamj2000/nxchart-streaming)
+- [Fichas semanales con datos CSV](https://github.com/jamj2000/semana-fct)
+- [Google Maps](https://github.com/jamj2000/nxgoogle-maps)
+
+---
+
+- [Autenticación con OAuth](https://github.com/jamj2000/nxauth-oauth)
+- [Autenticación con Credenciales](https://github.com/jamj2000/nxauth-credentials)
+- [Protección de rutas con Middleware](https://github.com/jamj2000/nxauth-middleware)
+
+---
+
+- [Pizzería](https://github.com/jamj2000/nxpizzeria)
+- [Blog](https://github.com/jamj2000/nxapp-blog)
+- [Climatización](https://github.com/jamj2000/nxapp-climatizacion)
+
+
+---
+
+## Exámenes resueltos
+
+<!-- - [Exámenes resueltos](examenes) -->
+
+### Curso 23-24
+
+- [examen-dwes-node-next](https://github.com/jamj2000/examen-dwes-node-next)
+- [examen-dwes-bis-node-next](https://github.com/jamj2000/examen-dwes-bis-node-next)
+  
+- [examen-dwes-nextjs-prisma](https://github.com/jamj2000/examen-dwes-nextjs-prisma)
+- [examen-dwes-bis-nextjs-prisma](https://github.com/jamj2000/examen-dwes-bis-nextjs-prisma)
+
+
+### Curso 24-25
+
+- [examen-dwes-24-25-mysql-api](https://github.com/jamj2000/examen-dwes-24-25-mysql-api)
+
+- [examen-dwes-24-25-form-prisma](https://github.com/jamj2000/examen-dwes-24-25-form-prisma)
+
 
 ---
 
