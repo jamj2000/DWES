@@ -59,11 +59,6 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 ---
 
-- [CRUD usando ORM Prisma en una única página de servidor](https://github.com/jamj2000/nxprisma-crud-simple1)
-- [CRUD usando ORM Prisma en una única página de cliente](https://github.com/jamj2000/nxprisma-crud-simple2)
-
----
-
 - [CRUD usando ORM Prisma con 1 tabla](https://github.com/jamj2000/nxprisma-crud)
 - [CRUD usando ORM Prisma con 2 tablas en relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 - [CRUD usando ORM Prisma con 2 tablas en relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
