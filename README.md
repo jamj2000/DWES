@@ -85,7 +85,7 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 ---
 
-- [Pizzería](https://github.com/jamj2000/nxpizzeria)
+- [Pizzería](https://github.com/jamj2000/nxapp-pizzeria)
 - [Blog](https://github.com/jamj2000/nxapp-blog)
 - [Climatización](https://github.com/jamj2000/nxapp-climatizacion)
 
