@@ -104,14 +104,14 @@ Para el **primer paso**, aquí tienes el contenido de un manifest.json de ejempl
 
 ```json
 {
+    "name": "NextJS Cloudinary CRUD",
+    "short_name": "nxcloudinary-crud",
     "theme_color": "#2e30a1",
     "background_color": "#3e586f",
     "display": "standalone",
+    "orientation": "",
     "scope": "/",
     "start_url": "/",
-    "name": "NextJS Cloudinary CRUD",
-    "short_name": "nxcloudinary-crud",
-    "description": "NextJS Photo Gallery App using Cloudinary",
     "icons": [
         {
             "src": "/pwa/icon-192x192.png",
@@ -132,6 +132,19 @@ Para el **primer paso**, aquí tienes el contenido de un manifest.json de ejempl
             "src": "/pwa/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
+        }
+    ],
+    "description": "NextJS Photo Gallery App using Cloudinary",
+    "screenshots": [
+        {
+          "src": "desktop.webp",
+          "sizes": "1096x1039",
+          "type": "image/webp"
+        },
+        {
+          "src": "mobile.webp",
+          "sizes": "665x976",
+          "type": "image/webp"
         }
     ]
 }
