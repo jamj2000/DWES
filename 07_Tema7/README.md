@@ -1260,6 +1260,7 @@ export default function Home() {
 
 ### 3.8.3. Documentación
 
+- [Video: Nextjs Google Maps Tutorial](https://youtu.be/q4LhRp1RaPA?si=-XPRnGbokS0E4tPC)
 - [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
 - [Código fuente del video anterior](https://github.com/MG95Developer/google-maps-tutorial)
 - [Documentación oficial](https://googlemaps.github.io/js-api-loader/index.html)
@@ -1311,9 +1312,11 @@ export default Tiptap
 
 ### 3.9.3. Documentación
 
-- [Ejemplo](https://tiptap.dev/docs/editor/examples/default)
+- [Ejemplo 1](https://tiptap.dev/docs/editor/examples/default)
+- [Ejemplo 2](https://github.com/jamj2000/nxeditor-icons)
+- [Ejemplo 3](https://github.com/tumetus/tiptap-nextjs-example.git)
+- [Vídeo del ejemplo 3](https://youtu.be/mKIQZNKdU2w?si=Dvt7GcPneI5LS8_q)
 
-También hay una aplicación de ejemplo, que además hace uso de iconos Lucide, en https://github.com/jamj2000/nxeditor-icons
 
 **Otros editores interesantes**
 
