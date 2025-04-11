@@ -61,7 +61,7 @@ En este tema abordaremos conceptos generales relacionados con las aplicaciones w
 - **CSS**: Formato/apariencia del documento. `CSS3`. 
 - **Javascript**: Funcionalidad del documento. `ECMAScript6`. `2015`
 
-> **NOTA**  
+> [!NOTE] 
 > 
 > Al final de línea se muestra la versión más relevante actualmente y el año de su aparición oficial.
 
@@ -148,7 +148,7 @@ Content-Type: text/html
 <!DOCTYPE html... (aquí estarían los 29769 bytes de la página web pedida)
 ```
 
-> **NOTA:**
+> [!NOTE] 
 >
 > Un cliente web, además de realizar peticiones GET, también puede hacer peticiones de tipo POST. Por ejemplo, al enviar al servidor información de un formulario:
 >
@@ -294,7 +294,7 @@ Según su nivel de complejidad y recursos necesarios, podemos dividirlos en 2 ti
 - Servidores de **contenido estático**
 - Servidores de **contenido dinám**ico
 
-> **NOTA** 
+> [!NOTE]  
 >
 > Por otro lado, también podemos diferenciar entre:
 >
@@ -336,7 +336,7 @@ Los servidores de contenido dinámico se pueden clasificar en diferentes categor
 
 ![iaas paas saas hierarchy](assets/iaas-paas-saas-hierarchy.jpg)
 
-> **NOTA:**
+> [!NOTE] 
 >
 > También existe **DBaaS** (Base de datos como servicio). Se puede considerar equivalente al PaaS, pero aplicado a bases de datos.
 
@@ -376,14 +376,14 @@ Una variante de los servidores de contenido dinámico son los [serverless](https
 ![Backend Frameworks](assets/backend-frameworks.png)
 
 
-Framework           |  Lenguaje
---------------------|---------------------
-**Laravel**         | PHP
-**Spring**          | Java 
-**.NET**            | C#
-**Ruby on rails**   | Ruby
-**Django**          | Python
-**Express**         | Javascript 
+| Framework         | Lenguaje   |
+| ----------------- | ---------- |
+| **Laravel**       | PHP        |
+| **Spring**        | Java       |
+| **.NET**          | C#         |
+| **Ruby on rails** | Ruby       |
+| **Django**        | Python     |
+| **Express**       | Javascript |
 
 
 ## 3.3. Resumen
