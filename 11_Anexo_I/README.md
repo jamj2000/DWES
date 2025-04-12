@@ -647,7 +647,7 @@ Por ejemplo, mi configuración es la siguiente:
     // Soporte de Emmet para JSX
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
-    },
+    }
 }
 ```
 
