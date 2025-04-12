@@ -690,6 +690,24 @@ Por ejemplo, mi configuración es la siguiente:
 Esta configuración me permite seleccionar un texto o variable y envolverla dentro de `console.log`. Es muy útil para realizar tareas de depuración.
 
 
+> [!NOTE]
+>
+> Los archivos de configuración de VSCode en realidad no son JSON, sino **JSONC** (JSON con comentarios). JSONC no es un estándar oficial. A continuación se muestra una tabla comparativa de características de JSON, JSONC y JSON5. 
+> 
+>
+> | Característica              | JSON | JSONC         | JSON5         |
+> |----------------------------|------|---------------|---------------|
+> | Comentarios                | ❌   | ✅            | ✅            |
+> | Claves sin comillas        | ❌   | ❌            | ✅            |
+> | Comillas simples           | ❌   | ❌            | ✅            |
+> | Notación JS extra          | ❌   | ❌            | ✅ (`NaN`, etc.) |
+> | Coma en la última línea    | ❌   | ❌            | ✅            |
+> | Compatible con APIs        | ✅   | ❌            | ❌ (generalmente) |
+> | Soporte general            | 🔥   | 😐            | 😐            |
+>
+> Por otro lado, JSON5 es poco usuado y no es nativamente compatible con todos los lenguajes. Para usarlo necesitas una librería que lo interprete.
+
+
 ## 4.4. Plugins
 
 Existen numerosos plugins para VSCode que nos permiten adaptar el entorno de desarrollo a nuestras necesidades. Para el desarrollo web suelen ser habituales, aunque pueden instalarse muchos otros, los siguientes:
