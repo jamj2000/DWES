@@ -392,8 +392,8 @@ model User {
 
 Vamos a necesitar el campo `password` para el trabajo con credenciales. Y el campo `role` nos permitirá distinguir entre roles USER y ADMIN.
 
-<details>
-<summary>Esquema de Prisma</summary>
+
+**EJEMPLO DE ARCHIVO prisma/schema.prisma**
 
 
 ```prisma
@@ -437,8 +437,12 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 ```
-</details>
 
+> [!IMPORTANT]
+>
+> Observa que el modelo `User` debe permitir **valores null en los siguientes campos: `password`, `email`, `image`**. Esto es así puesto que Oauth nunca nos devuelve información de password, y en muchos casos tampoco devuelve información de email e image.
+>
+> Si no permitimos valores null en estos campos la autenticación Oauth fallará.
 
 ## 5.2. Neon.tech
 
