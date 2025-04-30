@@ -121,7 +121,9 @@ Los controladores de ruta se definen en un archivo `route.js|ts` dentro del dire
 export async function GET(request: Request) {}
 ```
 
-> NOTA: No puede haber un archivo `route.js` en el mismo nivel de segmento de ruta que `page.js`.
+> [!NOTE]
+> 
+> No puede haber un archivo `route.js` en el mismo nivel de segmento de ruta que `page.js`.
 
 
 ## 2.2. Métodos HTTP admitidos
@@ -585,7 +587,9 @@ Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuen
 ![demo](assets/chart-dashboard.png)
 
 
-> **NOTA:** Otra biblioteca muy interesante es [`plotly para javascript`](https://plotly.com/javascript/). Es una biblioteca originalmente desarrollada para el lenguaje Python.
+> [!NOTE]
+> 
+> Otra biblioteca muy interesante es [`plotly para javascript`](https://plotly.com/javascript/). Es una biblioteca originalmente desarrollada para el lenguaje Python.
 > 
 > 
 > ```sh
@@ -958,7 +962,7 @@ Permite crear nuevos documentos y modificar los existentes. Permite trabajar en 
 Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
 
-> **NOTA**: 
+> [!NOTE] 
 >
 > Otras bibliotecas que merecen atención son las siguientes:
 >
@@ -1047,7 +1051,9 @@ createPDF()
 
 ![pdf-lib](assets/pdf-lib.png)
 
-> **NOTA**: Una vez hayas comprobado que funciona correctamente, puedes reutilizar la función anterior `createPDF` como *server action* dentro de un proyecto NextJS. 
+> [!NOTE]
+> 
+> Una vez hayas comprobado que funciona correctamente, puedes reutilizar la función anterior `createPDF` como *server action* dentro de un proyecto NextJS. 
 
 
 A continuación tienes los enlaces a 2 proyectos que hacen uso de esta biblioteca.
@@ -1065,7 +1071,9 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 
 El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. 
 
-> **NOTA:** Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
+> [!NOTE]
+> 
+> Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
 
 Es posible usar nuestra cuenta de Gmail para ello, pero Google ha ido restringiendo este tipo de funcionalidad, y actualmente aunque es posible su configuración requiere bastantes pasos y no es tan sencilla como sería esperable. No obstante, una opción gratuita, máximo 200 correos mensuales, y sencilla es usar la biblioteca [EmailJS](https://www.emailjs.com/). Aquí tienes un [vídeo de ejemplo](https://youtu.be/dgcYOm8n8ME?si=kd7cjfq1R6zKeVb0) y aquí [otro vídeo](https://youtu.be/mMnxn_hmLuI?si=bxl38WyOr7jevez5).
 
@@ -1139,7 +1147,9 @@ sendMail().catch(console.error);
 
 ![nodemailer](assets/node-mail.png)
 
-> **NOTA**: Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
+> [!NOTE]
+> 
+> Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
 
 
 ### 3.6.3. Documentación
@@ -1171,7 +1181,9 @@ stripe
 
 Si deseamos hacer uso de los Mapas de Google, podemos usar la biblioteca [@googlemaps/js-api-loader](https://www.npmjs.com/package/@googlemaps/js-api-loader).
 
-> **NOTA:** Deberás obtener una API KEY de Google.
+> [!NOTE]
+> 
+> Deberás obtener una API KEY de Google.
 
 Esta biblioteca solo puede usarse desde el lado cliente.
 

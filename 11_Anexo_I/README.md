@@ -52,7 +52,7 @@ Como desventajas, pueden señalarse las siguientes:
 
 En el lado servidor usaremos **NodeJS como entorno de ejecución** y como framework del lado servidor usaremos **NextJS 13**.
 
-> **NOTA**
+> [!NOTE]
 >
 > Actualmente, no existe un único entorno de ejecución, sino 3:
 >
@@ -432,11 +432,11 @@ mkdir proyecto-node  &&  cd proyecto-node
 npm  init  -y 
 ```
 
-> **NOTA**
+> [!TIP]
 > 
 > La opción -y (--yes) de `npm init` crea un archivo **package.json** con opciones por defecto, sin hacer preguntas al usuario.
 
-> **NOTA**
+> [!IMPORTANT]
 > 
 > El comando `npm` (**Node Package Manager**) es muy importante. Nos permitirá:
 > - Inicializar proyectos. 
@@ -481,7 +481,9 @@ Al realizar las instalaciones anteriores, se insertarán automáticamente las si
   }
 ```
 
-> **NOTA:** La versión de cada paquete puede diferir de la que tu tengas.
+> [!NOTE]
+> 
+> La versión de cada paquete puede diferir de la que tu tengas.
 
 
 

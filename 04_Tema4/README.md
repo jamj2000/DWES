@@ -75,7 +75,7 @@ La definición de contenido estático y dinámico es muy sencilla:
 
 
 
-> **NOTA:**
+> [!NOTE]
 >
 > El contenido dinámico requiere de renderizado en el lado servidor, lo cual ralentiza la respuesta al usuario.
 >  
@@ -143,7 +143,9 @@ Las características dinámicas se basan en información que sólo se puede cono
 - `headers()` (**cabeceras**): al usarse en un componente de servidor optará por toda la ruta hacia el renderizado dinámico en el momento de la solicitud.
 
 
-> **NOTA:** A partir de NextJS 15, deberemos hacer uso asíncrono de las características anteriores.
+> [!NOTE]
+> 
+>  A partir de NextJS 15, deberemos hacer uso asíncrono de las características anteriores.
 >
 > ```js
 > // Ejemplo
@@ -281,7 +283,9 @@ Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas mucho
 - **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
 - **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. También existe la posibilidad de indicar un tiempo de expiración usando la propiedad `expires`, o usando la propiedad `maxAge`. 
 
-> **NOTA:** A partir de NextJS 15, el manejo de cookies se realiza de forma asíncrona. Por tanto deberemos usar `await cookies()
+> [!NOTE]
+> 
+> A partir de NextJS 15, el manejo de cookies se realiza de forma asíncrona. Por tanto deberemos usar `await cookies()
 
 A continuación se muestra como trabjar con cookies desde NextJS.
 
@@ -320,7 +324,9 @@ async function setCookie( name ) {
 }
 ```
 
-> **NOTA:** Para crear una cookie de sesión que se elimine al cerrar la pestaña del navegador debes omitir la opción `expires`. 
+> [!NOTE]
+> 
+> Para crear una cookie de sesión que se elimine al cerrar la pestaña del navegador debes omitir la opción `expires`. 
 
 
 ## 7.3. Leer Cookies 

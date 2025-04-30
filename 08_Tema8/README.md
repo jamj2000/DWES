@@ -61,7 +61,9 @@ Auth.js es una solución completa de autenticación de código abierto para apli
 - Soporte integrado para más de 23 bases de datos/ORM (MySQL, Postgres, Prisma, Drizzle…)
 - Autenticación integrada de correo electrónico/sin contraseña/enlace mágico
 
-> **NOTA**: En sus inicios, hasta la versión 4, el proyecto se llamaba NextAuth y estaba enfocado en el framework NextJS. A partir de la versión 5, pasó a llamarse Auth.js y estar disponible también para otros frameworks como SvelteKit, SolidStart, ... A lo largo de este documento usaremos de forma indistinta los términos Auth.js y NextAuth 5.
+> [!NOTE]
+> 
+> En sus inicios, hasta la versión 4, el proyecto se llamaba NextAuth y estaba enfocado en el framework NextJS. A partir de la versión 5, pasó a llamarse Auth.js y estar disponible también para otros frameworks como SvelteKit, SolidStart, ... A lo largo de este documento usaremos de forma indistinta los términos Auth.js y NextAuth 5.
 
 
 # 2. Instalación de dependencias
@@ -97,7 +99,9 @@ npm install bcryptjs
 
 
 
-> **NOTA**: Trabajaremos con archivos de Javascript, en lugar de Typescript, para evitar complejidad. 
+> [!NOTE]
+> 
+> Trabajaremos con archivos de Javascript, en lugar de Typescript, para evitar complejidad. 
 
 
 
@@ -121,12 +125,15 @@ AUTH_FACEBOOK_SECRET=
 AUTH_RESEND_KEY=
 ```
 
-> **NOTA**: Podemos generar **AUTH_SECRET** con una de las siguientes formas:
+> [!NOTE]
+> 
+> Podemos generar **AUTH_SECRET** con una de las siguientes formas:
 > 
 > 1. Ejecutar en el terminal el comando
 > ```sh
 > npx  auth  secret
 > ```
+
 > 2. Ejecutar en el terminal el comando
 > ```sh
 > openssl rand -hex 32    # Sólo en Linux
@@ -169,7 +176,9 @@ export const {
 )
 ```
 
-> **NOTA**: En la versión 5 de NextAuth importamos los proveedores desde `@auth/core/providers/*` en lugar de `next-auth/providers/*` como se realizaba en la versión 4, aunque esta última forma se mantiene por motivos de retrocompatibilidad.
+> [!NOTE]
+> 
+> En la versión 5 de NextAuth importamos los proveedores desde `@auth/core/providers/*` en lugar de `next-auth/providers/*` como se realizaba en la versión 4, aunque esta última forma se mantiene por motivos de retrocompatibilidad.
 
 
 ## 3.3. src/app/api/auth/[...nextauth]/route.js
@@ -440,9 +449,9 @@ model Account {
 
 > [!IMPORTANT]
 >
-> Observa que el modelo `User` debe permitir **valores null en los siguientes campos: `password`, `email`, `image`**. Esto es así puesto que Oauth nunca nos devuelve información de password, y en muchos casos tampoco devuelve información de email e image.
+> Observa que el modelo `User` debe permitir **valores null en los siguientes campos: `password`, `email`, `image`**. Esto es así puesto que OAuth nunca nos devuelve información de password, y en muchos casos tampoco devuelve información de email e image.
 >
-> Si no permitimos valores null en estos campos la autenticación Oauth fallará.
+> Si no permitimos valores null en estos campos la autenticación OAuth fallará.
 
 ## 5.2. Neon.tech
 
@@ -505,7 +514,9 @@ import Google from "@auth/core/providers/google"
   providers: [ Github, Google ],
 ```
 
-> **NOTA**: A diferencia de versiones anteriores, en NextAuth 5 no es necesario indicar en este archivo las variables de entorno, siempre que la hayamos declarado en el archivo `.env` con la forma `AUTH_PROVEEDOR_ID` y `AUTH_PROVEEDOR_SECRET`.
+> [!NOTE]
+> 
+> A diferencia de versiones anteriores, en NextAuth 5 no es necesario indicar en este archivo las variables de entorno, siempre que la hayamos declarado en el archivo `.env` con la forma `AUTH_PROVEEDOR_ID` y `AUTH_PROVEEDOR_SECRET`.
 
 Para poder ofrecer OAuth necesitaremos **registrar nuestra aplicación** web en la **sección destinada a desarrolladores que ofrece el proveedor** para estos fines.
 
@@ -635,7 +646,7 @@ A continuación se muestran capturas de pantalla de los pasos 2 y 3.
 
 - [Documentación de Credentials](https://authjs.dev/getting-started/providers/credentials-tutorial)
 
-Tradicionalmente, y aún hoy en día, se trabaja con el clásico método **usuario / contraseña**, y es la mayoría de las veces como **email / contraseña**. Sin embargo, este método se considere inseguro y además requiere de trabajo extra para su gestión. Al menos se debería realizar un proceso de verificación del email para aumentar la seguridad.
+Tradicionalmente, y aún hoy en día, se trabaja con el clásico método **usuario / contraseña**, y es la mayoría de las veces como **email / contraseña**. Sin embargo, este método se considera inseguro y además requiere de trabajo extra para su gestión. Al menos se debería realizar un proceso de verificación del email para aumentar la seguridad.
 
 Desde AuthJS se limita intencionalmente para desalentar el uso de contraseñas debido a los riesgos de seguridad inherentes asociados con ellas y la complejidad adicional asociada con el soporte de nombres de usuario y contraseñas.
 
@@ -867,7 +878,9 @@ La función **`autorize`** es de gran importancia. Permite dar autorización (`r
 await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 ```
 
-> NOTA: Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
+> [!NOTE]
+> 
+> Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
 
 
 ## 8.3. Aplicación Middleware
@@ -1115,7 +1128,9 @@ Referencias:
 - [Using Context Providers](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#using-context-providers) 
 
 
-> **NOTA: signIn y signOut en el lado cliente**
+> [!NOTE] 
+> 
+> **signIn y signOut en el lado cliente**
 >
 > Al igual que podemos acceder a los datos de sesión desde el lado cliente, también podemos hacer `signin` y `signout` desde el lado cliente.
 >

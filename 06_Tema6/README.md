@@ -847,7 +847,9 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 
 ![Vercel Create Env var](assets/env-var.png)
 
-> **NOTA**: Además de Vercel, otros proveedores de DBaaS Postgres son:
+> [!NOTE]
+> 
+> Además de Vercel, otros proveedores de DBaaS Postgres son:
 > - [Neon.tech](https://neon.tech/)
 > - [Supabase](https://supabase.com/)
 
@@ -902,7 +904,9 @@ npm install @prisma/client
 
 `npx prisma init`
 
-> **NOTA**: Podemos indicar el proveedor de datos en la inicialización. Por ejemplo:
+> [!NOTE]
+> 
+>  Podemos indicar el proveedor de datos en la inicialización. Por ejemplo:
 >
 > ```sh
 > npx prisma init --datasource-provider postgresql
@@ -949,7 +953,9 @@ Como `provider` del `datasource` tenemos los siguientes:
 DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
 ```
 
-> **NOTA**: El formato de la variable de entorno `DATABASE_URL` es el siguiente:
+> [!NOTE]
+> 
+> El formato de la variable de entorno `DATABASE_URL` es el siguiente:
 >
 > `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>'`
 
@@ -982,7 +988,7 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 
 ![prisma migrate con cambios](assets/migrate-dev2.png)
 
-> **NOTA:**
+> [!NOTE]
 >
 > Una operación muchos más cómoda y directa, es hacer:
 >
@@ -1002,7 +1008,9 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 - Los nombres de los modelos deben comenzar con una letra y normalmente se escriben en **PascalCase**
 - Los nombres de los modelos deben usar la forma singular (por ejemplo, `Usuario` en lugar de usuario, usuarios o Usuarios)
 
-> **NOTA**: Puede utilizar el atributo `@@map` para asignar un modelo (por ejemplo, `Usuario`) a una tabla con un nombre diferente que no coincide con las convenciones de nomenclatura del modelo (por ejemplo, usuarios).
+> [!NOTE]
+> 
+> Puede utilizar el atributo `@@map` para asignar un modelo (por ejemplo, `Usuario`) a una tabla con un nombre diferente que no coincide con las convenciones de nomenclatura del modelo (por ejemplo, usuarios).
 
 
 **Reglas de nombrado para Campos**
@@ -1012,7 +1020,9 @@ Reglas de nombrado:
 - Debe cumplir con la siguiente expresión regular: [A-Za-z][A-Za-z0-9_]*
 - Debe comenzar con una letra y normalmente se escriben en **camelCase**
   
-> **NOTA**: Puede utilizar el atributo `@map` para asignar un nombre de campo a una columna con un nombre diferente que no coincida con las convenciones de nomenclatura de campos: p. ej. `miCampo @map("mi_campo")`.
+> [!NOTE] 
+> 
+> Puede utilizar el atributo `@map` para asignar un nombre de campo a una columna con un nombre diferente que no coincida con las convenciones de nomenclatura de campos: p. ej. `miCampo @map("mi_campo")`.
 
 
 **Ejemplo**:
@@ -1037,7 +1047,9 @@ model Articulo {
 }
 ```
 
-> NOTA: El signo **`?`** significa que el valor no es requerido, es decir admite NULL.
+> [!NOTE]
+> 
+> El signo **`?`** significa que el valor no es requerido, es decir admite NULL.
 
 
 **Tipos de datos**
@@ -1336,7 +1348,9 @@ const users = await prisma.user.findMany({}) // equivalente a la anterior
 **Estructura general de consultas find**
 
 
-> **NOTA**: **Cada una de las siguentes propiedades es opcional y puede colocarse en cualquier orden.**
+> [!NOTE]
+> 
+> **Cada una de las siguentes propiedades es opcional y puede colocarse en cualquier orden.**
 
 Podemos usar esta forma
 
@@ -1441,7 +1455,9 @@ const getUser = await prisma.user.findMany({
 ![skip & take](assets/skip-take.png)
 
 
-> **NOTA**: la documentación referida a **operadores** y **condiciones de filtrado** está accesible en
+> [!NOTE]
+> 
+> La documentación referida a **operadores** y **condiciones de filtrado** está accesible en
 >
 > https://www.prisma.io/docs/orm/reference/prisma-client-reference#filter-conditions-and-operators
 
@@ -1736,7 +1752,7 @@ async function Producto({ id }) {
 ```
 
 
-> **NOTA:**
+> [!NOTE]
 >
 > Aunque **Next.js recomienda usar páginas y componentes del lado servidor cuando recuperamos y mostramos datos**, también es posible usar para el mismo fin una página del lado cliente. A continuación tienes el código fuente para hacer un listado de Productos:
 >

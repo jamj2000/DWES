@@ -159,7 +159,7 @@ export async function logout() {
 }
 ```
 
-> **NOTA**:
+> [!NOTE]
 >
 > El `server action` recibe un argumento, habitualmente llamado `formData` con la información que ha recogido el formulario en el cliente. 
 > Para acceder a la información de cada campo del formulario hacemos:
@@ -253,11 +253,13 @@ export async function logout() {
 }
 ```
 
-> **NOTA**: 
+> [!NOTE] 
 >
 > - `revalidatePath` se importa desde el paquete `next/cache`
 > - `redirect` se importa desde el paquete `next/navigation`
-> **NOTA**:
+
+
+> [!NOTE]
 >
 > NextJS hace uso de una caché de contenido, por ello para volver a actualizar el contenido de una página, actualizando además la caché, necesitamos la función `revalidatePath`.
 
@@ -340,7 +342,9 @@ En **JSX** se escribe de la siguiente forma:
 </form>
 ```
 
-> **NOTA**: `action` es una función asíncrona ejecutada en el servidor, por ejemplo `action={insertarProducto}`
+> [!NOTE]
+> 
+> `action` es una función asíncrona ejecutada en el servidor, por ejemplo `action={insertarProducto}`
 
 Su equivalencia en **HTML** es la siguiente:
 
@@ -353,7 +357,7 @@ Su equivalencia en **HTML** es la siguiente:
 </form>
 ```
 
-> **NOTA**: 
+> [!NOTE]
 > 
 > En HTML, 
 > - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
@@ -398,11 +402,17 @@ import Form from 'next/form'; // IMPORTANTE. Necesario importar.
 </Form>
 ```
 
-> **NOTA1**: Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
+> [!TIP]
+> 
+> Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
 
-> **NOTA2**: `action` es la página que recibirá la información en forma de parámetros de consulta, por ejemplo `action="/productos"`.  Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
 
-> **NOTA3**: 
+> [!TIP] 
+> 
+> `action` es la página que recibirá la información en forma de parámetros de consulta, por ejemplo `action="/productos"`.  Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
+
+
+> [!IMPORTANT] 
 > 
 > En HTML, 
 > - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
@@ -577,7 +587,7 @@ export default function Cuadrado({ long, width }) {
 }
 ```
 
-> **NOTA:**
+> [!NOTE]
 >
 > React, y por tanto JSX, distingue entre **entradas controladas** y **entradas no controladas**.
 > 
@@ -645,7 +655,7 @@ export default Formulario (  ) {
 ```
 
 
-> **NOTA:**
+> [!NOTE]
 >
 > El componente `fieldset` también admite la propiedad `disabled`. A menudo esto es útil para deshabilitar un grupo de inputs. Sin embargo tiene el inconveniente de que los valores de los *inputs* dentro del *fieldset disabled* no serán enviados al servidor.
 > 
@@ -658,7 +668,9 @@ export default Formulario (  ) {
 > De la misma manera, tampoco se lanzarán las acciones de los componentes `button` que estén dentro de dicho componente.
 
 
-> **NOTA:** La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
+> [!NOTE] 
+> 
+> La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
 ### 3.3.6. Usa **`select`** correctamente

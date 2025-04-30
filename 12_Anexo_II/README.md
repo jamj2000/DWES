@@ -150,7 +150,9 @@ Ejecutaremos:
 ```bash
 node  server
 ```
-> **NOTA:** 
+
+
+> [!NOTE]
 > 
 > Los objetos `request` y `response` son instancias de [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Request) respectivamente.
 >
@@ -365,7 +367,7 @@ Existen 2 tipos:
 - **Parámetros de ruta** `Path Parameters`
 - **Parámetros de consulta** `Query Parameters` o `Query Strings`
 
-> **NOTA**:
+> [!NOTE]
 > 
 > A menudo se usa el término `Query Strings` como sinónimo de `URL Parameters`, lo cual no es del todo cierto como se acaba de ver y provoca confusiones.
 
@@ -498,12 +500,12 @@ Con NodeJS+Express es realmente sencillo crear una `API REST`.
 
 A continuación se muestra un ejemplo de una `API REST` que proporciona respuestas en formato `JSON` y ofrece funcionalidad básica **`CRUD`**. Lo normal es que la información se registre en una base de datos. Pero, por simplificar, en este ejemplo se trabaja con memoria primaria.
 
-Operación  | Método HTTP | Descripción
------------|-------------|---------------------------------------------------------
-**C**reate | **POST**    | Crear un recurso. Equivale a INSERT en una base de datos
-**R**ead   | **GET**     | Leer un recurso. Equivale a SELECT en una base de datos 
-**U**pdate | **PUT**     | Actualizar un recurso. Equivale a UPDATE en una base de datos
-**D**elete | **DELETE**  | Eliminar un recurso. Equivale a DELETE en una base de datos
+| Operación  | Método HTTP | Descripción                                                   |
+| ---------- | ----------- | ------------------------------------------------------------- |
+| **C**reate | **POST**    | Crear un recurso. Equivale a INSERT en una base de datos      |
+| **R**ead   | **GET**     | Leer un recurso. Equivale a SELECT en una base de datos       |
+| **U**pdate | **PUT**     | Actualizar un recurso. Equivale a UPDATE en una base de datos |
+| **D**elete | **DELETE**  | Eliminar un recurso. Equivale a DELETE en una base de datos   |
 
 ```javascript
 import express from "express";
@@ -646,12 +648,12 @@ El método `POST` es el recomendado, puesto que no tiene limitación en la longi
 Cuando se envía información desde un formulario, ésta puede codificarse de 3 maneras distintas:
 
 
-enctype        | Descripción
----------------|------------------
-**application/x-www-form-urlencoded**	| **Codificación por defecto**. No es necesario hacerla explícita. Todos los caracteres se codifican antes del envío (los espacios se convierten en símbolos "+" y los caracteres especiales se convierten en valores ASCII HEX)
-**multipart/form-data**	| Esta codificación es necesaria si el usuario desea **subir un archivo** a través del formulario.
-**text/plain** | **Desaconsejada**. Envía datos sin ningún tipo de codificación. 
-*application/json* | *No disponible*.
+| enctype                               | Descripción                                                                                                                                                                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **application/x-www-form-urlencoded** | **Codificación por defecto**. No es necesario hacerla explícita. Todos los caracteres se codifican antes del envío (los espacios se convierten en símbolos "+" y los caracteres especiales se convierten en valores ASCII HEX) |
+| **multipart/form-data**               | Esta codificación es necesaria si el usuario desea **subir un archivo** a través del formulario.                                                                                                                               |
+| **text/plain**                        | **Desaconsejada**. Envía datos sin ningún tipo de codificación.                                                                                                                                                                |
+| *application/json*                    | *No disponible*.                                                                                                                                                                                                               |
 
 
 > **Referencias**: 
@@ -711,7 +713,9 @@ app.post('/', multer().none(), function (req, res, next) {
 app.listen(3000);
 ```
 
-**NOTA**: Para gestionar los archivos subidos al servidor usaremos el paquete [`multer`](https://github.com/expressjs/multer/blob/master/doc/README-es.md)
+> [!NOTE]
+> 
+> Para gestionar los archivos subidos al servidor usaremos el paquete [`multer`](https://github.com/expressjs/multer/blob/master/doc/README-es.md)
 
 
 ## 9.3. JSON
@@ -759,12 +763,14 @@ app.post('/', function (req, res, next) {
 app.listen(3000);
 ```
 
-**NOTA:**
-Esta última forma es usada frecuentemente en Aplicaciones de Página Única (SPA - Single Page Applications) para enviar datos al servidor. Ofrece mayor libertad y flexibilidad que las anteriores, puesto que:
-
-- No es necesario usar la etiqueta `form` de HTML. Basta con tener los `input` necesarios y recoger sus valores en variables.
-- No está restringido a los métodos `GET` y `POST`. Se pueden usar otros métodos como `PUT`, `PATCH`, `DELETE`, ...
-
+> [!NOTE]
+>
+> Esta última forma es usada frecuentemente en Aplicaciones de Página Única (SPA - Single Page Applications) para enviar datos al servidor. Ofrece mayor libertad y flexibilidad que las anteriores, puesto que:
+>
+> 
+> - No es necesario usar la etiqueta `form` de HTML. Basta con tener los `input` necesarios y recoger sus valores en variables.
+> - No está restringido a los métodos `GET` y `POST`. Se pueden usar otros métodos como `PUT`, `PATCH`, `DELETE`, ...
+>
 
 
 # 10. Referencias

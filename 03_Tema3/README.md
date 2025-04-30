@@ -71,7 +71,7 @@ Nos aparecerá un asistente solicitando las funcionalidades con las que vamos a 
 
 ![create next app](assets/create-next-app.png)
 
-> **NOTA:**
+> [!NOTE]
 >
 > Otra forma de crear una nueva aplicación, evitando el uso del asistente, es la siguiente:
 >
@@ -184,13 +184,13 @@ Esto es debido a que HTML carece de ellas, y **cuando trabajamos con datos obten
 
 Algunos ejemplos de plantillas muy conocidas son:
 
-| Lenguaje | Framework | Plantilla           |
-| -------- | --------- | --------------------|
-| PHP      | Symfony   | Twig                |
-| PHP      | Laravel   | Blade               |
-| Java     | Spring    | Thymeleaf           |
-| Python   | Django    | DTL                 |
-| NodeJS   | Express   | Handlebars, EJS, ...|
+| Lenguaje | Framework | Plantilla            |
+| -------- | --------- | -------------------- |
+| PHP      | Symfony   | Twig                 |
+| PHP      | Laravel   | Blade                |
+| Java     | Spring    | Thymeleaf            |
+| Python   | Django    | DTL                  |
+| NodeJS   | Express   | Handlebars, EJS, ... |
 
 
 En React/Next las vistas se generan mediante JSX y las estructuras de iteración y condición se indican mediante el uso de **expresiones**. **Estas expresiones deben aparecer entre llaves {}**.  Son las que aparecen a continuación.
@@ -200,7 +200,9 @@ En React/Next las vistas se generan mediante JSX y las estructuras de iteración
 
 Es muy usado el método *array*.**map**, aunque hay otros métodos que pueden usarse como *array*.**filter**.
 
-> **NOTA**: Dentro de JSX no se permite el uso de sentencias del tipo for, while, ...
+> [!NOTE]
+> 
+> Dentro de JSX no se permite el uso de sentencias del tipo for, while, ...
 
 
 **Método map**
@@ -213,7 +215,7 @@ Es muy usado el método *array*.**map**, aunque hay otros métodos que pueden us
 }
 ```
 
-> **NOTA**:
+> [!NOTE]
 >
 > El tipo **[React.ReactNode](https://reactnative.dev/docs/react-node)** es un tipo general para cualquier cosa que se pueda representar: elementos, cadenas, números, fragmentos, nulos, booleanos y arrays que contienen estos tipos.
 
@@ -251,7 +253,9 @@ Existen varias expresiones que podemos usar. Las más habituales son:
 - Operador ??
 - Operador || (es menos usado)
 
-> **NOTA**: Dentro de JSX no se permite el uso de sentencias del tipo if, switch.
+> [!NOTE] 
+> 
+> Dentro de JSX no se permite el uso de sentencias del tipo if, switch.
 
 
 **Operador ternario**
@@ -559,7 +563,9 @@ function Test () {
 export default Test;
 ```
 
-> **NOTA:** Observa que las **propiedades** se escriben en **camelCase** y el separador es la coma.
+> [!NOTE]
+> 
+>  Observa que las **propiedades** se escriben en **camelCase** y el separador es la coma.
 
 
 
@@ -929,7 +935,7 @@ export default Spinner;
 - Ejemplo y documentación disponibles en: https://www.npmjs.com/package/react-spinners
 
 
-> **NOTA:**
+> [!NOTE]
 >
 > Otra forma mucho más simple de crear un spinner es usar un icono y aplicar una animación. 
 > 
