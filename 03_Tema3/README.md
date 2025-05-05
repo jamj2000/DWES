@@ -1008,6 +1008,44 @@ export function SkeletonCard() {
 
 
 
+**Fluent UI React** ( [sitio oficial](https://react.fluentui.dev/) )
+
+Biblioteca desarrollada por Microsoft muy completa. Dispone de numerosos componentes, además de iconos y otro tipo de elementos.
+
+
+```sh
+npm  install @fluentui/react-components
+```
+
+```js
+import * as React from "react";
+import { Button } from "@fluentui/react-components";
+
+export const Default = (props) => (
+  <Button {...props}>Example</Button>
+);
+```
+
+> [!TIP]
+>
+> Fluent UI también dispone de un catálogo de iconos que podemos importar desde el paquete **`@fluentui/react-icons`**
+>
+>```js
+> import { AddCircleFilled, AddCircleRegular, DismissSquareRegular } from '@fluentui/react-icons';
+>
+>
+> function MyComponent () {
+>  return (
+>    <div>           
+>      <DismissSquareRegular />
+>      <AddCircleRegular />
+>      <AddCircleFilled />
+>    </div>
+>  )
+> }
+>```
+
+
 **HeadlessUI** ( [sitio oficial](https://headlessui.com/) )
 
 Posee una dificultad de uso media, aunque no parece disponer de muchos componentes.
