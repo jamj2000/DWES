@@ -1359,8 +1359,8 @@ const users = await prisma.user.findMany({
   select: { /*...*/},
   where: { /*...*/},
   orderBy: {/*...*/},
-  skip: /*...*/,        // corresponde al LIMIT de SQL
-  take: /*...*/,        // corresponde al OFFSET de SQL
+  skip: /*...*/,         // corresponde al OFFSET de SQL
+  take: /*...*/,         // corresponde al LIMIT de SQL
 })
 ```
 
