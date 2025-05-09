@@ -1346,7 +1346,7 @@ Como sustituto de `innerHTML`, React dispone de `dangerouslySetInnerHTML` que es
 
 Cuando se usa `dangerouslySetInnerHTML`, React también sabe que el contenido de ese elemento específico es dinámico y, para los hijos de ese nodo, simplemente omite la comparación con el DOM virtual para obtener un rendimiento adicional.
 
-Imagina que tienes una página web donde se pueden enviar comentarios usando un editor de texto enriquecido. En este caso, el resultado de dicho editor probablemente será HTML con etiquetas como <p>, <b> e <img>.
+Imagina que tienes una página web donde se pueden enviar comentarios usando un editor de texto enriquecido. En este caso, el resultado de dicho editor probablemente será HTML con etiquetas como `<p>`, `<b>` e `<img>`.
 
 Cuando se usa `dangerouslySetInnerHTML`, React toma conciencia de las etiquetas HTML y las procesa correctamente.
 
