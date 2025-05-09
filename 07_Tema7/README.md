@@ -1359,7 +1359,7 @@ Cuando se usa `dangerouslySetInnerHTML`, React toma conciencia de las etiquetas 
   )
 ```
 
-Hay que tener en cuenta que el valor pasado a `dangerouslySetInnerHTML` debe ser un objeto con la clave `__html`. Además, el elemento en el que se utilice la propiedad **`dangerouslySetInnerHTML` no debe tener hijos**, de ahí el uso del elemento <div> con etiqueta de cierre automático.
+Hay que tener en cuenta que el valor pasado a `dangerouslySetInnerHTML` debe ser un objeto con la clave `__html`. Además, el elemento en el que se utilice la propiedad **`dangerouslySetInnerHTML` no debe tener hijos**, de ahí el uso del elemento **`<div>`**  con etiqueta de cierre automático.
 
 Como sugiere el nombre de la propiedad, usar `dangerouslySetInnerHTML` puede ser peligroso, ya que expone el código a ataques de scripts entre sitios (XSS). Esto puede convertirse en un problema especialmente grave si se obtienen datos de una fuente externa o se renderiza contenido enviado por los usuarios.
 
