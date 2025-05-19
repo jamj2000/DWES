@@ -1084,9 +1084,12 @@ Otra opción, es usar alguno de los servidores de correo transaccional, entre el
 - [Sendgrid](https://sendgrid.com)
 - [Mailtrap](https://mailtrap.io/)
 
-Su configuración no suele ser demasiado complicada, pero la integración con el dominio puede dar algunos problemas. Por ejemplo, en mi caso, configurar [resend](https://resend.com) para que use mi dominio registrado con [gandi](https://gandi.net) me ha sido imposible.
+Su configuración no suele ser demasiado complicada, pero la integración con el dominio puede dar algunos problemas. Por ejemplo, en mi caso, al tener ya configurado previamente un servidor de correo con prioridad 10, tuve que dar de alta [resend](https://resend.com) con prioridad 11 en [gandi](https://gandi.net).
 
-Finalmente la opción que he elegido, y explico a continuación, es la siguiente:
+![mx priority](assets/gandi-resend-dns-entries.png)
+
+A continuación explico como enviar correos sin necesidad de usar un servidor de correo transaccional. Los pasos son:
+
 
 1. Registrar un dominio con algún proveedor que ofrezca además alguna cuenta de correo. Por ejemplo, [gandi](https://gandi.net) ofrece 2 cuentas de correo. Los dominios `.eu` suelen ser bastante baratos.
 
