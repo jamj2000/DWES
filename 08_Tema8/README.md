@@ -36,7 +36,8 @@
   - [8.3. Aplicación Middleware](#83-aplicación-middleware)
 - [9. CASOS PRÁCTICOS](#9-casos-prácticos)
   - [9.1. App para gestionar un blog](#91-app-para-gestionar-un-blog)
-  - [9.2. App para gestionar proyectos de climatización](#92-app-para-gestionar-proyectos-de-climatización)
+  - [9.2. App para gestionar una pizzería](#92-app-para-gestionar-una-pizzería)
+  - [9.3. App para gestionar proyectos de climatización](#93-app-para-gestionar-proyectos-de-climatización)
 - [10. ANEXO: Datos de sesión en el lado cliente](#10-anexo-datos-de-sesión-en-el-lado-cliente)
 - [11. Referencias:](#11-referencias)
 
@@ -1053,7 +1054,16 @@ Hay una demo disponible en [vercel](https://nxauth-middleware.vercel.app/).
 ![blog demo](assets/blog.png)
 
 
-## 9.2. App para gestionar proyectos de climatización 
+## 9.2. App para gestionar una pizzería
+
+- [Código fuente](https://github.com/jamj2000/nxapp-pizzeria)
+- [Demo](https://nxapp-pizzeria.vercel.app/)
+
+
+![pizzeria demo](assets/pizzeria.png)
+
+
+## 9.3. App para gestionar proyectos de climatización 
 
 - [Código fuente](https://github.com/jamj2000/nxapp-climatizacion)
 - [Demo](https://nxapp-climatizacion.vercel.app/)
