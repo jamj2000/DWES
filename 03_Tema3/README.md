@@ -703,12 +703,21 @@ export default function Counter() {
 Referencia: https://nextjs.org/docs/app/building-your-application/rendering/client-components
 
 
-**RECORDATORIO IMPORTANTE:** 
+> [!IMPORTANT]
+>
+> **Deberemos colocar al inicio del archivo la directiva `use cliente`, si un componente o una página contiene alguno de los siguientes elementos:** 
+>
+> - **eventos (click, change, ...)**
+> - **funcionalidades del navegador (localStorage, ...)**
+> - **funciones de React del lado cliente como `useState`, `useEffect`,...**
+>
 
-**Deberemos colocar al inicio del archivo la directiva `use cliente`, si un componente o una página contiene alguno de los siguientes elementos:** 
+**Proyecto de ejemplo**
 
-- **eventos (click, change, ...)**
-- **funciones de React del lado cliente como `useState`, `useEffect`,...**
+A continuación se muestra un proyecto que hace uso de componentes de cliente.
+
+- [Carrito de compra: código](https://github.com/jamj2000/nxcart)
+- [Carrito de compra: demo](https://nxcart.vercel.app)
 
 
 ## 3.3. Comparativa. Cuándo usar cada tipo
