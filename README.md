@@ -30,7 +30,9 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 ## Proyectos
 
 - [Páginas y Layouts](https://github.com/jamj2000/nxapp-router)
-- [Contenido estático](https://github.com/jamj2000/nx-static)
+- [Contenido estático - Web informativa](https://github.com/jamj2000/nx-static)
+- [Componentes cliente - Carrito de compra](https://github.com/jamj2000/nxcart)
+
 --- 
 
 - [Contenido estático/dinámico. CSR/SSR](https://github.com/jamj2000/nxrender)
