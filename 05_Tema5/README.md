@@ -433,6 +433,8 @@ Su equivalencia en HTML es la siguiente:
 </form>
 ```
 
+[Proyecto de ejemplo](https://github.com/jamj2000/nxform-filter)
+
 ## 3.3. Consejos
 
 Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
