@@ -71,6 +71,7 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 - [API con datos en memoria RAM](https://github.com/jamj2000/nxapi-memory)
 - [API con datos en BD MongoDB](https://github.com/jamj2000/nxapi-mongodb)
+- [API con datos en BD MongoDB (mongoose)](https://github.com/jamj2000/nxapi-mongoose)
 - [API con datos en BD MySQL](https://github.com/jamj2000/nxapi-mysql)
 
 --- 
