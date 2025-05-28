@@ -708,7 +708,7 @@ Referencia: https://nextjs.org/docs/app/building-your-application/rendering/clie
 > **Deberemos colocar al inicio del archivo la directiva `use cliente`, si un componente o una página contiene alguno de los siguientes elementos:** 
 >
 > - **eventos (click, change, ...)**
-> - **funcionalidades del navegador (localStorage, ...)**
+> - **apis del navegador (window, document, navigator, fetch, localStorage, ...)**
 > - **funciones de React del lado cliente como `useState`, `useEffect`,...**
 >
 
