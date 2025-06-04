@@ -1051,7 +1051,7 @@ export default function Layout({ children }) {
 > [!TIP]
 >
 > - La propiedad `richColors` hace que los toasts tengan color.
-> - La propiead `position` puede tomar uno de los siguientes valores:
+> - La propiedad `position` puede tomar uno de los siguientes valores:
 >   - `top-left`
 >   - `top-center`
 >   - `top-right`
@@ -1092,7 +1092,7 @@ export default function Layout({ children }) {
 
 > [!TIP]
 >
-> - La propiead `position` puede tomar uno de los siguientes valores:
+> - La propiedad `position` puede tomar uno de los siguientes valores:
 >   - `top-left`
 >   - `top-center`
 >   - `top-right`
