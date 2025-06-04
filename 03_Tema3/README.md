@@ -32,12 +32,14 @@
   - [3.6. Componentes proporcionados por terceros](#36-componentes-proporcionados-por-terceros)
     - [3.6.1. Iconos](#361-iconos)
     - [3.6.2. Spinners](#362-spinners)
-    - [3.6.3. UI](#363-ui)
+    - [3.6.3. Toast](#363-toast)
+    - [3.6.4. UI](#364-ui)
 - [4. App Router](#4-app-router)
   - [4.1. Segmentos de ruta](#41-segmentos-de-ruta)
   - [4.2. Creando rutas](#42-creando-rutas)
   - [4.3. Organización del proyecto](#43-organización-del-proyecto)
 - [5. Referencias](#5-referencias)
+
 
 
 
@@ -974,13 +976,135 @@ export default Spinner;
 
 
 
-> **CURIOSIDAD:**
+> [!TIP]
 >
 > No todo son cosas desagradables, como esperar que una operación finalice. También tenemos hueco para cosas agradables, que podemos celebrar con **[confetti](https://github.com/alampros/react-confetti#readme)**.
 >
 
 
-### 3.6.3. UI
+### 3.6.3. Toast
+
+Un *toast* es un pequeño mensaje flotante que aparece para informar al usuario de un suceso. Este mensaje desaparece tras un tiempo.
+
+> [!IMPORTANT]
+> 
+> Para mostrar un toast usamos la función **toast**. Esta función **sólo puede ejecutarse desde un componente cliente**.
+>
+> Distintas formas de la función:
+>
+> ```js
+> toast('Mensaje')
+> toast.success('Mensaje de éxito')
+> toast.error('Mensaje de error')
+> toast.warning('Mensaje de aviso')
+> toast.promise( promesa,
+>   {
+>    loading: 'Loading',
+>    success: 'Got the data',
+>    error: 'Error when fetching',
+>   })
+> ```
+>
+> Componente cliente de ejemplo:
+>
+>```js
+>'use client'
+>
+>export default function ClientComponent() {
+>  //...
+>  toast.success('Mensaje de éxito')
+>  //...
+>}
+>```
+
+
+**sonner** ( [sitio oficial](https://sonner.emilkowal.ski/) )
+
+```sh
+npm  install  sonner
+```
+
+
+> [!IMPORTANT]
+> 
+> Debemos usar un componente **`Toaster`** en el archivo `src/app/layout.js`. Si no lo hacemos, los toasts no serán visibles al usuario.
+>
+
+
+```js
+// src/app/layout.js   
+import { Toaster } from "sonner";
+
+export default function Layout({ children }) {
+  return (
+    <html>
+      <body>
+        {/* ... */}
+
+        <Toaster position="top-center" richColors />
+      </body>
+    </html>
+  );
+}
+```
+
+> [!TIP]
+>
+> - La propiedad `richColors` hace que los toasts tengan color.
+> - La propiead `position` puede tomar uno de los siguientes valores:
+>   - `top-left`
+>   - `top-center`
+>   - `top-right`
+>   - `bottom-left`
+>   - `bottom-center`
+>   - `bottom-right`
+
+
+**red-hot-toast** ( [sitio oficial](https://react-hot-toast.com/) )
+
+```sh
+npm  install  react-hot-toast
+```
+
+
+> [!IMPORTANT]
+> 
+> Debemos usar un componente **`Toaster`** en el archivo `src/app/layout.js`. Si no lo hacemos, los toasts no serán visibles al usuario.
+>
+
+
+```js
+// src/app/layout.js   
+import { Toaster } from "react-hot-toast";
+
+export default function Layout({ children }) {
+  return (
+    <html>
+      <body>
+        {/* ... */}
+
+        <Toaster position="top-center" />
+      </body>
+    </html>
+  );
+}
+```
+
+> [!TIP]
+>
+> - La propiead `position` puede tomar uno de los siguientes valores:
+>   - `top-left`
+>   - `top-center`
+>   - `top-right`
+>   - `bottom-left`
+>   - `bottom-center`
+>   - `bottom-right`
+
+
+
+
+
+### 3.6.4. UI
 
 **Shadcn/UI** ( [sitio oficial](https://ui.shadcn.com/) )
 

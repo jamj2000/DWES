@@ -9,31 +9,28 @@
 <img src="assets/nextdotjs.svg" width="80" height="80">
 
 ---
-
 - [1. Introducción](#1-introducción)
 - [2. Server Actions](#2-server-actions)
   - [2.1. Crear acciones del servidor](#21-crear-acciones-del-servidor)
   - [2.2. Ejecutar acciones del servidor](#22-ejecutar-acciones-del-servidor)
   - [2.3. ¿Qué hace la acción del servidor al finalizar?](#23-qué-hace-la-acción-del-servidor-al-finalizar)
-- [3. Formularios](#3-formularios)
-  - [3.1. Varias acciones dentro de un formulario](#31-varias-acciones-dentro-de-un-formulario)
-  - [3.2. POST vs GET](#32-post-vs-get)
-    - [3.2.1. POST](#321-post)
-    - [3.2.2. GET](#322-get)
-  - [3.3. Consejos](#33-consejos)
-    - [3.3.1. Detro de un formulario usa **`button`** únicamente para hacer submit.](#331-detro-de-un-formulario-usa-button-únicamente-para-hacer-submit)
-    - [3.3.2. Pasa correctamente los valores a las propiedades en los **`input`**](#332-pasa-correctamente-los-valores-a-las-propiedades-en-los-input)
-    - [3.3.3. Usa **`label`** correctamente](#333-usa-label-correctamente)
-    - [3.3.4. Usa **`defaultValue`** y **`value`** correctamente](#334-usa-defaultvalue-y-value-correctamente)
-    - [3.3.5. Usa **`disabled`** y **`readOnly`** correctamente](#335-usa-disabled-y-readonly-correctamente)
-    - [3.3.6. Usa **`select`** correctamente](#336-usa-select-correctamente)
+- [3. Formularios y acciones](#3-formularios-y-acciones)
+  - [3.1. POST vs GET](#31-post-vs-get)
+    - [3.1.1. POST](#311-post)
+    - [3.1.2. GET](#312-get)
+  - [3.2. Consejos](#32-consejos)
+    - [3.2.1. Usa **`button`** siempre con la propiedad `type`.](#321-usa-button-siempre-con-la-propiedad-type)
+    - [3.2.2. Usa **`input`** con propiedades y valor del tipo adecuado](#322-usa-input-con-propiedades-y-valor-del-tipo-adecuado)
+    - [3.2.3. Usa **`label`** correctamente](#323-usa-label-correctamente)
+    - [3.2.4. Usa **`defaultValue`** y **`value`** correctamente](#324-usa-defaultvalue-y-value-correctamente)
+    - [3.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#325-usa-disabled-y-readonly-correctamente)
+    - [3.2.6. Usa **`select`** correctamente](#326-usa-select-correctamente)
 - [4. Funciones del lado cliente](#4-funciones-del-lado-cliente)
   - [4.1. useFormStatus](#41-useformstatus)
-  - [4.2. useFormState](#42-useformstate)
-  - [4.3. useActionState: simplificando lo anterior](#43-useactionstate-simplificando-lo-anterior)
-  - [4.4. Usando un envoltorio (wrapper)](#44-usando-un-envoltorio-wrapper)
-  - [4.5. Un método unificado de trabajo](#45-un-método-unificado-de-trabajo)
-  - [4.6. Ejemplo práctico: Formulario con feedback](#46-ejemplo-práctico-formulario-con-feedback)
+  - [4.2. useActionState: simplificando lo anterior](#42-useactionstate-simplificando-lo-anterior)
+  - [4.3. Usando un envoltorio (wrapper)](#43-usando-un-envoltorio-wrapper)
+  - [4.4. Un método unificado de trabajo](#44-un-método-unificado-de-trabajo)
+  - [4.5. Ejemplo práctico: Formulario con feedback](#45-ejemplo-práctico-formulario-con-feedback)
 - [5. Validación de datos](#5-validación-de-datos)
   - [5.1. Validación en el cliente](#51-validación-en-el-cliente)
   - [5.2. Validación en el servidor](#52-validación-en-el-servidor)
@@ -45,6 +42,8 @@
   - [6.1. Panel de gestión de escuela (Parte 1 de 2)](#61-panel-de-gestión-de-escuela-parte-1-de-2)
   - [6.2. Albúm de fotos](#62-albúm-de-fotos)
 - [7. Referencias](#7-referencias)
+
+
 
 
 
@@ -74,7 +73,7 @@ Como comparativa para constrastar, también incluimos en este tema la técnica `
 
 ## 2.1. Crear acciones del servidor
 
-Personalmente recomiendo, para mejor organización y con fin a obtener un código más legible, el colocar todas las `server actions` en un archivo o archivos separados. Un archivo puede contener varias acciones del servidor.
+Personalmente recomiendo, para mejor organización y con fin a obtener un código más legible, colocar todas las `server actions` en un archivo o archivos separados. Un archivo puede contener varias acciones del servidor.
 
 Al principio del archivo, debe colocarse la directiva `use server`, que evitará que dicho código sea enviado al cliente, lo cual resultaría en un problema de seguridad además de producir un fallo del funcionamiento esperado.
 
@@ -264,14 +263,14 @@ export async function logout() {
 > NextJS hace uso de una caché de contenido, por ello para volver a actualizar el contenido de una página, actualizando además la caché, necesitamos la función `revalidatePath`.
 
 
-# 3. Formularios
+# 3. Formularios y acciones
 
 El uso de formularios para la recogida de datos y su envío al servidor es una tarea muy habitual. 
 
 El diseño e implementación de formularios y sus *inputs* y *buttons* asociados no es tan trivial como puede parecer a primera vista. En este tema estudiaremos las bases para ello, y veremos las diferencias entre la forma en la que se trabaja en HTML frente a JSX. Existen algunas pequeñas diferencias que son clave y que pueden complicarnos la vida cuando no se conocen.  
 
 
-## 3.1. Varias acciones dentro de un formulario
+**Varias acciones dentro de un formulario**
 
 La forma tradicional, y más intuitiva, de gestionar la información de un formulario es vinculándolo a una **acción de servidor**.   
 
@@ -282,7 +281,7 @@ En HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](http
 NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
 
 ```html
-       <form>
+    <form>
           <input type='hidden' name='id' defaultValue={user.id} />
 
           <label htmlFor='nombre'>Usuario</label>
@@ -291,9 +290,9 @@ NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX
           <label htmlFor='edad'>Edad</label>
           <input type='text' id='edad' name='edad' defaultValue={user.edad} />
 
-          <button formAction={userUpdate}>Actualizar</button>
-          <button formAction={userDelete}>Eliminar</button>
-        </form>
+          <button type='submit' formAction={userUpdate}>Actualizar</button>
+          <button type='submit' formAction={userDelete}>Eliminar</button>
+    </form>
 ```
 
 Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar distintas acciones: actualizar, eliminar, ...
@@ -302,14 +301,14 @@ Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un us
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
-## 3.2. POST vs GET
+## 3.1. POST vs GET
 
 La información recogida en un formulario puede enviarse al servidor de 2 maneras distintas:
 
 - **POST** 
 - **GET**
 
-### 3.2.1. POST
+### 3.1.1. POST
 
 Cuando usamos el método POST, **la información se envía en el cuerpo de la petición** y no es visible para el usuario. 
 
@@ -368,7 +367,7 @@ Su equivalencia en **HTML** es la siguiente:
 > Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
 
 
-### 3.2.2. GET
+### 3.1.2. GET
 
 Cuando usamos el método GET, **la información se envía en la URL de la petición** y es visible para el usuario.
 
@@ -435,64 +434,73 @@ Su equivalencia en HTML es la siguiente:
 
 [Proyecto de ejemplo](https://github.com/jamj2000/nxform-filter)
 
-## 3.3. Consejos
+## 3.2. Consejos
 
 Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
 
 Aquí van algunos consejos:
 
 
-### 3.3.1. Detro de un formulario usa **`button`** únicamente para hacer submit.
+### 3.2.1. Usa **`button`** siempre con la propiedad `type`.
 
-No pongas botones con fines distintos a submit. Si lo hacemos se disparará el *action* asociado al formulario. Para operaciones que no sean acciones del servidor usa otro elemento que no sea *button*.
-
-
-**MAL**
+En Next.js, si usas un `<button>` sin especificar la propiedad `type`, su comportamiento es el mismo que en HTML estándar, es decir por defecto es `type="submit"`
 
 ```js
-'use client'
+<button>Guardar</button>
+```
 
-<form action={accion1} >
-    <button onClick={otraOperacion}> Otra operación que no es acción </button> // Mal
+Este botón se comporta como si hubieras escrito:
 
-    <button formAction={accion2} > Accion 2</button>  // Bien
-    <button formAction={accion3} > Accion 3</button>  // Bien
-    <button type='submit'> Acción 1 </button>         // Bien
+```js
+<button type="submit">Guardar</button>
+```
+
+Esto significa que:
+
+- Si estás dentro de un `<form>`, al hacer clic en el botón se enviará el formulario (es decir, se ejecutará la acción del formulario).
+
+- Esto puede causar comportamientos inesperados si tú pretendías que ese botón solo hiciera algo en el cliente (como cerrar un modal, limpiar campos, etc.).
+
+
+**✅ Buenas prácticas en Next.js (y React en general)**
+
+Siempre declara explícitamente el `type`, para evitar errores:
+
+| Comportamiento deseado      | Código recomendado                        |
+| --------------------------- | ----------------------------------------- |
+| Enviar el formulario        | `<button type="submit">Enviar</button>`   |
+| Botón sin enviar formulario | `<button type="button">Cancelar</button>` |
+| Reiniciar el formulario     | `<button type="reset">Reiniciar</button>` |
+
+**⚠️ Errores comunes**
+
+Si usas un botón dentro de un formulario y no especificas `type="button"`, puede causar errores como envíar el formulario sin querer
+
+```js
+<form>
+  <button onClick={() => cerrarModal()}>Cancelar</button> // ¡Envía el formulario sin querer!
+</form>
+```
+Solución:
+
+```js
+<form>
+  <button type="button" onClick={() => cerrarModal()}>Cancelar</button>
 </form>
 ```
 
-**BIEN**
+En resumen
 
-```js
-'use client'
+✅ Si no especificas type, el valor por defecto es submit.  
+🛠️ Es buena práctica declarar siempre type explícitamente.  
+🧠 Esto es HTML estándar, no algo específico de Next.js.  
 
-<form action={accion1} >
-    <span onClick={otraOperacion}> Otra operación que no es acción </span> // Bien
 
-    <button formAction={accion2} > Accion 2</button>  // Bien
-    <button formAction={accion3} > Accion 3</button>  // Bien
-    <button type='submit'> Acción 1 </button>         // Bien
-</form>
-```
+### 3.2.2. Usa **`input`** con propiedades y valor del tipo adecuado
 
-Otra solución es desactivar el comportamiento por defecto del botón con el método `preventDefault` del evento.
+A diferencia de HTML donde todos los valores de las propiedades son de tipo string, en JSX el valor para algunas propiedades debe ser `number` o `boolean`. 
 
-**BIEN**
-
-```js
-'use client'
-
-<form action={accion1} >
-    <button onClick={(e) => { e.preventDefault(); otraOperacion() }}> Otra operación que no es acción </button> // Bien
-
-    <button formAction={accion2} > Accion 2</button>  // Bien
-    <button formAction={accion3} > Accion 3</button>  // Bien
-    <button type='submit'> Acción 1 </button>         // Bien
-</form>
-```
-
-### 3.3.2. Pasa correctamente los valores a las propiedades en los **`input`**
-
+A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 
 **MAL**
 
@@ -510,7 +518,7 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 <input required  disabled />               // Correcto en JSX     
 ```
 
-### 3.3.3. Usa **`label`** correctamente
+### 3.2.3. Usa **`label`** correctamente
 
 **MAL**
 
@@ -534,7 +542,7 @@ Otra solución es desactivar el comportamiento por defecto del botón con el mé
 </label>  
 ```
 
-### 3.3.4. Usa **`defaultValue`** y **`value`** correctamente
+### 3.2.4. Usa **`defaultValue`** y **`value`** correctamente
 
 La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
 
@@ -614,7 +622,7 @@ export default function Cuadrado({ long, width }) {
 >
 > Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
-### 3.3.5. Usa **`disabled`** y **`readOnly`** correctamente
+### 3.2.5. Usa **`disabled`** y **`readOnly`** correctamente
 
 Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
 
@@ -675,7 +683,7 @@ export default Formulario (  ) {
 > La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
-### 3.3.6. Usa **`select`** correctamente
+### 3.2.6. Usa **`select`** correctamente
 
 Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
 
@@ -743,10 +751,9 @@ Aunque podemos definir un formulario en el lado servidor, a menudo necesitaremos
 En estos casos necesitaremos convertir el formulario en un componente del lado cliente y colocar, al comienzo de dicho archivo, la directiva **'use client'** (con comillas, simples o dobles)
 
 
-NextJS tiene 3 funciones para mejorar la experiencia con formularios en el lado cliente:
+NextJS tiene 2 funciones para mejorar la experiencia con formularios en el lado cliente:
 
 - Mostrar estados de carga en el cliente con `useFormStatus()`
-- Capturar y mostrar errores del servidor con `useFormState()`
 - Mostrar estados, capturar y mostrar errores del servidor con `useActionState()` (a partir de Next 15)
 
 > **IMPORTANTE**: **Componentes del lado cliente**
@@ -793,57 +800,7 @@ export function SubmitButton() {
 ```  
 
 
-## 4.2. useFormState
-
-Este *hook* permite al formulario recibir el mensaje generado por el `server action` tras su ejecución, y poder dar retroalimentación al usuario.
-
-Esta técnica es la que aparece en la mayoría de tutoriales y documentación. Voy a pasar a exponerla para que puedas entienda su funcionamiento y la forma de aplicarla. Aunque yo personalmente considero que es muy engorrosa y que es bastante mejorable.
-
-La documentación puede consultarse en https://react.dev/reference/react-dom/hooks/useFormState
-
-**/app/formulario.js**
-```js
-'use client'
-import { SubmitButton } from '@/app/SubmitButton'
-import { insertData } from '@/app/actions'
-import { useFormState } from 'react-dom';
-
-
-export function Formulario() {
-    // El server action real es insertData
-    const [respuesta, action] = useFormState(insertData, null);
-
-    return (
-        <form action={action}>
-            <input type="text" required name="nombre" placeholder="Introduce tu nombre" />
-            <input type="text" required name="apellidos" placeholder="Introduce tus apellidos" />
-            <label htmlFor="avatar">
-                Selecciona un avatar para enviar al servidor
-            </label>
-            <input type="file" required name="avatar" accept="image/*" />
-            <SubmitButton />
-            {respuesta?.message}
-        </form>
-    )
-}
-```
-Un inconveniente de esta técnica es que debemos modificar el `server action` para que reciba 2 argumentos. Quedaría así:
-
-**/app/actions.js**
-
-```js                                                        
-'use server'
-
-export async function insertData(prevState, formData) {
-    const nombre = formData.get('nombre')
-    const apellidos = formData.get('apellidos')
-    
-    // ...
- 
-}
-```
-
-## 4.3. useActionState: simplificando lo anterior
+## 4.2. useActionState: simplificando lo anterior
 
 A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplifica el trabajo con *actions*.
 
@@ -881,7 +838,6 @@ export default function Formulario() {
 **Características**
 
 - El código es más simple
-- No es necesario usar  `useFormStatus` ni `useFormState`.
 - No es necesario poner el botón de submit en un componente separado.
 - `useActionState` no se limita a su uso en formularios, sino que es una solución general para el *feedback* proporcionado por cualquier acción del servidor.
 
@@ -909,7 +865,7 @@ export async function createProduct(previousState, formData) {
 ```  
 
 
-## 4.4. Usando un envoltorio (wrapper)
+## 4.3. Usando un envoltorio (wrapper)
 
 Otra técnica muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
 
@@ -966,7 +922,7 @@ export async function insertData(formData) {
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
-## 4.5. Un método unificado de trabajo
+## 4.4. Un método unificado de trabajo
 
 Después de todas las posibilidades mostradas en los apartados anteriores, cualquiera puede llegar al *cortocircuito*.
 
@@ -1043,7 +999,7 @@ export async function accionReal(prevState, formData) {
 
 
 
-## 4.6. Ejemplo práctico: Formulario con feedback
+## 4.5. Ejemplo práctico: Formulario con feedback
 
 En el siguiente enlace tienes el código completo de una aplicación que muestra como gestionar mensajes de *feedback* en un formulario.
 
