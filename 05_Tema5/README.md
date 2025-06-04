@@ -760,7 +760,11 @@ NextJS tiene 2 funciones para mejorar la experiencia con formularios en el lado 
 >
 > En React, y en NextJS, todas las funciones que comienzan por `use` se consideran `hooks` y deben ser ejecutadas en el cliente. También es necesario usar componentes del cliente si queremos hacer uso de eventos como onclick, onchange, ...
 
-Supongamos que disponemos del siguiente **`server action`**:
+
+
+## 4.1. useFormStatus
+
+Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
 
 **/app/actions.js**
 ```js                                                        
@@ -774,12 +778,6 @@ export async function insertData(formData) {
  
 }
 ```
-
-
-## 4.1. useFormStatus
-
-Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
-
 
 **/app/SubmitButton.js**
 
@@ -798,6 +796,41 @@ export function SubmitButton() {
   )
 }
 ```  
+
+
+**/app/formulario.js**
+```js
+'use client'
+import { SubmitButton } from '@/app/SubmitButton'
+import { insertData } from '@/app/actions'
+import { toast } from 'react-hot-toast';
+
+
+export function Formulario() {
+
+    return (
+        <form action={insertData}>
+            <input required 
+               name="nombre" 
+               placeholder="Introduce tu nombre" />
+            
+            <input required 
+              name="apellidos" 
+              placeholder="Introduce tus apellidos" />
+            
+            <label htmlFor="avatar">
+                Selecciona un avatar para enviar al servidor
+            </label>
+            <input required
+                id="avatar" name="avatar"
+                type="file" accept="image/*" />
+
+            <SubmitButton />
+        </form>
+    )
+}
+```
+
 
 
 ## 4.2. useActionState: simplificando lo anterior
@@ -823,6 +856,7 @@ export default function Formulario() {
         className="py-2 px-3 rounded-sm"
       />
       <button
+        type="submit"
         disabled={pending}
         className="bg-blue-500 text-white py-2 px-3 rounded-sm"
       >
@@ -851,7 +885,7 @@ export default function Formulario() {
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
-export async function createProduct(previousState, formData) {
+export async function createProduct(prevState, formData) {
   const content = formData.get("content");
 
   try {
@@ -974,7 +1008,7 @@ fuction Formulario() {
     return (
         <form action={action}>
 
-            <button disabled={pending} >
+            <button type="submit" disabled={pending} >
                 {pending ? 'Realizando acción' : 'Acción 1'}
             </button>
         </form>
@@ -983,12 +1017,9 @@ fuction Formulario() {
 ```
 
 ```js
-// actions.js, declaradas como funciones de servidor
-'use server'
+'use server'  // IMPORTANTE
 
-// IMPORTANTE: Dos argumentos
-// - prevState
-// - formData
+// IMPORTANTE. Dos argumentos: prevState, formData
 export async function accionReal(prevState, formData) {
     // Realizamos operación en el servidor
 
@@ -1052,6 +1083,7 @@ function Formulario() {
             </div>
 
             <button
+                type="submit"
                 formAction={action1}
                 disabled={pending1}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
@@ -1062,6 +1094,7 @@ function Formulario() {
             {state1.success  && state1.success}
     
             <button
+                type="submit"
                 formAction={action2}
                 disabled={pending2}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
@@ -1280,6 +1313,7 @@ function Formulario() {
 
 
             <button
+                type="submit"
                 formAction={action}
                 disabled={pending}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
