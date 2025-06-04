@@ -491,7 +491,7 @@ Solución:
 
 En resumen
 
-✅ Si no especificas type, el valor por defecto es submit.  
+✅ **Si no especificas type, el valor por defecto es submit.**  
 🛠️ Es buena práctica declarar siempre type explícitamente.  
 🧠 Esto es HTML estándar, no algo específico de Next.js.  
 
@@ -502,7 +502,7 @@ A diferencia de HTML donde todos los valores de las propiedades son de tipo stri
 
 A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 
-**MAL**
+**MAL ❌**
 
 ```js
 <input type="number" min="1" max="100" />  // Permitido en HTML. No permitido en JSX
@@ -510,7 +510,7 @@ A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 <input required disabled />                // Permitido en HTML. Permitido en JSX
 ```
 
-**BIEN**
+**BIEN ✅**
 
 ```js
 <input type="number" min={1} max={100} />  // Correcto en JSX
@@ -520,21 +520,21 @@ A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 
 ### 3.2.3. Usa **`label`** correctamente
 
-**MAL**
+**MAL ❌**
 
 ```js
 <label>Número:</label>                              // Provoca warning en JSX
 <input id="num" type="number" min={1} max={100} />   
 ```
 
-**BIEN**
+**BIEN ✅**
 
 ```js
 <label htmlFor="num">Número: </label>                  
 <input id="num" type="number" min={1} max={100} />  
 ```
 
-**BIEN**
+**BIEN ✅**
 
 ```js
 <label>Número:                   
@@ -671,7 +671,7 @@ export default Formulario (  ) {
 > 
 > El componente `fieldset` no admite la propiedad `readOnly`. 
 
->**IMPORTANTE:**
+> [!IMPORTANT]
 >
 > Recuerda que los valores de los componentes `input`, `select`, `textarea`, ... no se enviarán al servidor si están dentro de un `fieldset disabled`. 
 > 
