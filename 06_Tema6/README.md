@@ -1089,11 +1089,14 @@ Estos tipos de datos son mapeados a los tipos nativos de cada base de datos seg√
 ```prisma
 model User {
   id      Int      @id @default(autoincrement())
+
   profile Profile?
 }
 
+
 model Profile {
   id     Int  @id @default(autoincrement())
+
   user   User @relation(fields: [userId], references: [id])
   userId Int  @unique  // campo escalar (usado en atributo `@relation`)
 }
@@ -1104,11 +1107,14 @@ model Profile {
 ```prisma
 model User {
   id    Int    @id @default(autoincrement())
+
   posts Post[]
 }
 
+
 model Post {
   id       Int  @id @default(autoincrement())
+
   author   User @relation(fields: [authorId], references: [id])
   authorId Int  // campo escalar (usado en atributo `@relation`)
 }
@@ -1122,11 +1128,14 @@ En el siguiente ejemplo, se permite crear un Post sin asignar un User. Observar 
 ```prisma
 model User {
   id    Int    @id @default(autoincrement())
+
   posts Post[]
 }
 
+
 model Post {
   id       Int   @id @default(autoincrement())
+
   author   User? @relation(fields: [authorId], references: [id])
   authorId Int?
 }
@@ -1138,22 +1147,28 @@ model Post {
 model Post {
   id         Int       @id @default(autoincrement())
   title      String
+
   categories CategoriesOnPosts[]
 }
+
 
 model Category {
   id    Int            @id @default(autoincrement())
   name  String
+
   posts CategoriesOnPosts[]
 }
 
+
 model CategoriesOnPosts {
-  post       Post     @relation(fields: [postId], references: [id])
-  postId     Int     // campo escalar (usado en atributo `@relation`)
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int     // campo escalar (usado en atributo `@relation`)
   assignedAt DateTime @default(now())
   assignedBy String
+
+  post       Post     @relation(fields: [postId], references: [id])
+  postId     Int     // campo escalar (usado en atributo `@relation`)
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int     // campo escalar (usado en atributo `@relation`)
 
   @@id([postId, categoryId])
 }
@@ -1165,12 +1180,15 @@ Si en la tabla intermedia no tenemos campos propios, Prisma nos permite simplifi
 model Post {
   id         Int         @id @default(autoincrement())
   title      String
+
   categories Category[]
 }
+
 
 model Category {
   id    Int              @id @default(autoincrement())
   name  String
+
   posts Post[]
 }
 ```
