@@ -1222,7 +1222,9 @@ o, en su lugar, ejecutaremos:
 npx prisma db push
 ```
 
-> **IMPORTANTE**: La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
+> [!IMPORTANT]
+> 
+> La operación `npx prisma db push` eliminará todas las tablas previas en la base de datos que no aparezcan registradas en `prisma/schema.prisma`. 
 
 
 
@@ -1235,7 +1237,9 @@ npx prisma db pull
 npx prisma generate
 ```
 
-> **IMPORTANTE**: La operación `npx prisma db pull` borra el esquema previo de `prisma/schema.prisma`. 
+> [!IMPORTANTE]
+> 
+> La operación `npx prisma db pull` borra el esquema previo de `prisma/schema.prisma`. 
 
 ![prisma db pull](assets/introspect.png)
 
@@ -1263,13 +1267,10 @@ Estas son las 4 operaciones básicas necesarias para la gestión de información
 A continuación, usaremos ejemplos con valores explícitos. Usaremos el siguiente esquema:
 
 
+![diagrama ER](assets/prisma-erd.png)
 
 <details>
-<summary>
-Esquema de prisma
-
-![diagrama ER](assets/prisma-erd.png)
-</summary>
+<summary> Esquema de prisma (Pulsa aquí para ver)</summary>
 
 <pre>
 
