@@ -63,7 +63,9 @@ La definición de contenido estático y dinámico es muy sencilla:
 - **Contenido estático** es aquel que **NO cambia** a lo largo del tiempo.
 - **Contenido dinámico** es aquel que **SÍ cambia** a lo largo del tiempo.
 
-> **MUY IMPORTANTE:**
+> [!IMPORTANT]
+> 
+> **MUY IMPORTANTE**
 >
 > **Cuando hablamos de contenido, nos referiremos al código fuente de la página**, no a lo que ve el usuario.
 >
@@ -295,7 +297,7 @@ A continuación se muestra como trabjar con cookies desde NextJS.
 **`cookieStore.set(name, value, options)`**  
 **`cookieStore.set( { name, value, /* options */ } )`**
 
-> **IMPORTANTE:** 
+> [!IMPORTANT]
 >
 > Sólo es posible generar cookies en un `Server Action` o un `Route Handler`.
 > HTTP no permite generar cookies después del comienzo de la respuesta.
@@ -353,7 +355,7 @@ export async function getCookie(name) {
 **`const cookieStore = await cookies()`**  
 **`cookieStore.delete(name)`**
 
-> **IMPORTANTE:** 
+> [!IMPORTANT]
 >
 > Sólo es posible eliminar cookies en un `Server Action` o un `Route Handler`.
 

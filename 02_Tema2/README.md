@@ -54,7 +54,10 @@ En este tema necesitaras consultar los recursos que aparecen a continuación par
 - [ARRAYS](https://github.com/jamj2000/Javascript/blob/master/04.ARRAYS.md)
 - [OBJETOS](https://github.com/jamj2000/Javascript/blob/master/05.OBJETOS.md)
 
-> **IMPORTANTE:** Los apartados que aparecen a continuación son un resumen muy breve del contenido de los enlaces anteriores y no es suficiente para entender con cierta profundidad el lenguaje Javascript, por lo que se recomienda encarecidamente la consulta de dichos enlaces.
+
+> [!IMPORTANT]
+> 
+> Los apartados que aparecen a continuación son un resumen muy breve del contenido de los enlaces anteriores y no es suficiente para entender con cierta profundidad el lenguaje Javascript, por lo que se recomienda encarecidamente la consulta de dichos enlaces.
 >
 
 

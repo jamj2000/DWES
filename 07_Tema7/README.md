@@ -370,7 +370,7 @@ Instalamos como **dependencia de desarrollo**. Aparecerá en la sección `devDep
 npm install -D @faker-js/faker
 ```
 
-> **IMPORTANTE:**
+> [!IMPORTANT]
 >
 > Esta biblioteca ocupa unos cuantos MB.
 
@@ -724,7 +724,7 @@ El gráfico debe estar dentro de un **elemento contenedor**. El contenedor padre
 Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (`canvas`) y los tamaños de visualización. Sin embargo, este método requiere que el contenedor esté relativamente posicionado y dedicado únicamente al lienzo del gráfico.
 
 
-> **IMPORTANTE:**
+> [!IMPORTANT]
 >
 > La página donde vaya a incrustarse el gráfico debe contener la directiva **`'use client'`**
 
@@ -764,7 +764,10 @@ npm run dev
 
 **Ejecución en entorno de producción**
 
-**IMPORTANTE**: El grafico6 hace uso del plugin `chartjs-plugin-zoom` para ofrecer funcionalidad de zoom y pan. Sin embargo este plugin provoca un error en el proceso de construcción. Por tanto el comando `npm run build` fallará. Si deseas llevar esta aplicación a producción, elimina este plugin del archivo `src/components/grafico6.js`.
+> [!IMPORTANT]
+> 
+> El grafico6 hace uso del plugin `chartjs-plugin-zoom` para ofrecer funcionalidad de zoom y pan. Sin embargo este plugin provoca un error en el proceso de construcción. Por tanto el comando `npm run build` fallará. Si deseas llevar esta aplicación a producción, elimina este plugin del archivo `src/components/grafico6.js`.
+> 
 
 
 **Resumen del proceso de desarrollo**

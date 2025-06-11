@@ -54,7 +54,7 @@ Next es un **framework fullstack JavaScript**, que emplea **React** para crear c
 Con Next hacemos aplicaciones **Server Side Rendering (SSR)**, y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
 
 
-> **IMPORTANTE**
+> [!IMPORTANT]
 >
 > **Usaremos la versión NextJS 13 o superior.**
 >
@@ -239,7 +239,7 @@ Ejemplo de método map
 *Por cada persona del array people, mostramos su nombre y profesión.*
 
 
-> **IMPORTANTE:** 
+> [!IMPORTANT]
 >
 > Cada elemento dentro del método map debe tener una propiedad **key**, que debe ser única.
 
@@ -786,7 +786,9 @@ El componente `<Image>` de Next.js amplía el elemento <img> de HTML con funcion
 - Referencia: https://nextjs.org/docs/app/api-reference/components/image
 
 
-> **IMPORTANTE**: Tanto si usamos el componente `Image` proporcionado por NextJS, como si usamos la etiqueta `img` de HTML, deberemos indicar en el archivo **`next.config.js`** los dominios desde los cuales recuperamos imágenes. Por ejemplo, si usamos imágenes alojadas en cloudinary, escribiremos:
+> [!IMPORTANT]
+> 
+> Tanto si usamos el componente `Image` proporcionado por NextJS, como si usamos la etiqueta `img` de HTML, deberemos indicar en el archivo **`next.config.js`** los dominios desde los cuales recuperamos imágenes. Por ejemplo, si usamos imágenes alojadas en cloudinary, escribiremos:
 >
 >
 > ```js

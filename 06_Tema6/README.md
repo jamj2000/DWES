@@ -1417,7 +1417,9 @@ const users = await prisma.user.findMany({
 })
 ```
 
-> **IMPORTANTE**: NO SE PERMITE USAR `select` E `include` A LA VEZ EN EL MISMO NIVEL.
+> [!IMPORTANT]
+> 
+> NO SE PERMITE USAR `select` E `include` A LA VEZ EN EL MISMO NIVEL.
 >
 > **INCORRECTO**
 > 

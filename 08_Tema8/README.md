@@ -145,7 +145,9 @@ AUTH_RESEND_KEY=
 > https://generate-secret.vercel.app/32
 > ```
 
-> **IMPORTANTE**: NextAuth 5 simplifica el proceso de gestión de variables de entorno con respecto a NextAuth4. La nueva forma de nombrado de variables es la mostrada arriba. Si seguimos esta convención, AuthJs las reconocerá automáticamente y nuestra configuración de archivos se verá simplificada de forma notable. 
+> [!IMPORTANT]
+> 
+> NextAuth 5 simplifica el proceso de gestión de variables de entorno con respecto a NextAuth4. La nueva forma de nombrado de variables es la mostrada arriba. Si seguimos esta convención, AuthJs las reconocerá automáticamente y nuestra configuración de archivos se verá simplificada de forma notable. 
 
 ## 3.2. src/auth.js
 
@@ -387,8 +389,10 @@ Los Modelos que usa Auth.js son los siguientes:
 
 ![Modelos para Auth](assets/authjs-models.png)
 
-**IMPORTANTE**: 
-Sólo necesitaremos los modelos User y Account. Se ha **ampliado del módelo `User` con campos `password` y `role`**.
+> [!IMPORTANT]
+>
+> Sólo necesitaremos los modelos User y Account. Se ha **ampliado del módelo `User` con campos `password` y `role`**.
+
 
 ```prisma
 model User {
