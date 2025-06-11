@@ -6,11 +6,13 @@
 
 **[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
+<div style="display: inline">
 <img src="assets/nextdotjs.svg" width="80" height="80">
 <img src="assets/mysql.svg" width="80" height="80">
 <img src="assets/sqlite.svg" width="80" height="80">
 <img src="assets/postgresql.svg" width="80" height="80">
 <img src="assets/prisma.svg" width="80" height="80">
+<div>
 
 ---- 
 
