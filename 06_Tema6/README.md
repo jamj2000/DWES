@@ -1253,12 +1253,14 @@ Estas son las 4 operaciones básicas necesarias para la gestión de información
 
 - [Consultas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
 
-A continuación, a menudo, usaremos ejemplos con valores explícitos. Usaremos el siguiente esquema:
+A continuación, usaremos ejemplos con valores explícitos. Usaremos el siguiente esquema:
 
-![diagrama ER](assets/prisma-erd.png)
+
 
 <details>
-<summary>Esquema Prisma</summary>
+<summary>
+![diagrama ER](assets/prisma-erd.png)
+</summary>
 
 <pre>
 
@@ -1298,6 +1300,11 @@ enum Role {
 
 </pre> 
 </details>
+
+> [!TIP]
+>
+> Para generar diagramas ER a partir del esquema de prisma (`schema.prisma`) puedes usar la herramienta [https://prisma-erd.simonknott.de/](https://prisma-erd.simonknott.de/)
+> 
 
 ### 9.1.1. Create
 
