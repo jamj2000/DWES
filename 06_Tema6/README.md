@@ -990,7 +990,7 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 
 ![prisma migrate con cambios](assets/migrate-dev2.png)
 
-> [!TIP]
+> [!TIP:]
 >
 > Una operación muchos más cómoda y directa, es hacer:
 >
