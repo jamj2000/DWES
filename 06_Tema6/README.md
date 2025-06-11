@@ -34,12 +34,12 @@
   - [7.1. Instalación del paquete prisma](#71-instalación-del-paquete-prisma)
   - [7.2. Comandos disponibles](#72-comandos-disponibles)
   - [7.3. Inicialización](#73-inicialización)
-- [8. Definiendo el Modelo de Datos](#8-definiendo-el-modelo-de-datos)
-  - [8.1. Escribir el modelo de datos manualmente](#81-escribir-el-modelo-de-datos-manualmente)
+- [8. Definiendo el Esquema de Datos](#8-definiendo-el-esquema-de-datos)
+  - [8.1. Escribir el esquema de datos manualmente](#81-escribir-el-esquema-de-datos-manualmente)
     - [8.1.1. Modelos](#811-modelos)
     - [8.1.2. Relaciones](#812-relaciones)
     - [8.1.3. Sincronizando el esquema con la base de datos](#813-sincronizando-el-esquema-con-la-base-de-datos)
-  - [8.2. Generar el modelo de datos mediante introspección](#82-generar-el-modelo-de-datos-mediante-introspección)
+  - [8.2. Generar el esquema de datos mediante introspección](#82-generar-el-esquema-de-datos-mediante-introspección)
 - [9. Consultas](#9-consultas)
   - [9.1. Consultas CRUD](#91-consultas-crud)
     - [9.1.1. Create](#911-create)
@@ -960,21 +960,21 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 > `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>'`
 
 
-# 8. Definiendo el Modelo de Datos
+# 8. Definiendo el Esquema de Datos
 
-Hay dos formas alternativas de definir un modelo de datos:
+Hay dos formas alternativas de definir un esquema de datos:
 
-1. **Escribir el modelo de datos manualmente y usar Prisma Migrate**: puedes escribir tu modelo de datos manualmente y asignarlo a tu base de datos usando Prisma Migrate. En este caso, el modelo de datos es la única fuente de verdad para los modelos de tu aplicación.
+1. **Escribir el esquema de datos manualmente y usar Prisma Migrate**: puedes escribir tu esquema de datos manualmente y asignarlo a tu base de datos usando Prisma Migrate. En este caso, el esquema de datos es la única fuente de verdad para los modelos de tu aplicación.
 
-2. **Generar el modelo de datos mediante introspección**: cuando tienes una base de datos existente o prefieres migrar el esquema de tu base de datos con SQL, genera el modelo de datos mediante una introspección de tu base de datos. En este caso, el esquema de la base de datos es la única fuente de verdad para los modelos de tu aplicación.
+2. **Generar el esquema de datos mediante introspección**: cuando tienes una base de datos existente o prefieres migrar el esquema de tu base de datos con SQL, genera el esquema de datos mediante una introspección de tu base de datos. En este caso, el esquema de la base de datos es la única fuente de verdad para los modelos de tu aplicación.
 
 
 Nosotros usaremos la primera forma, aunque se explica la segunda forma de manera somera más adelante.
 
 
-## 8.1. Escribir el modelo de datos manualmente
+## 8.1. Escribir el esquema de datos manualmente
 
-En este caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el modelo desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
+En este caso, tenemos una base de datos totalmente vacía, sin tablas creadas previamente. Para generar el esquema desde cero, editamos el archivo **`prisma/schema.prisma`** para añadir los modelos deseados. Una vez hecho lo anterior ejecutamos:
 
 ```sh
 npx prisma migrate dev   
@@ -988,7 +988,7 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 
 ![prisma migrate con cambios](assets/migrate-dev2.png)
 
-> [!NOTE]
+> [!TIP]
 >
 > Una operación muchos más cómoda y directa, es hacer:
 >
@@ -998,6 +998,11 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 
 
 ### 8.1.1. Modelos
+
+Los modelos son cada una de las partes de las que se compone un esquema. Los modelos:
+
+- Representan las **entidades** del dominio de aplicación.
+- Se asignan a las **tablas** (bases de datos relacionales como PostgreSQL) o **colecciones** (MongoDB) de la base de datos.
 
 - [Modelos en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/models)
 
@@ -1219,16 +1224,16 @@ npx prisma db push
 
 
 
-## 8.2. Generar el modelo de datos mediante introspección
+## 8.2. Generar el esquema de datos mediante introspección
 
-En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, podemos generar el modelo a partir de dichas tablas. Para ello ejecutamos:
+En el caso de que dispongamos de tablas previamente creadas en la base de datos y deseemos mantener la información, podemos generar el esquema a partir de dichas tablas. Para ello ejecutamos:
 
 ```sh
 npx prisma db pull    
 npx prisma generate
 ```
 
-> **IMPORTANTE**: La operación `npx prisma db pull` borra el modelo previo de `prisma/schema.prisma`. 
+> **IMPORTANTE**: La operación `npx prisma db pull` borra el esquema previo de `prisma/schema.prisma`. 
 
 ![prisma db pull](assets/introspect.png)
 
