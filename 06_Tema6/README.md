@@ -6,13 +6,13 @@
 
 **[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
-<div style="display: inline">
+
 <img src="assets/nextdotjs.svg" width="80" height="80">
 <img src="assets/mysql.svg" width="80" height="80">
 <img src="assets/sqlite.svg" width="80" height="80">
 <img src="assets/postgresql.svg" width="80" height="80">
 <img src="assets/prisma.svg" width="80" height="80">
-<div>
+
 
 ---- 
 
@@ -990,7 +990,7 @@ Si ha habido algún cambio al esquema, entonces nos solicitará un nombre para l
 
 ![prisma migrate con cambios](assets/migrate-dev2.png)
 
-> [!TIP:]
+> [!TIP]
 >
 > Una operación muchos más cómoda y directa, es hacer:
 >
@@ -1237,7 +1237,7 @@ npx prisma db pull
 npx prisma generate
 ```
 
-> [!IMPORTANTE]
+> [!IMPORTANT]
 > 
 > La operación `npx prisma db pull` borra el esquema previo de `prisma/schema.prisma`. 
 
