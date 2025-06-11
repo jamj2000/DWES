@@ -1266,6 +1266,8 @@ A continuación, usaremos ejemplos con valores explícitos. Usaremos el siguient
 
 <details>
 <summary>
+Esquema de prisma
+
 ![diagrama ER](assets/prisma-erd.png)
 </summary>
 

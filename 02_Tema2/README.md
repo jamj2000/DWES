@@ -4,9 +4,10 @@
 > Inserción de código en páginas Web  
 > JAVASCRIPT
 
-
+<div style="display: inline">
 <img src="assets/javascript.svg" width="80" height="80">
 <img src="assets/nodedotjs.svg" width="80" height="80">
+</div>
 
 ---
 
