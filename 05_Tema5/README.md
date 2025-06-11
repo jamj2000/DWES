@@ -727,7 +727,9 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 </select>
 ```
 
-> **CONSEJO IMPORTANTE**:
+> [!TIP]
+> 
+> **CONSEJO IMPORTANTE**
 >
 > Usa siempre una propiedad **key** en el select, cuando trabajes con entrada no controlada. 
 > El valor de dicha propiedad debe ser dinámico, y cambiar cuando el usuario seleccione una opción distinta a la anterior.
@@ -756,7 +758,9 @@ NextJS tiene 2 funciones para mejorar la experiencia con formularios en el lado 
 - Mostrar estados de carga en el cliente con `useFormStatus()`
 - Mostrar estados, capturar y mostrar errores del servidor con `useActionState()` (a partir de Next 15)
 
-> **IMPORTANTE**: **Componentes del lado cliente**
+> [!IMPORTANT] 
+> 
+> **Componentes del lado cliente**
 >
 > En React, y en NextJS, todas las funciones que comienzan por `use` se consideran `hooks` y deben ser ejecutadas en el cliente. También es necesario usar componentes del cliente si queremos hacer uso de eventos como onclick, onchange, ...
 

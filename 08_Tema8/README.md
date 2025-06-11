@@ -542,7 +542,10 @@ https://console.developers.google.com/apis/credentials
 
 ![google 2](assets/oauth-google2.png)
 
-> **IMPORTANTE**: Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
+
+> [!IMPORTANT]  
+> 
+> Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
 
 ![google 3](assets/oauth-google3.png)
 
@@ -561,7 +564,9 @@ https://github.com/settings/apps
 
 ![github 2](assets/oauth-github2.png)
 
-> **IMPORTANTE**: Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
+> [!IMPORTANT] 
+> 
+> Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
 
 ![github 3](assets/oauth-github3.png) 
 
@@ -675,9 +680,12 @@ import Credentials from "@auth/core/providers/credentials"
 
 # 7. Despliegue
 
-**MUY IMPORTANTE:**
-
-Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en los proveedores OAuth, de forma similar a la mostrada a continuación:
+> [!IMPORTANT] 
+>
+> **MUY IMPORTANTE:**
+>
+>
+> Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en los proveedores OAuth, de forma similar a la mostrada a continuación:
 
 **Google**
 

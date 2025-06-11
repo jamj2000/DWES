@@ -776,7 +776,7 @@ npm run dev
 npm  install  chart.js@3 react-chartjs-2@4 luxon chartjs-adapter-luxon chartjs-plugin-streaming chartjs-plugin-zoom chartjs-plugin-annotation@1 --legacy-peer-deps
 ```
 
-> **IMPORTANTE:** 
+> [!IMPORTANT] 
 >
 > **A fecha de Abril de 2024, este plugin de streaming no soporta chartjs v4, por tanto debemos instalar los paquetes más antiguos usando el comando anterior**
 

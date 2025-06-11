@@ -82,7 +82,9 @@ Un buen sitio para generar el `manifest` era [simicart](https://www.simicart.com
 
 Al generador deberemos proporcinarle, además de los datos de configuración, una imagen con fondo transparente y un tamano de 512x512 píxeles. A partir de ella, el generador nos proporcionará varias imagenes de menor tamaño.
 
-> **IMPORTANTE**: En el apartado Display es muy recomendable establecer el valor `standalone`. Esto hará que nuestra aplicación se muestre en una ventana propia, sin mostrar en ningún momento el navegador subyacente.
+> [!IMPORTANT] 
+> 
+> En el apartado Display es muy recomendable establecer el valor `standalone`. Esto hará que nuestra aplicación se muestre en una ventana propia, sin mostrar en ningún momento el navegador subyacente.
 
 A continuación descargaremos los archivos a nuestro PC o portátil.
 
@@ -221,7 +223,9 @@ Lo mismo puede realizarse a través de la web [https://pagespeed.web.dev/](https
 
 ![lighthouse 2](assets/lighthouse2.png)
 
-> **IMPORTANTE:** Para obtener una información más fiable se recomienda lanzar la auditoría en modo incógnito, puesto que no se cargan plugins que puedan interferir en la medida.
+> [!IMPORTANT] 
+> 
+> Para obtener una información más fiable se recomienda lanzar la auditoría en modo incógnito, puesto que no se cargan plugins que puedan interferir en la medida.
 
 
 

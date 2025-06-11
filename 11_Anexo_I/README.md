@@ -660,7 +660,7 @@ Básicamente, la configuración hace lo siguiente:
 - Al guardar los cambios a disco, se arregla ( *fix* ) el código. Algunos errores requerirán la intervención del usuario al no poder solucionarse automáticamente.
 - Se activa la edición enlazada, que permite modificar las 2 etiqueta HTML de una sola vez.   
 
-> **IMPORTANTE:**
+> [!IMPORTANT] 
 >
 > Para que la configuración anterior sea efectiva es necesario cumplir los 3 requisitos siguientes:
 > - Tener la fuente Fira Code instalada en el sistema.

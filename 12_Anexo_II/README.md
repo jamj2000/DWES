@@ -52,7 +52,9 @@ Además NodeJS permite la instalación de módulos externos. Algunos de ellos, b
 
 Para instalar estos módulos externos usamos la herramienta `npm`.
 
-> **IMPORTANTE:** Antes de instalar módulos deberemos haber inicializado previamente el proyecto con
+> [!IMPORTANT] 
+> 
+> Antes de instalar módulos deberemos haber inicializado previamente el proyecto con
 >
 > `npm  init  -y`
 >
