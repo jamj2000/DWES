@@ -1270,9 +1270,13 @@ A continuación, usaremos ejemplos con valores explícitos. Usaremos el siguient
 ![diagrama ER](assets/prisma-erd.png)
 
 <details>
-<summary> Esquema de prisma (Pulsa aquí para ver)</summary>
-
+<summary> <strong>Esquema de prisma (Pulsa aquí para ver)</strong></summary>
 <pre>
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
 
 model User {
   id           Int       @id 
@@ -1310,6 +1314,8 @@ enum Role {
 
 </pre> 
 </details>
+
+
 
 > [!TIP]
 >
