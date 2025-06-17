@@ -287,7 +287,7 @@ Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas mucho
 
 > [!NOTE]
 > 
-> A partir de NextJS 15, el manejo de cookies se realiza de forma asíncrona. Por tanto deberemos usar `await cookies()
+> A partir de NextJS 15, el manejo de cookies se realiza de forma asíncrona. Por tanto deberemos usar `await cookies()`
 
 A continuación se muestra como trabjar con cookies desde NextJS.
 

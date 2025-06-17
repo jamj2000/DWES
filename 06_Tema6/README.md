@@ -7,12 +7,13 @@
 **[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
 
+<div style="display: inline">
 <img src="assets/nextdotjs.svg" width="80" height="80">
 <img src="assets/mysql.svg" width="80" height="80">
 <img src="assets/sqlite.svg" width="80" height="80">
 <img src="assets/postgresql.svg" width="80" height="80">
 <img src="assets/prisma.svg" width="80" height="80">
-
+</div>
 
 ---- 
 
@@ -75,7 +76,7 @@ En la segunda parte de este tema trabajaremos con las mismas bases de datos, per
 
 En cualquier caso, siempre usaremos bases de datos del lado servidor. 
 
-> CURIOSIDAD:
+> [!NOTE]
 >
 > En el lado cliente también disponemos de almacenamiento gestionado por el navegador. Por ejemplo:
 > - [Local storage](https://es.javascript.info/localstorage)
@@ -352,10 +353,10 @@ almacenará en caché para un mejor rendimiento.
 
 Para mayor información acerca de como realizar consultas preparadas, dispones de la siguiente documentación:
 
-- [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/insert)
+- [INSERT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/insert)
 - [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/select)
-- [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/update)
-- [SELECT](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/delete)
+- [UPDATE](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/update)
+- [DELETE](https://sidorares.github.io/node-mysql2/docs/examples/queries/prepared-statements/delete)
 
 
 Por otro lado, hemos usado conexiones obtenidas de un *pool*, por lo cual necesitamos las sentencias:

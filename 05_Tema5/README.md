@@ -446,13 +446,17 @@ Aquí van algunos consejos:
 En Next.js, si usas un `<button>` sin especificar la propiedad `type`, su comportamiento es el mismo que en HTML estándar, es decir por defecto es `type="submit"`
 
 ```js
-<button>Guardar</button>
+<button>
+    Guardar
+</button>
 ```
 
 Este botón se comporta como si hubieras escrito:
 
 ```js
-<button type="submit">Guardar</button>
+<button type="submit">
+    Guardar
+</button>
 ```
 
 Esto significa que:
@@ -478,14 +482,18 @@ Si usas un botón dentro de un formulario y no especificas `type="button"`, pued
 
 ```js
 <form>
-  <button onClick={() => cerrarModal()}>Cancelar</button> // ¡Envía el formulario sin querer!
+  <button onClick={() => cerrarModal()}> // ¡Envía el formulario sin querer!
+    Cancelar
+  </button> 
 </form>
 ```
 Solución:
 
 ```js
 <form>
-  <button type="button" onClick={() => cerrarModal()}>Cancelar</button>
+  <button type="button" onClick={() => cerrarModal()}>
+    Cancelar
+  </button>
 </form>
 ```
 
