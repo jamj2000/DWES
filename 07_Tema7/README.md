@@ -969,11 +969,12 @@ Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 >
 > Otras bibliotecas que merecen atención son las siguientes:
 >
+> - [jsPDF](https://github.com/parallax/jsPDF) (lado cliente y servidor)	
 > - [html2pdf.js](https://ekoopmans.github.io/html2pdf.js/) (sólo lado cliente)
 > - [React PDF](https://react-pdf.org/) (lado cliente y servidor)
 > - [Puppeteer](https://pptr.dev/guides/pdf-generation) (sólo lado cliente)
 >
-> Un ejemplo de uso de estas bibliotecas se muestra en [este vídeo de Youtube](https://youtu.be/4V5HbqYJCVI?si=CVMqYt8l7thVbhrv), en inglés y nivel medio-avanzado. Su código fuente del ejemplo está disponible en [Github](https://github.com/colbyfayock/my-pdf). También hay un [artículo publicado por el autor](https://spacejelly.dev/posts/generate-a-pdf-from-html-in-javascript). 
+> Un ejemplo de uso de las 3 últimas bibliotecas se muestra en [este vídeo de Youtube](https://youtu.be/4V5HbqYJCVI?si=CVMqYt8l7thVbhrv), en inglés y nivel medio-avanzado. Su código fuente del ejemplo está disponible en [Github](https://github.com/colbyfayock/my-pdf). También hay un [artículo publicado por el autor](https://spacejelly.dev/posts/generate-a-pdf-from-html-in-javascript). 
 >
 > Las 3 bibliotecas nos permiten convertir HTML a PDF incluido html2pdf.js que nos permite convertir un árbol HTML a PDF, React PDF para renderizar un PDF y Puppeteer para generar un PDF a partir de una página en vivo.
 >
