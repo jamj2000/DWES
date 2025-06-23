@@ -1257,14 +1257,11 @@ npm  install  daisyui@latest  -D
 ```
 
 
-```js
-// tailwind.config.js
-module.exports = {
-  //...
-  plugins: [   
-    require('daisyui'),
-  ],
-}
+```css
+/*  src/app/globals.css  */
+@import "tailwindcss";
+
+@plugin "daisyui";
 ```
 
 ```js
