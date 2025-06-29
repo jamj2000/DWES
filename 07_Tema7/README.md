@@ -1105,7 +1105,7 @@ Podemos usar una cuenta de Gmail para permitir que nuestra aplicación pueda env
 
 Una contraseña de aplicación es una contraseña especial de 16 caracteres que te da Google para permitir que aplicaciones externas (como tu app Node.js) se conecten a tu cuenta sin usar tu contraseña principal. 
 
-Los pasos que debemos seguir para conseguir nuestro objetivo son:
+Los pasos a seguir para conseguir nuestro objetivo son:
 
 **Paso 1: Activar la verificación en dos pasos**
 
@@ -1205,7 +1205,9 @@ La configuración de un correo transaccional no suele ser demasiado complicada, 
 ![mx priority](assets/gandi-resend-dns-entries.png)
 
 
-A continuación se explica **como enviar correos sin necesidad de usar un servidor de correo transaccional**. Los pasos son:
+A continuación se explica **como enviar correos sin necesidad de usar un servidor de correo transaccional**. 
+
+Los pasos a seguir para conseguir nuestro objetivo son:
 
 
 **Paso 1: Registrar un dominio con algún proveedor que ofrezca además servidor de correo.**
