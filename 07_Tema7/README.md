@@ -52,6 +52,8 @@
   - [3.6. Envío de correos](#36-envío-de-correos)
     - [3.6.1. Instalación](#361-instalación)
     - [3.6.2. Uso](#362-uso)
+      - [3.6.2.1. Usando una cuenta de Gmail](#3621-usando-una-cuenta-de-gmail)
+      - [3.6.2.2. Usando servidor de correo propio](#3622-usando-servidor-de-correo-propio)
     - [3.6.3. Documentación](#363-documentación)
   - [3.7. Pagos por internet](#37-pagos-por-internet)
     - [3.7.1. Instalación](#371-instalación)
@@ -1073,39 +1075,11 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 
 ## 3.6. Envío de correos
 
-El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. 
+El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. Realizaremos el envío de correos desde el lado servidor de nuestra aplicación, usando node.js.
 
 > [!NOTE]
 > 
 > Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
-
-Es posible usar nuestra cuenta de Gmail para ello, pero Google ha ido restringiendo este tipo de funcionalidad, y actualmente aunque es posible su configuración requiere bastantes pasos y no es tan sencilla como sería esperable. No obstante, una opción gratuita, máximo 200 correos mensuales, y sencilla es usar la biblioteca [EmailJS](https://www.emailjs.com/). Aquí tienes un [vídeo de ejemplo](https://youtu.be/dgcYOm8n8ME?si=kd7cjfq1R6zKeVb0) y aquí [otro vídeo](https://youtu.be/mMnxn_hmLuI?si=bxl38WyOr7jevez5).
-
-Otra opción, es usar alguno de los servidores de correo transaccional, entre ellos:
-
-- [Brevo](https://brevo.com)
-- [Resend](https://resend.com)
-- [Sendgrid](https://sendgrid.com)
-- [Mailtrap](https://mailtrap.io/)
-
-Su configuración no suele ser demasiado complicada, pero la integración con el dominio puede dar algunos problemas. Por ejemplo, en mi caso, al tener ya configurado previamente un servidor de correo con prioridad 10, tuve que dar de alta [resend](https://resend.com) con prioridad 11 en [gandi](https://gandi.net).
-
-![mx priority](assets/gandi-resend-dns-entries.png)
-
-A continuación explico como enviar correos sin necesidad de usar un servidor de correo transaccional. Los pasos son:
-
-
-1. Registrar un dominio con algún proveedor que ofrezca además alguna cuenta de correo. Por ejemplo, [gandi](https://gandi.net) ofrece 2 cuentas de correo. Los dominios `.eu` suelen ser bastante baratos.
-
-![gandi](assets/gandi.png)
-
-2. Usar los parámetros de conexión para enviar correos con nuestra aplicación.  
-
-![gandi](assets/gandi-email.png)
-
-3. Si lo deseas, puedes crear alias. Son cuentas de correo adicionales asociadas a la cuenta principal.
-
-![gandi](assets/gandi-email-alias.png)
 
 
 ### 3.6.1. Instalación
@@ -1115,6 +1089,149 @@ npm  install  nodemailer
 ```
 
 ### 3.6.2. Uso
+
+Vamos a ver 2 opciones para enviar correos desde nuestra aplicación:
+
+- Usando una cuenta de Gmail
+- Usando un servidor de correo propio
+
+
+####  3.6.2.1. Usando una cuenta de Gmail
+
+Podemos usar una cuenta de Gmail para permitir que nuestra aplicación pueda enviar correos. Google ha ido modificando este tipo de soporte, cambiando la forma de realizar la configuración a lo largo del tiempo. Actualmente para configurar este tipo de funcionalidad debemos cumplir 2 requisitos:
+
+1. **tener habilitada la verificación en dos pasos** en dicha cuenta
+2. **poseer una contraseña de aplicación**
+
+Una contraseña de aplicación es una contraseña especial de 16 caracteres que te da Google para permitir que aplicaciones externas (como tu app Node.js) se conecten a tu cuenta sin usar tu contraseña principal. 
+
+Los pasos que debemos seguir para conseguir nuestro objetivo son:
+
+**Paso 1: Activar la verificación en dos pasos**
+
+Ve a: https://myaccount.google.com/security
+
+En la sección "Cómo inicias sesión en Google", haz clic en "Verificación en dos pasos" y actívala si aún no lo está.
+
+
+![myaccount.google.com/security](assets/security.png)
+
+
+**Paso 2: Generar una contraseña de aplicación**
+
+Una vez activada la verificación en dos pasos, ve a https://myaccount.google.com/apppasswords
+
+Escribe un nombre para la aplicación, por ejemplo "correo"
+
+![myaccount.google.com/apppasswords](assets/apppasswords-1.png)
+
+Copia la contraseña generada de 16 caracteres (sin espacios). Ejemplo: abcd efgh ijkl mnop
+
+![myaccount.google.com/apppasswords](assets/apppasswords-2.png)
+
+
+**Paso 3: Instalar Nodemailer**
+
+Desde tu terminal:
+
+```sh
+npm install nodemailer
+```
+
+**Paso 4: Probar código de ejemplo con contraseña de aplicación**
+
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crearemos el archivo **mail.mjs** y lo ejecutaremos directamente con Node. 
+
+
+```js
+// mail.mjs
+import nodemailer from 'nodemailer'
+
+var transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,       // true para 465, false para 587
+  auth: {
+    user: "jamj2000.vercel.app@gmail.com", // coloca aquí tu usuario
+    pass: "saogukadgqomnkzl", // La contraseña de aplicación (16 caracteres sin espacios)
+  }
+});
+
+
+// async..await no está permitido en el global scope, debemos usar un wrapper
+async function sendMail() {
+  // send mail with defined transport object
+  const info = await transporter.sendMail({
+    from: '"José Antonio Muñoz Jiménez 👻" <jamj2000.vercel.app@gmail.com>',
+    to: "jamj2000@gmail.com, jamunoz@iesincagarcilaso.com, adfadcaxs@afdaadxcdf.com",
+    subject: "Ejemplo con Nodemailer ✔",
+    text: "Mensaje de prueba. Ignoralo.",
+    html: "<h1>Mensaje de prueba</h1><p>Ignoralo</p>"
+  });
+
+  console.log("Mensaje enviado: %s", info.messageId);
+  // Mensaje enviado: <d786aa62-4e0a-070a-47ed-0b0666549519@jamj2000.eu>
+  console.log('MENSAJES ACEPTADOS: ', info.accepted);
+  console.log('MENSAJES RECHAZADOS: ', info.rejected);
+}
+
+sendMail().catch(console.error);
+``` 
+
+![nodemailer](assets/nodemailer.png)
+
+> [!NOTE]
+> 
+> Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
+
+
+
+#### 3.6.2.2. Usando servidor de correo propio
+
+Otra manera más profesional de gestionar correos es usar alguno de los servidores de correo transaccional, entre ellos:
+
+- [Brevo](https://brevo.com)
+- [Resend](https://resend.com)
+- [Sendgrid](https://sendgrid.com)
+- [Mailtrap](https://mailtrap.io/)
+
+> [!NOTE]
+>
+> Una alternativa gratuita y sencilla, máximo 200 correos mensuales, es usar la biblioteca [EmailJS](https://www.emailjs.com/). Aquí tienes un [vídeo de ejemplo](https://youtu.be/dgcYOm8n8ME?si=kd7cjfq1R6zKeVb0) y aquí [otro vídeo](https://youtu.be/mMnxn_hmLuI?si=bxl38WyOr7jevez5).
+
+
+La configuración de un correo transaccional no suele ser demasiado complicada, pero la integración con el dominio puede dar algunos problemas. Por ejemplo, en mi caso, al tener ya configurado previamente un servidor de correo con prioridad 10, tuve que dar de alta [resend](https://resend.com) con prioridad 11 en [gandi](https://gandi.net).
+
+![mx priority](assets/gandi-resend-dns-entries.png)
+
+
+A continuación se explica **como enviar correos sin necesidad de usar un servidor de correo transaccional**. Los pasos son:
+
+
+**Paso 1: Registrar un dominio con algún proveedor que ofrezca además servidor de correo.**
+
+Por ejemplo, [gandi](https://gandi.net) ofrece servidor de correo con 2 cuentas de correo. Los dominios `.eu` suelen ser bastante baratos.
+
+![gandi](assets/gandi.png)
+
+**Paso 2: Usar los parámetros de conexión para enviar correos con nuestra aplicación.**  
+
+![gandi](assets/gandi-email.png)
+
+Si lo deseas, puedes crear alias. Son cuentas de correo adicionales asociadas a la cuenta principal.
+
+![gandi](assets/gandi-email-alias.png)
+
+
+**Paso 3: Instalar Nodemailer**
+
+Desde tu terminal:
+
+```sh
+npm install nodemailer
+```
+
+**Paso 4: Probar código de ejemplo con contraseña de aplicación**
 
 Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **mail.mjs** y ejecútalo directamente con Node. 
 
