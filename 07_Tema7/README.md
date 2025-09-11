@@ -1301,6 +1301,11 @@ stripe
 
 ### 3.7.3. Documentación
 
+- [Pasarela de pago con Stripe en tu Web o App: Guía Paso a Paso -Python-](https://youtu.be/gOWCCkUq2nc?si=gLG9xjPdaRLmuRb7)
+- [Documentación de Stripe](https://docs.stripe.com/get-started/development-environment)
+- [Testing Stripe](https://docs.stripe.com/testing)
+- Stripe elements: [Web](https://docs.stripe.com/payments/elements)/[App](https://docs.stripe.com/payments/mobile)
+
 
 ## 3.8. Mapas
 
