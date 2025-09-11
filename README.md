@@ -30,6 +30,7 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 ## Proyectos
 
 - [Páginas y Layouts](https://github.com/jamj2000/nxapp-router)
+- [Componentes de DaisyUI](https://github.com/jamj2000/nxdaisyui)
 - [Contenido estático - Web informativa](https://github.com/jamj2000/nx-static)
 - [Componentes cliente - Carrito de compra](https://github.com/jamj2000/nxcart)
 
