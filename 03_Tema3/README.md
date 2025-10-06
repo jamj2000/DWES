@@ -104,7 +104,6 @@ Los archivos que aparecen dentro de la carpeta `src/app` son:
 - `globals.css`: estilos CSS globales
 - `layout.js`: plantilla o layout de la aplicación
 - `page.js`: página inicial
-- `page.module.css`: estilos CSS para la página principal
 
 Otros archivos opcionales que podemos añadir son:
 
@@ -171,7 +170,24 @@ Por ejemplo, para valores simples ...
 {"cadena de texto"}  // en este caso las llaves son opcionales
 {'cadena de texto'}  // en este caso las llaves son opcionales
 {`cadena de texto`}  
+
+{["juan", "ana", "eva"]}                             // array
+{{ backgroundColor: 'white', fontSize: '16px' }}     // objeto
 ```
+
+También podemos colocar expresiones entre llaves.
+
+```js
+{ 2+3*4 }
+{ Math.max(5,3,7,0) }
+{ "I think Ruth's dog is cuter than your dog!".replaceAll("dog", "monkey") }
+{ "   Hello world!   ".trim() }
+```
+
+> [!NOTE]
+>
+> Una expresión es una porción de código cuya evaluación corresponde a un valor.
+
 
 ## 2.2. Estructuras de iteración y de condición
 
@@ -260,7 +276,7 @@ Existen varias expresiones que podemos usar. Las más habituales son:
 > Dentro de JSX no se permite el uso de sentencias del tipo if, switch.
 
 
-**Operador ternario**
+**[Operador ternario](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Conditional_operator)**
 
 ```js
 {
@@ -283,7 +299,7 @@ Ejemplo de operador ternario
 *Si la tarea se ha finalizado mostramos su nombre y un check, sino sólo mostramos su nombre.*
 
 
-**Operador &&**
+**[Operador &&](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Logical_AND)**
 
 ```js
 {
@@ -303,7 +319,7 @@ Ejemplo de operador &&
 
 
 
-**Operador ??**
+**[Operador ??](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing)**
 
 ```js
 {
@@ -316,11 +332,11 @@ Ejemplo de operador ??
 
 ```js
 {
-  session ??  <Dashboard />
+  session ??  <Login />
 }
 ```
 
-*Si session es distinto a null y undefined entonces mostramos componente Dashboard*
+*Si session es null o undefined entonces mostramos componente Login*
 
 
 **Un ejemplo con estructuras de iteración y de condición**
