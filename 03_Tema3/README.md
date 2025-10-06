@@ -180,6 +180,7 @@ También podemos colocar expresiones entre llaves.
 ```js
 { 2+3*4 }
 { Math.max(5,3,7,0) }
+{ Math.PI > 4 ? "Sip" : "Nop" }
 { "I think Ruth's dog is cuter than your dog!".replaceAll("dog", "monkey") }
 { "   Hello world!   ".trim() }
 ```
