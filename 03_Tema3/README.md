@@ -623,9 +623,7 @@ export default function Home() {
 ```css
 /* globals.css */ 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";  
 ```
 
 
@@ -1295,7 +1293,7 @@ export default function Skeleton() {
 
 **Aceternety Ui** ( [sitio oficial](https://ui.aceternity.com/) )
 
-Otra librería más de compoenentes basados en Tailwind. En este caso, la [lista de componentes](https://ui.aceternity.com/components) que tenemos a nuestra disposición son estéticamente muy conseguidos e **incluyen efectos y transiciones**. Se parece a la librería anterior puesto que basta con copiar y pegar desde el sitio oficial. Pero también hay que realizar una instalación y configuración previa.
+Otra librería más de componentes basados en Tailwind. En este caso, la [lista de componentes](https://ui.aceternity.com/components) que tenemos a nuestra disposición son estéticamente muy conseguidos e **incluyen efectos y transiciones**. Se parece a la librería anterior puesto que basta con copiar y pegar desde el sitio oficial. Pero también hay que realizar una instalación y configuración previa.
 
 ```sh
 npm i framer-motion clsx tailwind-merge
@@ -1520,6 +1518,16 @@ Puedes consultar los siguientes recursos para aprender como hacer uso de algunos
 
 - [Vídeo: creación de un Portfolio](https://youtu.be/FTH6Dn3AyIQ?si=PMpHbdk3lMRCFbQz)
 - [Código fuente del vídeo anterior](https://github.com/adrianhajdin/portfolio)
+
+
+**Tailwind Components** ( [sitio oficial](https://www.creative-tim.com/twcomponents) )
+
+Sitio web donde la comunidad sube componentes realizados por ellos mismos. También se ofrecen componentes de pago.
+
+El código fuente de cada componente está en HTML, pero su conversión a React no es difícil. En caso de imagenes SVG incrustradas puedes usar [SVGR](https://react-svgr.com/playground) para su conversión.
+
+
+No es necesario instalar ninguna librería, solo copiar y pegar.
 
 
 
