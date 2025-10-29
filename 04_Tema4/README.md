@@ -283,7 +283,7 @@ Y no sólo para iniciar sesión. Imagínate que entras en Amazon y colocas mucho
 ## 7.1. Tipos de cookies
 
 - **Cookies persistentes**: pueden llegar a almacenarse en el dispositivo del cliente durante meses o años. A menudo, la única manera de impedirlo es haciendo un borrado manual. Es importante que lo hagas sobre todo cuando uses un ordenador público. 
-- **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. También existe la posibilidad de indicar un tiempo de expiración usando la propiedad `expires`, o usando la propiedad `maxAge`. 
+- **Cookies de sesión**: siempre se borran cuando finalizas la sesión en un sitio de Internet. Lo normal es que esto suceda de forma automática cuando cierras el navegador. En las cookies de sesión, no se especifica el campo expires ni maxAge. Aunque también existe la posibilidad de indicar un tiempo de expiración usando la propiedad `expires`, o usando la propiedad `maxAge`, cuando queremos indicar al menos una validez mínima. 
 
 > [!NOTE]
 > 
