@@ -26,8 +26,8 @@
   - [7.2. Generar Cookies](#72-generar-cookies)
   - [7.3. Leer Cookies](#73-leer-cookies)
   - [7.4. Eliminar Cookies](#74-eliminar-cookies)
-- [8. Middleware](#8-middleware)
-  - [8.1. Archivo middleware.js](#81-archivo-middlewarejs)
+- [8. Proxy](#8-proxy)
+  - [8.1. Archivo proxy.js](#81-archivo-proxyjs)
 - [9. ANEXO I: Parámetros de ruta y consulta en página de cliente](#9-anexo-i-parámetros-de-ruta-y-consulta-en-página-de-cliente)
 - [10. ANEXO II: SSG](#10-anexo-ii-ssg)
 - [11. Referencias](#11-referencias)
@@ -52,7 +52,7 @@ Al crear páginas que gestionan contenido dinámico suele ser habitual la necesi
 
 Después de haber estudiado los parámetros de las páginas dinámicas, pasaremos a trabajar las `cookies`, que es también una información gestionada de forma dinámica en cada petición/respuesta.
 
-Por último, aunque no está directamente relacionado con el contenido de este tema, haremos una breve incursión al `middleware`.
+Por último, aunque no está directamente relacionado con el contenido de este tema, haremos una breve incursión al `proxy`.
 
 
 
@@ -378,7 +378,7 @@ A continuación tienes el código fuente para trabajar los conceptos anteriores.
 
 - [Gestión de cookies y sesión](https://github.com/jamj2000/nxsession)
 
-En el proyecto anterior también se hace uso de `middleware`. Consulta el apartado siguiente.
+En el proyecto anterior también se hace uso de `proxy`. Consulta el apartado siguiente.
 
     
 **Referencias**: 
@@ -386,15 +386,21 @@ En el proyecto anterior también se hace uso de `middleware`. Consulta el aparta
 - [Documentación de NextJS](https://nextjs.org/docs/app/api-reference/functions/cookies)
 
 
-# 8. Middleware
+# 8. Proxy
 
-Desde el punto de vista de una aplicación NextJS, el middleware es un software que funciona como capa de conversión, traducción y/o integración.
+> [!NOTE]
+> 
+> En versiones previas de Next.JS  (versiones < 16), el término usado era **middleware**. 
+> 
 
-En este escenario, el middleware permite ejecutar código antes de que se complete una petición (request). Según la petición entrante, se puede modificar la respuesta reescribiendo, redirigiendo, modificando los encabezados de petición o respuesta, o respondiendo directamente.
 
-![middleware request-response](assets/middleware.webp)
+Desde el punto de vista de una aplicación NextJS, el proxy es un software que funciona como capa de conversión, traducción y/o integración.
 
-La integración de middleware en una aplicación puede generar mejoras significativas en el rendimiento, la seguridad y la experiencia del usuario. Algunos escenarios comunes en los que el middleware es particularmente eficaz incluyen:
+En este escenario, el proxy permite ejecutar código antes de que se complete una petición (request). Según la petición entrante, se puede modificar la respuesta reescribiendo, redirigiendo, modificando los encabezados de petición o respuesta, o respondiendo directamente.
+
+![proxy request-response](assets/proxy.webp)
+
+La integración de proxy en una aplicación puede generar mejoras significativas en el rendimiento, la seguridad y la experiencia del usuario. Algunos escenarios comunes en los que el proxy es particularmente eficaz incluyen:
 
 - **Autenticación y autorización**: garantizar la identidad del usuario y verificar las cookies de sesión antes de otorgar acceso a páginas específicas o rutas API.
 - **Redireccionamientos del lado del servidor**: redireccionar a los usuarios a nivel del servidor según ciertas condiciones (por ejemplo, configuración regional, rol del usuario).
@@ -403,24 +409,43 @@ La integración de middleware en una aplicación puede generar mejoras significa
 - **Registro y análisis**: capturar y analizar datos de solicitudes para obtener información antes de procesarlos en la página o API.
 - **Marcado de funcionalidades**: habilitar o deshabilitar funcionalidades dinámicamente para implementar o probar sin problemas dichas funcionalidades.
 
-Debido a la extensión de funcionalidades que pueden implementarse en el middleware, su implementación tiene cierta complejidad y require de conocimientos avanzados por parte del programador.
+> [!TIP]
+>
+> Podemos gestionar directamente las cookies en el proxy. 
+> Tanto las cookies recibidas del cliente en **`request`**
+>
+> ```js
+> request.cookies.get('sesion')
+> ```
+> como las cookies enviadas al cliente en **`response`**
+>
+> ```js
+> const response = NextResponse.next()
+> response.cookies.set({
+>    name: 'sesion',
+>    value: 'test',
+>    path: '/',
+>  })
+> ```
+> - Referencia: [Usando cookies en proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy#using-cookies)
 
-Para implementar dicho middleware, NextJS hace uso de un archivo `middleware.js` o `middleware.ts` que debe situarse en la raíz del proyecto. **Si tenemos carpeta `src` será ahí donde pondremos dicho archivo.** Si no tenemos carpeta `src` pondremos el archivo en la carpeta `app`.
+
+Para implementar dicho proxy, NextJS hace uso de un archivo `proxy.js` o `proxy.ts` que debe situarse en la raíz del proyecto. **Si tenemos carpeta `src` será ahí donde pondremos dicho archivo.** Si no tenemos carpeta `src` pondremos el archivo en la carpeta `app`.
 
 
 **Referencia:**
 
-- [Funcionalidades del middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+- [Características del proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy)
 
 
-## 8.1. Archivo middleware.js 
+## 8.1. Archivo proxy.js 
 
 A continuación se muestra un ejemplo muy, muy básico, con el contenido esencial de este archivo:
 
 ```js
 // Esta función puede ser `async` si usas `await` en su interior
-export default function middleware(request) {
-  // Lógica del Middleware
+export default function proxy(request) {
+  // Lógica del Proxy
 }
 
 export const config = {
@@ -428,7 +453,7 @@ export const config = {
 }
 ```
 
-La opción **`matcher`** permite seleccionar las rutas específicas a las que se aplicará la función **`middleware`**.
+La opción **`matcher`** permite seleccionar las rutas específicas a las que se aplicará la función **`proxy`**.
 
 Esta opción admite una lista de rutas (strings), cada cual:
 
@@ -440,7 +465,7 @@ Esta opción admite una lista de rutas (strings), cada cual:
 
 **Referencia:**
 
-- [Archivo middleware.js](https://nextjs.org/docs/app/api-reference/file-conventions/middleware)
+- [Archivo proxy.js](https://nextjs.org/docs/app/api-reference/file-conventions/proxy)
 
 
 # 9. ANEXO I: Parámetros de ruta y consulta en página de cliente
