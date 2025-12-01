@@ -1846,7 +1846,7 @@ export default async function PaginaProducto({ params }) {
 
 'use client'
 
-export defaultfunction Producto({ data }) {
+export default function Producto({ data }) {
 
     const producto = use(data)   // Resolvemos promesa
 
