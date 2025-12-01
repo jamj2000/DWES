@@ -16,7 +16,6 @@
 </div>
 
 ---- 
-
 - [1. Introducción](#1-introducción)
 - [2. SQLite](#2-sqlite)
   - [2.1. Proyecto](#21-proyecto)
@@ -55,11 +54,14 @@
 - [10. Ver datos de las tablas](#10-ver-datos-de-las-tablas)
 - [11. Cómo organizar el código](#11-cómo-organizar-el-código)
   - [11.1. Obtener datos](#111-obtener-datos)
+    - [11.1.1. Usando componente cliente](#1111-usando-componente-cliente)
+    - [11.1.2. Usando componente servidor](#1112-usando-componente-servidor)
   - [11.2. Mutar datos](#112-mutar-datos)
 - [12. Cliente de Prisma](#12-cliente-de-prisma)
 - [13. Despliegue en Vercel](#13-despliegue-en-vercel)
 - [14. ANEXO: CRUD en una única página](#14-anexo-crud-en-una-única-página)
 - [15. Referencias](#15-referencias)
+
 
 
 
@@ -1718,7 +1720,59 @@ export async function obtenerProducto(id) {
 
 ```
 
-A la hora de recuperar datos de la BD lo haremos dentro de un componente de servidor, esto nos permite envolver dicho componente dentro de **Suspense** y que la página cargue inmediatamente sin esperar a recibir todos los datos.
+A la hora de mostrar la información recuperada, podemos hacerlo de 2 formas diferentes:
+
+- en un componente cliente  (ofrece interactividad)
+- en un componente servidor (NO ofrece interactividad)
+
+Veamos cada caso por separado.
+
+
+### 11.1.1. Usando componente cliente
+
+> [!TIP]  
+> 
+> **Streaming de datos desde el servidor al cliente**  
+> 
+> Next.js 16 y React 19 incorpora la **[API use()](https://react.dev/reference/react/use)** que permite realizar *streaming* de datos de forma sencilla haciendo uso de `Suspense` en el servidor y `use()` en el cliente. Ejemplo de uso:
+>
+>
+> **En página en el servidor**
+> 
+> ```js
+> import { getArticulos } from '@/lib/data'
+>
+> export default function Pagina() {
+>    const promesa = getArticulos() // no usamos await
+>    
+>    return (
+>        <Suspense fallback="Recuperando lista de artículos...">
+>            <ComponenteCliente data={promesa} />  {/* Pasamos promesa */}
+>        </Suspense>
+>    )
+> }
+> ```
+>
+>
+> **En componente en el cliente**
+>
+> ```js
+> 'use client'
+> 
+> export default function ComponenteCliente( {data}) {
+>    const articulos = use(data)   // Resolvemos promesa
+>
+>    return (
+>        <div className="flex flex-wrap gap-4">
+>            {articulos.map(articulo => <Item key={articulo.id} articulo={articulo} />)}
+>        </div>
+>    )
+>}
+>```
+
+**Si necesitamos proporcionar interactidad**, recuperaremos los datos de la BD dentro de una página de servidor y haremos *streaming* directo a un componente cliente.
+
+Envolvemos dicho componente dentro de **Suspense** para mostrar un mensaje al usuario mediante la propiedad `fallback` mientras se cargan los datos.
 
 
 ```js
@@ -1726,7 +1780,154 @@ A la hora de recuperar datos de la BD lo haremos dentro de un componente de serv
 import { obtenerProductos } from "@/lib/data";
 import { Suspense } from "react";
 
-export default function ProductosPage() {
+export default function PaginaProductos() {
+    return (
+        <div>
+            <h1>Listado</h1>
+
+            <Suspense fallback={"..."}>
+                <Productos data={obtenerProductos()}/> {/* Pasamos promesa */} 
+            </Suspense>
+
+        </div>
+    );
+}
+```
+
+
+```js
+// --------------------- Componente de cliente -------------------
+'use client'
+
+export default function Productos({data}) {
+
+    const productos = use(data)   // Resolvemos promesa
+
+    return (
+        <div>
+            {productos.map(producto =>
+                <p key={producto.id}>
+                    {producto.nombre}
+                </p>
+            )}
+        </div>
+
+    );
+}
+```
+
+
+
+```js
+// src/app/productos/[id]/page.jsx
+import { obtenerProducto } from "@/lib/data";
+import { Suspense } from "react";
+
+export default async function PaginaProducto({ params }) {
+
+    const { id } = await params
+
+    return (
+        <div>
+            <h1>Producto #{id}</h1>
+
+            <Suspense fallback={"..."}>
+                <Producto data={obtenerProducto(id)}/> {/* Pasamos promesa */} 
+            </Suspense>
+
+        </div>
+    );
+}
+```
+
+
+```js
+// --------------------- Componente de cliente -------------------
+
+'use client'
+
+export defaultfunction Producto({ data }) {
+
+    const producto = use(data)   // Resolvemos promesa
+
+    return (
+        <div>
+            {producto.nombre}
+        </div>
+
+    );
+}
+```
+
+
+
+> [!NOTE]
+>
+> En Next.js también es posible recuperar datos directamente desde una página del lado cliente. A continuación tienes el código fuente para hacer un listado de Productos:
+>
+> ```js
+> 'use client'
+> 
+> import { useEffect, useState } from "react";
+> import { obtenerProductos } from "@/lib/data";
+> 
+> 
+> function PaginaCliente() {
+> 
+>    const [productos, setProductos] = useState(null)
+> 
+>    useEffect(() => {
+>        // esto equivale a hacer fetch pero sin la necesidad de disponer de una API 
+>        obtenerDatos()  
+>    }, [])
+> 
+>
+>    async function obtenerDatos() {
+>        const productos = await obtenerProductos()
+>        setProductos(productos)
+>    }
+> 
+>    if (!productos) return <p>Obteniendo datos ...</p>
+>    return (
+>        <div>
+>            {/* Si desas usar evento click descomenta las siguientes líneas */}
+>            {/*
+>            <div onClick={obtenerDatos}>
+>                Obtener datos
+>            </div>
+>            */}
+> 
+>            <h1>Listado</h1>
+> 
+>            {productos.map(producto =>
+>                <p key={producto.id}>
+>                    {producto.nombre}
+>                </p>
+>            )}
+>        </div>
+>    );
+> } 
+>
+> export default PaginaCliente;
+> ```
+
+
+
+
+
+### 11.1.2. Usando componente servidor
+
+**Si NO necesitamos proporcionar interactidad**, recuperaremos los datos de la BD dentro de un componente de servidor.
+
+Envolvemos dicho componente dentro de **Suspense** para mostrar un mensaje al usuario mediante la propiedad `fallback` mientras se cargan los datos.
+
+
+```js
+// src/app/productos/page.jsx
+import { obtenerProductos } from "@/lib/data";
+import { Suspense } from "react";
+
+export default function PaginaProductos() {
     return (
         <div>
             <h1>Listado</h1>
@@ -1738,7 +1939,9 @@ export default function ProductosPage() {
         </div>
     );
 }
+```
 
+```js
 // --------------------- Componente de servidor -------------------
 
 async function Productos() {
@@ -1764,7 +1967,7 @@ async function Productos() {
 import { obtenerProducto } from "@/lib/data";
 import { Suspense } from "react";
 
-export default async function ProductoPage({ params }) {
+export default async function PaginaProducto({ params }) {
 
     const { id } = await params
 
@@ -1779,7 +1982,9 @@ export default async function ProductoPage({ params }) {
         </div>
     );
 }
+```
 
+```js
 // --------------------- Componente de servidor -------------------
 
 async function Producto({ id }) {
@@ -1794,57 +1999,6 @@ async function Producto({ id }) {
     );
 }
 ```
-
-
-> [!NOTE]
->
-> Aunque **Next.js recomienda usar páginas y componentes del lado servidor cuando recuperamos y mostramos datos**, también es posible usar para el mismo fin una página del lado cliente. A continuación tienes el código fuente para hacer un listado de Productos:
->
-> ```js
-> 'use client'
-> 
-> import { useEffect, useState } from "react";
-> import { obtenerProductos } from "@/lib/data";
-> 
-> 
-> function ClientPage() {
-> 
->    const [productos, setProductos] = useState([])
-> 
->    async function obtenerDatos() {
->        const productos = await obtenerProductos()
->        setProductos(productos)
->    }
-> 
->    useEffect(() => {
->        // esto equivale a hacer fetch pero sin la necesidad de disponer de una API 
->        obtenerDatos()  
->    }, [])
-> 
-> 
->    return (
->        <div>
->            {/* Si desas interactividad descomenta las siguientes líneas */}
->            {/*
->            <div onClick={obtenerDatos}>
->                Obtener datos
->            </div>
->            */}
-> 
->            <h1>Listado</h1>
-> 
->            {productos.map(producto =>
->                <p key={producto.id}>
->                    {producto.nombre}
->                </p>
->            )}
->        </div>
->    );
-> } 
->
-> export default ClientPage;
-> ```
-
 
 
 ## 11.2. Mutar datos
@@ -1990,7 +2144,7 @@ import Productos from "@/components/Productos";
 import { Suspense } from "react";
 
 
-export default function ProductosPage() {
+export default function PaginaProductos() {
     return (
         <div>
             <h1 className="text-2xl">Listado</h1>
@@ -2010,7 +2164,7 @@ export default function ProductosPage() {
 import { Suspense } from "react";
 import Producto from "@/components/Producto";
 
-export default async function ProductoPage({ params }) {
+export default async function PaginaProducto({ params }) {
 
     const { id } = await params
 
