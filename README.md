@@ -117,6 +117,12 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 - [examen-dwes-24-25-form-prisma](https://github.com/jamj2000/examen-dwes-24-25-form-prisma)
 
 
+
+### Curso 25-26
+
+- [examen-dwes-25-26-mysql-api](https://github.com/jamj2000/examen-dwes-25-26-mysql-api)
+
+
 ---
 
 ## Referencias
