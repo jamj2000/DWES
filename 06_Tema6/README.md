@@ -1747,7 +1747,7 @@ Veamos cada caso por separado.
 >    
 >    return (
 >        <Suspense fallback="Recuperando lista de artículos...">
->            <ComponenteCliente data={promesa} />  {/* Pasamos promesa */}
+>            <ComponenteCliente promesa={promesa} />  {/* Pasamos promesa */}
 >        </Suspense>
 >    )
 > }
@@ -1759,8 +1759,8 @@ Veamos cada caso por separado.
 > ```js
 > 'use client'
 > 
-> export default function ComponenteCliente( {data}) {
->    const articulos = use(data)   // Resolvemos promesa
+> export default function ComponenteCliente( {promesa}) {
+>    const articulos = use(promesa)   // Resolvemos promesa
 >
 >    return (
 >        <div className="flex flex-wrap gap-4">
@@ -1774,6 +1774,8 @@ Veamos cada caso por separado.
 
 Envolvemos dicho componente dentro de **Suspense** para mostrar un mensaje al usuario mediante la propiedad `fallback` mientras se cargan los datos.
 
+**EJEMPLO 1: Listado de productos**
+
 
 ```js
 // src/app/productos/page.jsx
@@ -1786,7 +1788,7 @@ export default function PaginaProductos() {
             <h1>Listado</h1>
 
             <Suspense fallback={"..."}>
-                <Productos data={obtenerProductos()}/> {/* Pasamos promesa */} 
+                <Productos promesa={obtenerProductos()}/> {/* Pasamos promesa */} 
             </Suspense>
 
         </div>
@@ -1799,9 +1801,9 @@ export default function PaginaProductos() {
 // --------------------- Componente de cliente -------------------
 'use client'
 
-export default function Productos({data}) {
+export default function Productos({promesa}) {
 
-    const productos = use(data)   // Resolvemos promesa
+    const productos = use(promesa)   // Resolvemos promesa
 
     return (
         <div>
@@ -1817,6 +1819,7 @@ export default function Productos({data}) {
 ```
 
 
+**EJEMPLO 2: Producto con id**
 
 ```js
 // src/app/productos/[id]/page.jsx
@@ -1832,7 +1835,7 @@ export default async function PaginaProducto({ params }) {
             <h1>Producto #{id}</h1>
 
             <Suspense fallback={"..."}>
-                <Producto data={obtenerProducto(id)}/> {/* Pasamos promesa */} 
+                <Producto promesa={obtenerProducto(id)}/> {/* Pasamos promesa */} 
             </Suspense>
 
         </div>
@@ -1846,9 +1849,9 @@ export default async function PaginaProducto({ params }) {
 
 'use client'
 
-export default function Producto({ data }) {
+export default function Producto({ promesa }) {
 
-    const producto = use(data)   // Resolvemos promesa
+    const producto = use(promesa)   // Resolvemos promesa
 
     return (
         <div>
@@ -1874,29 +1877,22 @@ export default function Producto({ data }) {
 > 
 > function PaginaCliente() {
 > 
->    const [productos, setProductos] = useState(null)
+>    const [productos, setProductos] = useState([])
 > 
 >    useEffect(() => {
 >        // esto equivale a hacer fetch pero sin la necesidad de disponer de una API 
->        obtenerDatos()  
+>        async function load() {
+>            const productos = await obtenerProductos()  
+>            setProductos(productos)
+>        }
+>        load()
 >    }, [])
 > 
 >
->    async function obtenerDatos() {
->        const productos = await obtenerProductos()
->        setProductos(productos)
->    }
 > 
->    if (!productos) return <p>Obteniendo datos ...</p>
+>    if (productos.length === 0) return <p>Obteniendo datos ...</p>
 >    return (
 >        <div>
->            {/* Si desas usar evento click descomenta las siguientes líneas */}
->            {/*
->            <div onClick={obtenerDatos}>
->                Obtener datos
->            </div>
->            */}
-> 
 >            <h1>Listado</h1>
 > 
 >            {productos.map(producto =>
@@ -2197,6 +2193,7 @@ Por este motivo es frecuente implementar un archivo `lib/prisma.js` con el códi
 import { PrismaClient } from '@prisma/client';
 
 const prisma = global.prisma || new PrismaClient();
+
 if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 
 export default prisma
