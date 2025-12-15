@@ -50,7 +50,8 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 - [CLOUDINARY: Subir imágenes al cloud](https://github.com/jamj2000/nxcloudinary-upload)
 - [CLOUDINARY: Mostrar imágenes del cloud](https://github.com/jamj2000/nxcloudinary-gallery)
 - [CLOUDINARY: Operaciones CRUD en el cloud](https://github.com/jamj2000/nxcloudinary-crud)
- 
+- [CRUD usando MySQL y cloud de imágenes Cloudinary](https://github.com/jamj2000/nxmysql-app)
+  
 ---
 
 - [CRUD usando SQLite](https://github.com/jamj2000/nxsqlite-crud)
@@ -58,7 +59,6 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 - [CRUD usando MySQL Serverless](https://github.com/jamj2000/nxmysql-crud-serverless)
 - [CRUD usando Postgres](https://github.com/jamj2000/nxpostgres-crud)
 - [CRUD usando Postgres en Vercel](https://github.com/jamj2000/nxpostgres-crud-vercel)
-- [CRUD usando MySQL y cloud de imágenes Cloudinary](https://github.com/jamj2000/nxmysql-app)
 
 ---
 
