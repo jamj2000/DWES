@@ -11,6 +11,7 @@
 ### [CLOUDINARY: Subir imágenes al cloud](https://github.com/jamj2000/nxcloudinary-upload)
 ### [CLOUDINARY: Mostrar imágenes del cloud](https://github.com/jamj2000/nxcloudinary-gallery)
 ### [CLOUDINARY: Operaciones CRUD en el cloud](https://github.com/jamj2000/nxcloudinary-crud)
+### [CRUD usando MySQL y cloud de imágenes Cloudinary](https://github.com/jamj2000/nxmysql-app)
 
 <!-- 
 --- 
