@@ -1924,8 +1924,8 @@ export default function Producto({ promesa }) {
 > ```js
 > 'use client'
 > 
-> import { useEffect, useState } from "react";
-> import { obtenerProductos } from "@/lib/data";
+> import { useEffect, useState, useTransition } from "react";
+> import { obtenerLoteProductos } from "@/lib/data";
 > 
 > 
 > function PaginaCliente() {
@@ -1948,6 +1948,8 @@ export default function Producto({ promesa }) {
 >        cargarMas()   // Carga inicial
 >    }, [])
 > 
+>    // Opcionalmente, podemos utilizar el hook useTransition para mostrar estado pendiente
+>    const [isPending, startTransition] = useTransition();
 >
 > 
 >    return (
@@ -1958,6 +1960,11 @@ export default function Producto({ promesa }) {
 >            <button onClick={cargarMas}>
 >              Cargar más artículos
 >            </button> 
+>
+>            {/* Otro Botón que utiliza useTransition */} 
+>            <button onClick={() => startTransition(cargarMas)}>
+>              {isPending ? "Cargando..." : "Cargar más"}
+>            </button>
 >
 >            {productos.map(producto =>
 >                <p key={producto.id}>
