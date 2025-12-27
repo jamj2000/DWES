@@ -59,8 +59,7 @@
   - [11.2. Mutar datos](#112-mutar-datos)
 - [12. Cliente de Prisma](#12-cliente-de-prisma)
 - [13. Despliegue en Vercel](#13-despliegue-en-vercel)
-- [14. ANEXO: CRUD en una única página](#14-anexo-crud-en-una-única-página)
-- [15. Referencias](#15-referencias)
+- [14. Referencias](#15-referencias)
 
 
 
@@ -1708,6 +1707,15 @@ export async function obtenerProductos() {
 }
 
 
+export async function obtenerLoteProductos(offset=0, limit=5) {
+    const produtos = await prisma.producto.findMany({
+        skip: offset,
+        take: limit,
+        orderBy: { id: "asc" },
+    })
+    return produtos
+}
+
 
 export async function obtenerProducto(id) {
     const producto = await prisma.producto.findUnique({
@@ -1879,13 +1887,14 @@ export default function Producto({ promesa }) {
 > 
 >    const [productos, setProductos] = useState([])
 > 
+>    // esto equivale a hacer fetch pero sin la necesidad de disponer de una API 
+>    async function cargar() {
+>        const productos = await obtenerProductos()  
+>        setProductos(productos)
+>    }
+>
 >    useEffect(() => {
->        // esto equivale a hacer fetch pero sin la necesidad de disponer de una API 
->        async function load() {
->            const productos = await obtenerProductos()  
->            setProductos(productos)
->        }
->        load()
+>        cargar()
 >    }, [])
 > 
 >
@@ -1895,6 +1904,61 @@ export default function Producto({ promesa }) {
 >        <div>
 >            <h1>Listado</h1>
 > 
+>            {productos.map(producto =>
+>                <p key={producto.id}>
+>                    {producto.nombre}
+>                </p>
+>            )}
+>        </div>
+>    );
+> } 
+>
+> export default PaginaCliente;
+> ```
+
+
+> [!NOTE]
+>
+> Además, si deseamos interactividad, podemos crear un botón que al pulsar cargue un nuevo lote de productos
+>
+> ```js
+> 'use client'
+> 
+> import { useEffect, useState } from "react";
+> import { obtenerProductos } from "@/lib/data";
+> 
+> 
+> function PaginaCliente() {
+> 
+>    const [productos, setProductos] = useState([])
+>    const [offset, setOffset] = useState(0);
+> 
+>    // esto equivale a hacer fetch pero sin la necesidad de disponer de una API 
+>    async function cargarMas() {
+>        const nuevos = await obtenerLoteProductos(offset, 5)  
+>
+>        if (nuevos.length > 0) {
+>           setProductos(prev => [...prev, ...nuevos]);
+>           setOffset(prev => prev + 5);
+>        }
+>    }
+>
+>    
+>    useEffect(() => {
+>        cargarMas()   // Carga inicial
+>    }, [])
+> 
+>
+> 
+>    return (
+>        <div>
+>            <h1>Listado</h1>
+>             
+>            {/* Botón */} 
+>            <button onClick={cargarMas}>
+>              Cargar más artículos
+>            </button> 
+>
 >            {productos.map(producto =>
 >                <p key={producto.id}>
 >                    {producto.nombre}
@@ -2220,22 +2284,8 @@ Para evitar este problema, debemos insertar `prisma generate` al script `build` 
 }
 ```
 
-# 14. ANEXO: CRUD en una única página
 
-Es posible realizar las 4 operaciones de CRUD desde una única página. Este caso es habitual cuando se trabaja con SPA (Single Page Applications). 
-
-Desde NextJS también podemos ofrecer una funcionalidad prácticamente idéntica a la anterior. Para mostrar cómo se realiza, he desarrollado las 2 aplicaciones siguientes:
-
-1. [Simple1: con componente de servidor](https://github.com/jamj2000/nxprisma-crud-simple1)
-2. [Simple2: con componente de cliente](https://github.com/jamj2000/nxprisma-crud-simple2)
-
-El primer ejemplo es mucho más sencillo, pero también dispone de menos funcionalidades. 
-
-El segundo ejemplo es más complejo y dispone de mayor interactividad con el usuario. Después de obtener los datos desde el servidor, en el componente de cliente podemos realizar búsquedas por nombre y descripción y ordenar de forma ascendente y descendente por nombre y precio.
-
-
-
-# 15. Referencias
+# 14. Referencias
 
 - [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 - [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
