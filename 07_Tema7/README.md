@@ -353,6 +353,245 @@ const nextConfig = {
 - [Una tercera forma de habilitar CORS usando Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware#cors)
 
 
+
+## Documentación
+
+Para los usuarios o aplicaciones cliente que consumen nuestra API es muy importante que ésta esté documentada.
+
+Un sistema de documentación muy usado actualmente es **OpenAPI + Swagger**.
+
+**[OpenAPI](https://www.openapis.org/)** es una especificación estándar para describir APIs REST.
+
+En pocas palabras, OpenAPI define cómo documentar una API de forma estructurada y legible tanto para humanos como para máquinas.
+
+Con OpenAPI puedes describir:
+
+- Rutas (endpoints) disponibles
+- Métodos HTTP (GET, POST, PUT, DELETE, etc.)
+- Parámetros de entrada
+- Cuerpos de las peticiones
+- Respuestas posibles
+- Códigos de estado
+- Autenticación (JWT, OAuth, API keys, etc.)
+
+Se suele escribir en YAML o JSON.
+
+
+Por otro lado, **[Swagger](https://swagger.io/)** es un conjunto de herramientas que usan la especificación OpenAPI.
+
+Herramientas más conocidas de Swagger:
+
+- Swagger UI → Interfaz web para ver y probar la API
+- Swagger Editor → Editor para escribir archivos OpenAPI
+- Swagger Codegen → Genera código cliente o servidor automáticamente
+- Swagger Hub → Plataforma colaborativa para APIs
+
+Con Swagger UI puedes:
+
+- Ver la documentación de la API
+- Probar endpoints directamente desde el navegador
+- Enviar requests sin usar Postman
+
+
+**Proyectos de ejemplo**
+
+A continuación tienes el código fuente de dos proyectos que implementan una API y ofrecen su documentación asociada:
+
+- [Swagger - Ejemplo básico](https://github.com/jamj2000/nxapi-swagger)
+- [Swagger - Ejemplo más completo](https://github.com/jamj2000/nxapi-shop)
+
+
+En ambos casos disponemos de los 2 elementos siguientes:
+
+- Especificación OpenAPI 3.0 ( en archivo `public/swagger.json` )
+- Página interactiva ( en archivo `src/app/apidoc/page.js` )
+
+
+**Especificación OpenAPI 3.0**
+
+`public/swagger.json`
+
+Es un archivo JSON público que describe la API. Está organizado de las siguiente manera:
+
+```json
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Shop API Documentation",
+        "description": "A modern REST API built with Next.js",
+        "version": "1.0.0"
+    },
+    "components": {
+      ...
+    }
+    "paths": {
+      ...
+    } 
+```
+
+
+En el apartado de **`components`** tenemos la configuración de autenticación (en este caso Bearer JWT) y los schemas (modelos de datos)
+
+```json
+"components": { 
+      "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+      },
+      "schemas": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "cd533345-f1f3-48c9-a62e-7dc2da50c8f8",
+                        "description": "Product ID",
+                        "uniqueItems": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "T-Shirt Teslo",
+                        "description": "Product Title",
+                        "uniqueItems": true
+                    },
+                    "price": {
+                        "type": "number",
+                        "example": 0,
+                        "description": "Product price"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Anim reprehenderit nulla in anim mollit minim irure commodo.",
+                        "description": "Product description",
+                        "default": null
+                    }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "price",
+                    "description",
+                    "slug",
+                    "stock",
+                    "sizes",
+                    "gender",
+                    "tags",
+                    "images"
+                ]
+            },
+            ...
+      }
+}
+```
+
+En el apartado de **`paths`** tenemos la documentados los **endpoints** disponibles, cada uno con su configuración de seguridad (en caso de ser necesaria), los `parameters`, `requestBody` y `responses` admitidos.
+
+
+```json
+"paths": {
+       "/api/products": {
+            "post": {
+                "summary": "Create new product",
+                "tags": [
+                    "Products"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductCreate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product was created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing data"
+                    },
+                    "403": {
+                        "description": "Forbidden. Token related."
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "get": {
+                "summary": "List products",
+                "tags": [
+                    "Products"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "required": true,
+                        "in": "query",
+                        "description": "How many rows do you need",
+                        "schema": {
+                            "default": 10,
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": true,
+                        "in": "query",
+                        "description": "How many rows do you want to skip",
+                        "schema": {
+                            "default": 0,
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product list"
+                    }
+                }
+            }
+        },
+        ...
+}
+```
+
+
+**Página interactiva**
+
+`src/app/apidoc/page.js`
+
+![apidoc](assets/apidoc.png)
+
+
+Se ha utilizado un sistema de Autorización mediante Bearer *token*, siendo éste de tipo **[JWT](https://www.fastly.com/es/learning/security/what-is-jwt)**.
+
+Los **endpoints** que modifican la información de la API (métodos **POST**, **PATCH**, **PUT** y ***DELETE***) requieren que el cliente proporcione el JWT que previamente habrá solicitado al servidor. Este token estará firmado con la clave secreta del servidor y su autenticidad puede comprobarse en [jwt.io](https://jwt.io)
+
+![jwt](assets/jwt.png)
+
+
+
+
+
+
 # 3. BIBLIOTECAS
 
 Aquí se exponen someramente algunas de las bibliotecas que proporcionan funcionalidades que en ciertas circunstancias pueden ser de nuestro interés.
