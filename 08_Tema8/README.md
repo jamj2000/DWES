@@ -9,6 +9,7 @@
 <img src="assets/nextdotjs.svg" width="80" height="80">
 
 ---
+
 - [1. Introducción](#1-introducción)
 - [2. APIs REST](#2-apis-rest)
   - [2.1. Route Handlers](#21-route-handlers)
@@ -19,6 +20,7 @@
   - [2.6. API REST con datos en BD MongoDB](#26-api-rest-con-datos-en-bd-mongodb)
   - [2.7. Herramientas para probar la API](#27-herramientas-para-probar-la-api)
   - [2.8. CORS](#28-cors)
+  - [2.9. Documentación](#29-documentación)
 - [3. BIBLIOTECAS](#3-bibliotecas)
   - [3.1. Datos ficticios](#31-datos-ficticios)
     - [3.1.1. Instalación de biblioteca](#311-instalación-de-biblioteca)
@@ -72,9 +74,6 @@
     - [3.10.1. Instalación](#3101-instalación)
     - [3.10.2. Uso](#3102-uso)
     - [3.10.3. Documentación](#3103-documentación)
-
-
-
 
 --- 
 
@@ -354,7 +353,7 @@ const nextConfig = {
 
 
 
-## Documentación
+## 2.9. Documentación
 
 Para los usuarios o aplicaciones cliente que consumen nuestra API es muy importante que ésta esté documentada.
 
