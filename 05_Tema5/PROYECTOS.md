@@ -4,7 +4,6 @@
 ### [Formulario: feedback](https://github.com/jamj2000/nxform-feedback)
 ### [Formulario: validación](https://github.com/jamj2000/nxform-validate)
 ### [Formulario: filtrado](https://github.com/jamj2000/nxform-filter)
-### [Paginación](https://github.com/jamj2000/nxpagination)
 
 ---
 

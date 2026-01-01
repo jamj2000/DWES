@@ -12,3 +12,7 @@
 ### [CRUD usando ORM Prisma con 2 tablas en relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
 ### [CRUD usando ORM Prisma con 2 tablas en relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
 ### [CRUD usando ORM Prisma con 3 tablas en relación 1:N y N:M](https://github.com/jamj2000/nxprisma-crud-protectoras)
+
+---
+
+### [Paginación](https://github.com/jamj2000/nxpagination)
