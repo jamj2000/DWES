@@ -1961,7 +1961,7 @@ export default function Producto({ promesa }) {
 >              Cargar más artículos
 >            </button> 
 >
->            {/* Otro Botón que utiliza useTransition */} 
+>            {/* Otro Botón que muestra estado pendiente */} 
 >            <button onClick={() => startTransition(cargarMas)}>
 >              {isPending ? "Cargando..." : "Cargar más"}
 >            </button>
@@ -2155,10 +2155,8 @@ export default
                     </Link>
 
                     <form >
-                        <input type="hidden" 
-                            name="id" defaultValue={producto.id}/>
-                        <input 
-                            name="nombre" defaultValue={producto.nombre} />
+                        <input type="hidden" name="id" defaultValue={producto.id}/>
+                        <input name="nombre" defaultValue={producto.nombre} />
 
                         <button formAction={modificarProducto}>Modificar</button>
                         <button formAction={eliminarProducto}>Eliminar</button>
@@ -2192,9 +2190,7 @@ export default
             <p>{producto.nombre}</p>
             <form>
                 <input type="hidden" name="id" defaultValue={producto.id}/>
-                <input
-                    name="nombre"                       
-                    defaultValue={producto.nombre} />
+                <input name="nombre" defaultValue={producto.nombre} />
 
                 <button formAction={modificarProducto}>Modificar</button>
                 <button formAction={eliminarProducto}>Eliminar</button>
