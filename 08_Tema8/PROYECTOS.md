@@ -1,5 +1,13 @@
 # PROYECTOS DE EJEMPLO
 
-### [Autenticación con OAuth](https://github.com/jamj2000/nxauth-oauth)
-### [Autenticación con Credenciales](https://github.com/jamj2000/nxauth-credentials)
-### [Protección de rutas con Middleware](https://github.com/jamj2000/nxauth-middleware)
+### [API con datos en memoria RAM](https://github.com/jamj2000/nxapi-memory)
+### [API con datos en BD MongoDB](https://github.com/jamj2000/nxapi-mongodb)
+### [API con datos en BD MongoDB (mongoose)](https://github.com/jamj2000/nxapi-mongoose)
+### [API con datos en BD MySQL](https://github.com/jamj2000/nxapi-mysql)
+### [API documentada con Swagger](https://github.com/jamj2000/nxapi-swagger)
+--- 
+
+### [Gráficos Chart estáticos](https://github.com/jamj2000/nxchart)
+### [Gráficos Chart dinámicos](https://github.com/jamj2000/nxchart-streaming)
+### [Fichas semanales con datos CSV](https://github.com/jamj2000/semana-fct)
+### [Google Maps](https://github.com/jamj2000/nxgoogle-maps)

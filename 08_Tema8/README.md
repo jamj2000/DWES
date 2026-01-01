@@ -1,47 +1,77 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
-# Tema 8: AUTENTICACIÓN <!-- omit in toc -->
-> Generación dinámica de páginas Web interactivas  
-> AUTENTICACIÓN DE USUARIOS, NEXT AUTH. OAUTH, CREDENTIALS.
+# Tema 7: APIs REST <!-- omit in toc -->
+> Programación de servicios Web
+> APIs, BIBLIOTECAS DE UTILIDAD.
 
 **[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
 <img src="assets/nextdotjs.svg" width="80" height="80">
 
----- 
-
+---
 - [1. Introducción](#1-introducción)
-- [2. Instalación de dependencias](#2-instalación-de-dependencias)
-- [3. Creación de archivos necesarios](#3-creación-de-archivos-necesarios)
-  - [3.1. .env](#31-env)
-  - [3.2. src/auth.js](#32-srcauthjs)
-  - [3.3. src/app/api/auth/\[...nextauth\]/route.js](#33-srcappapiauthnextauthroutejs)
-  - [3.4. src/middleware.js](#34-srcmiddlewarejs)
-- [4. Sesiones](#4-sesiones)
-  - [4.1. Estrategias de gestión de sesiones](#41-estrategias-de-gestión-de-sesiones)
-- [5. Adaptadores. Tipos de persistencia de datos](#5-adaptadores-tipos-de-persistencia-de-datos)
-  - [5.1. Prisma](#51-prisma)
-  - [5.2. Neon.tech](#52-neontech)
-- [6. Proveedores. Tipos de autenticación](#6-proveedores-tipos-de-autenticación)
-  - [6.1. OAuth (Open Authentication)](#61-oauth-open-authentication)
-    - [6.1.1. Google](#611-google)
-    - [6.1.2. GitHub](#612-github)
-    - [6.1.3. Discord](#613-discord)
-  - [6.2. Email](#62-email)
-  - [6.3. Credentials](#63-credentials)
-- [7. Despliegue](#7-despliegue)
-- [8. Aplicaciones de ejemplo](#8-aplicaciones-de-ejemplo)
-  - [8.1. Aplicación OAuth](#81-aplicación-oauth)
-  - [8.2. Aplicación Credentials](#82-aplicación-credentials)
-  - [8.3. Aplicación Middleware](#83-aplicación-middleware)
-- [9. CASOS PRÁCTICOS](#9-casos-prácticos)
-  - [9.1. App para gestionar un blog](#91-app-para-gestionar-un-blog)
-  - [9.2. App para gestionar una pizzería](#92-app-para-gestionar-una-pizzería)
-  - [9.3. App para gestionar proyectos de climatización](#93-app-para-gestionar-proyectos-de-climatización)
-- [10. ANEXO: Datos de sesión en el lado cliente](#10-anexo-datos-de-sesión-en-el-lado-cliente)
-- [11. Referencias:](#11-referencias)
-
-
+- [2. APIs REST](#2-apis-rest)
+  - [2.1. Route Handlers](#21-route-handlers)
+  - [2.2. Métodos HTTP admitidos](#22-métodos-http-admitidos)
+  - [2.3. Parámetros de URL](#23-parámetros-de-url)
+  - [2.4. Creación de API REST](#24-creación-de-api-rest)
+  - [2.5. API REST con datos en memoria RAM](#25-api-rest-con-datos-en-memoria-ram)
+  - [2.6. API REST con datos en BD MongoDB](#26-api-rest-con-datos-en-bd-mongodb)
+  - [2.7. Herramientas para probar la API](#27-herramientas-para-probar-la-api)
+  - [2.8. CORS](#28-cors)
+- [3. BIBLIOTECAS](#3-bibliotecas)
+  - [3.1. Datos ficticios](#31-datos-ficticios)
+    - [3.1.1. Instalación de biblioteca](#311-instalación-de-biblioteca)
+    - [3.1.2. Uso](#312-uso)
+    - [3.1.3. Documentación](#313-documentación)
+  - [3.2. Datos de archivos CSV](#32-datos-de-archivos-csv)
+    - [3.2.1. Instalación de biblioteca](#321-instalación-de-biblioteca)
+    - [3.2.2. Uso](#322-uso)
+    - [3.2.3. Documentación](#323-documentación)
+    - [3.2.4. Caso práctico y truco](#324-caso-práctico-y-truco)
+  - [3.3. Arrastrar y Soltar (Drag \& Drop)](#33-arrastrar-y-soltar-drag--drop)
+    - [3.3.1. Instalación de biblioteca](#331-instalación-de-biblioteca)
+    - [3.3.2. Uso](#332-uso)
+    - [3.3.3. Otras bibliotecas](#333-otras-bibliotecas)
+    - [3.3.4. Documentación](#334-documentación)
+  - [3.4. Gráficos](#34-gráficos)
+    - [3.4.1. Instalación](#341-instalación)
+    - [3.4.2. Uso](#342-uso)
+    - [3.4.3. Flujo de datos (streaming)](#343-flujo-de-datos-streaming)
+      - [3.4.3.1. Los modelos de provisión de datos](#3431-los-modelos-de-provisión-de-datos)
+      - [3.4.3.2. Ejemplo](#3432-ejemplo)
+      - [3.4.3.3. Colas de mensajes](#3433-colas-de-mensajes)
+      - [3.4.3.4. InfluxDB](#3434-influxdb)
+    - [3.4.4. Documentación](#344-documentación)
+    - [3.4.5. Curiosidad](#345-curiosidad)
+    - [3.4.6. Otras bibliotecas](#346-otras-bibliotecas)
+  - [3.5. Creación de PDFs](#35-creación-de-pdfs)
+    - [3.5.1. Instalación](#351-instalación)
+    - [3.5.2. Uso](#352-uso)
+    - [3.5.3. Documentación](#353-documentación)
+  - [3.6. Envío de correos](#36-envío-de-correos)
+    - [3.6.1. Instalación](#361-instalación)
+    - [3.6.2. Uso](#362-uso)
+      - [3.6.2.1. Usando una cuenta de Gmail](#3621-usando-una-cuenta-de-gmail)
+      - [3.6.2.2. Usando servidor de correo propio](#3622-usando-servidor-de-correo-propio)
+    - [3.6.3. Documentación](#363-documentación)
+  - [3.7. Pagos por internet](#37-pagos-por-internet)
+    - [3.7.1. Instalación](#371-instalación)
+    - [3.7.2. Uso](#372-uso)
+    - [3.7.3. Documentación](#373-documentación)
+  - [3.8. Mapas](#38-mapas)
+    - [3.8.1. Instalación](#381-instalación)
+    - [3.8.2. Uso](#382-uso)
+    - [3.8.3. Documentación](#383-documentación)
+  - [3.9. Editor WYSIWYG](#39-editor-wysiwyg)
+    - [3.9.1. Instalación](#391-instalación)
+    - [3.9.2. Uso](#392-uso)
+    - [3.9.3. Documentación](#393-documentación)
+    - [3.9.4. Curiosidad](#394-curiosidad)
+  - [3.10. Coloreado de código](#310-coloreado-de-código)
+    - [3.10.1. Instalación](#3101-instalación)
+    - [3.10.2. Uso](#3102-uso)
+    - [3.10.3. Documentación](#3103-documentación)
 
 
 
@@ -51,1134 +81,1698 @@
 
 # 1. Introducción
 
-En este Tema usaremos el sistema de autenticación proporcionado por **[Auth.js](https://authjs.dev/)**. 
+En este tema veremos con trabajar con 
 
-Auth.js es una solución completa de autenticación de código abierto para aplicaciones web. Algunas de sus características son:
+- **APIs REST**
 
-- Cookies firmadas, con prefijo y solo de servidor
-- Protección CSRF incorporada
-- Agnóstico del tiempo de ejecución: Funciones Vercel Edge, Node.js, Serverless, etc.
-- Soporte integrado para más de 75 servicios populares (Google, Facebook, Auth0, Apple…)
-- Soporte integrado para más de 23 bases de datos/ORM (MySQL, Postgres, Prisma, Drizzle…)
-- Autenticación integrada de correo electrónico/sin contraseña/enlace mágico
+Y tambien veremos cómo añadir nuevas funcionalidades a nuestra aplicación web. En concreto, se estudiarán las siguientes funcionalidades:
 
-> [!NOTE]
-> 
-> En sus inicios, hasta la versión 4, el proyecto se llamaba NextAuth y estaba enfocado en el framework NextJS. A partir de la versión 5, pasó a llamarse Auth.js y estar disponible también para otros frameworks como SvelteKit, SolidStart, ... A lo largo de este documento usaremos de forma indistinta los términos Auth.js y NextAuth 5.
-
-
-# 2. Instalación de dependencias
-
-```sh
-npm install next-auth@beta
-```
-
-Si además trabajamos con el ORM Prisma:
-
-```sh
-npm install @auth/prisma-adapter
-npm install @prisma/client 
-npm install prisma -D 
-```
-
-Si vamos a necesitar cifrar contraseñas:
-
-```sh
-npm install bcryptjs
-```
-
-
-# 3. Creación de archivos necesarios
-
-
-| Ruta           | Archivo                               |
-| -------------- | ------------------------------------- |
-| **`/`**        | **`.env`**                            |
-| **`/src`**     | **`auth.js`**                         |
-| **`/src`**     | **`middleware.js`**                   |
-| **`/src/app`** | **`api/auth/[...nextauth]/route.js`** |
-
-
-
-> [!NOTE]
-> 
-> Trabajaremos con archivos de Javascript, en lugar de Typescript, para evitar complejidad. 
+- **Datos ficticios**
+- **Datos de archivos CSV**
+- **Gráficos**
+- **Creación de PDFs**
+- **Envío de correos**
+- **Pagos por internet**
+- **Mapas**
+- **Editor WYSIWYG**
+- **Coloreado de código**
 
 
 
 
-## 3.1. .env
+# 2. APIs REST
 
-En este archivo guardamos las variables de entorno de los proveedores OAuth, conexión a BD, ...
+Una de las funcionalidades más habituales que puede proporcionar un backend desde el lado servidor es la puesta a disposición de información, normalmente en formato JSON y extraida de alguna base de datos, destinada a ser consumida por diversos clientes. 
 
-```
-AUTH_SECRET=         
+Esta funcionalidad se proporciona mediante una [API de tipo REST](https://blog.hubspot.es/website/que-es-api-rest).
 
-AUTH_GITHUB_ID=
-AUTH_GITHUB_SECRET=
+En NextJS para la creación de este tipo de APIs hacemos uso de manejadores de rutas o `route handlers`.
 
-AUTH_GOOGLE_ID=
-AUTH_GOOGLE_SECRET=
+## 2.1. Route Handlers
 
-AUTH_FACEBOOK_ID=
-AUTH_FACEBOOK_SECRET=
+Los `controladores de ruta` permiten crear controladores de solicitudes personalizados para una ruta determinada mediante las APIs web [`Request`](https://developer.mozilla.org/docs/Web/API/Request) y [`Response`](https://developer.mozilla.org/docs/Web/API/Response).
 
-AUTH_RESEND_KEY=
+Los controladores de ruta sólo están disponibles dentro del directorio `app`. A menudo se suelen utilizar para la creación de `APIs REST`.
+
+![route-special-file](assets/route-special-file.avif)
+
+Los controladores de ruta se definen en un archivo `route.js|ts` dentro del directorio `app`:
+
+```typescript
+// app/api/route.ts
+export async function GET(request: Request) {}
 ```
 
 > [!NOTE]
 > 
-> Podemos generar **AUTH_SECRET** con una de las siguientes formas:
-> 
-> 1. Ejecutar en el terminal el comando
-> ```sh
-> npx  auth  secret
-> ```
-
-> 2. Ejecutar en el terminal el comando
-> ```sh
-> openssl rand -hex 32    # Sólo en Linux
-> ```
->
-> 3. Visitar 
-> ```
-> https://generate-secret.vercel.app/32
-> ```
-
-> [!IMPORTANT]
-> 
-> NextAuth 5 simplifica el proceso de gestión de variables de entorno con respecto a NextAuth4. La nueva forma de nombrado de variables es la mostrada arriba. Si seguimos esta convención, AuthJs las reconocerá automáticamente y nuestra configuración de archivos se verá simplificada de forma notable. 
-
-## 3.2. src/auth.js
-
-Es el archivo más importante, puesto que incluye toda la configuración para la autenticación.
-
-```js
-import NextAuth from "next-auth"
-import GitHub from "@auth/core/providers/github"
-import Google from "@auth/core/providers/google"
+> No puede haber un archivo `route.js` en el mismo nivel de segmento de ruta que `page.js`.
 
 
-const options = {
-  providers: /* ... */,
-  session:   /* ... */,
-  adapter:   /* ... */,
-  pages:     /* ... */,
-  callbacks: /* ... */, 
-  events:    /* ... */,
-}
+## 2.2. Métodos HTTP admitidos
+
+Los siguientes métodos HTTP son compatibles: **GET**, **POST**, **PUT**, **PATCH**, **DELETE**, **HEAD**, y **OPTIONS**. Si se llama a un método no compatible, Next.js devolverá una respuesta *405 Method Not Allowed*.
 
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut
-} = NextAuth ( 
-  options 
-)
-```
+**Referencias:**
 
-> [!NOTE]
-> 
-> En la versión 5 de NextAuth importamos los proveedores desde `@auth/core/providers/*` en lugar de `next-auth/providers/*` como se realizaba en la versión 4, aunque esta última forma se mantiene por motivos de retrocompatibilidad.
+- https://nextjs.org/docs/app/building-your-application/routing/route-handlers
+- https://nextjs.org/docs/app/api-reference/functions/next-request
+- https://nextjs.org/docs/app/api-reference/functions/next-response
 
 
-## 3.3. src/app/api/auth/[...nextauth]/route.js
+## 2.3. Parámetros de URL
 
-Esta archivo proporciona una API para autenticación.
+Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
 
-```js
-export { GET, POST } from '@/auth' // Reexportamos GET  y POST
-```
+En los `route handlers` también podemos acceder a los 2 tipos que existen:
 
-Las rutas que proporciona son las siguientes:
-
-```
-api/auth/providers    -> muestra JSON de los proveedores incorporados a nuestra app
-api/auth/session      -> muestra JSON de la sesión actual en caso de existir, sino muestra null
-api/auth/signin       -> muestra formulario por defecto para login
-api/auth/signout      -> muestra formulario por defecto para logout
-api/auth/error        -> muestra página por defecto para error
-api/auth/verify-request
-```
-
-**Ejemplo de página signin**
-
-![Signin page](assets/signin.png)
-
-**Ejemplo de página signout**
-
-![Signout page](assets/signout.png)
+- **Parámetros de ruta** `Path Parameters`
+- **Parámetros de consulta** `Query Parameters` o `Query Strings` 
 
 
-## 3.4. src/middleware.js
+Si tenemos la siguiente ruta:
 
-Este archivo es opcional.
+**`http://localhost:3000/api/products/bristol/books?sort=author&skip=1`**
 
-La configuración de este archivo nos permite indicar qué rutas de nuestra aplicación están protegidas y cuales no según las configuración. 
+
+Y el siguiente código en `src/app/api/products/[store]/[category]/route.js`
 
 
 ```js
-import { auth } from "@/auth";
+export async function GET(request, { params }) {
+    console.log( request.nextUrl.origin )
+    console.log( request.nextUrl.pathname )
 
-export default auth((req) => {
+    // Params
+    const { store, category } = await params
+    console.log( store )
+    console.log( category )
+
+    // SearchParams
+    const sort = request.nextUrl.searchParams.get("sort")
+    const skip = request.nextUrl.searchParams.get("skip")
+    console.log( sort )
+    console.log( skip )
+
     // ...
-
-})
-
-// Rutas que seran revisadas por la función anterior
-export const config = {
-    matcher: ['/dashboard(.*)']
-};
-
-```
-
-En configuraciones más complejas, cuando nuestra aplicación se despliega en Internet en una red `edge`, necesitaremos configurar el middleware de una manera algo distinta a la anterior, tal como se muestra a continuación.
-
-En un archivo separado pondremos la configuración de los proveedores. Y en el middleware sólamente incluiremos la configuración de este archivo. El resto de opciones de autenticación no los incluiremos. Esto es necesario, porque actualmente Prisma no puede ejecutarse en el `edge`, que es donde se ejecutará el *middleware*.
-
-```js
-// auth.config.js
-import Credentials from "@auth/core/providers/credentials"
-import Google from "@auth/core/providers/google"
-import GitHub from '@auth/core/providers/github'
-
-export default {
-    providers: [
-        Google,
-        GitHub,
-        Credentials({  /* ... */ })
-    ]
 }
 ```
 
-```js
-// middleware.js
-import NextAuth from "next-auth";
-import authConfing from "@/auth.config"
+Producirá la siguiente salida:
 
-const { auth } = NextAuth(authConfing)
+```
+http://localhost:3000
+/api/products/bristol/books
+bristol
+books
+author
+1
+``` 
 
 
-export default auth((req) => {
-    // ...
 
-})
+## 2.4. Creación de API REST
 
-export const config = {
-    matcher: [
-        '/',
-        '/about',
-        '/dashboard(.*)' 
-    ]
-};
+Como se ha comentado anteriormente, la principal aplicación que tienen los route handlers (`controladores de ruta`) es la implentación de APIs. Suele ser habitual el intercambio de información mediante el formato JSON.
+
+A continuación tienes 2 proyectos donde se implementa una API sencilla de este tipo. En ambos casos, los *endpoints* disponibles son:
+
+- `/api/users` Métodos **GET** y **POST**
+- `/api/users/[id]` Métodos **GET**, **PUT** y **DELETE**
+
+**Estructura de archivos en `app`**
+
+```
+app
+├── api
+│   └── users
+│       ├── [id]
+│       │   └── route.js
+│       └── route.js
+├── favicon.ico
+├── globals.css
+├── layout.js
+└── page.js
+
 ```
 
-El acceso a las rutas se puede configurar también sin necesidad de *middleware*. 
+
+## 2.5. API REST con datos en memoria RAM
+
+**Estructura de archivos en `src`**
+
+```
+.
+├── app
+│   ├── api
+│   │   └── users
+│   │       ├── [id]
+│   │       │   └── route.js
+│   │       └── route.js
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+└── lib
+    └── users.js
+```
+
+Gestión de datos en archivo `lib/users.js`.
+
+- [Código fuente](https://github.com/jamj2000/nxapi-memory)
 
 
-# 4. Sesiones
+## 2.6. API REST con datos en BD MongoDB
 
-Antes de nada es importante diferenciar 2 conceptos:
+**Estructura de archivos en `src`**
 
-- `Autenticación`: proceso para identificar a un usuario
-- `Autorización`: proceso de dar acceso a determindos recursos al usuario autenticado.
+```
+.
+├── app
+│   ├── api
+│   │   └── users
+│   │       ├── [id]
+│   │       │   └── route.js
+│   │       └── route.js
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+└── lib
+    └── mongodb.js
+```
 
-AuthJS es esencialmente una solución de **autenticación** para aplicaciones web. Pero junto con el manejo de sesiones y el middleware podemos conseguir una solución completa de autenticación/autorización.
+Gestión de datos en archivo `lib/mongodb.js`.
+
+- [Código fuente](https://github.com/jamj2000/nxapi-mongodb)
 
 
-HTTP / HTTPS son protocolos sin estado. Esto quiere decir, que aunque realicemos una conexión desde la misma IP, dichos protocolos no son capaces por si mismos de gestionar una sesión. 
+## 2.7. Herramientas para probar la API
 
-Se entende por **sesión** la capacidad de un servidor web de mantener la identidad del usuario y almacenar datos específicos de éste durante múltiples interacciones de solicitud/respuesta entre una aplicación web en el servidor y el cliente web en el navegador.
+Para comprobar el correcto funcionamiento de la API, tenemos muchas herramientas. Las más conocidas son:
 
-Debido a las limitaciones que tienen HTTP / HTTPS para este fin, ya hace tiempo que se inventó una forma de gestionar las sesiones y que a día de hoy es ampliamente usado.
-
-El mecanismo más usado para gestionar sesiones se compone de 2 elementos:
-
-- **cookies** en el lado cliente
-- **variables de sesión** en el lado servidor
+- [Postman](https://www.postman.com/)
+- [Insomnia](https://insomnia.rest/)
+- [Rest Client (plugin para VSCode)](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 
 
-En Auth.js, los datos de sesión tienen una forma similar a la siguiente:
+Una herramienta muy interesante es [HTTPie](https://httpie.io/), en especial su [CLI](https://httpie.io/cli), debido a su accesibilidad e inmediatez.
+
+![httpie-cli](assets/httpie-cli.png)
+
+
+```sh
+# Ejemplos
+http -b GET    https://nxapi-mongodb.vercel.app/api/users
+http -b POST   https://nxapi-mongodb.vercel.app/api/users nombre='Jose' edad=22
+http -b PUT    https://nxapi-mongodb.vercel.app/api/users/67ad04ef7152afc8f3d0d1f9 nombre='José' edad=23
+http -b DELETE https://nxapi-mongodb.vercel.app/api/users/67ad04ef7152afc8f3d0d1f9
+```
+
+Aunque también dispone de su versión [GUI](https://httpie.io/desktop)
+
+![httpie-gui](assets/httpie-gui.png)
+
+
+
+## 2.8. CORS
+
+El **intercambio de recursos entre orígenes** -Cross-Origin Resource Sharing (CORS)- es una característica de seguridad que te permite controlar qué sitios pueden acceder a tus recursos. Puedes configurar el encabezado `Access-Control-Allow-Origin` para permitir que un origen específico acceda a sus controladores de ruta.
+
+En NextJS existen 2 formas sencillas de habilitar CORS:
+
+1. [Usando la API Web estándar para un controlador de ruta](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#cors)
+2. [Agregando encabezados CORS a múltiples controladores de ruta](https://nextjs.org/docs/app/api-reference/next-config-js/headers#cors)
+
+A continuación se muestra como se haría de la primera forma:
+
+```js
+export async function GET(request: Request) {
+  return new Response('Hello, Next.js!', {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  })
+}
+```
+
+Para la segunda forma, deberemos editar el archivo `next.config.mjs`. Esta última forma nos permite establecer CORS para múltiples rutas. Por ejemplo:
+
+```js
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/api/(.*)",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, PUT, DELETE, OPTIONS",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization",
+          },
+        ],
+      },
+    ];
+  }  
+} 
+```
+
+**Referencia:**
+
+- [CORS: Qué es y cómo funciona el Cross-Origin Resource Sharing](https://okitup.com/blog/que-es-y-como-funciona-el-cors)
+- [Una tercera forma de habilitar CORS usando Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware#cors)
+
+
+
+## Documentación
+
+Para los usuarios o aplicaciones cliente que consumen nuestra API es muy importante que ésta esté documentada.
+
+Un sistema de documentación muy usado actualmente es **OpenAPI + Swagger**.
+
+**[OpenAPI](https://www.openapis.org/)** es una especificación estándar para describir APIs REST.
+
+En pocas palabras, OpenAPI define cómo documentar una API de forma estructurada y legible tanto para humanos como para máquinas.
+
+Con OpenAPI puedes describir:
+
+- Rutas (endpoints) disponibles
+- Métodos HTTP (GET, POST, PUT, DELETE, etc.)
+- Parámetros de entrada
+- Cuerpos de las peticiones
+- Respuestas posibles
+- Códigos de estado
+- Autenticación (JWT, OAuth, API keys, etc.)
+
+Se suele escribir en YAML o JSON.
+
+
+Por otro lado, **[Swagger](https://swagger.io/)** es un conjunto de herramientas que usan la especificación OpenAPI.
+
+Herramientas más conocidas de Swagger:
+
+- Swagger UI → Interfaz web para ver y probar la API
+- Swagger Editor → Editor para escribir archivos OpenAPI
+- Swagger Codegen → Genera código cliente o servidor automáticamente
+- Swagger Hub → Plataforma colaborativa para APIs
+
+Con Swagger UI puedes:
+
+- Ver la documentación de la API
+- Probar endpoints directamente desde el navegador
+- Enviar requests sin usar Postman
+
+
+**Proyectos de ejemplo**
+
+A continuación tienes el código fuente de dos proyectos que implementan una API y ofrecen su documentación asociada:
+
+- [Swagger - Ejemplo básico](https://github.com/jamj2000/nxapi-swagger)
+- [Swagger - Ejemplo más completo](https://github.com/jamj2000/nxapi-shop)
+
+
+En ambos casos disponemos de los 2 elementos siguientes:
+
+- Especificación OpenAPI 3.0 ( en archivo `public/swagger.json` )
+- Página interactiva ( en archivo `src/app/apidoc/page.js` )
+
+
+**Especificación OpenAPI 3.0**
+
+`public/swagger.json`
+
+Es un archivo JSON público que describe la API. Está organizado de la siguiente manera:
+
+```json
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Shop API Documentation",
+        "description": "A modern REST API built with Next.js",
+        "version": "1.0.0"
+    },
+    "components": {
+      ...
+    }
+    "paths": {
+      ...
+    } 
+```
+
+
+En el apartado de **`components`** tenemos la configuración de autenticación (en este caso Bearer JWT) y los schemas (modelos de datos)
+
+```json
+"components": { 
+      "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+      },
+      "schemas": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "cd533345-f1f3-48c9-a62e-7dc2da50c8f8",
+                        "description": "Product ID",
+                        "uniqueItems": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "T-Shirt Teslo",
+                        "description": "Product Title",
+                        "uniqueItems": true
+                    },
+                    "price": {
+                        "type": "number",
+                        "example": 0,
+                        "description": "Product price"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Anim reprehenderit nulla in anim mollit minim irure commodo.",
+                        "description": "Product description",
+                        "default": null
+                    }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "price",
+                    "description",
+                    "slug",
+                    "stock",
+                    "sizes",
+                    "gender",
+                    "tags",
+                    "images"
+                ]
+            },
+            ...
+      }
+}
+```
+
+En el apartado de **`paths`** tenemos la documentados los **endpoints** disponibles, cada uno con su configuración de seguridad (en caso de ser necesaria), los `parameters`, `requestBody` y `responses` admitidos.
 
 
 ```json
-{
-  "user": {
-    "name": "José Antonio Muñoz Jiménez",
-    "email": "jamj2000@gmail.com",
-    "image": "https://avatars.githubusercontent.com/u/2934084?v=4",
-  },
-  "expires": "2024-02-20T12:02:43.639Z"
+"paths": {
+       "/api/products": {
+            "post": {
+                "summary": "Create new product",
+                "tags": [
+                    "Products"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductCreate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product was created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing data"
+                    },
+                    "403": {
+                        "description": "Forbidden. Token related."
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "get": {
+                "summary": "List products",
+                "tags": [
+                    "Products"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "required": true,
+                        "in": "query",
+                        "description": "How many rows do you need",
+                        "schema": {
+                            "default": 10,
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "required": true,
+                        "in": "query",
+                        "description": "How many rows do you want to skip",
+                        "schema": {
+                            "default": 0,
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product list"
+                    }
+                }
+            }
+        },
+        ...
 }
 ```
 
-La sesión activa puede consultarse en el *endpoint* `/api/auth/session` proporcionado por la API de Auth.js.
+
+**Página interactiva**
+
+`src/app/apidoc/page.js`
+
+![apidoc](assets/apidoc.png)
 
 
-## 4.1. Estrategias de gestión de sesiones
+Se ha utilizado un sistema de Autorización mediante Bearer *token*, siendo éste de tipo **[JWT](https://www.fastly.com/es/learning/security/what-is-jwt)**.
 
-[Auth.js admite 2 estrategias](https://authjs.dev/concepts/session-strategies) de sesión para conservar el estado de inicio de sesión de un usuario. El valor predeterminado es utilizar la estrategia de almacenar sesiones en cookies + JWT: (`strategy: "jwt"`), pero también podemos utilizar el adaptador de base de datos para almacenar la sesión en una base de datos  (`strategy: "database"`).
+Los **endpoints** que modifican la información de la API (métodos **POST**, **PATCH**, **PUT** y **DELETE**) requieren que el cliente proporcione el JWT que previamente habrá solicitado al servidor. Este token estará firmado con la clave secreta del servidor y su autenticidad puede comprobarse en [jwt.io](https://jwt.io)
 
-Para la gestión de información de la sesión, nosotros usaremos la estrategia `jwt`:
-
-```js
-const options = {
-    providers: [Google, GitHub],
-    adapter: PrismaAdapter(prisma),
-    session: { strategy: "jwt" },
-    /* ... */
-}
-```
+![jwt](assets/jwt.png)
 
 
-# 5. Adaptadores. Tipos de persistencia de datos
-
-Un adaptador en Auth.js conecta la aplicación a cualquier base de datos o sistema backend que desees utilizar para almacenar datos de los usuarios, sus cuentas, sesiones, etc. Los adaptadores son opcionales, a menos que necesites conservar la información del usuario en su propia base de datos, o desees implementar ciertos flujos. Por ejemplo, el proveedor de correo electrónico requiere un adaptador para poder guardar tokens de verificación.
-
-La lista de adaptadores soportados de forma oficial está disponible en el siguiente enlace:
-
-- https://authjs.dev/getting-started/adapters
 
 
-## 5.1. Prisma
-
-- Referencia: https://authjs.dev/reference/adapter/prisma
-
-Un adaptador es un objeto con métodos para leer y escribir datos de una fuente de datos. Piensa en estos métodos como una forma de normalizar la capa de datos a interfaces comunes que Auth.js pueda entender.
-
-Esto es lo que hace que Auth.js sea muy flexible y permite utilizarlo con cualquier capa de datos.
-
-Los métodos del adaptador se utilizan para realizar las siguientes operaciones:
-
-- Crear/actualizar/eliminar un usuario
-- Vincular/desvincular una cuenta a/de un usuario
-- Manejar sesiones activas
-- Admite autenticación sin contraseña en múltiples dispositivos
-
-Auth.js se puede integrar con cualquier capa de datos (base de datos, ORM o API backend, cliente HTTP) para crear usuarios automáticamente, manejar la vinculación de cuentas automáticamente, admitir el inicio de sesión sin contraseña y almacenar información de la sesión.
-
-Auth.js tiene una lista bastante extensa de adaptadores para ORM/Bases de datos:
-
-- @auth/azure-tables-adapter
-- @auth/d1-adapter
-- @auth/dgraph-adapter
-- @auth/drizzle-adapter
-- @auth/dynamodb-adapter
-- @auth/edgedb-adapter
-- @auth/fauna-adapter
-- @auth/firebase-adapter
-- @auth/hasura-adapter
-- @auth/kysely-adapter
-- @auth/mikro-orm-adapter
-- @auth/mongodb-adapter
-- @auth/neo4j-adapter
-- @auth/pg-adapter
-- @auth/pouchdb-adapter
-- **@auth/prisma-adapter**
-- @auth/sequelize-adapter
-- @auth/supabase-adapter
-- @auth/surrealdb-adapter
-- @auth/typeorm-adapter
-- @auth/unstorage-adapter
-- @auth/upstash-redis-adapter
-- @auth/xata-adapter
-
-Los Modelos que usa Auth.js son los siguientes:
-
-![Modelos para Auth](assets/authjs-models.png)
-
-> [!IMPORTANT]
->
-> Sólo necesitaremos los modelos User y Account. Se ha **ampliado del módelo `User` con campos `password` y `role`**.
 
 
-```prisma
-model User {
-  id            String  @id @default(cuid())
-  // ...
-  password      String?
-  role          String?   @default("USER")  // o  ADMIN
-  // ...
-}
-```
+# 3. BIBLIOTECAS
 
-Vamos a necesitar el campo `password` para el trabajo con credenciales. Y el campo `role` nos permitirá distinguir entre roles USER y ADMIN.
+Aquí se exponen someramente algunas de las bibliotecas que proporcionan funcionalidades que en ciertas circunstancias pueden ser de nuestro interés.
 
+## 3.1. Datos ficticios
 
-**EJEMPLO DE ARCHIVO prisma/schema.prisma**
+Durante el desarrollo de una aplicación a menudo necesitamos datos *fake* para probar su funcionalidad. Para ello disponemos de la biblioteca **[faker.js](https://fakerjs.dev/)**, la cual nos provee de este tipo de datos. 
 
+Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
-```prisma
-generator client {
-  provider = "prisma-client-js"
-}
+### 3.1.1. Instalación de biblioteca
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+Instalamos como **dependencia de desarrollo**. Aparecerá en la sección `devDependencies` en el archivo `package.json`.
 
 
-model User {
-  id            String  @id @default(cuid())
-  name          String
-  email         String?   @unique
-  password      String?
-  emailVerified DateTime?
-  image         String?
-  role          String?   @default("USER")  // o  ADMIN
-  accounts      Account[]
-}
-
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
+```console
+npm install -D @faker-js/faker
 ```
 
 > [!IMPORTANT]
 >
-> Observa que el modelo `User` debe permitir **valores null en los siguientes campos: `password`, `email`, `image`**. Esto es así puesto que OAuth nunca nos devuelve información de password, y en muchos casos tampoco devuelve información de email e image.
->
-> Si no permitimos valores null en estos campos la autenticación OAuth fallará.
-
-## 5.2. Neon.tech
-
-[neon.tech](https://neon.tech) es un DBaaS muy sencillo de usar y con un plan gratis bastante generoso. Se recomienda su uso para las tareas de este Tema. 
-
-Una vez nos hayamos registrado y creado una base de datos, podemos acceder a los datos de conexión mediante `Dashboard` -> `Connection Details`-> `Database` -> `Prisma` y `.env`
-
-![neon prisma](assets/neon-prisma.png)
-
-![neon .env](assets/neon-env.png)
+> Esta biblioteca ocupa unos cuantos MB.
 
 
+### 3.1.2. Uso
 
-# 6. Proveedores. Tipos de autenticación
-
-Los proveedores de autenticación en NextAuth.js son servicios que se pueden utilizar para iniciar sesión un usuario. Existen varios tipos. Los más usados son:
-
-- **OAuth**
-- **Email**
-- **Credentials**
-
-Los proveedores disponibles en nuestra app pueden consultarse en el *endpoint* `/api/auth/providers` proporcionado por la API de Auth.js.
-
-
-## 6.1. OAuth (Open Authentication)
-
-- [Documentación de OAuth](https://authjs.dev/getting-started/providers/oauth-tutorial)
-
-**Open Authorization (OAuth)** es un estándar abierto que permite flujos simples de autorización para sitios web o aplicaciones informáticas. Se trata de un protocolo propuesto por Blaine Cook y Chris Messina, que permite autorización segura de una API de modo estándar y simple para aplicaciones de escritorio, móviles y web.
-
-OAuth permite a un usuario del sitio A (proveedor de servicio) compartir su información con el sitio B (llamado consumidor) sin compartir toda su identidad. Para desarrolladores de consumidores, OAuth es un método de interactuar con datos protegidos y publicarlos. Para desarrolladores de proveedores de servicio, OAuth proporciona a los usuarios un acceso a sus datos al mismo tiempo que protege las credenciales de su cuenta. Este mecanismo es utilizado por compañías como Google, Facebook, Microsoft, Twitter y Github para permitir a los usuarios compartir información sobre sus cuentas con aplicaciones de terceros o sitios web.
-
-NextAuth.js está diseñado para funcionar con cualquier servicio OAuth, es **compatible con OAuth 1.0, 1.0A, 2.0 y OpenID Connect** y tiene soporte integrado para los servicios de inicio de sesión más populares.
-
-Los lista proveedores soportados de forma oficial está disponible en el siguiente enlace:
-
-- https://authjs.dev/getting-started/providers
-
-
-Para configurar dicha funcionalidad necesitaremos editar 2 archivos. A continuación se muestra un ejemplo:
- 
-- Archivo **/.env**
-
-```
-AUTH_GITHUB_ID=
-AUTH_GITHUB_SECRET=
-
-AUTH_GOOGLE_ID=
-AUTH_GOOGLE_SECRET=
-```
-
-- Archivo **/src/auth.js**
 
 ```js
-import Github from "@auth/core/providers/github"
-import Google from "@auth/core/providers/google"
+import { faker } from '@faker-js/faker';
 
-  // ...
-
-  providers: [ Github, Google ],
+// Algunos datos disponibles.
+// Para ver un listado exhaustivo, consulta la API
+faker.number.int()
+faker.number.int({ min: 10, max: 100 })
+faker.number.float() 
+faker.number.float({ min: 10, max: 100, multipleOf: 0.02 }) 
+faker.person.firstName() 
+faker.person.firstName('female') 
+faker.person.firstName('male') 
+faker.person.lastName()
+faker.person.fullName()
+faker.person.bio()
+faker.internet.email()
+faker.internet.email({ firstName: 'Jeanne', lastName: 'Doe' }) // 'Jeanne_Doe63@yahoo.com'
+faker.internet.email({ firstName: 'Jeanne', lastName: 'Doe', provider: 'example.dev' }) // 'Jeanne_Doe88@example.dev'
+faker.animal.dog()   // 'Irish Water Spaniel'
+faker.animal.cat()   // 'Singapura'
+faker.animal.horse() // 'Swedish Warmblood'
+faker.image.avatar()
+faker.image.city()
 ```
+
+
+### 3.1.3. Documentación
+
+- [Guía](https://fakerjs.dev/guide/)
+- [API. Tipos de datos proporcionados](https://fakerjs.dev/api/)
+
+
+
+## 3.2. Datos de archivos CSV
+
+Es posible que se te presente la posibilidad de realizar una aplicación que requiera el uso de datos de poca complejidad y de sólo lectura. En estos casos es problable que usar una BD sea algo parecido a *matar moscas a cañonazos*. 
+
+Disponemos de una biblioteca  llamada **[Papa Parse](https://www.papaparse.com/)** que nos permite almacenar nuestros datos en uno o varios [archivos CSV](https://es.wikipedia.org/wiki/Valores_separados_por_comas), y realizar las consultas deseadas sobre ellos. 
+
+Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
+
+### 3.2.1. Instalación de biblioteca
+
+ ```sh
+npm  install  papaparse
+ ```
+
+
+### 3.2.2. Uso
+
+
+```js
+import Papa from 'papaparse';
+
+Papa.parse(file, config);
+```
+
+A continuación tienes los enlaces a 2 proyectos que hacen uso de esta biblioteca.
+
+- [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
+- [Aplicación de lado servidor para consultar biblioteca de libros](https://github.com/jamj2000/book-inventory)
+
+La segunda aplicación contiene los datos en el archivo [book.csv](https://github.com/jamj2000/book-inventory/blob/main/books.csv). CUIDADO: son unos 70MB.
+
+Para cargar grandes cantidades de datos desde CSV a una BD consulta el siguiente vídeo:
+
+- [Loading Large CSVs into a Vercel Postgres Database](https://youtu.be/RbDcTraZwQA?si=PEv-tX-Q6L3QHtrS)
+
+
+### 3.2.3. Documentación
+
+- [Sitio oficial](https://www.papaparse.com/)
+- [Repositorio en Github](https://github.com/mholt/PapaParse?tab=readme-ov-file)
+
+
+### 3.2.4. Caso práctico y truco
+
+Si tenemos un archivo `localidades.csv` con los datos en formato CSV, podemos convertirlos fácilmente a datos JSON con algún conversor, como [csvjson.com](https://csvjson.com/) y guardarlos en un archivo `localidades.json`.
+
+Los datos CSV siguientes
+
+```csv
+"id","nombre","temp_ext_ver","hr_ext_ver","temp_ext_inv","hr_ext_inv","altitud","zona_climatica"
+1,"Álava (Vitoria / Aeropuerto de Foronda)",30.1,49,-2.4,96,508,"D"
+2,"Albacete (Los Llanos-Base Aérea)",34.2,25,-3,92.3,704,"D"
+3,"Albacete (Hellín)",36.7,27,1.5,70.4,520,"D"
+```
+
+se convertirán en los datos JSON siguientes
+
+```json
+[
+    {
+        "id": 1,
+        "nombre": "Álava (Vitoria / Aeropuerto de Foronda)",
+        "temp_ext_ver": 30.1,
+        "hr_ext_ver": 49,
+        "temp_ext_inv": -2.4,
+        "hr_ext_inv": 96,
+        "altitud": 508,
+        "zona_climatica": "D"
+    },
+    {
+        "id": 2,
+        "nombre": "Albacete (Los Llanos-Base Aérea)",
+        "temp_ext_ver": 34.2,
+        "hr_ext_ver": 25,
+        "temp_ext_inv": -3,
+        "hr_ext_inv": 92.3,
+        "altitud": 704,
+        "zona_climatica": "D"
+    },
+    {
+        "id": 3,
+        "nombre": "Albacete (Hellín)",
+        "temp_ext_ver": 36.7,
+        "hr_ext_ver": 27,
+        "temp_ext_inv": 1.5,
+        "hr_ext_inv": 70.4,
+        "altitud": 520,
+        "zona_climatica": "D"
+    }
+]
+```
+
+
+**NextJS tiene soporte nativo para datos JSON**. Por ejemplo, podemos hacer
+
+``` js
+import localidades from '@/lib/localidades.json'  
+
+// ...
+
+console.log( localidades.find ( localidad => localidad.id == 1 ) )  // Mostramos localidad con id 1
+```
+
+De esta forma tan sencilla, nos ahorramos tener que usar papaparse, y así reducir dependencias y simplificar el desarrollo.
+
+
+
+## 3.3. Arrastrar y Soltar (Drag & Drop)
+
+La funcionalidad de arrastrar y soltar es propia del lado cliente y por tanto deberá ser usada desde componentes cliente. Además de poder realizarla con Vanilla JS, también disponemos de 2 bibliotecas interesantes, que son:
+
+- **[DnD Kit](https://docs.dndkit.com/)**
+- **[React DnD](https://react-dnd.github.io/react-dnd/docs/overview)**
+
+A diferencia de muchas bibliotecas de arrastrar y soltar, **DnD Kit** no está construido intencionalmente sobre la API de arrastrar y soltar HTML5. Esta fue una decisión arquitectónica deliberada, que conlleva desventajas que debe conocer antes de decidir usarla. Para la mayoría de las aplicaciones web, creemos que los beneficios superan las desventajas.
+
+La API de arrastrar y soltar de HTML5 tiene algunas limitaciones severas. No es compatible con dispositivos táctiles, lo que significa que las bibliotecas que se construyen sobre ella deben exponer una implementación completamente diferente para admitir dispositivos táctiles.
+
+La principal desventaja de que **DnD Kit** no use la API de arrastrar y soltar de HTML5 es que no podrá arrastrar desde el escritorio o entre ventanas. 
+Si el caso de uso de arrastrar y soltar que tiene en mente implica este tipo de funcionalidad, definitivamente querrá usar una biblioteca que esté construida sobre la API de arrastrar y soltar de HTML5. 
+Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd/about) para obtener una biblioteca de React que tenga un backend de arrastrar y soltar de HTML5 nativo.
+
+|           | Soporta pantallas táctiles | DnD desde escritorio y entre ventanas |
+| --------- | :------------------------: | :-----------------------------------: |
+| DnD Kit   |             ✓              |                   𐄂                   |
+| React DnD |             𐄂              |                   ✓                   |
+
+
+### 3.3.1. Instalación de biblioteca
+
+```sh
+npm  install  react  react-dom  @dnd-kit/core 
+```
+
+```sh
+npm  install  react  react-dom  react-dnd  react-dnd-html5-backend
+```
+
+### 3.3.2. Uso
+
+- Para DnD Kit seguir la siguiente guía: https://docs.dndkit.com/introduction/getting-started
+- Para React DnD seguir el siguiente tutorial: https://react-dnd.github.io/react-dnd/docs/tutorial 
+
+
+### 3.3.3. Otras bibliotecas
+
+Otras herramientas que nos permiten hacer DnD son:
+
+- [Swapy](https://swapy.tahazsh.com/)
+- [Dockview](https://dockview.dev/)
+- [React Mosaic](https://github.com/nomcopter/react-mosaic#readme)
+
+
+### 3.3.4. Documentación
+
+- [DnD Kit](https://docs.dndkit.com/)
+- [React DnD](https://react-dnd.github.io/react-dnd/docs/overview)
+  
+
+## 3.4. Gráficos
+
+Esta biblioteca debe ser usada desde el lado cliente.
+
+Otra de las funcionalidades que a menudo es requerida es la de presentación de información en forma gráfica. Suele tratarse de diagramas para la exposición de datos o de monitorización de ellos (en algunos casos en tiempo real). En este último caso, los gráficos suelen estar incorporados en un Dashboard o Panel del usuario. 
+
+La web W3Schools tiene una [introdución a los gráficos](https://www.w3schools.com/ai/ai_graphics.asp) explicando brevemente las bibliotecas más habituales para el trabajo con gráficos.
+
+Nosotros usaremos la biblioteca [chart.js](https://www.chartjs.org/) por ser una de las más populares. Además es sencilla de usar y tiene licencia MIT, la cual es muy permisiva.
+
+Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuente está disponible en:
+
+- [Código fuente](https://github.com/jamj2000/nxchart)
+
+![demo](assets/chart-dashboard.png)
+
 
 > [!NOTE]
 > 
-> A diferencia de versiones anteriores, en NextAuth 5 no es necesario indicar en este archivo las variables de entorno, siempre que la hayamos declarado en el archivo `.env` con la forma `AUTH_PROVEEDOR_ID` y `AUTH_PROVEEDOR_SECRET`.
-
-Para poder ofrecer OAuth necesitaremos **registrar nuestra aplicación** web en la **sección destinada a desarrolladores que ofrece el proveedor** para estos fines.
-
-Una vez hecho esto, el proveedor nos proporcionará 2 valores, que deberemos añadir a nuestro archivo `.env`, que son:
-
-- **ID**
-- **SECRET**
-
-A continuación se muestra el proceso resumido de registro de una aplicación web en los proveedores Google y Github, aunque existen muchos otros.
-
-
-### 6.1.1. Google
-
-https://console.developers.google.com/apis/credentials
-
-
-![google 1](assets/oauth-google1.png)
-
-![google 2](assets/oauth-google2.png)
-
-
-> [!IMPORTANT]  
+> Otra biblioteca muy interesante es [`plotly para javascript`](https://plotly.com/javascript/). Es una biblioteca originalmente desarrollada para el lenguaje Python.
 > 
-> Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
-
-![google 3](assets/oauth-google3.png)
-
-![google 4](assets/oauth-google4.png)
-
-Si no has usado nunca está consola, Google te pedirá que primero crees un Proyecto, y después que rellenes una Pantalla de Consentimiento. Y finalmente podrás dar de alta las credenciales de tu app tal como se muestra en las capturas anteriores.
-
-Si tienes algún problema puedes consultar la página https://support.google.com/cloud/answer/10311615 
-
-
-### 6.1.2. GitHub
-
-https://github.com/settings/apps
-
-![github 1](assets/oauth-github1.png)
-
-![github 2](assets/oauth-github2.png)
-
-> [!IMPORTANT] 
 > 
-> Cuando nuestra aplicación esté desplegada en producción, deberemos cambiar la URL `http://localhost:3000` por la URL del despliegue, p. ej: `https://mi-app.vercel.app`. 
+> ```sh
+> npm  install  plotly.js-dist-min
+> ```
+> Características:
+> - Mayor cantidad de gráficas de chart.js
+> - Mayor interactividad
+> - Buena integración con datos en tiempo real
+>
+> A pesar de sus interesantes características, una desventaja muy importante es que su integración con NextJS es bastante mala. Sin embargo funciona muy bien con Vanilla JS.
+>
+> Más documentación:
+> - [Fundamentos](https://plotly.com/javascript/plotly-fundamentals/)
+> - [Integración con React](https://plotly.com/javascript/react/) (`npm  install  react-plotly.js  plotly.js`)
 
-![github 3](assets/oauth-github3.png) 
-
-![github 4](assets/oauth-github4.png)
 
 
-### 6.1.3. Discord
+### 3.4.1. Instalación
 
-https://discord.com/developers/applications
-
-![oauth discord despliegue](assets/oauth-discord.png)
-
-
-## 6.2. Email
-
-- [Documentación de Email](https://authjs.dev/getting-started/providers/email-tutorial)
-
-Además de autenticar usuarios en Auth.js mediante OAuth, también puedes habilitar la opción de autenticarlos mediante `magic links`. Son enlaces que se envían al correo electrónico del usuario y al hacer clic en ellos se registrará el usuario automáticamente.
-
-Agregar soporte para iniciar sesión por correo electrónico además de uno o más servicios OAuth proporciona una manera para que los usuarios inicien sesión si pierden el acceso a su cuenta OAuth (por ejemplo, si está bloqueada o eliminada).
-
-El proveedor de correo electrónico se puede utilizar junto con (o en lugar de) uno o más proveedores de OAuth.
-
-<!-- 
-Para configurar dicha funcionalidad necesitaremos editar 2 archivos. A continuación se muestra un ejemplo:
- 
-- Archivo **/.env**
-
-```
-SMTP_USER=apikey
-SMTP_PASSWORD={API_KEY}
-SMTP_HOST=smtp.sendgrid.net
-SMTP_PORT=587
-EMAIL_FROM={SENDER_EMAIL}
+```console
+npm  install  chart.js  react-chartjs-2
 ```
 
-- Archivo **/src/auth.js**
+El segundo paquete (`react-chartjs-2`) nos permitirá usar directamente componentes de React, en lugar de Vanilla JS.
+
+
+### 3.4.2. Uso
+
+
+La forma más rápida y directa de empezar a usar esta biblioteca es usando el siguiente esquema. 
 
 ```js
-import Email from "@auth/core/providers/email"
+import { Chart } from 'chart.js/auto'   // versión 4 de chartjs
+import { Line } from 'react-chartjs-2';
 
-  providers: [
-    Email({
-      server: {
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT),
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASSWORD,
+const options = {
+  plugins: {
+    title:   /* ... */,
+    legend:  /* ... */,
+  },
+  scales:    /* ... */,
+}
+
+const data = {
+    labels:  /* ... */,
+    datasets: [
+        {
+            label: /* ... */,
+            data:  /* ... */,
         },
-      },
-      from: process.env.EMAIL_FROM,
-    }),
-  ],
+        {
+            label: /* ... */,
+            data:  /* ... */,
+        }
+    ],
+};
+
+export default function grafico() {
+    return (
+        <div className='contenedor '>
+            <Line options={options} data={data} />
+        </div>
+    )
+}
 ```
--->
 
-Si desaas realizar la verificación de email, por ejemplo al usar credenciales, necesitarás enviar un correo de confirmación al usuario. Y para ello puedes usar alguno de los correos transaccionales que aparecen a continuación.
+Sin embargo, para despliegue en producción, en lugar de usar `import { Chart } from 'chart.js/auto'` es recomendable usar la forma que aparece a continuación, puesto que reducirá el peso del código resultante. En este segundo caso deberemos importar los componentes especificos que vayamos a necesitar y además realizar un registro de ellos.
 
-**Servidores de correo transaccional**
+```js
+// Esto es un ejemplo para un gráfico tipo Scatter.
+// Para otro tipo de gráfico necesitarás importar otros componentes.
+import {
+  Chart,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
+Chart.register(LinearScale, PointElement, Tooltip, Legend);
+```
+
+
+Haciendo uso del paquete `react-chartjs-2` importamos el tipo de gráfico deseado. En el ejemplo que viene a continuación importamos un gráfico de tipo `Scatter`.
+
+Luego seguimos el siguiente procedimiento:
+
+1. Definimos un constante `options` con la configuración general del gráfico.
+2. Definimos una constante `data` con la configuración específica del gráfico.
+3. Usamos el componente pasándole las propiedades anteriores.
+
+
+```js
+import { Scatter } from 'react-chartjs-2';
+
+const options = {
+    scales: {
+        y: {
+            beginAtZero: true,
+        },
+    },
+};
+
+const data = {
+    datasets: [
+        {
+            label: 'Puntos aleatorios',   
+            data: Array.from({ length: 100 }, () => ({  // 100 puntos 
+                x: Math.random(),
+                y: Math.random(),
+            })),
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+        },
+    ],
+};
+
+export default function grafico() {
+    return (
+        <div className='contenedor '>
+            <Scatter options={options} data={data} />
+        </div>
+    )
+}
+```
+
+El gráfico debe estar dentro de un **elemento contenedor**. El contenedor padre debe cumplir los siguientes requisitos para que el comportamiento sea [responsive](https://www.chartjs.org/docs/latest/configuration/responsive.html):
+
+- Tener `position: relative` en su estilo CSS. 
+- Dedicarse únicamente al lienzo del gráfico.
+
+Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (`canvas`) y los tamaños de visualización. Sin embargo, este método requiere que el contenedor esté relativamente posicionado y dedicado únicamente al lienzo del gráfico.
+
+
+> [!IMPORTANT]
+>
+> La página donde vaya a incrustarse el gráfico debe contener la directiva **`'use client'`**
+
+
+### 3.4.3. Flujo de datos (streaming)
+
+En algunos casos deseamos que la gráfica muestre un flujo de datos (**streaming**) obtenido de alguna fuente. Para ello podemos usar el plugin [chartjs-plugin-streaming](https://nagix.github.io/chartjs-plugin-streaming/latest/). Su página web dispone de varios [ejemplos](https://nagix.github.io/chartjs-plugin-streaming/latest/samples/charts/line-horizontal.html).
+
+El sitio oficial también dispone de una [guía](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/) bastante detallada.
+
+Entre toda la información podemos destacar:
+
+1. [Los modelos de provisión de datos](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html)
+2. [El tutorial para crear app en React, también aplicable a Next.js](https://nagix.github.io/chartjs-plugin-streaming/latest/tutorials/react/app.html)
+
+#### 3.4.3.1. Los modelos de provisión de datos
+
+El paquete `chartjs-plugin-streaming` soporta obtención de datos mediante los modos **pull** y **push**. Para mayor información consulta la [documentación oficial](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html#push-model-listening-based)
+
+
+
+#### 3.4.3.2. Ejemplo
+
+Hay disponible una aplicación de ejemplo con [código fuente disponible en Github](https://github.com/jamj2000/nxchart-streaming).
+
+![demo streaming](assets/streaming.avif)
+
+
+**Ejecución en entorno de desarrollo**
+
+```console
+git clone  https://github.com/jamj2000/nxchart-streaming.git
+cd  nxchart-streaming
+npm install
+npm run dev
+```
+
+**Ejecución en entorno de producción**
+
+> [!IMPORTANT]
+> 
+> El grafico6 hace uso del plugin `chartjs-plugin-zoom` para ofrecer funcionalidad de zoom y pan. Sin embargo este plugin provoca un error en el proceso de construcción. Por tanto el comando `npm run build` fallará. Si deseas llevar esta aplicación a producción, elimina este plugin del archivo `src/components/grafico6.js`.
+> 
+
+
+**Resumen del proceso de desarrollo**
+
+```console
+npm  install  chart.js@3 react-chartjs-2@4 luxon chartjs-adapter-luxon chartjs-plugin-streaming chartjs-plugin-zoom chartjs-plugin-annotation@1 --legacy-peer-deps
+```
+
+> [!IMPORTANT] 
+>
+> **A fecha de Abril de 2024, este plugin de streaming no soporta chartjs v4, por tanto debemos instalar los paquetes más antiguos usando el comando anterior**
+
+Los paquetes instalados son los siguientes:
+
+- `luxon`: biblioteca para manejo de fechas y horas
+- `chartjs-adapter-luxon`: adaptador de la biblioteca anterior
+- `chartjs-plugin-annotation`: plugin para realizar anotaciones en el gráfico
+- `chartjs-plugin-streaming`: plugin para hacer streaming
+- `chartjs-plugin-zoom`: plugin opcional. Para hacer zoom y pan 
+
+
+
+```js
+'use client'
+import { Line } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';         // IMPORTANTE: versión 3 de chartjs. La forma de importar es distinta
+import annotationPlugin from 'chartjs-plugin-annotation';
+
+import 'chartjs-adapter-luxon';
+import ChartStreaming from 'chartjs-plugin-streaming';
+
+
+const onRefresh = (chart) => {
+ /* ... */
+};
+
+
+const options = {
+  responsive: true,
+  plugins: {
+    title: /* ... */,
+    legend: /* ... */,
+    annotation: { annotations: {} }  // necesario para ocultar gráfica al pulsar leyenda
+  },
+  scales: {
+    x: {
+      type: 'realtime',
+      realtime: {
+        duration: 20000,
+        refresh: 1000,
+        delay: 2000,
+        onRefresh: onRefresh
+      }
+    },
+    y: {
+      title: {
+        display: true,
+        text: 'Valores'
+      }
+    }
+  },
+  interaction: /* ... */,
+}
+
+
+const data = /* ... */;
+
+
+
+function grafico() {
+  Chart.register(annotationPlugin, ChartStreaming);
+
+  return (
+    <div className='contenedor'>
+      <Line options={options} data={data} />
+    </div>
+  );
+}
+
+export default grafico
+```
+
+
+#### 3.4.3.3. Colas de mensajes
+
+Una forma de recuperar los datos para realizar las gráficas es mediante el uso de una cola de mensajes.
+
+Una cola de mensajes es una forma de comunicación asíncrona entre múltiples procesos que necesitan transmitirse diferentes datos. De esta forma un sistema añade un mensaje a la cola que se persistirá hasta que otro sistema lo consuma y lo procese. 
+
+La principal ventaja de utilizar las colas de mensajes es desacoplar diferentes sistema. También pueden ser de utilidad cuando quieres procesar múltiples operaciones en lotes, de forma que evites que se produzcan picos en la utilización de tu plataforma y se pueda degradar el servicio.
+
+Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQS, algunas más complejas para flujos de eventos como Apache Kafka o Amazon Kinesis, pero realmente puedes utilizar incluso un buffer en memoria aprovechando herramientas como Redis, o incluso MySQL como se indica en la siguiente referencia (incluye vídeo).
+
+
+**Referencia**:
+
+- [Pirobits: Cola de mensajes usando MySQL: SELECT * FOR UPDATE](https://www.pirobits.com/es/post/cola-de-mensajes-usando-mysql-select-for-update)
+
+#### 3.4.3.4. InfluxDB
+
+No podemos dejar de nombrar al SGBD InfluxDB que es un sistema especialmente diseñado desde cero para trabajar con **base de datos de series temporales**.
+
+InfluxDB ofrece muchas alternativas a la hora de recopilar datos, como puede apreciarse en la siguiente imagen:
+
+![influxDB recopilación de datos](assets/influxdb-collect-data.png)
+
+Puedes [instalar InfluxDB con Docker](https://github.com/jamj2000/Docker/tree/master/influxdb), y luego realizar la configuración accediendo a http://localhost:8086.
+
+![setup 1](assets/influxdb-setup1.png)
+
+![setup 2](assets/influxdb-setup2.png)
+
+![setup 3](assets/influxdb-setup3.png)
+
+
+Referencias:
+
+- [Sitio oficial](https://www.influxdata.com/)
+- [Qué es InfluxDB y primeros pasos](https://openwebinars.net/blog/que-es-influxdb-y-primeros-pasos/)
+- [Compare InfluxDB to SQL databases](https://docs.influxdata.com/influxdb/v1/concepts/crosswalk/#influxql)
+- [Paquete de npm para InfluxDB](https://www.npmjs.com/package/@influxdata/influxdb-client)
+- [Monitorizando datos con InfluxDB, Telegraf y Grafana](https://openwebinars.net/blog/monitorizando-datos-con-influxdb-telegraf-y-grafana/)  
+
+
+### 3.4.4. Documentación
+
+- [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
+- [Código fuente de ejemplo con streaming](https://github.com/jamj2000/nxchart-streaming)
+- [Componentes](https://react-chartjs-2.js.org/components/)
+- [Ejemplos de react-chartjs-2](https://github.com/reactchartjs/react-chartjs-2/tree/master/sandboxes)
+- [Documentación Plugin Streaming](https://nagix.github.io/chartjs-plugin-streaming/latest/)
+- [Documentación Plugin Annotation](https://www.chartjs.org/chartjs-plugin-annotation/latest/)
+- [Documentación Plugin Zoom](https://www.chartjs.org/chartjs-plugin-zoom/latest/)
+- [Más gráficos, plugins,... - Awesome Chart.js](https://github.com/chartjs/awesome/blob/master/README.md)
+- [Otra biblioteca de Charts](https://recharts.org)
+
+
+### 3.4.5. Curiosidad
+
+Existe un biblioteca para *charting* llamada **`roughViz`**. Como su nombre indica realiza la visualización de forma algo bruta. Sirve para dar un toque de originalidad en detrimento de la exactitud en la representación gráfica.
+
+![roughViz 1](assets/roughViz1.png)
+
+La [documentación oficial](https://github.com/jwilber/roughViz) nos informa de los tipos de gráficos soportados y de las propiedades que podemos emplear en ellos. Algunas de estas propiedades son las que se muestran a continuación:
+
+![roughViz 2](assets/roughViz2.png)
+
+Existe [integración para React](https://github.com/Chris927/react-roughviz).
+
+
+```js
+npm  install  react-roughviz
+```
+
+```js
+'use client'
+import {Bar, Pie } from 'react-roughviz'
+// ...
+
+    <h3>Bar</h3>
+    <Bar
+      data='https://raw.githubusercontent.com/jwilber/random_data/master/flavors.csv'
+      labels='flavor'
+      values='price'
+    />
+    <h3>Pie</h3>
+    <Pie
+      data={{
+        labels: ['North', 'South', 'East', 'West'],
+        values: [10, 5, 8, 3]
+      }}
+      title='Regions'
+      colors={['red', 'orange', 'blue', 'skyblue']}
+      roughness={8}
+    />
+
+```
+
+### 3.4.6. Otras bibliotecas
+
+Existen numerosas bibliotecas para la realización de gráficas. Algunas de ellas son:
+
+- [Recharts](https://recharts.org/)
+- [Highcharts]( https://www.highcharts.com/ )
+- [Nivo](https://nivo.rocks/) 
+- [D3.js](https://d3js.org): Una de las más potentes. Requiere de conocimientos avanzados.
+
+
+## 3.5. Creación de PDFs 
+
+De las muchas bibliotecas disponibles para trabajar con archivos PDF, una de las más interesantes y potentes es [pdf-lib](https://www.npmjs.com/package/pdf-lib).
+
+Permite crear nuevos documentos y modificar los existentes. Permite trabajar en todos los entornos de JavaScript, no solo en Node o el navegador.
+
+Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
+
+
+> [!NOTE] 
+>
+> Otras bibliotecas que merecen atención son las siguientes:
+>
+> - [jsPDF](https://github.com/parallax/jsPDF) (lado cliente y servidor)	
+> - [html2pdf.js](https://ekoopmans.github.io/html2pdf.js/) (sólo lado cliente)
+> - [React PDF](https://react-pdf.org/) (lado cliente y servidor)
+> - [Puppeteer](https://pptr.dev/guides/pdf-generation) (sólo lado cliente)
+>
+> Un ejemplo de uso de las 3 últimas bibliotecas se muestra en [este vídeo de Youtube](https://youtu.be/4V5HbqYJCVI?si=CVMqYt8l7thVbhrv), en inglés y nivel medio-avanzado. Su código fuente del ejemplo está disponible en [Github](https://github.com/colbyfayock/my-pdf). También hay un [artículo publicado por el autor](https://spacejelly.dev/posts/generate-a-pdf-from-html-in-javascript). 
+>
+> Las 3 bibliotecas nos permiten convertir HTML a PDF incluido html2pdf.js que nos permite convertir un árbol HTML a PDF, React PDF para renderizar un PDF y Puppeteer para generar un PDF a partir de una página en vivo.
+>
+> Según la documentación oficial de Puppeteer, se trata de una biblioteca de JavaScript que proporciona una API de alto nivel para controlar Chrome o Firefox a través del protocolo DevTools o WebDriver BiDi. Puppeteer se ejecuta en la interfaz de usuario sin cabeza (sin interfaz de usuario visible) de forma predeterminada, pero se puede configurar para que se ejecute en un navegador visible ("con cabeza"). Es decir, la principal finalidad de esta biblioteca no es trabajar con PDF, aunque tiene una parte que ofrece esta funcionalidad.
+>
+> **Ejemplo muy básico**
+>
+> ```sh
+> mkdir  puppeteer
+> cd     puppeteer
+> npm  init -y
+> ```
+>
+> ```sh
+> npm  install  puppeteer
+> ```
+>
+> ```js
+> import puppeteer from 'puppeteer';
+> 
+> const browser = await puppeteer.launch();
+> const page = await browser.newPage();
+> await page.goto('https://spacejelly.dev');
+> const pdf = await page.pdf({path: './example.pdf', format: 'A4', printBackground: true});
+> await browser.close();
+> ```
+> ![puppeteer](assets/puppeteer.png)
+
+
+
+### 3.5.1. Instalación
+
+```sh
+mkdir  pdf-lib
+cd     pdf-lib
+npm  init -y
+```
+
+```sh
+npm  install  pdf-lib
+```
+
+### 3.5.2. Uso
+
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **pdf.mjs** y ejecútalo directamente con Node. 
+
+```js
+// pdf.mjs
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
+import fs from 'node:fs/promises'
+
+async function createPDF() {
+  const pdfDoc = await PDFDocument.create()
+  const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
+
+  const page = pdfDoc.addPage()
+  const { width, height } = page.getSize()
+  const fontSize = 30
+  page.drawText('Creating PDFs in JavaScript is awesome!', {
+    x: 50,
+    y: height - 4 * fontSize,
+    size: fontSize,
+    font: timesRomanFont,
+    color: rgb(0, 0.53, 0.71),
+  })
+
+  const pdfBytes = await pdfDoc.save()
+
+  try {
+    await fs.writeFile('example.pdf', pdfBytes);
+  } catch (err) {
+    console.log(err);
+  } 
+}
+
+createPDF()
+```
+
+![pdf-lib](assets/pdf-lib.png)
+
+> [!NOTE]
+> 
+> Una vez hayas comprobado que funciona correctamente, puedes reutilizar la función anterior `createPDF` como *server action* dentro de un proyecto NextJS. 
+
+
+A continuación tienes los enlaces a 2 proyectos que hacen uso de esta biblioteca.
+
+- [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
+- [Aplicación de tickets de supermercado -por realizar-](#)
+
+### 3.5.3. Documentación
+
+- [Ejemplos de la Documentación oficial](https://pdf-lib.js.org/#examples)
+
+
+
+## 3.6. Envío de correos
+
+El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. Realizaremos el envío de correos desde el lado servidor de nuestra aplicación, usando node.js.
+
+> [!NOTE]
+> 
+> Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
+
+
+### 3.6.1. Instalación
+
+```sh
+npm  install  nodemailer
+```
+
+### 3.6.2. Uso
+
+Vamos a ver 2 opciones para enviar correos desde nuestra aplicación:
+
+- Usando una cuenta de Gmail
+- Usando un servidor de correo propio
+
+
+####  3.6.2.1. Usando una cuenta de Gmail
+
+Podemos usar una cuenta de Gmail para permitir que nuestra aplicación pueda enviar correos. Google ha ido modificando este tipo de soporte, cambiando la forma de realizar la configuración a lo largo del tiempo. Actualmente para configurar este tipo de funcionalidad debemos cumplir 2 requisitos:
+
+1. **tener habilitada la verificación en dos pasos** en dicha cuenta
+2. **poseer una contraseña de aplicación**
+
+Una contraseña de aplicación es una contraseña especial de 16 caracteres que te da Google para permitir que aplicaciones externas (como tu app Node.js) se conecten a tu cuenta sin usar tu contraseña principal. 
+
+Los pasos a seguir para conseguir nuestro objetivo son:
+
+**Paso 1: Activar la verificación en dos pasos**
+
+Ve a: https://myaccount.google.com/security
+
+En la sección "Cómo inicias sesión en Google", haz clic en "Verificación en dos pasos" y actívala si aún no lo está.
+
+
+![myaccount.google.com/security](assets/security.png)
+
+
+**Paso 2: Generar una contraseña de aplicación**
+
+Una vez activada la verificación en dos pasos, ve a https://myaccount.google.com/apppasswords
+
+Escribe un nombre para la aplicación, por ejemplo "correo"
+
+![myaccount.google.com/apppasswords](assets/apppasswords-1.png)
+
+Copia la contraseña generada de 16 caracteres (sin espacios). Ejemplo: abcd efgh ijkl mnop
+
+![myaccount.google.com/apppasswords](assets/apppasswords-2.png)
+
+
+**Paso 3: Instalar Nodemailer**
+
+Desde tu terminal:
+
+```sh
+npm install nodemailer
+```
+
+**Paso 4: Probar código de ejemplo con contraseña de aplicación**
+
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crearemos el archivo **mail.mjs** y lo ejecutaremos directamente con Node. 
+
+
+```js
+// mail.mjs
+import nodemailer from 'nodemailer'
+
+var transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,       // true para 465, false para 587
+  auth: {
+    user: "jamj2000.vercel.app@gmail.com", // coloca aquí tu usuario
+    pass: "saogukadgqomnkzl", // La contraseña de aplicación (16 caracteres sin espacios)
+  }
+});
+
+
+// async..await no está permitido en el global scope, debemos usar un wrapper
+async function sendMail() {
+  // send mail with defined transport object
+  const info = await transporter.sendMail({
+    from: '"José Antonio Muñoz Jiménez 👻" <jamj2000.vercel.app@gmail.com>',
+    to: "jamj2000@gmail.com, jamunoz@iesincagarcilaso.com, adfadcaxs@afdaadxcdf.com",
+    subject: "Ejemplo con Nodemailer ✔",
+    text: "Mensaje de prueba. Ignoralo.",
+    html: "<h1>Mensaje de prueba</h1><p>Ignoralo</p>"
+  });
+
+  console.log("Mensaje enviado: %s", info.messageId);
+  // Mensaje enviado: <d786aa62-4e0a-070a-47ed-0b0666549519@jamj2000.eu>
+  console.log('MENSAJES ACEPTADOS: ', info.accepted);
+  console.log('MENSAJES RECHAZADOS: ', info.rejected);
+}
+
+sendMail().catch(console.error);
+``` 
+
+![nodemailer](assets/nodemailer.png)
+
+> [!NOTE]
+> 
+> Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
+
+
+
+#### 3.6.2.2. Usando servidor de correo propio
+
+Otra manera más profesional de gestionar correos es usar alguno de los servidores de correo transaccional, entre ellos:
+
+- [Brevo](https://brevo.com)
 - [Resend](https://resend.com)
 - [Sendgrid](https://sendgrid.com)
 - [Mailtrap](https://mailtrap.io/)
-- [Brevo](https://brevo.com)
 
-El proceso de verificación de email es complejo y no se aboradará en este tema. Si te interesa, en [este vídeo](https://youtu.be/MNm1XhDjX1s?si=XtUeR4FxpEY5MYSy) puedes ver como se realiza.
-
-
-Simplificando mucho, podemos decir que el proceso a seguir sería el siguiente:
-
-1. Disponer de cuenta en un servidor con DNS y reenvío de correo (p. ej: https://gandi.net)
-2. Disponer de cuenta en un servidor de envío de correo transaccional (p. ej: https://resend.com)
-   - Dar de alta el dominio DNS personal
-   - Obtener API KEY 
-3. Actualizar los registros DNS de nuestro servidor de dominio.
-4. Editar el código siguiendo la documentación disponible en https://authjs.dev/getting-started/providers/resend?framework=next-js
-   
-A continuación se muestran capturas de pantalla de los pasos 2 y 3.
-
-![Resend configuration](assets/resend-add-domain.png)
-![Resend configuration](assets/resend-create-api-key.png)
-
-![DNS configuration](assets/gandi-resend-dns-entries.png)
-
-## 6.3. Credentials
-
-- [Documentación de Credentials](https://authjs.dev/getting-started/providers/credentials-tutorial)
-
-Tradicionalmente, y aún hoy en día, se trabaja con el clásico método **usuario / contraseña**, y es la mayoría de las veces como **email / contraseña**. Sin embargo, este método se considera inseguro y además requiere de trabajo extra para su gestión. Al menos se debería realizar un proceso de verificación del email para aumentar la seguridad.
-
-Desde AuthJS se limita intencionalmente para desalentar el uso de contraseñas debido a los riesgos de seguridad inherentes asociados con ellas y la complejidad adicional asociada con el soporte de nombres de usuario y contraseñas.
-
-AuthJS ha sido diseñado para manejar la sesión del usuario desde el punto de vista del cliente, para admitir múltiples métodos de autenticación (OAuth, correo electrónico, etc.) para que no se vea obligado a ejecutar su propio servicio de autenticación.
-
-
-
-```js
-import Credentials from "@auth/core/providers/credentials"
-// ...
- providers: [
-    Credentials({
-        async authorize(credentials) {
-              return getUserByEmail(credentials.email)
-        },
-    }),
-  ],
-```
-
-
-
-# 7. Despliegue
-
-> [!IMPORTANT] 
+> [!NOTE]
 >
-> **MUY IMPORTANTE:**
->
->
-> Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en los proveedores OAuth, de forma similar a la mostrada a continuación:
-
-**Google**
-
-![oauth google despliegue](assets/oauth-google5.png)
-
-**Github**
-
-![oauth github despliegue](assets/oauth-github5.png)
-
-**Discord**
-
-![oauth discord despliegue](assets/oauth-discord.png)
+> Una alternativa gratuita y sencilla, máximo 200 correos mensuales, es usar la biblioteca [EmailJS](https://www.emailjs.com/). Aquí tienes un [vídeo de ejemplo](https://youtu.be/dgcYOm8n8ME?si=kd7cjfq1R6zKeVb0) y aquí [otro vídeo](https://youtu.be/mMnxn_hmLuI?si=bxl38WyOr7jevez5).
 
 
-# 8. Aplicaciones de ejemplo
+La configuración de un correo transaccional no suele ser demasiado complicada, pero la integración con el dominio puede dar algunos problemas. Por ejemplo, en mi caso, al tener ya configurado previamente un servidor de correo con prioridad 10, tuve que dar de alta [resend](https://resend.com) con prioridad 11 en [gandi](https://gandi.net).
 
-En este tema trabajaremos con el código fuente de 3 aplicaciones:
+![mx priority](assets/gandi-resend-dns-entries.png)
 
-1. [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
-2. [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
-3. [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
-   
-Las directrices seguidas para su desarrollo han sido comunes, y se listan a continuación.
 
-Se ha realizado la **autenticación siempre desde el lado servidor**.
+A continuación se explica **como enviar correos sin necesidad de usar un servidor de correo transaccional**. 
 
-Para **obtener los datos de sesión**, se ha usado `const sesion = await auth()`
+Los pasos a seguir para conseguir nuestro objetivo son:
+
+
+**Paso 1: Registrar un dominio con algún proveedor que ofrezca además servidor de correo.**
+
+Por ejemplo, [gandi](https://gandi.net) ofrece servidor de correo con 2 cuentas de correo. Los dominios `.eu` suelen ser bastante baratos.
+
+![gandi](assets/gandi.png)
+
+**Paso 2: Usar los parámetros de conexión para enviar correos con nuestra aplicación.**  
+
+![gandi](assets/gandi-email.png)
+
+Si lo deseas, puedes crear alias. Son cuentas de correo adicionales asociadas a la cuenta principal.
+
+![gandi](assets/gandi-email-alias.png)
+
+
+**Paso 3: Instalar Nodemailer**
+
+Desde tu terminal:
+
+```sh
+npm install nodemailer
+```
+
+**Paso 4: Probar código de ejemplo con contraseña de aplicación**
+
+Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **mail.mjs** y ejecútalo directamente con Node. 
 
 ```js
-import { auth } from "@/auth"
+// mail.mjs
+import nodemailer from 'nodemailer'
 
-async function page() {
-    const sesion = await auth()
-    
+var transporter = nodemailer.createTransport({
+  host: "mail.gandi.net",     // coloca aquí tu servidor de correo
+  port: 465,
+  auth: {
+    user: "info@jamj2000.eu", // coloca aquí tu usuario
+    pass: "tu_contraseña",    // coloca aquí tu contraseña
+  }
+});
+
+
+// async..await no está permitido en el global scope, debemos usar un wrapper
+async function sendMail() {
+  // send mail with defined transport object
+  const info = await transporter.sendMail({
+    from: '"José Antonio Muñoz Jiménez 👻" <soporte@jamj2000.eu>', 
+    to: "jamj2000@gmail.com, jamunoz@iesincagarcilaso.com, adfadcaxs@afdaadxcdf.com", 
+    subject: "Ejemplo con Nodemailer ✔", 
+    text: "Mensaje de prueba. Ignoralo.", 
+    html: "<h1>Mensaje de prueba</h1><p>Ignoralo</p>"
+  });
+
+console.log("Mensaje enviado: %s", info.messageId);
+  // Mensaje enviado: <d786aa62-4e0a-070a-47ed-0b0666549519@jamj2000.eu>
+console.log('MENSAJES ACEPTADOS: ', info.accepted);
+console.log('MENSAJES RECHAZADOS: ', info.rejected);
 }
+
+sendMail().catch(console.error);
 ```
 
-
-## 8.1. Aplicación OAuth
-
-- [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
-
-En la primera aplicación, nos centramos en el código necesario para trabajar con OAuth.
-
-El archivo `auth.js` queda de una forma similar a la siguiente:
-
-```js
-// auth.js
-import NextAuth from "next-auth";
-import Google from "@auth/core/providers/google"
-import GitHub from "@auth/core/providers/github"
-import Discord from "@auth/core/providers/discord"
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/lib/prisma"
-
-const options = {
-    providers: [Google, GitHub],
-    adapter: PrismaAdapter(prisma),
-    session: { strategy: "jwt" },
-    callbacks: {
-        async session({ session, token }) {
-            session.user.id = token?.sub;     // Para recuperar ID de usuario desde el token
-            session.user.role = token?.role   // Para recuperar Rol de usuario desde el token
-            return session
-        },
-
-        async jwt({ token }) {  
-            if (!token.sub) return token;
-            
-            const user = await prisma.user.findUnique({
-                where: {
-                    id: token.sub
-                }
-            })
-            if (!user) return token;
-
-            token.role = user?.role
-            return token
-        }
-    }
-}
-
-export const {
-    handlers: { GET, POST },
-    auth,
-    signIn,
-    signOut
-} = NextAuth(options)
-```
-
-Los callbacks **`jwt`** y **`session`** son muy importantes. Se ejecutan en el orden indicado anteriormente y nos permiten:
-
-1. recoger la información de *id* y *role* del usuario desde la BD e introducirla en el JWT.
-2. recoger la información de *id* y *role* del usuario desde el JWT e introducirla en la sesión.
-
-Los datos de sesión tendrán por tanto un aspecto similar al siguiente:
-
-```json
-{
-  "user": {
-    "name": "José Antonio Muñoz Jiménez",
-    "email": "jamj2000@gmail.com",
-    "image": "https://avatars.githubusercontent.com/u/2934084?v=4",
-    "id": "cm798cj3t0020p8bilrdj93dv",
-    "role": "USER",    
-  },
-  "expires": "2024-02-20T12:02:43.639Z"
-}
-```
-
-Las acciones de servidor quedan así:
-
-```js
-'use server'
-import { signIn, signOut} from "@/auth"
-
-
-// https://authjs.dev/reference/nextjs#signin
-export async function loginGoogle() {
-    try {
-        await signIn('google', { redirectTo: '/dashboard'})
-    } catch (error) {
-        throw error
-    }
-}
-
-export async function loginGithub() {
-    try {
-        await signIn('github', { redirectTo: '/dashboard'})
-    } catch (error) {
-        console.log(error);
-        throw error
-    }
-}
-
-
-export async function loginDiscord() {
-    try {
-        await signIn('discord', { redirectTo: '/dashboard'})
-    } catch (error) {
-        console.log(error);
-        throw error
-    }
-}
-
-// https://authjs.dev/reference/nextjs#signout
-export async function logout() {
-    try {
-        await signOut({redirectTo: '/'})
-    } catch (error) {
-        throw error
-    }
-}
-```
-
-
-## 8.2. Aplicación Credentials
-
-- [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
-
-En la segunda aplicación, nos centramos en el código necesario para trabajar con Credentials.
-
-Bastantes archivos se ven afectados.
-
-```js
-// auth.js
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { prisma } from '@/lib/prisma'
-import NextAuth from 'next-auth'
-import Credentials from '@auth/core/providers/credentials'
-
-
-export const options = {
-    session: { strategy: 'jwt' },
-    adapter: PrismaAdapter(prisma),
-    pages: {
-        signIn: '/auth/signin',
-        signOut: '/auth/signout',
-        error: '/auth/error'
-    },
-    providers: [
-        Credentials({
-            async authorize(credentials) {
-              return getUserByEmail(credentials.email)
-            },
-        }),
-     ]
-}
-
-
-export const {
-    handlers: { GET, POST },
-    auth,
-    signIn,
-    signOut
-} = NextAuth( options )
-```
-
-La función **`autorize`** es de gran importancia. Permite dar autorización (`return user`) o no (`return null`). Esta función se ejecuta después de introducir los datos en el formulario y después de la ejecución del server action de login. 
-
-```js
-// código ejecutado en un server action
-await signIn('credentials', { email, password, redirectTo: '/dashboard' })
-```
+![nodemailer](assets/node-mail.png)
 
 > [!NOTE]
 > 
-> Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
+> Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
 
 
-## 8.3. Aplicación Middleware
+### 3.6.3. Documentación
 
-- [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
-
-En la última aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas. 
-
-![middleware](assets/middleware.jpg)
-
-El contenido del archivo `src/middleware.js` es el siguiente:
-
-```js
-// Run on edge
-import NextAuth from "next-auth";
-import authConfig from "@/auth.config";
-
-const { auth } = NextAuth(authConfig);
-
-export default auth((req) => {
-  console.log(`MIDDLEWARE`, req.nextUrl.pathname, req.auth);
-
-  if (!req.auth) {  // No autenticado
-    const callbackUrl = req.nextUrl.pathname + req.nextUrl.search
-    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
-
-    return Response.redirect(req.nextUrl.origin + `/auth/login?callbackUrl=${encodedCallbackUrl}`)
-  }
-    
-})
+- [Nodemailer](https://www.nodemailer.com/)
+- [react-email](https://react.email/)
+- [Resend: Video en español](https://www.youtube.com/watch?v=orYsGPYwkXQ)
+- [Resend: Video en inglés](https://www.youtube.com/watch?v=UqQxfpTQBaE)
+- [Resend: Video en inglés](https://www.youtube.com/watch?v=T2xaiw7VK4A)
 
 
-export const config = {
-    matcher: [
-        "/dashboard(.*)",
-        "/admin(.*)",
-        "/proveedores(.*)",
-        "/productos(.*)",
-    ],
-};
+## 3.7. Pagos por internet
+
+
+stripe
+
+### 3.7.1. Instalación
+
+
+### 3.7.2. Uso
+
+
+
+### 3.7.3. Documentación
+
+- [Pasarela de pago con Stripe en tu Web o App: Guía Paso a Paso -Python-](https://youtu.be/gOWCCkUq2nc?si=gLG9xjPdaRLmuRb7)
+- [Documentación de Stripe](https://docs.stripe.com/get-started/development-environment)
+- [Testing Stripe](https://docs.stripe.com/testing)
+- Stripe elements: [Web](https://docs.stripe.com/payments/elements)/[App](https://docs.stripe.com/payments/mobile)
+
+
+## 3.8. Mapas
+
+
+Si deseamos hacer uso de los Mapas de Google, podemos usar la biblioteca [@googlemaps/js-api-loader](https://www.npmjs.com/package/@googlemaps/js-api-loader).
+
+> [!NOTE]
+> 
+> Deberás obtener una API KEY de Google.
+
+Esta biblioteca solo puede usarse desde el lado cliente.
+
+
+### 3.8.1. Instalación
+
+```sh
+npm  install  @googlemaps/js-api-loader
+npm  install  @types/google.maps          # Sólo necesario si vamos a usar Typescript
+``` 
+
+### 3.8.2. Uso
+
+**`.env`**
+
+```sh
+NEXT_PUBLIC_MAPS_API_KEY="YOUR API KEY"
 ```
 
-Si el usuario no ha iniciado sesión, lo redirigimos a la página de login y guardamos en query string `?callbackUrl=` la url a la que quiere acceder.
 
-
-Hemos colocado la configuración de NextAuth en dos archivos separados:
-
-- **src/auth.js**
-- **src/auth.config.js**
-  
-El motivo es que, actualmente, dentro del *middleware* no podemos hacer uso de `PrismaAdapter`. Por tanto, colocamos en **`src/auth.config.js`**
+**`src/components/GoogleMaps.js`**
 
 ```js
-import Credentials from '@auth/core/providers/credentials'
-import Google from '@auth/core/providers/google'
-import GitHub from '@auth/core/providers/github'
-import Discord from '@auth/core/providers/discord'
-import { getUserByEmail } from '@/lib/data'
+'use client';
 
-export default {
-    providers: [
-        Google,
-        GitHub,
-        Discord,
-        Credentials({
-            async authorize(credentials) {
-                return getUserByEmail(credentials.email)
-            },
-        }),
-    ]
+import { useEffect, useRef } from 'react';
+import { Loader } from '@googlemaps/js-api-loader';
+
+
+export default function GoogleMaps() {
+	const mapRef = useRef(null);
+
+	useEffect(() => {
+		const initializeMap = async () => {
+			const loader = new Loader({
+				apiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY,
+				version: "quarterly",
+				libraries: ["places"]
+			});
+
+			const { Map } = await loader.importLibrary('maps');
+
+			const locationInMap = {
+				lat: 37.57869021751064,
+				lng: -4.6471375471961025
+			};
+
+			// MARKER
+			const { AdvancedMarkerElement: Marker } = await loader.importLibrary("marker")
+
+			const options = {
+				center: locationInMap,
+				zoom: 10,
+				mapId: 'DEMO_MAP_ID',
+			};
+
+			const map = new Map(mapRef.current, options);
+
+			// add the marker in the map
+			const marker = new Marker({
+				map: map,
+				position: locationInMap,
+			});
+		};
+
+		initializeMap();
+	}, []);
+
+	return <div className="h-[600px]" ref={mapRef} />;
 }
-```
+``` 
 
-Y en **`src/auth.js`**
-
-```js
-import NextAuth from "next-auth"
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/lib/prisma"
-import { getUserById } from "@/lib/data"
-import authConfig from "@/auth.config"
-
-
-export const options = {
-    session: { strategy: 'jwt' },
-    adapter: PrismaAdapter(prisma),
-    pages: {
-        signIn: '/auth/login',
-        signOut: '/auth/logout',
-        error: '/auth/error'
-    },
-    callbacks: {
-        async session({ session, token }) {
-            session.user.id = token?.sub;     // Para recuperar ID de usuario desde el token
-            session.user.role = token?.role   // Para recuperar Rol de usuario desde el token
-            return session
-        },
-        async jwt({ token }) {
-            if (!token.sub) return token;
-
-            const user = await getUserById(token.sub)
-            if (!user) return token;
-
-            token.role = user?.role
-            return token
-        }
-    },
-}
-
-export const {
-    handlers: { GET, POST },
-    auth,
-    signIn,
-    signOut
-} = NextAuth({ ...options, ...authConfig })
-```
-
-**`src/app/auth/login.js`**
-
-En la página de login, recogemos la variable `callbackUrl` con la información de la ruta a la que quería acceder el usuario. 
-
-Guardamos dicho valor dentro de [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) (más información [aquí](https://krative.digital/globalthis/)), que es un objeto global
-
-
-**`src/app/auth/login.js`**
+**`src/app/page.js`**
 
 ```js
-// ...
+import GoogleMaps from "@/components/GoogleMaps";
 
-function page({ searchParams }) {
-  const { error, callbackUrl } = searchParams
-  // Usamos globalThis para almacenar variable global
-  // La usaremos en los actions de login
-  globalThis.callbackUrl = decodeURIComponent(callbackUrl ?? '%2Fdashboard')
-
-  // ...
-
-```
-
-De esta forma podremos recoger el valor en los *server actions* y redirigir finalmente al usuario a la ruta a que quería acceder en un inicio.
-
-
-**`src/lib/actions.js`**
-
-```js
-// ...
-export async function loginGoogle() {
-    try {
-        await signIn('google', { redirectTo: globalThis.callbackUrl })
-    } catch (error) {
-        console.log(error);
-        throw error
-    }
-}
-
-// ...
-```
-
-Hay una demo disponible en [vercel](https://nxauth-middleware.vercel.app/).
-
-
-# 9. CASOS PRÁCTICOS
-
-
-## 9.1. App para gestionar un blog
-
-- [Código fuente](https://github.com/jamj2000/nxapp-blog)
-- [Demo](https://nxapp-blog.vercel.app/)
-
-
-![blog demo](assets/blog.png)
-
-
-## 9.2. App para gestionar una pizzería
-
-- [Código fuente](https://github.com/jamj2000/nxapp-pizzeria)
-- [Demo](https://nxapp-pizzeria.vercel.app/)
-
-
-![pizzeria demo](assets/pizzeria.png)
-
-
-## 9.3. App para gestionar proyectos de climatización 
-
-- [Código fuente](https://github.com/jamj2000/nxapp-climatizacion)
-- [Demo](https://nxapp-climatizacion.vercel.app/)
-
-
-![blog demo](assets/climatizacion.png)
-
-
-
-
-# 10. ANEXO: Datos de sesión en el lado cliente
-
-En los ejemplos anteriores nos hemos centrado en usar los datos de sesión desde el lado servidor. NextJS, como framework fullstack, también nos permite recuperar los datos de sesión desde el lado cliente.
-
-En el lado servidor, hemos usado la siguiente forma:
-
-```js
-import { auth } from "@/auth"
-
-async function page() {
-    const sesion = await auth()
-    // ...
-}
-```
-
-Sin embargo, en el lado cliente, deberemos hacer uso del *hook* `useSession` de la siguiente manera:
-
-```js
-"use client";
-import {useSession} from "next-auth/react";
-
-export default function Page() {
-  const {data: session, status} = useSession();
-  console.log("status", status);
-  console.log("session", session);
-
-  return <div>Client Page</div>;
-}
-```
-
-Pero, además debemos realizar un cambio en `RootLayout`  para que todas las páginas cliente puedan hacer uso del método anterior. Debemos envolver la propiedad `children` dentro de un `SessionProvider`, el cual es un componente cliente, y por tanto deberemos declararlo en un archivo separado. 
-
-
-```js
-// src/app/layout.js
-import {Providers} from "./providers";
-
-export default function RootLayout({ children }) {
+export default function Home() {
   return (
-    <html lang="en">
-      <body>
-          <Providers>{children}</Providers>
-      </body>
-    </html>
+    <div className="mx-auto container w-8/12">
+    <GoogleMaps />
+    </div>
   );
 }
 ```
 
-```js
-// src/app/providers.js
-"use client"
-import {SessionProvider} from "next-auth/react";
+### 3.8.3. Documentación
 
-export function Providers({children}) {
-  return <SessionProvider>{children}</SessionProvider>;
+- [Video: Nextjs Google Maps Tutorial](https://youtu.be/q4LhRp1RaPA?si=-XPRnGbokS0E4tPC)
+- [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
+- [Código fuente del video anterior](https://github.com/MG95Developer/google-maps-tutorial)
+- [Documentación oficial](https://googlemaps.github.io/js-api-loader/index.html)
+- [Bibliotecas disponibles](https://developers.google.com/maps/documentation/javascript/libraries?hl=es-419)
+
+
+
+## 3.9. Editor WYSIWYG
+
+
+**Tiptap - Editor WYSIWYG** ( [sitio oficial](https://tiptap.dev/) )
+
+
+
+### 3.9.1. Instalación
+
+
+```sh
+npm  install  @tiptap/react  @tiptap/pm  @tiptap/starter-kit
+```
+```sh
+# Algunas extensiones interesantes
+npm  install  @tiptap/extension-color  @tiptap/extension-list-item  @tiptap/extension-text-style
+```
+
+
+
+### 3.9.2. Uso 
+
+```js
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+
+const Tiptap = () => {
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+    ],
+    content: '<p>Hello World! 🌎️</p>',
+  })
+
+  return (
+    <EditorContent editor={editor} />
+  )
+}
+
+export default Tiptap
+```
+
+### 3.9.3. Documentación
+
+- [Ejemplo 1](https://tiptap.dev/docs/editor/examples/default)
+- [Ejemplo 2](https://github.com/jamj2000/nxeditor-icons)
+- [Ejemplo 3](https://github.com/tumetus/tiptap-nextjs-example.git)
+- [Vídeo del ejemplo 3](https://youtu.be/mKIQZNKdU2w?si=Dvt7GcPneI5LS8_q)
+
+
+**Otros editores interesantes**
+
+- [Jodit](https://xdsoft.net/jodit/)
+- [Quill](https://quilljs.com/)
+  
+
+### 3.9.4. Curiosidad
+
+Al usar bibliotecas com Tiptap es muy probable que te encuentres ante la necesidad de rellenar un elemento <div> con datos provenientes de un **editor de texto enriquecido**. En este caso es de gran utilidad la propiedad **`dangerouslySetInnerHTML`**.
+
+Esta propiedad en una aplicación React es equivalente al atributo `innerHTML` en el DOM del navegador. En JavaScript estándar, `innerHTML` es un atributo de los elementos DOM que permite obtener o configurar el contenido HTML dentro de un elemento y forma parte de la API DOM estándar, no es específica de React.
+
+Como sustituto de `innerHTML`, React dispone de `dangerouslySetInnerHTML` que es una propiedad que se puede usar en elementos HTML de una aplicación React para configurar su contenido mediante programación. En lugar de usar un selector para obtener el elemento HTML y luego configurar su `innerHTML`, se puede usar esta propiedad directamente en el elemento.
+
+Cuando se usa `dangerouslySetInnerHTML`, React también sabe que el contenido de ese elemento específico es dinámico y, para los hijos de ese nodo, simplemente omite la comparación con el DOM virtual para obtener un rendimiento adicional.
+
+Imagina que tienes una página web donde se pueden enviar comentarios usando un editor de texto enriquecido. En este caso, el resultado de dicho editor probablemente será HTML con etiquetas como `<p>`, `<b>` e `<img>`.
+
+Cuando se usa `dangerouslySetInnerHTML`, React toma conciencia de las etiquetas HTML y las procesa correctamente.
+
+```js
+  const data = 'lorem <b>ipsum</b>';
+
+  return (
+    <div dangerouslySetInnerHTML={{__html: data}}  />
+    // ...
+  )
+```
+
+Hay que tener en cuenta que el valor pasado a `dangerouslySetInnerHTML` debe ser un objeto con la clave `__html`. Además, el elemento en el que se utilice la propiedad **`dangerouslySetInnerHTML` no debe tener hijos**, de ahí el uso del elemento **`<div>`**  con etiqueta de cierre automático.
+
+Como sugiere el nombre de la propiedad, usar `dangerouslySetInnerHTML` puede ser peligroso, ya que expone el código a ataques de scripts entre sitios (XSS). Esto puede convertirse en un problema especialmente grave si se obtienen datos de una fuente externa o se renderiza contenido enviado por los usuarios.
+
+
+
+## 3.10. Coloreado de código
+
+En el muy poco probable caso de que tengamos que incorporar visualización de código fuente en nuestra aplicación, podemos usar la biblioteca [bright](https://bright.codehike.org/).
+
+Esta biblioteca debe usarse en el lado servidor, aunque es probable que también pueda emplearse en la lado cliente (no la he utilizado).
+
+
+### 3.10.1. Instalación
+
+```sh
+npm  install  bright
+``` 
+
+### 3.10.2. Uso
+
+```js
+import { Code } from "bright"
+
+const myCode = `
+let hello = "hello brightness"
+console.log(hello, "my old friend")
+`.trim()
+
+Code.theme = "github-dark"
+
+export default function Page() {
+  return (
+    <Code lang="js" title="example.js" lineNumbers>
+      {myCode}
+    </Code>
+  )
 }
 ```
 
-Referencias: 
 
-- [Using NextAuth authentication provider in Next.js 13 App Router](https://medium.com/@rezahedi/using-nextauth-authentication-provider-in-next-js-by-app-router-f50cb23282c9)
-- [Using Context Providers](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#using-context-providers) 
+### 3.10.3. Documentación
 
+- [Documentación oficial](https://bright.codehike.org/)
+- [Código en Github](https://github.com/code-hike/bright?tab=readme-ov-file)
 
-> [!NOTE] 
-> 
-> **signIn y signOut en el lado cliente**
->
-> Al igual que podemos acceder a los datos de sesión desde el lado cliente, también podemos hacer `signin` y `signout` desde el lado cliente.
->
-> ```js
-> 'use client'
-> import { signIn, signOut } from "next-auth/react"
->  
-> // ...
->    <button onClick={() => signIn()}> Sign in </button>
->    <button onClick={() => signOut()}> Sign out </button>
->```
-> La redirección se hace de forma distinta a la empleada en el lado servidor. Empleamos la propiedad **`callbackUrl`** en lugar de la propiedad `redirectTo`. En el lado cliente es así:
->
-> ```js
->  signIn('google', { callbackUrl: 'http://localhost:3000/dashboard' })
->  signOut({ callbackUrl: 'http://localhost:3000/home' })
-> ```
-
-
-
-
-# 11. Referencias:
-
-- [Introducción a Auth.js](https://authjs.dev/getting-started/introduction)
-- [Diferencias entre NextAuth4 y NextAuth5](https://authjs.dev/guides/upgrade-to-v5)
-- [⭐ Video: Next Auth V5 - Advanced Guide (2024)](https://youtu.be/1MTyCvS05V4?feature=shared): El vídeo es muy completo, pero dura 8 horas 😱. Nuestro interés empieza a partir de la segunda hora.
-- [⭐ Código fuente del vídeo anterior](https://github.com/AntonioErdeljac/next-auth-v5-advanced-guide)
 

@@ -17,8 +17,8 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 4. [CONTENIDO DINÁMICO](04_Tema4/README.md)
 5. [FORMULARIOS](05_Tema5/README.md)
 6. [BASES DE DATOS](06_Tema6/README.md)
-7. [APIs REST](07_Tema7/README.md)
-8. [AUTENTICACIÓN](08_Tema8/README.md)
+7. [AUTENTICACIÓN](07_Tema7/README.md)
+8. [APIs REST](08_Tema8/README.md)8. 
 9. [APLICACIONES WEB PROGRESIVAS](09_Tema9/README.md)
 10. [Recursos y Referencias](10_Recursos_Referencias/README.md)
 11. [Anexo I](11_Anexo_I/README.md)
@@ -69,11 +69,18 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 --- 
 
+- [Autenticación con OAuth](https://github.com/jamj2000/nxauth-oauth)
+- [Autenticación con Credenciales](https://github.com/jamj2000/nxauth-credentials)
+- [Protección de rutas con Middleware](https://github.com/jamj2000/nxauth-middleware)
+
+---
+
 - [API con datos en memoria RAM](https://github.com/jamj2000/nxapi-memory)
 - [API con datos en BD MongoDB](https://github.com/jamj2000/nxapi-mongodb)
 - [API con datos en BD MongoDB (mongoose)](https://github.com/jamj2000/nxapi-mongoose)
 - [API con datos en BD MySQL](https://github.com/jamj2000/nxapi-mysql)
-- [API documentada con Swagger](https://github.com/jamj2000/nxapi-swagger)
+- [API 1 documentada con Swagger](https://github.com/jamj2000/nxapi-swagger)
+- [API 2 documentada con Swagger](https://github.com/jamj2000/nxapi-shop)
 
 --- 
 
@@ -81,12 +88,6 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 - [Gráficos Chart dinámicos](https://github.com/jamj2000/nxchart-streaming)
 - [Fichas semanales con datos CSV](https://github.com/jamj2000/semana-fct)
 - [Google Maps](https://github.com/jamj2000/nxgoogle-maps)
-
----
-
-- [Autenticación con OAuth](https://github.com/jamj2000/nxauth-oauth)
-- [Autenticación con Credenciales](https://github.com/jamj2000/nxauth-credentials)
-- [Protección de rutas con Middleware](https://github.com/jamj2000/nxauth-middleware)
 
 ---
 
