@@ -1,6 +1,6 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
-# Tema 8: AUTENTICACIÓN <!-- omit in toc -->
+# Tema 7: AUTENTICACIÓN <!-- omit in toc -->
 > Generación dinámica de páginas Web interactivas  
 > AUTENTICACIÓN DE USUARIOS, NEXT AUTH. OAUTH, CREDENTIALS.
 

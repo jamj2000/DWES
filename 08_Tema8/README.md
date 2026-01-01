@@ -1,6 +1,6 @@
 > DESARROLLO WEB EN ENTORNO SERVIDOR
 
-# Tema 7: APIs REST <!-- omit in toc -->
+# Tema 8: APIs REST <!-- omit in toc -->
 > Programación de servicios Web
 > APIs, BIBLIOTECAS DE UTILIDAD.
 
