@@ -411,7 +411,7 @@ En ambos casos disponemos de los 2 elementos siguientes:
 
 `public/swagger.json`
 
-Es un archivo JSON público que describe la API. Está organizado de las siguiente manera:
+Es un archivo JSON público que describe la API. Está organizado de la siguiente manera:
 
 ```json
     "openapi": "3.0.0",
@@ -583,7 +583,7 @@ En el apartado de **`paths`** tenemos la documentados los **endpoints** disponib
 
 Se ha utilizado un sistema de Autorización mediante Bearer *token*, siendo éste de tipo **[JWT](https://www.fastly.com/es/learning/security/what-is-jwt)**.
 
-Los **endpoints** que modifican la información de la API (métodos **POST**, **PATCH**, **PUT** y ***DELETE***) requieren que el cliente proporcione el JWT que previamente habrá solicitado al servidor. Este token estará firmado con la clave secreta del servidor y su autenticidad puede comprobarse en [jwt.io](https://jwt.io)
+Los **endpoints** que modifican la información de la API (métodos **POST**, **PATCH**, **PUT** y **DELETE**) requieren que el cliente proporcione el JWT que previamente habrá solicitado al servidor. Este token estará firmado con la clave secreta del servidor y su autenticidad puede comprobarse en [jwt.io](https://jwt.io)
 
 ![jwt](assets/jwt.png)
 
