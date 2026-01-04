@@ -244,12 +244,19 @@ Independientemente de la PWA, para generar los distintos tamaños del [**`favico
 
 # 9. Optimización
 
-Algunas técnicas novedosas para optimizar nuestra aplicación Next, pueden verse en los siguientes enlaces:
+Una técnica novedosa para optimizar nuestra aplicación Next, puede verse en los siguientes enlaces:
 
 - [Demo](https://next-faster.vercel.app/)
 - [Código fuente](https://github.com/ethanniser/NextFaster)
 - [Vídeo explicativo en inglés](https://youtu.be/fWfIf7Vfjec?si=xe_aIduZKmF6XLAB)
 
+
+Una exposición de las numerosas técnicas que proporciona Next.js para la optimización del rendimiento: 
+
+- [Artículo explicativo en inglés](https://blog.perfectbase.dev/nextjs-navigation-performance)
+- [Demo](https://nextperformance.vercel.app/)
+- [Código fuente](https://github.com/perfectbase/next-performance)
+- [Vídeo explicativo en inglés](https://www.youtube.com/watch?v=9uJ1hZ4BL10)
 
 
 # 10. CASOS PRÁCTICOS AVANZADOS
