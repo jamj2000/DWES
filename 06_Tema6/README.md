@@ -895,9 +895,14 @@ Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
 
 ## 7.1. Instalación del paquete prisma
 
+> [!CAUTION]
+>
+> Trabajaremos con la versión 6 de Prisma.
+
+
 ```sh 
-npm install prisma -D
-npm install @prisma/client
+npm install prisma6 -D
+npm install @prisma6/client
 ``` 
 
 ## 7.2. Comandos disponibles
