@@ -404,13 +404,13 @@ A continuación tienes el código fuente de dos proyectos que implementan una AP
 
 En ambos casos disponemos de los 2 elementos siguientes:
 
-- Especificación OpenAPI 3.0 ( en archivo `public/swagger.json` )
+- Especificación OpenAPI 3.0 ( en archivo `public/openapi.json` )
 - Página interactiva ( en archivo `src/app/apidoc/page.js` )
 
 
 **Especificación OpenAPI 3.0**
 
-`public/swagger.json`
+`public/openapi.json`
 
 Es un archivo JSON público que describe la API. Está organizado de la siguiente manera:
 
@@ -574,15 +574,19 @@ En el apartado de **`paths`** tenemos la documentados los **endpoints** disponib
 }
 ```
 
+> [!TIP]
+>
+> Es posible escribir la especificación en formato **YAML**, que es menos *verboso* que JSON.
+
 
 **Página interactiva**
 
-`src/app/apidoc/page.js`
+`src/app/api/page.js`
 
 ![apidoc](assets/apidoc.png)
 
 
-Se ha utilizado un sistema de Autorización mediante Bearer *token*, siendo éste de tipo **[JWT](https://www.fastly.com/es/learning/security/what-is-jwt)**.
+En [este proyecto](https://github.com/jamj2000/nxapi-shop) se ha utilizado un sistema de Autorización mediante Bearer *token*, siendo éste de tipo **[JWT](https://www.fastly.com/es/learning/security/what-is-jwt)**.
 
 Los **endpoints** que modifican la información de la API (métodos **POST**, **PATCH**, **PUT** y **DELETE**) requieren que el cliente proporcione el JWT que previamente habrá solicitado al servidor. Este token estará firmado con la clave secreta del servidor y su autenticidad puede comprobarse en [jwt.io](https://jwt.io)
 
