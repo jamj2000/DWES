@@ -16,7 +16,7 @@
   - [3.1. .env](#31-env)
   - [3.2. src/auth.js](#32-srcauthjs)
   - [3.3. src/app/api/auth/\[...nextauth\]/route.js](#33-srcappapiauthnextauthroutejs)
-  - [3.4. src/middleware.js](#34-srcmiddlewarejs)
+  - [3.4. src/proxy.js](#34-srcproxyjs)
 - [4. Sesiones](#4-sesiones)
   - [4.1. Estrategias de gestión de sesiones](#41-estrategias-de-gestión-de-sesiones)
 - [5. Adaptadores. Tipos de persistencia de datos](#5-adaptadores-tipos-de-persistencia-de-datos)
@@ -33,7 +33,7 @@
 - [8. Aplicaciones de ejemplo](#8-aplicaciones-de-ejemplo)
   - [8.1. Aplicación OAuth](#81-aplicación-oauth)
   - [8.2. Aplicación Credentials](#82-aplicación-credentials)
-  - [8.3. Aplicación Middleware](#83-aplicación-middleware)
+  - [8.3. Aplicación con Proxy](#83-aplicación-con-proxy)
 - [9. CASOS PRÁCTICOS](#9-casos-prácticos)
   - [9.1. App para gestionar un blog](#91-app-para-gestionar-un-blog)
   - [9.2. App para gestionar una pizzería](#92-app-para-gestionar-una-pizzería)
@@ -77,9 +77,14 @@ Si además trabajamos con el ORM Prisma:
 
 ```sh
 npm install @auth/prisma-adapter
-npm install @prisma/client 
-npm install prisma -D 
+npm install @prisma/client@6 
+npm install prisma@6 -D 
 ```
+
+> [!CAUTION]
+>
+> Trabajaremos con la versión 6 de Prisma.
+
 
 Si vamos a necesitar cifrar contraseñas:
 
@@ -95,7 +100,7 @@ npm install bcryptjs
 | -------------- | ------------------------------------- |
 | **`/`**        | **`.env`**                            |
 | **`/src`**     | **`auth.js`**                         |
-| **`/src`**     | **`middleware.js`**                   |
+| **`/src`**     | **`proxy.js`**                        |
 | **`/src/app`** | **`api/auth/[...nextauth]/route.js`** |
 
 
@@ -119,11 +124,6 @@ AUTH_GITHUB_SECRET=
 
 AUTH_GOOGLE_ID=
 AUTH_GOOGLE_SECRET=
-
-AUTH_FACEBOOK_ID=
-AUTH_FACEBOOK_SECRET=
-
-AUTH_RESEND_KEY=
 ```
 
 > [!NOTE]
@@ -212,7 +212,13 @@ api/auth/verify-request
 ![Signout page](assets/signout.png)
 
 
-## 3.4. src/middleware.js
+## 3.4. src/proxy.js
+
+> [!NOTE]
+>
+> A partir de Next.js 16 el nombre de archivo debe ser `proxy.js`.
+>
+> Este archivo se nombraba `middleware.js` en versiones de Next.js 15 y anteriores.
 
 Este archivo es opcional.
 
@@ -234,9 +240,9 @@ export const config = {
 
 ```
 
-En configuraciones más complejas, cuando nuestra aplicación se despliega en Internet en una red `edge`, necesitaremos configurar el middleware de una manera algo distinta a la anterior, tal como se muestra a continuación.
+En configuraciones más complejas, cuando nuestra aplicación se despliega en Internet en una red `edge`, necesitaremos configurar el proxy de una manera algo distinta a la anterior, tal como se muestra a continuación.
 
-En un archivo separado pondremos la configuración de los proveedores. Y en el middleware sólamente incluiremos la configuración de este archivo. El resto de opciones de autenticación no los incluiremos. Esto es necesario, porque actualmente Prisma no puede ejecutarse en el `edge`, que es donde se ejecutará el *middleware*.
+En un archivo separado pondremos la configuración de los proveedores. Y en el proxy sólamente incluiremos la configuración de este archivo. El resto de opciones de autenticación no los incluiremos. Esto es necesario, porque actualmente Prisma no puede ejecutarse en el `edge`, que es donde se ejecutará el *proxy*.
 
 ```js
 // auth.config.js
@@ -254,7 +260,7 @@ export default {
 ```
 
 ```js
-// middleware.js
+// proxy.js
 import NextAuth from "next-auth";
 import authConfing from "@/auth.config"
 
@@ -275,7 +281,7 @@ export const config = {
 };
 ```
 
-El acceso a las rutas se puede configurar también sin necesidad de *middleware*. 
+El acceso a las rutas se puede configurar también sin necesidad de *proxy*. 
 
 
 # 4. Sesiones
@@ -285,7 +291,7 @@ Antes de nada es importante diferenciar 2 conceptos:
 - `Autenticación`: proceso para identificar a un usuario
 - `Autorización`: proceso de dar acceso a determindos recursos al usuario autenticado.
 
-AuthJS es esencialmente una solución de **autenticación** para aplicaciones web. Pero junto con el manejo de sesiones y el middleware podemos conseguir una solución completa de autenticación/autorización.
+AuthJS es esencialmente una solución de **autenticación** para aplicaciones web. Pero junto con el manejo de sesiones y el proxy podemos conseguir una solución completa de autenticación/autorización.
 
 
 HTTP / HTTPS son protocolos sin estado. Esto quiere decir, que aunque realicemos una conexión desde la misma IP, dichos protocolos no son capaces por si mismos de gestionar una sesión. 
@@ -706,7 +712,7 @@ En este tema trabajaremos con el código fuente de 3 aplicaciones:
 
 1. [nxauth-oauth](https://github.com/jamj2000/nxauth-oauth)
 2. [nxauth-credentials](https://github.com/jamj2000/nxauth-credentials)
-3. [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
+3. [nxauth-proxy](https://github.com/jamj2000/nxauth-proxy)
    
 Las directrices seguidas para su desarrollo han sido comunes, y se listan a continuación.
 
@@ -896,15 +902,15 @@ await signIn('credentials', { email, password, redirectTo: '/dashboard' })
 > Las variables `email` y `password` anteriores, son enviadas como argumento dentro del objeto `credentials` a la función `authorize`.
 
 
-## 8.3. Aplicación Middleware
+## 8.3. Aplicación con Proxy
 
-- [nxauth-middleware](https://github.com/jamj2000/nxauth-middleware)
+- [nxauth-proxy](https://github.com/jamj2000/nxauth-proxy)
 
-En la última aplicación controlamos el acceso a las rutas mediante `middleware`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas. 
+En la última aplicación controlamos el acceso a las rutas mediante `proxy`. Este componente se ejecuta antes de acceder a las rutas que queramos controlar. Al final del archivo hemos añadido dichas rutas. 
 
-![middleware](assets/middleware.jpg)
+![proxy](assets/proxy.jpg)
 
-El contenido del archivo `src/middleware.js` es el siguiente:
+El contenido del archivo `src/proxy.js` es el siguiente:
 
 ```js
 // Run on edge
@@ -914,7 +920,7 @@ import authConfig from "@/auth.config";
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
-  console.log(`MIDDLEWARE`, req.nextUrl.pathname, req.auth);
+  console.log(`PROXY`, req.nextUrl.pathname, req.auth);
 
   if (!req.auth) {  // No autenticado
     const callbackUrl = req.nextUrl.pathname + req.nextUrl.search
@@ -944,7 +950,7 @@ Hemos colocado la configuración de NextAuth en dos archivos separados:
 - **src/auth.js**
 - **src/auth.config.js**
   
-El motivo es que, actualmente, dentro del *middleware* no podemos hacer uso de `PrismaAdapter`. Por tanto, colocamos en **`src/auth.config.js`**
+El motivo es que, actualmente, dentro del *proxy* no podemos hacer uso de `PrismaAdapter`. Por tanto, colocamos en **`src/auth.config.js`**
 
 ```js
 import Credentials from '@auth/core/providers/credentials'
@@ -1052,7 +1058,7 @@ export async function loginGoogle() {
 // ...
 ```
 
-Hay una demo disponible en [vercel](https://nxauth-middleware.vercel.app/).
+Hay una demo disponible en [vercel](https://nxauth-proxy.vercel.app/).
 
 
 # 9. CASOS PRÁCTICOS
