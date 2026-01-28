@@ -643,7 +643,7 @@ El proceso de verificación de email es complejo y no se aboradará en este tema
 
 > [!TIP]
 >
-> Si sólo deseas añadir la funcionalidad de envío de correo sin la necesidad de registro de usuarios, puedes consultar la sección [envío de correos](../08_Tema8/README.md#36-envío-de-correos)
+> Si sólo deseas añadir la funcionalidad de envío de correo sin la necesidad de registro de usuarios, puedes consultar la sección [envío de correos](../08_Tema8/README.md#36-envío-de-correos) del siguiente tema.
 > 
 
 
