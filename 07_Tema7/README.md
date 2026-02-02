@@ -219,13 +219,15 @@ api/auth/verify-request
 > A partir de Next.js 16 el nombre de archivo debe ser `proxy.js`.
 >
 > Este archivo se nombraba `middleware.js` en versiones de Next.js 15 y anteriores.
-
-Este archivo es opcional.
+>
+> Este archivo es opcional.
 
 La configuración de este archivo nos permite indicar qué rutas de nuestra aplicación están protegidas y cuales no según las configuración. 
 
+**`src/proxy.js`**
 
 ```js
+// Vercel lo ejecuta en edge
 import { auth } from "@/auth";
 
 export default auth((req) => {
@@ -240,7 +242,7 @@ export const config = {
 
 ```
 
-En configuraciones más complejas, cuando nuestra aplicación se despliega en Internet en una red `edge`, necesitaremos configurar el proxy de una manera algo distinta a la anterior, tal como se muestra a continuación.
+En configuraciones más complejas, cuando nuestro proxy se despliega en Internet en una red `edge` (es el caso de Vercel), necesitaremos configurar de una manera algo distinta a la anterior, tal como se muestra a continuación.
 
 En un archivo separado pondremos la configuración de los proveedores. Y en el proxy sólamente incluiremos la configuración de este archivo. El resto de opciones de autenticación no los incluiremos. Esto es necesario, porque actualmente Prisma no puede ejecutarse en el `edge`, que es donde se ejecutará el *proxy*.
 
@@ -397,7 +399,14 @@ Los Modelos que usa Auth.js son los siguientes:
 
 > [!IMPORTANT]
 >
-> Sólo necesitaremos los modelos User y Account. Se ha **ampliado del módelo `User` con campos `password` y `role`**.
+> Sólo necesitaremos los modelos User y Account. 
+> 
+> Además se ha **ampliado el módelo `User` con campos `password`, `role` y `active`**.
+> 
+> -  `password` para el trabajo con credenciales. 
+> -  `role` nos permitirá distinguir entre roles USER y ADMIN.
+> -  `active` nos permitira activar o desactivar usuarios.
+
 
 
 ```prisma
@@ -406,12 +415,10 @@ model User {
   // ...
   password      String?
   role          String?   @default("USER")  // o  ADMIN
+  active        Boolean?  @default(true)    // o  false
   // ...
 }
 ```
-
-Vamos a necesitar el campo `password` para el trabajo con credenciales. Y el campo `role` nos permitirá distinguir entre roles USER y ADMIN.
-
 
 **EJEMPLO DE ARCHIVO prisma/schema.prisma**
 
@@ -435,6 +442,7 @@ model User {
   emailVerified DateTime?
   image         String?
   role          String?   @default("USER")  // o  ADMIN
+  active        Boolean?  @default(true)    // o  false
   accounts      Account[]
 }
 
@@ -460,7 +468,7 @@ model Account {
 
 > [!IMPORTANT]
 >
-> Observa que el modelo `User` debe permitir **valores null en los siguientes campos: `password`, `email`, `image`**. Esto es así puesto que OAuth nunca nos devuelve información de password, y en muchos casos tampoco devuelve información de email e image.
+> Observa que el modelo `User` debe permitir **valores null en los siguientes campos: `password`, `email`, `image` y `active`**. Esto es así puesto que OAuth nunca nos devuelve información de password ni de active, y en muchos casos tampoco devuelve información de email e image.
 >
 > Si no permitimos valores null en estos campos la autenticación OAuth fallará.
 
@@ -695,7 +703,6 @@ import Credentials from "@auth/core/providers/credentials"
 >
 > **MUY IMPORTANTE:**
 >
->
 > Cuando despliegues tu aplicación en Internet deberás actualizar las URLs en los proveedores OAuth, de forma similar a la mostrada a continuación:
 
 **Google**
@@ -723,13 +730,13 @@ Las directrices seguidas para su desarrollo han sido comunes, y se listan a cont
 
 Se ha realizado la **autenticación siempre desde el lado servidor**.
 
-Para **obtener los datos de sesión**, se ha usado `const sesion = await auth()`
+Para **obtener los datos de sesión**, se ha usado `const session = await auth()`
 
 ```js
 import { auth } from "@/auth"
 
 async function page() {
-    const sesion = await auth()
+    const session = await auth()
     
 }
 ```
@@ -915,7 +922,7 @@ En la última aplicación controlamos el acceso a las rutas mediante `proxy`. Es
 
 ![proxy](assets/proxy.jpg)
 
-El contenido del archivo `src/proxy.js` es el siguiente:
+El contenido del archivo **`src/proxy.js`** es el siguiente:
 
 ```js
 // Run on edge
@@ -944,10 +951,41 @@ export const config = {
         "/proveedores(.*)",
         "/productos(.*)",
     ],
-};
+}
 ```
 
 Si el usuario no ha iniciado sesión, lo redirigimos a la página de login y guardamos en query string `?callbackUrl=` la url a la que quiere acceder.
+
+> [!TIP]
+>
+> Es una práctica habitual y recomendada proteger es indicar mediante una [expresión regular](https://nextjs.org/docs/app/api-reference/file-conventions/proxy#matcher) todas las rutas que serán públicas. Todas las que no se incluyan en dicha expresión estarán protegidas. Por ejemplo:
+> 
+>```js
+> export const config = {
+>    matcher: [
+>        /*
+>         * Match all request paths except for the ones starting with:
+>         * - api (API routes)
+>         * - auth
+>         * - pizzas
+>         * - carrito 
+>         * - images (into /public)
+>         * - pwa (into /public) 
+>         * - _next/static (static files)
+>         * - _next/image (image optimization files)
+>         * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+>         * - $ (root page)
+>         */
+>        '/((?!api|auth|images|pwa|pizzas|carrito|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|$).*)',
+>   ]
+> }
+>```
+
+> [!CAUTION]
+>
+> Si usas la forma anterior de definir las rutas, presta especial atención al contenido de la carpeta `public`, puesto que deberás añadir a la expresión regular anterior los archivos y carpetas que estén dentro. 
+> 
+> Si no lo haces, ¡no serán públicos! 
 
 
 Hemos colocado la configuración de NextAuth en dos archivos separados:
@@ -955,7 +993,9 @@ Hemos colocado la configuración de NextAuth en dos archivos separados:
 - **src/auth.js**
 - **src/auth.config.js**
   
-El motivo es que, actualmente, dentro del *proxy* no podemos hacer uso de `PrismaAdapter`. Por tanto, colocamos en **`src/auth.config.js`**
+El motivo es que, actualmente, dentro del *proxy* no podemos hacer uso de `PrismaAdapter`. 
+
+Por tanto, colocamos en **`src/auth.config.js`**
 
 ```js
 import Credentials from '@auth/core/providers/credentials'
@@ -1108,7 +1148,7 @@ En el lado servidor, hemos usado la siguiente forma:
 import { auth } from "@/auth"
 
 async function page() {
-    const sesion = await auth()
+    const session = await auth()
     // ...
 }
 ```
