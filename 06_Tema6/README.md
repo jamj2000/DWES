@@ -2295,9 +2295,7 @@ Para evitar este problema, debemos insertar `prisma generate` al script `build` 
 
 # 14. Referencias
 
-- [Ejemplo con Prisma y Relación 1:N](https://github.com/jamj2000/nxprisma-crud-zoo)
-- [Ejemplo con Prisma y Relación N:M](https://github.com/jamj2000/nxprisma-crud-negocio)
-- [Ejemplo con Prisma y Relaciones 1:N y N:M](https://github.com/jamj2000/nxprisma-crud-protectoras)
+- [CRUD usando ORM Prisma con 3 tablas en relación 1:N y N:M](https://github.com/jamj2000/escuela2026)
 - [Video: Nextjs y Prisma ORM desde Cero usando Typescript](https://www.youtube.com/watch?v=5k7ZGhL3pI0&t=3938s)
 - [Video: Prisma in Next.js](https://youtu.be/QXxy8Uv1LnQ)
 - [MySQL API con NextJS](https://github.com/jamj2000/nxapi-mysql)
