@@ -136,3 +136,4 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 - [Video: 20 Browser Extensions For Web Design & Development ](https://youtu.be/OhU4yaNih2M?si=EbTO_TflU7UFDV-F)
 - [Web article: 20 Browser Extensions For Web Design & Development ](https://www.traversymedia.com/blog/20-browser-extensions)
 - [Lista de recursos para desarrolladores](https://free-for.dev/)
+- [Public APIs](https://github.com/public-apis/public-apis/blob/master/README.md)

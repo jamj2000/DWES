@@ -74,6 +74,8 @@
     - [3.10.1. Instalación](#3101-instalación)
     - [3.10.2. Uso](#3102-uso)
     - [3.10.3. Documentación](#3103-documentación)
+- [4. Referencias](#4-referencias)
+
 
 --- 
 
@@ -1787,3 +1789,6 @@ export default function Page() {
 - [Código en Github](https://github.com/code-hike/bright?tab=readme-ov-file)
 
 
+# 4. Referencias
+
+- [Public APIs](https://github.com/public-apis/public-apis/blob/master/README.md)
