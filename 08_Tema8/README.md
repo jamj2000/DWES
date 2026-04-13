@@ -1535,21 +1535,122 @@ sendMail().catch(console.error);
 
 ## 3.7. Pagos por internet
 
+Los pagos online permiten a los usuarios comprar productos o servicios directamente desde una web o aplicación. Una de las plataformas más utilizadas es **Stripe**, que ofrece APIs seguras y fáciles de integrar.
 
-stripe
+En aplicaciones modernas con Next.js, Stripe se suele usar mediante rutas API para procesar pagos en el servidor y componentes en el cliente para recoger datos de pago.
+
+Para que tu aplicación pueda hacer uso de stripe deberas registrarte previamente en Crear cuenta en Stripe https://dashboard.stripe.com/register
+
+Y después obtener las claves y añadirlas al archivo **`.env`**:
+
+- STRIPE_SECRET_KEY (privada)
+- STRIPE_PUBLISHABLE_KEY (pública)
+
+La clave privada no debe ser accesible al usuario final. Está destinada a su uso en el backend.
+
+La clave pública puede usarse en el frontend y puede ser visible al usuario final. Se utiliza en caso que querer realizar *checkout* desde el frontend.
+
+
+> [!TIP]
+>
+> Puedes ver una aplicación, tanto su funcionalidad como su código, que implementa los pagos con stripe en los siguentes enlaces:
+>
+> - [App Pizzería - Demo funcional](https://nxapp-pizzeria.vercel.app/)
+> - [App Pizzería - Código fuente](https://github.com/jamj2000/nxapp-pizzeria)
 
 ### 3.7.1. Instalación
+
+Desde tu terminal:
+
+```sh
+npm install stripe
+```
+
+> [!NOTE]
+>
+> También necesitarás instalar [stripe CLI](https://docs.stripe.com/stripe-cli/install) para probar y gestionar tu integración desde la línea de comandos
+
+> [!IMPORTANT]
+> 
+> Deberemos modificar el `schema.prisma` para añadir un campo `stripeSessionId` (posible nulo, único) al modelo `Pedido` para poder vincular el pago con el pedido:
+> 
+>```prisma
+> model Pedido {
+>   // ... campos existentes ...
+>   stripeSessionId String?  @unique
+> }
+>```
+> En Stripe, cada vez que creas una sesión de pago (`checkout.session`) se genera un ID único (`session.id`).
+> Esto significa que:
+> 
+> - Cada intento de pago tiene su propia sesión
+> - No se reutilizan sesiones automáticamente
+> - Puedes identificar cada proceso de checkout de forma independiente
+
 
 
 ### 3.7.2. Uso
 
 
+**Flujo de pago**
+
+1. En `app/carrito/checkout/page.js` el usuario pulsa en botón **“Pagar con Stripe”**.
+2. Se ejecuta en el backend la acción de servidor (`lib/actions/checkout.js`), encargada de **crear una sesión de pago en Stripe**.
+3. El usuario es **redirigido al checkout de Stripe**.
+4. El usuario introduce datos de su tarjeta.
+5. Stripe procesa el pago de forma segura.
+6. Stripe envía el resultado del pago al endpoint `app/api/webhook.js` mediante un *webhook*. Si el evento es `checkout.session.completed`, se guarda la información del pedido en la base de datos.
+7. Finalmente, el usuario es redirigido a una página de **éxito** o **cancelación**.
+
+
+> [!NOTE]
+>
+> El paso 2 también puede implementarse mediante una petición a `app/api/checkout.js` (endpoint `/api/checkout`), en lugar de usar una acción de servidor.
+>
+> - El uso de un **endpoint API** es más adecuado en arquitecturas desacopladas (frontend/backend separados).
+> - El uso de **acciones de servidor** es más apropiado en aplicaciones fullstack monolíticas con Next.js.
+
+
+
+> [!NOTE]
+>
+> El paso 4 permite el uso de tarjetas de prueba:
+>
+> - Tarjeta válida: `4242 4242 4242 4242`
+> - Fecha futura cualquiera
+> - CVC cualquiera
+
+
+> [!TIP]
+>
+> **RESUMEN**
+>
+> 1. **Frontend**: inicia el proceso (botón de pago)
+> 2. **Backend (Next.js)**: crea la sesión de Stripe
+> 3. **Stripe**: gestiona el pago de forma segura
+> 4. **Webhook**: confirma el resultado de forma fiable
+> 5. **Base de datos**: solo se actualiza cuando el pago está confirmado
+
+
+![Stripe Inicio](assets/stripe-inicio.png)
+
+![Stripe Inicio](assets/stripe-workbench-resumen.png)
+
+![Stripe Inicio](assets/stripe-workbench-webhooks.png)
+
+![Stripe Inicio](assets/stripe-transacciones.png)
+
+![Stripe Inicio](assets/stripe-transaccion-detalles.png)
+
+
+
 
 ### 3.7.3. Documentación
 
-- [Pasarela de pago con Stripe en tu Web o App: Guía Paso a Paso -Python-](https://youtu.be/gOWCCkUq2nc?si=gLG9xjPdaRLmuRb7)
+- [Vídeo: Pasarela de pago con Stripe en tu Web o App: Guía Paso a Paso -Python-](https://youtu.be/gOWCCkUq2nc?si=gLG9xjPdaRLmuRb7)
 - [Documentación de Stripe](https://docs.stripe.com/get-started/development-environment)
 - [Testing Stripe](https://docs.stripe.com/testing)
+- [Sripe CLI (Command Line Interface)](https://docs.stripe.com/stripe-cli)
 - Stripe elements: [Web](https://docs.stripe.com/payments/elements)/[App](https://docs.stripe.com/payments/mobile)
 
 
