@@ -1555,8 +1555,9 @@ La clave pública puede usarse en el frontend y puede ser visible al usuario fin
 >
 > Puedes ver una aplicación, tanto su funcionalidad como su código, que implementa los pagos con stripe en los siguentes enlaces:
 >
-> - [App Pizzería - Demo funcional](https://nxapp-pizzeria.vercel.app/)
-> - [App Pizzería - Código fuente](https://github.com/jamj2000/nxapp-pizzeria)
+> - [Pizzería Mamma Mia - Demo funcional](https://pizzeria-mm.vercel.app/)
+> - [Pizzería Mamma Mia - Código fuente](https://github.com/jamj2000/pizzeria-mm)
+> - [Pizzería Mamma Mia - Documentación sobre Stripe](https://github.com/jamj2000/pizzeria-mm/blob/main/STRIPE.md)
 
 ### 3.7.1. Instalación
 
@@ -1623,7 +1624,7 @@ npm install stripe
 
 > [!TIP]
 >
-> **RESUMEN**
+> **RESUMEN**  
 >
 > 1. **Frontend**: inicia el proceso (botón de pago)
 > 2. **Backend (Next.js)**: crea la sesión de Stripe
@@ -1651,6 +1652,7 @@ npm install stripe
 - [Documentación de Stripe](https://docs.stripe.com/get-started/development-environment)
 - [Testing Stripe](https://docs.stripe.com/testing)
 - [Sripe CLI (Command Line Interface)](https://docs.stripe.com/stripe-cli)
+- [El objeto Checkout Session](https://docs.stripe.com/api/checkout/sessions/object)
 - Stripe elements: [Web](https://docs.stripe.com/payments/elements)/[App](https://docs.stripe.com/payments/mobile)
 
 

@@ -1120,8 +1120,8 @@ Hay una demo disponible en [vercel](https://nxauth-proxy.vercel.app/).
 
 ## 9.2. App para gestionar una pizzería
 
-- [Código fuente](https://github.com/jamj2000/nxapp-pizzeria)
-- [Demo](https://nxapp-pizzeria.vercel.app/)
+- [Código fuente](https://github.com/jamj2000/pizzeria-mm)
+- [Demo](https://pizzeria-mm.vercel.app/)
 
 
 ![pizzeria demo](assets/pizzeria.png)
