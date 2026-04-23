@@ -1654,6 +1654,7 @@ npm install stripe
 - [Sripe CLI (Command Line Interface)](https://docs.stripe.com/stripe-cli)
 - [El objeto Checkout Session](https://docs.stripe.com/api/checkout/sessions/object)
 - Stripe elements: [Web](https://docs.stripe.com/payments/elements)/[App](https://docs.stripe.com/payments/mobile)
+- [Números de tarjeta para pruebas](https://docs.stripe.com/testing)
 
 
 ## 3.8. Mapas
