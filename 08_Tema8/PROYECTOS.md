@@ -9,6 +9,7 @@
 
 --- 
 
+### [Pizzería Mamma Mia](https://github.com/jamj2000/pizzeria-mm)
 ### [Gráficos Chart estáticos](https://github.com/jamj2000/nxchart)
 ### [Gráficos Chart dinámicos](https://github.com/jamj2000/nxchart-streaming)
 ### [Fichas semanales con datos CSV](https://github.com/jamj2000/semana-fct)
