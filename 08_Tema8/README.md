@@ -1587,6 +1587,17 @@ npm install stripe
 > - Cada intento de pago tiene su propia sesión
 > - No se reutilizan sesiones automáticamente
 > - Puedes identificar cada proceso de checkout de forma independiente
+>
+> Además, deberemos modificar el `schema.prisma` para añadir un campo `stripeCustomerId` (posible nulo, único) al modelo `User` para poder vincular el pago con el usuario:
+> 
+>```prisma
+> model User {
+>   // ... campos existentes ...
+>   stripeCustomerId String?  @unique
+> }
+>```
+
+
 
 
 
@@ -1615,11 +1626,20 @@ npm install stripe
 
 > [!NOTE]
 >
-> El paso 4 permite el uso de tarjetas de prueba:
+> El paso 4 permite el uso de [tarjetas de prueba](https://docs.stripe.com/testing?locale=es-ES#cards). Entre otras:
+>
+> **Tarjeta visa EE.UU.**
 >
 > - Tarjeta válida: `4242 4242 4242 4242`
 > - Fecha futura cualquiera
 > - CVC cualquiera
+>
+> **Tarjeta visa España**
+>
+> - Tarjeta válida: `4000 0072 4000 0007`
+> - Fecha futura cualquiera
+> - CVC cualquiera
+>
 
 
 > [!TIP]
