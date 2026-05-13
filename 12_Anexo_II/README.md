@@ -25,11 +25,14 @@
 - [8. Creando nuestra propia API REST](#8-creando-nuestra-propia-api-rest)
   - [8.1. Herramientas para probar la API](#81-herramientas-para-probar-la-api)
   - [8.2. CORS](#82-cors)
+  - [8.3. JWT (JSON Web Token)](#83-jwt-json-web-token)
+  - [8.4. Documentación](#84-documentación)
 - [9. Formularios](#9-formularios)
   - [9.1. application/x-www-form-urlencoded](#91-applicationx-www-form-urlencoded)
   - [9.2. multipart/form-data](#92-multipartform-data)
   - [9.3. JSON](#93-json)
 - [10. Referencias](#10-referencias)
+
 
 
 
