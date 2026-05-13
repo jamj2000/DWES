@@ -637,6 +637,66 @@ app.use(cors({
 
 - [CORS con Express](https://expressjs.com/en/resources/middleware/cors.html)
 
+## 8.3. JWT (JSON Web Token)
+
+Un aspecto muy importante a tener en cuenta es la seguridad. En el caso de trabajar con APIs REST es muy común el uso de [JWT](https://jwt.io/) para la autenticación de los usuarios. En concreto, se suelen utilizar los llamados **`Bearer Tokens`**.  
+
+El **JWT** es un formato de tokens que permite transmitir información de forma segura entre dos partes como un objeto JSON.
+
+En el proyecto [codigo/api-jwt/](codigo/api-jwt/) se muestra cómo usar JWT para autenticar usuarios en una API REST.
+
+Es obligatorio protegar al menos los endpoints de tipo:
+
+- `POST`
+- `PUT`
+- `DELETE`
+
+Y en algunos casos también podemos desear proteger otros endpoints de tipo `GET`, para que no haya fuga de información.
+
+A grandes rasgos, la protección de los endpoints se realiza de la siguiente manera:
+
+1. El cliente inicia sesión (envía sus credenciales).
+2. El servidor le proporciona un **token** (JWT).
+3. El cliente proporciona el token en cada solicitud (en la cabecera `Authorization`).
+4. El servidor verifica el token.
+5. El servidor proporciona los datos.
+
+Para ello hemos implementado el endpoint:
+
+- **POST `/api/login`**
+
+En el que se el usuario deberá autenticarse proporcionando sus credenciales (usuario y contraseña).
+
+Si la autenticación es exitosa, el servidor le proporcionará un **token**, que estará firmado digitalmente por el servidor mediante un *secreto*.
+
+Ejemplo de respuesta:
+
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNzE1NjI3OTQ4fQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+}
+```
+
+![jwt-login](assets/jwt-login.png)
+
+
+En cada petición del usuario, el token deberá ser enviado en la cabecera `Authorization` con el prefijo `Bearer `:
+
+```http
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNzE1NjI3OTQ4fQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+```
+
+El servidor verificará que el token sea correcto y si lo es, le proporcionará los datos solicitados. En caso contrario, le devolverá un error 403 Forbidden.
+
+
+![jwt-delete](assets/jwt-delete.png)
+
+
+## 8.4. Documentación
+
+- [Documentación de Express](https://expressjs.com/en/4x/api.html)
+
+
 
 # 9. Formularios
 
