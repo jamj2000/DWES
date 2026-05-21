@@ -53,6 +53,15 @@
 Next es un **framework fullstack JavaScript**, que emplea **React** para crear componentes. Y ya no solo componentes de frontend. Gracias a los "**React Server Components (RSC)**" podemos tener componentes que sólo se ejecuten en un entorno de servidor o backend.
 Con Next hacemos aplicaciones **Server Side Rendering (SSR)**, y con los RSC lo que tenemos es Streaming-SSR, una evolución del mismo que nos permite mezclar lo mejor de muchos "mundos".
 
+Next.js suele utilizarse en **arquitecturas monolíticas modernas** porque integra frontend y funcionalidades backend en un único proyecto. Sin embargo, también **puede formar parte de arquitecturas basadas en APIs o microservicios**.
+
+En un proyecto típico de Next.js:
+
+- El frontend y parte del backend viven en el mismo proyecto.
+- Las rutas web y las API se gestionan juntas.
+- Todo se despliega como una única aplicación.
+
+
 
 > [!IMPORTANT]
 >

@@ -26,18 +26,23 @@
   - [4.3. Resumen](#43-resumen)
 - [5. Tecnologías Javascript Fullstack](#5-tecnologías-javascript-fullstack)
   - [5.1. Frameworks para servidor y cliente](#51-frameworks-para-servidor-y-cliente)
-- [6. MVC o SPA](#6-mvc-o-spa)
-  - [6.1. Modelo-Vista-Controlador](#61-modelo-vista-controlador)
-  - [6.2. Single Page Application](#62-single-page-application)
-  - [6.3. MVC vs SPA](#63-mvc-vs-spa)
-  - [6.4. Arquitectura de 3 capas](#64-arquitectura-de-3-capas)
-- [7. Persistencia de los datos](#7-persistencia-de-los-datos)
-  - [7.1. Bases de datos relacionales](#71-bases-de-datos-relacionales)
-  - [7.2. Bases de datos no relacionales (noSQL)](#72-bases-de-datos-no-relacionales-nosql)
-- [8. Viajando al futuro, que ya es presente](#8-viajando-al-futuro-que-ya-es-presente)
-  - [8.1. WebAssembly (Wasm)](#81-webassembly-wasm)
-  - [8.2. Apps en Wasm](#82-apps-en-wasm)
-
+- [6. Tecnología alternativa](#6-tecnología-alternativa)
+  - [6.1. WebAssembly (Wasm)](#61-webassembly-wasm)
+  - [6.2. Apps en Wasm](#62-apps-en-wasm)
+- [7. Arquitecturas](#7-arquitecturas)
+  - [7.1. Arquitectura cliente-servidor](#71-arquitectura-cliente-servidor)
+  - [7.2. Arquitectura en tres capas](#72-arquitectura-en-tres-capas)
+  - [7.3. Arquitectura MVC (Modelo-Vista-Controlador)](#73-arquitectura-mvc-modelo-vista-controlador)
+  - [7.4. Arquitectura monolítica](#74-arquitectura-monolítica)
+  - [7.5. Arquitectura de microservicios](#75-arquitectura-de-microservicios)
+  - [7.6. Arquitectura basada en APIs](#76-arquitectura-basada-en-apis)
+  - [7.7. Comparativa de arquitecturas](#77-comparativa-de-arquitecturas)
+  - [7.8. Diferencias importantes](#78-diferencias-importantes)
+    - [7.8.1. MVC vs Arquitectura en tres capas](#781-mvc-vs-arquitectura-en-tres-capas)
+    - [7.8.2. Monolito vs Microservicios](#782-monolito-vs-microservicios)
+- [8. Persistencia de los datos](#8-persistencia-de-los-datos)
+  - [8.1. Bases de datos relacionales](#81-bases-de-datos-relacionales)
+  - [8.2. Bases de datos no relacionales (noSQL)](#82-bases-de-datos-no-relacionales-nosql)
 
 
 
@@ -430,73 +435,14 @@ Una variante de los servidores de contenido dinámico son los [serverless](https
 
 
 
-# 6. MVC o SPA
-
-
-## 6.1. Modelo-Vista-Controlador
-
-![Modelo Vista Controlador](assets/MVC.png)
-
-
-- patrón de diseño arquitectónico
-- se ejecuta casi toda la lógica de aplicación en el backend. 
-- el servidor sirve múltiples vistas, cada vista es una página HTML. 
-- es una aplicación de múltiples páginas (MPA). 
-
-https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador 
-
-
-## 6.2. Single Page Application
-
-![Aplicación de Página Única](assets/SPA.png)
-
-
-- se ejecuta gran parte de la lógica de la aplicación en el frontend. 
-- el servidor sirve datos mediante una API web. 
-- principalmente se usan 2 formatos para el intercambio de datos:
-  - **XML**
-  - **JSON** 
-
-
-## 6.3. MVC vs SPA
-
-![MVC vs SPA](assets/mvc-spa.png)
-
-
-## 6.4. Arquitectura de 3 capas
-
-![Arquitectura de 3 capas](assets/arquitectura-3-capas.png)
-
-
-
-# 7. Persistencia de los datos
-
-- Uso de archivos
-- Bases de datos relacionales
-  - Subtipo importante: **BBDD objeto-relacionales**.
-- Bases de datos no relacionales
-  - Subtipo importante: **BBDD noSQL**.
-
-
-## 7.1. Bases de datos relacionales
-
-![BBDD relacionales](assets/SQL.png)
-
-
-## 7.2. Bases de datos no relacionales (noSQL)
-
-![BBDD relacionales](assets/noSQL.png)
-
-
-
-# 8. Viajando al futuro, que ya es presente
+# 6. Tecnología alternativa
 
 ![Wasm](assets/wasm.png)
 
 - [WebAssembly](https://es.wikipedia.org/wiki/WebAssembly)
 
 
-## 8.1. WebAssembly (Wasm)
+## 6.1. WebAssembly (Wasm)
 
 - Formato binario pequeño y rápido que promete un rendimiento casi nativo para las aplicaciones web.
 - Los principales navegadores son compatibles con WebAssembly.
@@ -509,8 +455,316 @@ https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador
 - [WebAssembly explicado](https://www.ciospain.es/liderazgo--gestion-ti/que-es-webassembly-la-plataforma-web-de-proxima-generacion-explicada)
 
 
-## 8.2. Apps en Wasm
+## 6.2. Apps en Wasm
 
 ![Autocad web](assets/autocad-webassembly.jpg)
 
 - [Algunas aplicaciones desarrolladas para WebAssembly](https://www.campusmvp.es/recursos/post/8-proyectos-espectaculares-que-utilizan-webassembly.aspx)
+
+
+
+
+# 7. Arquitecturas
+
+En desarrollo web en entorno servidor, las arquitecturas definen cómo se organiza una aplicación, cómo se separan las responsabilidades y cómo se comunican los distintos componentes del sistema.
+
+Las arquitecturas permiten crear aplicaciones más organizadas, mantenibles y escalables.
+
+## 7.1. Arquitectura cliente-servidor
+
+Es la arquitectura básica de las aplicaciones web.
+
+Un cliente (normalmente un navegador web) realiza peticiones a un servidor, y el servidor responde devolviendo información o recursos.
+
+**Funcionamiento básico**
+
+1. El usuario accede a una página web.
+2. El navegador envía una petición HTTP al servidor.
+3. El servidor procesa la petición.
+4. El servidor devuelve una respuesta.
+
+**Ejemplo**
+
+- Cliente: navegador web.
+- Servidor: aplicación desarrollada en PHP, Java, Node.js o Python.
+- Base de datos: MySQL o PostgreSQL.
+
+**Ventajas**
+
+- Arquitectura sencilla.
+- Centralización de la información.
+- Fácil mantenimiento inicial.
+
+**Inconvenientes**
+
+- Dependencia del servidor.
+- Posibles problemas de saturación.
+- Menor escalabilidad si crece mucho el número de usuarios.
+
+
+## 7.2. Arquitectura en tres capas
+
+La aplicación se divide en tres capas independientes. Esta separación facilita el mantenimiento y la organización del código.
+
+![arquitectura 3 capas](assets/arquitectura-3-capas.png)
+
+> [!NOTE]
+> 
+> **CAPAS PRINCIPALES**
+> 
+> **Capa de presentación**
+>
+> Es la interfaz que utiliza el usuario. Ejemplos:
+> 
+> - HTML
+> - CSS
+> - JavaScript
+> 
+> **Capa lógica o de negocio**
+> 
+> Contiene las reglas y procesos de la aplicación. Ejemplos:
+> 
+> - Validación de formularios.
+> - Gestión de usuarios.
+> - Procesamiento de pedidos.
+>
+>
+> Tecnologías habituales:
+> 
+> - PHP
+> - Java
+> - Node.js
+> - ASP.NET
+>
+> **Capa de datos**
+> 
+> Gestiona el acceso y almacenamiento de la información. Ejemplos:
+> 
+> - MySQL
+> - PostgreSQL
+> - MongoDB
+
+**Ventajas**
+
+- Código organizado.
+- Facilita el trabajo en equipo.
+- Mayor mantenimiento y escalabilidad.
+
+**Inconvenientes**
+
+- Mayor complejidad inicial.
+- Necesita una buena planificación.
+
+
+## 7.3. Arquitectura MVC (Modelo-Vista-Controlador)
+
+MVC es un patrón arquitectónico que separa la aplicación en tres componentes principales.
+
+Su objetivo es dividir la lógica, la presentación y el control.
+
+![Modelo Vista Controlador](assets/MVC.png)
+
+[Artículo en Wikipedia](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador )
+
+> [!NOTE] 
+> 
+> **COMPONENTES**
+> 
+> **Modelo (Model)**
+>
+> Gestiona los datos y la lógica de negocio.
+> 
+> Ejemplos:
+> 
+> - Consultas a bases de datos.
+> - Validaciones.
+>
+> **Vista (View)**
+> 
+> Se encarga de mostrar la información al usuario.
+> 
+> Ejemplos:
+>
+> - Páginas HTML.
+> - Plantillas.
+> 
+> **Controlador (Controller)**
+> 
+> Recibe las peticiones del usuario y coordina la aplicación.
+> 
+> Funciones:
+> 
+> - Procesar formularios.
+> - Llamar al modelo.
+> - Seleccionar la vista adecuada.
+>
+
+**Funcionamiento básico**
+
+1. El usuario realiza una petición.
+2. El controlador recibe la petición.
+3. El modelo obtiene o procesa los datos.
+4. La vista muestra la información.
+
+**Frameworks conocidos**
+
+- Laravel
+- Django
+- Ruby on Rails
+- ASP.NET MVC
+
+**Ventajas**
+
+- Separación clara de responsabilidades.
+- Facilita mantenimiento y reutilización.
+- Muy utilizado en frameworks modernos.
+
+**Inconvenientes**
+
+- Puede resultar complejo para principiantes.
+- Requiere organización adecuada.
+
+
+
+## 7.4. Arquitectura monolítica
+
+Toda la aplicación se desarrolla y despliega como un único bloque.
+
+Todos los módulos forman parte del mismo proyecto.
+
+**Características**
+
+- Un único despliegue.
+- Un solo proyecto.
+- Código centralizado.
+
+**Ventajas**
+
+- Fácil de desarrollar inicialmente.
+- Despliegue sencillo.
+- Adecuada para proyectos pequeños.
+
+**Inconvenientes**
+
+- Difícil mantenimiento en proyectos grandes.
+- Escalabilidad limitada.
+- Cambios más arriesgados.
+
+
+
+## 7.5. Arquitectura de microservicios
+
+La aplicación se divide en pequeños servicios independientes.
+
+Cada microservicio realiza una función concreta.
+
+**Ejemplo**
+
+Una plataforma puede dividirse en:
+
+- Servicio de usuarios.
+- Servicio de pagos.
+- Servicio de productos.
+- Servicio de notificaciones.
+
+Todos los servicios se comunican mediante APIs.
+
+**Ventajas**
+
+- Alta escalabilidad.
+- Servicios independientes.
+- Facilita el trabajo de equipos grandes.
+
+**Inconvenientes**
+
+- Arquitectura compleja.
+- Mayor dificultad de despliegue.
+- Requiere monitorización y coordinación.
+
+
+## 7.6. Arquitectura basada en APIs
+
+El servidor proporciona una API que puede ser utilizada por distintos clientes.
+
+![Aplicación de Página Única](assets/SPA.png)
+
+**Clientes habituales**
+
+- Aplicaciones web.
+- Aplicaciones móviles.
+- Aplicaciones de escritorio.
+
+**Tecnologías frecuentes**
+
+- REST
+- JSON
+- GraphQL
+
+**Ventajas**
+
+- Gran flexibilidad.
+- Permite separar frontend y backend.
+- Facilita integración con otras aplicaciones.
+
+**Inconvenientes**
+
+- Mayor complejidad en seguridad.
+- Necesidad de documentación adecuada.
+
+
+
+## 7.7. Comparativa de arquitecturas
+
+| Arquitectura     | Uso habitual                  | Ventaja principal               | Dificultad |
+| ---------------- | ----------------------------- | ------------------------------- | ---------- |
+| Cliente-servidor | Aplicaciones web básicas      | Simplicidad                     | Baja       |
+| Tres capas       | Aplicaciones empresariales    | Organización                    | Media      |
+| MVC              | Frameworks web                | Separación de responsabilidades | Media      |
+| Monolítica       | Proyectos pequeños y medianos | Despliegue sencillo             | Baja       |
+| Microservicios   | Grandes plataformas           | Escalabilidad                   | Alta       |
+| Basada en APIs   | Aplicaciones modernas         | Flexibilidad                    | Media      |
+
+
+La elección de una arquitectura depende del tamaño del proyecto, los requisitos de escalabilidad y la complejidad de la aplicación.
+
+
+## 7.8. Diferencias importantes
+
+### 7.8.1. MVC vs Arquitectura en tres capas
+
+- La arquitectura en tres capas separa la aplicación por niveles funcionales.
+- MVC organiza principalmente la estructura interna del código.
+
+### 7.8.2. Monolito vs Microservicios
+
+**Monolito**
+
+- Todo el sistema está unido.
+- Más sencillo de desarrollar.
+- Menor complejidad.
+
+**Microservicios**
+
+- Servicios independientes.
+- Mayor escalabilidad.
+- Más complejidad técnica.
+
+
+
+# 8. Persistencia de los datos
+
+- Uso de archivos
+- Bases de datos relacionales
+  - Subtipo importante: **BBDD objeto-relacionales**.
+- Bases de datos no relacionales
+  - Subtipo importante: **BBDD noSQL**.
+
+
+## 8.1. Bases de datos relacionales
+
+![BBDD relacionales](assets/SQL.png)
+
+
+## 8.2. Bases de datos no relacionales (noSQL)
+
+![BBDD relacionales](assets/noSQL.png)
