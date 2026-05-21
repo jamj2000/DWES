@@ -22,8 +22,6 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 9. [APLICACIONES WEB PROGRESIVAS](09_Tema9/README.md)
 10. [Recursos y Referencias](10_Recursos_Referencias/README.md)
 11. [Anexo I](11_Anexo_I/README.md)
-12. [Anexo II](12_Anexo_II/README.md)
-13. [Anexo III](13_Anexo_III/README.md)
 
 ---
 
