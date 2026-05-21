@@ -10,6 +10,7 @@
 <img src="assets/javascript.svg" width="80" height="80">
 <img src="assets/nodedotjs.svg" width="80" height="80">
 </div>
+
 ---
 
 - [1. Introducción](#1-introducción)
