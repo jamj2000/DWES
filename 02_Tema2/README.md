@@ -31,10 +31,11 @@
   - [6.4. Modificar](#64-modificar)
   - [6.5. Copiar](#65-copiar)
   - [6.6. Obtener sección](#66-obtener-sección)
-  - [6.7. Recorrer](#67-recorrer)
-  - [6.8. Filtrar](#68-filtrar)
-  - [6.9. Encontrar](#69-encontrar)
-  - [6.10. Ordenar](#610-ordenar)
+  - [6.7. Eliminar elementos duplicados](#67-eliminar-elementos-duplicados)
+  - [6.8. Recorrer](#68-recorrer)
+  - [6.9. Filtrar](#69-filtrar)
+  - [6.10. Encontrar](#610-encontrar)
+  - [6.11. Ordenar](#611-ordenar)
 - [7. Operaciones frecuentes con objetos](#7-operaciones-frecuentes-con-objetos)
   - [7.1. Inicializar](#71-inicializar)
   - [7.2. Insertar](#72-insertar)
@@ -65,6 +66,7 @@
   - [15.2. multipart/form-data](#152-multipartform-data)
   - [15.3. JSON](#153-json)
 - [16. Referencias](#16-referencias)
+
 
 
 
@@ -300,7 +302,17 @@ const nuevoArray2 = a.slice(-2)    // [ 4, 5 ]
 const nuevoArray3 = a.slice(0,3)   // [ 1, 2, 3 ]
 ```
 
-## 6.7. Recorrer
+
+## 6.7. Eliminar elementos duplicados
+
+```js
+// Al convertir el array original a conjunto (Set) se eliminan los duplicados
+const array = [ 2, 20, 2, 1, 10, 1, 100 ];
+const nuevoArray = Array.from( new Set(array) )  // [ 2, 20, 1, 10, 100 ]
+```
+
+
+## 6.8. Recorrer
 
 > 🤔 Observa el uso de una **función flecha** como argumento de otra función
 
@@ -319,7 +331,7 @@ const nuevoArray1 = array.map( item => item * 2 )          // nuevoArray1 = [ 2,
 const nuevoArray2 = array.map( (item, pos) => item * pos ) // nuevoArray2 = [ 0, 2, 6, 12, 20 ]
 ``` 
 
-## 6.8. Filtrar 
+## 6.9. Filtrar 
 
 > 🤔 Observa el uso de una **función flecha** como argumento de otra función
 
@@ -332,7 +344,7 @@ const nuevoArray3 = array.filter( (item, pos) => pos==1 || pos==4 ) // nuevoArra
 ``` 
 
 
-## 6.9. Encontrar
+## 6.10. Encontrar
 
 > 🤔 Observa el uso de una **función flecha** como argumento de otra función
 
@@ -344,7 +356,7 @@ const num2 = array.find( item => !(item % 2) )     // num2 = 2  // el primer nú
 const num3 = array.find( (item, pos) => pos == 4 ) // num3 = 5  //posición 4
 ```
 
-## 6.10. Ordenar
+## 6.11. Ordenar
 
 > 🤔 Observa el uso de una **función flecha** como argumento de otra función
 
