@@ -872,7 +872,7 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 > 
 > También suele clasificarse como una plataforma de desarrollo full-stack backend o una alternativa de código abierto a `Firebase`, aunque a diferencia de Firebase está centrada en PostgreSQL.
 > 
-> Otra ventaja de Supabase es que al ser *open source* [puedes instalarla en tu propio servidor](https://supabase.com/docs/guides/self-hosting/docker), con lo cual tienes tu propio backend con las funcionalidades indicadas anteriormente.
+> Otra ventaja de Supabase es que al ser *open source* [puedes instalarla en tu propio servidor](https://supabase.com/docs/guides/self-hosting/docker), con lo cual tienes tu propio backend con las funcionalidades indicadas anteriormente. Para automatizar el proceso puedes consultar [este proyecto para realizar autohospedaje automatizado](https://github.com/singh-inder/supabase-automated-self-host).
 >
 > En [este artículo](https://carlosseijas.com/blog/guia-autentificacion-react-supabase) puedes comprobar lo simple y potente que es la implementación de autenticación en una aplicación frontend de React.
 
