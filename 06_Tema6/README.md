@@ -51,7 +51,7 @@
   - [9.2. Otras consultas](#92-otras-consultas)
     - [9.2.1. count](#921-count)
     - [9.2.2. groupBy](#922-groupby)
-    - [9.2.3. Consultas en paralelo](#923-consultas-en-paralelo)
+  - [9.3. Consultas en paralelo](#93-consultas-en-paralelo)
 - [10. Ver datos de las tablas](#10-ver-datos-de-las-tablas)
 - [11. Cómo organizar el código](#11-cómo-organizar-el-código)
   - [11.1. Obtener datos](#111-obtener-datos)
@@ -1623,7 +1623,7 @@ Documentación disponible en:
 - [Aggregation, Grouping, Summarizing](https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing)
 
 
-### 9.2.3. Consultas en paralelo
+## 9.3. Consultas en paralelo
 
 Cuando tenemos que realizar múltiples consultas, y éstas **son independientes unas de otras**, podemos usar [**`Promise.all`** o **`Promise.allSettled`**](https://matiashernandez.dev/blog/post/que-es-promise.allsettled-y-como-usarlo) para mejorar el rendimiento. 
 
