@@ -356,6 +356,29 @@ const num2 = array.find( item => !(item % 2) )     // num2 = 2  // el primer nú
 const num3 = array.find( (item, pos) => pos == 4 ) // num3 = 5  //posición 4
 ```
 
+> [!TIP]
+>
+> Si sólo deseamos saber si un elemento existe o no (`true` o `false`), una solución más simple es usar el método `includes`. Por ejemplo:
+>
+> ```js
+> array.includes(5) // true
+> array.includes(9) // false
+> ```
+
+
+> [!TIP]
+>
+> El método `includes` también se aplica a tipos `string`.
+>
+> Por ejemplo:
+> 
+> ```js
+> "The quick brown fox jumps over the lazy dog".includes("dog")   // true
+> "The quick brown fox jumps over the lazy dog".includes("bird")  // false
+> ```
+
+
+
 ## 6.11. Ordenar
 
 > 🤔 Observa el uso de una **función flecha** como argumento de otra función

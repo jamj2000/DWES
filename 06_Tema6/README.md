@@ -51,6 +51,7 @@
   - [9.2. Otras consultas](#92-otras-consultas)
     - [9.2.1. count](#921-count)
     - [9.2.2. groupBy](#922-groupby)
+    - [Consultas en paralelo](#consultas-en-paralelo)
 - [10. Ver datos de las tablas](#10-ver-datos-de-las-tablas)
 - [11. Cómo organizar el código](#11-cómo-organizar-el-código)
   - [11.1. Obtener datos](#111-obtener-datos)
@@ -59,7 +60,7 @@
   - [11.2. Mutar datos](#112-mutar-datos)
 - [12. Cliente de Prisma](#12-cliente-de-prisma)
 - [13. Despliegue en Vercel](#13-despliegue-en-vercel)
-- [14. Referencias](#15-referencias)
+- [14. Referencias](#14-referencias)
 
 
 
@@ -858,6 +859,23 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 > - [Supabase](https://supabase.com/)
 
 
+> [!TIP]
+> 
+> Algunos DBaaS han evolucionado rápidamente para convertirse en [BaaS](https://carlosseijas.com/blog/que-es-un-backend-as-a-service). Es el caso de **Supabase**, que proporciona una serie de servicios backend listos para usar, de modo que puedas desarrollar aplicaciones sin tener que construir y administrar toda la infraestructura desde cero. Entre sus características principales están:
+>
+> - Base de datos basada en PostgreSQL.
+> - Autenticación de usuarios (email, OAuth, etc.).
+> - API REST y GraphQL generadas automáticamente.
+> - Almacenamiento de archivos (Storage).
+> - Funciones serverless (Edge Functions).
+> - Suscripciones en tiempo real (Realtime).
+> 
+> También suele clasificarse como una plataforma de desarrollo full-stack backend o una alternativa de código abierto a `Firebase`, aunque a diferencia de Firebase está centrada en PostgreSQL.
+> 
+> Otra ventaja de Supabase es que al ser *open source* [puedes instalarla en tu propio servidor](https://supabase.com/docs/guides/self-hosting/docker), con lo cual tienes tu propio backend con las funcionalidades indicadas anteriormente.
+>
+> En [este artículo](https://carlosseijas.com/blog/guia-autentificacion-react-supabase) puedes comprobar lo simple y potente que es la implementación de autenticación en una aplicación frontend de React.
+
 
 
 # 7. Primeros pasos con ORM Prisma
@@ -1603,6 +1621,53 @@ const groupUsers = await prisma.user.groupBy({
 Documentación disponible en:
 
 - [Aggregation, Grouping, Summarizing](https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing)
+
+
+### Consultas en paralelo
+
+Cuando tenemos que realizar múltiples consultas, y éstas **son independientes unas de otras**, podemos usar [**`Promise.all`** o **`Promise.allSettled`**](https://matiashernandez.dev/blog/post/que-es-promise.allsettled-y-como-usarlo) para mejorar el rendimiento. 
+
+
+```js
+  // Obtener datos en paralelo.
+  // Las consultas se envían a la base de datos prácticamente al mismo tiempo.
+  const [totalLibros, totalAutores, totalSocios, prestamosActivos, ultimosPrestamos] = await Promise.all([
+    prisma.libro.count(),
+    prisma.autor.count(),
+    prisma.socio.count(),
+    prisma.prestamo.count({ where: { devueltoEn: null } }),
+    prisma.prestamo.findMany({
+      where: { devueltoEn: null },
+      include: {
+        libro: { select: { titulo: true } },
+        socio: { select: { nombre: true } },
+      },
+      orderBy: { prestadoEn: "desc" },
+      take: 5,
+    }),
+  ]);
+```
+
+```js
+// Obtener datos en serie. 
+// La segunda consulta no comienza hasta que termina la primera,
+// y la tercera no comienza hasta que termina la segunda, y así sucesivamente.
+const totalLibros = await prisma.libro.count();
+const totalAutores = await prisma.autor.count();
+const totalSocios = await prisma.socio.count();
+const prestamosActivos =  prisma.prestamo.count({ where: { devueltoEn: null } });
+const ultimosPrestamos = prisma.prestamo.findMany({
+      where: { devueltoEn: null },
+      include: {
+        libro: { select: { titulo: true } },
+        socio: { select: { nombre: true } },
+      },
+      orderBy: { prestadoEn: "desc" },
+      take: 5,
+  });
+```
+
+
 
 
 # 10. Ver datos de las tablas
