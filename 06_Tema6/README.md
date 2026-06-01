@@ -2,7 +2,7 @@
 
 # Tema 6: BASES DE DATOS <!-- omit in toc -->
 > Utilización de técnicas de acceso a datos  
-> BASES DE DATOS sin ORM. BASES DE DATOS con ORM, PRISMA
+> BASES DE DATOS con ORM, PRISMA
 
 **[`PROYECTOS DE EJEMPLO`](PROYECTOS.md)**
 
@@ -854,27 +854,33 @@ A la hora de desplegar en Vercel la aplicación deberemos configurar las variabl
 
 > [!NOTE]
 > 
-> Además de Vercel, otros proveedores de DBaaS Postgres son:
+> En realidad vercel subcontrata la BD a NeonDB. Proveedores principales de DBaaS Postgres son:
+> 
 > - [Neon.tech](https://neon.tech/)
 > - [Supabase](https://supabase.com/)
 
 
 > [!TIP]
+>
+> **Evolución DBaaS -> BaaS**
 > 
 > Algunos DBaaS han evolucionado rápidamente para convertirse en [BaaS](https://carlosseijas.com/blog/que-es-un-backend-as-a-service). Es el caso de **Supabase**, que proporciona una serie de servicios backend listos para usar, de modo que puedas desarrollar aplicaciones sin tener que construir y administrar toda la infraestructura desde cero. Entre sus características principales están:
 >
-> - Base de datos basada en PostgreSQL.
-> - Autenticación de usuarios (email, OAuth, etc.).
-> - API REST y GraphQL generadas automáticamente.
-> - Almacenamiento de archivos (Storage).
-> - Funciones serverless (Edge Functions).
-> - Suscripciones en tiempo real (Realtime).
+> - **Base de datos** basada en PostgreSQL.
+> - **Autenticación** de usuarios (email, OAuth, etc.).
+> - **API REST** y GraphQL generadas automáticamente.
+> - **Almacenamiento de archivos** (Storage).
+> - **Funciones serverless** (Edge Functions).
+> - **Suscripciones en tiempo real** (Realtime).
 > 
 > También suele clasificarse como una plataforma de desarrollo full-stack backend o una alternativa de código abierto a `Firebase`, aunque a diferencia de Firebase está centrada en PostgreSQL.
 > 
 > Otra ventaja de Supabase es que al ser *open source* [puedes instalarla en tu propio servidor](https://supabase.com/docs/guides/self-hosting/docker), con lo cual tienes tu propio backend con las funcionalidades indicadas anteriormente. Para automatizar el proceso puedes consultar [este proyecto para realizar autohospedaje automatizado](https://github.com/singh-inder/supabase-automated-self-host).
 >
 > En [este artículo](https://carlosseijas.com/blog/guia-autentificacion-react-supabase) puedes comprobar lo simple y potente que es la implementación de autenticación en una aplicación frontend de React.
+>
+> Similar a Supabase, [NeonDB está siguiendo el mismo camino](https://neon.com/blog/were-building-backends).
+> Esta evolución permite, en muchos casos, desarrollar una aplicación web implementando únicamente el frontend y usando como backend el BaaS.
 
 
 
