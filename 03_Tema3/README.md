@@ -974,7 +974,7 @@ export default Spinner;
 
 > [!NOTE]
 >
-> Otra forma mucho más simple de crear un spinner es usar un icono y aplicar una animación. 
+> Otra forma más simple de crear un spinner es usar un icono y aplicar una animación. 
 > 
 > En el siguiente ejemplo, usamos el icono **`Loader2`** y le aplicamos la clase **`animate-spin`** de Tailwind:
 >
@@ -1003,7 +1003,7 @@ export default Spinner;
 
 > [!TIP]
 >
-> Otra forma incluso más simple (sin necesidad de icono) es usar JSX y aplicar una animación para simular un spinner. 
+> Otra forma incluso más simple (sin necesidad de icono) es usar sólo JSX y aplicar una animación para simular un spinner. 
 > 
 >
 > ```js
