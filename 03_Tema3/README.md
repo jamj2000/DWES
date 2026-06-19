@@ -1001,6 +1001,37 @@ export default Spinner;
 > ```
 
 
+> [!TIP]
+>
+> Otra forma incluso más simple (sin necesidad de icono) es usar JSX y aplicar una animación para simular un spinner. 
+> 
+>
+> ```js
+>"use client";
+>
+>import { useFormStatus } from "react-dom";
+>
+>export function SubmitButton() {
+>  const { pending } = useFormStatus();
+>  return (
+>    <>
+>      {pending ? (
+>        <button disabled>
+>            {/* Spinner */}
+>            <div className="flex justify-center items-center py-16">
+>              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-600"></div>
+>            </div>
+>        </button>
+>      ) : (
+>        <button type="submit">Submit Message</button>
+>      )}
+>    </>
+>  );
+>}
+> ```
+
+
+
 
 > [!TIP]
 >
