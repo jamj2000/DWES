@@ -1592,6 +1592,32 @@ El código fuente de cada componente está en HTML, pero su conversión a React 
 No es necesario instalar ninguna librería, solo copiar y pegar.
 
 
+**Simple UI** ( [sitio oficial](https://github.com/jamj2000/simpleui) )
+
+Biblioteca de componentes diseñada con el objetivo de ser lo más simple posible. 
+
+```sh
+# Descarga
+curl -O https://raw.githubusercontent.com/jamj2000/simpleui/main/simpleui.jsx
+```
+
+```js
+// Uso del componentes
+import { Spinner, Skeleton } from "@/components/simpleui"
+ 
+export default function Page() {
+  return (
+    <div>
+      <Spinner />
+      <Skeleton />
+    </div>
+  )
+}
+```
+
+> [App web de demostración](https://simpleui-app.vercel.app/)
+
+
 
 # 4. App Router
 
