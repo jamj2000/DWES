@@ -928,6 +928,27 @@ function Question () {
 }
 ``` 
 
+**SVG Repo**  ( [sitio oficial](https://www.svgrepo.com/) )
+
+Este repositorio es bastante diferente a los anteriores, puesto que tiene iconos disponibles en formato **`SVG`**.
+
+![svg icons](assets/svg-icons.png)
+
+Permite descarga en formato SVG y otros formatos. 
+
+Para usarlos basta con insertarlos con la etiqueta `<img>` o `<Image>`
+
+Otra opción es copiar y pegar el código SVG, pero **deben modificarse las propiedades `kebab-case` a `camelCase`**. Por ejemplo:
+
+- `stroke-width` pasa a ser `strokeWidth`
+- `stroke-linecap` pasa a ser `strokeLinecap`
+- `stroke-linejoin` pasa a ser `strokeLinejoin`
+- lo mismo con otras propiedades en `kebab-case`
+
+Por último, otra alternativa es convertir SVG a componente JSX, usando https://transform.tools/.
+
+
+
 ### 3.6.2. Spinners
 
 **React Spinners** ( [sitio oficial](https://www.davidhu.io/react-spinners/) )
