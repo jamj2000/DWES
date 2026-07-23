@@ -1,0 +1,335 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Products JWT",
+    "description": "API REST de productos con autenticación JWT. Para probar endpoints protegidos: 1) ejecuta POST /api/login, 2) pulsa Authorize e introduce el token.",
+    "version": "1.0.0"
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "example": "Jose"
+          },
+          "password": {
+            "type": "string",
+            "example": "jose"
+          }
+        },
+        "required": ["nombre", "password"]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "JWT válido durante 5 minutos"
+          }
+        },
+        "required": ["token"]
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 0
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Teclado"
+          },
+          "precio": {
+            "type": "number",
+            "example": 100
+          }
+        },
+        "required": ["id", "nombre", "precio"]
+      },
+      "ProductInput": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "example": "Webcam"
+          },
+          "precio": {
+            "type": "number",
+            "example": 45
+          }
+        },
+        "required": ["nombre", "precio"]
+      },
+      "MessageResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": ["message"]
+      }
+    }
+  },
+  "paths": {
+    "/api/login": {
+      "post": {
+        "summary": "Iniciar sesión y obtener token JWT",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login exitoso o error de autenticación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/LoginResponse" },
+                    { "$ref": "#/components/schemas/MessageResponse" }
+                  ]
+                },
+                "examples": {
+                  "success": {
+                    "value": { "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
+                  },
+                  "userNotFound": {
+                    "value": { "message": "Usuario no encontrado" }
+                  },
+                  "wrongPassword": {
+                    "value": { "message": "Contraseña incorrecta" }
+                  },
+                  "invalidJson": {
+                    "value": { "message": "Debes proporcionar datos JSON" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products": {
+      "get": {
+        "summary": "Obtener todos los productos",
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "Lista de productos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un producto",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producto creado o error de validación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Product" }
+                    },
+                    { "$ref": "#/components/schemas/MessageResponse" }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token requerido o inválido",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageResponse" },
+                "examples": {
+                  "tokenRequired": {
+                    "value": { "message": "Token requerido" }
+                  },
+                  "invalidToken": {
+                    "value": { "message": "Token inválido" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/{id}": {
+      "get": {
+        "summary": "Obtener un producto por ID",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto encontrado o no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/Product" },
+                    { "$ref": "#/components/schemas/MessageResponse" }
+                  ]
+                },
+                "examples": {
+                  "found": {
+                    "value": { "id": 0, "nombre": "Teclado", "precio": 100 }
+                  },
+                  "notFound": {
+                    "value": { "message": "El elemento no ha sido encontrado" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un producto por ID",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 0
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producto actualizado o no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Product" }
+                    },
+                    { "$ref": "#/components/schemas/MessageResponse" }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token requerido o inválido",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageResponse" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un producto por ID",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto eliminado o no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Product" }
+                    },
+                    { "$ref": "#/components/schemas/MessageResponse" }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token requerido o inválido",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MessageResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
