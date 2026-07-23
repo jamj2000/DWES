@@ -3,7 +3,7 @@ import cors from "cors";
 import bcrypt from "bcryptjs"  // Hashing de contraseñas
 import jwt from "jsonwebtoken" // Generacion y verificacion de tokens
 import swaggerUi from "swagger-ui-express"
-import openapi from "./openapi.json" with { type: "json" }
+import swaggerDocument from "./openapi.json" with { type: "json" }
 
 const SECRET_KEY = "secreto" // Secreto para firmar y verificar el token
 const app = express()
@@ -25,10 +25,12 @@ let Products = [
 
 app.use(express.json())   // IMPORTANTE
 app.use(cors())           // Para habilitar CORS
+app.use(
+    "/api-docs", 
+    swaggerUi.serve, 
+    swaggerUi.setup(swaggerDocument)
+)
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapi))
-
-app.get("/", (request, response) => response.redirect("/api-docs"))
 
 
 function verifyToken(request, response, next) {
@@ -44,6 +46,9 @@ function verifyToken(request, response, next) {
     }
 }
 
+
+// Redirigir a la documentación de la API
+app.get("/", (request, response) => response.redirect("/api-docs"))
 
 
 // LOGIN

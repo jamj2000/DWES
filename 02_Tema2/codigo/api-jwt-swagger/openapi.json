@@ -5,6 +5,11 @@
     "description": "API REST de productos con autenticación JWT. Para probar endpoints protegidos: 1) ejecuta POST /api/login, 2) pulsa Authorize e introduce el token.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
   "components": {
     "securitySchemes": {
       "bearerAuth": {
