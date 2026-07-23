@@ -63,7 +63,8 @@ app.post('/api/login', async (request, response) => {
     // Generamos el token firmado con secreto
     const token = jwt.sign(
         { id: user.id, nombre: user.nombre },
-        SECRET_KEY
+        SECRET_KEY,
+        { expiresIn: '5m' }
     )
 
     response.json({ token })
@@ -133,3 +134,4 @@ app.delete('/api/products/:id', verifyToken, (request, response) => {
 
 app.listen(3000)
 
+export default app
