@@ -27,7 +27,8 @@ app.use(express.json())   // IMPORTANTE
 app.use(cors())           // Para habilitar CORS
 app.use(
     "/api-docs", 
-    swaggerUi.serve, 
+    // swaggerUi.serve, 
+    swaggerUi.serveFiles(swaggerDocument), // para despligue en vercel
     swaggerUi.setup(swaggerDocument)
 )
 
