@@ -101,15 +101,14 @@ Más adelante trataremos asuntos más prácticos, como el entorno de ejecución 
 
 ![Backend-Frontend](assets/frontend-backend.png)
 
-
-- **Backend**: parte que se ejecuta en el servidor.
-  - Se encarga de atender las peticiones de los clientes.
-  - Suele tener soporte de almacenamiento de datos.
-  - También se denomina capa de acceso a datos
 - **Frontend**: parte que se ejecuta en el cliente.
   - Se encarga de la experiencia del usuario (UX).
   - Puede tener soporte de cache de datos.
   - También se denomina capa de presentación.
+- **Backend**: parte que se ejecuta en el servidor.
+  - Se encarga de atender las peticiones de los clientes.
+  - Suele tener soporte de almacenamiento de datos.
+  - También se denomina capa de acceso a datos
 
 
 # 2. Arquitectura Cliente/Servidor
