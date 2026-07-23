@@ -5,11 +5,6 @@
     "description": "API REST de productos con autenticación JWT. Para probar endpoints protegidos: 1) ejecuta POST /api/login, 2) pulsa Authorize e introduce el token.",
     "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "http://localhost:3000"
-    }
-  ],
   "components": {
     "securitySchemes": {
       "bearerAuth": {
@@ -31,7 +26,10 @@
             "example": "jose"
           }
         },
-        "required": ["nombre", "password"]
+        "required": [
+          "nombre",
+          "password"
+        ]
       },
       "LoginResponse": {
         "type": "object",
@@ -41,7 +39,9 @@
             "description": "JWT válido durante 5 minutos"
           }
         },
-        "required": ["token"]
+        "required": [
+          "token"
+        ]
       },
       "Product": {
         "type": "object",
@@ -59,7 +59,11 @@
             "example": 100
           }
         },
-        "required": ["id", "nombre", "precio"]
+        "required": [
+          "id",
+          "nombre",
+          "precio"
+        ]
       },
       "ProductInput": {
         "type": "object",
@@ -73,7 +77,10 @@
             "example": 45
           }
         },
-        "required": ["nombre", "precio"]
+        "required": [
+          "nombre",
+          "precio"
+        ]
       },
       "MessageResponse": {
         "type": "object",
@@ -82,7 +89,9 @@
             "type": "string"
           }
         },
-        "required": ["message"]
+        "required": [
+          "message"
+        ]
       }
     }
   },
@@ -90,7 +99,9 @@
     "/api/login": {
       "post": {
         "summary": "Iniciar sesión y obtener token JWT",
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -108,22 +119,34 @@
               "application/json": {
                 "schema": {
                   "oneOf": [
-                    { "$ref": "#/components/schemas/LoginResponse" },
-                    { "$ref": "#/components/schemas/MessageResponse" }
+                    {
+                      "$ref": "#/components/schemas/LoginResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MessageResponse"
+                    }
                   ]
                 },
                 "examples": {
                   "success": {
-                    "value": { "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
                   },
                   "userNotFound": {
-                    "value": { "message": "Usuario no encontrado" }
+                    "value": {
+                      "message": "Usuario no encontrado"
+                    }
                   },
                   "wrongPassword": {
-                    "value": { "message": "Contraseña incorrecta" }
+                    "value": {
+                      "message": "Contraseña incorrecta"
+                    }
                   },
                   "invalidJson": {
-                    "value": { "message": "Debes proporcionar datos JSON" }
+                    "value": {
+                      "message": "Debes proporcionar datos JSON"
+                    }
                   }
                 }
               }
@@ -135,7 +158,9 @@
     "/api/products": {
       "get": {
         "summary": "Obtener todos los productos",
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "responses": {
           "200": {
             "description": "Lista de productos",
@@ -154,8 +179,14 @@
       },
       "post": {
         "summary": "Crear un producto",
-        "tags": ["Products"],
-        "security": [{ "bearerAuth": [] }],
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -175,9 +206,13 @@
                   "oneOf": [
                     {
                       "type": "array",
-                      "items": { "$ref": "#/components/schemas/Product" }
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
                     },
-                    { "$ref": "#/components/schemas/MessageResponse" }
+                    {
+                      "$ref": "#/components/schemas/MessageResponse"
+                    }
                   ]
                 }
               }
@@ -187,13 +222,19 @@
             "description": "Token requerido o inválido",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/MessageResponse" },
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                },
                 "examples": {
                   "tokenRequired": {
-                    "value": { "message": "Token requerido" }
+                    "value": {
+                      "message": "Token requerido"
+                    }
                   },
                   "invalidToken": {
-                    "value": { "message": "Token inválido" }
+                    "value": {
+                      "message": "Token inválido"
+                    }
                   }
                 }
               }
@@ -205,7 +246,9 @@
     "/api/products/{id}": {
       "get": {
         "summary": "Obtener un producto por ID",
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -224,16 +267,26 @@
               "application/json": {
                 "schema": {
                   "oneOf": [
-                    { "$ref": "#/components/schemas/Product" },
-                    { "$ref": "#/components/schemas/MessageResponse" }
+                    {
+                      "$ref": "#/components/schemas/Product"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MessageResponse"
+                    }
                   ]
                 },
                 "examples": {
                   "found": {
-                    "value": { "id": 0, "nombre": "Teclado", "precio": 100 }
+                    "value": {
+                      "id": 0,
+                      "nombre": "Teclado",
+                      "precio": 100
+                    }
                   },
                   "notFound": {
-                    "value": { "message": "El elemento no ha sido encontrado" }
+                    "value": {
+                      "message": "El elemento no ha sido encontrado"
+                    }
                   }
                 }
               }
@@ -243,8 +296,14 @@
       },
       "put": {
         "summary": "Actualizar un producto por ID",
-        "tags": ["Products"],
-        "security": [{ "bearerAuth": [] }],
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -275,9 +334,13 @@
                   "oneOf": [
                     {
                       "type": "array",
-                      "items": { "$ref": "#/components/schemas/Product" }
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
                     },
-                    { "$ref": "#/components/schemas/MessageResponse" }
+                    {
+                      "$ref": "#/components/schemas/MessageResponse"
+                    }
                   ]
                 }
               }
@@ -287,7 +350,9 @@
             "description": "Token requerido o inválido",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/MessageResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
               }
             }
           }
@@ -295,8 +360,14 @@
       },
       "delete": {
         "summary": "Eliminar un producto por ID",
-        "tags": ["Products"],
-        "security": [{ "bearerAuth": [] }],
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -317,9 +388,13 @@
                   "oneOf": [
                     {
                       "type": "array",
-                      "items": { "$ref": "#/components/schemas/Product" }
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
                     },
-                    { "$ref": "#/components/schemas/MessageResponse" }
+                    {
+                      "$ref": "#/components/schemas/MessageResponse"
+                    }
                   ]
                 }
               }
@@ -329,7 +404,9 @@
             "description": "Token requerido o inválido",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/MessageResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
               }
             }
           }

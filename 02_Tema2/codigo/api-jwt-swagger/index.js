@@ -4,6 +4,9 @@ import bcrypt from "bcryptjs"  // Hashing de contraseñas
 import jwt from "jsonwebtoken" // Generacion y verificacion de tokens
 import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "./openapi.json" with { type: "json" }
+// Para que swagger funcione correctamente en Vercel es necesario archivo vercel.json
+// y añadir configuración indicada en https://github.com/swagger-api/swagger-ui/issues/9924#issuecomment-3360835086
+
 
 const SECRET_KEY = "secreto" // Secreto para firmar y verificar el token
 const app = express()
@@ -26,9 +29,8 @@ let Products = [
 app.use(express.json())   // IMPORTANTE
 app.use(cors())           // Para habilitar CORS
 app.use(
-    "/api-docs", 
-    // swaggerUi.serve, 
-    swaggerUi.serveFiles(swaggerDocument), // para despligue en vercel
+    "/api-docs",
+    swaggerUi.serve,
     swaggerUi.setup(swaggerDocument)
 )
 
