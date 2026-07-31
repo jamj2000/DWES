@@ -25,6 +25,7 @@
     - [3.2.4. Usa **`defaultValue`** y **`value`** correctamente](#324-usa-defaultvalue-y-value-correctamente)
     - [3.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#325-usa-disabled-y-readonly-correctamente)
     - [3.2.6. Usa **`select`** correctamente](#326-usa-select-correctamente)
+    - [3.2.7. Gestiona los valores que recibe la acción del servidor](#327-gestiona-los-valores-que-recibe-la-acción-del-servidor)
 - [4. Funciones del lado cliente](#4-funciones-del-lado-cliente)
   - [4.1. useFormStatus](#41-useformstatus)
   - [4.2. useActionState: simplificando lo anterior](#42-useactionstate-simplificando-lo-anterior)
@@ -748,6 +749,45 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
  
       
 - Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
+
+
+### 3.2.7. Gestiona los valores que recibe la acción del servidor
+
+Un aspecto importante a tener en cuenta es que los valores definidos en los campos del formulario, independientemente de su tipo, serán enviados desde el formulario (lado cliente) a la acción de servidor siempre en formato `string`.
+
+Por tanto, la acción del servidor deberá realizar las conversiones necesarias.
+
+A continuación tienes una tabla de los tipos de datos en cada lado.
+
+
+| Form        | ⇨   | Action         |
+| ----------- | --- | -------------- |
+| `string`    | ⇨   | `string`       |
+| `number`    | ⇨   | `string`       |
+| `boolean`   | ⇨   | `string`       |
+| `Date`      | ⇨   | `string`       |
+| `undefined` | ⇨   | `string vacío` |
+| (no existe) | ⇨   | `null`         |
+
+
+Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o es un checkbox sin marcar, o simplemente no existe), entonces la acción obtiene `null`.
+
+**Ejemplos**
+
+
+```js
+// Estado del input                           // Lo que recibe el Server Action |
+<input name="x" value="hola" />               // "hola"                         
+<input name="x" value="" />                   // "" (cadena vacía)              
+<input name="x" value={undefined} />          // "" (cadena vacía)              
+<input name="x" value={99} type="number" />   // "99"                           
+<input name="x" value={false} type="radio" /> // "false"                        
+<input name="x" value={true} type="radio" />  // "true"    
+<input type="date" value={Date.now()} />      // "2077-06-01"                        
+// Input sin atributo name                    // null (No se envía)             
+// Input disabled                             // null (No se envía)             
+// Checkbox no marcado                        // null (No se envía)             
+```
 
 
 # 4. Funciones del lado cliente
