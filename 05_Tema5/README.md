@@ -754,7 +754,7 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 
 ### 3.2.7. Gestiona los valores que recibe la acción del servidor
 
-Un aspecto importante a tener en cuenta es que los valores definidos en los campos del formulario, independientemente de su tipo, serán enviados desde el formulario (lado cliente) a la acción de servidor siempre en formato `string`.
+Un aspecto importante a tener en cuenta es que **los valores definidos en los campos del formulario**, independientemente de su tipo, **serán enviados desde el formulario (lado cliente) a la acción de servidor siempre en formato `string`**.
 
 Por tanto, la acción del servidor deberá realizar las conversiones necesarias.
 
@@ -771,15 +771,17 @@ A continuación tienes una tabla de los tipos de datos en cada lado.
 | (no existe) | ⇨   | `null`         |
 
 
-Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o es un checkbox sin marcar, o simplemente no existe), entonces la acción obtiene `null`.
+Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o es un checkbox sin marcar, o simplemente no existe dicho campo), entonces la acción obtiene `null`.
 
 **Ejemplos**
 
 
 ```js
-// Estado del input                           // Lo que recibe el Server Action |
+// Estado del input                           // Lo que recibe el Server Action 
+//----------------------------------------------------------------------------------
 <input name="x" value="hola" />               // "hola"                         
-<input name="x" value="" />                   // "" (cadena vacía)              
+<input name="x" value="" />                   // "" (cadena vacía)    
+<input name="x" />                            // "" (cadena vacía)              
 <input name="x" value={undefined} />          // "" (cadena vacía)              
 <input name="x" value={99} type="number" />   // "99"                           
 <input name="x" value={false} type="radio" /> // "false"                        
@@ -787,7 +789,8 @@ Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o
 <input type="date" value={Date.now()} />      // "2077-06-01"                        
 // Input sin atributo name                    // null (No se envía)             
 // Input disabled                             // null (No se envía)             
-// Checkbox no marcado                        // null (No se envía)             
+// Checkbox no marcado                        // null (No se envía)    
+// No existe                                  // null (No se envía)          
 ```
 
 
