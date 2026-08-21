@@ -777,20 +777,27 @@ Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o
 
 
 ```js
-// Estado del input                           // Lo que recibe el Server Action 
-//----------------------------------------------------------------------------------
-<input name="x" value="hola" />               // "hola"                         
-<input name="x" value="" />                   // "" (cadena vacía)    
-<input name="x" />                            // "" (cadena vacía)              
-<input name="x" value={undefined} />          // "" (cadena vacía)              
-<input name="x" value={99} type="number" />   // "99"                           
-<input name="x" value={false} type="radio" /> // "false"                        
-<input name="x" value={true} type="radio" />  // "true"    
-<input type="date" value={Date.now()} />      // "2077-06-01"                        
-// Input sin atributo name                    // null (No se envía)             
-// Input disabled                             // null (No se envía)             
-// Checkbox no marcado                        // null (No se envía)    
-// No existe                                  // null (No se envía)          
+// Estado del input                                                 // Lo que recibe el Server Action 
+//---------------------------------------------------------------------------------------------------
+<input name="x" defaultValue="hola" />                    // "hola"                         
+<input name="x" defaultValue="" />                        // "" (cadena vacía)    
+<input name="x" />                                        // "" (cadena vacía)              
+<input name="x" 
+  type="number" 
+  defaultValue={99}  />                                   // "99"                           
+<input name="x" 
+  type="radio" 
+  defaultValue={false}  defaultChecked />                 // "false"                        
+<input name="x"   
+  type="radio" 
+  defaultValue={true}  defaultChecked />                  // "true"    
+<input name="x" 
+  type="date"  
+  defaultValue={new Date().toISOString().slice(0, 10)} /> // "2077-06-01"                        
+// Input sin atributo name                                // null (No se envía)             
+// Input disabled                                         // null (No se envía)             
+// Radio / Checkbox no marcado                            // null (No se envía)    
+// No existe                                              // null (No se envía)          
 ```
 
 
