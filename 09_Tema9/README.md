@@ -276,6 +276,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 # 11. Referencias
 
+- [Favicon Generator](https://realfavicongenerator.net/)
 - [Web App Manifest Generator: simicart](https://www.simicart.com/manifest-generator.html/)
 - [Web App Manifest Generator: netlify](https://manifest-gen.netlify.app/) 
 - [❤️ Convertidor PNG a ICO ❤️](https://convertico.com/)
