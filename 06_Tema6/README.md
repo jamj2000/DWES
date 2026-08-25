@@ -36,6 +36,7 @@
   - [7.1. Instalación del paquete prisma](#71-instalación-del-paquete-prisma)
   - [7.2. Comandos disponibles](#72-comandos-disponibles)
   - [7.3. Inicialización](#73-inicialización)
+  - [7.4. Generación del cliente](#74-generación-del-cliente)
 - [8. Definiendo el Esquema de Datos](#8-definiendo-el-esquema-de-datos)
   - [8.1. Escribir el esquema de datos manualmente](#81-escribir-el-esquema-de-datos-manualmente)
     - [8.1.1. Modelos](#811-modelos)
@@ -921,13 +922,20 @@ Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
 
 > [!CAUTION]
 >
-> Trabajaremos con la versión 6 de Prisma.
+> Trabajaremos con la versión 7 de Prisma. La versión 8 está a punto de ser publicada pero hay bastantes cambios respecto a la versión anterior y aún es muy reciente para su uso en producción.
+> Además trabajaremos con base de datos Postgresql.
 
 
 ```sh 
-npm install prisma6 -D
-npm install @prisma6/client
+npm  install  prisma  -D
+npm  install  @prisma/client  @prisma/adapter-pg
 ``` 
+
+> [!NOTE]
+>
+> Al instalar el paquete `prisma` también se instala el paquete `dotenv`, necesario para leer archivo `.env`.
+> Al instalar el paquete `adapter-pg` también se instala el paquete `pg` que es el driver para trabajar con Postgresql.
+
 
 ## 7.2. Comandos disponibles
 
@@ -948,25 +956,24 @@ npm install @prisma6/client
 > ```   
 
 
-Este comando hace dos cosas:
+Este comando hace 3 cosas:
 
 1. crea un nuevo directorio y archivo llamados **`prima/schema.prisma`**, que contiene el esquema de Prisma con la variable de conexión de su base de datos.
-2. añade al archivo **`.env`** en el directorio raíz del proyecto la variable de entorno `DATABASE_URL`, que debeás posteriormente editar manualmente para apuntar a tu base de datos.
+2. crea un nuevo archivo llamado **`prisma.config.ts`** que contiene una configuración básica de prisma.
+3. añade al archivo **`.env`** en el directorio raíz del proyecto la variable de entorno **`DATABASE_URL`**, que debeás posteriormente editar manualmente para apuntar a tu base de datos.
+
 
 
 **`prisma/schema.prisma`**
 
 ```prisma
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 ```
 
@@ -991,6 +998,18 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 > El formato de la variable de entorno `DATABASE_URL` es el siguiente:
 >
 > `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>'`
+
+
+## 7.4. Generación del cliente
+
+El cliente es el código que nos permite conectar y gestionar la conexión a la base de datos. 
+
+Cada vez que cambie la variable DATABASE_URL deberemos generar el cliente con el comando:
+
+```sh
+npx  prisma  generate
+```
+De esta manera se nos creará una carpeta `src/generated/prisma` con varios archivos en su interior, uno de ellos llamado `src/generated/prisma/client.ts`
 
 
 # 8. Definiendo el Esquema de Datos
@@ -1067,12 +1086,12 @@ Reglas de nombrado:
 
 ```prisma
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Articulo {
@@ -1304,9 +1323,13 @@ A continuación, usaremos ejemplos con valores explícitos. Usaremos el siguient
 <summary> <strong>Esquema de prisma (Pulsa aquí para ver)</strong></summary>
 <pre>
 
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
 datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
 model User {
