@@ -923,11 +923,11 @@ Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
 > [!CAUTION]
 >
 > Trabajaremos con la versión 7 de Prisma. La versión 8 está a punto de ser publicada pero hay bastantes cambios respecto a la versión anterior y aún es muy reciente para su uso en producción.
-> Además trabajaremos con base de datos Postgresql.
+> Trabajaremos con base de datos Postgresql.
 
 
 ```sh 
-npm  install  prisma  -D
+npm  install  prisma@7  -D
 npm  install  @prisma/client  @prisma/adapter-pg
 ``` 
 
