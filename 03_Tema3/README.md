@@ -1598,7 +1598,7 @@ Biblioteca de componentes diseñada con el objetivo de ser lo más simple posibl
 
 ```sh
 # Descarga
-curl -O https://raw.githubusercontent.com/jamj2000/simpleui/main/simpleui.jsx
+npx  simpleui.dev  init
 ```
 
 ```js
@@ -1615,7 +1615,7 @@ export default function Page() {
 }
 ```
 
-> [App web de demostración](https://simpleui-app.vercel.app/)
+> [Documentación y ejemplos](https://simpleui.dev/)
 
 
 

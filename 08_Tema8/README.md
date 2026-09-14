@@ -22,59 +22,64 @@
   - [2.6. CORS](#26-cors)
   - [2.7. Documentación](#27-documentación)
 - [3. BIBLIOTECAS](#3-bibliotecas)
-  - [3.1. Datos ficticios](#31-datos-ficticios)
+  - [3.1. Modo claro/oscuro](#31-modo-clarooscuro)
     - [3.1.1. Instalación de biblioteca](#311-instalación-de-biblioteca)
     - [3.1.2. Uso](#312-uso)
     - [3.1.3. Documentación](#313-documentación)
-  - [3.2. Datos de archivos CSV](#32-datos-de-archivos-csv)
+  - [3.2. Datos ficticios](#32-datos-ficticios)
     - [3.2.1. Instalación de biblioteca](#321-instalación-de-biblioteca)
     - [3.2.2. Uso](#322-uso)
     - [3.2.3. Documentación](#323-documentación)
-    - [3.2.4. Caso práctico y truco](#324-caso-práctico-y-truco)
-  - [3.3. Arrastrar y Soltar (Drag \& Drop)](#33-arrastrar-y-soltar-drag--drop)
+  - [3.3. Datos de archivos CSV](#33-datos-de-archivos-csv)
     - [3.3.1. Instalación de biblioteca](#331-instalación-de-biblioteca)
     - [3.3.2. Uso](#332-uso)
-    - [3.3.3. Otras bibliotecas](#333-otras-bibliotecas)
-    - [3.3.4. Documentación](#334-documentación)
-  - [3.4. Gráficos](#34-gráficos)
-    - [3.4.1. Instalación](#341-instalación)
+    - [3.3.3. Documentación](#333-documentación)
+    - [3.3.4. Caso práctico y truco](#334-caso-práctico-y-truco)
+  - [3.4. Arrastrar y Soltar (Drag \& Drop)](#34-arrastrar-y-soltar-drag--drop)
+    - [3.4.1. Instalación de biblioteca](#341-instalación-de-biblioteca)
     - [3.4.2. Uso](#342-uso)
-    - [3.4.3. Flujo de datos (streaming)](#343-flujo-de-datos-streaming)
-      - [3.4.3.1. Los modelos de provisión de datos](#3431-los-modelos-de-provisión-de-datos)
-      - [3.4.3.2. Ejemplo](#3432-ejemplo)
-      - [3.4.3.3. Colas de mensajes](#3433-colas-de-mensajes)
-      - [3.4.3.4. InfluxDB](#3434-influxdb)
+    - [3.4.3. Otras bibliotecas](#343-otras-bibliotecas)
     - [3.4.4. Documentación](#344-documentación)
-    - [3.4.5. Curiosidad](#345-curiosidad)
-    - [3.4.6. Otras bibliotecas](#346-otras-bibliotecas)
-  - [3.5. Creación de PDFs](#35-creación-de-pdfs)
+  - [3.5. Gráficos](#35-gráficos)
     - [3.5.1. Instalación](#351-instalación)
     - [3.5.2. Uso](#352-uso)
-    - [3.5.3. Documentación](#353-documentación)
-  - [3.6. Envío de correos](#36-envío-de-correos)
+    - [3.5.3. Flujo de datos (streaming)](#353-flujo-de-datos-streaming)
+      - [3.5.3.1. Los modelos de provisión de datos](#3531-los-modelos-de-provisión-de-datos)
+      - [3.5.3.2. Ejemplo](#3532-ejemplo)
+      - [3.5.3.3. Colas de mensajes](#3533-colas-de-mensajes)
+      - [3.5.3.4. InfluxDB](#3534-influxdb)
+    - [3.5.4. Documentación](#354-documentación)
+    - [3.5.5. Curiosidad](#355-curiosidad)
+    - [3.5.6. Otras bibliotecas](#356-otras-bibliotecas)
+  - [3.6. Creación de PDFs](#36-creación-de-pdfs)
     - [3.6.1. Instalación](#361-instalación)
     - [3.6.2. Uso](#362-uso)
-      - [3.6.2.1. Usando una cuenta de Gmail](#3621-usando-una-cuenta-de-gmail)
-      - [3.6.2.2. Usando servidor de correo propio](#3622-usando-servidor-de-correo-propio)
     - [3.6.3. Documentación](#363-documentación)
-  - [3.7. Pagos por internet](#37-pagos-por-internet)
+  - [3.7. Envío de correos](#37-envío-de-correos)
     - [3.7.1. Instalación](#371-instalación)
     - [3.7.2. Uso](#372-uso)
+      - [3.7.2.1. Usando una cuenta de Gmail](#3721-usando-una-cuenta-de-gmail)
+      - [3.7.2.2. Usando servidor de correo propio](#3722-usando-servidor-de-correo-propio)
     - [3.7.3. Documentación](#373-documentación)
-  - [3.8. Mapas](#38-mapas)
+  - [3.8. Pagos por internet](#38-pagos-por-internet)
     - [3.8.1. Instalación](#381-instalación)
     - [3.8.2. Uso](#382-uso)
     - [3.8.3. Documentación](#383-documentación)
-  - [3.9. Editor WYSIWYG](#39-editor-wysiwyg)
+  - [3.9. Mapas](#39-mapas)
     - [3.9.1. Instalación](#391-instalación)
     - [3.9.2. Uso](#392-uso)
     - [3.9.3. Documentación](#393-documentación)
-    - [3.9.4. Curiosidad](#394-curiosidad)
-  - [3.10. Coloreado de código](#310-coloreado-de-código)
+  - [3.10. Editor WYSIWYG](#310-editor-wysiwyg)
     - [3.10.1. Instalación](#3101-instalación)
     - [3.10.2. Uso](#3102-uso)
     - [3.10.3. Documentación](#3103-documentación)
+    - [3.10.4. Curiosidad](#3104-curiosidad)
+  - [3.11. Coloreado de código](#311-coloreado-de-código)
+    - [3.11.1. Instalación](#3111-instalación)
+    - [3.11.2. Uso](#3112-uso)
+    - [3.11.3. Documentación](#3113-documentación)
 - [4. Referencias](#4-referencias)
+
 
 
 --- 
@@ -603,13 +608,150 @@ Los **endpoints** que modifican la información de la API (métodos **POST**, **
 
 Aquí se exponen someramente algunas de las bibliotecas que proporcionan funcionalidades que en ciertas circunstancias pueden ser de nuestro interés.
 
-## 3.1. Datos ficticios
+
+
+## 3.1. Modo claro/oscuro
+
+Es probable que durante el desarrollo de nuestra app deseemos añadir funcionalidad para soportar modos claro/oscuro. Para ello podemos usar la biblioteca `next-themes`. 
+
+Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
+
+### 3.1.1. Instalación de biblioteca
+
+Instalamos como **dependencia**. Aparecerá en la sección `dependencies` en el archivo `package.json`.
+
+
+```console
+npm  install  next-themes
+```
+
+
+
+### 3.1.2. Uso
+
+El procedimiento para proporcionar soporte claro/oscuro a nuestra aplicación consta de 3 pasos:
+
+
+1. Creamos **componente cliente** que nos permita cambiar el tema.
+
+
+```js
+'use client'
+
+import { useTheme } from 'next-themes'
+
+export function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme()
+  return (
+    <button
+      type="button"
+      className="mt-16 px-4 py-2 text-white dark:text-black bg-black dark:bg-white font-semibold rounded-md"
+      onClick={() => {
+        setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
+      }}
+    >
+      Change Theme
+    </button>
+  )
+}
+```
+
+
+2. Colocamos el componente anterior en una página u componente para ofrecer al usuario la posibilidad de interactuar.
+
+```js
+import { ThemeToggle } from './ThemeToggle'
+
+export default function Home() {
+  return (
+    <div className="w-full container p-4 mx-auto">
+      <div className="py-20 flex flex-col items-center justify-center">
+        <h1 className="text-5xl text-center text-gray-800 dark:text-gray-100 font-bold">
+          Next Themes + Tailwind Dark Mode
+        </h1>
+        <p className="italic text-2xl">with app-dir</p>
+
+        <ThemeToggle />
+      </div>
+    </div>
+  )
+}
+```
+
+3. En el layout principal envolvemos el contenido en `ThemeProvider`.
+
+```js
+import './globals.css'
+import { ThemeProvider } from 'next-themes'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning> 
+      <body className="bg-white dark:bg-black min-h-dvh">
+        <ThemeProvider attribute="class">
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+> [!NOTE]
+>
+> Al utilizar el atributo `class` para el proveedor `ThemeProvider` next-themes modificará el atributo `class` en el elemento html.
+>
+> Para ignorar el tema del sistema hacemos:  
+>
+> ```jsx
+>    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} enableColorScheme>
+> ```
+
+
+
+También deberemos modificar el archivo `globals.css` de la siguiente manera:
+
+```css
+@import "tailwindcss";
+
+/* Para que funcione next-themes */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ... */
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* --background: #0a0a0a;
+    --foreground: #ededed; */
+  }
+}
+
+body {
+  /* background: var(--background);
+  color: var(--foreground); */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+```
+
+
+### 3.1.3. Documentación
+
+- [Documentación](https://www.npmjs.com/package/next-themes)
+- [Código de ejemplo](https://github.com/pacocoursey/next-themes/tree/main/examples/with-app-dir)
+
+
+
+
+
+## 3.2. Datos ficticios
 
 Durante el desarrollo de una aplicación a menudo necesitamos datos *fake* para probar su funcionalidad. Para ello disponemos de la biblioteca **[faker.js](https://fakerjs.dev/)**, la cual nos provee de este tipo de datos. 
 
 Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
-### 3.1.1. Instalación de biblioteca
+### 3.2.1. Instalación de biblioteca
 
 Instalamos como **dependencia de desarrollo**. Aparecerá en la sección `devDependencies` en el archivo `package.json`.
 
@@ -623,7 +765,7 @@ npm install -D @faker-js/faker
 > Esta biblioteca ocupa unos cuantos MB.
 
 
-### 3.1.2. Uso
+### 3.2.2. Uso
 
 
 ```js
@@ -652,14 +794,14 @@ faker.image.city()
 ```
 
 
-### 3.1.3. Documentación
+### 3.2.3. Documentación
 
 - [Guía](https://fakerjs.dev/guide/)
 - [API. Tipos de datos proporcionados](https://fakerjs.dev/api/)
 
 
 
-## 3.2. Datos de archivos CSV
+## 3.3. Datos de archivos CSV
 
 Es posible que se te presente la posibilidad de realizar una aplicación que requiera el uso de datos de poca complejidad y de sólo lectura. En estos casos es problable que usar una BD sea algo parecido a *matar moscas a cañonazos*. 
 
@@ -667,14 +809,14 @@ Disponemos de una biblioteca  llamada **[Papa Parse](https://www.papaparse.com/)
 
 Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
-### 3.2.1. Instalación de biblioteca
+### 3.3.1. Instalación de biblioteca
 
  ```sh
 npm  install  papaparse
  ```
 
 
-### 3.2.2. Uso
+### 3.3.2. Uso
 
 
 ```js
@@ -695,13 +837,13 @@ Para cargar grandes cantidades de datos desde CSV a una BD consulta el siguiente
 - [Loading Large CSVs into a Vercel Postgres Database](https://youtu.be/RbDcTraZwQA?si=PEv-tX-Q6L3QHtrS)
 
 
-### 3.2.3. Documentación
+### 3.3.3. Documentación
 
 - [Sitio oficial](https://www.papaparse.com/)
 - [Repositorio en Github](https://github.com/mholt/PapaParse?tab=readme-ov-file)
 
 
-### 3.2.4. Caso práctico y truco
+### 3.3.4. Caso práctico y truco
 
 Si tenemos un archivo `localidades.csv` con los datos en formato CSV, podemos convertirlos fácilmente a datos JSON con algún conversor, como [csvjson.com](https://csvjson.com/) y guardarlos en un archivo `localidades.json`.
 
@@ -766,7 +908,7 @@ De esta forma tan sencilla, nos ahorramos tener que usar papaparse, y así reduc
 
 
 
-## 3.3. Arrastrar y Soltar (Drag & Drop)
+## 3.4. Arrastrar y Soltar (Drag & Drop)
 
 La funcionalidad de arrastrar y soltar es propia del lado cliente y por tanto deberá ser usada desde componentes cliente. Además de poder realizarla con Vanilla JS, también disponemos de 2 bibliotecas interesantes, que son:
 
@@ -787,7 +929,7 @@ Le recomendamos que consulte [`react-dnd`](https://react-dnd.github.io/react-dnd
 | React DnD |             𐄂              |                   ✓                   |
 
 
-### 3.3.1. Instalación de biblioteca
+### 3.4.1. Instalación de biblioteca
 
 ```sh
 npm  install  react  react-dom  @dnd-kit/core 
@@ -797,13 +939,13 @@ npm  install  react  react-dom  @dnd-kit/core
 npm  install  react  react-dom  react-dnd  react-dnd-html5-backend
 ```
 
-### 3.3.2. Uso
+### 3.4.2. Uso
 
 - Para DnD Kit seguir la siguiente guía: https://docs.dndkit.com/introduction/getting-started
 - Para React DnD seguir el siguiente tutorial: https://react-dnd.github.io/react-dnd/docs/tutorial 
 
 
-### 3.3.3. Otras bibliotecas
+### 3.4.3. Otras bibliotecas
 
 Otras herramientas que nos permiten hacer DnD son:
 
@@ -812,13 +954,13 @@ Otras herramientas que nos permiten hacer DnD son:
 - [React Mosaic](https://github.com/nomcopter/react-mosaic#readme)
 
 
-### 3.3.4. Documentación
+### 3.4.4. Documentación
 
 - [DnD Kit](https://docs.dndkit.com/)
 - [React DnD](https://react-dnd.github.io/react-dnd/docs/overview)
   
 
-## 3.4. Gráficos
+## 3.5. Gráficos
 
 Esta biblioteca debe ser usada desde el lado cliente.
 
@@ -856,7 +998,7 @@ Hay una [demo disponible en Vercel](https://nxchart.vercel.app). El código fuen
 
 
 
-### 3.4.1. Instalación
+### 3.5.1. Instalación
 
 ```console
 npm  install  chart.js  react-chartjs-2
@@ -865,7 +1007,7 @@ npm  install  chart.js  react-chartjs-2
 El segundo paquete (`react-chartjs-2`) nos permitirá usar directamente componentes de React, en lugar de Vanilla JS.
 
 
-### 3.4.2. Uso
+### 3.5.2. Uso
 
 
 La forma más rápida y directa de empezar a usar esta biblioteca es usando el siguiente esquema. 
@@ -977,7 +1119,7 @@ Chart.js usa su contenedor principal para actualizar el renderizado del lienzo (
 > La página donde vaya a incrustarse el gráfico debe contener la directiva **`'use client'`**
 
 
-### 3.4.3. Flujo de datos (streaming)
+### 3.5.3. Flujo de datos (streaming)
 
 En algunos casos deseamos que la gráfica muestre un flujo de datos (**streaming**) obtenido de alguna fuente. Para ello podemos usar el plugin [chartjs-plugin-streaming](https://nagix.github.io/chartjs-plugin-streaming/latest/). Su página web dispone de varios [ejemplos](https://nagix.github.io/chartjs-plugin-streaming/latest/samples/charts/line-horizontal.html).
 
@@ -988,13 +1130,13 @@ Entre toda la información podemos destacar:
 1. [Los modelos de provisión de datos](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html)
 2. [El tutorial para crear app en React, también aplicable a Next.js](https://nagix.github.io/chartjs-plugin-streaming/latest/tutorials/react/app.html)
 
-#### 3.4.3.1. Los modelos de provisión de datos
+#### 3.5.3.1. Los modelos de provisión de datos
 
 El paquete `chartjs-plugin-streaming` soporta obtención de datos mediante los modos **pull** y **push**. Para mayor información consulta la [documentación oficial](https://nagix.github.io/chartjs-plugin-streaming/latest/guide/data-feed-models.html#push-model-listening-based)
 
 
 
-#### 3.4.3.2. Ejemplo
+#### 3.5.3.2. Ejemplo
 
 Hay disponible una aplicación de ejemplo con [código fuente disponible en Github](https://github.com/jamj2000/nxchart-streaming).
 
@@ -1099,7 +1241,7 @@ export default grafico
 ```
 
 
-#### 3.4.3.3. Colas de mensajes
+#### 3.5.3.3. Colas de mensajes
 
 Una forma de recuperar los datos para realizar las gráficas es mediante el uso de una cola de mensajes.
 
@@ -1114,7 +1256,7 @@ Herramientas para trabajar con colas de mensajes hay muchas: RabbitMQ, Amazon SQ
 
 - [Pirobits: Cola de mensajes usando MySQL: SELECT * FOR UPDATE](https://www.pirobits.com/es/post/cola-de-mensajes-usando-mysql-select-for-update)
 
-#### 3.4.3.4. InfluxDB
+#### 3.5.3.4. InfluxDB
 
 No podemos dejar de nombrar al SGBD InfluxDB que es un sistema especialmente diseñado desde cero para trabajar con **base de datos de series temporales**.
 
@@ -1140,7 +1282,7 @@ Referencias:
 - [Monitorizando datos con InfluxDB, Telegraf y Grafana](https://openwebinars.net/blog/monitorizando-datos-con-influxdb-telegraf-y-grafana/)  
 
 
-### 3.4.4. Documentación
+### 3.5.4. Documentación
 
 - [Código fuente de ejemplo](https://github.com/jamj2000/nxchart)
 - [Código fuente de ejemplo con streaming](https://github.com/jamj2000/nxchart-streaming)
@@ -1153,7 +1295,7 @@ Referencias:
 - [Otra biblioteca de Charts](https://recharts.org)
 
 
-### 3.4.5. Curiosidad
+### 3.5.5. Curiosidad
 
 Existe un biblioteca para *charting* llamada **`roughViz`**. Como su nombre indica realiza la visualización de forma algo bruta. Sirve para dar un toque de originalidad en detrimento de la exactitud en la representación gráfica.
 
@@ -1194,7 +1336,7 @@ import {Bar, Pie } from 'react-roughviz'
 
 ```
 
-### 3.4.6. Otras bibliotecas
+### 3.5.6. Otras bibliotecas
 
 Existen numerosas bibliotecas para la realización de gráficas. Algunas de ellas son:
 
@@ -1204,7 +1346,7 @@ Existen numerosas bibliotecas para la realización de gráficas. Algunas de ella
 - [D3.js](https://d3js.org): Una de las más potentes. Requiere de conocimientos avanzados.
 
 
-## 3.5. Creación de PDFs 
+## 3.6. Creación de PDFs 
 
 De las muchas bibliotecas disponibles para trabajar con archivos PDF, una de las más interesantes y potentes es [pdf-lib](https://www.npmjs.com/package/pdf-lib).
 
@@ -1253,7 +1395,7 @@ Esta biblioteca puede usarse desde el lado cliente y desde el lado servidor.
 
 
 
-### 3.5.1. Instalación
+### 3.6.1. Instalación
 
 ```sh
 mkdir  pdf-lib
@@ -1265,7 +1407,7 @@ npm  init -y
 npm  install  pdf-lib
 ```
 
-### 3.5.2. Uso
+### 3.6.2. Uso
 
 Haremos una primera prueba desde NodeJS, sin necesidad de crear un proyecto completo en NextJS. Para ello crea el archivo **pdf.mjs** y ejecútalo directamente con Node. 
 
@@ -1313,13 +1455,13 @@ A continuación tienes los enlaces a 2 proyectos que hacen uso de esta bibliotec
 - [Aplicación de lado cliente para rellenar fichas semanales](https://github.com/jamj2000/semana-fct)
 - [Aplicación de tickets de supermercado -por realizar-](#)
 
-### 3.5.3. Documentación
+### 3.6.3. Documentación
 
 - [Ejemplos de la Documentación oficial](https://pdf-lib.js.org/#examples)
 
 
 
-## 3.6. Envío de correos
+## 3.7. Envío de correos
 
 El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el paquete `nodemailer`. La dificultad suele provenir de la configuración del servidor de correo y la cuenta asociada. Realizaremos el envío de correos desde el lado servidor de nuestra aplicación, usando node.js.
 
@@ -1328,13 +1470,13 @@ El envío de correos desde una aplicación NodeJS es muy sencillo si usamos el p
 > Lo que se aplica para NodeJS, también se aplica para NextJS desde el lado servidor.
 
 
-### 3.6.1. Instalación
+### 3.7.1. Instalación
 
 ```sh
 npm  install  nodemailer
 ```
 
-### 3.6.2. Uso
+### 3.7.2. Uso
 
 Vamos a ver 2 opciones para enviar correos desde nuestra aplicación:
 
@@ -1342,7 +1484,7 @@ Vamos a ver 2 opciones para enviar correos desde nuestra aplicación:
 - Usando un servidor de correo propio
 
 
-####  3.6.2.1. Usando una cuenta de Gmail
+####  3.7.2.1. Usando una cuenta de Gmail
 
 Podemos usar una cuenta de Gmail para permitir que nuestra aplicación pueda enviar correos. Google ha ido modificando este tipo de soporte, cambiando la forma de realizar la configuración a lo largo del tiempo. Actualmente para configurar este tipo de funcionalidad debemos cumplir 2 requisitos:
 
@@ -1432,7 +1574,7 @@ sendMail().catch(console.error);
 
 
 
-#### 3.6.2.2. Usando servidor de correo propio
+#### 3.7.2.2. Usando servidor de correo propio
 
 Otra manera más profesional de gestionar correos es usar alguno de los servidores de correo transaccional, entre ellos:
 
@@ -1524,7 +1666,7 @@ sendMail().catch(console.error);
 > Una vez hayas comprobado que el envío de correo funciona correctamente, puedes reutilizar la función anterior `sendMail` como *server action* dentro de un proyecto NextJS. 
 
 
-### 3.6.3. Documentación
+### 3.7.3. Documentación
 
 - [Nodemailer](https://www.nodemailer.com/)
 - [react-email](https://react.email/)
@@ -1533,7 +1675,7 @@ sendMail().catch(console.error);
 - [Resend: Video en inglés](https://www.youtube.com/watch?v=T2xaiw7VK4A)
 
 
-## 3.7. Pagos por internet
+## 3.8. Pagos por internet
 
 Los pagos online permiten a los usuarios comprar productos o servicios directamente desde una web o aplicación. Una de las plataformas más utilizadas es **Stripe**, que ofrece APIs seguras y fáciles de integrar.
 
@@ -1559,7 +1701,7 @@ La clave pública puede usarse en el frontend y puede ser visible al usuario fin
 > - [Pizzería Mamma Mia - Código fuente](https://github.com/jamj2000/pizzeria-mm)
 > - [Pizzería Mamma Mia - Documentación sobre Stripe](https://github.com/jamj2000/pizzeria-mm/blob/main/STRIPE.md)
 
-### 3.7.1. Instalación
+### 3.8.1. Instalación
 
 Desde tu terminal:
 
@@ -1601,7 +1743,7 @@ npm install stripe
 
 
 
-### 3.7.2. Uso
+### 3.8.2. Uso
 
 
 **Flujo de pago**
@@ -1666,7 +1808,7 @@ npm install stripe
 
 
 
-### 3.7.3. Documentación
+### 3.8.3. Documentación
 
 - [Vídeo: Pasarela de pago con Stripe en tu Web o App: Guía Paso a Paso -Python-](https://youtu.be/gOWCCkUq2nc?si=gLG9xjPdaRLmuRb7)
 - [Documentación de Stripe](https://docs.stripe.com/get-started/development-environment)
@@ -1677,7 +1819,7 @@ npm install stripe
 - [Números de tarjeta para pruebas](https://docs.stripe.com/testing)
 
 
-## 3.8. Mapas
+## 3.9. Mapas
 
 
 Si deseamos hacer uso de los Mapas de Google, podemos usar la biblioteca [@googlemaps/js-api-loader](https://www.npmjs.com/package/@googlemaps/js-api-loader).
@@ -1695,14 +1837,14 @@ Si deseamos hacer uso de los Mapas de Google, podemos usar la biblioteca [@googl
 Esta biblioteca solo puede usarse desde el lado cliente.
 
 
-### 3.8.1. Instalación
+### 3.9.1. Instalación
 
 ```sh
 npm  install  @googlemaps/js-api-loader
 npm  install  @types/google.maps          # Sólo necesario si vamos a usar Typescript
 ``` 
 
-### 3.8.2. Uso
+### 3.9.2. Uso
 
 **`.env`**
 
@@ -1777,7 +1919,7 @@ export default function Home() {
 }
 ```
 
-### 3.8.3. Documentación
+### 3.9.3. Documentación
 
 - [Video: Nextjs Google Maps Tutorial](https://youtu.be/q4LhRp1RaPA?si=-XPRnGbokS0E4tPC)
 - [Video: Add Google Maps to your Next JS application - Easy way](https://www.youtube.com/watch?v=2xI2RKC4niY)
@@ -1787,14 +1929,14 @@ export default function Home() {
 
 
 
-## 3.9. Editor WYSIWYG
+## 3.10. Editor WYSIWYG
 
 
 **Tiptap - Editor WYSIWYG** ( [sitio oficial](https://tiptap.dev/) )
 
 
 
-### 3.9.1. Instalación
+### 3.10.1. Instalación
 
 
 ```sh
@@ -1807,7 +1949,7 @@ npm  install  @tiptap/extension-color  @tiptap/extension-list-item  @tiptap/exte
 
 
 
-### 3.9.2. Uso 
+### 3.10.2. Uso 
 
 ```js
 import { useEditor, EditorContent } from '@tiptap/react'
@@ -1829,7 +1971,7 @@ const Tiptap = () => {
 export default Tiptap
 ```
 
-### 3.9.3. Documentación
+### 3.10.3. Documentación
 
 - [Ejemplo 1](https://tiptap.dev/docs/editor/examples/default)
 - [Ejemplo 2](https://github.com/jamj2000/nxeditor-icons)
@@ -1843,7 +1985,7 @@ export default Tiptap
 - [Quill](https://quilljs.com/)
   
 
-### 3.9.4. Curiosidad
+### 3.10.4. Curiosidad
 
 Al usar bibliotecas com Tiptap es muy probable que te encuentres ante la necesidad de rellenar un elemento <div> con datos provenientes de un **editor de texto enriquecido**. En este caso es de gran utilidad la propiedad **`dangerouslySetInnerHTML`**.
 
@@ -1872,20 +2014,20 @@ Como sugiere el nombre de la propiedad, usar `dangerouslySetInnerHTML` puede ser
 
 
 
-## 3.10. Coloreado de código
+## 3.11. Coloreado de código
 
 En el muy poco probable caso de que tengamos que incorporar visualización de código fuente en nuestra aplicación, podemos usar la biblioteca [bright](https://bright.codehike.org/).
 
 Esta biblioteca debe usarse en el lado servidor, aunque es probable que también pueda emplearse en la lado cliente (no la he utilizado).
 
 
-### 3.10.1. Instalación
+### 3.11.1. Instalación
 
 ```sh
 npm  install  bright
 ``` 
 
-### 3.10.2. Uso
+### 3.11.2. Uso
 
 ```js
 import { Code } from "bright"
@@ -1907,7 +2049,7 @@ export default function Page() {
 ```
 
 
-### 3.10.3. Documentación
+### 3.11.3. Documentación
 
 - [Documentación oficial](https://bright.codehike.org/)
 - [Código en Github](https://github.com/code-hike/bright?tab=readme-ov-file)

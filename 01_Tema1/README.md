@@ -1551,4 +1551,5 @@ Plugins opcionales. Recomentados si trabajamos con framework CSS Tailwind.
 # 13. Referencias
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
+- [Editor Read-Eval-Print Loop](https://repl.js.org/)
 - [Vídeo: ¡Trucazos de Visual Studio Code para Programadores Web!](https://www.youtube.com/live/UdIcAdQtiws?si=nON_1sTZNnTQP1ZB)
