@@ -87,12 +87,13 @@
 
 # 1. Introducción
 
-En este tema veremos con trabajar con 
+En este tema veremos  
 
 - **APIs REST**
 
-Y tambien veremos cómo añadir nuevas funcionalidades a nuestra aplicación web. En concreto, se estudiarán las siguientes funcionalidades:
+Y tambien cómo añadir nuevas funcionalidades a nuestra aplicación web. En concreto, se estudiarán las siguientes funcionalidades:
 
+- **Modo claro/oscuro**
 - **Datos ficticios**
 - **Datos de archivos CSV**
 - **Gráficos**
@@ -110,7 +111,7 @@ Y tambien veremos cómo añadir nuevas funcionalidades a nuestra aplicación web
 
 Una de las funcionalidades más habituales que puede proporcionar un backend desde el lado servidor es la puesta a disposición de información, normalmente en formato JSON y extraida de alguna base de datos, destinada a ser consumida por diversos clientes. 
 
-Esta funcionalidad se proporciona mediante una [API de tipo REST](https://blog.hubspot.es/website/que-es-api-rest).
+Esta funcionalidad se proporciona mediante una [API de tipo REST](https://es.wikipedia.org/wiki/Transferencia_de_Estado_Representacional).
 
 En NextJS para la creación de este tipo de APIs hacemos uso de manejadores de rutas o `route handlers`.
 
@@ -156,43 +157,44 @@ En los `route handlers` también podemos acceder a los 2 tipos que existen:
 - **Parámetros de consulta** `Query Parameters` o `Query Strings` 
 
 
-Si tenemos la siguiente ruta:
+**Ejemplo**
 
-**`http://localhost:3000/api/products/bristol/books?sort=author&skip=1`**
-
-
-Y el siguiente código en `src/app/api/products/[store]/[category]/route.js`
-
+Si tenemos `src/app/api/products/[store]/[category]/route.js` con el siguiente contenido:
 
 ```js
 export async function GET(request, { params }) {
-    console.log( request.nextUrl.origin )
-    console.log( request.nextUrl.pathname )
+    console.log( 'origin', request.nextUrl.origin )
+    console.log( 'pathname', request.nextUrl.pathname )
 
     // Params
     const { store, category } = await params
-    console.log( store )
-    console.log( category )
+    console.log( 'store', store )
+    console.log( 'category', category )
 
     // SearchParams
     const sort = request.nextUrl.searchParams.get("sort")
     const skip = request.nextUrl.searchParams.get("skip")
-    console.log( sort )
-    console.log( skip )
+    console.log( 'sort', sort )
+    console.log( 'skip', skip )
 
     // ...
 }
 ```
 
-Producirá la siguiente salida:
+Al hacer una petición a la siguiente URL:
+
+**`http://localhost:3000/api/products/bristol/books?sort=author&skip=1`**
+
+
+Obtendremos el siguiente resultado:
 
 ```
-http://localhost:3000
-/api/products/bristol/books
-bristol
-books
-author
-1
+origin http://localhost:3000
+pathname /api/products/bristol/books
+store bristol
+category books
+sort author
+skip 1
 ``` 
 
 
@@ -629,7 +631,7 @@ npm  install  next-themes
 
 ### 3.1.2. Uso
 
-El procedimiento para proporcionar soporte claro/oscuro a nuestra aplicación consta de 3 pasos:
+El procedimiento para proporcionar soporte claro/oscuro a nuestra aplicación consta de 4 pasos:
 
 
 1. Creamos **componente cliente** que nos permita cambiar el tema.
@@ -657,7 +659,7 @@ export function ThemeToggle() {
 ```
 
 
-2. Colocamos el componente anterior en una página u componente para ofrecer al usuario la posibilidad de interactuar.
+2. Colocamos el componente anterior en una página u componente para permitir al usuario cambiar el tema.
 
 ```js
 import { ThemeToggle } from './ThemeToggle'
@@ -708,8 +710,7 @@ export default function RootLayout({ children }) {
 > ```
 
 
-
-También deberemos modificar el archivo `globals.css` de la siguiente manera:
+4. Modificamos archivo `globals.css` de la siguiente manera:
 
 ```css
 @import "tailwindcss";
@@ -1685,8 +1686,8 @@ Para que tu aplicación pueda hacer uso de stripe deberas registrarte previament
 
 Y después obtener las claves y añadirlas al archivo **`.env`**:
 
-- STRIPE_SECRET_KEY (privada)
-- STRIPE_PUBLISHABLE_KEY (pública)
+- **`STRIPE_SECRET_KEY`** (privada)
+- **`STRIPE_PUBLISHABLE_KEY`** (pública)
 
 La clave privada no debe ser accesible al usuario final. Está destinada a su uso en el backend.
 
@@ -1706,12 +1707,15 @@ La clave pública puede usarse en el frontend y puede ser visible al usuario fin
 Desde tu terminal:
 
 ```sh
-npm install stripe
+npm  install  stripe
 ```
 
 > [!NOTE]
 >
 > También necesitarás instalar [stripe CLI](https://docs.stripe.com/stripe-cli/install) para probar y gestionar tu integración desde la línea de comandos
+>
+> `npm  install  -g  @stripe/cli`
+
 
 > [!IMPORTANT]
 > 
@@ -1753,13 +1757,13 @@ npm install stripe
 3. El usuario es **redirigido al checkout de Stripe**.
 4. El usuario introduce datos de su tarjeta.
 5. Stripe procesa el pago de forma segura.
-6. Stripe envía el resultado del pago al endpoint `app/api/webhook.js` mediante un *webhook*. Si el evento es `checkout.session.completed`, se guarda la información del pedido en la base de datos.
+6. Stripe envía el resultado del pago al endpoint `app/api/webhook/route.js`, que funciona como *webhook*. Si el evento es `checkout.session.completed`, se guarda la información del pedido en la base de datos.
 7. Finalmente, el usuario es redirigido a una página de **éxito** o **cancelación**.
 
 
 > [!NOTE]
 >
-> El paso 2 también puede implementarse mediante una petición a `app/api/checkout.js` (endpoint `/api/checkout`), en lugar de usar una acción de servidor.
+> El paso 2 también puede implementarse mediante una petición a API REST `app/api/checkout/route.js` (endpoint `/api/checkout`), en lugar de usar una acción de servidor.
 >
 > - El uso de un **endpoint API** es más adecuado en arquitecturas desacopladas (frontend/backend separados).
 > - El uso de **acciones de servidor** es más apropiado en aplicaciones fullstack monolíticas con Next.js.
