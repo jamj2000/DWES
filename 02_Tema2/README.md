@@ -2,7 +2,7 @@
 
 # Tema 2: LENGUAJE PARA SERVIDOR <!-- omit in toc -->
 > Inserción de código en páginas Web  
-> JAVASCRIPT, EXPRESS
+> JAVASCRIPT, NODEJS, EXPRESS, NPM, JSON
 
 <div style="display: inline">
 <img src="assets/javascript.svg" width="80" height="80">

@@ -2,13 +2,12 @@
 
 # Tema 1: CONCEPTOS GENERALES <!-- omit in toc -->
 > Selección de arquitecturas y herramientas de programación  
-> CONCEPTOS, BACKEND, FRONTEND, LENGUAJES, FRAMEWORKS, NODEJS, NPM, JSON
+> CONCEPTOS, LENGUAJES, FRAMEWORKS, JAVASCRIPT
 
 **[`CÓDIGO DE EJEMPLO`](codigo)**
 
 <div style="display: inline">
 <img src="assets/javascript.svg" width="80" height="80">
-<img src="assets/nodedotjs.svg" width="80" height="80">
 </div>
 
 ---
@@ -336,7 +335,7 @@ Un servidor web es el software encargado de recibir y responder a las peticiones
 Según su nivel de complejidad y recursos necesarios, podemos dividirlos en 2 tipos:
 
 - Servidores de **contenido estático**
-- Servidores de **contenido dinám**ico
+- Servidores de **contenido dinámico**
 
 > [!NOTE]  
 >
