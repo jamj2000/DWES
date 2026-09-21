@@ -14,508 +14,592 @@
 
 ---
 
-- [1. Introducción](#1-introducción)
-- [2. Declaración de variables y constantes](#2-declaración-de-variables-y-constantes)
-- [3. Tipos de datos simples](#3-tipos-de-datos-simples)
-  - [3.1. Booleanos](#31-booleanos)
-  - [3.2. Numeros](#32-numeros)
-  - [3.3. Texto](#33-texto)
-- [4. Tipos de datos compuestos](#4-tipos-de-datos-compuestos)
-  - [4.1. Arrays](#41-arrays)
-  - [4.2. Objetos](#42-objetos)
-- [5. Valores vs Referencias](#5-valores-vs-referencias)
-- [6. Operaciones frecuentes con arrays](#6-operaciones-frecuentes-con-arrays)
-  - [6.1. Inicializar](#61-inicializar)
-  - [6.2. Insertar](#62-insertar)
-  - [6.3. Eliminar](#63-eliminar)
-  - [6.4. Modificar](#64-modificar)
-  - [6.5. Copiar](#65-copiar)
-  - [6.6. Obtener sección](#66-obtener-sección)
-  - [6.7. Eliminar elementos duplicados](#67-eliminar-elementos-duplicados)
-  - [6.8. Recorrer](#68-recorrer)
-  - [6.9. Filtrar](#69-filtrar)
-  - [6.10. Encontrar](#610-encontrar)
-  - [6.11. Ordenar](#611-ordenar)
-- [7. Operaciones frecuentes con objetos](#7-operaciones-frecuentes-con-objetos)
-  - [7.1. Inicializar](#71-inicializar)
-  - [7.2. Insertar](#72-insertar)
-  - [7.3. Eliminar](#73-eliminar)
-  - [7.4. Modificar](#74-modificar)
-  - [7.5. Copiar](#75-copiar)
-- [8. Framework Express](#8-framework-express)
-- [9. Módulos externos](#9-módulos-externos)
-  - [9.1. Instalación de módulos externos](#91-instalación-de-módulos-externos)
-  - [9.2. Opciones de NPM](#92-opciones-de-npm)
-  - [9.3. Desinstalación de módulos externos](#93-desinstalación-de-módulos-externos)
-- [10. Módulos CommonJS](#10-módulos-commonjs)
-- [11. Módulos ECMAScript](#11-módulos-ecmascript)
-  - [11.1. Exportación e Importación](#111-exportación-e-importación)
-    - [11.1.1. Ejemplo sin package.json](#1111-ejemplo-sin-packagejson)
-    - [11.1.2. Ejemplo con package.json](#1112-ejemplo-con-packagejson)
-- [12. Parámetros de URL](#12-parámetros-de-url)
-  - [12.1. Parámetros de ruta (Path Parameters)](#121-parámetros-de-ruta-path-parameters)
-  - [12.2. Parámetros de consulta (Query Parameters o Query Strings)](#122-parámetros-de-consulta-query-parameters-o-query-strings)
-- [13. Fetch desde el servidor](#13-fetch-desde-el-servidor)
-- [14. Creando nuestra propia API REST](#14-creando-nuestra-propia-api-rest)
-  - [14.1. Herramientas para probar la API](#141-herramientas-para-probar-la-api)
-  - [14.2. CORS](#142-cors)
-  - [14.3. JWT (JSON Web Token)](#143-jwt-json-web-token)
-  - [14.4. Documentación](#144-documentación)
-- [15. Formularios](#15-formularios)
-  - [15.1. application/x-www-form-urlencoded](#151-applicationx-www-form-urlencoded)
-  - [15.2. multipart/form-data](#152-multipartform-data)
-  - [15.3. JSON](#153-json)
-- [16. Referencias](#16-referencias)
-
-
-
-
-
-
-
+- [1. NodeJS](#1-nodejs)
+  - [1.1. Instalación del entorno de ejecución NodeJS](#11-instalación-del-entorno-de-ejecución-nodejs)
+  - [1.2. Probando Node](#12-probando-node)
+  - [1.3. Probando VSCode](#13-probando-vscode)
+  - [1.4. Inicializar un proyecto](#14-inicializar-un-proyecto)
+  - [1.5. Archivo package.json](#15-archivo-packagejson)
+  - [1.6. Ejecución de paquetes sin necesidad de instalar](#16-ejecución-de-paquetes-sin-necesidad-de-instalar)
+  - [1.7. Módulos incorporados (built-in) en Node](#17-módulos-incorporados-built-in-en-node)
+- [2. Linter para Javascript (y también para CSS)](#2-linter-para-javascript-y-también-para-css)
+- [3. Configuración de usuario en VSCode](#3-configuración-de-usuario-en-vscode)
+  - [3.1. Atajos imprescindibles del teclado](#31-atajos-imprescindibles-del-teclado)
+  - [3.2. Archivo settings.json](#32-archivo-settingsjson)
+  - [3.3. Archivo keybindings.json](#33-archivo-keybindingsjson)
+  - [3.4. Plugins](#34-plugins)
+- [4. Framework Express](#4-framework-express)
+- [5. Módulos externos](#5-módulos-externos)
+  - [5.1. Instalación de módulos externos](#51-instalación-de-módulos-externos)
+  - [5.2. Opciones de NPM](#52-opciones-de-npm)
+  - [5.3. Desinstalación de módulos externos](#53-desinstalación-de-módulos-externos)
+- [6. Módulos CommonJS](#6-módulos-commonjs)
+- [7. Módulos ECMAScript](#7-módulos-ecmascript)
+  - [7.1. Exportación e Importación](#71-exportación-e-importación)
+    - [7.1.1. Ejemplo sin package.json](#711-ejemplo-sin-packagejson)
+    - [7.1.2. Ejemplo con package.json](#712-ejemplo-con-packagejson)
+- [8. Parámetros de URL](#8-parámetros-de-url)
+  - [8.1. Parámetros de ruta (Path Parameters)](#81-parámetros-de-ruta-path-parameters)
+  - [8.2. Parámetros de consulta (Query Parameters o Query Strings)](#82-parámetros-de-consulta-query-parameters-o-query-strings)
+- [9. Fetch desde el servidor](#9-fetch-desde-el-servidor)
+- [10. Creando nuestra propia API REST](#10-creando-nuestra-propia-api-rest)
+  - [10.1. Herramientas para probar la API](#101-herramientas-para-probar-la-api)
+  - [10.2. CORS](#102-cors)
+  - [10.3. JWT (JSON Web Token)](#103-jwt-json-web-token)
+  - [10.4. Documentación](#104-documentación)
+- [11. Formularios](#11-formularios)
+  - [11.1. application/x-www-form-urlencoded](#111-applicationx-www-form-urlencoded)
+  - [11.2. multipart/form-data](#112-multipartform-data)
+  - [11.3. JSON](#113-json)
+- [12. Referencias](#12-referencias)
 
 
 ---
-# 1. Introducción
-
-En este tema necesitaras consultar los recursos que aparecen a continuación para entender los **Arrays**, **Objetos** y **Arrow functions**, requisito imprescindible para trabajar en NodeJS y Javascript:
-
-- [SINTAXIS DE JAVASCRIPT](https://github.com/jamj2000/Javascript/blob/master/02.SINTAXIS.md)
-- [FUNCIONES](https://github.com/jamj2000/Javascript/blob/master/03.FUNCIONES.md)
-- [ARRAYS](https://github.com/jamj2000/Javascript/blob/master/04.ARRAYS.md)
-- [OBJETOS](https://github.com/jamj2000/Javascript/blob/master/05.OBJETOS.md)
 
 
-> [!IMPORTANT]
-> 
-> Los apartados que aparecen a continuación son un resumen muy breve del contenido de los enlaces anteriores y no es suficiente para entender con cierta profundidad el lenguaje Javascript, por lo que se recomienda encarecidamente la consulta de dichos enlaces.
->
+
+
+# 1. NodeJS
+
+
+![node](assets/node.png)
+
+Node.js es un **entorno en tiempo de ejecución** multiplataforma, de código abierto, para la capa del servidor basado en el lenguaje de programación **JavaScript**, asíncrono, con E/S de datos en una arquitectura orientada a eventos y **basado en el motor V8 de Google**.
+
+
+![v8 engine](assets/v8-engine.png)
+
+Este entorno nos permitirá desarrollar aplicaciones en el servidor usando Javascript. También es muy utilizado como plataforma de desarrollo para frameworks del lado cliente.
+
+Posee un extenso repositorio de paquetes para prácticamente cualquier funcionalidad que deseemos. 
+
+Trabajaremos con la version LTS, por ser más estable y tener soporte a largo plazo. 
+
 
 Más adelante nos enfocaremos en el aspecto práctico usando el framework Express. También veremos como desarrollar una API REST con este framework.
 
 
+## 1.1. Instalación del entorno de ejecución NodeJS
 
-# 2. Declaración de variables y constantes
+![Node download](assets/node-download.png)
 
-```js
-let a;        // Valor inicial undefined, tipo undefined
-const b = 0;  // Obligatorio asignar un valor inicial 
+La instalación de NodeJS es bastante sencilla. Existen instaladores para Windows y Mac. 
+
+En el caso de Linux lo haremos desde el terminal de texto. Aquí tienes los comandos. Es copiar y pegar.
+
+```bash
+# instalamos nvm (Node Version Manager)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+
+# descargamos e instalamos Node.js (después necesitarás reiniciar el terminal)
+nvm install 24
 ```
 
-# 3. Tipos de datos simples
+Los versiones instaladas se guardarán en la carpeta del usuario, en `~/.nvm/versions/node/`
 
-## 3.1. Booleanos
 
-```js
-a = true; 
-typeof a;   // boolean
+Una vez realizada la instalación dispondremos de 3 utilidades:
+
+- **node**:  es el entorno de ejecución propiamente dicho.
+- **npm**:  es el gestor de paquetes.
+- **npx**:  es el lanzador de paquetes ejecutables.
+
+Podemos comprobar que se han instalado correctamente y la version de cada utilidad:
+
+```bash
+node --version
+npm  --version
+npx  --version
+nvm  --version
 ```
 
-## 3.2. Numeros
+Si nos muestra la versión de cada uno, es que la instalación fue exitosa.
 
-```js
-a = 23;
-typeof a;   // number
 
-a = 23.01;  
-typeof a;   // number 
-```
+## 1.2. Probando Node
 
-**Conversión de número a string**
+Podemos lanzar el intérprete de node, simplemente ejecutando en un terminal el comando `node`:
 
-```js
-let a = 4.095001;
-
-a.toString();
-```
-
-**Redondeo a 2 decimales**
-
-```js
-let a = 4.095001;
-
-+a.toFixed(2);      // Redondeo a 2 decimales 
-```
-
-## 3.3. Texto
-
-```js
-a = "hola mundo";
-typeof a;   // string
-```
-
-**Conversión de número a string**
-
-```js
-let a = 4.095001';
-
-a.toFixed(2);      // Redondeo a 2 decimales 
-```
- 
-
-# 4. Tipos de datos compuestos
-
-## 4.1. Arrays
-
-
-```js
-const array = [ 1, 2, 3 ];
-```
-
-
-## 4.2. Objetos
-
-
-```js
-const objeto = { nombre: 'Juan', edad: 20 };
-```
-
-
-# 5. Valores vs Referencias
-
-- **Los datos simples (number, string, boolean) son tratados como valores.**
-- **Los datos compuestos (arrays, objetos) son tratados como referencias.**
-
-![Valores vs Referencias](assets/valor-referencia.png)
-
-# 6. Operaciones frecuentes con arrays
-
-Las operaciones más frecuentes con arrays son las siguientes:
-
-## 6.1. Inicializar
-
-```js
-// Crea nueva referencia y asigna memoria dinámica
-const array = [ 1, 2, 3, 4, 5 ]
-```
-
-## 6.2. Insertar
-
-**Un elemento al final**
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-array.push(6)  // [ 1, 2, 3, 4, 5, 6 ]
-```
-
-**Uno o varios elementos en cualquier posición**
-
-
-```js
-const array = [ 1, 2, 3 ]
-
-// en pos 0 sustituimos 0 elementos por 9
-const sus = array.splice(0, 0, 9)  // sus = [], array = [ 9, 1, 2, 3 ]
-```
-
-```js
-const array = [ 1, 2, 3 ]
-
-// en pos 1 sustituimos 0 elementos por 9, 8, 7
-const sus = array.splice(1, 0, 9, 8, 7)  // sus = [], array = [ 1, 9, 8, 7, 2, 3 ]
-```
-
-## 6.3. Eliminar
-
-**Un elemento al final**
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-const num = array.pop()  // num = 5, array = [ 1, 2, 3, 4 ]
-```
-
-**Uno o varios elementos en cualquier posición**
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-// en pos 0 extraemos 1 elemento
-const ex = array.splice(0, 1)  // ex = [1], array = [ 2, 3, 4, 5 ]
-```
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-// en pos 1 extraemos 3 elementos
-const ex = array.splice(1, 3)  // ex = [2, 3, 4], array = [ 1, 5 ]
-```
-
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-// Deja un hueco
-delete array[1]  // [ 1, <1 empty item>, 3, 4, 5 ]
-```
-
-## 6.4. Modificar
-
-**Uno o varios elementos en cualquier posición**
-
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-// en pos 0 sustituimos 1 elemento por 9
-array.splice(0, 1, 9)  // array = [ 9, 2, 3, 4, 5 ]
-```
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-// en pos 0 sustituimos 1 elemento por 9, 8, 7
-const sus = array.splice(0, 1, 9, 8 , 7)  // sus = [1],  array = [ 9, 8, 7, 2, 3, 4, 5 ]
-```
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-// en pos 1 sustituimos 3 elementos por 9, 8, 7
-const sus = array.splice(1, 3, 9, 8, 7)  // sus = [2, 3, 4], array = [ 1, 9, 8, 7, 5 ]
-```
-
-## 6.5. Copiar
-
-```js
-const numeros = [ 1, 2, [3, 4], [5, 6] ]
-
-const copia_superficial = [ ...numeros ]
-
-const copia_profunda1 = JSON.parse(JSON.stringify(numeros))
-const copia_profunda2 = structuredClone(numeros);
-
-// Test
-copia_superficial[2][0] = 9 // numeros = [ 1, 2, [ 9, 4 ], [ 5, 6 ] ]
-copia_profunda1[2][1] = 9   // numeros = [ 1, 2, [ 9, 4 ], [ 5, 6 ] ]
-copia_profunda2[2][1] = 9   // numeros = [ 1, 2, [ 9, 4 ], [ 5, 6 ] ]
-```
-
-
-## 6.6. Obtener sección
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-const nuevoArray1 = a.slice(1)     // [ 2, 3, 4, 5 ]
-const nuevoArray2 = a.slice(-2)    // [ 4, 5 ]
-const nuevoArray3 = a.slice(0,3)   // [ 1, 2, 3 ]
-```
-
-
-## 6.7. Eliminar elementos duplicados
-
-```js
-// Al convertir el array original a conjunto (Set) se eliminan los duplicados
-const array = [ 2, 20, 2, 1, 10, 1, 100 ];
-const nuevoArray = Array.from( new Set(array) )  // [ 2, 20, 1, 10, 100 ]
-```
-
-
-## 6.8. Recorrer
-
-> 🤔 Observa el uso de una **función flecha** como argumento de otra función
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-array.forEach( item => console.log (item) )
-array.forEach( (item, pos) => console.log (pos, item) )
-``` 
-
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
-
-const nuevoArray1 = array.map( item => item * 2 )          // nuevoArray1 = [ 2, 4, 6, 8, 10 ]
-const nuevoArray2 = array.map( (item, pos) => item * pos ) // nuevoArray2 = [ 0, 2, 6, 12, 20 ]
-``` 
-
-## 6.9. Filtrar 
-
-> 🤔 Observa el uso de una **función flecha** como argumento de otra función
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
- 
-const nuevoArray1 = array.filter( item => item % 2 )          // nuevoArray1 = [ 1, 3, 5 ]  // números impares
-const nuevoArray2 = array.filter( item => !(item % 2) )       // nuevoArray2 = [ 2 , 4 ]    // números pares
-const nuevoArray3 = array.filter( (item, pos) => pos==1 || pos==4 ) // nuevoArray3 = [2, 5] // posiciones 1 y 4
-``` 
-
-
-## 6.10. Encontrar
-
-> 🤔 Observa el uso de una **función flecha** como argumento de otra función
-
-```js
-const array = [ 1, 2, 3, 4, 5 ]
- 
-const num1 = array.find( item => item % 2 )        // num1 = 1  // el primer número impar
-const num2 = array.find( item => !(item % 2) )     // num2 = 2  // el primer número par
-const num3 = array.find( (item, pos) => pos == 4 ) // num3 = 5  //posición 4
-```
-
-> [!TIP]
->
-> Si sólo deseamos saber si un elemento existe o no (`true` o `false`), una solución más simple es usar el método `includes`. Por ejemplo:
->
-> ```js
-> array.includes(5) // true
-> array.includes(9) // false
-> ```
-
-
-> [!TIP]
->
-> El método `includes` también se aplica a tipos `string`.
->
-> Por ejemplo:
+```bash
+node 
+Welcome to Node.js v24.16.0.
+Type ".help" for more information.
 > 
-> ```js
-> "The quick brown fox jumps over the lazy dog".includes("dog")   // true
-> "The quick brown fox jumps over the lazy dog".includes("bird")  // false
-> ```
+```
+
+Algunos comandos: 
 
 
+```javascript
+console.log("Hola mundo")
+```
 
-## 6.11. Ordenar
+```javascript
+for (let i=0; i<10; i++) console.log (i)
+```
 
-> 🤔 Observa el uso de una **función flecha** como argumento de otra función
+```javascript
+let desarrolladores = [
+    { nombre: 'Juan', tipo: 'móvil', edad: 24 },
+    { nombre: 'Inma', tipo: 'móvil', edad: 31 },
+    { nombre: 'Ana',  tipo: 'web',   edad: 25 },
+    { nombre: 'Eva',  tipo: 'web',   edad: 30 },
+    { nombre: 'José', tipo: 'móvil', edad: 33 }
+];
 
-```js
-const array = [ 2, 20, 2, 1, 10, 1, 100 ];
+console.table(desarrolladores)
+```
 
-array.sort();                         // [1, 1, 10, 100, 2, 2, 20]
-array.sort( (a, b) => a - b );        // [1, 1, 2, 2, 10, 20, 100]  
+```javascript
+const fs = require('fs')
 
-const nuevoArray = array.toSorted( (a, b) => a - b );    // No modifica array original  
+// Creación de archivo leeme.txt
+const datos = `
+Este contenido ha sido generado desde Javascript
+y escrito en un archivo desde NodeJS.
 
-const ciudades = [ "Ávila", "Almeria", "Albacete", "Álava" ]
+Chao.
+`
 
-ciudades.sort()                               // [ 'Albacete', 'Almeria', 'Álava', 'Ávila' ]
-ciudades.sort( (a,b) => a.localeCompare(b) )  // [ 'Álava', 'Albacete', 'Almeria', 'Ávila' ]
+fs.writeFile ("leeme.txt", datos, (error) => {
+  if (error)
+    console.log(error);
+  else 
+    console.log("Archivo creado exitosamente");
+})
+```
 
-const nuevasCiudades = ciudades.toSorted( (a, b) => a.localeCompare(b) )  // No modifica array original
+```javascript
+const fs = require('fs')
+
+// Lectura de archivo leeme.txt
+fs.readFile('leeme.txt', 'utf8', (error, datos) => {
+  if (error) 
+    console.error(error);
+  else
+    console.log(datos);
+})
 ```
 
 
-**Ejemplos de filtrado, ordenación y mapeo con métodos encadenados**
+> **ACTIVIDAD**
+>
+> Escribe `os.` y pulsa tabulador 2 veces
+>
+> Te aparecerán todas las propiedades y métodos disponibles en este módulo.
+>
+> Ejecuta los siguientes y haz una captura de pantalla:
+> 
+> `os.type()`
+> 
+> `os.platform()`
+> 
+> `os.arch()`
+>
+> `os.release()`
+>
+> `os.cpus()`
+>
+> `os.totalmem()`
+>
+> `os.freemem()`
+>
+> `os.uptime()`
+>
+> `os.networkInterfaces()`
+>
+> `os.userInfo()`
 
-```js
-const nombres = ["Ángel", "Anabel", "Eva", "Ana", "elena", "David" ]
 
-const resultado = nombres
-  .filter( nombre => nombre.length > 4 )   
-  .sort( (a, b) => a.localeCompare(b) )
-  .map( nombre => nombre.toUpperCase() )                          
+> **ACTIVIDAD**
+>
+> Escribe `process.` y pulsa tabulador 2 veces
+>
+> Te aparecerán todas las propiedades y métodos disponibles en este módulo.
+>
+> Ejecuta los siguientes y haz una captura de pantalla:
+>
+> `process.env`
+>
+> `process.pid`
+>
+> `process.ppid`
+> 
+> `process.uptime()`
+
+
+Para salir de Node, escribimos `.exit` o pulsamos las teclas `Ctrl+D`.
+
+## 1.3. Probando VSCode
+
+La manera anterior de trabajar es muy incómoda. Nos sirve para tareas muy simples, pero si deseamos trabajar más cómoda podemos hacer uso de un editor o IDE. En la captura de más abajo se muestra un ejemplo de uso de VSCode. En el terminal lanzamos **`node  --watch  codigo.js`**, lo cual dejará a Node escuchando los cambios en el archivo `codigo.js`, y cada vez que guardemos los cambios a disco se ejecutará su código.
+
+![node --watch](assets/node--watch.png)
+
+
+## 1.4. Inicializar un proyecto
+
+Normalmente, node no se suele ejecutar de la forma que hemos realizado previamente, sino que se crean proyectos que se ejecutan en node.
+
+Para crear un proyecto, creamos una carpeta, entramos en ella y ejecutamos `npm init -y`
+```bash
+mkdir proyecto-node  &&  cd proyecto-node
+
+npm  init  -y 
+```
+
+> [!TIP]
+> 
+> La opción -y (--yes) de `npm init` crea un archivo **package.json** con opciones por defecto, sin hacer preguntas al usuario.
+
+> [!IMPORTANT]
+> 
+> El comando `npm` (**Node Package Manager**) es muy importante. Nos permitirá:
+> - Inicializar proyectos. 
+> - Instalar paquetes.
+> - Desinstalar paquetes.
+> - Ejecutar diversos scripts: lanzamiento de entorno de desarrollo, generación de la compilación, tests, ...
+
+
+## 1.5. Archivo package.json
+
+Una vez inicializado un proyecto, se nos generará un archivo parecido al siguiente:
+
+```json
+{
+  "name": "proyecto-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+Podemos instalar módulos externos con `npm`. Por ejemplo:
+
+```console
+npm install express     # Dependencia de aplicación
+npm install nodemon -D  # Dependencia de desarrollo (dev)
+```
+
+Al realizar las instalaciones anteriores, se insertarán automáticamente las siguientes líneas en el archivo anterior:
+
+```json
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+```
+
+> [!NOTE]
+> 
+> La versión de cada paquete puede diferir de la que tu tengas.
 
 
 
-const nums = [-10, 5, -3, 8, -7]
+El archivo `package.json` contiene los metadatos del proyecto, entre estos están 3 cosas muy importantes:
 
-const resultado = nums
-  .map(num => Math.abs(num))        
-  .sort((a, b) => a - b) 
+- **scripts**:  tareas que podremos invocar, por ejemplo `npm run test` 
+- **dependencies**: paquetes que nuestra aplicación necesita para ofrecer la funcionalidad deseada y serán incorporados a la aplicación final. 
+- **devDependencies**: paquetes que sólo usaremos durante el desarrollo, no se incorporan a la aplicación final.
 
 
 
-const jugadores = [
-  { nombre: "Alicia", score: 4 },
-  { nombre: "Roberto", score: 7 },
-  { nombre: "Carlos", score: 9 },
-  { nombre: "David", score: 3 }
+## 1.6. Ejecución de paquetes sin necesidad de instalar
+
+Si no tenemos permisos para instalar paquetes en el sistema, podemos usar la herramienta **npx**. Características:
+
+- Es una herramienta de ejecución de paquetes.
+- **Ejecuta** paquetes ejecutables de `node.js` sin necesidad de instalarlos.
+- Es más cómodo que usar `sudo npm install -g ...`
+- Ejemplo (lanzar servidor web):
+  
+**Usando `sudo npm install -g ...`**
+
+  ```bash
+  sudo npm  install  -g  http-server
+  http-server
+  ```
+**Usando `npx  ...`**
+ 
+  ```bash
+  npx  http-server
+  ```
+
+**Ejemplos**
+
+```
+npx  serve                     # Inicia un servidor web
+npx  http-server               # Inicia otro servidor web
+npx  live-server               # Inicia otro servidor web con recarga de archivos modificados
+npx  servor                    # Inicia otro servidor web con recarga de archivos modificados
+
+npx  @angular/cli  new         nombre-proyecto  # Iniciar proyecto de Angular 
+npx  create-react-app          nombre-proyecto  # Iniciar proyecto de React 
+npx  @vue/cli  create          nombre-proyecto  # Iniciar proyecto de Vue
+npx  degit  sveltejs/template  nombre-proyecto  # Iniciar proyecto de Svelte   
+```
+
+
+## 1.7. Módulos incorporados (built-in) en Node
+
+- No es necesario instalarlos.
+- Ya vienen con node.js.
+- Ejemplos:
+  - **fs**:  Sistema de archivos
+  - **http**:  Servidor HTTP
+  - **https**:  Servidor HTTPS
+  - **os**:  Sistema operativo
+  - **path**:  Rutas de archivos
+  - **process**:  Información y control del proceso actual
+  - ...
+
+Mas info: https://www.w3schools.com/nodejs/ref_modules.asp
+
+
+# 2. Linter para Javascript (y también para CSS)
+
+Un linter es un software que se encarga de examinar el código del programador y lo ayuda cuando detecta errores de sintaxis, código incorrecto, malas prácticas o incluso promueve a seguir unas normas de estilo. 
+
+Dos linter muy conocidos son:
+- **eslint** (para Javascript)
+- **stylelint** (para CSS)
+
+
+Podemos configurar un linter básico de Javascript haciendo:
+
+```javascript
+npm  init  -y               # Inicialización de proyecto
+npm  init  @eslint/config   # Asistente de configuración de ESLint
+```
+
+Más información en https://lenguajejs.com/javascript/calidad-de-codigo/eslint/
+
+Otra forma más directa, aunque menos configurable, es realizar:
+
+```javascript
+npm  init  -y                                        # Inicialización de proyecto
+npm  install -D standard  stylelint-config-standard  # Instalamos el conjunto de reglas standard
+```
+
+E insertamos en `package.json`
+
+```json
+"eslintConfig": {
+  "extends": [ "standard" ]
+},
+"stylelint": {
+  "extends": "stylelint-config-standard",
+  "rules": {
+     "indentation": 2
+  }
+},
+``` 
+
+# 3. Configuración de usuario en VSCode
+
+## 3.1. Atajos imprescindibles del teclado
+
+- `Ctrl+K`, `Ctrl+S`: Configuración de atajos del teclado
+- `Ctrl+,`: Prefeencias del usuario
+- `Ctrl+P`: Ir a archivo, ...
+- `Ctrl+Shift+P`: Paleta de comandos
+
+**Referencias**:
+
+- [keyboard-shortcuts-windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+- [keyboard-shortcuts-linux](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf)
+- [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+
+
+
+## 3.2. Archivo settings.json
+
+La configuración de usuario se guarda en un archivo **`settings.json`**, dentro de la carpeta del usuario, en la subcarpeta `.config/Code/User`.
+
+Para acceder al archivo anterior y realizar las configuraciones deseadas, pulsamos **`Ctrl+Shift+P`** para acceder a la paleta de comandos de VSCode, y luego escribimos `user settings json`. Abrimos el archivo, y editamos las opciones de configuración deseadas. 
+
+Por ejemplo, mi configuración es la siguiente:
+
+```json
+{
+    "workbench.colorTheme": "Default Light+",
+    "workbench.iconTheme": "material-icon-theme",
+    // Tailwind autofold 
+    "tailwind-fold.autoFold": true,
+    // Actualizar etiquetas de cierre de HTML y JSX
+    "editor.linkedEditing": true,
+    // Fuente con ligaduras
+    "editor.fontLigatures": true,
+    "editor.fontVariations": false,
+    "editor.fontFamily": "'Fira Code', monospace",
+    "svg.preview.mode": "svg",
+    // Desactivamos validación CSS por defecto de VSCode
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    // Activamos stylelint para CSS
+    "stylelint.enable": true,
+    // linters: activamos eslint para Javascript
+    "javascript.validate.enable": true,
+    "eslint.validate": [
+        "javascript"
+    ],
+    "eslint.enable": true,
+    // linters: arreglamos código CSS + Javascript al guardar a disco
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true,
+    },
+    // Desactivamos la opción siguiente para no interferir con los linters
+    // "editor.formatOnSave": true,
+    "extensions.ignoreRecommendations": true,
+    // Permite la edición simultánea de inicio y cierre de etiquetas HTML y JSX
+    "editor.linkedEditing": true,
+    // Soporte de Emmet para JSX
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    }
+}
+```
+
+Básicamente, la configuración hace lo siguiente:
+
+- Se usa fuente con ligaduras [`Fira Code`](https://github.com/tonsky/FiraCode). Dicha fuente tiene que estar instalada previamente en el sistema.
+- Se activa el [`lint`](https://es.wikipedia.org/wiki/Lint) para CSS y Javascript.
+- Al guardar los cambios a disco, se arregla ( *fix* ) el código. Algunos errores requerirán la intervención del usuario al no poder solucionarse automáticamente.
+- Se activa la edición enlazada, que permite modificar las 2 etiqueta HTML de una sola vez.   
+
+> [!IMPORTANT] 
+>
+> Para que la configuración anterior sea efectiva es necesario cumplir los 3 requisitos siguientes:
+> - Tener la fuente Fira Code instalada en el sistema.
+> - Tener el plugin ESLint instalado en VSCode
+> - Tener el plugin Stylelint instalado en VSCode
+
+
+## 3.3. Archivo keybindings.json
+
+La configuración de usuario para atajos de teclado se guarda en un archivo **`keybindings.json`**, dentro de la carpeta del usuario, en la subcarpeta `.config/Code/User`.
+
+
+Por ejemplo, mi configuración es la siguiente:
+
+```json
+// Coloque sus atajos de teclado en este archivo para sobreescribir los valores predeterminados
+[
+    {
+        "key": "ctrl+l",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus",
+        "args": {
+          "snippet": "console.log(${TM_SELECTED_TEXT}$1);"
+        }
+      }
 ]
-
-const resultado = jugadores
-  .filter(jugador => jugador.score > 5)  
-  .map(jugador => jugador.nombre)          
-  .sort( (a, b) => a.localeCompare(b) )   
 ```
 
-> 🧐 
+Esta configuración me permite seleccionar un texto o variable y envolverla dentro de `console.log`. Es muy útil para realizar tareas de depuración.
+
+
+> [!NOTE]
+>
+> Los archivos de configuración de VSCode en realidad no son JSON, sino **JSONC** (JSON con comentarios). JSONC no es un estándar oficial. A continuación se muestra una tabla comparativa de características de JSON, JSONC y JSON5. 
 > 
-> Los siguientes métodos NO modifican el array original
 >
-> - `map`, `filter`, `find`, `toSorted`
+> | Característica              | JSON | JSONC         | JSON5         |
+> |----------------------------|------|---------------|---------------|
+> | Comentarios                | ❌   | ✅            | ✅            |
+> | Claves sin comillas        | ❌   | ❌            | ✅            |
+> | Comillas simples           | ❌   | ❌            | ✅            |
+> | Notación JS extra          | ❌   | ❌            | ✅ (`NaN`, etc.) |
+> | Coma en la última línea    | ❌   | ❌            | ✅            |
+> | Compatible con APIs        | ✅   | ❌            | ❌ (generalmente) |
+> | Soporte general            | 🔥   | 😐            | 😐            |
 >
-> El siguiente método SÍ modifica el array original
->
-> - `sort`
+> Por otro lado, JSON5 es poco usuado y no es nativamente compatible con todos los lenguajes. Para usarlo necesitas una librería que lo interprete.
 
 
-# 7. Operaciones frecuentes con objetos
+## 3.4. Plugins
 
-Las operaciones más frecuentes con objetos son las siguientes:
+Existen numerosos plugins para VSCode que nos permiten adaptar el entorno de desarrollo a nuestras necesidades. Para el desarrollo web suelen ser habituales, aunque pueden instalarse muchos otros, los siguientes:
 
-## 7.1. Inicializar
+**Spanish Language Pack for Visual Studio Code**
 
-```js
-// Crea nueva referencia y asigna memoria dinámica
-const persona = { nombre: 'Juan', edad: 20 }
-```
-
-## 7.2. Insertar
-
-```js
-const persona = { nombre: 'Juan', edad: 20 }
-
-persona.casado = false  // persona = { nombre: 'Juan', edad: 20, casado: false }
-```
-
-```js
-const persona = { nombre: 'Juan', edad: 20 }
-
-// Crea nueva referencia y asigna memoria dinámica
-persona = { ...persona, casado: false }  // persona = { nombre: 'Juan', edad: 20, casado: false }
-```
-
-## 7.3. Eliminar
-
-```js
-const persona = { nombre: 'Juan', edad: 20 }
-
-delete persona.edad  // persona = { nombre: 'Juan' }
-```
-
-## 7.4. Modificar
-
-```js
-const persona = { nombre: 'Juan', edad: 20 }
-
-persona.edad = 21  // persona = { nombre: 'Juan', edad: 21 }
-```
-
-```js
-const persona = { nombre: 'Juan', edad: 20 }
-
-// Crea nueva referencia y asigna memoria dinámica
-persona = { ...persona, edad: 21 } // persona = { nombre: 'Juan', edad: 21 }
-```
+Para cambiar el idioma de VSCode a español. 
 
 
+**Material Icon Theme**
 
-## 7.5. Copiar
-
-
-```js
-const persona = { edad: 11, direccion: {calle: "nueva", num: 1} }
-
-const copia_superficial = { ...persona }
-
-const copia_profunda1 = JSON.parse(JSON.stringify(persona))
-const copia_profunda2 = structuredClone(persona);
-
-// Test
-copia_superficial.direccion.num = 99 // persona = { edad: 11,  direccion: {calle: "nueva", num: 99} }
-copia_profunda1.direccion.num = 88   // persona = { edad: 11,  direccion: {calle: "nueva", num: 99} }
-copia_profunda2.direccion.num = 88   // persona = { edad: 11,  direccion: {calle: "nueva", num: 99} }
-```
+Permite mostrar un icono por cada carpeta y archivo.
 
 
+**Multiple cursor case preserve**
+
+Nos permite preservar mayúsculas y minúsculas cuando editamos con cursor múltiple (Ctrl+D)
 
 
-# 8. Framework Express
+**ESLint**
+
+Para hacer *lint* de Javascript.
+
+
+**Stylelint**
+
+Para hacer *lint* de CSS.
+
+
+**Error Lens** 
+
+Para mostrar los errores en la línea en la que ocurren.
+Este plugin puede considerarse opcional, según el caso. De cualquier modo, una vez instalado, puede deshabilitarse si lo consideramos intrusivo.
+
+
+**Console Ninja**
+
+Este plugin es opcional, pero recomendado para realizar tareas de depuración de código. Nos permite mostrar dentro del propio VSCode los mensajes producidos por `console.log()` sin tener que recurrir al terminal constantemente.
+
+
+**REST Client**
+
+Este plugin es opcional. Es útil cuando deseamos *testear endpoints* de una API REST.
+
+
+**Svg Preview**
+
+Este plugin es opcional, pero recomendado si trabajamos con imagenes vectoriales `.svg`. Permite su visualización gráfica.
+
+
+**Markdown All in One**
+
+Este plugin es opcional, pero recomendado si trabajamos con Markdown. Permite numerar automáticamente los títulos y crear índice de contenido, entre otras funcionalidades.
+
+
+**ES7+ React/Redux/React-Native snippets**
+
+Este plugin es opcional, pero recomendado si trabajamos con React y/o NextJS.
+
+
+**Prisma**
+
+Este plugin es opcional. Recomendado si trabajamos con ORM Prisma.
+
+
+**Tailwind CSS IntelliSense** y **Tailwind Fold**
+
+Plugins opcionales. Recomentados si trabajamos con framework CSS Tailwind.
+
+
+
+
+
+# 4. Framework Express
 
 Node.js nos permite desarrollar un servidor web desde cero. Para ello puede usarse los módulos incorporados `http` y `https`.
 
@@ -529,7 +613,7 @@ Pero, si en algo destaca, es la facilidad con la que puede desarrollarse una API
 
 
 
-# 9. Módulos externos
+# 5. Módulos externos
 
 NodeJS viene con numerosos módulos internos incorporados (built-in): `fs`, `os`, `process`, `path`, `http`, `https`, ...
 
@@ -545,7 +629,7 @@ Para instalar estos módulos externos usamos la herramienta `npm`.
 >
 
 
-## 9.1. Instalación de módulos externos
+## 5.1. Instalación de módulos externos
 
 ```bash
      npm  install  express      -S  
@@ -561,7 +645,7 @@ o de forma más corta
 sudo npm  i  json-server -g
 ```
 
-## 9.2. Opciones de NPM
+## 5.2. Opciones de NPM
 
 **-S,  --save**
 - dependencia de aplicación. Añade entrada en archivo `package.json`. En las últimas versiones de `npm` no es necesaria esta opción.
@@ -573,7 +657,7 @@ sudo npm  i  json-server -g
 - instala en el sistema de forma global. Se usa normalmente para paquetes ejecutables.
 
 
-## 9.3. Desinstalación de módulos externos
+## 5.3. Desinstalación de módulos externos
 ```bash
      npm  remove  express
      npm  remove  nodemon     -D 
@@ -587,7 +671,7 @@ o de forma más corta
 sudo npm  r  json-server -g
 ```
 
-# 10. Módulos CommonJS
+# 6. Módulos CommonJS
 
 Tradicionalemente NodeJS trabajaba y aún trabaja con **módulos CommonJS**. En este caso, para importar los módulos se hace con **`require`**. 
 
@@ -637,7 +721,7 @@ node  server
 >
 > Por tanto, poseen las propiedades y métodos correspondientes.
 
-# 11. Módulos ECMAScript
+# 7. Módulos ECMAScript
 
 Una forma de importar módulos más moderna y, que además es usada también en el lado cliente, es trabajar con **módulos ECMAScript**. En este caso para importar los módulos se hace con **`import`**. Es la forma recomendada de cara al futuro.
 
@@ -747,7 +831,7 @@ Para lanzar el servidor, hacemos:
 npm run dev
 ```
 
-## 11.1. Exportación e Importación
+## 7.1. Exportación e Importación
 
 Cuando usamos `ESM (ECMAScript Modules)`, un archivo puede exportar e importar:
 
@@ -762,7 +846,7 @@ A la hora de exportar, deberemos tener en cuenta que **un archivo**
 - puede exportar varios elementos que no sean por defecto
 
 
-### 11.1.1. Ejemplo sin package.json
+### 7.1.1. Ejemplo sin package.json
 
 Si no usamos archivo `package.json`, deberemos colocar a nuestros archivos la extensión `.mjs` (Module JavaScript)
 
@@ -793,7 +877,7 @@ node archivo2.mjs
 ```
 
 
-### 11.1.2. Ejemplo con package.json
+### 7.1.2. Ejemplo con package.json
 
 En este caso indicamos que nuestro proyecto es de `"type": "module"`. En este caso, los archivos ya no llevarán las extensión `.mjs` sino **`.js`**.
 
@@ -837,7 +921,7 @@ node  archivo2.js
 La exportación normal se debe importar usando llaves `{` y `}`. Se puede importar con otro nombre si usamos `as`. 
 
 
-# 12. Parámetros de URL
+# 8. Parámetros de URL
 
 Los parámetros de URL o **`URL Parameters`** son partes de la URL en las cuales los valores que aparecen pueden variar de una petición a otra, aunque la estructura de la URL se mantiene.
 
@@ -851,7 +935,7 @@ Existen 2 tipos:
 > A menudo se usa el término `Query Strings` como sinónimo de `URL Parameters`, lo cual no es del todo cierto como se acaba de ver y provoca confusiones.
 
 
-## 12.1. Parámetros de ruta (Path Parameters)
+## 8.1. Parámetros de ruta (Path Parameters)
 
 Son parámetros que están incorporados dentro de la ruta de la URL. Son parámetros de solicitud adjuntos a una URL que apuntan a un recurso de `API REST` específico.
 
@@ -866,7 +950,7 @@ Los parámetros de ruta son muy usados en `API REST`.
 ![API REST](assets/api-url.png)
 
 
-## 12.2. Parámetros de consulta (Query Parameters o Query Strings)
+## 8.2. Parámetros de consulta (Query Parameters o Query Strings)
 
 Son parámetros que están al final de la ruta de la URL, tras el signo `?` y están separados unos de otros mediante `&`
 
@@ -891,7 +975,7 @@ Ejemplos:
 - `https://api.github.com/users/jamj2000/repos?sort=created&direction=asc`
 
 
-# 13. Fetch desde el servidor
+# 9. Fetch desde el servidor
 
 
 Se entiende **`fetch`** como la **recuperación de datos solicitados a un servidor**. Es habitual que el formato de los datos sea **`JSON`**.
@@ -973,7 +1057,7 @@ app.get('/github/:organizacion', async (req, res) => {
 app.listen(3000)
 ```
 
-# 14. Creando nuestra propia API REST
+# 10. Creando nuestra propia API REST
 
 Con NodeJS+Express es realmente sencillo crear una `API REST`. 
 
@@ -1060,7 +1144,7 @@ app.delete('/api/users/:id', (request, response) => {
 app.listen(3000)
 ```
 
-## 14.1. Herramientas para probar la API
+## 10.1. Herramientas para probar la API
 
 Para comprobar el correcto funcionamiento de la API, tenemos muchas herramientas. Las más conocidas son:
 
@@ -1077,7 +1161,7 @@ Aunque también dispone de su versión [GUI](https://httpie.io/desktop)
 
 ![httpie-gui](assets/httpie-gui.png)
 
-## 14.2. CORS
+## 10.2. CORS
 
 El **intercambio de recursos entre orígenes** -Cross-Origin Resource Sharing (CORS)- es una característica de seguridad que te permite controlar qué sitios pueden acceder a tus recursos. 
 
@@ -1114,7 +1198,7 @@ app.use(cors({
 
 - [CORS con Express](https://expressjs.com/en/resources/middleware/cors.html)
 
-## 14.3. JWT (JSON Web Token)
+## 10.3. JWT (JSON Web Token)
 
 Un aspecto muy importante a tener en cuenta es la seguridad. En el caso de trabajar con APIs REST es muy común el uso de [JWT](https://jwt.io/) para la autenticación de los usuarios. En concreto, se suelen utilizar los llamados **`Bearer Tokens`**.  
 
@@ -1169,13 +1253,13 @@ El servidor verificará que el token sea correcto y si lo es, le proporcionará 
 ![jwt-delete](assets/jwt-delete.png)
 
 
-## 14.4. Documentación
+## 10.4. Documentación
 
 - [Documentación de Express](https://expressjs.com/en/4x/api.html)
 
 
 
-# 15. Formularios
+# 11. Formularios
 
 Los formularios es el método principal para enviar información al servidor desde el lado cliente o navegador. Los formularios únicamente pueden enviar esta información mediante 2 métodos:
 
@@ -1200,7 +1284,7 @@ Cuando se envía información desde un formulario, ésta puede codificarse de 3 
 > - https://blog.jim-nielsen.com/2022/browsers-json-formdata/
 
 
-## 15.1. application/x-www-form-urlencoded
+## 11.1. application/x-www-form-urlencoded
 
 ```javascript
 const express = require('express');
@@ -1226,7 +1310,7 @@ app.post('/', function (req, res, next) {
 app.listen(3000);
 ```
 
-## 15.2. multipart/form-data
+## 11.2. multipart/form-data
 
 ```javascript
 const express = require('express');
@@ -1257,7 +1341,7 @@ app.listen(3000);
 > Para gestionar los archivos subidos al servidor usaremos el paquete [`multer`](https://github.com/expressjs/multer/blob/master/doc/README-es.md)
 
 
-## 15.3. JSON
+## 11.3. JSON
 
 No existe la codificación `application/json` (~~enctype="application/json"~~). [Hubo una propuesta](https://www.w3.org/TR/html-json-forms/), pero quedó en nada.
 
@@ -1312,7 +1396,7 @@ app.listen(3000);
 >
 
 
-# 16. Referencias
+# 12. Referencias
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
 - [CommonJS vs ES Modules](https://lenguajejs.com/automatizadores/introduccion/commonjs-vs-es-modules/)
