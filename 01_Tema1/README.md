@@ -347,7 +347,7 @@ Según su nivel de complejidad y recursos necesarios, podemos dividirlos en 2 ti
 > Los primeros se suelen usar con aplicaciones desarrolladas con lenguajes como PHP, Java, .Net.
 > Los segundos suelen programarse específicamente para implementar el backend de una aplicación web desarrollada para Python, NodeJS.
 >
-> Tanto unos como otros pueden ofrecer tanto contenido estático como computo. 
+> Tanto unos como otros pueden ofrecer tanto contenido estático como cómputo. 
 
 
 ### 2.4.1. Servidores de contenido estático
@@ -356,13 +356,13 @@ Estos servidores web son funcionalmente muy sencillos. Se limitan a atender las 
 
 Suelen ser muy baratos e incluso gratuitos muchas veces. Se usan para desplegar sitios web y aplicaciones sencillas (del lado cliente). 
 
-Los servidores de computo, por otro lado, ofrecen la posibilidad de ejecutar código en el propio servidor, por lo cual suponen un mayor costo al proveedor tanto energético como en tiempo. Su complejidad y gestión también es menos simple. Aunque es posible encontrar algún que otro proveedor con un *free tier*, es habitual la necesidad de realizar un pago mensual.
+Los servidores de cómputo, por otro lado, ofrecen la posibilidad de ejecutar código en el propio servidor, por lo cual suponen un mayor costo al proveedor tanto energético como en tiempo. Su complejidad y gestión también es menos simple. Aunque es posible encontrar algún que otro proveedor con un *free tier*, es habitual la necesidad de realizar un pago mensual.
 
 
 
 ### 2.4.2. Servidores de contenido dinámico
 
-Son aquellos servidores que, antes de servir el contenido, realizan algún tipo de computo. Suele ser habitual la búsqueda y modificación de información en bases de datos y el posterior renderizado y envío de vistas al cliente (la mayoría de las veces es un navegador web). Otras operaciones que se realizan en el lado servidor suelen ser la gestión de la autenticación y autorización.
+Son aquellos servidores que, antes de servir el contenido, realizan algún tipo de cómputo. Suele ser habitual la búsqueda y modificación de información en bases de datos y el posterior renderizado y envío de vistas al cliente (la mayoría de las veces es un navegador web). Otras operaciones que se realizan en el lado servidor suelen ser la gestión de la autenticación y autorización.
 
 Los lenguajes más utilizados para estos fines, sin ningún orden en particular, son:
 
