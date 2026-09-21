@@ -1400,5 +1400,8 @@ app.listen(3000);
 
 - [Apuntes de Javascript](https://github.com/jamj2000/Javascript)
 - [CommonJS vs ES Modules](https://lenguajejs.com/automatizadores/introduccion/commonjs-vs-es-modules/)
+- [Código fuente de API con MongoDB](codigo/api-mongodb/)
+- [Código fuente de API con JWT](codigo/api-jwt/)
+- [Código fuente de API con Swagger](codigo/api-jwt-swagger/)
 - [API de ejemplo: Cat as a Service](https://cataas.com/doc.html)
 - [API de ejemplo: Dummy JSON](https://dummyjson.com/docs)
