@@ -209,17 +209,6 @@ Obtendremos el siguiente resultado:
 ```
 
 
-```
-origin http://localhost:3000
-pathname /api/products/bristol/books
-store bristol
-category books
-sort author
-skip 1
-``` 
-
-
-
 ## 2.4. Creación de API REST
 
 Como se ha comentado anteriormente, la principal aplicación que tienen los route handlers (`controladores de ruta`) es la implentación de APIs. Suele ser habitual el intercambio de información mediante el formato JSON.
