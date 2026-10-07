@@ -1157,6 +1157,14 @@ Una herramienta muy interesante es [HTTPie](https://httpie.io/), en especial su 
 
 ![httpie-cli](assets/httpie-cli.png)
 
+```sh
+# Ejemplos
+http -b GET    https://nxapi-mongodb.vercel.app/api/users
+http -b POST   https://nxapi-mongodb.vercel.app/api/users nombre='Jose' edad=22
+http -b PUT    https://nxapi-mongodb.vercel.app/api/users/67ad04ef7152afc8f3d0d1f9 nombre='José' edad=23
+http -b DELETE https://nxapi-mongodb.vercel.app/api/users/67ad04ef7152afc8f3d0d1f9
+```
+
 Aunque también dispone de su versión [GUI](https://httpie.io/desktop)
 
 ![httpie-gui](assets/httpie-gui.png)
