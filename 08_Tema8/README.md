@@ -163,21 +163,30 @@ Si tenemos `src/app/api/products/[store]/[category]/route.js` con el siguiente c
 
 ```js
 export async function GET(request, { params }) {
-    console.log( 'origin', request.nextUrl.origin )
-    console.log( 'pathname', request.nextUrl.pathname )
-
     // Params
     const { store, category } = await params
-    console.log( 'store', store )
-    console.log( 'category', category )
 
     // SearchParams
     const sort = request.nextUrl.searchParams.get("sort")
     const skip = request.nextUrl.searchParams.get("skip")
-    console.log( 'sort', sort )
-    console.log( 'skip', skip )
 
-    // ...
+    console.table({
+        origin: request.nextUrl.origin,
+        pathname: request.nextUrl.pathname,
+        store,
+        category,
+        sort,
+        skip
+    })
+
+    return Response.json({
+        origin: request.nextUrl.origin,
+        pathname: request.nextUrl.pathname,
+        store,
+        category,
+        sort,
+        skip
+    })
 }
 ```
 
@@ -187,6 +196,18 @@ Al hacer una petición a la siguiente URL:
 
 
 Obtendremos el siguiente resultado:
+
+```json
+{
+  "origin": "http://localhost:3000",
+  "pathname": "/api/products/bristol/books",
+  "store": "bristol",
+  "category": "books",
+  "sort": "author",
+  "skip": "1"
+}
+```
+
 
 ```
 origin http://localhost:3000
