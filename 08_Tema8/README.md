@@ -276,6 +276,16 @@ Gestión de datos en archivo `lib/mongodb.js`.
 
 - [Código fuente](https://github.com/jamj2000/nxapi-mongodb)
 
+> [!TIP]
+>
+> **Plantilla para proyecto de API**
+>
+> Podemos inicializar un proyecto con un ejemplo básico de API con el comando
+>
+> ```sh
+> npx  create-next-app  mi-api  --api
+> ```
+
 
 ## 2.5. Herramientas para probar la API
 
