@@ -1,0 +1,30 @@
+---
+config:
+  theme: 'redux-color'
+---
+sequenceDiagram
+    autonumber
+    actor Cliente
+    participant API as Servidor
+
+    rect rgb(235, 245, 255)
+        Note over Cliente,API: 1. Obtención del token
+        Cliente->>API: POST /api/login
+        Note right of Cliente: Credenciales
+        API->>API: Validar credenciales
+        API-->>Cliente: 200 OK + access_token (JWT)
+    end
+
+    rect rgb(230, 248, 243)
+        Note over Cliente,API: 2. Consulta del endpoint
+        Cliente->>API: GET /api/recurso
+        Note right of Cliente: Authorization: Bearer access_token
+        API->>API: Validar token y permisos
+        alt Token válido
+            API-->>Cliente: 200 OK + datos solicitados
+        else Token inválido o expirado
+            API-->>Cliente: 401 Unauthorized
+        else Sin permisos suficientes
+            API-->>Cliente: 403 Forbidden
+        end
+    end

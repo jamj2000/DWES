@@ -1225,10 +1225,13 @@ Y en algunos casos también podemos desear proteger otros endpoints de tipo `GET
 A grandes rasgos, la protección de los endpoints se realiza de la siguiente manera:
 
 1. El cliente inicia sesión (envía sus credenciales).
-2. El servidor le proporciona un **token** (JWT).
-3. El cliente proporciona el token en cada solicitud (en la cabecera `Authorization`).
-4. El servidor verifica el token.
-5. El servidor proporciona los datos.
+2. **El servidor valida las credenciales**
+3. El servidor le proporciona un **token** (JWT).
+4. El cliente proporciona el token en cada solicitud (en la cabecera `Authorization`).
+5. **El servidor valida el token**
+6. El servidor proporciona los datos.
+
+![secuencia jwt](assets/secuencia-jwt.png)
 
 Para ello hemos implementado el endpoint:
 
@@ -1263,7 +1266,217 @@ El servidor verificará que el token sea correcto y si lo es, le proporcionará 
 
 ## 10.4. Documentación
 
-- [Documentación de Express](https://expressjs.com/en/4x/api.html)
+Para los usuarios o aplicaciones cliente que consumen nuestra API es muy importante que ésta esté documentada.
+
+Un sistema de documentación muy usado actualmente es **OpenAPI + Swagger**.
+
+**[OpenAPI](https://www.openapis.org/)** es una especificación estándar para describir APIs REST.
+
+En pocas palabras, OpenAPI define cómo documentar una API de forma estructurada y legible tanto para humanos como para máquinas.
+
+Con OpenAPI puedes describir:
+
+- Rutas (endpoints) disponibles
+- Métodos HTTP (GET, POST, PUT, DELETE, etc.)
+- Parámetros de entrada
+- Cuerpos de las peticiones
+- Respuestas posibles
+- Códigos de estado
+- Autenticación (JWT, OAuth, API keys, etc.)
+
+Se suele escribir en YAML o JSON.
+
+
+Por otro lado, **[Swagger](https://swagger.io/)** es un conjunto de herramientas que usan la especificación OpenAPI.
+
+Herramientas más conocidas de Swagger:
+
+- Swagger UI → Interfaz web para ver y probar la API
+- Swagger Editor → Editor para escribir archivos OpenAPI
+- Swagger Codegen → Genera código cliente o servidor automáticamente
+- Swagger Hub → Plataforma colaborativa para APIs
+
+Con Swagger UI puedes:
+
+- Ver la documentación de la API
+- Probar endpoints directamente desde el navegador
+- Enviar requests sin usar Postman
+
+
+**Proyecto de ejemplo**
+
+- [Swagger - Ejemplo básico](https://github.com/jamj2000/DWES/tree/main/02_Tema2/codigo/api-jwt-swagger)
+
+
+**Especificación OpenAPI 3.0**
+
+Especificación OpenAPI 3.0 ( en ruta `/api-docs`: archivo `openapi.json` )
+
+
+`openapi.json` es un archivo JSON organizado de la siguiente manera:
+
+```json
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Products JWT",
+      "description": "API REST de productos con autenticación JWT",
+      "version": "1.0.0"
+    },
+    "components": {
+      ...
+    }
+    "paths": {
+      ...
+    } 
+```
+
+
+En el apartado de **`components`** tenemos la configuración de autenticación (en este caso **Bearer JWT**) y los schemas (modelos de datos):
+
+- `securitySchemes`
+- `schemas`
+
+
+```json
+"components": { 
+      "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+      },
+      "schemas": {
+            "Product": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "nombre": {
+                      "type": "string",
+                      "example": "Teclado"
+                    },
+                    "precio": {
+                      "type": "number",
+                      "example": 100
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "nombre",
+                    "precio"
+                  ]
+          },
+          ...
+      }
+}
+```
+
+En el apartado de **`paths`** tenemos documentados los **endpoints** disponibles, **cada uno con**:
+
+- `security` (su configuración de seguridad, en caso de ser necesaria)
+- `parameters`
+- `requestBody`
+- `responses` admitidas.
+
+
+```json
+"paths": {
+       "/api/products": {
+            "post": {
+                "summary": "Crear nuevo producto",
+                "tags": [
+                    "Products"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Producto creado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Datos requeridos."
+                    },
+                    "401": {
+                        "description": "Token requerido."
+                    },
+                    "403": {
+                        "description": "Token inválido o expirado."
+                    },
+                    "500": {
+                        "description": "Error interno del servidor."
+                    }
+                }
+            },
+            "get": {
+                "summary": "Lista de productos",
+                "tags": [
+                    "Products"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de productos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                      "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        ...
+}
+```
+
+> [!TIP]
+>
+> Es posible escribir la especificación en formato **YAML**, que es menos *verboso* que JSON.
+
+
+**Página interactiva**
+
+`/api-docs`
+
+![apidoc](assets/apidoc.png)
+
+
+En [este proyecto](https://github.com/jamj2000/DWES/tree/main/02_Tema2/codigo/api-jwt-swagger) se ha utilizado un sistema de Autorización mediante ***Bearer token***, siendo éste de tipo **[JWT](https://www.fastly.com/es/learning/security/what-is-jwt)**.
+
+Los **endpoints** que modifican la información de la API (métodos **POST**, **PATCH**, **PUT** y **DELETE**) requieren que el cliente proporcione el JWT que previamente habrá solicitado al servidor. Este token estará firmado con la clave secreta del servidor y su autenticidad puede comprobarse en [jwt.io](https://jwt.io)
+
+![jwt](assets/jwt.png)
+
+
+
 
 
 
@@ -1413,3 +1626,4 @@ app.listen(3000);
 - [Código fuente de API con Swagger](codigo/api-jwt-swagger/)
 - [API de ejemplo: Cat as a Service](https://cataas.com/doc.html)
 - [API de ejemplo: Dummy JSON](https://dummyjson.com/docs)
+- [Documentación de Express](https://expressjs.com/en/4x/api.html)

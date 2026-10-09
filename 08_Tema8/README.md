@@ -459,7 +459,11 @@ Es un archivo JSON público que describe la API. Está organizado de la siguient
 ```
 
 
-En el apartado de **`components`** tenemos la configuración de autenticación (en este caso Bearer JWT) y los schemas (modelos de datos)
+En el apartado de **`components`** tenemos la configuración de autenticación (en este caso Bearer JWT) y los schemas (modelos de datos):
+
+- `securitySchemes`
+- `schemas`
+
 
 ```json
 "components": { 
@@ -516,7 +520,12 @@ En el apartado de **`components`** tenemos la configuración de autenticación (
 }
 ```
 
-En el apartado de **`paths`** tenemos la documentados los **endpoints** disponibles, cada uno con su configuración de seguridad (en caso de ser necesaria), los `parameters`, `requestBody` y `responses` admitidos.
+En el apartado de **`paths`** tenemos documentados los **endpoints** disponibles, **cada uno con**:
+
+- `security` (su configuración de seguridad, en caso de ser necesaria)
+- `parameters`
+- `requestBody`
+- `responses` admitidas.
 
 
 ```json
