@@ -928,13 +928,13 @@ Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
 
 ```sh 
 npm  install  prisma@7  -D
-npm  install  @prisma/client@7  @prisma/adapter-pg  dotenv
+npm  install  @prisma/client@7  @prisma/adapter-pg 
 ``` 
 
 > [!NOTE]
 >
-> Al instalar el paquete `prisma` también se instala el paquete `dotenv`, necesario para leer archivo `.env`.
-> Al instalar el paquete `adapter-pg` también se instala el paquete `pg` que es el driver para trabajar con Postgresql.
+> Al instalar el paquete `prisma` también se instala el paquete **`dotenv`**, necesario para leer archivo `.env`.
+> Al instalar el paquete `adapter-pg` también se instala el paquete **`pg`** que es el driver para trabajar con Postgresql.
 
 
 > [!TIP]
@@ -945,7 +945,7 @@ npm  install  @prisma/client@7  @prisma/adapter-pg  dotenv
 >  
 > ```sh
 > npm  install  prisma@7  -D
-> npm  install  @prisma/client@7  @prisma/adapter-better-sqlite3  dotenv
+> npm  install  @prisma/client@7  @prisma/adapter-better-sqlite3 
 > ```
 
 ## 7.2. Comandos disponibles
@@ -986,7 +986,18 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// Definimos los modelos/tablas 
 ```
+
+> [!NOTE]
+>
+> Para crear las tablas en la base de datos ejecutamos:
+>
+> ```sh
+> npx  prisma  db  push
+> ```
+
 
 Como `provider` del `datasource` tenemos los siguientes: 
 
@@ -1033,14 +1044,6 @@ export default defineConfig({
 });
 
 ```
-
-
-Para crear las tablas en la base de datos ejecutamos:
-
-```sh
-npx  prisma  db  push
-```
-
 
 ## 7.4. Generación del cliente
 
