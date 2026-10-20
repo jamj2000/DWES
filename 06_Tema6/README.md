@@ -928,7 +928,7 @@ Las dos primeras tareas son obligatorias. La tercera tarea es opcional.
 
 ```sh 
 npm  install  prisma@7  -D
-npm  install  @prisma/client  @prisma/adapter-pg
+npm  install  @prisma/client@7  @prisma/adapter-pg  dotenv
 ``` 
 
 > [!NOTE]
@@ -936,6 +936,17 @@ npm  install  @prisma/client  @prisma/adapter-pg
 > Al instalar el paquete `prisma` también se instala el paquete `dotenv`, necesario para leer archivo `.env`.
 > Al instalar el paquete `adapter-pg` también se instala el paquete `pg` que es el driver para trabajar con Postgresql.
 
+
+> [!TIP]
+> 
+> **SQLite**
+>
+> En ciertos casos quizás deseemos trabajar con una base de datos local, por ejemplo durante el desarrollo. Podemos instalar los paquetes para SQLite con los siguientes comanddos:
+>  
+> ```sh
+> npm  install  prisma@7  -D
+> npm  install  @prisma/client@7  @prisma/adapter-better-sqlite3  dotenv
+> ```
 
 ## 7.2. Comandos disponibles
 
