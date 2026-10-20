@@ -1004,6 +1004,12 @@ Como `provider` del `datasource` tenemos los siguientes:
 DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
 ```
 
+> [!NOTE]
+> 
+> El formato de la variable de entorno `DATABASE_URL` es el siguiente:
+>
+> `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>?<options>'`
+
 
 **`prisma.config.ts`**
 
@@ -1028,11 +1034,6 @@ export default defineConfig({
 
 ```
 
-> [!NOTE]
-> 
-> El formato de la variable de entorno `DATABASE_URL` es el siguiente:
->
-> `DATABASE_URL='<provider>://<user>:<pass>@<host>:<port>/<db>'`
 
 Para crear las tablas en la base de datos ejecutamos:
 
