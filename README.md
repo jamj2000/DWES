@@ -25,6 +25,12 @@ Módulo de **Desarrollo Web en Entorno Servidor** del ciclo de Desarrollo de Apl
 
 ---
 
+## Recursos
+
+- [Plantilla para Next.js](https://github.com/jamj2000/next-starter)
+- [Componentes UI](https://simpleui.dev) 
+
+---
 ## Proyectos
 
 - [Páginas y Layouts](https://github.com/jamj2000/nxapp-router)
