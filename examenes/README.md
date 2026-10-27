@@ -14,3 +14,9 @@
 - [examen-dwes-24-25-mysql-api](https://github.com/jamj2000/examen-dwes-24-25-mysql-api)
 
 - [examen-dwes-24-25-form-prisma](https://github.com/jamj2000/examen-dwes-24-25-form-prisma)
+
+### Curso 25-26
+
+- [examen-dwes-25-26-mysql-api](https://github.com/jamj2000/examen-dwes-25-26-mysql-api)
+
+- [examen-dwes-25-26-form-prisma](https://github.com/jamj2000/examen-dwes-25-26-form-prisma)
