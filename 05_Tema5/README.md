@@ -10,31 +10,31 @@
 
 ---
 - [1. Introducción](#1-introducción)
-- [2. Server Actions](#2-server-actions)
-  - [2.1. Crear acciones del servidor](#21-crear-acciones-del-servidor)
-  - [2.2. Ejecutar acciones del servidor](#22-ejecutar-acciones-del-servidor)
-  - [2.3. ¿Qué hace la acción del servidor al finalizar?](#23-qué-hace-la-acción-del-servidor-al-finalizar)
-- [3. Caché de datos en el servidor (Server Data Cache)](#3-caché-de-datos-en-el-servidor-server-data-cache)
-  - [3.1. Introducción](#31-introducción)
-  - [3.2. Activar Cache Components](#32-activar-cache-components)
-  - [3.3. Funcionamiento de Cache Components](#33-funcionamiento-de-cache-components)
-  - [3.4. Lectura de datos (Read)](#34-lectura-de-datos-read)
-  - [3.5. Mutación de datos (Create, Update y Delete)](#35-mutación-de-datos-create-update-y-delete)
-  - [3.6. ¿Cuándo utilizar updateTag(), revalidateTag() y revalidatePath()?](#36-cuándo-utilizar-updatetag-revalidatetag-y-revalidatepath)
-  - [3.7. Consideraciones importantes](#37-consideraciones-importantes)
-  - [3.8. Conclusión](#38-conclusión)
-- [4. Formularios y acciones](#4-formularios-y-acciones)
-  - [4.1. POST vs GET](#41-post-vs-get)
-    - [4.1.1. POST](#411-post)
-    - [4.1.2. GET](#412-get)
-  - [4.2. Consejos](#42-consejos)
-    - [4.2.1. Usa **`button`** siempre con la propiedad `type`.](#421-usa-button-siempre-con-la-propiedad-type)
-    - [4.2.2. Usa **`input`** con propiedades y valor del tipo adecuado](#422-usa-input-con-propiedades-y-valor-del-tipo-adecuado)
-    - [4.2.3. Usa **`label`** correctamente](#423-usa-label-correctamente)
-    - [4.2.4. Usa **`defaultValue`** y **`value`** correctamente](#424-usa-defaultvalue-y-value-correctamente)
-    - [4.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#425-usa-disabled-y-readonly-correctamente)
-    - [4.2.6. Usa **`select`** correctamente](#426-usa-select-correctamente)
-    - [4.2.7. Gestiona los valores que recibe la acción del servidor](#427-gestiona-los-valores-que-recibe-la-acción-del-servidor)
+- [2. Formularios y acciones](#2-formularios-y-acciones)
+  - [2.1. POST vs GET](#21-post-vs-get)
+    - [2.1.1. POST](#211-post)
+    - [2.1.2. GET](#212-get)
+  - [2.2. Consejos](#22-consejos)
+    - [2.2.1. Usa **`button`** siempre con la propiedad `type`.](#221-usa-button-siempre-con-la-propiedad-type)
+    - [2.2.2. Usa **`input`** con propiedades y valor del tipo adecuado](#222-usa-input-con-propiedades-y-valor-del-tipo-adecuado)
+    - [2.2.3. Usa **`label`** correctamente](#223-usa-label-correctamente)
+    - [2.2.4. Usa **`defaultValue`** y **`value`** correctamente](#224-usa-defaultvalue-y-value-correctamente)
+    - [2.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#225-usa-disabled-y-readonly-correctamente)
+    - [2.2.6. Usa **`select`** correctamente](#226-usa-select-correctamente)
+- [3. Server Actions](#3-server-actions)
+  - [3.1. Crear acciones del servidor](#31-crear-acciones-del-servidor)
+  - [3.2. Ejecutar acciones del servidor](#32-ejecutar-acciones-del-servidor)
+  - [3.3. Gestiona los valores que recibe la acción del servidor](#33-gestiona-los-valores-que-recibe-la-acción-del-servidor)
+  - [3.4. ¿Qué hace la acción del servidor al finalizar?](#34-qué-hace-la-acción-del-servidor-al-finalizar)
+- [4. Caché de datos en el servidor (Server Data Cache)](#4-caché-de-datos-en-el-servidor-server-data-cache)
+  - [4.1. Introducción](#41-introducción)
+  - [4.2. Activar Cache Components](#42-activar-cache-components)
+  - [4.3. Funcionamiento de Cache Components](#43-funcionamiento-de-cache-components)
+  - [4.4. Lectura de datos (Read)](#44-lectura-de-datos-read)
+  - [4.5. Mutación de datos (Create, Update y Delete)](#45-mutación-de-datos-create-update-y-delete)
+  - [4.6. ¿Cuándo utilizar updateTag(), revalidateTag() y revalidatePath()?](#46-cuándo-utilizar-updatetag-revalidatetag-y-revalidatepath)
+  - [4.7. Consideraciones importantes](#47-consideraciones-importantes)
+  - [4.8. Conclusión](#48-conclusión)
 - [5. Funciones del lado cliente](#5-funciones-del-lado-cliente)
   - [5.1. useFormStatus](#51-useformstatus)
   - [5.2. useActionState: simplificando lo anterior](#52-useactionstate-simplificando-lo-anterior)
@@ -57,15 +57,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 --- 
 
 # 1. Introducción
@@ -78,13 +69,501 @@ Como comparativa para constrastar, también incluimos en este tema la técnica `
 
 
 
-# 2. Server Actions
+# 2. Formularios y acciones
+
+El uso de formularios para la recogida de datos y su envío al servidor es una tarea muy habitual. 
+
+El diseño e implementación de formularios y sus *inputs* y *buttons* asociados no es tan trivial como puede parecer a primera vista. En este tema estudiaremos las bases para ello, y veremos las diferencias entre la forma en la que se trabaja en HTML frente a JSX. Existen algunas pequeñas diferencias que son clave y que pueden complicarnos la vida cuando no se conocen.  
+
+
+**Varias acciones dentro de un formulario**
+
+La forma tradicional, y más intuitiva, de gestionar la información de un formulario es vinculándolo a una **acción de servidor**.   
+
+Además es posible indicar varias **acciones** dentro del formulario, lo cual puede ser muy interesante cuando deseamos realizar distintas operaciones con los datos.
+
+En HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](https://www.w3schools.com/tags/att_formaction.asp) . Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
+
+NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
+
+```html
+    <form>
+          <input type='hidden' name='id' defaultValue={user.id} />
+
+          <label htmlFor='nombre'>Usuario</label>
+          <input type='text' id='nombre' name='nombre' defaultValue={user.nombre} />
+
+          <label htmlFor='edad'>Edad</label>
+          <input type='text' id='edad' name='edad' defaultValue={user.edad} />
+
+          <button type='submit' formAction={userUpdate}>Actualizar</button>
+          <button type='submit' formAction={userDelete}>Eliminar</button>
+    </form>
+```
+
+Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar distintas acciones: actualizar, eliminar, ...
+
+
+[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
+
+
+## 2.1. POST vs GET
+
+La información recogida en un formulario puede enviarse al servidor de 2 maneras distintas:
+
+- **POST** 
+- **GET**
+
+### 2.1.1. POST
+
+Cuando usamos el método POST, **la información se envía en el cuerpo de la petición** y no es visible para el usuario. 
+
+**Esta es la forma recomendada en la mayoría de los casos**, por ejemplo:
+
+- Hay campos con información confidencial, como puede ser contraseñas y similar.
+- Hay gran cantidad de información a enviar al servidor, como muchos inputs, textareas, ...
+- Necesitamos enviar archivos al servidor mediante `input type='file'`.
+
+Es habitual su uso para enviar información de un formulario para su procesamiento en el servidor. Las operaciones que se realizan, normalmente sobre una BD, son:
+
+- **Inserción**
+- **Modificación**
+- **Eliminación**
+
+Este método también se usa en operaciones de autenticación, como:
+
+- **Registro**
+- **Login**
+- **Logout**
+  
+
+En **JSX** se escribe de la siguiente forma:
+
+```js
+<form  action={...}>
+
+  {/* Elementos del formulario */}
+
+</form>
+```
+
+> [!NOTE]
+> 
+> `action` es una función asíncrona ejecutada en el servidor, por ejemplo `action={insertarProducto}`
+
+Su equivalencia en **HTML** es la siguiente:
+
+
+```html
+<form  action="..."  method="POST"  enctype="multipart/form-data">
+
+  <!-- Elementos del formulario -->
+
+</form>
+```
+
+> [!NOTE]
+> 
+> En HTML, 
+> - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
+> - si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
+>  
+> Sin embargo en JSX, en el componente `form` (con f minúscula), de forma implícita, por defecto es  `method="POST"` y `enctype="multipart/form-data"`. Esto último permite el uso de `input type="file"`, y por tanto la subida de archivos al servidor.  
+>
+> Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
+
+
+### 2.1.2. GET
+
+Cuando usamos el método GET, **la información se envía en la URL de la petición** y es visible para el usuario.
+
+Su uso es menos habitual, aunque es adecuado en el siguiente caso:
+
+- Necesitamos enviar poca información al servidor y deseamos que esa información sea pública.
+
+Suele usarse para enviar información de filtrado en la URL de una página, por ejemplo:
+
+http://www.example.com/products **?query=laptop&sort=price&page=2**
+
+Esta información de filtrado suele clasificarse en 3 categorías:
+
+- **Búsqueda**
+- **Ordenación**
+- **Paginación**
+
+En JSX se escribe de la siguiente forma:
+
+```js
+import Form from 'next/form'; // IMPORTANTE. Necesario importar. 
+
+// ...
+
+<Form  action="...">
+
+  <input name='query' {/* ... */} />
+  <input name='sort'  {/* ... */} />
+  <input name='page'  {/* ... */} />
+
+</Form>
+```
+
+> [!TIP]
+> 
+> Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
+
+
+> [!TIP] 
+> 
+> `action` es la página que recibirá la información en forma de parámetros de consulta, por ejemplo `action="/productos"`.  Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
+
+
+> [!IMPORTANT] 
+> 
+> En HTML, 
+> - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
+> - si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
+>  
+> **En JSX**, en el componente `Form` (con F mayúscula), también es así, pero **no debemos indicar `method` ni `enctype`, puesto que dará error**.
+
+
+Su equivalencia en HTML es la siguiente:
+
+```html
+<form  action="..."  method="GET"  enctype="application/x-www-form-urlencoded">
+
+  <input name='query' <!-- ... --> />
+  <input name='sort'  <!-- ... --> />
+  <input name='page'  <!-- ... --> />
+
+</form>
+```
+
+[Proyecto de ejemplo](https://github.com/jamj2000/nxform-filter)
+
+## 2.2. Consejos
+
+Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
+
+Aquí van algunos consejos:
+
+
+### 2.2.1. Usa **`button`** siempre con la propiedad `type`.
+
+En Next.js, si usas un `<button>` sin especificar la propiedad `type`, su comportamiento es el mismo que en HTML estándar, es decir por defecto es `type="submit"`
+
+```js
+<button>
+    Guardar
+</button>
+```
+
+Este botón se comporta como si hubieras escrito:
+
+```js
+<button type="submit">
+    Guardar
+</button>
+```
+
+Esto significa que:
+
+- Si estás dentro de un `<form>`, al hacer clic en el botón se enviará el formulario (es decir, se ejecutará la acción del formulario).
+
+- Esto puede causar comportamientos inesperados si tú pretendías que ese botón solo hiciera algo en el cliente (como cerrar un modal, limpiar campos, etc.).
+
+
+**✅ Buenas prácticas en Next.js (y React en general)**
+
+Siempre declara explícitamente el `type`, para evitar errores:
+
+| Comportamiento deseado      | Código recomendado                        |
+| --------------------------- | ----------------------------------------- |
+| Enviar el formulario        | `<button type="submit">Enviar</button>`   |
+| Botón sin enviar formulario | `<button type="button">Cancelar</button>` |
+| Reiniciar el formulario     | `<button type="reset">Reiniciar</button>` |
+
+**⚠️ Errores comunes**
+
+Si usas un botón dentro de un formulario y no especificas `type="button"`, puede causar errores como envíar el formulario sin querer
+
+```js
+<form>
+  <button onClick={() => cerrarModal()}> // ¡Envía el formulario sin querer!
+    Cancelar
+  </button> 
+</form>
+```
+Solución:
+
+```js
+<form>
+  <button type="button" onClick={() => cerrarModal()}>
+    Cancelar
+  </button>
+</form>
+```
+
+En resumen
+
+✅ **Si no especificas type, el valor por defecto es submit.**  
+🛠️ Es buena práctica declarar siempre type explícitamente.  
+🧠 Esto es HTML estándar, no algo específico de Next.js.  
+
+
+### 2.2.2. Usa **`input`** con propiedades y valor del tipo adecuado
+
+A diferencia de HTML donde todos los valores de las propiedades son de tipo string, en JSX el valor para algunas propiedades debe ser `number` o `boolean`. 
+
+A continuación se muestran ejemplos de **código JSX** con errores y correcto.
+
+**MAL ❌**
+
+```js
+<input type="number" min="1" max="100" />  // Permitido en HTML. No permitido en JSX
+<input required="true" disabled="true" />  // Permitido en HTML. No permitido en JSX
+<input required disabled />                // Permitido en HTML. Permitido en JSX
+```
+
+**BIEN ✅**
+
+```js
+<input type="number" min={1} max={100} />  // Correcto en JSX
+<input required={true} disabled={true} />  // Correcto en JSX
+<input required  disabled />               // Correcto en JSX     
+```
+
+### 2.2.3. Usa **`label`** correctamente
+
+**MAL ❌**
+
+```js
+<label>Número:</label>                              // Provoca warning en JSX
+<input id="num" type="number" min={1} max={100} />   
+```
+
+**BIEN ✅**
+
+```js
+<label htmlFor="num">Número: </label>                  
+<input id="num" type="number" min={1} max={100} />  
+```
+
+**BIEN ✅**
+
+```js
+<label>Número:                   
+  <input type="number" min={1} max={100} />  
+</label>  
+```
+
+### 2.2.4. Usa **`defaultValue`** y **`value`** correctamente
+
+La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
+
+A continuación tienes los contextos en los que se usa cada propiedad:
+
+| Propiedad      | Contexto                                            |
+| -------------- | --------------------------------------------------- |
+| **`value`**    | Para valores asociados a una variable de **estado** |
+| `defaultValue` | Para valores no asociados a una variable de estado  |
+
+
+Ejemplo:
+
+
+```js
+'use client'
+import { useState } from 'react';
+
+
+export default function Cuadrado({ long, width }) {
+
+    const [largo, setLargo] = useState(long)
+    const [ancho, setAncho] = useState(width)
+
+    return (
+        <form>
+            <label> Escala:
+                <input type="number" name="escala" step={0.01}
+                    defaultValue={1}    // Correcto. No asociado a variable de estado   
+                />
+            </label>
+            <label> Largo:
+                <input type="number" name="largo" step={0.01}
+                    onChange={(e) => setLargo(e.target.value)}
+                    value={largo}      // Correcto. Variable de estado
+                />
+            </label>
+            <label> Ancho:
+                <input type="number" name="ancho" step={0.01}
+                    onChange={(e) => setAncho(e.target.value)}
+                    value={ancho}       // Correcto. Variable de estado
+                />
+            </label>
+            <label> Área:
+                <input type="number" name="area" readOnly
+                    value={largo * ancho}   // Correcto. Valor derivado del estado
+                    onChange={() => {}}
+                />
+            </label>  
+        </form>
+    )
+}
+```
+
+> [!NOTE]
+>
+> React, y por tanto JSX, distingue entre **entradas controladas** y **entradas no controladas**.
+> 
+> Una entrada como `<input />` no está controlada. Incluso si pasamos un valor inicial como `<input defaultValue="Initial text" />`, JSX solo especifica el valor inicial. No controla cuál debería ser el valor en otro momento.      
+>
+> Para representar una **entrada controlada**, le pasamos la propiedad **`value`** (o `checked` para los checkbox y radio). React forzará que la entrada coincida siempre con dicho valor. Este valor se guarda en una variable de estado, que es actualizada  con un gestor de eventos. Ejemplo:
+>
+> ```js
+>function Form() {
+>  const [firstName, setFirstName] = useState(''); // Declaramos variable de estado ...
+>  // ... 
+>  return (
+>    <input
+>      // ...forzamos que el valor del input value coincida con el la variable de estado...
+>      value={firstName} 
+>      // ... y actualizamos la variable de estado en cada cambio
+>      onChange={e => setFirstName(e.target.value)}
+>    />
+>  );
+>}
+>```
+>
+> Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
+
+### 2.2.5. Usa **`disabled`** y **`readOnly`** correctamente
+
+Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
+
+La principal diferencia es la siguiente:
+
+- cuando usamos `readOnly` el valor SÍ será enviado al servidor.
+- cuando usamos `disabled` el valor NO será enviado al servidor.
+
+Ejemplo:
+
+```js
+export default Formulario (  ) {
+
+  return (
+   <form action={action}>
+              <label> Número 1:
+                <input  type="number"  name="num1"  step={0.01}
+                  defaultValue={ 1 }   
+                />
+              </label>
+
+              <label> Número 2:
+                <input  type="number"  name="num2"  step={0.01}
+                  defaultValue={ 2 }
+                  readOnly         // Valor no modificable. SÍ se envía al servidor                      
+                />
+              </label>  
+
+              <label> Número 3:
+                <input  type="number"  name="num3"  step={0.01} 
+                  defaultValue={ 3 }  
+                  disabled         // Valor no modificable. NO se envía al servidor 
+                />  
+              </label>
+
+              <button type="submit"> </button>
+    </form>
+  )
+}
+```
+
+
+> [!NOTE]
+>
+> El componente `fieldset` también admite la propiedad `disabled`. A menudo esto es útil para deshabilitar un grupo de inputs. Sin embargo tiene el inconveniente de que los valores de los *inputs* dentro del *fieldset disabled* no serán enviados al servidor.
+> 
+> El componente `fieldset` no admite la propiedad `readOnly`. 
+
+> [!IMPORTANT]
+>
+> Recuerda que los valores de los componentes `input`, `select`, `textarea`, ... no se enviarán al servidor si están dentro de un `fieldset disabled`. 
+> 
+> De la misma manera, tampoco se lanzarán las acciones de los componentes `button` que estén dentro de dicho componente.
+
+
+> [!NOTE] 
+> 
+> La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
+
+
+### 2.2.6. Usa **`select`** correctamente
+
+Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
+
+En HTML hacemos
+
+```html
+<select name="localidad">
+      <option value="1"> Álava </option>
+      <option value="2"> Albacete </option>
+      <option value="3" selected> Almeria </option>
+      <option value="4"> Ávila </option>
+</select>
+```
+
+En JSX debemos hacer
+
+```js
+<select
+  key={3}
+  name="localidad"
+  defaultValue={3}>
+      <option value={1}> Álava </option>
+      <option value={2}> Albacete </option>
+      <option value={3}> Almeria </option>
+      <option value={4}> Ávila </option>
+</select>
+```
+A diferencia de HTML, no se admite pasar el atributo `selected` a `option`. Para indicar la opción seleccionada por defecto usamos `defaultValue`.
+
+Por otro lado, cuando usamos array de objetos y los recorremos con el método `map`, el formato a seguir es el que aparece a continuación:
+
+
+```js
+<select
+  key={localidadId}
+  name="localidad"
+  defaultValue={localidadId} >
+    {localidades.map(localidad => (
+        <option key={localidad.id} value={localidad.id}> {localidad.nombre} </option>
+    ))}
+</select>
+```
+
+> [!TIP]
+> 
+> **CONSEJO IMPORTANTE**
+>
+> Usa siempre una propiedad **key** en el select, cuando trabajes con entrada no controlada. 
+> El valor de dicha propiedad debe ser dinámico, y cambiar cuando el usuario seleccione una opción distinta a la anterior.
+>
+> El motivo es que [React trabaja con un Virtual DOM y necesita saber que un elemento ha cambiado para sincronizar cambios con el DOM](https://www.escuelafrontend.com/prop-key-en-react). 
+> 
+> Si no lo hacemos así los cambios realizados en VDOM no se verán reflejados en el DOM. 
+ 
+      
+- Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
+
+
+
+# 3. Server Actions
 
 **Las acciones de servidor son funciones asíncronas que serán ejecutadas en el servidor**. Fueron introducidas en NextJS 13. 
 
 **Se usan habitualmente para procesar, en el lado servidor, datos procedentes de un formulario.**
 
-## 2.1. Crear acciones del servidor
+## 3.1. Crear acciones del servidor
 
 Personalmente recomiendo, para mejor organización y con fin a obtener un código más legible, colocar todas las `server actions` en un archivo o archivos separados. Un archivo puede contener varias acciones del servidor.
 
@@ -180,7 +659,7 @@ export async function logout() {
 >
 > Siendo *nombre-del-campo* el que aparece en el atributo `name` del input del formulario
 
-## 2.2. Ejecutar acciones del servidor
+## 3.2. Ejecutar acciones del servidor
 
 Para invocar a una acción del servidor desde un formulario bastará con indicarlo con el atributo `action` del elemento `form`.
 
@@ -203,7 +682,59 @@ function Login() {
 export default Login
 ```
 
-## 2.3. ¿Qué hace la acción del servidor al finalizar?
+
+## 3.3. Gestiona los valores que recibe la acción del servidor
+
+Un aspecto importante a tener en cuenta es que **los valores definidos en los campos del formulario**, independientemente de su tipo, **serán enviados desde el formulario (lado cliente) a la acción de servidor siempre en formato `string`**.
+
+Por tanto, la acción del servidor deberá realizar las conversiones necesarias.
+
+A continuación tienes una tabla de los tipos de datos en cada lado.
+
+
+| Form        | ⇨   | Action         |
+| ----------- | --- | -------------- |
+| `string`    | ⇨   | `string`       |
+| `number`    | ⇨   | `string`       |
+| `boolean`   | ⇨   | `string`       |
+| `Date`      | ⇨   | `string`       |
+| `undefined` | ⇨   | `string vacío` |
+| (no existe) | ⇨   | `null`         |
+
+
+Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o es un checkbox sin marcar, o simplemente no existe dicho campo), entonces la acción obtiene `null`.
+
+**Ejemplos**
+
+
+```js
+// Estado del input                                                 // Lo que recibe el Server Action 
+//---------------------------------------------------------------------------------------------------
+<input name="x" defaultValue="hola" />                    // "hola"                         
+<input name="x" defaultValue="" />                        // "" (cadena vacía)    
+<input name="x" />                                        // "" (cadena vacía)              
+<input name="x" 
+  type="number" 
+  defaultValue={99}  />                                   // "99"                           
+<input name="x" 
+  type="radio" 
+  defaultValue={false}  defaultChecked />                 // "false"                        
+<input name="x"   
+  type="radio" 
+  defaultValue={true}  defaultChecked />                  // "true"    
+<input name="x" 
+  type="date"  
+  defaultValue={new Date().toISOString().slice(0, 10)} /> // "2077-06-01"                        
+// Input sin atributo name                                // null (No se envía)             
+// Input disabled                                         // null (No se envía)             
+// Radio / Checkbox no marcado                            // null (No se envía)    
+// No existe                                              // null (No se envía)          
+```
+
+
+
+
+## 3.4. ¿Qué hace la acción del servidor al finalizar?
 
 Básicamente, el `server action` al finalizar puede realizar alguna de las 3 operaciones siguientes:
 
@@ -275,9 +806,9 @@ export async function logout() {
 >
 
 
-# 3. Caché de datos en el servidor (Server Data Cache)
+# 4. Caché de datos en el servidor (Server Data Cache)
 
-## 3.1. Introducción
+## 4.1. Introducción
 
 Vercel, empresa que desarrolla el framework Next.js, siempre ha tenido como uno de sus objetivos principales ofrecer una buena **DX (Developer Experience)**, es decir, facilitar la experiencia de los desarrolladores a la hora de construir aplicaciones web Full Stack.
 
@@ -316,7 +847,7 @@ Next.js mantiene documentación para los dos modelos:
 2. [Sistema moderno de caché (Cache Components)](https://nextjs.org/docs/app/getting-started/caching).
 
 
-## 3.2. Activar Cache Components
+## 4.2. Activar Cache Components
 
 Para utilizar el nuevo sistema de caché debemos habilitarlo en la configuración de Next.js.
 
@@ -344,7 +875,7 @@ export default nextConfig
 Esta segunda opción permite optimizar la precarga de las páginas durante la navegación. Es independiente de la gestión de la caché de datos, por lo que no es imprescindible para utilizar `use cache`.
 
 
-## 3.3. Funcionamiento de Cache Components
+## 4.3. Funcionamiento de Cache Components
 
 El objetivo es que el servidor pueda almacenar los resultados de determinadas operaciones de lectura y reutilizarlos en posteriores peticiones.
 
@@ -366,7 +897,7 @@ Por tanto, necesitamos gestionar dos procesos fundamentales:
 A continuación veremos cómo implementar ambos procesos utilizando Prisma y Server Actions.
 
 
-## 3.4. Lectura de datos (Read)
+## 4.4. Lectura de datos (Read)
 
 Para almacenar una consulta en caché utilizamos la directiva `use cache`.
 
@@ -408,7 +939,7 @@ Vamos a analizar los elementos más importantes:
 Es importante señalar que no necesitamos utilizar `use server` en este archivo. Las funciones de lectura pueden ejecutarse directamente desde Server Components. Reservaremos `use server` para las acciones que realizan modificaciones en el servidor.
 
 
-## 3.5. Mutación de datos (Create, Update y Delete)
+## 4.5. Mutación de datos (Create, Update y Delete)
 
 Entendemos por mutación cualquier operación que modifica la información almacenada en la base de datos.
 
@@ -571,7 +1102,7 @@ Una vez eliminado el registro, invalidamos la etiqueta correspondiente.
 Cuando se vuelva a consultar el listado, el artículo eliminado ya no aparecerá.
 
 
-## 3.6. ¿Cuándo utilizar updateTag(), revalidateTag() y revalidatePath()?
+## 4.6. ¿Cuándo utilizar updateTag(), revalidateTag() y revalidatePath()?
 
 Es importante comprender que estas funciones no son equivalentes.
 
@@ -614,7 +1145,7 @@ Por tanto, podemos resumirlo así:
 | Invalidar una ruta concreta                               | `revalidatePath()` |
 
 
-## 3.7. Consideraciones importantes
+## 4.7. Consideraciones importantes
 
 Hay que tener presente que invalidar una etiqueta solamente afecta a las consultas que previamente hayan sido asociadas a ella mediante `cacheTag()`.
 
@@ -650,7 +1181,7 @@ También es recomendable:
 - Invalidar todas las etiquetas afectadas cuando existan relaciones entre diferentes modelos.
 
 
-## 3.8. Conclusión
+## 4.8. Conclusión
 
 El nuevo modelo de caché de Next.js permite al desarrollador tener un mayor control sobre la información que se almacena y sobre el momento en que debe actualizarse.
 
@@ -666,542 +1197,6 @@ De esta forma conseguimos separar claramente los procesos de lectura y escritura
 
 
 
-
-
-# 4. Formularios y acciones
-
-El uso de formularios para la recogida de datos y su envío al servidor es una tarea muy habitual. 
-
-El diseño e implementación de formularios y sus *inputs* y *buttons* asociados no es tan trivial como puede parecer a primera vista. En este tema estudiaremos las bases para ello, y veremos las diferencias entre la forma en la que se trabaja en HTML frente a JSX. Existen algunas pequeñas diferencias que son clave y que pueden complicarnos la vida cuando no se conocen.  
-
-
-**Varias acciones dentro de un formulario**
-
-La forma tradicional, y más intuitiva, de gestionar la información de un formulario es vinculándolo a una **acción de servidor**.   
-
-Además es posible indicar varias **acciones** dentro del formulario, lo cual puede ser muy interesante cuando deseamos realizar distintas operaciones con los datos.
-
-En HTML, los `input` y `button` pueden tener un atributo [**`formAction`**](https://www.w3schools.com/tags/att_formaction.asp) . Con ello, dentro de un formulario podemos hacer llamadas a distintas acciones en el servidor.
-
-NextJS, emplea una técnica similar, como se muestra en el siguiente código JSX:
-
-```html
-    <form>
-          <input type='hidden' name='id' defaultValue={user.id} />
-
-          <label htmlFor='nombre'>Usuario</label>
-          <input type='text' id='nombre' name='nombre' defaultValue={user.nombre} />
-
-          <label htmlFor='edad'>Edad</label>
-          <input type='text' id='edad' name='edad' defaultValue={user.edad} />
-
-          <button type='submit' formAction={userUpdate}>Actualizar</button>
-          <button type='submit' formAction={userDelete}>Eliminar</button>
-    </form>
-```
-
-Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un usuario, y queremos realizar distintas acciones: actualizar, eliminar, ...
-
-
-[Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
-
-
-## 4.1. POST vs GET
-
-La información recogida en un formulario puede enviarse al servidor de 2 maneras distintas:
-
-- **POST** 
-- **GET**
-
-### 4.1.1. POST
-
-Cuando usamos el método POST, **la información se envía en el cuerpo de la petición** y no es visible para el usuario. 
-
-**Esta es la forma recomendada en la mayoría de los casos**, por ejemplo:
-
-- Hay campos con información confidencial, como puede ser contraseñas y similar.
-- Hay gran cantidad de información a enviar al servidor, como muchos inputs, textareas, ...
-- Necesitamos enviar archivos al servidor mediante `input type='file'`.
-
-Es habitual su uso para enviar información de un formulario para su procesamiento en el servidor. Las operaciones que se realizan, normalmente sobre una BD, son:
-
-- **Inserción**
-- **Modificación**
-- **Eliminación**
-
-Este método también se usa en operaciones de autenticación, como:
-
-- **Registro**
-- **Login**
-- **Logout**
-  
-
-En **JSX** se escribe de la siguiente forma:
-
-```js
-<form  action={...}>
-
-  {/* Elementos del formulario */}
-
-</form>
-```
-
-> [!NOTE]
-> 
-> `action` es una función asíncrona ejecutada en el servidor, por ejemplo `action={insertarProducto}`
-
-Su equivalencia en **HTML** es la siguiente:
-
-
-```html
-<form  action="..."  method="POST"  enctype="multipart/form-data">
-
-  <!-- Elementos del formulario -->
-
-</form>
-```
-
-> [!NOTE]
-> 
-> En HTML, 
-> - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
-> - si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
->  
-> Sin embargo en JSX, en el componente `form` (con f minúscula), de forma implícita, por defecto es  `method="POST"` y `enctype="multipart/form-data"`. Esto último permite el uso de `input type="file"`, y por tanto la subida de archivos al servidor.  
->
-> Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
-
-
-### 4.1.2. GET
-
-Cuando usamos el método GET, **la información se envía en la URL de la petición** y es visible para el usuario.
-
-Su uso es menos habitual, aunque es adecuado en el siguiente caso:
-
-- Necesitamos enviar poca información al servidor y deseamos que esa información sea pública.
-
-Suele usarse para enviar información de filtrado en la URL de una página, por ejemplo:
-
-http://www.example.com/products **?query=laptop&sort=price&page=2**
-
-Esta información de filtrado suele clasificarse en 3 categorías:
-
-- **Búsqueda**
-- **Ordenación**
-- **Paginación**
-
-En JSX se escribe de la siguiente forma:
-
-```js
-import Form from 'next/form'; // IMPORTANTE. Necesario importar. 
-
-// ...
-
-<Form  action="...">
-
-  <input name='query' {/* ... */} />
-  <input name='sort'  {/* ... */} />
-  <input name='page'  {/* ... */} />
-
-</Form>
-```
-
-> [!TIP]
-> 
-> Observa que es necesario importar el componente, y que éste debe escribirse con la primera letra en mayúsculas. Este componente está disponible a partir de NextJS 15
-
-
-> [!TIP] 
-> 
-> `action` es la página que recibirá la información en forma de parámetros de consulta, por ejemplo `action="/productos"`.  Cuando tenemos `action=""`, significa que la información será enviada a la misma página donde está el formulario.
-
-
-> [!IMPORTANT] 
-> 
-> En HTML, 
-> - si no indicamos atributo `method`, se toma por defecto el valor `method="GET"`
-> - si no indicamos atributo `enctype`, se toma por defecto el valor `enctype="application/x-www-form-urlencoded"`. 
->  
-> **En JSX**, en el componente `Form` (con F mayúscula), también es así, pero **no debemos indicar `method` ni `enctype`, puesto que dará error**.
-
-
-Su equivalencia en HTML es la siguiente:
-
-```html
-<form  action="..."  method="GET"  enctype="application/x-www-form-urlencoded">
-
-  <input name='query' <!-- ... --> />
-  <input name='sort'  <!-- ... --> />
-  <input name='page'  <!-- ... --> />
-
-</form>
-```
-
-[Proyecto de ejemplo](https://github.com/jamj2000/nxform-filter)
-
-## 4.2. Consejos
-
-Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
-
-Aquí van algunos consejos:
-
-
-### 4.2.1. Usa **`button`** siempre con la propiedad `type`.
-
-En Next.js, si usas un `<button>` sin especificar la propiedad `type`, su comportamiento es el mismo que en HTML estándar, es decir por defecto es `type="submit"`
-
-```js
-<button>
-    Guardar
-</button>
-```
-
-Este botón se comporta como si hubieras escrito:
-
-```js
-<button type="submit">
-    Guardar
-</button>
-```
-
-Esto significa que:
-
-- Si estás dentro de un `<form>`, al hacer clic en el botón se enviará el formulario (es decir, se ejecutará la acción del formulario).
-
-- Esto puede causar comportamientos inesperados si tú pretendías que ese botón solo hiciera algo en el cliente (como cerrar un modal, limpiar campos, etc.).
-
-
-**✅ Buenas prácticas en Next.js (y React en general)**
-
-Siempre declara explícitamente el `type`, para evitar errores:
-
-| Comportamiento deseado      | Código recomendado                        |
-| --------------------------- | ----------------------------------------- |
-| Enviar el formulario        | `<button type="submit">Enviar</button>`   |
-| Botón sin enviar formulario | `<button type="button">Cancelar</button>` |
-| Reiniciar el formulario     | `<button type="reset">Reiniciar</button>` |
-
-**⚠️ Errores comunes**
-
-Si usas un botón dentro de un formulario y no especificas `type="button"`, puede causar errores como envíar el formulario sin querer
-
-```js
-<form>
-  <button onClick={() => cerrarModal()}> // ¡Envía el formulario sin querer!
-    Cancelar
-  </button> 
-</form>
-```
-Solución:
-
-```js
-<form>
-  <button type="button" onClick={() => cerrarModal()}>
-    Cancelar
-  </button>
-</form>
-```
-
-En resumen
-
-✅ **Si no especificas type, el valor por defecto es submit.**  
-🛠️ Es buena práctica declarar siempre type explícitamente.  
-🧠 Esto es HTML estándar, no algo específico de Next.js.  
-
-
-### 4.2.2. Usa **`input`** con propiedades y valor del tipo adecuado
-
-A diferencia de HTML donde todos los valores de las propiedades son de tipo string, en JSX el valor para algunas propiedades debe ser `number` o `boolean`. 
-
-A continuación se muestran ejemplos de **código JSX** con errores y correcto.
-
-**MAL ❌**
-
-```js
-<input type="number" min="1" max="100" />  // Permitido en HTML. No permitido en JSX
-<input required="true" disabled="true" />  // Permitido en HTML. No permitido en JSX
-<input required disabled />                // Permitido en HTML. Permitido en JSX
-```
-
-**BIEN ✅**
-
-```js
-<input type="number" min={1} max={100} />  // Correcto en JSX
-<input required={true} disabled={true} />  // Correcto en JSX
-<input required  disabled />               // Correcto en JSX     
-```
-
-### 4.2.3. Usa **`label`** correctamente
-
-**MAL ❌**
-
-```js
-<label>Número:</label>                              // Provoca warning en JSX
-<input id="num" type="number" min={1} max={100} />   
-```
-
-**BIEN ✅**
-
-```js
-<label htmlFor="num">Número: </label>                  
-<input id="num" type="number" min={1} max={100} />  
-```
-
-**BIEN ✅**
-
-```js
-<label>Número:                   
-  <input type="number" min={1} max={100} />  
-</label>  
-```
-
-### 4.2.4. Usa **`defaultValue`** y **`value`** correctamente
-
-La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
-
-A continuación tienes los contextos en los que se usa cada propiedad:
-
-| Propiedad      | Contexto                                            |
-| -------------- | --------------------------------------------------- |
-| **`value`**    | Para valores asociados a una variable de **estado** |
-| `defaultValue` | Para valores no asociados a una variable de estado  |
-
-
-Ejemplo:
-
-
-```js
-'use client'
-import { useState } from 'react';
-
-
-export default function Cuadrado({ long, width }) {
-
-    const [largo, setLargo] = useState(long)
-    const [ancho, setAncho] = useState(width)
-
-    return (
-        <form>
-            <label> Escala:
-                <input type="number" name="escala" step={0.01}
-                    defaultValue={1}    // Correcto. No asociado a variable de estado   
-                />
-            </label>
-            <label> Largo:
-                <input type="number" name="largo" step={0.01}
-                    onChange={(e) => setLargo(e.target.value)}
-                    value={largo}      // Correcto. Variable de estado
-                />
-            </label>
-            <label> Ancho:
-                <input type="number" name="ancho" step={0.01}
-                    onChange={(e) => setAncho(e.target.value)}
-                    value={ancho}       // Correcto. Variable de estado
-                />
-            </label>
-            <label> Área:
-                <input type="number" name="area" readOnly
-                    value={largo * ancho}   // Correcto. Valor derivado del estado
-                    onChange={() => {}}
-                />
-            </label>  
-        </form>
-    )
-}
-```
-
-> [!NOTE]
->
-> React, y por tanto JSX, distingue entre **entradas controladas** y **entradas no controladas**.
-> 
-> Una entrada como `<input />` no está controlada. Incluso si pasamos un valor inicial como `<input defaultValue="Initial text" />`, JSX solo especifica el valor inicial. No controla cuál debería ser el valor en otro momento.      
->
-> Para representar una **entrada controlada**, le pasamos la propiedad **`value`** (o `checked` para los checkbox y radio). React forzará que la entrada coincida siempre con dicho valor. Este valor se guarda en una variable de estado, que es actualizada  con un gestor de eventos. Ejemplo:
->
-> ```js
->function Form() {
->  const [firstName, setFirstName] = useState(''); // Declaramos variable de estado ...
->  // ... 
->  return (
->    <input
->      // ...forzamos que el valor del input value coincida con el la variable de estado...
->      value={firstName} 
->      // ... y actualizamos la variable de estado en cada cambio
->      onChange={e => setFirstName(e.target.value)}
->    />
->  );
->}
->```
->
-> Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
-
-### 4.2.5. Usa **`disabled`** y **`readOnly`** correctamente
-
-Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
-
-La principal diferencia es la siguiente:
-
-- cuando usamos `readOnly` el valor SÍ será enviado al servidor.
-- cuando usamos `disabled` el valor NO será enviado al servidor.
-
-Ejemplo:
-
-```js
-export default Formulario (  ) {
-
-  return (
-   <form action={action}>
-              <label> Número 1:
-                <input  type="number"  name="num1"  step={0.01}
-                  defaultValue={ 1 }   
-                />
-              </label>
-
-              <label> Número 2:
-                <input  type="number"  name="num2"  step={0.01}
-                  defaultValue={ 2 }
-                  readOnly         // Valor no modificable. SÍ se envía al servidor                      
-                />
-              </label>  
-
-              <label> Número 3:
-                <input  type="number"  name="num3"  step={0.01} 
-                  defaultValue={ 3 }  
-                  disabled         // Valor no modificable. NO se envía al servidor 
-                />  
-              </label>
-
-              <button type="submit"> </button>
-    </form>
-  )
-}
-```
-
-
-> [!NOTE]
->
-> El componente `fieldset` también admite la propiedad `disabled`. A menudo esto es útil para deshabilitar un grupo de inputs. Sin embargo tiene el inconveniente de que los valores de los *inputs* dentro del *fieldset disabled* no serán enviados al servidor.
-> 
-> El componente `fieldset` no admite la propiedad `readOnly`. 
-
-> [!IMPORTANT]
->
-> Recuerda que los valores de los componentes `input`, `select`, `textarea`, ... no se enviarán al servidor si están dentro de un `fieldset disabled`. 
-> 
-> De la misma manera, tampoco se lanzarán las acciones de los componentes `button` que estén dentro de dicho componente.
-
-
-> [!NOTE] 
-> 
-> La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
-
-
-### 4.2.6. Usa **`select`** correctamente
-
-Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
-
-En HTML hacemos
-
-```html
-<select name="localidad">
-      <option value="1"> Álava </option>
-      <option value="2"> Albacete </option>
-      <option value="3" selected> Almeria </option>
-      <option value="4"> Ávila </option>
-</select>
-```
-
-En JSX debemos hacer
-
-```js
-<select
-  key={3}
-  name="localidad"
-  defaultValue={3}>
-      <option value={1}> Álava </option>
-      <option value={2}> Albacete </option>
-      <option value={3}> Almeria </option>
-      <option value={4}> Ávila </option>
-</select>
-```
-A diferencia de HTML, no se admite pasar el atributo `selected` a `option`. Para indicar la opción seleccionada por defecto usamos `defaultValue`.
-
-Por otro lado, cuando usamos array de objetos y los recorremos con el método `map`, el formato a seguir es el que aparece a continuación:
-
-
-```js
-<select
-  key={localidadId}
-  name="localidad"
-  defaultValue={localidadId} >
-    {localidades.map(localidad => (
-        <option key={localidad.id} value={localidad.id}> {localidad.nombre} </option>
-    ))}
-</select>
-```
-
-> [!TIP]
-> 
-> **CONSEJO IMPORTANTE**
->
-> Usa siempre una propiedad **key** en el select, cuando trabajes con entrada no controlada. 
-> El valor de dicha propiedad debe ser dinámico, y cambiar cuando el usuario seleccione una opción distinta a la anterior.
->
-> El motivo es que [React trabaja con un Virtual DOM y necesita saber que un elemento ha cambiado para sincronizar cambios con el DOM](https://www.escuelafrontend.com/prop-key-en-react). 
-> 
-> Si no lo hacemos así los cambios realizados en VDOM no se verán reflejados en el DOM. 
- 
-      
-- Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
-
-
-### 4.2.7. Gestiona los valores que recibe la acción del servidor
-
-Un aspecto importante a tener en cuenta es que **los valores definidos en los campos del formulario**, independientemente de su tipo, **serán enviados desde el formulario (lado cliente) a la acción de servidor siempre en formato `string`**.
-
-Por tanto, la acción del servidor deberá realizar las conversiones necesarias.
-
-A continuación tienes una tabla de los tipos de datos en cada lado.
-
-
-| Form        | ⇨   | Action         |
-| ----------- | --- | -------------- |
-| `string`    | ⇨   | `string`       |
-| `number`    | ⇨   | `string`       |
-| `boolean`   | ⇨   | `string`       |
-| `Date`      | ⇨   | `string`       |
-| `undefined` | ⇨   | `string vacío` |
-| (no existe) | ⇨   | `null`         |
-
-
-Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o es un checkbox sin marcar, o simplemente no existe dicho campo), entonces la acción obtiene `null`.
-
-**Ejemplos**
-
-
-```js
-// Estado del input                                                 // Lo que recibe el Server Action 
-//---------------------------------------------------------------------------------------------------
-<input name="x" defaultValue="hola" />                    // "hola"                         
-<input name="x" defaultValue="" />                        // "" (cadena vacía)    
-<input name="x" />                                        // "" (cadena vacía)              
-<input name="x" 
-  type="number" 
-  defaultValue={99}  />                                   // "99"                           
-<input name="x" 
-  type="radio" 
-  defaultValue={false}  defaultChecked />                 // "false"                        
-<input name="x"   
-  type="radio" 
-  defaultValue={true}  defaultChecked />                  // "true"    
-<input name="x" 
-  type="date"  
-  defaultValue={new Date().toISOString().slice(0, 10)} /> // "2077-06-01"                        
-// Input sin atributo name                                // null (No se envía)             
-// Input disabled                                         // null (No se envía)             
-// Radio / Checkbox no marcado                            // null (No se envía)    
-// No existe                                              // null (No se envía)          
-```
 
 
 # 5. Funciones del lado cliente
