@@ -320,7 +320,7 @@ Next.js mantiene documentación para los dos modelos:
 
 Para utilizar el nuevo sistema de caché debemos habilitarlo en la configuración de Next.js.
 
-**next.config.ts**
+**next.config.js**
 
 ```js
 const nextConfig = {
