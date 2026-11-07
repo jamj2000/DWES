@@ -14,35 +14,45 @@
   - [2.1. Crear acciones del servidor](#21-crear-acciones-del-servidor)
   - [2.2. Ejecutar acciones del servidor](#22-ejecutar-acciones-del-servidor)
   - [2.3. ¿Qué hace la acción del servidor al finalizar?](#23-qué-hace-la-acción-del-servidor-al-finalizar)
-- [3. Formularios y acciones](#3-formularios-y-acciones)
-  - [3.1. POST vs GET](#31-post-vs-get)
-    - [3.1.1. POST](#311-post)
-    - [3.1.2. GET](#312-get)
-  - [3.2. Consejos](#32-consejos)
-    - [3.2.1. Usa **`button`** siempre con la propiedad `type`.](#321-usa-button-siempre-con-la-propiedad-type)
-    - [3.2.2. Usa **`input`** con propiedades y valor del tipo adecuado](#322-usa-input-con-propiedades-y-valor-del-tipo-adecuado)
-    - [3.2.3. Usa **`label`** correctamente](#323-usa-label-correctamente)
-    - [3.2.4. Usa **`defaultValue`** y **`value`** correctamente](#324-usa-defaultvalue-y-value-correctamente)
-    - [3.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#325-usa-disabled-y-readonly-correctamente)
-    - [3.2.6. Usa **`select`** correctamente](#326-usa-select-correctamente)
-    - [3.2.7. Gestiona los valores que recibe la acción del servidor](#327-gestiona-los-valores-que-recibe-la-acción-del-servidor)
-- [4. Funciones del lado cliente](#4-funciones-del-lado-cliente)
-  - [4.1. useFormStatus](#41-useformstatus)
-  - [4.2. useActionState: simplificando lo anterior](#42-useactionstate-simplificando-lo-anterior)
-  - [4.3. Usando un envoltorio (wrapper)](#43-usando-un-envoltorio-wrapper)
-  - [4.4. Un método unificado de trabajo](#44-un-método-unificado-de-trabajo)
-  - [4.5. Ejemplo práctico: Formulario con feedback](#45-ejemplo-práctico-formulario-con-feedback)
-- [5. Validación de datos](#5-validación-de-datos)
-  - [5.1. Validación en el cliente](#51-validación-en-el-cliente)
-  - [5.2. Validación en el servidor](#52-validación-en-el-servidor)
-    - [5.2.1. Ataques frecuentes](#521-ataques-frecuentes)
-    - [5.2.2. Sea paranoico: nunca confíe en sus usuarios](#522-sea-paranoico-nunca-confíe-en-sus-usuarios)
-    - [5.2.3. Resumen](#523-resumen)
-  - [5.3. Ejemplo práctico: Formulario con validación en el servidor](#53-ejemplo-práctico-formulario-con-validación-en-el-servidor)
-- [6. ANEXO: Casos prácticos avanzados](#6-anexo-casos-prácticos-avanzados)
-  - [6.1. Panel de gestión de escuela (Parte 1 de 2)](#61-panel-de-gestión-de-escuela-parte-1-de-2)
-  - [6.2. Albúm de fotos](#62-albúm-de-fotos)
-- [7. Referencias](#7-referencias)
+- [3. Caché de datos en el servidor (Server Data Cache)](#3-caché-de-datos-en-el-servidor-server-data-cache)
+  - [3.1. Introducción](#31-introducción)
+  - [3.2. Activar Cache Components](#32-activar-cache-components)
+  - [3.3. Funcionamiento de Cache Components](#33-funcionamiento-de-cache-components)
+  - [3.4. Lectura de datos (Read)](#34-lectura-de-datos-read)
+  - [3.5. Mutación de datos (Create, Update y Delete)](#35-mutación-de-datos-create-update-y-delete)
+  - [3.6. ¿Cuándo utilizar updateTag(), revalidateTag() y revalidatePath()?](#36-cuándo-utilizar-updatetag-revalidatetag-y-revalidatepath)
+  - [3.7. Consideraciones importantes](#37-consideraciones-importantes)
+  - [3.8. Conclusión](#38-conclusión)
+- [5. Formularios y acciones](#5-formularios-y-acciones)
+  - [5.1. POST vs GET](#51-post-vs-get)
+    - [5.1.1. POST](#511-post)
+    - [5.1.2. GET](#512-get)
+  - [5.2. Consejos](#52-consejos)
+    - [5.2.1. Usa **`button`** siempre con la propiedad `type`.](#521-usa-button-siempre-con-la-propiedad-type)
+    - [5.2.2. Usa **`input`** con propiedades y valor del tipo adecuado](#522-usa-input-con-propiedades-y-valor-del-tipo-adecuado)
+    - [5.2.3. Usa **`label`** correctamente](#523-usa-label-correctamente)
+    - [5.2.4. Usa **`defaultValue`** y **`value`** correctamente](#524-usa-defaultvalue-y-value-correctamente)
+    - [5.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#525-usa-disabled-y-readonly-correctamente)
+    - [5.2.6. Usa **`select`** correctamente](#526-usa-select-correctamente)
+    - [5.2.7. Gestiona los valores que recibe la acción del servidor](#527-gestiona-los-valores-que-recibe-la-acción-del-servidor)
+- [6. Funciones del lado cliente](#6-funciones-del-lado-cliente)
+  - [6.1. useFormStatus](#61-useformstatus)
+  - [6.2. useActionState: simplificando lo anterior](#62-useactionstate-simplificando-lo-anterior)
+  - [6.3. Usando un envoltorio (wrapper)](#63-usando-un-envoltorio-wrapper)
+  - [6.4. Un método unificado de trabajo](#64-un-método-unificado-de-trabajo)
+  - [6.5. Ejemplo práctico: Formulario con feedback](#65-ejemplo-práctico-formulario-con-feedback)
+- [7. Validación de datos](#7-validación-de-datos)
+  - [7.1. Validación en el cliente](#71-validación-en-el-cliente)
+  - [7.2. Validación en el servidor](#72-validación-en-el-servidor)
+    - [7.2.1. Ataques frecuentes](#721-ataques-frecuentes)
+    - [7.2.2. Sea paranoico: nunca confíe en sus usuarios](#722-sea-paranoico-nunca-confíe-en-sus-usuarios)
+    - [7.2.3. Resumen](#723-resumen)
+  - [7.3. Ejemplo práctico: Formulario con validación en el servidor](#73-ejemplo-práctico-formulario-con-validación-en-el-servidor)
+- [8. ANEXO: Casos prácticos avanzados](#8-anexo-casos-prácticos-avanzados)
+  - [8.1. Panel de gestión de escuela (Parte 1 de 2)](#81-panel-de-gestión-de-escuela-parte-1-de-2)
+  - [8.2. Albúm de fotos](#82-albúm-de-fotos)
+- [9. Referencias](#9-referencias)
+
 
 
 
@@ -197,7 +207,7 @@ export default Login
 Básicamente, el `server action` al finalizar puede realizar alguna de las 3 operaciones siguientes:
 
 - **Devolver un mensaje** de confirmación o de error, usando **`return`**
-- **Actualizar el contenido de una página**, usando **`revalidatePath`**.  
+- **Actualizar el contenido**, usando **`revalidatePath`** o **`updateTag`**.  
 - **Redirigir a otra página**, p. ej. tras validar un usuario, usando **`redirect`**
 
 
@@ -256,16 +266,410 @@ export async function logout() {
 
 > [!NOTE] 
 >
-> - `revalidatePath` se importa desde el paquete `next/cache`
+> - `revalidatePath` y `updateTag` se importan desde el paquete `next/cache`
 > - `redirect` se importa desde el paquete `next/navigation`
-
-
-> [!NOTE]
 >
-> NextJS hace uso de una caché de contenido, por ello para volver a actualizar el contenido de una página, actualizando además la caché, necesitamos la función `revalidatePath`.
+>
+> NextJS hace uso de una caché de contenido, por ello para volver a actualizar el contenido de una página, actualizando además la caché, necesitamos la función `revalidatePath` o la función `updateTag`.
+>
 
 
-# 3. Formularios y acciones
+# 3. Caché de datos en el servidor (Server Data Cache)
+
+## 3.1. Introducción
+
+Vercel, empresa que desarrolla el framework Next.js, siempre ha tenido como uno de sus objetivos principales ofrecer una buena **DX (Developer Experience)**, es decir, facilitar la experiencia de los desarrolladores a la hora de construir aplicaciones web Full Stack.
+
+Además de proporcionar herramientas que simplifiquen el desarrollo, otro objetivo fundamental es conseguir que las aplicaciones desplegadas ofrezcan un buen rendimiento.
+
+Para conseguirlo, Next.js incorpora diferentes mecanismos de caché que permiten almacenar temporalmente los resultados de determinadas operaciones y reutilizarlos en posteriores peticiones, evitando así tener que repetir consultas a bases de datos o servicios externos.
+
+**Evolución del sistema de caché**
+
+En las primeras versiones del App Router, Next.js ofrecía diferentes mecanismos de caché que, en buena medida, dependían de los comportamientos predeterminados del framework.
+
+La intención era simplificar el trabajo del desarrollador y evitar que tuviera que gestionar manualmente todos los aspectos relacionados con la caché.
+
+Sin embargo, esta estrategia también generó críticas. La existencia de diferentes capas de caché, sus comportamientos predeterminados y la interacción entre ellas podían provocar resultados inesperados y dificultades para comprender cuándo se almacenaban los datos y cuándo se actualizaban.
+
+Con el tiempo, Next.js ha ido evolucionando hacia un modelo que permite al desarrollador controlar de forma más explícita qué información debe almacenarse en caché y cuándo debe invalidarse.
+
+Esta nueva estrategia se conoce como **Cache Components**.
+
+**Cronología de la evolución de la caché**
+
+| Versión      | Fecha                 | Novedad                                                                                 |
+| ------------ | --------------------- | --------------------------------------------------------------------------------------- |
+| Next.js 13.4 | 4 de mayo de 2023     | Estabilización del App Router e introducción de `revalidatePath()` y `revalidateTag()`. |
+| Next.js 15.4 | Julio de 2025         | Cache Components en beta.                                                               |
+| Next.js 16.0 | 21 de octubre de 2025 | Cache Components como modelo oficial de caché.                                          |
+| Next.js 16.3 | 2026                  | Introducción de `partialPrefetching` para optimizar la precarga de navegación.          |
+
+Hay que destacar que `revalidatePath()` pertenece al sistema de revalidación del App Router introducido en Next.js 13.4. Sigue estando disponible en las versiones actuales y convive con las nuevas APIs de Cache Components.
+
+**Documentación oficial**
+
+Next.js mantiene documentación para los dos modelos:
+
+1. [Sistema de caché tradicional (sin Cache Components)](https://nextjs.org/docs/app/guides/caching-without-cache-components).
+2. [Sistema moderno de caché (Cache Components)](https://nextjs.org/docs/app/getting-started/caching).
+
+
+## 3.2. Activar Cache Components
+
+Para utilizar el nuevo sistema de caché debemos habilitarlo en la configuración de Next.js.
+
+**next.config.ts**
+
+```js
+const nextConfig = {
+  cacheComponents: true,
+}
+
+export default nextConfig
+```
+
+En Next.js 16.3 también podemos activar `partialPrefetching`:
+
+```js
+import type { NextConfig } from 'next'
+
+const nextConfig = {
+  cacheComponents: true,
+  partialPrefetching: true,
+}
+
+export default nextConfig
+```
+
+Esta segunda opción permite optimizar la precarga de las páginas durante la navegación. Es independiente de la gestión de la caché de datos, por lo que no es imprescindible para utilizar `use cache`.
+
+
+## 3.3. Funcionamiento de Cache Components
+
+El objetivo es que el servidor pueda almacenar los resultados de determinadas operaciones de lectura y reutilizarlos en posteriores peticiones.
+
+Por ejemplo, imaginemos que nuestra aplicación necesita consultar los artículos almacenados en una base de datos mediante Prisma.
+
+Sin caché, cada vez que se ejecute la consulta será necesario acceder a la base de datos.
+
+Con Cache Components podemos almacenar el resultado de esa consulta y reutilizarlo durante el tiempo que establezcamos.
+
+Esto puede reducir considerablemente el número de consultas a la base de datos y mejorar el rendimiento de la aplicación.
+
+Sin embargo, hay que tener en cuenta que la caché puede quedar desactualizada cuando se producen modificaciones en la base de datos.
+
+Por tanto, necesitamos gestionar dos procesos fundamentales:
+
+1. **Lectura de datos:** obtener los datos y almacenarlos en caché.
+2. **Mutación de datos:** invalidar la caché correspondiente cuando se crean, modifican o eliminan registros.
+
+A continuación veremos cómo implementar ambos procesos utilizando Prisma y Server Actions.
+
+
+## 3.4. Lectura de datos (Read)
+
+Para almacenar una consulta en caché utilizamos la directiva `use cache`.
+
+Además, podemos asociar una etiqueta mediante `cacheTag()`. Esta etiqueta permitirá identificar posteriormente qué información debemos invalidar.
+
+Supongamos que tenemos una tabla denominada `articulo` en nuestra base de datos.
+
+**lib/actions-articulos.ts** (funciones de lectura)
+
+```typescript
+import prisma from '@/lib/prisma'
+import { cacheTag, cacheLife } from 'next/cache'
+
+export async function getArticulos() {
+  'use cache'
+
+  cacheLife('hours')
+
+  cacheTag('articulos')
+
+  try {
+    const articulos = await prisma.articulo.findMany()
+
+    return articulos
+
+  } catch (error) {
+    console.error(error)
+    throw new Error('Error al obtener los artículos')
+  }
+}
+```
+
+Vamos a analizar los elementos más importantes:
+
+- **`use cache`:** indica a Next.js que el resultado de esta función debe almacenarse en caché.
+- **`cacheLife('hours')`:** establece el perfil de duración de la caché. En este caso utilizamos el perfil `hours`.
+- **`cacheTag('articulos')`:** asigna una etiqueta a la información almacenada. Esta etiqueta nos permitirá invalidar posteriormente la caché.
+
+Es importante señalar que no necesitamos utilizar `use server` en este archivo. Las funciones de lectura pueden ejecutarse directamente desde Server Components. Reservaremos `use server` para las acciones que realizan modificaciones en el servidor.
+
+
+## 3.5. Mutación de datos (Create, Update y Delete)
+
+Entendemos por mutación cualquier operación que modifica la información almacenada en la base de datos.
+
+Las operaciones CRUD son:
+
+- **Create:** creación de registros.
+- **Read:** lectura de registros.
+- **Update:** modificación de registros.
+- **Delete:** eliminación de registros.
+
+Cuando realizamos una operación de escritura debemos invalidar las etiquetas asociadas a los datos afectados.
+
+Para ello, en Next.js disponemos de diferentes funciones:
+
+| Función            | Comportamiento                                                                                            |
+| ------------------ | --------------------------------------------------------------------------------------------------------- |
+| `updateTag()`      | Expira inmediatamente la caché asociada a una etiqueta.                                                   |
+| `revalidateTag()`  | Marca la información como obsoleta y permite su actualización en segundo plano según el perfil utilizado. |
+| `revalidatePath()` | Invalida la caché asociada a una ruta determinada.                                                        |
+
+En nuestro caso utilizaremos principalmente `updateTag()`, ya que queremos que el usuario vea sus propias modificaciones inmediatamente después de realizar una operación CRUD.
+
+**Importante:** `updateTag()` solamente puede utilizarse dentro de Server Actions.
+
+**CREATE: crear un artículo**
+
+```typescript
+'use server'
+
+import prisma from '@/lib/prisma'
+import { updateTag } from 'next/cache'
+
+export async function createArticulo(prevState, formData) {
+
+  // Obtenemos los datos del formulario
+  const nombre = String(formData.get('nombre') ?? '')
+  const descripcion = String(formData.get('descripcion') ?? '')
+  const precio = Number(formData.get('precio'))
+
+  // Realizamos la operación en la base de datos
+  try {
+    await prisma.articulo.create({
+      data: {
+        nombre,
+        descripcion,
+        precio,
+      },
+    })
+
+  } catch (error) {
+    console.error(error)
+
+    return {
+      error: 'Fallo al realizar la operación',
+    }
+  }
+
+  // Invalidamos la caché asociada a los artículos
+  updateTag('articulos')
+
+  return {
+    success: 'Operación realizada con éxito',
+  }
+}
+```
+
+La instrucción fundamental es:
+
+```js
+updateTag('articulos')
+```
+
+Con ella indicamos a Next.js que debe expirar inmediatamente las entradas de caché asociadas a la etiqueta `articulos`.
+
+Cuando se vuelva a solicitar el listado, se ejecutará nuevamente la consulta a Prisma y se obtendrán los datos actualizados.
+
+**UPDATE: modificar un artículo**
+
+El procedimiento es prácticamente idéntico al anterior.
+
+Primero realizamos la modificación en la base de datos y, posteriormente, invalidamos la caché.
+
+```js
+'use server'
+
+import prisma from '@/lib/prisma'
+import { updateTag } from 'next/cache'
+
+export async function updateArticulo(id, prevState, formData) {
+
+  const nombre = String(formData.get('nombre') ?? '')
+  const descripcion = String(formData.get('descripcion') ?? '')
+  const precio = Number(formData.get('precio'))
+
+  try {
+    await prisma.articulo.update({
+      where: { id },
+      data: {
+        nombre,
+        descripcion,
+        precio,
+      },
+    })
+
+  } catch (error) {
+    console.error(error)
+
+    return {
+      error: 'Fallo al actualizar el artículo',
+    }
+  }
+
+  updateTag('articulos')
+
+  return {
+    success: 'Artículo actualizado correctamente',
+  }
+}
+```
+
+Una vez realizada la operación, la etiqueta `articulos` queda invalidada.
+
+La siguiente lectura de `getArticulos()` obtendrá los datos actualizados de Prisma.
+
+**DELETE: eliminar un artículo**
+
+En este caso seguimos exactamente el mismo procedimiento.
+
+```typescript
+'use server'
+
+import prisma from '@/lib/prisma'
+import { updateTag } from 'next/cache'
+
+export async function deleteArticulo(id) {
+
+  try {
+    await prisma.articulo.delete({
+      where: { id },
+    })
+
+  } catch (error) {
+    console.error(error)
+
+    return {
+      error: 'Fallo al eliminar el artículo',
+    }
+  }
+
+  updateTag('articulos')
+
+  return {
+    success: 'Artículo eliminado correctamente',
+  }
+}
+```
+
+Una vez eliminado el registro, invalidamos la etiqueta correspondiente.
+
+Cuando se vuelva a consultar el listado, el artículo eliminado ya no aparecerá.
+
+
+## 3.6. ¿Cuándo utilizar updateTag(), revalidateTag() y revalidatePath()?
+
+Es importante comprender que estas funciones no son equivalentes.
+
+**updateTag()**
+
+Es la opción recomendada cuando realizamos una modificación desde una Server Action y queremos que el usuario vea inmediatamente sus propios cambios.
+
+```js
+updateTag('articulos')
+```
+
+**revalidateTag()**
+
+Permite marcar los datos asociados a una etiqueta como obsoletos. Por ejemplo:
+
+```js
+revalidateTag('articulos', 'max')
+```
+
+El perfil `max` utiliza una estrategia stale-while-revalidate: puede servir temporalmente los datos anteriores mientras se actualiza la caché.
+
+Es especialmente útil cuando no es imprescindible que el usuario reciba inmediatamente los datos nuevos, por ejemplo, al recibir un webhook de un CMS externo.
+
+**revalidatePath()**
+
+Permite invalidar la caché asociada a una ruta concreta.
+
+```js
+revalidatePath('/articulos')
+```
+
+Es útil cuando queremos invalidar una página determinada, independientemente de que existan otras páginas que utilicen los mismos datos.
+
+Por tanto, podemos resumirlo así:
+
+| Necesidad                                                 | API recomendada    |
+| --------------------------------------------------------- | ------------------ |
+| Crear, modificar o eliminar datos desde una Server Action | `updateTag()`      |
+| Actualizar datos en segundo plano                         | `revalidateTag()`  |
+| Invalidar una ruta concreta                               | `revalidatePath()` |
+
+
+## 3.7. Consideraciones importantes
+
+Hay que tener presente que invalidar una etiqueta solamente afecta a las consultas que previamente hayan sido asociadas a ella mediante `cacheTag()`.
+
+Por ejemplo, si tenemos:
+
+```js
+export async function getArticulos() {
+  'use cache'
+
+  cacheTag('articulos')
+
+  return prisma.articulo.findMany()
+}
+```
+
+La siguiente instrucción:
+
+```js
+updateTag('articulos')
+```
+
+invalidará esa caché.
+
+Pero si tenemos otras consultas que utilizan los mismos datos y no están asociadas a esa etiqueta, no necesariamente se actualizarán.
+
+Por tanto, debemos diseñar correctamente las etiquetas de caché de nuestra aplicación.
+
+También es recomendable:
+
+- Validar los datos recibidos desde los formularios.
+- Comprobar que el usuario tiene permisos para realizar cada operación.
+- No compartir datos privados entre usuarios mediante claves de caché inadecuadas.
+- Invalidar todas las etiquetas afectadas cuando existan relaciones entre diferentes modelos.
+
+
+## 3.8. Conclusión
+
+El nuevo modelo de caché de Next.js permite al desarrollador tener un mayor control sobre la información que se almacena y sobre el momento en que debe actualizarse.
+
+En nuestro ejemplo hemos utilizado tres elementos fundamentales:
+
+- `use cache`: almacena los resultados de las consultas.
+- `cacheTag()`: identifica los datos almacenados mediante etiquetas.
+- `updateTag()`: invalida inmediatamente la caché después de una operación de escritura.
+
+De esta forma conseguimos separar claramente los procesos de lectura y escritura, manteniendo la coherencia entre la información almacenada en la base de datos y la que se muestra al usuario.
+
+**La idea fundamental es sencilla: almacenamos en caché las lecturas y, cada vez que modificamos los datos, invalidamos las etiquetas correspondientes.**
+
+
+
+
+
+# 5. Formularios y acciones
 
 El uso de formularios para la recogida de datos y su envío al servidor es una tarea muy habitual. 
 
@@ -303,14 +707,14 @@ Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un us
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
-## 3.1. POST vs GET
+## 5.1. POST vs GET
 
 La información recogida en un formulario puede enviarse al servidor de 2 maneras distintas:
 
 - **POST** 
 - **GET**
 
-### 3.1.1. POST
+### 5.1.1. POST
 
 Cuando usamos el método POST, **la información se envía en el cuerpo de la petición** y no es visible para el usuario. 
 
@@ -369,7 +773,7 @@ Su equivalencia en **HTML** es la siguiente:
 > Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
 
 
-### 3.1.2. GET
+### 5.1.2. GET
 
 Cuando usamos el método GET, **la información se envía en la URL de la petición** y es visible para el usuario.
 
@@ -436,14 +840,14 @@ Su equivalencia en HTML es la siguiente:
 
 [Proyecto de ejemplo](https://github.com/jamj2000/nxform-filter)
 
-## 3.2. Consejos
+## 5.2. Consejos
 
 Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
 
 Aquí van algunos consejos:
 
 
-### 3.2.1. Usa **`button`** siempre con la propiedad `type`.
+### 5.2.1. Usa **`button`** siempre con la propiedad `type`.
 
 En Next.js, si usas un `<button>` sin especificar la propiedad `type`, su comportamiento es el mismo que en HTML estándar, es decir por defecto es `type="submit"`
 
@@ -506,7 +910,7 @@ En resumen
 🧠 Esto es HTML estándar, no algo específico de Next.js.  
 
 
-### 3.2.2. Usa **`input`** con propiedades y valor del tipo adecuado
+### 5.2.2. Usa **`input`** con propiedades y valor del tipo adecuado
 
 A diferencia de HTML donde todos los valores de las propiedades son de tipo string, en JSX el valor para algunas propiedades debe ser `number` o `boolean`. 
 
@@ -528,7 +932,7 @@ A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 <input required  disabled />               // Correcto en JSX     
 ```
 
-### 3.2.3. Usa **`label`** correctamente
+### 5.2.3. Usa **`label`** correctamente
 
 **MAL ❌**
 
@@ -552,7 +956,7 @@ A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 </label>  
 ```
 
-### 3.2.4. Usa **`defaultValue`** y **`value`** correctamente
+### 5.2.4. Usa **`defaultValue`** y **`value`** correctamente
 
 La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
 
@@ -632,7 +1036,7 @@ export default function Cuadrado({ long, width }) {
 >
 > Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
-### 3.2.5. Usa **`disabled`** y **`readOnly`** correctamente
+### 5.2.5. Usa **`disabled`** y **`readOnly`** correctamente
 
 Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
 
@@ -693,7 +1097,7 @@ export default Formulario (  ) {
 > La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
-### 3.2.6. Usa **`select`** correctamente
+### 5.2.6. Usa **`select`** correctamente
 
 Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
 
@@ -752,7 +1156,7 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 - Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
 
 
-### 3.2.7. Gestiona los valores que recibe la acción del servidor
+### 5.2.7. Gestiona los valores que recibe la acción del servidor
 
 Un aspecto importante a tener en cuenta es que **los valores definidos en los campos del formulario**, independientemente de su tipo, **serán enviados desde el formulario (lado cliente) a la acción de servidor siempre en formato `string`**.
 
@@ -801,7 +1205,7 @@ Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o
 ```
 
 
-# 4. Funciones del lado cliente
+# 6. Funciones del lado cliente
 
 Aunque podemos definir un formulario en el lado servidor, a menudo necesitaremos que dicho formulario ofrezca funcionalidades del lado cliente, como:
 
@@ -825,7 +1229,7 @@ NextJS tiene 2 funciones para mejorar la experiencia con formularios en el lado 
 
 
 
-## 4.1. useFormStatus
+## 6.1. useFormStatus
 
 Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
 
@@ -896,7 +1300,7 @@ export function Formulario() {
 
 
 
-## 4.2. useActionState: simplificando lo anterior
+## 6.2. useActionState: simplificando lo anterior
 
 A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplifica el trabajo con *actions*.
 
@@ -962,7 +1366,7 @@ export async function createProduct(prevState, formData) {
 ```  
 
 
-## 4.3. Usando un envoltorio (wrapper)
+## 6.3. Usando un envoltorio (wrapper)
 
 Otra técnica muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
 
@@ -1019,7 +1423,7 @@ export async function insertData(formData) {
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
-## 4.4. Un método unificado de trabajo
+## 6.4. Un método unificado de trabajo
 
 Después de todas las posibilidades mostradas en los apartados anteriores, cualquiera puede llegar al *cortocircuito*.
 
@@ -1093,7 +1497,7 @@ export async function accionReal(prevState, formData) {
 
 
 
-## 4.5. Ejemplo práctico: Formulario con feedback
+## 6.5. Ejemplo práctico: Formulario con feedback
 
 En el siguiente enlace tienes el código completo de una aplicación que muestra como gestionar mensajes de *feedback* en un formulario.
 
@@ -1213,7 +1617,7 @@ export async function realAction2(prevState, formData) {
 
 
 
-#  5. Validación de datos
+#  7. Validación de datos
 
 La validación de datos es el proceso de garantizar que la entrada del usuario sea limpia, correcta y útil.
 
@@ -1232,7 +1636,7 @@ La **validación del lado del cliente** la realiza un navegador web, antes de en
 La **validación del lado del servidor** la realiza un servidor web, después de que la entrada se haya enviado al servidor.
 
 
-## 5.1. Validación en el cliente
+## 7.1. Validación en el cliente
 
 HTML5 introdujo un nuevo concepto de validación HTML llamado validación de restricciones .
 
@@ -1269,13 +1673,13 @@ La validación de restricciones HTML se basa en:
 | `:valid`     | Selecciona elementos de entrada con valores válidos.           |
 
 
-## 5.2. Validación en el servidor
+## 7.2. Validación en el servidor
 
 > **ADVERTENCIA**: nunca confíe en los datos pasados ​​a su servidor desde el cliente. Incluso si su formulario se valida correctamente y evita entradas con formato incorrecto en el lado del cliente, un usuario malintencionado aún puede alterar la solicitud de red.
 
 Cada vez que envía datos a un servidor, debe considerar la seguridad. Los formularios HTML son, con diferencia, los vectores de ataque a servidores más comunes (lugares donde pueden ocurrir ataques). Los problemas nunca provienen de los formularios HTML en sí, sino de cómo el servidor maneja los datos.
 
-### 5.2.1. Ataques frecuentes
+### 7.2.1. Ataques frecuentes
 
 En [este artículo](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security) se analiza en detalle varios ataques comunes y posibles defensas contra ellos. Es muy recomendable su lectura. Los ataques más conocidos son los siguientes:
 
@@ -1298,7 +1702,7 @@ Las vulnerabilidades de inyección SQL permiten a usuarios malintencionados ejec
 Los ataques CSRF permiten a un usuario malintencionado ejecutar acciones utilizando las credenciales de otro usuario sin el conocimiento o consentimiento de ese usuario.
 
 
-### 5.2.2. Sea paranoico: nunca confíe en sus usuarios
+### 7.2.2. Sea paranoico: nunca confíe en sus usuarios
 
 Entonces, ¿cómo se lucha contra estas amenazas? Este es un tema que va mucho más allá de esta guía, pero hay algunas reglas a tener en cuenta. La regla más importante es: nunca confíes en tus usuarios, incluido tú mismo; Incluso un usuario de confianza podría haber sido secuestrado.
 
@@ -1309,12 +1713,12 @@ Todos los datos que llegan a su servidor deben ser verificados y desinfectados (
 - **Archivos subidos a la zona de pruebas**. Guárdelos en un servidor diferente y permita el acceso al archivo sólo a través de un subdominio diferente o, mejor aún, a través de un dominio completamente diferente.
 Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres reglas, pero siempre es una buena idea que un tercero competente realice una revisión de seguridad. No asuma que ha visto todos los problemas posibles.
 
-### 5.2.3. Resumen
+### 7.2.3. Resumen
 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
 
 
-## 5.3. Ejemplo práctico: Formulario con validación en el servidor
+## 7.3. Ejemplo práctico: Formulario con validación en el servidor
 
 En el siguiente enlace tienes el código completo de una aplicación que muestra como realizar la validación de datos de un formulario en el servidor.
 
@@ -1445,13 +1849,13 @@ export async function realAction1(prevState, formData) {
 ``` 
 
 
-# 6. ANEXO: Casos prácticos avanzados
+# 8. ANEXO: Casos prácticos avanzados
 
 En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
 Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar los siguientes proyectos, que están desarrollados y explicados (en inglés) con cierta profundidad. 
 
-## 6.1. Panel de gestión de escuela (Parte 1 de 2)
+## 8.1. Panel de gestión de escuela (Parte 1 de 2)
 
 - [Vídeo: Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP)
 - [Código fuente del video anterior](https://github.com/safak/next-dashboard-ui/tree/completed)
@@ -1461,7 +1865,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 ![dashboard demo](assets/dashboard.png)
 
 
-## 6.2. Albúm de fotos
+## 8.2. Albúm de fotos
 
 ![photobox](assets/photobox.png)
  
@@ -1474,7 +1878,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 
 
-# 7. Referencias
+# 9. Referencias
 
 - [MDN: Envío y rececpción de datos de formulario (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 - [W3Schools: Atributo formaction (en inglés)](https://www.w3schools.com/tags/att_formaction.asp)
