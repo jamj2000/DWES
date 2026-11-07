@@ -23,35 +23,36 @@
   - [3.6. ¿Cuándo utilizar updateTag(), revalidateTag() y revalidatePath()?](#36-cuándo-utilizar-updatetag-revalidatetag-y-revalidatepath)
   - [3.7. Consideraciones importantes](#37-consideraciones-importantes)
   - [3.8. Conclusión](#38-conclusión)
-- [5. Formularios y acciones](#5-formularios-y-acciones)
-  - [5.1. POST vs GET](#51-post-vs-get)
-    - [5.1.1. POST](#511-post)
-    - [5.1.2. GET](#512-get)
-  - [5.2. Consejos](#52-consejos)
-    - [5.2.1. Usa **`button`** siempre con la propiedad `type`.](#521-usa-button-siempre-con-la-propiedad-type)
-    - [5.2.2. Usa **`input`** con propiedades y valor del tipo adecuado](#522-usa-input-con-propiedades-y-valor-del-tipo-adecuado)
-    - [5.2.3. Usa **`label`** correctamente](#523-usa-label-correctamente)
-    - [5.2.4. Usa **`defaultValue`** y **`value`** correctamente](#524-usa-defaultvalue-y-value-correctamente)
-    - [5.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#525-usa-disabled-y-readonly-correctamente)
-    - [5.2.6. Usa **`select`** correctamente](#526-usa-select-correctamente)
-    - [5.2.7. Gestiona los valores que recibe la acción del servidor](#527-gestiona-los-valores-que-recibe-la-acción-del-servidor)
-- [6. Funciones del lado cliente](#6-funciones-del-lado-cliente)
-  - [6.1. useFormStatus](#61-useformstatus)
-  - [6.2. useActionState: simplificando lo anterior](#62-useactionstate-simplificando-lo-anterior)
-  - [6.3. Usando un envoltorio (wrapper)](#63-usando-un-envoltorio-wrapper)
-  - [6.4. Un método unificado de trabajo](#64-un-método-unificado-de-trabajo)
-  - [6.5. Ejemplo práctico: Formulario con feedback](#65-ejemplo-práctico-formulario-con-feedback)
-- [7. Validación de datos](#7-validación-de-datos)
-  - [7.1. Validación en el cliente](#71-validación-en-el-cliente)
-  - [7.2. Validación en el servidor](#72-validación-en-el-servidor)
-    - [7.2.1. Ataques frecuentes](#721-ataques-frecuentes)
-    - [7.2.2. Sea paranoico: nunca confíe en sus usuarios](#722-sea-paranoico-nunca-confíe-en-sus-usuarios)
-    - [7.2.3. Resumen](#723-resumen)
-  - [7.3. Ejemplo práctico: Formulario con validación en el servidor](#73-ejemplo-práctico-formulario-con-validación-en-el-servidor)
-- [8. ANEXO: Casos prácticos avanzados](#8-anexo-casos-prácticos-avanzados)
-  - [8.1. Panel de gestión de escuela (Parte 1 de 2)](#81-panel-de-gestión-de-escuela-parte-1-de-2)
-  - [8.2. Albúm de fotos](#82-albúm-de-fotos)
-- [9. Referencias](#9-referencias)
+- [4. Formularios y acciones](#4-formularios-y-acciones)
+  - [4.1. POST vs GET](#41-post-vs-get)
+    - [4.1.1. POST](#411-post)
+    - [4.1.2. GET](#412-get)
+  - [4.2. Consejos](#42-consejos)
+    - [4.2.1. Usa **`button`** siempre con la propiedad `type`.](#421-usa-button-siempre-con-la-propiedad-type)
+    - [4.2.2. Usa **`input`** con propiedades y valor del tipo adecuado](#422-usa-input-con-propiedades-y-valor-del-tipo-adecuado)
+    - [4.2.3. Usa **`label`** correctamente](#423-usa-label-correctamente)
+    - [4.2.4. Usa **`defaultValue`** y **`value`** correctamente](#424-usa-defaultvalue-y-value-correctamente)
+    - [4.2.5. Usa **`disabled`** y **`readOnly`** correctamente](#425-usa-disabled-y-readonly-correctamente)
+    - [4.2.6. Usa **`select`** correctamente](#426-usa-select-correctamente)
+    - [4.2.7. Gestiona los valores que recibe la acción del servidor](#427-gestiona-los-valores-que-recibe-la-acción-del-servidor)
+- [5. Funciones del lado cliente](#5-funciones-del-lado-cliente)
+  - [5.1. useFormStatus](#51-useformstatus)
+  - [5.2. useActionState: simplificando lo anterior](#52-useactionstate-simplificando-lo-anterior)
+  - [5.3. Usando un envoltorio (wrapper)](#53-usando-un-envoltorio-wrapper)
+  - [5.4. Un método unificado de trabajo](#54-un-método-unificado-de-trabajo)
+  - [5.5. Ejemplo práctico: Formulario con feedback](#55-ejemplo-práctico-formulario-con-feedback)
+- [6. Validación de datos](#6-validación-de-datos)
+  - [6.1. Validación en el cliente](#61-validación-en-el-cliente)
+  - [6.2. Validación en el servidor](#62-validación-en-el-servidor)
+    - [6.2.1. Ataques frecuentes](#621-ataques-frecuentes)
+    - [6.2.2. Sea paranoico: nunca confíe en sus usuarios](#622-sea-paranoico-nunca-confíe-en-sus-usuarios)
+    - [6.2.3. Resumen](#623-resumen)
+  - [6.3. Ejemplo práctico: Formulario con validación en el servidor](#63-ejemplo-práctico-formulario-con-validación-en-el-servidor)
+- [7. ANEXO: Casos prácticos avanzados](#7-anexo-casos-prácticos-avanzados)
+  - [7.1. Panel de gestión de escuela (Parte 1 de 2)](#71-panel-de-gestión-de-escuela-parte-1-de-2)
+  - [7.2. Albúm de fotos](#72-albúm-de-fotos)
+- [8. Referencias](#8-referencias)
+
 
 
 
@@ -332,8 +333,6 @@ export default nextConfig
 En Next.js 16.3 también podemos activar `partialPrefetching`:
 
 ```js
-import type { NextConfig } from 'next'
-
 const nextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
@@ -669,7 +668,7 @@ De esta forma conseguimos separar claramente los procesos de lectura y escritura
 
 
 
-# 5. Formularios y acciones
+# 4. Formularios y acciones
 
 El uso de formularios para la recogida de datos y su envío al servidor es una tarea muy habitual. 
 
@@ -707,14 +706,14 @@ Esto es muy útil si disponemos de un formulario con datos, por ejemplo de un us
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
-## 5.1. POST vs GET
+## 4.1. POST vs GET
 
 La información recogida en un formulario puede enviarse al servidor de 2 maneras distintas:
 
 - **POST** 
 - **GET**
 
-### 5.1.1. POST
+### 4.1.1. POST
 
 Cuando usamos el método POST, **la información se envía en el cuerpo de la petición** y no es visible para el usuario. 
 
@@ -773,7 +772,7 @@ Su equivalencia en **HTML** es la siguiente:
 > Además **en JSX, no debemos indicar `method` ni `enctype`**, puesto que dará error.
 
 
-### 5.1.2. GET
+### 4.1.2. GET
 
 Cuando usamos el método GET, **la información se envía en la URL de la petición** y es visible para el usuario.
 
@@ -840,14 +839,14 @@ Su equivalencia en HTML es la siguiente:
 
 [Proyecto de ejemplo](https://github.com/jamj2000/nxform-filter)
 
-## 5.2. Consejos
+## 4.2. Consejos
 
 Aunque JSX se parece mucho a HTML, tiene algunas peculiaridades que pueden complicar la vida al desarrollador que no las conozca.   
 
 Aquí van algunos consejos:
 
 
-### 5.2.1. Usa **`button`** siempre con la propiedad `type`.
+### 4.2.1. Usa **`button`** siempre con la propiedad `type`.
 
 En Next.js, si usas un `<button>` sin especificar la propiedad `type`, su comportamiento es el mismo que en HTML estándar, es decir por defecto es `type="submit"`
 
@@ -910,7 +909,7 @@ En resumen
 🧠 Esto es HTML estándar, no algo específico de Next.js.  
 
 
-### 5.2.2. Usa **`input`** con propiedades y valor del tipo adecuado
+### 4.2.2. Usa **`input`** con propiedades y valor del tipo adecuado
 
 A diferencia de HTML donde todos los valores de las propiedades son de tipo string, en JSX el valor para algunas propiedades debe ser `number` o `boolean`. 
 
@@ -932,7 +931,7 @@ A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 <input required  disabled />               // Correcto en JSX     
 ```
 
-### 5.2.3. Usa **`label`** correctamente
+### 4.2.3. Usa **`label`** correctamente
 
 **MAL ❌**
 
@@ -956,7 +955,7 @@ A continuación se muestran ejemplos de **código JSX** con errores y correcto.
 </label>  
 ```
 
-### 5.2.4. Usa **`defaultValue`** y **`value`** correctamente
+### 4.2.4. Usa **`defaultValue`** y **`value`** correctamente
 
 La mayoría de las veces la propiedad que necesitaremos usar en un `input` es `defaultValue`. Pero existen algunos casos en que necesitaremos hacer uso de `value`. 
 
@@ -1036,7 +1035,7 @@ export default function Cuadrado({ long, width }) {
 >
 > Referencia: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
-### 5.2.5. Usa **`disabled`** y **`readOnly`** correctamente
+### 4.2.5. Usa **`disabled`** y **`readOnly`** correctamente
 
 Las propiedades `disabled` y `readOnly` se comportan de forma parecida en un `input`. **En ambos casos, el usuario no podrá modificar el valor del input**.
 
@@ -1097,7 +1096,7 @@ export default Formulario (  ) {
 > La propiedad `readOnly` sólo se aplica a `input` y `textarea`. No tiene efecto con `fieldset` ni con `select`.    
 
 
-### 5.2.6. Usa **`select`** correctamente
+### 4.2.6. Usa **`select`** correctamente
 
 Hay algunas diferencias al usar `select` y `option` en JSX con respecto a su uso en HTML.
 
@@ -1156,7 +1155,7 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 - Referencia: [Documentación de React acerca de select](https://react.dev/reference/react-dom/components/select)
 
 
-### 5.2.7. Gestiona los valores que recibe la acción del servidor
+### 4.2.7. Gestiona los valores que recibe la acción del servidor
 
 Un aspecto importante a tener en cuenta es que **los valores definidos en los campos del formulario**, independientemente de su tipo, **serán enviados desde el formulario (lado cliente) a la acción de servidor siempre en formato `string`**.
 
@@ -1205,7 +1204,7 @@ Si el campo no se envía (por ejemplo porque está `disabled`, no tiene `name` o
 ```
 
 
-# 6. Funciones del lado cliente
+# 5. Funciones del lado cliente
 
 Aunque podemos definir un formulario en el lado servidor, a menudo necesitaremos que dicho formulario ofrezca funcionalidades del lado cliente, como:
 
@@ -1229,7 +1228,7 @@ NextJS tiene 2 funciones para mejorar la experiencia con formularios en el lado 
 
 
 
-## 6.1. useFormStatus
+## 5.1. useFormStatus
 
 Este *hook* nos permite deshabilitar el botón de submit mientras el formulario se está procesando en el servidor. Esto evita que el usuario siga pulsando dicho botón para evitar sobrecargar de peticiones al servidor.
 
@@ -1300,7 +1299,7 @@ export function Formulario() {
 
 
 
-## 6.2. useActionState: simplificando lo anterior
+## 5.2. useActionState: simplificando lo anterior
 
 A partir de NextJS 15 disponemos de un nuevo hook `useActionState` que simplifica el trabajo con *actions*.
 
@@ -1366,7 +1365,7 @@ export async function createProduct(prevState, formData) {
 ```  
 
 
-## 6.3. Usando un envoltorio (wrapper)
+## 5.3. Usando un envoltorio (wrapper)
 
 Otra técnica muy elegante es usar un *wrapper* para envolver el `server action`. Esto nos permitirá realizar operaciones en el cliente, tanto antes como después de invocar la acción del servidor.
 
@@ -1423,7 +1422,7 @@ export async function insertData(formData) {
 [Código fuente con ejemplo completo](https://github.com/jamj2000/nxform)
 
 
-## 6.4. Un método unificado de trabajo
+## 5.4. Un método unificado de trabajo
 
 Después de todas las posibilidades mostradas en los apartados anteriores, cualquiera puede llegar al *cortocircuito*.
 
@@ -1497,7 +1496,7 @@ export async function accionReal(prevState, formData) {
 
 
 
-## 6.5. Ejemplo práctico: Formulario con feedback
+## 5.5. Ejemplo práctico: Formulario con feedback
 
 En el siguiente enlace tienes el código completo de una aplicación que muestra como gestionar mensajes de *feedback* en un formulario.
 
@@ -1617,7 +1616,7 @@ export async function realAction2(prevState, formData) {
 
 
 
-#  7. Validación de datos
+#  6. Validación de datos
 
 La validación de datos es el proceso de garantizar que la entrada del usuario sea limpia, correcta y útil.
 
@@ -1636,7 +1635,7 @@ La **validación del lado del cliente** la realiza un navegador web, antes de en
 La **validación del lado del servidor** la realiza un servidor web, después de que la entrada se haya enviado al servidor.
 
 
-## 7.1. Validación en el cliente
+## 6.1. Validación en el cliente
 
 HTML5 introdujo un nuevo concepto de validación HTML llamado validación de restricciones .
 
@@ -1673,13 +1672,13 @@ La validación de restricciones HTML se basa en:
 | `:valid`     | Selecciona elementos de entrada con valores válidos.           |
 
 
-## 7.2. Validación en el servidor
+## 6.2. Validación en el servidor
 
 > **ADVERTENCIA**: nunca confíe en los datos pasados ​​a su servidor desde el cliente. Incluso si su formulario se valida correctamente y evita entradas con formato incorrecto en el lado del cliente, un usuario malintencionado aún puede alterar la solicitud de red.
 
 Cada vez que envía datos a un servidor, debe considerar la seguridad. Los formularios HTML son, con diferencia, los vectores de ataque a servidores más comunes (lugares donde pueden ocurrir ataques). Los problemas nunca provienen de los formularios HTML en sí, sino de cómo el servidor maneja los datos.
 
-### 7.2.1. Ataques frecuentes
+### 6.2.1. Ataques frecuentes
 
 En [este artículo](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security) se analiza en detalle varios ataques comunes y posibles defensas contra ellos. Es muy recomendable su lectura. Los ataques más conocidos son los siguientes:
 
@@ -1702,7 +1701,7 @@ Las vulnerabilidades de inyección SQL permiten a usuarios malintencionados ejec
 Los ataques CSRF permiten a un usuario malintencionado ejecutar acciones utilizando las credenciales de otro usuario sin el conocimiento o consentimiento de ese usuario.
 
 
-### 7.2.2. Sea paranoico: nunca confíe en sus usuarios
+### 6.2.2. Sea paranoico: nunca confíe en sus usuarios
 
 Entonces, ¿cómo se lucha contra estas amenazas? Este es un tema que va mucho más allá de esta guía, pero hay algunas reglas a tener en cuenta. La regla más importante es: nunca confíes en tus usuarios, incluido tú mismo; Incluso un usuario de confianza podría haber sido secuestrado.
 
@@ -1713,12 +1712,12 @@ Todos los datos que llegan a su servidor deben ser verificados y desinfectados (
 - **Archivos subidos a la zona de pruebas**. Guárdelos en un servidor diferente y permita el acceso al archivo sólo a través de un subdominio diferente o, mejor aún, a través de un dominio completamente diferente.
 Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres reglas, pero siempre es una buena idea que un tercero competente realice una revisión de seguridad. No asuma que ha visto todos los problemas posibles.
 
-### 7.2.3. Resumen
+### 6.2.3. Resumen
 
 Como mencionamos anteriormente, enviar datos de formularios es fácil, pero proteger una aplicación puede ser complicado. Solo recuerda que un desarrollador front-end no es quien debe definir el modelo de seguridad de los datos. Es posible realizar una validación del formulario del lado del cliente, pero el servidor no puede confiar en esta validación porque no tiene forma de saber realmente qué sucedió realmente en el lado del cliente.
 
 
-## 7.3. Ejemplo práctico: Formulario con validación en el servidor
+## 6.3. Ejemplo práctico: Formulario con validación en el servidor
 
 En el siguiente enlace tienes el código completo de una aplicación que muestra como realizar la validación de datos de un formulario en el servidor.
 
@@ -1849,13 +1848,13 @@ export async function realAction1(prevState, formData) {
 ``` 
 
 
-# 8. ANEXO: Casos prácticos avanzados
+# 7. ANEXO: Casos prácticos avanzados
 
 En los temas previos dispones de algunos [proyectos de ejemplo](proyectos) que hacen uso de formularios y de imágenes. Son proyectos básicos que pretenden ser didácticos, no ser extensos ni exhaustivos. 
 
 Para que compruebes las posibilidades que tienes a tu disposición, puedes consultar los siguientes proyectos, que están desarrollados y explicados (en inglés) con cierta profundidad. 
 
-## 8.1. Panel de gestión de escuela (Parte 1 de 2)
+## 7.1. Panel de gestión de escuela (Parte 1 de 2)
 
 - [Vídeo: Next.js School Management Dashboard UI Design Tutorial](https://youtu.be/myYlGLFxZas?si=S7H_vI7Jj9hh6LjP)
 - [Código fuente del video anterior](https://github.com/safak/next-dashboard-ui/tree/completed)
@@ -1865,7 +1864,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 ![dashboard demo](assets/dashboard.png)
 
 
-## 8.2. Albúm de fotos
+## 7.2. Albúm de fotos
 
 ![photobox](assets/photobox.png)
  
@@ -1878,7 +1877,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 
 
-# 9. Referencias
+# 8. Referencias
 
 - [MDN: Envío y rececpción de datos de formulario (en inglés)](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data)
 - [W3Schools: Atributo formaction (en inglés)](https://www.w3schools.com/tags/att_formaction.asp)
