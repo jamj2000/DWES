@@ -242,6 +242,13 @@ Independientemente de la PWA, para generar los distintos tamaños del [**`favico
 
 ![png to ico](assets/png-ico.png)
 
+> [!TIP]
+>
+> Si no deseamos complicarnos la vida con el formato `.ico` y la gestión de distintos tamaños, un atajo es usar un archivo **`icon.svg`** dentro de la carpeta `src/app`. Next.js lo detectará automáticamente y usará este último en lugar de `favicon.ico`.
+>
+> Podemos obtener iconos SVG gratuitos en [SVG Repo](https://www.svgrepo.com/)
+
+
 # 9. Optimización
 
 Una técnica novedosa para optimizar nuestra aplicación Next, puede verse en los siguientes enlaces:
@@ -276,6 +283,7 @@ Para que compruebes las posibilidades que tienes a tu disposición, puedes consu
 
 # 11. Referencias
 
+- [SVG Repo](https://www.svgrepo.com/)
 - [Favicon Generator](https://realfavicongenerator.net/)
 - [Web App Manifest Generator: simicart](https://www.simicart.com/manifest-generator.html/)
 - [Web App Manifest Generator: netlify](https://manifest-gen.netlify.app/) 
