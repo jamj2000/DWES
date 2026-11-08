@@ -71,7 +71,7 @@
 
 # 1. Introducción
 
-En temas anteriores hemos trabajado un poco con bases de datos no relacionales, también llamadas noSQL. En concreto, en el tema 4, creamos una aplicación que proporcionaba una API REST hacia una base de datos documental como MongoDB. En adelante nos centraremos en las bases de datos relacionales. 
+En temas anteriores hemos trabajado un poco con bases de datos no relacionales, también llamadas noSQL. En concreto, en el tema 2, creamos una aplicación que proporcionaba una API REST hacia una base de datos documental como MongoDB. En adelante nos centraremos en las bases de datos relacionales. 
 
 En la primera parte de este tema trabajaremos con algunas de estas bases de datos relacionales de uso habitual mediante comandos SQL. En concreto usaremos las bases de datos MySQL/MariaDB, SQLite y Postgres.
 
