@@ -45,7 +45,7 @@
   - [6.1. Validación en el cliente](#61-validación-en-el-cliente)
   - [6.2. Validación en el servidor](#62-validación-en-el-servidor)
     - [6.2.1. Ataques frecuentes](#621-ataques-frecuentes)
-    - [6.2.2. Sea paranoico: nunca confíe en sus usuarios](#622-sea-paranoico-nunca-confíe-en-sus-usuarios)
+    - [6.2.2. Sé paranoico: nunca confíes en tus usuarios](#622-sé-paranoico-nunca-confíes-en-tus-usuarios)
     - [6.2.3. Resumen](#623-resumen)
   - [6.3. Ejemplo práctico: Formulario con validación en el servidor](#63-ejemplo-práctico-formulario-con-validación-en-el-servidor)
 - [7. ANEXO: Casos prácticos avanzados](#7-anexo-casos-prácticos-avanzados)
@@ -1475,7 +1475,7 @@ Este método cumple los siguientes requisitos y funcionalidades:
 El método explicado de forma esquemática es el siguiente:
 
 1. Los formularios son declarados como componente cliente, iniciando el código con la directiva `'use client'`
-2. **En el formulario**, para gestionar el estado y si está pendiente o no, usaremos el hook `useActionState( accion, valorInicial)`
+2. **En el formulario**, para gestionar el estado y si está pendiente o no, usaremos el hook `useActionState( accion, estadoInicial)`
 3. **En la acción** declararemos 2 argumentos, `async function accion(prevState, formData)`
 
 
@@ -1703,9 +1703,9 @@ La validación de restricciones HTML se basa en:
 
 ## 6.2. Validación en el servidor
 
-> **ADVERTENCIA**: nunca confíe en los datos pasados ​​a su servidor desde el cliente. Incluso si su formulario se valida correctamente y evita entradas con formato incorrecto en el lado del cliente, un usuario malintencionado aún puede alterar la solicitud de red.
+> **ADVERTENCIA**: nunca confíes en los datos pasados ​​a su servidor desde el cliente. Incluso si el formulario se valida correctamente y evita entradas con formato incorrecto en el lado del cliente, un usuario malintencionado aún puede alterar la solicitud de red.
 
-Cada vez que envía datos a un servidor, debe considerar la seguridad. Los formularios HTML son, con diferencia, los vectores de ataque a servidores más comunes (lugares donde pueden ocurrir ataques). Los problemas nunca provienen de los formularios HTML en sí, sino de cómo el servidor maneja los datos.
+Cada vez que envía datos a un servidor, debes considerar la seguridad. Los formularios HTML son, con diferencia, los vectores de ataque a servidores más comunes (lugares donde pueden ocurrir ataques). Los problemas nunca provienen de los formularios HTML en sí, sino de cómo el servidor maneja los datos.
 
 ### 6.2.1. Ataques frecuentes
 
@@ -1730,16 +1730,16 @@ Las vulnerabilidades de inyección SQL permiten a usuarios malintencionados ejec
 Los ataques CSRF permiten a un usuario malintencionado ejecutar acciones utilizando las credenciales de otro usuario sin el conocimiento o consentimiento de ese usuario.
 
 
-### 6.2.2. Sea paranoico: nunca confíe en sus usuarios
+### 6.2.2. Sé paranoico: nunca confíes en tus usuarios
 
-Entonces, ¿cómo se lucha contra estas amenazas? Este es un tema que va mucho más allá de esta guía, pero hay algunas reglas a tener en cuenta. La regla más importante es: nunca confíes en tus usuarios, incluido tú mismo; Incluso un usuario de confianza podría haber sido secuestrado.
+Entonces, ¿cómo se lucha contra estas amenazas? Este es un tema muy extenso, pero hay algunas reglas a tener en cuenta. La regla más importante es: nunca confíes en tus usuarios, incluido tú mismo; Incluso un usuario de confianza podría haber sido secuestrado.
 
 Todos los datos que llegan a su servidor deben ser verificados y desinfectados (en inglés se conoce como `sanitized`). Siempre. Sin excepción.
 
 - **Escapa de personajes potencialmente peligrosos**. Los caracteres específicos con los que debes tener cuidado varían según el contexto en el que se utilizan los datos y la plataforma del servidor que empleas, pero todos los lenguajes del lado del servidor tienen funciones para esto. Lo que hay que tener en cuenta son las secuencias de caracteres que parecen código ejecutable (como comandos JavaScript o SQL).
 - **Limite la cantidad de datos entrantes para permitir solo lo necesario**.
 - **Archivos subidos a la zona de pruebas**. Guárdelos en un servidor diferente y permita el acceso al archivo sólo a través de un subdominio diferente o, mejor aún, a través de un dominio completamente diferente.
-Debería poder evitar muchos o la mayoría de los problemas si sigue estas tres reglas, pero siempre es una buena idea que un tercero competente realice una revisión de seguridad. No asuma que ha visto todos los problemas posibles.
+Deberías poder evitar muchos o la mayoría de los problemas si sigues estas tres reglas, pero siempre es una buena idea que un tercero competente realice una revisión de seguridad. No asumas que has visto todos los problemas posibles.
 
 ### 6.2.3. Resumen
 
