@@ -563,6 +563,13 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 
 **Se usan habitualmente para procesar, en el lado servidor, datos procedentes de un formulario.**
 
+> [!NOTE]
+>
+> Las `Acciones de Servidor (Server Actions)` forman parte de un conjunto más amplio denominado [`Funciones de Servidor (Server Functions)`](https://react.dev/reference/rsc/server-functions)
+> 
+> ![Fuctions vs Actions](assets/functions_vs_actions.png)
+>
+
 ## 3.1. Crear acciones del servidor
 
 Personalmente recomiendo, para mejor organización y con fin a obtener un código más legible, colocar todas las `server actions` en un archivo o archivos separados. Un archivo puede contener varias acciones del servidor.
