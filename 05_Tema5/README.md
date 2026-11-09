@@ -565,10 +565,37 @@ Por otro lado, cuando usamos array de objetos y los recorremos con el método `m
 
 > [!NOTE]
 >
-> Las `Acciones de Servidor (Server Actions)` forman parte de un conjunto más amplio denominado [`Funciones de Servidor (Server Functions)`](https://react.dev/reference/rsc/server-functions)
+> Las [`Acciones de Servidor (Server Actions)`](https://nextjs.org/docs/app/guides/server-actions) forman parte de un conjunto más amplio denominado [`Funciones de Servidor (Server Functions)`](https://react.dev/reference/rsc/server-functions)
 > 
 > ![Fuctions vs Actions](assets/functions_vs_actions.png)
 >
+> **Ejemplo de función de servidor**
+>
+> ```js
+> 'use server';
+>
+> export async function getUser(id) {
+>  return await db.user.findUnique({
+>    where: { id }
+>  });
+> }
+> ```
+>
+> **Ejemplo de acción de servidor**
+>
+> ```js
+> 'use server';
+>
+> export async function createUser(formData) {
+>  await db.user.create({
+>    data: {
+>      name: formData.get('name')
+>    }
+>  });
+>}
+> ```
+
+
 
 ## 3.1. Crear acciones del servidor
 
