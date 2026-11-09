@@ -432,6 +432,15 @@ La integración de proxy en una aplicación puede generar mejoras significativas
 
 Para implementar dicho proxy, NextJS hace uso de un archivo `proxy.js` o `proxy.ts` que debe situarse en la raíz del proyecto. **Si tenemos carpeta `src` será ahí donde pondremos dicho archivo.** Si no tenemos carpeta `src` pondremos el archivo en la carpeta `app`.
 
+**Proceso simplificado de actualización de cookie**
+
+`Diagrama de secuencia con proxy`
+
+![Actualización de cookie](assets/actualiza-cookie.png)
+
+
+
+
 
 **Referencia:**
 

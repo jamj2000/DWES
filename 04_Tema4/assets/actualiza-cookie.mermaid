@@ -1,0 +1,19 @@
+
+sequenceDiagram
+    participant B as Navegador
+    participant P as Proxy
+    participant A as App Next.js
+
+    B->>P: GET /dashboard
+    Note over P: Lee cookie de sesión
+
+    P->>P: NextResponse.next()
+    P->>P: response.cookies.set(newCookie)
+    Note over P: Prepara Set-Cookie
+
+    P->>A: Continúa procesamiento
+    Note over A: Renderiza /dashboard
+
+    A-->>B: Resultado del procesamiento
+    Note over B: Recibe respuesta HTTP + Set-Cookie
+    Note over B: Actualiza cookie
