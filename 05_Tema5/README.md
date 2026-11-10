@@ -1793,7 +1793,7 @@ function Formulario() {
                   />
                 </label>                
             </div>
-             {state.issues?.nombre && state.issues.nombre}
+             {state.errors?.nombre && state.errors.nombre}
 
 
             <div className="flex justify-between">
@@ -1804,7 +1804,7 @@ function Formulario() {
                    />
                 </label>
             </div>
-            {state.issues?.edad && state.issues.edad}
+            {state.errors?.edad && state.errors.edad}
 
 
             <button
@@ -1858,10 +1858,10 @@ export async function realAction1(prevState, formData) {
 
     const result = validate(formData)
 
-    if (!result.success) {
-        const simplified = result.error.issues.map(issue => [issue.path[0], issue.message])
-        const issues = Object.fromEntries(simplified)
-        return { issues, payload: formData }
+
+ if (!result.success) {
+        const { formErrors, fieldErrors } = z.flattenError(result.error);  
+        return { errors: fieldErrors, values: data }
     }
 
 
