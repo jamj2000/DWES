@@ -1810,7 +1810,8 @@ function Formulario() {
             <button
                 type="submit"               
                 disabled={pending}
-                className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
+                className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2"
+            >
                 {pending ? 'Realizando acción' : 'Action'}
             </button>
          
@@ -1844,13 +1845,13 @@ const schema = z.object({
 
 
 // Observa que la acción recibe dos parámetros: prevState y formData
-export async function realAction1(prevState, formData) {
+export async function realAction (prevState, formData) {  
 
   // Leemos datos de entrada
   const data = Object.fromEntries(formData.entries())
 
   // Validamos datos de entrada
-  const result = schema.safeParse(datos)
+  const result = schema.safeParse(data)
 
   // Si hay errores de validación
   if (!result.success) {
