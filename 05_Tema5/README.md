@@ -1761,7 +1761,7 @@ A continuación tienes un código muy simplificado. Para mayor detalle, consulta
 ```js
 // src/components/form.jsx
 'use client'
-import { realAction1, realAction2, realAction3 } from "@/lib/actions";
+import { realAction } from "@/lib/actions";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -1781,7 +1781,7 @@ function Formulario() {
 
   
     return (
-        <form className="my-20 border-2 p-4 flex flex-col gap-4">
+        <form  action={action} className="my-20 border-2 p-4 flex flex-col gap-4">
             <h1 className="text-center text-xl">Formulario</h1>
             
 
@@ -1789,7 +1789,7 @@ function Formulario() {
                 <label>Nombre:
                   <input 
                     name="nombre"
-                    defaultValue={state.payload?.get("nombre") || ""}  // para recuperar el valor introducido previamente
+                    defaultValue={state.values?.nombre}  // para recuperar el valor introducido previamente
                   />
                 </label>                
             </div>
@@ -1800,7 +1800,7 @@ function Formulario() {
                 <label>Edad
                   <input type="number" 
                      name="edad" 
-                     defaultValue={state.payload?.get("edad") || ""}  // para recuperar el valor introducido previamente
+                     defaultValue={state.values.edad}  // para recuperar el valor introducido previamente
                    />
                 </label>
             </div>
@@ -1808,8 +1808,7 @@ function Formulario() {
 
 
             <button
-                type="submit"
-                formAction={action}
+                type="submit"               
                 disabled={pending}
                 className="disabled:bg-slate-600 bg-blue-600 text-white rounded-lg py-2" >
                 {pending ? 'Realizando acción' : 'Action'}
@@ -1843,36 +1842,32 @@ const schema = z.object({
 
 
 
-function validate(formData) {
-    const datos = Object.fromEntries(formData.entries())
-
-    const result = schema.safeParse(datos)
-    return result
-}
-
-
-
 
 // Observa que la acción recibe dos parámetros: prevState y formData
 export async function realAction1(prevState, formData) {
 
-    const result = validate(formData)
+  // Leemos datos de entrada
+  const data = Object.fromEntries(formData.entries())
 
+  // Validamos datos de entrada
+  const result = schema.safeParse(datos)
 
- if (!result.success) {
+  // Si hay errores de validación
+  if (!result.success) {
         const { formErrors, fieldErrors } = z.flattenError(result.error);  
         return { errors: fieldErrors, values: data }
-    }
+  }
 
-
-    try {
+  // Si no hay errores de validación 
+  try {
         // Hacemos algo (guardar en BD, enviar a API, ...) con
         // result.data
         return { success: 'Éxito al realizar acción' }
-    } catch (error) {
+  } catch (error) {
         console.log("Error:", error);
         return { error }
-}
+  }
+
 }
 ``` 
 
