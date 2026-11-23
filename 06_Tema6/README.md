@@ -1112,7 +1112,7 @@ Los modelos son cada una de las partes de las que se compone un esquema. Los mod
 - Representan las **entidades** del dominio de aplicación.
 - Se asignan a las **tablas** (bases de datos relacionales como PostgreSQL) o **colecciones** (MongoDB) de la base de datos.
 
-- [Modelos en Prisma](https://www.prisma.io/docs/orm/prisma-schema/data-model/models)
+- [Modelos en Prisma](https://www.prisma.io/docs/orm/v7/prisma-schema/data-model/models)
 
 
 **Reglas de nombrado para Modelos:**
