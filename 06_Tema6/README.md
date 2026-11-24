@@ -1354,7 +1354,7 @@ npx prisma generate
 
 # 9. Consultas
 
-- [Consultas con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries)
+- [Consultas con Prisma](https://www.prisma.io/docs/orm/v7/prisma-client/queries/crud)
 
 
 ## 9.1. Consultas CRUD
@@ -1368,7 +1368,7 @@ CRUD es el acrónimo para:
 
 Estas son las 4 operaciones básicas necesarias para la gestión de información.
 
-- [Consultas CRUD con Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud)
+- [Consultas CRUD con Prisma](https://www.prisma.io/docs/orm/v7/prisma-client/queries/crud)
 
 A continuación, usaremos ejemplos con valores explícitos. Usaremos el siguiente esquema:
 
@@ -1430,6 +1430,11 @@ enum Role {
 > [!TIP]
 >
 > Para generar diagramas ER a partir del esquema de prisma (`schema.prisma`) puedes usar la herramienta [https://prisma-erd.simonknott.de/](https://prisma-erd.simonknott.de/)
+>
+> Otra opción es:
+> 1. Copiar el contenido de `schema.prisma`.
+> 2. Pegar en chatgpt y pedirle que nos genere el diagrama ER.
+> 3. Usar [Mermaid Live Editor](https://mermaid-live-editor.com/) para personalizar el diseño.
 > 
 
 ### 9.1.1. Create
@@ -1705,7 +1710,7 @@ const groupUsers = await prisma.user.groupBy({
 
 Documentación disponible en:
 
-- [Aggregation, Grouping, Summarizing](https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing)
+- [Aggregation, Grouping, Summarizing](https://www.prisma.io/docs/orm/v7/prisma-client/queries/aggregation-grouping-summarizing)
 
 
 ## 9.3. Consultas en paralelo
